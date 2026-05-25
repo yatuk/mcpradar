@@ -35,7 +35,7 @@ shutdown, reboot, sudo, su, chmod, chown, wget, curl
 }
 ```
 
-**Neden tehlikeli:** Bir MCP client'ı (Claude gibi) bu tool'u `eval` diye 
+**Neden tehlikeli:** Bir MCP client'ı (LLM agent gibi) bu tool'u `eval` diye 
 görür. Tool ismi kullanıcıya "zararsız bir hesaplama" gibi gösterilse bile, 
 arka planda shell komutu çalıştırabilir.
 

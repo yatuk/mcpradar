@@ -66,7 +66,10 @@ def scan(
         help="Minimum severity esigi (low/medium/high/critical)",
     ),
     json_only: bool = typer.Option(  # noqa: B008
-        False, "--json", help="Yalnızca JSON çıktı (tablo olmadan)"
+        False,
+        "--json",
+        hidden=True,
+        help="Deprecated: --format json kullanın",
     ),
     output_format: str = typer.Option(  # noqa: B008
         "rich",
@@ -79,9 +82,19 @@ def scan(
     ),
 ) -> None:
     """MCP server'i güvenlik açısından tara ve SQLite'a kaydet."""
+    import warnings
+
     from mcpradar.output.console import console
     from mcpradar.scanner.engine import Scanner
     from mcpradar.scanner.report import Severity
+
+    if json_only:
+        warnings.warn(
+            "--json is deprecated, use --format json instead",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        output_format = "json"
 
     valid_transports = {"http", "sse", "stdio"}
     if transport not in valid_transports:

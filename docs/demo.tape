@@ -21,7 +21,7 @@ Sleep 1200ms
 Enter
 Sleep 400ms
 
-Type "mcpradar scan 'python demo/malicious_server.py' -t stdio"
+Type "mcpradar scan "python demo/malicious_server.py" -t stdio"
 Sleep 600ms
 Enter
 Sleep 6s
@@ -30,7 +30,7 @@ Type "# 6 findings caught. Second scan, then diff:"
 Enter
 Sleep 1s
 
-Type "mcpradar scan 'python demo/malicious_server.py' -t stdio"
+Type "mcpradar scan "python demo/malicious_server.py" -t stdio"
 Sleep 400ms
 Enter
 Sleep 5s

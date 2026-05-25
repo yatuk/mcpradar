@@ -60,7 +60,7 @@ after install. **MCPRadar does.**
 ## Quick Start
 
 ```bash
-uvx mcpradar scan stdio -- npx -y @modelcontextprotocol/server-filesystem /tmp
+uvx mcpradar scan "npx -y @modelcontextprotocol/server-filesystem /tmp" -t stdio
 ```
 
 That's it. One command, no install, runs against any MCP server you can launch.

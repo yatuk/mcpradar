@@ -124,6 +124,112 @@ class TestCLIRegistryScan:
             assert "Leaderboard" in content or "leaderboard" in content
 
 
+class TestCLIDiffFormat:
+    def test_diff_with_output_flag(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "diff.json"
+            result = runner.invoke(app, ["diff", "http://x", "--json", "-o", str(out)])
+            assert result.exit_code == 0
+
+
+class TestCLIWatchFull:
+    def test_watch_with_all_flags(self) -> None:
+        result = runner.invoke(
+            app,
+            [
+                "watch",
+                "http://x",
+                "-t", "http",
+                "-i", "10",
+                "-c", "echo changed",
+                "-w", "https://hooks.slack.com/x",
+            ],
+        )
+        # Will fail connecting but shouldn't crash on arg parsing
+        # Ctrl+C gets simulated by the connection failure
+        assert result.exit_code in (0, 1)
+
+    def test_watch_with_stdio(self) -> None:
+        result = runner.invoke(
+            app,
+            ["watch", "python test", "-t", "stdio", "-i", "10"],
+        )
+        assert result.exit_code in (0, 1)
+
+
+class TestCLIScanFormat:
+    def test_scan_format_sarif(self) -> None:
+        result = runner.invoke(
+            app,
+            ["scan", "http://x", "--format", "sarif", "--no-save"],
+        )
+        assert result.exit_code in (0, 1)
+
+    def test_scan_format_json(self) -> None:
+        result = runner.invoke(
+            app,
+            ["scan", "http://x", "--format", "json", "--no-save"],
+        )
+        assert result.exit_code in (0, 1)
+
+    def test_scan_deprecated_json_flag(self) -> None:
+        import warnings
+
+        with warnings.catch_warnings(record=True) as w:
+            warnings.simplefilter("always")
+            result = runner.invoke(
+                app,
+                ["scan", "http://x", "--json", "--no-save"],
+            )
+            assert result.exit_code in (0, 1)
+            # Should emit deprecation warning
+            dep_warnings = [x for x in w if issubclass(x.category, DeprecationWarning)]
+            assert len(dep_warnings) >= 1
+
+
+class TestCLIExportFormats:
+    def test_export_json(self) -> None:
+        result = runner.invoke(
+            app,
+            ["export", "nonexistent", "-f", "json", "-o", "/tmp/out.json"],
+        )
+        assert result.exit_code == 0
+
+    def test_export_csv(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "out.csv"
+            result = runner.invoke(
+                app,
+                ["export", "nonexistent", "-f", "csv", "-o", str(out)],
+            )
+            assert result.exit_code == 0
+
+    def test_export_sarif(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "out.sarif"
+            result = runner.invoke(
+                app,
+                ["export", "nonexistent", "-f", "sarif", "-o", str(out)],
+            )
+            assert result.exit_code == 0
+
+
+class TestCLIPurgeOptions:
+    def test_purge_with_target(self) -> None:
+        result = runner.invoke(
+            app,
+            ["purge", "--older-than", "7d", "--target", "http://x", "--dry-run"],
+        )
+        assert result.exit_code == 0
+
+    def test_purge_keep_last(self) -> None:
+        result = runner.invoke(
+            app,
+            ["purge", "--keep-last", "5", "--dry-run"],
+        )
+        assert result.exit_code == 0
+
+
 class TestCLIScanAll:
     def test_scan_all_no_config(self) -> None:
         import os
