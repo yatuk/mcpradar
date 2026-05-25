@@ -1,7 +1,11 @@
-<!-- Logo: docs/logo.svg -->
+<!-- Logo: docs/logo-light.svg + docs/logo-dark.svg -->
 
 <p align="center">
-  <img src="docs/logo.svg" width="140" alt="MCPRadar"/>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/logo-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="docs/logo-light.svg">
+    <img src="docs/logo-light.svg" width="160" alt="MCPRadar"/>
+  </picture>
 </p>
 
 <h1 align="center">MCPRadar</h1>
@@ -12,11 +16,19 @@
 </p>
 
 <p align="center">
-  <a href="https://pypi.org/project/mcpradar/"><img src="https://img.shields.io/pypi/v/mcpradar?color=blue" alt="PyPI"/></a>
-  <a href="https://pypi.org/project/mcpradar/"><img src="https://img.shields.io/pypi/pyversions/mcpradar" alt="Python"/></a>
-  <a href="https://github.com/yatuk/mcpradar/actions"><img src="https://github.com/yatuk/mcpradar/actions/workflows/ci.yml/badge.svg" alt="CI"/></a>
-  <a href="https://github.com/yatuk/mcpradar/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="License"/></a>
-  <a href="https://github.com/yatuk/mcpradar/stargazers"><img src="https://img.shields.io/github/stars/yatuk/mcpradar?style=flat&color=yellow" alt="Stars"/></a>
+  <a href="https://github.com/yatuk/mcpradar/actions/workflows/ci.yml">
+    <img src="https://github.com/yatuk/mcpradar/actions/workflows/ci.yml/badge.svg" alt="CI"/>
+  </a>
+  <a href="https://github.com/yatuk/mcpradar/blob/main/LICENSE">
+    <img src="https://img.shields.io/badge/license-MIT-green" alt="License"/>
+  </a>
+  <a href="https://github.com/yatuk/mcpradar/stargazers">
+    <img src="https://img.shields.io/github/stars/yatuk/mcpradar?style=flat&color=yellow" alt="Stars"/>
+  </a>
+  <a href="https://github.com/yatuk/mcpradar/commits/main">
+    <img src="https://img.shields.io/github/last-commit/yatuk/mcpradar?color=blueviolet" alt="Last commit"/>
+  </a>
+  <img src="https://img.shields.io/badge/status-alpha-orange" alt="Status: Alpha"/>
 </p>
 
 <p align="center">
