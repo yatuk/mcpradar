@@ -433,10 +433,51 @@ class DangerousNameDetection(Rule):
 # ---------------------------------------------------------------------------
 
 
+def _discover_plugins() -> list[Rule]:
+    """Discover community rules via entry_points(group='mcpradar.rules')."""
+    import logging
+
+    try:
+        from importlib.metadata import entry_points
+    except ImportError:
+        return []
+
+    logger = logging.getLogger("mcpradar.plugins")
+    discovered: list[Rule] = []
+
+    try:
+        eps = entry_points(group="mcpradar.rules")
+    except TypeError:
+        # Python 3.11 compat
+        eps = entry_points().get("mcpradar.rules", [])  # type: ignore[arg-type]
+
+    for ep in eps:
+        try:
+            rule_cls = ep.load()
+            instance = rule_cls()
+            if not isinstance(instance, Rule):
+                logger.warning(
+                    "Plugin %s does not inherit from Rule, skipping", ep.name
+                )
+                continue
+            discovered.append(instance)
+            logger.debug("Loaded plugin: %s → %s", ep.name, instance.rule_id)
+        except Exception as exc:
+            logger.warning("Failed to load plugin %s: %s", ep.name, exc)
+
+    return discovered
+
+
 class RuleEngine:
-    def __init__(self, min_severity: Severity = Severity.MEDIUM) -> None:
+    def __init__(
+        self,
+        min_severity: Severity = Severity.MEDIUM,
+        disabled_rules: list[str] | None = None,
+    ) -> None:
         self.min_severity = min_severity
-        self._rules: list[Rule] = [
+        self._disabled: set[str] = set(disabled_rules or [])
+
+        builtins: list[Rule] = [
             DangerousNameDetection(),
             ZeroWidthDetection(),
             PromptInjectionDetection(),
@@ -445,8 +486,41 @@ class RuleEngine:
             PermissionScopeMismatch(),
         ]
 
+        self._rules = [r for r in builtins if r.rule_id not in self._disabled]
+
+        # Discover community plugins
+        for plugin in _discover_plugins():
+            if not isinstance(plugin, Rule):
+                continue
+            if plugin.rule_id not in self._disabled:
+                self._rules.append(plugin)
+
+    @property
+    def loaded_rules(self) -> list[dict[str, str]]:
+        """Return metadata for all loaded rules."""
+        return [
+            {
+                "rule_id": r.rule_id,
+                "title": r.title,
+                "severity": r.severity.value,
+                "source": "built-in" if isinstance(r, (
+                    DangerousNameDetection, ZeroWidthDetection,
+                    PromptInjectionDetection, EncodedBlobDetection,
+                    HiddenContentDetection, PermissionScopeMismatch,
+                )) else "plugin",
+            }
+            for r in self._rules
+        ]
+
     def register(self, rule: Rule) -> None:
         self._rules.append(rule)
+
+    def disable(self, rule_id: str) -> bool:
+        """Disable a rule by ID. Returns True if found."""
+        self._disabled.add(rule_id)
+        before = len(self._rules)
+        self._rules = [r for r in self._rules if r.rule_id not in self._disabled]
+        return len(self._rules) < before
 
     def analyze(self, tool: ToolInfo) -> list[Finding]:
         findings: list[Finding] = []

@@ -1,0 +1,13 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mcpradar-rule-example"
+version = "0.1.0"
+description = "Example community detection rule for MCPRadar"
+requires-python = ">=3.11"
+dependencies = ["mcpradar>=0.1.0"]
+
+[project.entry-points."mcpradar.rules"]
+example = "mcpradar_rule_example.rule:ExampleRule"

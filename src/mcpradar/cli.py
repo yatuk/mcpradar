@@ -532,6 +532,217 @@ def scan_all(
 
 
 # ---------------------------------------------------------------------------
+# analyze-context
+# ---------------------------------------------------------------------------
+
+
+@app.command()
+def analyze_context(
+    config_path: Path | None = typer.Option(  # noqa: B008
+        None, "--config", help="Konfigürasyon dosyası yolu"
+    ),
+    json_only: bool = typer.Option(  # noqa: B008
+        False, "--json", help="Yalnızca JSON çıktı"
+    ),
+) -> None:
+    """Birden fazla MCP server'ının birlikte güvenliğini analiz et.
+
+    Cross-server contamination risklerini tespit eder:
+    tool ismi çakışmaları, shadowing, veri sızdırma zincirleri.
+    """
+    import asyncio
+
+    from mcpradar.analyzer.context import ContextAnalyzer
+    from mcpradar.config import MCPRadarConfig
+    from mcpradar.output.console import console
+    from mcpradar.scanner.engine import Scanner
+    from mcpradar.scanner.report import Severity
+
+    cfg = MCPRadarConfig.from_file(config_path)
+    if cfg is None or not cfg.servers:
+        console.print("[red]Konfigürasyon bulunamadı veya servers listesi boş.[/]")
+        raise typer.Exit(code=1)
+
+    servers = cfg.servers[:10]  # Max 10
+    console.print(
+        f"[bold]mcpradar analyze-context[/] — "
+        f"{len(servers)} sunucu analiz ediliyor\n"
+    )
+
+    scans: list[Any] = []
+    for srv in servers:
+        with console.status(f"[dim]{srv.name or srv.url}[/] taranıyor..."):
+            try:
+                scanner = Scanner(
+                    target=srv.url,
+                    transport=srv.transport,
+                    min_severity=Severity("low"),
+                )
+                report = asyncio.run(scanner.run())
+                scans.append(report)
+                console.print(
+                    f"  [green]{srv.name or srv.url}[/] "
+                    f"— {len(report.tools)} tools"
+                )
+            except Exception as exc:
+                console.print(
+                    f"  [red]{srv.name or srv.url}[/] — hata: {exc}"
+                )
+
+    if len(scans) < 2:
+        console.print("[red]En az 2 sunucu taranabilmeli.[/]")
+        raise typer.Exit(code=1)
+
+    analyzer = ContextAnalyzer(scans)
+    ctx_report = analyzer.analyze()
+
+    if json_only:
+        console.print(
+            json.dumps(ctx_report.to_dict(), indent=2, ensure_ascii=False)
+        )
+    else:
+        _print_context_report(ctx_report, console)
+
+
+def _print_context_report(ctx_report: Any, console: Any) -> None:
+    """Rich output for context analysis."""
+    from rich.table import Table
+
+    console.print()
+    console.rule("[bold]Cross-Server Context Analysis[/]")
+    console.print(
+        f"[dim]{ctx_report.server_count} servers, "
+        f"{ctx_report.tool_count} tools, "
+        f"{len(ctx_report.findings)} cross-server findings[/]\n"
+    )
+
+    if not ctx_report.findings:
+        console.print("[green]No cross-server risks detected.[/]")
+        return
+
+    table = Table(title="Cross-Server Findings", show_header=True, show_lines=True)
+    table.add_column("Rule", width=6)
+    table.add_column("Severity", width=8)
+    table.add_column("Servers", width=24)
+    table.add_column("Description")
+
+    for f in ctx_report.findings:
+        color = {
+            "critical": "bold red",
+            "high": "orange1",
+            "medium": "yellow",
+            "low": "dim cyan",
+        }.get(f.severity.value, "")
+        table.add_row(
+            f"[{color}]{f.rule_id}[/]",
+            f"[{color}]{f.severity.value.upper()}[/]",
+            ", ".join(f.servers[:3]),
+            f.description,
+        )
+
+    console.print(table)
+
+    # Risk graph
+    if ctx_report.risk_graph:
+        console.print("\n[bold]Risk Graph:[/]")
+        for srv, deps in ctx_report.risk_graph.items():
+            console.print(f"  [cyan]{srv}[/] ←→ {', '.join(deps)}")
+
+    console.print()
+
+
+# rules
+# ---------------------------------------------------------------------------
+
+rules_app = typer.Typer(help="Manage detection rules", no_args_is_help=True)
+app.add_typer(rules_app, name="rules")
+
+
+@rules_app.command(name="list")
+def rules_list() -> None:
+    """List all loaded rules (built-in + plugins)."""
+    from rich.table import Table
+
+    from mcpradar.output.console import console
+    from mcpradar.scanner.report import Severity
+    from mcpradar.scanner.rules import RuleEngine
+
+    engine = RuleEngine(min_severity=Severity("low"))
+    table = Table(title="Loaded Rules", show_header=True)
+    table.add_column("Rule ID", width=8)
+    table.add_column("Title", width=36)
+    table.add_column("Severity", width=10)
+    table.add_column("Source", width=12)
+
+    for r in engine.loaded_rules:
+        sev = r["severity"]
+        color = {
+            "critical": "bold red",
+            "high": "orange1",
+            "medium": "yellow",
+            "low": "dim cyan",
+        }.get(sev, "")
+        table.add_row(
+            f"[{color}]{r['rule_id']}[/]",
+            r["title"],
+            sev.upper(),
+            r["source"],
+        )
+
+    console.print(table)
+
+
+@rules_app.command(name="info")
+def rules_info(
+    rule_id: str = typer.Argument(help="Rule ID (örnek: R102)"),
+) -> None:
+    """Show detailed info for a specific rule."""
+    from mcpradar.output.console import console
+    from mcpradar.scanner.report import Severity
+    from mcpradar.scanner.rules import RuleEngine
+
+    engine = RuleEngine(min_severity=Severity("low"))
+    for r in engine._rules:
+        if r.rule_id == rule_id.upper():
+            console.print(f"[bold]{r.rule_id}[/] — {r.title}")
+            console.print(f"  Severity: {r.severity.value}")
+            console.print(f"  Class: {type(r).__module__}.{type(r).__name__}")
+            return
+    console.print(f"[red]Rule '{rule_id}' not found.[/]")
+
+
+@rules_app.command(name="disable")
+def rules_disable(
+    rule_id: str = typer.Argument(help="Disable edilecek rule ID"),
+) -> None:
+    """Disable a rule (updates mcpradar.toml)."""
+    import tomllib
+    from pathlib import Path
+
+    import tomli_w
+
+    from mcpradar.output.console import console
+    from mcpradar.scanner.report import Severity
+    from mcpradar.scanner.rules import RuleEngine
+
+    engine = RuleEngine(min_severity=Severity("low"))
+    rid = rule_id.upper()
+    if engine.disable(rid):
+        console.print(f"[yellow]Rule {rid} disabled.[/]")
+        config_path = Path("mcpradar.toml")
+        if config_path.exists():
+            raw = tomllib.loads(config_path.read_text(encoding="utf-8"))
+            raw.setdefault("rules", {})
+            raw.setdefault("disabled_rules", [])
+            if rid not in raw["rules"]["disabled_rules"]:
+                raw["rules"]["disabled_rules"].append(rid)
+            config_path.write_text(tomli_w.dumps(raw), encoding="utf-8")
+            console.print("[dim]Updated mcpradar.toml[/]")
+    else:
+        console.print(f"[dim]Rule {rid} not found or already disabled.[/]")
+
+
+# ---------------------------------------------------------------------------
 # watch
 # ---------------------------------------------------------------------------
 
@@ -603,6 +814,23 @@ def registry_scan(
 
 
 # ---------------------------------------------------------------------------
+# feed
+# ---------------------------------------------------------------------------
+
+
+@app.command()
+def feed_update() -> None:
+    """CVE feed'ini güncelle (MCP-related CVE'ler)."""
+    from mcpradar.cvefeed.syncer import save_feed, sync_feed
+    from mcpradar.output.console import console
+
+    entries = sync_feed()
+    save_feed(entries)
+    console.print(
+        f"[green]{len(entries)} CVE synced.[/]"
+    )
+
+
 # init
 # ---------------------------------------------------------------------------
 

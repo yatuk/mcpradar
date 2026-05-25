@@ -1,0 +1,8 @@
+- id: mcpradar-scan
+  name: MCPRadar Scan
+  description: Scan MCP server configs for security issues before commit
+  entry: mcpradar scan
+  language: python
+  types: [toml]
+  pass_filenames: false
+  args: ["--no-save", "--format", "json"]
