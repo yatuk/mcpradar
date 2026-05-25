@@ -175,6 +175,16 @@ Full docs: [docs/detection-rules.md](docs/detection-rules.md)
 
 ---
 
+## Public Leaderboard
+
+Security scores for popular MCP servers, updated weekly:
+
+<p align="center">
+  <a href="https://yatuk.github.io/mcpradar"><b>🔗 yatuk.github.io/mcpradar</b></a>
+</p>
+
+---
+
 <p align="center">
   <br/>
   <b>⭐ If MCPRadar helped you catch something, please star us on GitHub.</b><br/>
@@ -195,7 +205,7 @@ Full docs: [docs/detection-rules.md](docs/detection-rules.md)
 - [x] SARIF + GitHub Actions integration
 - [x] CI matrix (3.11/3.12/3.13 × ubuntu/macos/windows)
 - [ ] Real-world 10-server validation
-- [ ] Public leaderboard (GitHub Pages)
+- [x] Public leaderboard (GitHub Pages)
 - [ ] Plugin system for community rules
 - [ ] Cross-server contamination analysis
 - [ ] MCP server fingerprinting

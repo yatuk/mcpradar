@@ -3,13 +3,13 @@ name: Release
 on:
   push:
     tags:
-      - "v*"
+      - "v*.*.*"
 
 jobs:
   build:
     name: Build & Publish
     runs-on: ubuntu-latest
-    environment: release
+    environment: pypi
     permissions:
       id-token: write
       contents: write
@@ -28,8 +28,15 @@ jobs:
         with:
           skip-existing: true
 
+      - name: Extract changelog
+        id: changelog
+        run: |
+          awk '/^## \[/{p++; if(p==2) exit} p==1' CHANGELOG.md > /tmp/release_notes.md
+          echo "notes_file=/tmp/release_notes.md" >> "$GITHUB_OUTPUT"
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          generate_release_notes: true
+          body_path: /tmp/release_notes.md
           files: dist/*
+          generate_release_notes: false

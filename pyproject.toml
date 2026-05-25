@@ -5,20 +5,36 @@ build-backend = "hatchling.build"
 [project]
 name = "mcpradar"
 version = "0.1.0"
-description = "MCP server güvenlik tarayıcısı — tool poisoning ve zaafiyet tespiti"
+description = "Security scanner for MCP servers — catch tool poisoning, prompt injection, and rug pulls"
 readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.11"
-authors = [{ name = "MCPRadar Team" }]
-keywords = ["mcp", "security", "scanner", "tool-poisoning"]
+authors = [{ name = "Fatih Serdar Cakmak", email = "fs.cakmak05@gmail.com" }]
+keywords = [
+    "mcp",
+    "model-context-protocol",
+    "security",
+    "prompt-injection",
+    "tool-poisoning",
+    "llm-security",
+    "ai-security",
+    "scanner",
+    "sarif",
+    "supply-chain",
+]
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 4 - Beta",
     "Environment :: Console",
     "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
     "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Topic :: Security",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Testing",
 ]
 
 dependencies = [
@@ -55,7 +71,11 @@ mcpradar = "mcpradar.cli:app"
 
 [project.urls]
 Homepage = "https://github.com/yatuk/mcpradar"
+Documentation = "https://github.com/yatuk/mcpradar/tree/main/docs"
 Repository = "https://github.com/yatuk/mcpradar"
+Issues = "https://github.com/yatuk/mcpradar/issues"
+Changelog = "https://github.com/yatuk/mcpradar/blob/main/CHANGELOG.md"
+Leaderboard = "https://yatuk.github.io/mcpradar"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/mcpradar"]
