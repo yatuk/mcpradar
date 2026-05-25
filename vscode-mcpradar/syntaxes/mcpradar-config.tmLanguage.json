@@ -1,0 +1,55 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "MCPRadar Config",
+  "scopeName": "source.mcpradar-config",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#sections" },
+    { "include": "#keys" },
+    { "include": "#strings" },
+    { "include": "#arrays" }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.number-sign.toml",
+          "match": "#.*$"
+        }
+      ]
+    },
+    "sections": {
+      "patterns": [
+        {
+          "name": "entity.name.section.toml",
+          "match": "^\\[\\[?[a-zA-Z0-9._-]+\\]\\]?"
+        }
+      ]
+    },
+    "keys": {
+      "patterns": [
+        {
+          "name": "variable.other.key.toml",
+          "match": "^[a-zA-Z_][a-zA-Z0-9_-]*\\s*(?==)"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.toml",
+          "begin": "\"",
+          "end": "\""
+        }
+      ]
+    },
+    "arrays": {
+      "patterns": [
+        {
+          "name": "constant.language.toml",
+          "match": "\\[|\\]"
+        }
+      ]
+    }
+  }
+}

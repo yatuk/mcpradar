@@ -1,0 +1,69 @@
+{
+  "name": "vscode-mcpradar",
+  "displayName": "MCPRadar",
+  "description": "Security scanner for MCP servers — VS Code integration",
+  "version": "0.1.0",
+  "publisher": "yatuk",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Linters", "Security"],
+  "keywords": ["mcp", "security", "prompt-injection", "tool-poisoning"],
+  "activationEvents": [
+    "onCommand:mcpradar.scan",
+    "onLanguage:toml"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "mcpradar.scan",
+        "title": "MCPRadar: Scan this MCP server"
+      },
+      {
+        "command": "mcpradar.diff",
+        "title": "MCPRadar: Diff last two scans"
+      }
+    ],
+    "languages": [
+      {
+        "id": "mcpradar-config",
+        "extensions": ["mcpradar.toml"],
+        "aliases": ["MCPRadar Config"]
+      }
+    ],
+    "grammars": [
+      {
+        "language": "mcpradar-config",
+        "scopeName": "source.mcpradar-config",
+        "path": "./syntaxes/mcpradar-config.tmLanguage.json"
+      }
+    ],
+    "problemMatchers": [
+      {
+        "name": "mcpradar",
+        "label": "MCPRadar findings",
+        "owner": "mcpradar",
+        "source": "mcpradar",
+        "pattern": [
+          {
+            "regexp": "^\\[([A-Z]+)\\]\\s+([A-Z0-9]+)\\s+(.+?)\\s+-\\s+(.+)$",
+            "severity": 1,
+            "code": 2,
+            "file": 3,
+            "message": 4
+          }
+        ]
+      }
+    ]
+  },
+  "scripts": {
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yatuk/mcpradar"
+  }
+}
