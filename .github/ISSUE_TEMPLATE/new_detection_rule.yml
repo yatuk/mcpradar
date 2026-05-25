@@ -1,0 +1,64 @@
+name: New Detection Rule
+description: Propose a new security detection rule for MCP tool poisoning
+title: "[Rule]: "
+labels: ["new-rule", "enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Propose a new detection rule! Good rules are specific, low-FP, and
+        address a real attack vector.
+
+  - type: input
+    id: rule_name
+    attributes:
+      label: Rule name
+      placeholder: "Dangerous Parameter Default"
+    validations:
+      required: true
+
+  - type: textarea
+    id: attack_vector
+    attributes:
+      label: Attack vector
+      description: What specific attack or vulnerability does this detect?
+    validations:
+      required: true
+
+  - type: textarea
+    id: example
+    attributes:
+      label: Real-world example
+      description: |
+        Show a tool definition (JSON) that this rule WOULD flag.
+        Explain why it's dangerous.
+      render: json
+    validations:
+      required: true
+
+  - type: textarea
+    id: false_positive_risk
+    attributes:
+      label: False positive analysis
+      description: |
+        In what legitimate scenarios might this rule trigger?
+        How would you mitigate false positives?
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Proposed severity
+      options:
+        - LOW
+        - MEDIUM
+        - HIGH
+        - CRITICAL
+
+  - type: textarea
+    id: implementation
+    attributes:
+      label: Implementation sketch (optional)
+      description: |
+        Pseudo-code or regex pattern ideas.
+        See docs/contributing.md for the Rule API.
+      render: python

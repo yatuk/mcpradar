@@ -1,0 +1,43 @@
+name: Feature Request
+description: Suggest a new feature or improvement
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the idea! Tell us what you'd like to see.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What problem does this feature solve?
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: How should it work? Include CLI examples if applicable.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Other approaches you've thought about
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - New CLI command
+        - New detection rule
+        - New output format
+        - Performance / DX improvement
+        - Documentation
+        - Other

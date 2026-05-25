@@ -1,0 +1,63 @@
+# MCPRadar real-world validation targets
+# Run: python validation/run_validation.py
+
+servers:
+  - name: "@modelcontextprotocol/server-filesystem"
+    install: "npx -y @modelcontextprotocol/server-filesystem /tmp"
+    scan: "npx -y @modelcontextprotocol/server-filesystem /tmp"
+    transport: stdio
+    notes: "Official Anthropic. File read/write tools. Expect R105 on read_file."
+
+  - name: "@modelcontextprotocol/server-github"
+    install: "npx -y @modelcontextprotocol/server-github"
+    scan: "npx -y @modelcontextprotocol/server-github"
+    transport: stdio
+    notes: "Official. GitHub API tools. Expect mostly clean."
+
+  - name: "@modelcontextprotocol/server-postgres"
+    install: "npx -y @modelcontextprotocol/server-postgres localhost:5432"
+    scan: "npx -y @modelcontextprotocol/server-postgres localhost:5432"
+    transport: stdio
+    notes: "Official. SQL query tool. May trigger R105 (db name + file desc)."
+
+  - name: "@modelcontextprotocol/server-brave-search"
+    install: "npx -y @modelcontextprotocol/server-brave-search"
+    scan: "npx -y @modelcontextprotocol/server-brave-search"
+    transport: stdio
+    notes: "Official. Search tool. Should be clean."
+
+  - name: "@modelcontextprotocol/server-puppeteer"
+    install: "npx -y @modelcontextprotocol/server-puppeteer"
+    scan: "npx -y @modelcontextprotocol/server-puppeteer"
+    transport: stdio
+    notes: "Official. Browser automation. May trigger R001 if tool named 'eval'."
+
+  - name: "@modelcontextprotocol/server-slack"
+    install: "npx -y @modelcontextprotocol/server-slack"
+    scan: "npx -y @modelcontextprotocol/server-slack"
+    transport: stdio
+    notes: "Official. Slack API. Expect network-related tools, mostly clean."
+
+  - name: "@anthropic/server-sequential-thinking"
+    install: "npx -y @anthropic/server-sequential-thinking"
+    scan: "npx -y @anthropic/server-sequential-thinking"
+    transport: stdio
+    notes: "Community. Reasoning tool. Should be clean."
+
+  - name: "uv-mcp-server (example)"
+    install: "uvx mcp-server-time"
+    scan: "uvx mcp-server-time --local-timezone=UTC"
+    transport: stdio
+    notes: "Community. Time server. Simple — should be clean."
+
+  - name: "uv-mcp-fetch (example)"
+    install: "uvx mcp-server-fetch"
+    scan: "uvx mcp-server-fetch"
+    transport: stdio
+    notes: "Community. Fetch URL content. May trigger R105 or R005."
+
+  - name: "uv-mcp-git (example)"
+    install: "uvx mcp-server-git --repository /tmp"
+    scan: "uvx mcp-server-git --repository /tmp"
+    transport: stdio
+    notes: "Community. Git operations. May trigger R001 (exec, rm)."

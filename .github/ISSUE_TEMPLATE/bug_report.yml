@@ -1,0 +1,56 @@
+name: Bug Report
+description: Report a bug in MCPRadar
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! Please fill out the details below.
+
+  - type: input
+    id: version
+    attributes:
+      label: MCPRadar version
+      placeholder: "0.1.0"
+    validations:
+      required: true
+
+  - type: input
+    id: python
+    attributes:
+      label: Python version
+      placeholder: "3.12.0"
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    attributes:
+      label: Operating system
+      placeholder: "Ubuntu 24.04 / macOS 15 / Windows 11"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Steps to reproduce, expected vs actual behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: command
+    attributes:
+      label: Command used
+      description: Full mcpradar command you ran
+      render: bash
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error output
+      description: |
+        Paste the full error output. Use `--json` for clean output if helpful.
+      render: text

@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Project
+mcpradar.db
+snapshots/
+*.db-journal
+*.db-wal
+
+# Coverage
+.coverage
+coverage.xml
+htmlcov/
+
+# Mypy
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+
+# Validation results ARE tracked (validation/*.json, validation/REPORT.md)
