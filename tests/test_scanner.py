@@ -1,6 +1,5 @@
 """Scanner modulu testleri — engine + RuleEngine + report."""
 
-
 from mcpradar.scanner.report import Finding, ScanReport, Severity, ToolInfo
 from mcpradar.scanner.rules import DANGEROUS_NAMES, RuleEngine
 

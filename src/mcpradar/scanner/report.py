@@ -106,8 +106,7 @@ class ScanReport:
                 for p in self.prompts
             ],
             "resources": [
-                {"uri": r.uri, "name": r.name, "description": r.description}
-                for r in self.resources
+                {"uri": r.uri, "name": r.name, "description": r.description} for r in self.resources
             ],
             "findings": [
                 {

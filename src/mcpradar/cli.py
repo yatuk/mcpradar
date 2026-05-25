@@ -195,12 +195,16 @@ def diff(
             return
         if len(ids) >= 2:
             ids = [ids[0], ids[-1]]  # newest vs oldest in range
-            console.print(f"[dim]{len(store.scan_since(server, since))} scan, "
-                          f"en yeni vs en eski kiyaslaniyor[/]")
+            console.print(
+                f"[dim]{len(store.scan_since(server, since))} scan, "
+                f"en yeni vs en eski kiyaslaniyor[/]"
+            )
 
     if len(ids) < 2:
-        console.print(f"[dim]{server} icin en az 2 scan gerekli (su an {len(ids)}). "
-                      "Once birden fazla 'mcpradar scan' calistirin.[/]")
+        console.print(
+            f"[dim]{server} icin en az 2 scan gerekli (su an {len(ids)}). "
+            "Once birden fazla 'mcpradar scan' calistirin.[/]"
+        )
         store.close()
         return
 
@@ -386,10 +390,16 @@ def _export_csv(report: Any, path: Path) -> None:
         w = csv.writer(f)
         w.writerow(["rule_id", "severity", "target", "title", "description", "evidence"])
         for f_ in report.findings:
-            w.writerow([
-                f_.rule_id, f_.severity.value, f_.target,
-                f_.title, f_.description, f_.evidence,
-            ])
+            w.writerow(
+                [
+                    f_.rule_id,
+                    f_.severity.value,
+                    f_.target,
+                    f_.title,
+                    f_.description,
+                    f_.evidence,
+                ]
+            )
 
 
 @app.command()

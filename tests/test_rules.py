@@ -136,9 +136,7 @@ class TestPromptInjectionDetection:
         )
         findings = rule.check(tool)
 
-        system_findings = [
-            f for f in findings if "system:" in f.detail.get("pattern", "").lower()
-        ]
+        system_findings = [f for f in findings if "system:" in f.detail.get("pattern", "").lower()]
         assert len(system_findings) >= 1
         assert system_findings[0].severity == Severity.CRITICAL
 
@@ -150,10 +148,7 @@ class TestPromptInjectionDetection:
         )
         findings = rule.check(tool)
 
-        im_findings = [
-            f for f in findings
-            if "im start" in f.detail.get("pattern", "").lower()
-        ]
+        im_findings = [f for f in findings if "im start" in f.detail.get("pattern", "").lower()]
         assert len(im_findings) >= 1
 
     def test_you_must_directive(self) -> None:
@@ -174,9 +169,7 @@ class TestPromptInjectionDetection:
         )
         findings = rule.check(tool)
 
-        assert any(
-            "override" in f.detail.get("pattern", "").lower() for f in findings
-        )
+        assert any("override" in f.detail.get("pattern", "").lower() for f in findings)
 
     def test_pretend_role(self) -> None:
         rule = PromptInjectionDetection()
@@ -186,9 +179,7 @@ class TestPromptInjectionDetection:
         )
         findings = rule.check(tool)
 
-        assert any(
-            "pretend" in f.detail.get("pattern", "").lower() for f in findings
-        )
+        assert any("pretend" in f.detail.get("pattern", "").lower() for f in findings)
 
     def test_no_injection_clean(self) -> None:
         rule = PromptInjectionDetection()
@@ -208,9 +199,7 @@ class TestPromptInjectionDetection:
         )
         findings = rule.check(tool)
 
-        assert any(
-            "don't follow" in f.detail.get("pattern", "").lower() for f in findings
-        )
+        assert any("don't follow" in f.detail.get("pattern", "").lower() for f in findings)
 
 
 # ---------------------------------------------------------------------------

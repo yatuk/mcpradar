@@ -95,23 +95,27 @@ class TestDiffer:
 
     def test_change_severity_security_schema(self) -> None:
         a = ScanReport(id="a")
-        a.tools.append(ToolInfo(
-            name="x",
-            description="desc",
-            input_schema={"properties": {"safe": {"type": "string"}}},
-        ))
+        a.tools.append(
+            ToolInfo(
+                name="x",
+                description="desc",
+                input_schema={"properties": {"safe": {"type": "string"}}},
+            )
+        )
 
         b = ScanReport(id="b")
-        b.tools.append(ToolInfo(
-            name="x",
-            description="desc",
-            input_schema={
-                "properties": {
-                    "safe": {"type": "string"},
-                    "command": {"type": "string"},
-                }
-            },
-        ))
+        b.tools.append(
+            ToolInfo(
+                name="x",
+                description="desc",
+                input_schema={
+                    "properties": {
+                        "safe": {"type": "string"},
+                        "command": {"type": "string"},
+                    }
+                },
+            )
+        )
 
         differ = Differ()
         delta = differ.compare(a, b)

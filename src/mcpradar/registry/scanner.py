@@ -89,9 +89,7 @@ def render_leaderboard(results: list[dict[str, Any]]) -> str:
         f"— {len(results)} servers tracked\n"
     )
     lines.append("")
-    lines.append(
-        "| Server | Status | Tools | Findings | High | Critical |"
-    )
+    lines.append("| Server | Status | Tools | Findings | High | Critical |")
     lines.append("|--------|--------|-------|----------|------|----------|")
 
     for r in results:

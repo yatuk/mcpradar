@@ -170,7 +170,7 @@ class TestStore:
                     ScanReport(
                         target="http://srv",
                         id=f"s{i}",
-                        scanned_at=f"2026-01-0{i+1}",
+                        scanned_at=f"2026-01-0{i + 1}",
                     )
                 )
 

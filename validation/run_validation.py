@@ -55,11 +55,16 @@ def scan_server(target: dict[str, Any], timeout: int = 60) -> dict[str, Any]:
     try:
         proc = subprocess.run(
             [
-                sys.executable, "-m", "mcpradar", "scan",
+                sys.executable,
+                "-m",
+                "mcpradar",
+                "scan",
                 cmd,
-                "-t", transport,
+                "-t",
+                transport,
                 "--json",
-                "-s", "low",
+                "-s",
+                "low",
             ],
             capture_output=True,
             text=True,
@@ -89,19 +94,19 @@ def scan_server(target: dict[str, Any], timeout: int = 60) -> dict[str, Any]:
                     result["findings_by_severity"][sev] = (
                         result["findings_by_severity"].get(sev, 0) + 1
                     )
-                    result["findings_by_rule"][rule] = (
-                        result["findings_by_rule"].get(rule, 0) + 1
-                    )
+                    result["findings_by_rule"][rule] = result["findings_by_rule"].get(rule, 0) + 1
 
                     # Per-finding triage
-                    result["triage"].append({
-                        "rule_id": rule,
-                        "severity": sev,
-                        "title": f.get("title", ""),
-                        "target": f.get("target", ""),
-                        "description": f.get("description", "")[:200],
-                        "classification": "needs_review",
-                    })
+                    result["triage"].append(
+                        {
+                            "rule_id": rule,
+                            "severity": sev,
+                            "title": f.get("title", ""),
+                            "target": f.get("target", ""),
+                            "description": f.get("description", "")[:200],
+                            "classification": "needs_review",
+                        }
+                    )
 
                 # Auto-classify known patterns
                 for t in result["triage"]:
@@ -177,12 +182,8 @@ def generate_report(results: list[dict[str, Any]]) -> str:
 
     # Per-server breakdown
     lines.append("## Server-by-Server Breakdown\n")
-    lines.append(
-        "| Server | Status | Tools | Findings | High+Critical | Triage |"
-    )
-    lines.append(
-        "|--------|--------|-------|----------|---------------|--------|"
-    )
+    lines.append("| Server | Status | Tools | Findings | High+Critical | Triage |")
+    lines.append("|--------|--------|-------|----------|---------------|--------|")
 
     for r in results:
         status = r["status"]
@@ -208,12 +209,8 @@ def generate_report(results: list[dict[str, Any]]) -> str:
             continue
         lines.append(f"### {r['name']}\n")
         lines.append(f"**Notes:** {r['notes']}\n")
-        lines.append(
-            "| Rule | Severity | Target | Classification | Reason |"
-        )
-        lines.append(
-            "|------|----------|--------|----------------|--------|"
-        )
+        lines.append("| Rule | Severity | Target | Classification | Reason |")
+        lines.append("|------|----------|--------|----------------|--------|")
         for t in r["triage"]:
             cls_icon = {
                 "true_positive": "🔴 TP",
@@ -246,9 +243,7 @@ def main() -> None:
 
     parser = argparse.ArgumentParser(description="MCPRadar validation runner")
     parser.add_argument("--server", help="Only scan this server name")
-    parser.add_argument(
-        "--timeout", type=int, default=60, help="Timeout per scan (seconds)"
-    )
+    parser.add_argument("--timeout", type=int, default=60, help="Timeout per scan (seconds)")
     parser.add_argument(
         "--skip-scan",
         action="store_true",

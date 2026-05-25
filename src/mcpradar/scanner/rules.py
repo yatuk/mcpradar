@@ -41,12 +41,7 @@ class Rule:
 # ZWSP / zero-width detection
 # ---------------------------------------------------------------------------
 
-ZERO_WIDTH_CHARS = re.compile(
-    "[​‌‍‎‏"
-    "‪‫‬‭‮"
-    "⁠⁡⁢⁣⁤"
-    "﻿￹￺￻]"
-)
+ZERO_WIDTH_CHARS = re.compile("[​‌‍‎‏‪‫‬‭‮⁠⁡⁢⁣⁤﻿￹￺￻]")
 
 ZERO_WIDTH_NAMES: dict[str, str] = {
     "​": "ZERO WIDTH SPACE",
@@ -88,8 +83,7 @@ class ZeroWidthDetection(Rule):
                 found.append(
                     self._finding(
                         tool.name,
-                        f"'{field_name}' alaninda gizli Unicode: "
-                        f"{char_name} (U+{ord(char):04X})",
+                        f"'{field_name}' alaninda gizli Unicode: {char_name} (U+{ord(char):04X})",
                         severity=sev,
                         field=field_name,
                         char=char_name,
@@ -230,9 +224,7 @@ class EncodedBlobDetection(Rule):
 
             decoded = ""
             with contextlib.suppress(Exception):
-                decoded = base64.b64decode(blob, validate=True).decode(
-                    "utf-8", errors="replace"
-                )
+                decoded = base64.b64decode(blob, validate=True).decode("utf-8", errors="replace")
 
             sev = Severity.HIGH if decoded and _is_printable(decoded) else Severity.MEDIUM
             f = self._finding(
@@ -255,8 +247,7 @@ class EncodedBlobDetection(Rule):
                 found.append(
                     self._finding(
                         tool.name,
-                        f"Description icinde hex blob ({len(blob)} chars) — "
-                        f"decode: {decoded[:60]}",
+                        f"Description icinde hex blob ({len(blob)} chars) — decode: {decoded[:60]}",
                         severity=Severity.HIGH,
                         blob_length=len(blob),
                         decoded_preview=decoded[:80],
@@ -289,12 +280,8 @@ HIDDEN_LINK_RE = re.compile(
     r"\s*(?:click\s*here|here|more|\.{2,}|.{0,2})\s*</a>",
     re.I,
 )
-ZERO_FONT_RE = re.compile(
-    r"<font\s+size\s*=\s*[\"']?\s*0\s*[\"']?[^>]*>", re.I
-)
-HIDDEN_MD_LINK_RE = re.compile(
-    r"\[(?:.{0,2}|click here|here|more)\]\([^)]+\)", re.I
-)
+ZERO_FONT_RE = re.compile(r"<font\s+size\s*=\s*[\"']?\s*0\s*[\"']?[^>]*>", re.I)
+HIDDEN_MD_LINK_RE = re.compile(r"\[(?:.{0,2}|click here|here|more)\]\([^)]+\)", re.I)
 
 
 class HiddenContentDetection(Rule):
@@ -332,9 +319,7 @@ class HiddenContentDetection(Rule):
 
 SCOPE_PAIRS: list[tuple[re.Pattern[str], re.Pattern[str], str, str]] = [
     (
-        re.compile(
-            r"\b(?:file|filesystem|read_file|write_file|fs|disk)\b", re.I
-        ),
+        re.compile(r"\b(?:file|filesystem|read_file|write_file|fs|disk)\b", re.I),
         re.compile(
             r"\b(?:network|internet|http|https|api|remote|fetch|url|curl|socket)\b",
             re.I,
@@ -401,9 +386,28 @@ class PermissionScopeMismatch(Rule):
 # ---------------------------------------------------------------------------
 
 DANGEROUS_NAMES = {
-    "eval", "exec", "system", "shell", "bash", "cmd", "subprocess",
-    "os", "rm", "del", "delete", "drop", "truncate", "kill",
-    "shutdown", "reboot", "sudo", "su", "chmod", "chown", "wget", "curl",
+    "eval",
+    "exec",
+    "system",
+    "shell",
+    "bash",
+    "cmd",
+    "subprocess",
+    "os",
+    "rm",
+    "del",
+    "delete",
+    "drop",
+    "truncate",
+    "kill",
+    "shutdown",
+    "reboot",
+    "sudo",
+    "su",
+    "chmod",
+    "chown",
+    "wget",
+    "curl",
 }
 
 

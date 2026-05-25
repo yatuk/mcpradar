@@ -32,6 +32,7 @@ class TestCLIInit:
     def test_init_default_path(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             import os
+
             old = os.getcwd()
             os.chdir(tmp)
             try:
@@ -126,6 +127,7 @@ class TestCLIRegistryScan:
 class TestCLIScanAll:
     def test_scan_all_no_config(self) -> None:
         import os
+
         with tempfile.TemporaryDirectory() as tmp:
             old = os.getcwd()
             os.chdir(tmp)

@@ -22,6 +22,7 @@ class TestExtractSchema:
         class FakeModel:
             def model_dump(self) -> dict:
                 return {"extracted": True}
+
         result = _extract_schema(FakeModel())
         assert result == {"extracted": True}
 
@@ -29,6 +30,7 @@ class TestExtractSchema:
         class BadModel:
             def model_dump(self) -> str:
                 return "not_a_dict"
+
         result = _extract_schema(BadModel())
         assert result == {}
 
@@ -80,9 +82,7 @@ class TestScannerInit:
         assert s.target == "http://x"
 
     def test_custom_severity(self) -> None:
-        s = Scanner(
-            target="http://x", transport="sse", min_severity=Severity.HIGH
-        )
+        s = Scanner(target="http://x", transport="sse", min_severity=Severity.HIGH)
         assert s.transport == "sse"
 
 
@@ -96,6 +96,7 @@ class TestTransportRouting:
 
 class _FakeTransport:
     """Async context manager that yields (read, write) or (read, write, extra)."""
+
     def __init__(self, read, write, extra=None):
         self.read = read
         self.write = write
@@ -112,6 +113,7 @@ class _FakeTransport:
 
 class _FakeSessionCtx:
     """Async context manager that yields a single session object."""
+
     def __init__(self, session):
         self.session = session
 
@@ -138,15 +140,9 @@ class TestScannerRunMock:
         mock_session = AsyncMock()
         mock_session.initialize = AsyncMock()
         mock_tool = Tool(name="safe_tool", description="Safe", inputSchema={})
-        mock_session.list_tools = AsyncMock(
-            return_value=AsyncMock(tools=[mock_tool])
-        )
-        mock_session.list_prompts = AsyncMock(
-            return_value=AsyncMock(prompts=[])
-        )
-        mock_session.list_resources = AsyncMock(
-            return_value=AsyncMock(resources=[])
-        )
+        mock_session.list_tools = AsyncMock(return_value=AsyncMock(tools=[mock_tool]))
+        mock_session.list_prompts = AsyncMock(return_value=AsyncMock(prompts=[]))
+        mock_session.list_resources = AsyncMock(return_value=AsyncMock(resources=[]))
         mock_session_cls.return_value = _FakeSessionCtx(mock_session)
 
         scanner = Scanner(target="http://test", transport="http", min_severity=Severity.LOW)
@@ -182,20 +178,12 @@ class TestScannerRunMock:
                 "properties": {"command": {"type": "string"}},
             },
         )
-        mock_session.list_tools = AsyncMock(
-            return_value=AsyncMock(tools=[mock_tool])
-        )
-        mock_session.list_prompts = AsyncMock(
-            return_value=AsyncMock(prompts=[])
-        )
-        mock_session.list_resources = AsyncMock(
-            return_value=AsyncMock(resources=[])
-        )
+        mock_session.list_tools = AsyncMock(return_value=AsyncMock(tools=[mock_tool]))
+        mock_session.list_prompts = AsyncMock(return_value=AsyncMock(prompts=[]))
+        mock_session.list_resources = AsyncMock(return_value=AsyncMock(resources=[]))
         mock_session_cls.return_value = _FakeSessionCtx(mock_session)
 
-        scanner = Scanner(
-            target="sse://localhost", transport="sse", min_severity=Severity.LOW
-        )
+        scanner = Scanner(target="sse://localhost", transport="sse", min_severity=Severity.LOW)
         report = asyncio.run(scanner.run())
 
         assert len(report.tools) == 1
@@ -224,22 +212,13 @@ class TestScannerRunMock:
             description='<span style="display:none">injected</span>',
             inputSchema={},
         )
-        mock_session.list_tools = AsyncMock(
-            return_value=AsyncMock(tools=[mock_tool])
-        )
-        mock_session.list_prompts = AsyncMock(
-            return_value=AsyncMock(prompts=[])
-        )
-        mock_session.list_resources = AsyncMock(
-            return_value=AsyncMock(resources=[])
-        )
+        mock_session.list_tools = AsyncMock(return_value=AsyncMock(tools=[mock_tool]))
+        mock_session.list_prompts = AsyncMock(return_value=AsyncMock(prompts=[]))
+        mock_session.list_resources = AsyncMock(return_value=AsyncMock(resources=[]))
         mock_session_cls.return_value = _FakeSessionCtx(mock_session)
 
-        scanner = Scanner(
-            target="uvx test-server", transport="stdio", min_severity=Severity.LOW
-        )
+        scanner = Scanner(target="uvx test-server", transport="stdio", min_severity=Severity.LOW)
         report = asyncio.run(scanner.run())
 
         assert len(report.tools) == 1
         assert any(f.rule_id == "R104" for f in report.findings)
-

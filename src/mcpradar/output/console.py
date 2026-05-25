@@ -186,11 +186,11 @@ class RadarConsole:
         # Summary stats
         counts = delta.summary_counts()
         stats = "  ".join(
-            f"[green]+{counts.get('added',0)} added[/]"
-            f"  [red]-{counts.get('removed',0)} removed[/]"
-            f"  [dim]~{counts.get('cosmetic',0)} cosmetic[/]"
-            f"  [yellow]~{counts.get('behavioral',0)} behavioral[/]"
-            f"  [bold red]~{counts.get('security',0)} security[/]"
+            f"[green]+{counts.get('added', 0)} added[/]"
+            f"  [red]-{counts.get('removed', 0)} removed[/]"
+            f"  [dim]~{counts.get('cosmetic', 0)} cosmetic[/]"
+            f"  [yellow]~{counts.get('behavioral', 0)} behavioral[/]"
+            f"  [bold red]~{counts.get('security', 0)} security[/]"
         )
         self._console.print(stats)
         self._console.print()
@@ -220,14 +220,10 @@ class RadarConsole:
 
         # Prompts / Resources
         if delta.prompt_added or delta.prompt_removed:
-            self._print_resource_changes(
-                "Prompts", delta.prompt_added, delta.prompt_removed
-            )
+            self._print_resource_changes("Prompts", delta.prompt_added, delta.prompt_removed)
 
         if delta.resource_added or delta.resource_removed:
-            self._print_resource_changes(
-                "Resources", delta.resource_added, delta.resource_removed
-            )
+            self._print_resource_changes("Resources", delta.resource_added, delta.resource_removed)
 
         self._console.print()
 
@@ -330,15 +326,11 @@ class RadarConsole:
             elif ov is not None and nv is None:
                 lines.append(f"    [red]- {key}[/]")
             elif ov != nv:
-                lines.append(
-                    f"    [yellow]~ {key}[/]: {_prop_summary(ov)} → {_prop_summary(nv)}"
-                )
+                lines.append(f"    [yellow]~ {key}[/]: {_prop_summary(ov)} → {_prop_summary(nv)}")
 
         return "\n".join(lines) if lines else "    (no property-level changes)"
 
-    def _print_resource_changes(
-        self, label: str, added: list[str], removed: list[str]
-    ) -> None:
+    def _print_resource_changes(self, label: str, added: list[str], removed: list[str]) -> None:
         self._console.print(f"[bold]{label}:[/]")
         for name in added:
             self._console.print(f"  [green]+ {name}[/]")

@@ -130,15 +130,41 @@ class DiffDelta:
 # ---------------------------------------------------------------------------
 
 SECURITY_SENSITIVE_KEYS: set[str] = {
-    "command", "cmd", "script", "code", "eval", "exec",
-    "shell", "sql", "query", "expression", "template",
-    "url", "path", "file", "filename", "key", "token",
-    "password", "secret", "credential", "auth",
+    "command",
+    "cmd",
+    "script",
+    "code",
+    "eval",
+    "exec",
+    "shell",
+    "sql",
+    "query",
+    "expression",
+    "template",
+    "url",
+    "path",
+    "file",
+    "filename",
+    "key",
+    "token",
+    "password",
+    "secret",
+    "credential",
+    "auth",
 }
 
 BEHAVIORAL_KEYS: set[str] = {
-    "required", "type", "format", "pattern", "minimum", "maximum",
-    "minLength", "maxLength", "enum", "default", "additionalProperties",
+    "required",
+    "type",
+    "format",
+    "pattern",
+    "minimum",
+    "maximum",
+    "minLength",
+    "maxLength",
+    "enum",
+    "default",
+    "additionalProperties",
 }
 
 
@@ -232,22 +258,16 @@ class Differ:
         for name in sorted(names_b - names_a):
             t = tools_b[name]
             td = ToolDiff(tool_name=name, added=True)
-            td.changes.append(
-                SchemaChange("name", None, t.name, ChangeSeverity.SECURITY)
-            )
+            td.changes.append(SchemaChange("name", None, t.name, ChangeSeverity.SECURITY))
             td.changes.append(
                 SchemaChange("description", None, t.description, ChangeSeverity.COSMETIC)
             )
             td.changes.append(
-                SchemaChange(
-                    "input_schema", {}, t.input_schema, ChangeSeverity.BEHAVIORAL
-                )
+                SchemaChange("input_schema", {}, t.input_schema, ChangeSeverity.BEHAVIORAL)
             )
             if t.output_schema:
                 td.changes.append(
-                    SchemaChange(
-                        "output_schema", {}, t.output_schema, ChangeSeverity.BEHAVIORAL
-                    )
+                    SchemaChange("output_schema", {}, t.output_schema, ChangeSeverity.BEHAVIORAL)
                 )
             delta.tool_diffs.append(td)
 

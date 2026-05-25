@@ -118,8 +118,7 @@ class Store:
 
         for p in report.prompts:
             self._conn.execute(
-                "INSERT INTO prompts(scan_id, name, description, arguments) "
-                "VALUES (?,?,?,?)",
+                "INSERT INTO prompts(scan_id, name, description, arguments) VALUES (?,?,?,?)",
                 (
                     report.id,
                     p.name,
@@ -261,30 +260,24 @@ class Store:
         """Return scan IDs since a given ISO timestamp or scan ID."""
         # Try as ISO timestamp first
         rows = self._conn.execute(
-            "SELECT id FROM scans WHERE target = ? AND scanned_at >= ? "
-            "ORDER BY scanned_at DESC",
+            "SELECT id FROM scans WHERE target = ? AND scanned_at >= ? ORDER BY scanned_at DESC",
             (target, since),
         ).fetchall()
         if rows:
             return [r[0] for r in rows]
 
         # Try as scan ID — get its timestamp, then find newer
-        ref = self._conn.execute(
-            "SELECT scanned_at FROM scans WHERE id = ?", (since,)
-        ).fetchone()
+        ref = self._conn.execute("SELECT scanned_at FROM scans WHERE id = ?", (since,)).fetchone()
         if ref is None:
             return []
         rows = self._conn.execute(
-            "SELECT id FROM scans WHERE target = ? AND scanned_at > ? "
-            "ORDER BY scanned_at DESC",
+            "SELECT id FROM scans WHERE target = ? AND scanned_at > ? ORDER BY scanned_at DESC",
             (target, ref[0]),
         ).fetchall()
         return [r[0] for r in rows]
 
     def list_targets(self) -> list[str]:
-        rows = self._conn.execute(
-            "SELECT DISTINCT target FROM scans ORDER BY target"
-        ).fetchall()
+        rows = self._conn.execute("SELECT DISTINCT target FROM scans ORDER BY target").fetchall()
         return [r[0] for r in rows]
 
     def scan_count(self, target: str) -> int:

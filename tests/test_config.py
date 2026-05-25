@@ -60,6 +60,7 @@ history_dir = "my_snapshots"
 
     def test_missing_file_returns_none(self) -> None:
         import os
+
         with tempfile.TemporaryDirectory() as tmp:
             old = os.getcwd()
             os.chdir(tmp)

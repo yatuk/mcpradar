@@ -17,11 +17,8 @@ def _to_dict(obj: Any) -> Any:
     if isinstance(obj, dict):
         return {str(k): _to_dict(v) for k, v in obj.items()}
     # sarif-om object
-    return {
-        k: _to_dict(v)
-        for k, v in obj.__dict__.items()
-        if not k.startswith("_")
-    }
+    return {k: _to_dict(v) for k, v in obj.__dict__.items() if not k.startswith("_")}
+
 
 SARIF_SEVERITY: dict[Severity, str] = {
     Severity.LOW: "note",
@@ -50,9 +47,7 @@ def to_sarif(report: ScanReport) -> dict[str, Any]:
             sarif.ReportingDescriptor(
                 id=rid,
                 name=rid,
-                short_description=sarif.MultiformatMessageString(
-                    text=desc
-                ),
+                short_description=sarif.MultiformatMessageString(text=desc),
                 help_uri=f"https://github.com/yatuk/mcpradar/blob/main/docs/detection-rules.md#{rid.lower()}",
             )
             for rid, desc in sorted(RULE_HELP.items())

@@ -49,9 +49,7 @@ class Watcher:
                     differ = Differ()
                     delta = differ.compare(self.last_report, report)
                     if delta.has_changes:
-                        console.print(
-                            "\n[bold yellow][!] Degisiklik tespit edildi![/]"
-                        )
+                        console.print("\n[bold yellow][!] Degisiklik tespit edildi![/]")
                         console.print_diff(delta)
                         if self.alert_cmd:
                             self._run_alert(delta)
