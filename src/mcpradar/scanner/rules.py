@@ -224,7 +224,7 @@ class EncodedBlobDetection(Rule):
         found: list[Finding] = []
 
         for m in BASE64_RE.finditer(tool.description):
-            blob = m.group(1).strip("=")
+            blob = m.group(1).rstrip("=")
             if len(blob) < 40:
                 continue
 

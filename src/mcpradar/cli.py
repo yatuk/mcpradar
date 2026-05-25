@@ -225,10 +225,14 @@ def _save_output(report: Any, output: Path, fmt: str) -> None:
         out_path = output if output.suffix == ".json" else output.with_suffix(".json")
         if hasattr(report, "to_dict"):
             out_path.write_text(
-                json.dumps(report.to_dict(), indent=2, ensure_ascii=False)
+                json.dumps(report.to_dict(), indent=2, ensure_ascii=False),
+                encoding="utf-8",
             )
         else:
-            out_path.write_text(json.dumps(report, indent=2, ensure_ascii=False))
+            out_path.write_text(
+                json.dumps(report, indent=2, ensure_ascii=False),
+                encoding="utf-8",
+            )
     console.print(f"[dim]Çıktı: {out_path}[/]")
 
 
