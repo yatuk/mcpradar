@@ -130,30 +130,80 @@ servers in disposable containers with network egress locked down.
 
 ## Comparison
 
+Feature presence in MCP security tools. **Feature checkmarks do not imply detection accuracy** —
+see [Benchmarks](#benchmarks) for measured precision/recall data.
+
 | Feature | MCPRadar | Cisco mcp-scanner | Snyk agent-scan | Pipelock | Hermes | agent-audit | MCP Guardian |
 |---|---|---|---|---|---|---|---|
 | **Approach** | Static + Diff + Sandbox | YARA + LLM + VirusTotal | LLM classifier | Runtime proxy (Go) | Fuzz + Probe (Rust) | SAST 40+ rules | Policy proxy |
-| **Zero-width Unicode** | ✅ | ❌ | ❌ | ✅ (live) | ❌ | ❌ | ❌ |
-| **Prompt injection** | 10 patterns | YARA patterns | LLM-based | ✅ (live) | ❌ | ❌ | ❌ |
-| **Base64/hex blob** | ✅ | ❌ | ❌ | ✅ (decode) | ❌ | ❌ | ❌ |
-| **Hidden HTML/MD** | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ |
-| **Secret/token scan** | ✅ R106 | ✅ (YARA) | ❌ | ✅ (48 DLP) | ✅ | ✅ | ❌ |
-| **Command injection** | ✅ R107 | ❌ | ❌ | ✅ (live) | ✅ | ✅ | ❌ |
-| **Supply chain risk** | ✅ R108 | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ |
-| **DCI (desc ≠ code)** | ✅ AST-based | ❌ | ❌ | ❌ | ❌ | Partial | ❌ |
-| **Cross-server analysis** | ✅ C001-C007 | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| **Source scanning** | ✅ GitHub/npm/Docker | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ |
-| **SBOM + dep. CVE** | ✅ CycloneDX | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| **Sandbox execution** | ✅ Docker egress-lock | ❌ | ❌ | N/A (proxy) | ❌ | ❌ | ❌ |
-| **AIVSS scoring** | ✅ 0–10 + CWE | LLM score | ✅ | ❌ | ❌ | ❌ | ❌ |
-| **Snapshot diff** | ✅ 3-level | Not documented | Version compare | ✅ (every call) | ❌ | ❌ | ❌ |
-| **SARIF output** | ✅ v2.1.0 | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
-| **stdio transport** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| **Runtime proxy** | ❌ (planned v1.1) | ❌ | ❌ | ✅ | ❌ | ❌ | ✅ |
+| **Zero-width Unicode** | ✅ | — | — | ✅ | — | — | — |
+| **Prompt injection** | 10 patterns | YARA patterns | LLM-based | ✅ | — | — | — |
+| **Base64/hex blob** | ✅ | — | — | ✅ | — | — | — |
+| **Hidden HTML/MD** | ✅ | — | — | ✅ | — | — | — |
+| **Secret/token scan** | ✅ | ✅ | — | ✅ | ✅ | ✅ | — |
+| **Command injection** | ✅ | — | — | ✅ | ✅ | ✅ | — |
+| **Supply chain risk** | ✅ | — | — | — | — | ✅ | — |
+| **DCI (desc ≠ code)** | ✅ | — | — | — | — | Partial | — |
+| **Cross-server analysis** | ✅ C001-C007 | — | — | — | — | — | — |
+| **Source scanning** | ✅ GitHub/npm/Docker | — | — | — | — | ✅ | — |
+| **SBOM + dep. CVE** | ✅ CycloneDX | — | — | — | — | — | — |
+| **Sandbox execution** | ✅ Docker egress-lock | — | — | N/A (proxy) | — | — | — |
+| **AIVSS scoring** | ✅ 0–10 + CWE | LLM score | ✅ | — | — | — | — |
+| **Snapshot diff** | ✅ 3-level | Not documented | Version compare | ✅ | — | — | — |
+| **SARIF output** | ✅ v2.1.0 | ✅ | — | — | ✅ | — | — |
+| **stdio transport** | ✅ | — | — | — | — | — | — |
+| **Runtime proxy** | 🔜 planned v1.1 | — | — | ✅ | — | — | ✅ |
 | **License** | MIT | Apache 2.0 | Snyk platform | Apache 2.0 | Unknown | Unknown | Custom |
-| **Offline capable** | ✅ | ❌ (VT/LLM API) | ❌ (LLM API) | ✅ | ✅ | ✅ | ✅ |
+| **Offline capable** | ✅ | — (VT/LLM API) | — (LLM API) | ✅ | ✅ | ✅ | ✅ |
+| **Accuracy measured?** | ✅ [BENCHMARK](validation/BENCHMARK.md) | Not published | Not published | Not published | Not published | [0.91 F1](https://explore.market.dev/ecosystems/mcp/projects/agent-audit) | Not published |
 
-✅ = Built · 🔜 = Planned (see [ROADMAP.md](ROADMAP.md))
+✅ = Feature present  ·  🔜 = Planned  ·  — = Unknown / not independently verified
+
+**Note:** `—` means we could not verify the feature's existence or accuracy from public documentation.
+This does NOT mean the tool lacks the capability — only that we have no data to confirm it.
+Corrections welcome via PR.
+
+---
+
+## Benchmarks
+
+MCPRadar's detection accuracy is measured against a labeled corpus and published
+in [`validation/BENCHMARK.md`](validation/BENCHMARK.md). The benchmark includes:
+
+- **Positive cases:** `demo/malicious_server.py` — 9 intentionally vulnerable tools covering R001–R109
+- **Negative controls:** Official MCP reference servers (filesystem, memory, everything) — expected zero findings
+- **External corpus:** [Appsecco Vulnerable MCP Servers Lab](https://github.com/appsecco/vulnerable-mcp-servers-lab) — 9 servers with labeled vulnerability classes
+
+| Metric | Target |
+|---|---|
+| Precision | ≥ 80% |
+| Recall | ≥ 85% |
+| F1 Score | ≥ 0.82 |
+
+Performance benchmarks (see `tests/test_benchmark.py`): rule engine latency ~14 ms (100 tools),
+SARIF generation ~2 ms (100 findings), SQLite insert ~1.5 ms (batch).
+
+---
+
+## Known Limitations
+
+MCPRadar is a **pattern detector, not an exploitability oracle**. It does not execute
+code or exploit vulnerabilities. Understand its limits:
+
+| Rule | Detection Method | FP Risk | Notes |
+|---|---|---|---|
+| R102 (Prompt injection) | Regex patterns | Medium | "You must..." in docs, "system:" in OS references |
+| R105 (Scope mismatch) | Heuristic word overlap | **High** | Legitimate bridge/adapter tools; allowed via BRIDGE_KEYWORDS |
+| R106 (Secrets) | Pattern + entropy | Medium | Placeholder keys, example tokens, high-entropy IDs |
+| R107 (Command injection) | Shell metachar sequences | Medium | Build scripts, command examples in documentation |
+| R108 (Supply chain) | Install/exec patterns | **High** | `pip install`, `npx`, `eval(` in setup instructions |
+
+For detailed triage guidance, see [`docs/false-positives.md`](docs/false-positives.md).
+
+**What MCPRadar does NOT do:**
+- Execute or validate exploitability of detected patterns
+- Detect runtime-only attacks on live traffic (use a runtime proxy for that)
+- Guarantee zero false negatives — novel attack patterns may evade static rules
 
 ---
 

@@ -1732,29 +1732,238 @@ def audit(
 
 
 # ---------------------------------------------------------------------------
-# registry-scan
+# registry — MCP Registry integration
 # ---------------------------------------------------------------------------
 
+registry_app = typer.Typer(help="MCP Registry integration", no_args_is_help=True)
+app.add_typer(registry_app, name="registry")
 
-@app.command()
-def registry_scan(
-    output: Path = typer.Option(  # noqa: B008
-        Path("leaderboard.md"),
-        "--output",
-        "-o",
-        help="Markdown çıktı dosyası",
+
+@registry_app.command(name="fetch")
+def registry_fetch(
+    limit: int = typer.Option(  # noqa: B008
+        100, "--limit", "-n", help="Maximum servers to fetch per page"
+    ),
+    all_versions: bool = typer.Option(  # noqa: B008
+        False, "--all-versions", help="Include all versions (not just latest)"
     ),
 ) -> None:
-    """Popüler MCP sunucu kayıtlarını tara ve leaderboard oluştur."""
+    """Fetch MCP server list from the official registry and cache locally."""
     from mcpradar.output.console import console
-    from mcpradar.registry.scanner import render_leaderboard, scan_registry
+    from mcpradar.registry.client import RegistryClient
 
-    console.print("[bold]MCP Registry Scan[/]\n")
-    results = scan_registry()
-    md = render_leaderboard(results)
-    output.write_text(md, encoding="utf-8")
-    console.print(md)
-    console.print(f"\n[green]Leaderboard: {output}[/]")
+    console.print("[bold]Fetching MCP Registry...[/]")
+    client = RegistryClient()
+    entries = client.list_servers(limit=limit, latest_only=not all_versions)
+
+    scannable = sum(1 for e in entries if e.packages)
+    remote_only = len(entries) - scannable
+
+    console.print(f"[green]Fetched {len(entries)} servers[/]")
+    console.print(f"  With packages (scannable): [cyan]{scannable}[/]")
+    console.print(f"  Remote-only: [dim]{remote_only}[/]")
+    console.print(f"[dim]Cache: {client._cache_path()}[/]")
+
+
+@registry_app.command(name="list")
+def registry_list(
+    limit: int = typer.Option(  # noqa: B008
+        20, "--limit", "-n", help="Maximum entries to display"
+    ),
+    category: str | None = typer.Option(  # noqa: B008
+        None, "--category", "-c", help="Filter by category (e.g. Developer Tools)"
+    ),
+    transport: str | None = typer.Option(  # noqa: B008
+        None, "--transport", "-t", help="Filter by transport (stdio, streamable-http, sse)"
+    ),
+    scannable_only: bool = typer.Option(  # noqa: B008
+        False, "--scannable", help="Show only servers with installable packages"
+    ),
+) -> None:
+    """List MCP servers from the cached registry."""
+    from rich.table import Table
+
+    from mcpradar.output.console import console
+    from mcpradar.registry.client import RegistryClient
+
+    client = RegistryClient()
+    entries = client.list_servers(limit=100, latest_only=True)
+
+    # Filters
+    if category:
+        entries = [e for e in entries if any(category.lower() in c.lower() for c in e.categories)]
+    if transport:
+        entries = [e for e in entries if any(p.transport == transport for p in e.packages)]
+    if scannable_only:
+        entries = [e for e in entries if e.packages]
+
+    entries = entries[:limit]
+
+    if not entries:
+        console.print("[dim]No entries match the filter. Run 'mcpradar registry fetch' first.[/]")
+        return
+
+    table = Table(title="MCP Registry Servers", show_header=True, header_style="bold")
+    table.add_column("Name", width=36)
+    table.add_column("Version", width=10)
+    table.add_column("Packages", width=20)
+    table.add_column("Categories", width=24)
+    table.add_column("Status", width=10)
+
+    for e in entries:
+        pkg_str = ", ".join(f"{p.registry_type}:{p.identifier}" for p in e.packages[:2])
+        if len(e.packages) > 2:
+            pkg_str += f" +{len(e.packages) - 2}"
+        cat_str = ", ".join(e.categories[:2])
+        status_color = "green" if e.status == "active" else "yellow"
+        table.add_row(
+            e.name[:36],
+            e.version[:10],
+            pkg_str[:20] if pkg_str else "[dim]remote only[/]",
+            cat_str[:24],
+            f"[{status_color}]{e.status}[/]",
+        )
+
+    console.print(table)
+
+
+# ---------------------------------------------------------------------------
+# leaderboard
+# ---------------------------------------------------------------------------
+
+leaderboard_app = typer.Typer(help="Security leaderboard generation", no_args_is_help=True)
+app.add_typer(leaderboard_app, name="leaderboard")
+
+
+@leaderboard_app.command(name="generate")
+def leaderboard_generate(
+    output_path: Path | None = typer.Option(  # noqa: B008
+        None, "--output", "-o", help="Output path (default: docs/leaderboard/data.json)"
+    ),
+    results_dir: Path | None = typer.Option(  # noqa: B008
+        None, "--results-dir", help="Validation results directory (default: validation/results)"
+    ),
+) -> None:
+    """Generate leaderboard data.json with AIVSS scores from scan results."""
+    import hashlib
+    import json
+
+    from mcpradar import __version__
+    from mcpradar.output.console import console
+
+    results = results_dir or Path("validation/results")
+    output = output_path or Path("docs/leaderboard/data.json")
+
+    rows: list[dict[str, Any]] = []
+
+    if results.exists():
+        for fpath in sorted(results.glob("*.json")):
+            try:
+                data = json.loads(fpath.read_text(encoding="utf-8"))
+            except (json.JSONDecodeError, OSError):
+                continue
+
+            name = data.get("name", fpath.stem)
+            sev = data.get("findings_by_severity", {})
+            tools = data.get("tools", 0)
+            total_findings = data.get("findings", 0)
+            scan_id = data.get("scan_id", "")
+
+            # Compute AIVSS score from severity counts
+            tc = max(tools, 1)
+            weighted = (
+                sev.get("critical", 0) * 10
+                + sev.get("high", 0) * 7
+                + sev.get("medium", 0) * 4
+                + sev.get("low", 0) * 1
+            )
+            if total_findings == 0:
+                score, grade = 0.0, "A"
+            else:
+                density = total_findings / tc
+                density_factor = max(0.5, min(2.0, density * 5))
+                raw = weighted / tc * density_factor
+                score = min(10.0, round(raw, 1))
+                if score <= 0.9:
+                    grade = "A"
+                elif score <= 2.9:
+                    grade = "B"
+                elif score <= 4.9:
+                    grade = "C"
+                elif score <= 6.9:
+                    grade = "D"
+                else:
+                    grade = "F"
+
+            # Tool hash from store
+            tool_hash = ""
+            if scan_id:
+                try:
+                    from mcpradar.storage.store import Store
+
+                    store = Store()
+                    report = store.load(scan_id)
+                    store.close()
+                    if report.tools:
+                        names = sorted(t.name for t in report.tools)
+                        tool_hash = hashlib.sha256(",".join(names).encode()).hexdigest()[:16]
+                except Exception:
+                    pass
+
+            rows.append(
+                {
+                    "server": name,
+                    "display_name": name.replace("@", "").replace("/", " / "),
+                    "version": data.get("version", ""),
+                    "aivss_score": score,
+                    "grade": grade,
+                    "confidence": 1.0
+                    if total_findings == 0
+                    else round(
+                        min(
+                            1.0,
+                            (
+                                sev.get("critical", 0) * 0.3
+                                + sev.get("high", 0) * 0.2
+                                + sev.get("medium", 0) * 0.1
+                            )
+                            / max(total_findings, 1)
+                            + 0.7,
+                        ),
+                        2,
+                    ),
+                    "tools": tools,
+                    "findings": total_findings,
+                    "by_severity": {
+                        "critical": sev.get("critical", 0),
+                        "high": sev.get("high", 0),
+                        "medium": sev.get("medium", 0),
+                        "low": sev.get("low", 0),
+                    },
+                    "tool_hash": tool_hash,
+                    "last_scanned": data.get("scanned_at", "")[:10]
+                    if data.get("scanned_at")
+                    else "—",
+                    "scanner_version": __version__,
+                    "status": data.get("status", "unknown"),
+                }
+            )
+
+    rows.sort(key=lambda r: (r["aivss_score"], -r["tools"]))
+
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(json.dumps(rows, indent=2, ensure_ascii=False), encoding="utf-8")
+
+    console.print(f"[green]Generated {output} with {len(rows)} entries[/]")
+    for r in rows:
+        grade_color = {
+            "A": "green",
+            "B": "bright_green",
+            "C": "yellow",
+            "D": "orange1",
+            "F": "bold red",
+        }.get(r["grade"], "")
+        console.print(f"  [{grade_color}]{r['grade']}[/] | {r['aivss_score']:4.1f} | {r['server']}")
 
 
 # ---------------------------------------------------------------------------

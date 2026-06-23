@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import tempfile
 from pathlib import Path
 
@@ -113,15 +114,19 @@ class TestCLIWatch:
         assert result.exit_code == 0
 
 
-class TestCLIRegistryScan:
-    def test_registry_scan(self) -> None:
+class TestCLILeaderboard:
+    def test_leaderboard_generate(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
-            out = Path(tmp) / "leaderboard.md"
-            result = runner.invoke(app, ["registry-scan", "-o", str(out)])
+            out = Path(tmp) / "data.json"
+            result = runner.invoke(
+                app,
+                ["leaderboard", "generate", "-o", str(out), "--results-dir", str(Path(tmp))],
+            )
             assert result.exit_code == 0
             assert out.exists()
             content = out.read_text(encoding="utf-8")
-            assert "Leaderboard" in content or "leaderboard" in content
+            data = json.loads(content)
+            assert isinstance(data, list)  # empty when no results, but valid JSON
 
 
 class TestCLIDiffFormat:

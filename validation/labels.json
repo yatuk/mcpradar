@@ -1,0 +1,34 @@
+{
+  "_description": "Ground-truth labels for MCPRadar benchmark. expected_rules lists rule IDs that SHOULD fire. expected_findings_min/max define acceptable finding count ranges.",
+  "targets": {
+    "demo/malicious_server.py": {
+      "command": "python demo/malicious_server.py",
+      "transport": "stdio",
+      "expected_rules": ["R001", "R101", "R102", "R103", "R104", "R105", "R106", "R107", "R108", "R109"],
+      "expected_findings_min": 15,
+      "expected_findings_max": 40,
+      "notes": "Intentional test corpus. Should trigger all 10 static rules. R110 (fingerprint) and R111 (transport) are integration-level rules not tested here."
+    },
+    "@modelcontextprotocol/server-filesystem": {
+      "command": "npx -y @modelcontextprotocol/server-filesystem /tmp",
+      "transport": "stdio",
+      "expected_rules": [],
+      "expected_findings_max": 3,
+      "notes": "Official reference server. Should be clean. Any findings are potential FPs worth investigating."
+    },
+    "@modelcontextprotocol/server-everything": {
+      "command": "npx -y @modelcontextprotocol/server-everything",
+      "transport": "stdio",
+      "expected_rules": [],
+      "expected_findings_max": 2,
+      "notes": "Official reference server. Should be clean."
+    },
+    "@modelcontextprotocol/server-memory": {
+      "command": "npx -y @modelcontextprotocol/server-memory",
+      "transport": "stdio",
+      "expected_rules": [],
+      "expected_findings_max": 2,
+      "notes": "Official reference server. Should be clean."
+    }
+  }
+}

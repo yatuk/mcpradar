@@ -481,7 +481,9 @@ class SecretExposureDetection(Rule):
 # Command injection risk patterns (R107)
 # ---------------------------------------------------------------------------
 
-SHELL_METACHAR_RE = re.compile(r"\$\(|`|\|\||&&|;|\b(?:nc|netcat)\b|[|><]")
+SHELL_METACHAR_RE = re.compile(
+    r"\$\(|`|\|\||&&|;\s*(?:nc|netcat|curl|wget)\b|>>|>\s*/dev/null|2>&1|>\s*\("
+)
 
 DANGEROUS_DEFAULTS: set[str] = {
     "rm -rf",
@@ -627,6 +629,26 @@ SUPPLY_CHAIN_PATTERNS: list[tuple[re.Pattern[str], str, Severity]] = [
 ]
 
 
+def _is_install_docs(text: str, label: str) -> bool:
+    """Return True if this match appears to be setup documentation, not malicious."""
+    if label in ("pip install", "npm/yarn install", "npx execution"):
+        desc_lower = text.lower()
+        # Pattern: install instructions for the server itself, not payload delivery
+        if any(
+            kw in desc_lower
+            for kw in (
+                "setup",
+                "install the server",
+                "getting started",
+                "quick start",
+                "configuration",
+                "usage",
+            )
+        ):
+            return True
+    return False
+
+
 class SupplyChainRiskDetection(Rule):
     rule_id = "R108"
     title = "Supply chain risk gostergesi"
@@ -637,6 +659,9 @@ class SupplyChainRiskDetection(Rule):
         found: list[Finding] = []
         for pattern, label, sev in SUPPLY_CHAIN_PATTERNS:
             for m in pattern.finditer(text):
+                # Skip if this appears to be setup/install documentation
+                if _is_install_docs(text, label):
+                    continue
                 found.append(
                     self._finding(
                         tool.name,
@@ -789,6 +814,14 @@ BRIDGE_KEYWORDS: set[str] = {
     "connector",
     "relay",
     "translator",
+    "integration",
+    "orchestrator",
+    "manager",
+    "handler",
+    "provider",
+    "service",
+    "client",
+    "interface",
 }
 
 SCOPE_PAIRS: list[tuple[re.Pattern[str], re.Pattern[str], str, str]] = [

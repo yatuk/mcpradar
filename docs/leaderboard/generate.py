@@ -7,53 +7,90 @@ Writes: docs/leaderboard/data.json
 
 from __future__ import annotations
 
+import hashlib
 import json
 import sys
 from pathlib import Path
 
-# Allow importing from src/ when run from repo root
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent / "src"))
 
-RESULTS_DIR = Path("validation/results")
-OUTPUT = Path("docs/leaderboard/data.json")
+from mcpradar import __version__
+
+# AIVSS scoring implemented inline in score_from_counts() below
+# to compute directly from severity counts without Finding objects
+
+_SCRIPT_ROOT = Path(__file__).resolve().parent.parent.parent
+RESULTS_DIR = _SCRIPT_ROOT / "validation/results"
+OUTPUT = _SCRIPT_ROOT / "docs/leaderboard/data.json"
 
 
-def _fallback_entries() -> list[dict]:
-    """Generate placeholder entries from known MCP servers.
+def score_from_counts(severity_counts: dict[str, int], tool_count: int) -> tuple[float, str, float]:
+    """Compute AIVSS score, grade and confidence from severity counts.
 
-    When no validation results exist, this ensures the leaderboard
-    shows all tracked servers with 'pending' status instead of
-    appearing empty.
+    Returns (aivss_score, grade, confidence).
     """
-    from mcpradar.registry.scanner import KNOWN_MPC_SERVERS
+    total = sum(severity_counts.values())
+    if total == 0:
+        return 0.0, "A", 1.0
 
-    rows: list[dict] = []
-    for name, _runner, _cmd in KNOWN_MPC_SERVERS:
-        rows.append(
-            {
-                "server": name,
-                "tools": 0,
-                "findings": 0,
-                "critical": 0,
-                "high": 0,
-                "medium": 0,
-                "low": 0,
-                "last_scanned": "—",
-                "status": "pending",
-            }
+    tc = max(tool_count, 1)
+    weighted = (
+        severity_counts.get("critical", 0) * 10
+        + severity_counts.get("high", 0) * 7
+        + severity_counts.get("medium", 0) * 4
+        + severity_counts.get("low", 0) * 1
+    )
+    density = total / tc
+    density_factor = max(0.5, min(2.0, density * 5))
+    raw = weighted / tc * density_factor
+    score = min(10.0, round(raw, 1))
+
+    if score <= 0.9:
+        grade = "A"
+    elif score <= 2.9:
+        grade = "B"
+    elif score <= 4.9:
+        grade = "C"
+    elif score <= 6.9:
+        grade = "D"
+    else:
+        grade = "F"
+
+    # Confidence: weighted by severity composition
+    # More high/critical findings = higher confidence
+    confidence = min(
+        1.0,
+        (
+            severity_counts.get("critical", 0) * 0.3
+            + severity_counts.get("high", 0) * 0.2
+            + severity_counts.get("medium", 0) * 0.1
         )
-    return rows
+        / max(total, 1)
+        + 0.7,
+    )
+
+    return score, grade, round(confidence, 2)
+
+
+def compute_tool_hash(scan_id: str) -> str:
+    """Compute tool_names_hash from the SQLite store for a given scan_id."""
+    try:
+        from mcpradar.storage.store import Store
+
+        store = Store()
+        report = store.load(scan_id)
+        store.close()
+        if report.tools:
+            names = sorted(t.name for t in report.tools)
+            return hashlib.sha256(",".join(names).encode()).hexdigest()[:16]
+    except Exception:
+        pass
+    return ""
 
 
 def main() -> None:
     rows: list[dict] = []
 
-    # Start with placeholder entries for all known servers
-    server_map: dict[str, dict] = {}
-    for entry in _fallback_entries():
-        server_map[entry["server"]] = entry
-
-    # Overlay real scan results on top of placeholders
     if RESULTS_DIR.exists():
         for fpath in sorted(RESULTS_DIR.glob("*.json")):
             try:
@@ -63,22 +100,46 @@ def main() -> None:
 
             name = data.get("name", fpath.stem)
             sev = data.get("findings_by_severity", {})
-            server_map[name] = {
-                "server": name,
-                "tools": data.get("tools", 0),
-                "findings": data.get("findings", 0),
-                "critical": sev.get("critical", 0),
-                "high": sev.get("high", 0),
-                "medium": sev.get("medium", 0),
-                "low": sev.get("low", 0),
-                "last_scanned": data.get("scanned_at", "")[:10] if data.get("scanned_at") else "—",
-                "status": data.get("status", "unknown"),
-            }
+            tools = data.get("tools", 0)
+            findings_count = data.get("findings", 0)
+            scan_id = data.get("scan_id", "")
 
-    rows = list(server_map.values())
-    rows.sort(key=lambda r: (r["status"] != "pending", r["findings"]), reverse=True)
+            score, grade, confidence = score_from_counts(sev, tools)
+            tool_hash = compute_tool_hash(scan_id) if scan_id else ""
+
+            rows.append(
+                {
+                    "server": name,
+                    "display_name": name.replace("@", "").replace("/", " / "),
+                    "version": data.get("version", ""),
+                    "aivss_score": score,
+                    "grade": grade,
+                    "confidence": confidence,
+                    "tools": tools,
+                    "findings": findings_count,
+                    "by_severity": {
+                        "critical": sev.get("critical", 0),
+                        "high": sev.get("high", 0),
+                        "medium": sev.get("medium", 0),
+                        "low": sev.get("low", 0),
+                    },
+                    "tool_hash": tool_hash,
+                    "last_scanned": (
+                        data.get("scanned_at", "")[:10] if data.get("scanned_at") else "—"
+                    ),
+                    "scanner_version": __version__,
+                    "status": data.get("status", "unknown"),
+                }
+            )
+
+    # Sort by AIVSS score ascending (best/safest first)
+    rows.sort(key=lambda r: (r["aivss_score"], -r["tools"]))
+
+    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT.write_text(json.dumps(rows, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"Generated {OUTPUT} with {len(rows)} entries")
+    for r in rows:
+        print(f"  {r['grade']} | {r['aivss_score']:4.1f} | {r['server']}")
 
 
 if __name__ == "__main__":

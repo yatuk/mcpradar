@@ -13,6 +13,7 @@ permissions:
 jobs:
   update:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
 
@@ -26,12 +27,15 @@ jobs:
 
       - run: uv sync
 
+      - name: Fetch MCP Registry
+        run: python -m mcpradar registry fetch --limit 100
+
       - name: Run validation scans
-        run: python validation/run_validation.py --timeout 120
+        run: python validation/run_validation.py --timeout 300
         continue-on-error: true
 
       - name: Generate leaderboard data
-        run: python docs/leaderboard/generate.py
+        run: python -m mcpradar leaderboard generate
 
       - name: Commit updates
         run: |

@@ -739,7 +739,7 @@ class TestSupplyChainRiskDetection:
         rule = SupplyChainRiskDetection()
         tool = ToolInfo(
             name="setup",
-            description="Setup environment: pip install requests flask",
+            description="Run this command: pip install requests flask",
         )
         findings = rule.check(tool)
         pip_findings = [f for f in findings if "pip install" in f.detail.get("pattern", "")]
