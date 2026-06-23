@@ -1,112 +1,42 @@
 [
   {
-    "server": "@modelcontextprotocol/server-filesystem",
-    "tools": 0,
+    "server": "filesystem",
+    "display_name": "filesystem",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 14,
     "findings": 0,
-    "critical": 0,
-    "high": 0,
-    "medium": 0,
-    "low": 0,
-    "last_scanned": "—",
-    "status": "pending"
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "tool_hash": "44c35cf6ac86e32d",
+    "last_scanned": "2026-06-23",
+    "scanner_version": "1.0.0-rc3",
+    "status": "unknown"
   },
   {
-    "server": "@modelcontextprotocol/server-github",
-    "tools": 0,
-    "findings": 0,
-    "critical": 0,
-    "high": 0,
-    "medium": 0,
-    "low": 0,
-    "last_scanned": "—",
-    "status": "pending"
-  },
-  {
-    "server": "@modelcontextprotocol/server-postgres",
-    "tools": 0,
-    "findings": 0,
-    "critical": 0,
-    "high": 0,
-    "medium": 0,
-    "low": 0,
-    "last_scanned": "—",
-    "status": "pending"
-  },
-  {
-    "server": "@modelcontextprotocol/server-brave-search",
-    "tools": 0,
-    "findings": 0,
-    "critical": 0,
-    "high": 0,
-    "medium": 0,
-    "low": 0,
-    "last_scanned": "—",
-    "status": "pending"
-  },
-  {
-    "server": "@modelcontextprotocol/server-puppeteer",
-    "tools": 0,
-    "findings": 0,
-    "critical": 0,
-    "high": 0,
-    "medium": 0,
-    "low": 0,
-    "last_scanned": "—",
-    "status": "pending"
-  },
-  {
-    "server": "@modelcontextprotocol/server-slack",
-    "tools": 0,
-    "findings": 0,
-    "critical": 0,
-    "high": 0,
-    "medium": 0,
-    "low": 0,
-    "last_scanned": "—",
-    "status": "pending"
-  },
-  {
-    "server": "@anthropic/server-sequential-thinking",
-    "tools": 0,
-    "findings": 0,
-    "critical": 0,
-    "high": 0,
-    "medium": 0,
-    "low": 0,
-    "last_scanned": "—",
-    "status": "pending"
-  },
-  {
-    "server": "@tavily/server-tavily-search",
-    "tools": 0,
-    "findings": 0,
-    "critical": 0,
-    "high": 0,
-    "medium": 0,
-    "low": 0,
-    "last_scanned": "—",
-    "status": "pending"
-  },
-  {
-    "server": "@smithery/server-git",
-    "tools": 0,
-    "findings": 0,
-    "critical": 0,
-    "high": 0,
-    "medium": 0,
-    "low": 0,
-    "last_scanned": "—",
-    "status": "pending"
-  },
-  {
-    "server": "@smithery/server-fetch",
-    "tools": 0,
-    "findings": 0,
-    "critical": 0,
-    "high": 0,
-    "medium": 0,
-    "low": 0,
-    "last_scanned": "—",
-    "status": "pending"
+    "server": "playwright",
+    "display_name": "playwright",
+    "version": "",
+    "aivss_score": 4.2,
+    "grade": "C",
+    "confidence": 0.9,
+    "tools": 23,
+    "findings": 8,
+    "by_severity": {
+      "critical": 4,
+      "high": 0,
+      "medium": 4,
+      "low": 0
+    },
+    "tool_hash": "73c317b4aedef755",
+    "last_scanned": "2026-06-23",
+    "scanner_version": "1.0.0-rc3",
+    "status": "unknown"
   }
 ]
