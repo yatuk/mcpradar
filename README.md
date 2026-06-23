@@ -21,7 +21,7 @@
   <a href="https://pypi.org/project/mcpradar/"><img src="https://img.shields.io/pypi/dm/mcpradar?color=orange" alt="PyPI downloads"/></a>
   <a href="https://github.com/yatuk/mcpradar/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="MIT License"/></a>
   <a href="https://github.com/astral-sh/ruff"><img src="https://img.shields.io/badge/code%20style-ruff-261230" alt="Ruff"/></a>
-  <a href="https://owasp.org/www-project-mcp-top-10/"><img src="https://img.shields.io/badge/OWASP%20MCP%20Top%2010-6/10%20covered-yellow" alt="OWASP MCP Top 10"/></a>
+  <a href="https://owasp.org/www-project-mcp-top-10/"><img src="https://img.shields.io/badge/OWASP%20MCP%20Top%2010-10/10%20covered-brightgreen" alt="OWASP MCP Top 10"/></a>
 </p>
 
 <p align="center">
@@ -65,13 +65,13 @@ That's it. One command, no install, runs against any MCP server you can launch.
 
 ## Features
 
-### 🔍 Security Detection (11 rules planned, 6 built)
+### 🔍 Security Detection (12 rules, all built)
 - 🎯 **R001–R105** — Dangerous tool names, zero-width Unicode, prompt injection (10 patterns), base64/hex blobs, hidden HTML/Markdown, permission scope mismatch
-- 🔜 **R106–R111** — Secret/token exposure, SSRF detection, path traversal, tool-name shadowing, tool-output injection, insecure transport
+- ✅ **R106–R111** — Secret/token exposure, command injection, supply chain risk, schema poisoning, version anomaly, insecure transport
 
-### 🔗 Cross-Server Analysis (7 rules, 5 built)
+### 🔗 Cross-Server Analysis (5 rules, all built)
 - 🌐 **C001–C005** — Tool name collision, shadowing, exfiltration chains, capability overlap, permission gradient
-- 🔜 **C006–C007** — Attack path chain (graph-based), privilege escalation via cross-server chaining
+- 🔜 **C006–C007** — Attack path chain (graph-based), privilege escalation via cross-server chaining (Sprint 4)
 
 ### 📦 Package & Source Scanning
 - 📂 **`scan-source`** — Scan GitHub repos, npm/pip packages, Docker images, MCP registry IDs without running the server
@@ -133,10 +133,10 @@ servers in disposable containers with network egress locked down.
 | **Prompt injection** | 10 patterns | YARA patterns | LLM-based | ✅ (live) | ❌ | ❌ | ❌ |
 | **Base64/hex blob** | ✅ | ❌ | ❌ | ✅ (decode) | ❌ | ❌ | ❌ |
 | **Hidden HTML/MD** | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ |
-| **Secret/token scan** | 🔜 R106 | ✅ (YARA) | ❌ | ✅ (48 DLP) | ✅ | ✅ | ❌ |
-| **SSRF detection** | 🔜 R107 | ❌ | ❌ | ✅ (live) | ✅ | ✅ | ❌ |
-| **Path traversal** | 🔜 R108 | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ |
-| **DCI (desc ≠ code)** | 🔜 AST-based | ❌ | ❌ | ❌ | ❌ | Partial | ❌ |
+| **Secret/token scan** | ✅ R106 | ✅ (YARA) | ❌ | ✅ (48 DLP) | ✅ | ✅ | ❌ |
+| **Command injection** | ✅ R107 | ❌ | ❌ | ✅ (live) | ✅ | ✅ | ❌ |
+| **Supply chain risk** | ✅ R108 | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ |
+| **DCI (desc ≠ code)** | ✅ AST-based | ❌ | ❌ | ❌ | ❌ | Partial | ❌ |
 | **Cross-server analysis** | ✅ C001-C005 | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | **Source scanning** | 🔜 GitHub/npm/Docker | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ |
 | **SBOM + dep. CVE** | 🔜 CycloneDX | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
