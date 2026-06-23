@@ -16,10 +16,15 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/yatuk/mcpradar/actions/workflows/ci.yml"><img src="https://github.com/yatuk/mcpradar/actions/workflows/ci.yml/badge.svg" alt="CI"/></a>
+  <a href="https://github.com/yatuk/mcpradar/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="MIT License"/></a>
+  <a href="https://github.com/yatuk/mcpradar"><img src="https://img.shields.io/github/stars/yatuk/mcpradar?style=social" alt="GitHub stars"/></a>
+  <a href="https://github.com/yatuk/mcpradar"><img src="https://img.shields.io/github/last-commit/yatuk/mcpradar" alt="Last commit"/></a>
+  <a href="https://github.com/yatuk/mcpradar"><img src="https://img.shields.io/badge/status-alpha-orange" alt="Status: Alpha"/></a>
+  <br/>
   <a href="https://pypi.org/project/mcpradar/"><img src="https://img.shields.io/pypi/v/mcpradar?color=blue" alt="PyPI version"/></a>
   <a href="https://pypi.org/project/mcpradar/"><img src="https://img.shields.io/pypi/pyversions/mcpradar?color=blueviolet" alt="Python 3.11 3.12 3.13"/></a>
   <a href="https://pypi.org/project/mcpradar/"><img src="https://img.shields.io/pypi/dm/mcpradar?color=orange" alt="PyPI downloads"/></a>
-  <a href="https://github.com/yatuk/mcpradar/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="MIT License"/></a>
   <a href="https://github.com/astral-sh/ruff"><img src="https://img.shields.io/badge/code%20style-ruff-261230" alt="Ruff"/></a>
   <a href="https://owasp.org/www-project-mcp-top-10/"><img src="https://img.shields.io/badge/OWASP%20MCP%20Top%2010-10/10%20covered-brightgreen" alt="OWASP MCP Top 10"/></a>
 </p>
