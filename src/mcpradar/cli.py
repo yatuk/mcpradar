@@ -892,6 +892,213 @@ def plugin_uninstall(
 
 
 # ---------------------------------------------------------------------------
+# fingerprint
+# ---------------------------------------------------------------------------
+
+fingerprint_app = typer.Typer(
+    help="Server fingerprint and identity tracking", no_args_is_help=True
+)
+app.add_typer(fingerprint_app, name="fingerprint")
+
+
+@fingerprint_app.command(name="create")
+def fingerprint_create(
+    target: str = typer.Argument(help="MCP sunucu adresi"),
+    transport: str = typer.Option(  # noqa: B008
+        "http",
+        "--transport",
+        "-t",
+        help="Transport protokolu (http, sse, stdio)",
+    ),
+) -> None:
+    """Sunucu parmak izi olustur ve kaydet."""
+    import asyncio
+
+    from mcpradar.fingerprint.fingerprinter import Fingerprinter
+    from mcpradar.fingerprint.transport_check import TransportChecker
+    from mcpradar.output.console import console
+    from mcpradar.scanner.engine import Scanner
+    from mcpradar.scanner.report import Severity
+    from mcpradar.storage.store import Store
+
+    # Scan the server
+    sev = Severity.from_str("low")
+    scanner = Scanner(target=target, transport=transport, min_severity=sev)
+    with console.status(f"[bold blue]{target}[/] taranıyor..."):
+        report = asyncio.run(scanner.run())
+
+    # Transport check
+    checker = TransportChecker()
+    tls_info = checker.check(target, transport)
+
+    # Create fingerprint
+    fingerprinter = Fingerprinter()
+    fp = fingerprinter.create(report, tls_info)
+
+    # Save to database
+    store = Store()
+    store.save_fingerprint(fp)
+
+    # Display
+    console.print("\n[bold]Parmak Izi (Fingerprint)[/]")
+    console.print(f"  Server ID:      [bold cyan]{fp.server_id}[/]")
+    console.print(f"  Endpoint:       {fp.endpoint}")
+    console.print(f"  Transport:      {fp.transport}")
+    console.print(f"  Server Version: {fp.server_version or '(bilinmiyor)'}")
+    console.print(f"  Protocol:       {fp.protocol_version or '(bilinmiyor)'}")
+    console.print(f"  Tool Count:     {fp.tool_count}")
+    console.print(f"  Tools Hash:     [dim]{fp.tool_names_hash[:16]}...[/]")
+    if tls_info and tls_info.version != "N/A":
+        console.print(f"  TLS Version:    {tls_info.version}")
+        if tls_info.cert_issuer:
+            console.print(f"  Cert Issuer:    {tls_info.cert_issuer}")
+        cert_ok = "[green]Evet[/]" if tls_info.cert_valid else "[red]Hayir[/]"
+        console.print(f"  Cert Valid:     {cert_ok}")
+        ss_ok = "[yellow]Evet[/]" if tls_info.self_signed else "[green]Hayir[/]"
+        console.print(f"  Self-Signed:    {ss_ok}")
+    elif tls_info and tls_info.version == "plain":
+        console.print("  TLS:            [red]Plain HTTP (sifresiz)[/]")
+
+    console.print("\n[green]Parmak izi kaydedildi.[/]")
+    console.print(f"Karsilastirma icin: mcpradar fingerprint compare {target} -t {transport}")
+
+
+@fingerprint_app.command(name="compare")
+def fingerprint_compare(
+    target: str = typer.Argument(help="MCP sunucu adresi"),
+    transport: str = typer.Option(  # noqa: B008
+        "http",
+        "--transport",
+        "-t",
+        help="Transport protokolu (http, sse, stdio)",
+    ),
+) -> None:
+    """Onceki parmak izi ile karsilastir."""
+    import asyncio
+
+    from mcpradar.fingerprint.fingerprinter import Fingerprinter
+    from mcpradar.fingerprint.transport_check import TransportChecker
+    from mcpradar.output.console import console
+    from mcpradar.scanner.engine import Scanner
+    from mcpradar.scanner.report import Severity
+    from mcpradar.storage.store import Store
+
+    # Load baseline
+    store = Store()
+    baseline = store.load_fingerprint(target, transport)
+
+    if baseline is None:
+        console.print("[yellow]Bu sunucu icin daha once parmak izi kaydi yok.[/]")
+        console.print(
+            f"Parmak izi olusturmak icin: "
+            f"mcpradar fingerprint create {target} -t {transport}"
+        )
+        return
+
+    # Current scan
+    sev = Severity.from_str("low")
+    scanner = Scanner(target=target, transport=transport, min_severity=sev)
+    with console.status(f"[bold blue]{target}[/] taranıyor..."):
+        report = asyncio.run(scanner.run())
+
+    # Transport check
+    checker = TransportChecker()
+    tls_info = checker.check(target, transport)
+
+    # Create current fingerprint
+    fingerprinter = Fingerprinter()
+    current = fingerprinter.create(report, tls_info)
+
+    # Compare
+    diff = fingerprinter.compare(baseline, current)
+
+    # Display
+    console.print("\n[bold]Parmak Izi Karsilastirmasi[/]")
+    console.print(f"  [dim]Onceki:[/] {baseline.first_seen}")
+    console.print(f"  [dim]Simdi: [/] {current.first_seen}")
+
+    if diff.is_first_scan:
+        console.print("\n[yellow]Ilk tarama — karsilastirma yapilamadi.[/]")
+        return
+
+    if not any([
+        diff.tool_names_changed, diff.version_change, diff.protocol_changed,
+        diff.capabilities_changed, diff.tls_changed, diff.endpoint_changed,
+    ]):
+        console.print("\n[green]Degisiklik tespit edilmedi.[/]")
+        return
+
+    console.print("\n[bold]Tespit Edilen Degisiklikler:[/]")
+
+    if diff.version_change:
+        color = "red" if diff.version_change == "rollback" else "yellow"
+        label = {
+            "rollback": "SURUM DUSURME (rollback)",
+            "major_upgrade": "Major surum atlamasi",
+            "minor_upgrade": "Minor surum degisikligi",
+        }.get(diff.version_change, diff.version_change)
+        console.print(
+            f"  [{color}][!][/] {label}: "
+            f"{diff.previous_version} → {diff.current_version}"
+        )
+
+    if diff.tool_names_changed:
+        console.print("  [yellow][!][/] Tool listesi degisti")
+
+    if diff.tls_downgrade:
+        console.print("  [red][!][/] TLS downgrade tespit edildi")
+    elif diff.tls_changed:
+        console.print("  [yellow][!][/] TLS bilgisi degisti")
+
+    if diff.endpoint_changed:
+        console.print("  [red][!][/] Sunucu adresi degisti")
+
+    if diff.protocol_changed:
+        console.print("  [dim][i][/] MCP protokol versiyonu degisti")
+
+    if diff.capabilities_changed:
+        console.print("  [dim][i][/] Yetenekler (capabilities) degisti")
+
+
+@fingerprint_app.command(name="list")
+def fingerprint_list() -> None:
+    """Kayitli parmak izlerini listele."""
+    from rich.table import Table
+
+    from mcpradar.output.console import console
+    from mcpradar.storage.store import Store
+
+    store = Store()
+    fingerprints = store.list_fingerprints()
+
+    if not fingerprints:
+        console.print("[dim]Henuz hic parmak izi kaydi yok.[/]")
+        console.print("[dim]Parmak izi olusturmak icin: mcpradar fingerprint create <hedef>[/]")
+        return
+
+    table = Table(title="Stored Fingerprints", show_header=True)
+    table.add_column("Server ID", width=18)
+    table.add_column("Endpoint", width=30)
+    table.add_column("Version", width=10)
+    table.add_column("Tools", width=6)
+    table.add_column("TLS", width=10)
+    table.add_column("Last Seen", width=20)
+
+    for fp in fingerprints:
+        tls_ver = fp.tls_info.version if fp.tls_info else "N/A"
+        table.add_row(
+            fp.server_id,
+            fp.endpoint[:30],
+            fp.server_version or "?",
+            str(fp.tool_count),
+            tls_ver,
+            fp.last_seen[:19],
+        )
+
+    console.print(table)
+
+
+# ---------------------------------------------------------------------------
 # watch
 # ---------------------------------------------------------------------------
 

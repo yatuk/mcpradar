@@ -38,6 +38,8 @@ RULE_HELP: dict[str, str] = {
     "R107": "Command injection risk via tool parameter defaults, patterns, or enum values",
     "R108": "Supply chain risk — pip/npm install, curl-to-bash, dynamic code loading",
     "R109": "Schema poisoning — additionalProps:true, missing types, buffer overflow risk",
+    "R110": "Version anomaly — rollback attack, unexpected major upgrade, tool list change",
+    "R111": "Insecure transport — plain HTTP, old TLS, self-signed certificates",
 }
 
 

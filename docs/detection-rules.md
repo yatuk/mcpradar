@@ -1,6 +1,6 @@
 # Detection Rules
 
-MCPRadar'ın 10 built-in detection rule'u ve topluluk eklentileri, her biri ayrı bir saldırı vektörünü hedefler.
+MCPRadar'ın 12 built-in detection rule'u ve topluluk eklentileri, her biri ayrı bir saldırı vektörünü hedefler.
 
 ## Rule Index
 
@@ -16,6 +16,8 @@ MCPRadar'ın 10 built-in detection rule'u ve topluluk eklentileri, her biri ayr�
 | R107 | Command Injection via Parameters | CRITICAL/HIGH | Command injection |
 | R108 | Supply Chain Risk Indicator | MEDIUM/HIGH | Supply chain |
 | R109 | Schema Poisoning Indicator | HIGH/MEDIUM | Schema validation |
+| R110 | Version Anomaly | HIGH/CRITICAL | Fingerprint |
+| R111 | Insecure Transport | HIGH/CRITICAL | Transport |
 | X001 | Suspicious Crypto/Wallet References | MEDIUM | Community (örnek) |
 | X002 | Deprecated/Legacy API Pattern | LOW | Community (örnek) |
 
@@ -285,6 +287,83 @@ OpenAI (`sk-*`), GitHub (`ghp_*`, `gho_*`, `github_pat_*`), Slack (`xox*`), AWS 
 **Neden tehlikeli:** `additionalProperties: true` olan bir schema, tool'a tanımlanmamış ek parametreler gönderilmesine izin verir. Bu, prompt injection payload'larının beklenmedik alanlardan sızmasına yol açabilir. Zorunlu alan olmaması, tool'un boş veya eksik girdiyle çalıştırılmasına izin verir. Aşırı büyük limitler buffer overflow ve DoS riski taşır.
 
 **False positive riski:** Yüksek. Birçok meşru MCP tool'u esnek schema kullanır. Özellikle "no required fields" MEDIUM severity ile işaretlenir.
+
+---
+
+## R110 — Version Anomaly Detection
+
+**Severity:** CRITICAL (rollback) / HIGH (major upgrade, tool change, TLS downgrade, endpoint change) / MEDIUM (first scan, protocol change)
+
+**Ne arar:** Iki tarama arasindaki fingerprint degisikliklerini analiz eder:
+- **Rollback saldiri** (CRITICAL): Sunucu surumunun onceki taramaya gore dusmesi
+- **Major surum atlamasi** (HIGH): Beklenmeyen major surum yukseltmesi
+- **Tool listesi degisimi** (HIGH): Yeni tool eklenmesi veya mevcut tool kaldirilmasi
+- **TLS downgrade** (HIGH): TLS surumunun dusurulmesi (ornegin TLSv1.3'ten TLSv1.2'ye)
+- **Endpoint degisimi** (HIGH): Ayni sunucu kimliginin farkli bir adreste gorulmesi
+- **Protokol versiyonu degisimi** (MEDIUM): MCP protokol surumunun degismesi
+- **Ilk tarama** (MEDIUM): Daha once hic taranmamis sunucu
+
+**Nasil calisir:** `RuleEngine.pre_scan_check()` metodu, `Fingerprinter.compare()` ile iki `ServerFingerprint` objesini karsilastirir. `ServerFingerprint` sunucu adresi, transport tipi, tool ismi hash'i, versiyon bilgisi ve TLS detaylarini icerir.
+
+**Gerçek örnek (saldiri):**
+```
+Tarama 1: server_version="1.2.0", 5 tools
+Tarama 2: server_version="1.0.0", 5 tools
+→ CRITICAL: rollback attack detected
+```
+
+```
+Tarama 1: server_version="1.0.0", tools = [read_file, write_file]
+Tarama 2: server_version="1.0.0", tools = [read_file, write_file, exec_command]
+→ HIGH: tool list changed (1 added, 0 removed)
+```
+
+**Neden tehlikeli:** Saldirgan bir MCP sunucusunun kontrolunu ele gecirdiginde:
+1. Sunucu versiyonunu dusurerek bilinen zaafiyetleri aktif hale getirebilir (rollback)
+2. Yeni zararli tool'lar ekleyebilir (tool poisoning)
+3. TLS yapilandirmasini zayiflatabilir (downgrade)
+4. Sunucuyu farkli bir adrese tasiyarak MITM yapabilir
+
+**False positive riski:** Dusuk-orta. Mesru major surum yukseltmeleri ve planli tool eklemeleri false positive uretebilir. Bu yuzden sadece `major_upgrade` ve tool degisimleri HIGH severity'de, rollback ise CRITICAL'dir.
+
+---
+
+## R111 — Insecure Transport Detection
+
+**Severity:** CRITICAL (TLS < 1.2) / HIGH (plain HTTP, expired cert, TLS baglanti hatasi) / MEDIUM (self-signed cert, HSTS eksik)
+
+**Ne arar:** Transport katmaninda guvenlik zafiyetlerini tespit eder. **stdio transport icin uygulanmaz** — sadece HTTP/SSE endpoint'leri taranir:
+- Plain HTTP (TLS olmadan)
+- Eski TLS surumleri (TLSv1.0, TLSv1.1, SSLv3)
+- Self-signed sertifikalar
+- Suresi gecmis sertifikalar
+- HSTS eksikligi
+
+**Nasil calisir:** `InsecureTransportDetection` kurali, bireysel tool'lari taramaz. Transport guvenligi kontrolleri, tarama sirasinda baglanti asamasinda yapilir ve bulgular ayri bir `TransportChecker` mekanizmasiyla uretilir. Bulgular `pre_scan_check()` tarafindan `TLSInfo` verileri uzerinden degerlendirilir.
+
+**Gerçek örnek (saldiri):**
+```
+Endpoint: http://mcp-server.com (HTTP, TLS yok)
+→ HIGH: plain HTTP transport, trafik sifrelenmemis
+```
+
+```
+Endpoint: https://old-server.com (TLSv1.1)
+→ CRITICAL: TLS 1.2'den eski surum
+```
+
+```
+Endpoint: https://mcp-server.example.com (TLSv1.0, self-signed cert)
+→ CRITICAL: eski TLS surumu + MEDIUM: self-signed sertifika
+```
+
+**Neden tehlikeli:** Guvenli olmayan transport:
+1. **Plain HTTP**: Tum MCP trafigi (tool isimleri, parametreler, sonuclar) ag uzerinde acik metin olarak okunabilir. Sifrelenmemis baglantilar MITM saldirilarina aciktir. LLM agent'in tool cagrilari ve yanitlari calinabilir.
+2. **Eski TLS**: TLSv1.0/1.1 ve SSLv3 bilinen zaafiyetlere (POODLE, BEAST, Lucky13) karsi savunmasizdir. Downgrade saldirilari ile zorlanabilir.
+3. **Self-signed sertifika**: Trust zincirini krar, MITM saldirilarina karsi koruma saglamaz. Saldirgan kendi self-signed sertifikasini sunarak trafigi izleyebilir.
+4. **Suresi gecmis sertifika**: Gecersiz sertifikalar kullanicilari uyari mesajlarini goz ardi etmeye alistirir ve gercek MITM saldirilarini tespit etmeyi zorlastirir.
+
+**False positive riski:** Dusuk. Localhost gelistirme sunuculari self-signed sertifika kullanabilir (MEDIUM severity). stdio transport icin hic bulgu uretilmez — bu kural sadece ag uzerinden erisilen sunucularda calisir.
 
 ---
 

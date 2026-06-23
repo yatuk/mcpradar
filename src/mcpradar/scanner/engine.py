@@ -31,6 +31,7 @@ class Scanner:
     ) -> None:
         self.target = target
         self.transport = transport
+        self.min_severity = min_severity
         self.rule_engine = RuleEngine(min_severity=min_severity)
 
     async def run(self) -> ScanReport:
@@ -42,6 +43,17 @@ class Scanner:
             await self._run_sse(report)
         else:
             await self._run_http(report)
+
+        # Transport security check
+        from mcpradar.fingerprint.transport_check import TransportChecker
+
+        checker = TransportChecker()
+        tls_info = checker.check(self.target, self.transport)
+        if tls_info or self.transport != "stdio":
+            r111_findings = checker.generate_findings(self.target, self.transport, tls_info)
+            for f in r111_findings:
+                if f.severity >= self.min_severity:
+                    report.add_finding(f)
 
         return report
 
@@ -56,7 +68,15 @@ class Scanner:
             stdio_client(params) as (read, write),
             ClientSession(read, write) as session,
         ):
-            await session.initialize()
+            init_result = await session.initialize()
+            report.server_version = getattr(init_result, "serverVersion", "") or ""
+            report.protocol_version = getattr(init_result, "protocolVersion", "") or ""
+            caps = getattr(init_result, "capabilities", None)
+            if caps is not None:
+                if hasattr(caps, "model_dump"):
+                    report.capabilities = caps.model_dump()
+                elif isinstance(caps, dict):
+                    report.capabilities = caps
             await self._collect_all(session, report)
 
     async def _run_sse(self, report: ScanReport) -> None:
@@ -67,7 +87,15 @@ class Scanner:
             sse_client(url) as (read, write),
             ClientSession(read, write) as session,
         ):
-            await session.initialize()
+            init_result = await session.initialize()
+            report.server_version = getattr(init_result, "serverVersion", "") or ""
+            report.protocol_version = getattr(init_result, "protocolVersion", "") or ""
+            caps = getattr(init_result, "capabilities", None)
+            if caps is not None:
+                if hasattr(caps, "model_dump"):
+                    report.capabilities = caps.model_dump()
+                elif isinstance(caps, dict):
+                    report.capabilities = caps
             await self._collect_all(session, report)
 
     async def _run_http(self, report: ScanReport) -> None:
@@ -75,7 +103,15 @@ class Scanner:
         # streamablehttp_client returns 3-tuple — can't combine in single `with`
         async with streamablehttp_client(url) as (read, write, _):  # noqa: SIM117
             async with ClientSession(read, write) as session:
-                await session.initialize()
+                init_result = await session.initialize()
+                report.server_version = getattr(init_result, "serverVersion", "") or ""
+                report.protocol_version = getattr(init_result, "protocolVersion", "") or ""
+                caps = getattr(init_result, "capabilities", None)
+                if caps is not None:
+                    if hasattr(caps, "model_dump"):
+                        report.capabilities = caps.model_dump()
+                    elif isinstance(caps, dict):
+                        report.capabilities = caps
                 await self._collect_all(session, report)
 
     # ------------------------------------------------------------------

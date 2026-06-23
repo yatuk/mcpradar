@@ -2,13 +2,18 @@
 
 from __future__ import annotations
 
+import contextlib
 import json
 import sqlite3
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from platformdirs import user_data_dir
 
 from mcpradar.scanner.report import ScanReport
+
+if TYPE_CHECKING:
+    from mcpradar.fingerprint.models import ServerFingerprint
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS scans (
@@ -63,6 +68,26 @@ CREATE INDEX IF NOT EXISTS idx_scans_scanned_at ON scans(scanned_at);
 CREATE INDEX IF NOT EXISTS idx_tools_scan ON tools(scan_id);
 CREATE INDEX IF NOT EXISTS idx_findings_scan ON findings(scan_id);
 CREATE INDEX IF NOT EXISTS idx_findings_rule ON findings(rule_id);
+
+CREATE TABLE IF NOT EXISTS fingerprints (
+    server_id         TEXT PRIMARY KEY,
+    endpoint          TEXT NOT NULL,
+    transport         TEXT NOT NULL DEFAULT 'http',
+    server_version    TEXT NOT NULL DEFAULT '',
+    protocol_version  TEXT NOT NULL DEFAULT '',
+    capabilities      TEXT NOT NULL DEFAULT '{}',
+    tool_names_hash   TEXT NOT NULL DEFAULT '',
+    tool_count        INTEGER NOT NULL DEFAULT 0,
+    first_seen        TEXT NOT NULL,
+    last_seen         TEXT NOT NULL,
+    tls_version       TEXT NOT NULL DEFAULT '',
+    tls_cert_issuer   TEXT NOT NULL DEFAULT '',
+    tls_cert_subject  TEXT NOT NULL DEFAULT '',
+    tls_cert_expiry   TEXT NOT NULL DEFAULT '',
+    tls_cert_valid    INTEGER NOT NULL DEFAULT 1,
+    tls_self_signed   INTEGER NOT NULL DEFAULT 0
+);
+CREATE INDEX IF NOT EXISTS idx_fp_endpoint ON fingerprints(endpoint);
 """
 
 
@@ -80,20 +105,38 @@ class Store:
         self._conn.executescript(SCHEMA)
         self._conn.commit()
 
+        # Migrations for v0.4.0
+        with contextlib.suppress(Exception):
+            self._conn.execute(
+                "ALTER TABLE scans ADD COLUMN server_version TEXT NOT NULL DEFAULT ''"
+            )
+        with contextlib.suppress(Exception):
+            self._conn.execute(
+                "ALTER TABLE scans ADD COLUMN protocol_version TEXT NOT NULL DEFAULT ''"
+            )
+        with contextlib.suppress(Exception):
+            self._conn.execute(
+                "ALTER TABLE scans ADD COLUMN capabilities TEXT NOT NULL DEFAULT '{}'"
+            )
+
     # ------------------------------------------------------------------
     # Save
     # ------------------------------------------------------------------
 
     def save(self, report: ScanReport) -> str:
         self._conn.execute(
-            "INSERT OR REPLACE INTO scans(id, target, transport, scanned_at, summary) "
-            "VALUES (?, ?, ?, ?, ?)",
+            "INSERT OR REPLACE INTO scans(id, target, transport, scanned_at, summary, "
+            "server_version, protocol_version, capabilities) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
             (
                 report.id,
                 report.target,
                 report.transport,
                 report.scanned_at,
                 json.dumps(report.summary, ensure_ascii=False),
+                report.server_version,
+                report.protocol_version,
+                json.dumps(report.capabilities, default=str, ensure_ascii=False),
             ),
         )
 
@@ -170,7 +213,8 @@ class Store:
         )
 
         row = self._conn.execute(
-            "SELECT id, target, transport, scanned_at, summary FROM scans WHERE id = ?",
+            "SELECT id, target, transport, scanned_at, summary, "
+            "server_version, protocol_version, capabilities FROM scans WHERE id = ?",
             (scan_id,),
         ).fetchone()
 
@@ -184,6 +228,9 @@ class Store:
             scanned_at=row[3],
         )
         report.summary = json.loads(row[4])
+        report.server_version = row[5] or ""
+        report.protocol_version = row[6] or ""
+        report.capabilities = json.loads(row[7]) if row[7] else {}
 
         for trow in self._conn.execute(
             "SELECT name, description, input_schema, output_schema "
@@ -325,6 +372,127 @@ class Store:
             json.dumps(report.to_dict(), indent=2, ensure_ascii=False),
             encoding="utf-8",
         )
+
+    # ------------------------------------------------------------------
+    # Fingerprint CRUD
+    # ------------------------------------------------------------------
+
+    def save_fingerprint(self, fp: ServerFingerprint) -> None:
+        """Save or update a server fingerprint."""
+        tls = fp.tls_info
+        self._conn.execute(
+            """INSERT OR REPLACE INTO fingerprints
+               (server_id, endpoint, transport, server_version, protocol_version,
+                capabilities, tool_names_hash, tool_count, first_seen, last_seen,
+                tls_version, tls_cert_issuer, tls_cert_subject, tls_cert_expiry,
+                tls_cert_valid, tls_self_signed)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+            (
+                fp.server_id,
+                fp.endpoint,
+                fp.transport,
+                fp.server_version,
+                fp.protocol_version,
+                json.dumps(fp.capabilities, default=str),
+                fp.tool_names_hash,
+                fp.tool_count,
+                fp.first_seen,
+                fp.last_seen,
+                tls.version if tls else "",
+                tls.cert_issuer if tls else "",
+                tls.cert_subject if tls else "",
+                tls.cert_expiry if tls else "",
+                1 if (tls and tls.cert_valid) else 0,
+                1 if (tls and tls.self_signed) else 0,
+            ),
+        )
+        self._conn.commit()
+
+    def load_fingerprint(
+        self, endpoint: str, transport: str
+    ) -> ServerFingerprint | None:
+        """Load the most recent fingerprint for an endpoint+transport pair."""
+        from mcpradar.fingerprint.models import ServerFingerprint, TLSInfo
+
+        row = self._conn.execute(
+            """SELECT server_id, endpoint, transport, server_version, protocol_version,
+                      capabilities, tool_names_hash, tool_count, first_seen, last_seen,
+                      tls_version, tls_cert_issuer, tls_cert_subject, tls_cert_expiry,
+                      tls_cert_valid, tls_self_signed
+               FROM fingerprints
+               WHERE endpoint = ? AND transport = ?
+               ORDER BY last_seen DESC LIMIT 1""",
+            (endpoint, transport),
+        ).fetchone()
+
+        if row is None:
+            return None
+
+        return ServerFingerprint(
+            server_id=row[0],
+            endpoint=row[1],
+            transport=row[2],
+            server_version=row[3],
+            protocol_version=row[4],
+            capabilities=json.loads(row[5]),
+            tool_names_hash=row[6],
+            tool_count=row[7],
+            first_seen=row[8],
+            last_seen=row[9],
+            tls_info=TLSInfo(
+                version=row[10],
+                cert_issuer=row[11],
+                cert_subject=row[12],
+                cert_expiry=row[13],
+                cert_valid=bool(row[14]),
+                self_signed=bool(row[15]),
+            ) if row[10] else None,
+        )
+
+    def list_fingerprints(self) -> list[ServerFingerprint]:
+        """List all stored fingerprints."""
+        from mcpradar.fingerprint.models import ServerFingerprint, TLSInfo
+
+        rows = self._conn.execute(
+            """SELECT server_id, endpoint, transport, server_version, protocol_version,
+                      capabilities, tool_names_hash, tool_count, first_seen, last_seen,
+                      tls_version, tls_cert_issuer, tls_cert_subject, tls_cert_expiry,
+                      tls_cert_valid, tls_self_signed
+               FROM fingerprints
+               ORDER BY last_seen DESC"""
+        ).fetchall()
+
+        results: list[ServerFingerprint] = []
+        for row in rows:
+            results.append(ServerFingerprint(
+                server_id=row[0],
+                endpoint=row[1],
+                transport=row[2],
+                server_version=row[3],
+                protocol_version=row[4],
+                capabilities=json.loads(row[5]),
+                tool_names_hash=row[6],
+                tool_count=row[7],
+                first_seen=row[8],
+                last_seen=row[9],
+                tls_info=TLSInfo(
+                    version=row[10],
+                    cert_issuer=row[11],
+                    cert_subject=row[12],
+                    cert_expiry=row[13],
+                    cert_valid=bool(row[14]),
+                    self_signed=bool(row[15]),
+                ) if row[10] else None,
+            ))
+        return results
+
+    def delete_fingerprint(self, server_id: str) -> bool:
+        """Delete a fingerprint by server_id. Returns True if deleted."""
+        cursor = self._conn.execute(
+            "DELETE FROM fingerprints WHERE server_id = ?", (server_id,)
+        )
+        self._conn.commit()
+        return cursor.rowcount > 0
 
     def close(self) -> None:
         self._conn.close()

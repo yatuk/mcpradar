@@ -1,6 +1,6 @@
 # MCPRadar Stratejik Gelişim Yol Haritası
 
-> **Son güncelleme:** 2026-06-23 · **Mevcut sürüm:** v0.1.0 · **Hedef:** v1.0.0-rc1 (12 hafta)
+> **Son güncelleme:** 2026-06-23 · **Mevcut sürüm:** v0.4.0 · **Hedef:** v1.0.0-rc1 (12 hafta)
 
 ---
 
@@ -124,14 +124,14 @@ En büyük üç OWASP kapsam açığını kapatmak: gizli kimlik bilgisi ifşas�
 
 #### Tamamlanma Kriterleri
 
-- [ ] R106: 25+ parametrize test, 15+ gizli format tespiti
-- [ ] R107: 20+ test, shell metakarakter + tehlikeli varsayılan + recursive walk
-- [ ] R108: 15+ test, pip/npm/curl-bash pattern'leri
-- [ ] R109: 15+ test, schema poisoning vektörleri
-- [ ] R105: 10+ yeni scope çifti, 10+ test
-- [ ] mypy strict: sıfır hata
-- [ ] CI tam matris geçer
-- [ ] Yeni kod için test coverage ≥ %95
+- [x] R106: 25+ parametrize test, 15+ gizli format tespiti
+- [x] R107: 20+ test, shell metakarakter + tehlikeli varsayılan + recursive walk
+- [x] R108: 15+ test, pip/npm/curl-bash pattern'leri
+- [x] R109: 15+ test, schema poisoning vektörleri
+- [x] R105: 10+ yeni scope çifti, 10+ test
+- [x] mypy strict: sıfır hata
+- [x] CI tam matris geçer
+- [x] Yeni kod için test coverage ≥ %95
 
 ---
 
@@ -185,11 +185,11 @@ mcpradar plugin uninstall <paket>               # pip uninstall
 
 #### Tamamlanma Kriterleri
 
-- [ ] `mcpradar plugin init` tam çalışan eklenti paketi üretir
-- [ ] `mcpradar plugin validate` hataları yakalar: eksik entry_point, bozuk rule_id, Rule kalıtımı yok, import hatası
-- [ ] `mcpradar plugin list` tüm eklentileri versiyon/yazar bilgisiyle gösterir
-- [ ] 2 örnek topluluk eklentisi (`plugins/` altında)
-- [ ] Mevcut tüm plugin testleri değişmeden geçer
+- [x] `mcpradar plugin init` tam çalışan eklenti paketi üretir
+- [x] `mcpradar plugin validate` hataları yakalar: eksik entry_point, bozuk rule_id, Rule kalıtımı yok, import hatası
+- [x] `mcpradar plugin list` tüm eklentileri versiyon/yazar bilgisiyle gösterir
+- [x] 2 örnek topluluk eklentisi (`plugins/` altında)
+- [x] Mevcut tüm plugin testleri değişmeden geçer
 
 ---
 
@@ -265,11 +265,11 @@ mcpradar fingerprint --compare <hedef>      # Baseline ile karşılaştır
 
 #### Tamamlanma Kriterleri
 
-- [ ] Parmak izi: endpoint hash, versiyon, capabilities, tools hash, TLS bilgisi
-- [ ] Karşılaştırma: tool listesi değişimi, versiyon sapması, endpoint değişimi, TLS downgrade
-- [ ] TransportChecker: TLS ≥ 1.2, sertifika geçerli, self-signed değil, HSTS mevcut
-- [ ] Parmak izleri SQLite'da saklanır
-- [ ] R110 diff pipeline ile entegre
+- [x] Parmak izi: endpoint hash, versiyon, capabilities, tools hash, TLS bilgisi
+- [x] Karşılaştırma: tool listesi değişimi, versiyon sapması, endpoint değişimi, TLS downgrade
+- [x] TransportChecker: TLS ≥ 1.2, sertifika geçerli, self-signed değil, HSTS mevcut
+- [x] Parmak izleri SQLite'da saklanır
+- [x] R110 diff pipeline ile entegre
 
 ---
 

@@ -229,7 +229,7 @@ Findings appear in your repo's Security tab. Full template:
 
 ## Detection Rules
 
-### Built-in (v0.1.0)
+### Built-in (v0.4.0)
 
 | ID   | Rule                  | Severity      | OWASP | Catches |
 |------|-----------------------|---------------|-------|---------|
@@ -239,6 +239,12 @@ Findings appear in your repo's Security tab. Full template:
 | R103 | Encoded Blob          | MEDIUM/HIGH   | MCP06 | Base64 (40+ chars), hex (32+ chars) — HIGH if decodes to readable text |
 | R104 | Hidden Content        | HIGH          | MCP03 | `display:none`, `font-size:0`, hidden Markdown links, deceptive `<a>` tags |
 | R105 | Scope Mismatch        | LOW/MEDIUM    | MCP02 | Tool name implies file/db/read-only, description mentions network/shell/write |
+| R106 | Secret/Token Exposure | CRITICAL/HIGH | MCP01 | API keys, GitHub tokens, JWTs, DB connection strings, high-entropy strings |
+| R107 | Command Injection     | CRITICAL/HIGH | MCP05 | Shell metacharacters, dangerous defaults, overly broad regex, command enums |
+| R108 | Supply Chain Risk     | HIGH/MEDIUM   | MCP04 | `curl \| bash`, `pip install`, `eval()`, `npx`, dynamic imports |
+| R109 | Schema Poisoning      | HIGH/MEDIUM   | MCP03 | `additionalProperties: true`, missing types, excessive maxLength/maxItems |
+| R110 | Version Anomaly       | HIGH/CRITICAL | MCP09 | Version rollback, major upgrade, tool list change, TLS downgrade |
+| R111 | Insecure Transport    | HIGH/CRITICAL | MCP07 | Plain HTTP, TLS < 1.2, expired/self-signed certs, missing HSTS |
 
 ### Cross-Server (v0.1.0)
 
@@ -254,12 +260,6 @@ Findings appear in your repo's Security tab. Full template:
 
 | ID   | Rule                  | Sprint | OWASP |
 |------|-----------------------|--------|-------|
-| R106 | Secret/Token Exposure | Sprint 1 | MCP01 |
-| R107 | SSRF Detection        | Sprint 1 | MCP05 |
-| R108 | Path Traversal        | Sprint 1 | MCP05 |
-| R109 | Schema Poisoning      | Sprint 1 | MCP03 |
-| R110 | Version Anomaly       | Sprint 3 | MCP09 |
-| R111 | Insecure Transport    | Sprint 3 | MCP07 |
 | C006 | Attack Path Chain     | Sprint 4 | MCP03 |
 | C007 | Privilege Escalation  | Sprint 4 | MCP02 |
 
@@ -295,15 +295,15 @@ MCPRadar targets full coverage of the [OWASP MCP Top 10 (2025)](https://owasp.or
 
 | # | Risk | Covered By | Status |
 |---|---|---|---|
-| MCP01 | Token Mismanagement & Secret Exposure | R106 (planned) | 🔜 Sprint 1 |
+| MCP01 | Token Mismanagement & Secret Exposure | R106 | ✅ Strong |
 | MCP02 | Privilege Escalation via Scope Creep | R105, C005, C007 | 🟡 Partial |
 | MCP03 | Tool Poisoning | R001, R104, R109, C006 | 🟡 Partial |
-| MCP04 | Supply Chain Attacks & Dependency Tampering | R108 (planned) | 🔜 Sprint 1 |
-| MCP05 | Command Injection & Execution | R001, R107 (planned) | 🔴 Minimal |
+| MCP04 | Supply Chain Attacks & Dependency Tampering | R108 | ✅ Strong |
+| MCP05 | Command Injection & Execution | R001, R107 | 🟢 Strong |
 | MCP06 | Prompt Injection via Contextual Payloads | R101, R102, R103, R104 | ✅ Strong |
-| MCP07 | Insufficient AuthN/AuthZ | R111 (planned) | 🔜 Sprint 3 |
+| MCP07 | Insufficient AuthN/AuthZ | R111 | ✅ Strong |
 | MCP08 | Lack of Audit & Telemetry | Audit trail (planned) | 🔜 Sprint 5 |
-| MCP09 | Shadow MCP Servers | R110 (planned) | 🔜 Sprint 3 |
+| MCP09 | Shadow MCP Servers | R110 | ✅ Strong |
 | MCP10 | Context Injection & Over-Sharing | C001–C005, C006 | 🟡 Partial |
 
 ✅ Strong · 🟡 Partial · 🔴 Minimal · 🔜 Planned — see [ROADMAP.md](ROADMAP.md)
@@ -339,9 +339,9 @@ See **[ROADMAP.md](ROADMAP.md)** for the full development roadmap.
 
 | Sprint | Version | Focus |
 |--------|---------|-------|
-| 1 | v0.2.0 | 4 new rules — Secret exposure (R106), Command injection (R107), Supply chain (R108), Schema poisoning (R109) |
-| 2 | v0.3.0 | Plugin system — PluginManager, Validator, Scaffolder, CLI |
-| 3 | v0.4.0 | Server fingerprinting + Transport security (R110, R111) |
+| ✅ 1 | v0.2.0 | 4 new rules — Secret exposure (R106), Command injection (R107), Supply chain (R108), Schema poisoning (R109) |
+| ✅ 2 | v0.3.0 | Plugin system — PluginManager, Validator, Scaffolder, CLI |
+| ✅ 3 | v0.4.0 | Server fingerprinting + Transport security (R110, R111) |
 | 4 | v0.5.0 | Deep cross-server analysis + Runtime probing (C006, C007) |
 | 5 | v0.6.0 | Audit trail + CVE automation + Statistics |
 | 6 | v1.0.0-rc1 | Validation, performance, documentation — OWASP 10/10 |

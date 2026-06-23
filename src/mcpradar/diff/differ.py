@@ -59,6 +59,8 @@ class DiffDelta:
     resource_added: list[str] = field(default_factory=list)
     resource_removed: list[str] = field(default_factory=list)
 
+    fingerprint_changes: list[str] = field(default_factory=list)
+
     @property
     def has_changes(self) -> bool:
         return bool(
@@ -69,6 +71,7 @@ class DiffDelta:
             or self.prompt_removed
             or self.resource_added
             or self.resource_removed
+            or self.fingerprint_changes
         )
 
     def summary_counts(self) -> dict[str, int]:
@@ -122,6 +125,7 @@ class DiffDelta:
             "prompt_removed": self.prompt_removed,
             "resource_added": self.resource_added,
             "resource_removed": self.resource_removed,
+            "fingerprint_changes": self.fingerprint_changes,
         }
 
 
@@ -334,5 +338,27 @@ class Differ:
         rb = {r.uri for r in report_b.resources}
         delta.resource_added = sorted(rb - ra)
         delta.resource_removed = sorted(ra - rb)
+
+        # Fingerprint comparison
+        if report_a.server_version != report_b.server_version:
+            a_ver = report_a.server_version or "(yok)"
+            b_ver = report_b.server_version or "(yok)"
+            delta.fingerprint_changes.append(
+                f"server_version: {a_ver} → {b_ver}"
+            )
+        if report_a.protocol_version != report_b.protocol_version:
+            a_proto = report_a.protocol_version or "(yok)"
+            b_proto = report_b.protocol_version or "(yok)"
+            delta.fingerprint_changes.append(
+                f"protocol_version: {a_proto} → {b_proto}"
+            )
+        if report_a.capabilities != report_b.capabilities:
+            delta.fingerprint_changes.append("capabilities: degisti")
+        tool_count_a = len(report_a.tools)
+        tool_count_b = len(report_b.tools)
+        if tool_count_a != tool_count_b:
+            delta.fingerprint_changes.append(
+                f"tool_count: {tool_count_a} → {tool_count_b}"
+            )
 
         return delta

@@ -739,6 +739,40 @@ class SchemaPoisoningDetection(Rule):
 
 
 # ---------------------------------------------------------------------------
+# Version Anomaly (R110)
+# ---------------------------------------------------------------------------
+
+
+class VersionAnomalyDetection(Rule):
+    """Fingerprint-based: detects version rollback, unexpected upgrades, tool changes."""
+    rule_id = "R110"
+    title = "Sunucu versiyon anomalisi"
+    severity = Severity.HIGH
+
+    def check(self, tool: ToolInfo) -> list[Finding]:
+        # R110 operates on fingerprint diffs, not individual tools
+        # Findings are generated via RuleEngine.pre_scan_check()
+        return []
+
+
+# ---------------------------------------------------------------------------
+# Insecure Transport (R111)
+# ---------------------------------------------------------------------------
+
+
+class InsecureTransportDetection(Rule):
+    """Transport-layer: detects plain HTTP, old TLS, bad certs, missing HSTS."""
+    rule_id = "R111"
+    title = "Guvenli olmayan transport"
+    severity = Severity.HIGH
+
+    def check(self, tool: ToolInfo) -> list[Finding]:
+        # R111 operates on transport-level checks, not individual tools
+        # Findings are generated during scan via TransportChecker
+        return []
+
+
+# ---------------------------------------------------------------------------
 # Permission scope mismatch — bridge-aware (R105)
 # ---------------------------------------------------------------------------
 
@@ -997,6 +1031,8 @@ class RuleEngine:
             CommandInjectionDetection(),
             SupplyChainRiskDetection(),
             SchemaPoisoningDetection(),
+            VersionAnomalyDetection(),
+            InsecureTransportDetection(),
         ]
 
         self._rules = [r for r in builtins if r.rule_id not in self._disabled]
@@ -1030,6 +1066,8 @@ class RuleEngine:
                         CommandInjectionDetection,
                         SupplyChainRiskDetection,
                         SchemaPoisoningDetection,
+                        VersionAnomalyDetection,
+                        InsecureTransportDetection,
                     ),
                 )
                 else "plugin",
@@ -1052,3 +1090,139 @@ class RuleEngine:
         for rule in self._rules:
             findings.extend(rule.check(tool))
         return [f for f in findings if f.severity >= self.min_severity]
+
+    def pre_scan_check(
+        self,
+        baseline: object | None,
+        current: object,
+    ) -> list[Finding]:
+        """Run fingerprint-based rules before tool-level analysis.
+
+        Args:
+            baseline: Previous ServerFingerprint or None (first scan).
+            current: Current ServerFingerprint.
+        """
+        from mcpradar.fingerprint.fingerprinter import Fingerprinter
+        from mcpradar.fingerprint.models import ServerFingerprint
+
+        findings: list[Finding] = []
+        if not isinstance(current, ServerFingerprint):
+            return findings
+        fp_baseline = baseline if isinstance(baseline, ServerFingerprint) else None
+        fingerprinter = Fingerprinter()
+        diff = fingerprinter.compare(fp_baseline, current)
+
+        if diff.is_first_scan:
+            findings.append(
+                Finding(
+                    rule_id="R110",
+                    title="Ilk tarama — baseline yok",
+                    description="Bu sunucu icin daha once fingerprint kaydi bulunamadi",
+                    severity=Severity.MEDIUM,
+                    target=current.endpoint if hasattr(current, 'endpoint') else "",
+                    location="fingerprint",
+                )
+            )
+            return findings
+
+        # Rollback detection (CRITICAL)
+        if diff.version_change == "rollback":
+            findings.append(
+                Finding(
+                    rule_id="R110",
+                    title="Surum dusurme (rollback) saldirisi tespit edildi",
+                    description=(
+                        f"Sunucu surumu {diff.previous_version}'dan "
+                        f"{diff.current_version}'a dusuruldu — rollback saldirisi olabilir"
+                    ),
+                    severity=Severity.CRITICAL,
+                    target=current.endpoint if hasattr(current, 'endpoint') else "",
+                    location="fingerprint",
+                    detail={
+                        "previous": diff.previous_version,
+                        "current": diff.current_version,
+                    },
+                )
+            )
+
+        # Unexpected major version upgrade (HIGH)
+        if diff.version_change == "major_upgrade":
+            findings.append(
+                Finding(
+                    rule_id="R110",
+                    title="Beklenmeyen major surum atlamasi",
+                    description=(
+                        f"Sunucu surumu {diff.previous_version}'dan "
+                        f"{diff.current_version}'a major atladi"
+                    ),
+                    severity=Severity.HIGH,
+                    target=current.endpoint if hasattr(current, 'endpoint') else "",
+                    location="fingerprint",
+                    detail={
+                        "previous": diff.previous_version,
+                        "current": diff.current_version,
+                    },
+                )
+            )
+
+        # Tool list changed (HIGH)
+        if diff.tool_names_changed:
+            findings.append(
+                Finding(
+                    rule_id="R110",
+                    title="Tool listesi degisti",
+                    description=(
+                        f"Sunucudaki tool listesi onceki taramaya gore degismis. "
+                        f"Eklenen: {len(diff.tools_added)}, "
+                        f"Kaldirilan: {len(diff.tools_removed)}"
+                    ),
+                    severity=Severity.HIGH,
+                    target=current.endpoint if hasattr(current, 'endpoint') else "",
+                    location="fingerprint",
+                    detail={
+                        "tools_added": diff.tools_added,
+                        "tools_removed": diff.tools_removed,
+                    },
+                )
+            )
+
+        # TLS downgrade (HIGH)
+        if diff.tls_downgrade:
+            findings.append(
+                Finding(
+                    rule_id="R110",
+                    title="TLS downgrade tespit edildi",
+                    description="Sunucunun TLS surumu onceki taramaya gore dusurulmus",
+                    severity=Severity.HIGH,
+                    target=current.endpoint if hasattr(current, 'endpoint') else "",
+                    location="fingerprint",
+                )
+            )
+
+        # Endpoint changed (HIGH)
+        if diff.endpoint_changed:
+            findings.append(
+                Finding(
+                    rule_id="R110",
+                    title="Sunucu adresi degisti",
+                    description="Ayni sunucu kimligi farkli bir adreste goruldu",
+                    severity=Severity.HIGH,
+                    target=current.endpoint if hasattr(current, 'endpoint') else "",
+                    location="fingerprint",
+                )
+            )
+
+        # Protocol changed (MEDIUM)
+        if diff.protocol_changed:
+            findings.append(
+                Finding(
+                    rule_id="R110",
+                    title="MCP protokol versiyonu degisti",
+                    description="Sunucunun MCP protokol versiyonu degismis",
+                    severity=Severity.MEDIUM,
+                    target=current.endpoint if hasattr(current, 'endpoint') else "",
+                    location="fingerprint",
+                )
+            )
+
+        return findings

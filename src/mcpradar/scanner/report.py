@@ -65,6 +65,9 @@ class ScanReport:
     target: str = ""
     transport: str = "http"
     scanned_at: str = field(default_factory=lambda: datetime.now(UTC).isoformat())
+    server_version: str = ""
+    protocol_version: str = ""
+    capabilities: dict[str, object] = field(default_factory=dict)
     tools: list[ToolInfo] = field(default_factory=list)
     prompts: list[PromptInfo] = field(default_factory=list)
     resources: list[ResourceInfo] = field(default_factory=list)

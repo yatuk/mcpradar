@@ -5,6 +5,25 @@ All notable changes to MCPRadar will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2026-06-23
+
+### Added
+- **fingerprint** CLI komut grubu: `mcpradar fingerprint {create,compare,list}`
+- Parmak izi sistemi: `Fingerprinter` (SHA256 tabanlı sunucu kimliği), `TransportChecker` (TLS/sertifika/HSTS validasyonu)
+- `ServerFingerprint` ve `TLSInfo` veri modelleri
+- 2 yeni tespit kuralı:
+  - R110: Version Anomaly Detection — sürüm rollback, major upgrade, tool listesi değişimi tespiti
+  - R111: Insecure Transport Detection — plain HTTP, eski TLS, expired cert, self-signed cert, HSTS eksikliği
+- `ScanReport`: `server_version`, `protocol_version`, `capabilities` alanları eklendi
+- `Scanner`: `initialize()` yanıtından sunucu kimlik bilgilerini yakalar
+- `Store`: `fingerprints` tablosu + CRUD (save/load/list/delete)
+- `DiffDelta`: `fingerprint_changes` alanı (versiyon, protokol, capabilities, tool sayısı değişimi)
+- `RuleEngine.pre_scan_check()`: fingerprint tabanlı tarama öncesi kontrol hook'u
+
+### Security
+- OWASP MCP07 (Insufficient AuthN/AuthZ): R111 ile kapsanıyor (transport güvenliği)
+- OWASP MCP09 (Shadow MCP Servers): R110 + fingerprint sistemi ile kapsanıyor
+
 ## [0.3.0] - 2026-06-23
 
 ### Added
