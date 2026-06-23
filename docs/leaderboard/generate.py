@@ -99,10 +99,20 @@ def main() -> None:
                 continue
 
             name = data.get("name", fpath.stem)
-            sev = data.get("findings_by_severity", {})
-            tools = data.get("tools", 0)
-            findings_count = data.get("findings", 0)
-            scan_id = data.get("scan_id", "")
+
+            # Handle both raw to_dict() format and processed validation format
+            summary = data.get("summary", {})
+            tools = summary.get("total_tools", len(data.get("tools", [])))
+            findings_list = data.get("findings", [])
+            findings_count = len(findings_list)
+            scan_id = data.get("scan_id", "") or data.get("id", "")
+
+            # Compute severity counts from findings array
+            sev: dict[str, int] = {"critical": 0, "high": 0, "medium": 0, "low": 0}
+            for f in findings_list:
+                s = f.get("severity", "")
+                if s in sev:
+                    sev[s] += 1
 
             score, grade, confidence = score_from_counts(sev, tools)
             tool_hash = compute_tool_hash(scan_id) if scan_id else ""

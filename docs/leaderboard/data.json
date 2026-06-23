@@ -1,7 +1,7 @@
 [
   {
-    "server": "@modelcontextprotocol/server-filesystem",
-    "display_name": "modelcontextprotocol / server-filesystem",
+    "server": "filesystem",
+    "display_name": "filesystem",
     "version": "",
     "aivss_score": 0.0,
     "grade": "A",
@@ -16,7 +16,27 @@
     },
     "tool_hash": "44c35cf6ac86e32d",
     "last_scanned": "2026-06-23",
-    "scanner_version": "1.0.0-rc2",
-    "status": "clean"
+    "scanner_version": "1.0.0-rc3",
+    "status": "unknown"
+  },
+  {
+    "server": "playwright",
+    "display_name": "playwright",
+    "version": "",
+    "aivss_score": 4.2,
+    "grade": "C",
+    "confidence": 0.9,
+    "tools": 23,
+    "findings": 8,
+    "by_severity": {
+      "critical": 4,
+      "high": 0,
+      "medium": 4,
+      "low": 0
+    },
+    "tool_hash": "73c317b4aedef755",
+    "last_scanned": "2026-06-23",
+    "scanner_version": "1.0.0-rc3",
+    "status": "unknown"
   }
 ]
