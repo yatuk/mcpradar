@@ -34,6 +34,10 @@ RULE_HELP: dict[str, str] = {
     "R103": "Base64 or hex-encoded blob found in tool description",
     "R104": "Hidden HTML/Markdown content (display:none, font-size:0, etc.)",
     "R105": "Permission scope mismatch — tool name scope differs from description",
+    "R106": "Secret or token exposed in tool metadata — API keys, JWTs, connection strings",
+    "R107": "Command injection risk via tool parameter defaults, patterns, or enum values",
+    "R108": "Supply chain risk — pip/npm install, curl-to-bash, dynamic code loading",
+    "R109": "Schema poisoning — additionalProps:true, missing types, buffer overflow risk",
 }
 
 

@@ -5,6 +5,28 @@ All notable changes to MCPRadar will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2026-06-23
+
+### Added
+- 4 yeni tespit kuralı:
+  - R106: Secret/Token Exposure — 16 bilinen gizli format regex'i + Shannon entropi tabanlı tespit
+  - R107: Command Injection via Tool Parameters — recursive schema walk ile shell metakarakter, tehlikeli varsayılan değer ve komut benzeri enum tespiti
+  - R108: Supply Chain Risk Indicator — curl-bash, pip/npm install, eval/exec, dinamik kod yükleme tespiti
+  - R109: Schema Poisoning Indicator — additionalProperties:true, eksik tip kısıtlaması, aşırı maxLength/maxItems tespiti
+- Yardımcı fonksiyonlar: `_shannon_entropy()`, `_decompose_name()`, `_walk_schema_props()`, `_collect_all_texts()`
+- R105 Permission Scope Mismatch iyileştirmesi: 10+ scope çifti, bridge keyword suppression, snake_case/camelCase isim ayrıştırma
+
+### Changed
+- R105: LOW severity downgrade kaldırıldı, yerine bridge keyword + isim ayrıştırma tabanlı false positive suppression
+- R105: minimum severity MEDIUM olarak sabitlendi
+- E2E mock server `safe_tool`: schema'ya `required` alanı eklendi (R109 uyumluluğu)
+
+### Security
+- OWASP MCP01 (Token Mismanagement): R106 ile kapsanıyor
+- OWASP MCP04 (Supply Chain): R108 ile kapsanıyor
+- OWASP MCP05 (Command Injection): R107 ile güçlendirildi
+- OWASP MCP03 (Tool Poisoning): R109 ile genişletildi
+
 ## [0.1.0] - 2026-05-25
 
 ### Added

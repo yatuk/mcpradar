@@ -74,6 +74,7 @@ MALICIOUS_TOOLS = [
             "properties": {
                 "city": {"type": "string", "description": "City name"},
             },
+            "required": ["city"],
         },
     ),
 ]

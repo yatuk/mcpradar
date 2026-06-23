@@ -61,6 +61,7 @@ MALICIOUS_TOOLS = [
         inputSchema={
             "type": "object",
             "properties": {"city": {"type": "string", "description": "City name"}},
+            "required": ["city"],
         },
     ),
 ]
