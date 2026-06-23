@@ -1747,6 +1747,9 @@ def registry_fetch(
     all_versions: bool = typer.Option(  # noqa: B008
         False, "--all-versions", help="Include all versions (not just latest)"
     ),
+    json_only: bool = typer.Option(  # noqa: B008
+        False, "--json", help="Output as JSON"
+    ),
 ) -> None:
     """Fetch MCP server list from the official registry and cache locally."""
     from mcpradar.output.console import console
@@ -1758,6 +1761,38 @@ def registry_fetch(
 
     scannable = sum(1 for e in entries if e.packages)
     remote_only = len(entries) - scannable
+
+    if json_only:
+        console.print(
+            json.dumps(
+                {
+                    "count": len(entries),
+                    "scannable": scannable,
+                    "remote_only": remote_only,
+                    "servers": [
+                        {
+                            "name": e.name,
+                            "title": e.title,
+                            "version": e.version,
+                            "packages": [
+                                {
+                                    "type": p.registry_type,
+                                    "identifier": p.identifier,
+                                    "transport": p.transport,
+                                }
+                                for p in e.packages
+                            ],
+                            "categories": e.categories,
+                            "status": e.status,
+                        }
+                        for e in entries
+                    ],
+                },
+                indent=2,
+                ensure_ascii=False,
+            )
+        )
+        return
 
     console.print(f"[green]Fetched {len(entries)} servers[/]")
     console.print(f"  With packages (scannable): [cyan]{scannable}[/]")
@@ -1778,6 +1813,9 @@ def registry_list(
     ),
     scannable_only: bool = typer.Option(  # noqa: B008
         False, "--scannable", help="Show only servers with installable packages"
+    ),
+    json_only: bool = typer.Option(  # noqa: B008
+        False, "--json", help="Output as JSON"
     ),
 ) -> None:
     """List MCP servers from the cached registry."""
@@ -1801,6 +1839,22 @@ def registry_list(
 
     if not entries:
         console.print("[dim]No entries match the filter. Run 'mcpradar registry fetch' first.[/]")
+        return
+
+    if json_only:
+        output = [
+            {
+                "name": e.name,
+                "version": e.version,
+                "packages": [
+                    {"type": p.registry_type, "identifier": p.identifier} for p in e.packages
+                ],
+                "categories": e.categories,
+                "status": e.status,
+            }
+            for e in entries
+        ]
+        console.print(json.dumps(output, indent=2, ensure_ascii=False))
         return
 
     table = Table(title="MCP Registry Servers", show_header=True, header_style="bold")

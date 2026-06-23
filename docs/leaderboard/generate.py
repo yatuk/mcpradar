@@ -170,6 +170,37 @@ def main() -> None:
     for r in rows:
         print(f"  {r['grade']} | {r['aivss_score']:4.1f} | {r['server']}")
 
+    # Also generate subregistry-format servers.json with _meta security scores
+    servers_output = _SCRIPT_ROOT / "docs/leaderboard/servers.json"
+    servers_json = []
+    for r in rows:
+        entry = {
+            "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+            "name": r["server"]
+            .replace("@modelcontextprotocol/", "io.modelcontextprotocol/")
+            .replace("@anthropic/", "io.anthropic/")
+            .replace("@playwright/", "com.microsoft.playwright/")
+            .replace("@", "io.github."),
+            "version": r.get("version") or "unknown",
+            "_meta": {
+                "com.github.yatuk.mcpradar/security": {
+                    "aivss_score": r["aivss_score"],
+                    "grade": r["grade"],
+                    "confidence": r["confidence"],
+                    "findings": r["findings"],
+                    "by_severity": r["by_severity"],
+                    "last_scanned": r["last_scanned"],
+                    "scanner_version": r["scanner_version"],
+                    "tool_hash": r["tool_hash"],
+                }
+            },
+        }
+        servers_json.append(entry)
+    servers_output.write_text(
+        json.dumps(servers_json, indent=2, ensure_ascii=False), encoding="utf-8"
+    )
+    print(f"Generated {servers_output} with {len(servers_json)} entries (subregistry format)")
+
 
 if __name__ == "__main__":
     main()

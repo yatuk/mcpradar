@@ -430,7 +430,23 @@
         : "—";
       var name = s.display_name || s.server || "—";
 
-      var serverCell = escapeHtml(name);
+      var serverName = s.server || "";
+var serverCell;
+if (serverName) {
+  var registryName = serverName
+    .replace("@modelcontextprotocol/", "io.modelcontextprotocol/")
+    .replace("@anthropic/", "io.anthropic/")
+    .replace("@playwright/", "com.microsoft.playwright/")
+    .replace("@", "io.github.");
+  serverCell =
+    '<a class="server-link" href="https://registry.modelcontextprotocol.io/v0.1/servers/' +
+    encodeURIComponent(registryName) +
+    '/versions/latest" target="_blank" rel="noopener">' +
+    escapeHtml(name) +
+    "</a>";
+} else {
+  serverCell = escapeHtml(name);
+}
 
       html += "<tr>";
       html += '<td style="color:var(--dim)">' + (i + 1) + "</td>";

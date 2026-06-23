@@ -48,7 +48,7 @@ class RegistryClient:
     rate limiting, and graceful error recovery.
     """
 
-    BASE_URL = "https://registry.modelcontextprotocol.io/v0/servers"
+    BASE_URL = "https://registry.modelcontextprotocol.io/v0.1/servers"
 
     def __init__(self, cache_ttl: int = 86400) -> None:
         """Initialise the client.
