@@ -1,7 +1,7 @@
 [
   {
-    "server": "filesystem",
-    "display_name": "filesystem",
+    "server": "@modelcontextprotocol/server-filesystem",
+    "display_name": "modelcontextprotocol / server-filesystem",
     "version": "",
     "aivss_score": 0.0,
     "grade": "A",
@@ -14,14 +14,15 @@
       "medium": 0,
       "low": 0
     },
+    "findings_detail": [],
     "tool_hash": "44c35cf6ac86e32d",
     "last_scanned": "2026-06-23",
     "scanner_version": "1.0.0-rc3",
     "status": "unknown"
   },
   {
-    "server": "memory",
-    "display_name": "memory",
+    "server": "@modelcontextprotocol/server-memory",
+    "display_name": "modelcontextprotocol / server-memory",
     "version": "",
     "aivss_score": 0.0,
     "grade": "A",
@@ -34,14 +35,15 @@
       "medium": 0,
       "low": 0
     },
+    "findings_detail": [],
     "tool_hash": "4d709119e341da34",
     "last_scanned": "2026-06-23",
     "scanner_version": "1.0.0-rc3",
     "status": "unknown"
   },
   {
-    "server": "sequential-thinking",
-    "display_name": "sequential-thinking",
+    "server": "@modelcontextprotocol/server-sequential-thinking",
+    "display_name": "modelcontextprotocol / server-sequential-thinking",
     "version": "",
     "aivss_score": 0.0,
     "grade": "A",
@@ -54,14 +56,15 @@
       "medium": 0,
       "low": 0
     },
+    "findings_detail": [],
     "tool_hash": "9bbea416bf3d4e0c",
     "last_scanned": "2026-06-23",
     "scanner_version": "1.0.0-rc3",
     "status": "unknown"
   },
   {
-    "server": "everything",
-    "display_name": "everything",
+    "server": "@modelcontextprotocol/server-everything",
+    "display_name": "modelcontextprotocol / server-everything",
     "version": "",
     "aivss_score": 3.8,
     "grade": "C",
@@ -74,14 +77,46 @@
       "medium": 4,
       "low": 0
     },
+    "findings_detail": [
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning gostergesi",
+        "description": "input_schema: zorunlu alan yok — bos girdi kabul edilebilir"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning gostergesi",
+        "description": "input_schema: zorunlu alan yok — bos girdi kabul edilebilir"
+      },
+      {
+        "rule_id": "R106",
+        "severity": "critical",
+        "title": "Gizli kimlik bilgisi / token ifsasi",
+        "description": "'Generic base64-like (entropy check applied)' tespit edildi: input_schema alaninda"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning gostergesi",
+        "description": "input_schema: zorunlu alan yok — bos girdi kabul edilebilir"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning gostergesi",
+        "description": "input_schema: zorunlu alan yok — bos girdi kabul edilebilir"
+      }
+    ],
     "tool_hash": "3f4d3cd441fa0a80",
     "last_scanned": "2026-06-23",
     "scanner_version": "1.0.0-rc3",
     "status": "unknown"
   },
   {
-    "server": "playwright",
-    "display_name": "playwright",
+    "server": "@playwright/mcp",
+    "display_name": "playwright / mcp",
     "version": "",
     "aivss_score": 4.2,
     "grade": "C",
@@ -94,6 +129,56 @@
       "medium": 4,
       "low": 0
     },
+    "findings_detail": [
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning gostergesi",
+        "description": "input_schema: zorunlu alan yok — bos girdi kabul edilebilir"
+      },
+      {
+        "rule_id": "R107",
+        "severity": "critical",
+        "title": "Tool parametrelerinde komut enjeksiyonu riski",
+        "description": "Shell metakarakteri: 'fields.items.value.description' = 'Value to fill in the field. If the field is a checkbox, the '"
+      },
+      {
+        "rule_id": "R107",
+        "severity": "critical",
+        "title": "Tool parametrelerinde komut enjeksiyonu riski",
+        "description": "Shell metakarakteri: 'key.description' = 'Name of the key to press or a character to generate, such as'"
+      },
+      {
+        "rule_id": "R107",
+        "severity": "critical",
+        "title": "Tool parametrelerinde komut enjeksiyonu riski",
+        "description": "Shell metakarakteri: 'code.description' = 'A JavaScript function containing Playwright code to execute.'"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning gostergesi",
+        "description": "input_schema: zorunlu alan yok — bos girdi kabul edilebilir"
+      },
+      {
+        "rule_id": "R107",
+        "severity": "critical",
+        "title": "Tool parametrelerinde komut enjeksiyonu riski",
+        "description": "Shell metakarakteri: 'filename.description' = 'File name to save the screenshot to. Defaults to `page-{time'"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning gostergesi",
+        "description": "input_schema: zorunlu alan yok — bos girdi kabul edilebilir"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning gostergesi",
+        "description": "input_schema: zorunlu alan yok — bos girdi kabul edilebilir"
+      }
+    ],
     "tool_hash": "73c317b4aedef755",
     "last_scanned": "2026-06-23",
     "scanner_version": "1.0.0-rc3",

@@ -1863,7 +1863,15 @@ def leaderboard_generate(
             except (json.JSONDecodeError, OSError):
                 continue
 
-            name = data.get("name", fpath.stem)
+            name = data.get("name") or ""
+            if not name:
+                target = data.get("target", "")
+                for token in target.split():
+                    if token.startswith("@"):
+                        name = token
+                        break
+                if not name:
+                    name = fpath.stem
 
             # Handle both raw to_dict() format and processed validation format
             summary = data.get("summary", {})
@@ -1904,6 +1912,16 @@ def leaderboard_generate(
                     grade = "D"
                 else:
                     grade = "F"
+
+            findings_detail = [
+                {
+                    "rule_id": f.get("rule_id", "?"),
+                    "severity": f.get("severity", "?"),
+                    "title": f.get("title", "")[:80],
+                    "description": f.get("description", "")[:120],
+                }
+                for f in findings_list
+            ]
 
             # Tool hash from store
             tool_hash = ""
@@ -1950,6 +1968,7 @@ def leaderboard_generate(
                         "medium": sev.get("medium", 0),
                         "low": sev.get("low", 0),
                     },
+                    "findings_detail": findings_detail,
                     "tool_hash": tool_hash,
                     "last_scanned": data.get("scanned_at", "")[:10]
                     if data.get("scanned_at")
