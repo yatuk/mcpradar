@@ -209,6 +209,7 @@ class TestTransportChecker:
         # Mock HSTS check to return True
         # Mock HEAD request to return Mcp-Method/Mcp-Name headers (2026-07-28 spec)
         from unittest.mock import MagicMock
+
         mock_head = MagicMock()
         mock_head.headers = {"mcp-method": "tools/list", "mcp-name": "search"}
         with (
