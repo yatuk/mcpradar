@@ -1,4 +1,5 @@
 """Plugin CLI tests."""
+
 from __future__ import annotations
 
 import tempfile
@@ -35,9 +36,7 @@ class TestPluginInit:
         with tempfile.TemporaryDirectory() as tmp:
             result = runner.invoke(app, ["plugin", "init", "test-rule", "-o", tmp])
             assert result.exit_code == 0
-            module_dir = (
-                Path(tmp) / "mcpradar-rule-test-rule" / "src" / "mcpradar_rule_test_rule"
-            )
+            module_dir = Path(tmp) / "mcpradar-rule-test-rule" / "src" / "mcpradar_rule_test_rule"
             assert module_dir.exists()
             rule_file = module_dir / "rule.py"
             assert rule_file.exists()
@@ -69,9 +68,7 @@ class TestPluginValidate:
             assert result.exit_code == 1
 
     def test_validate_deprecated_plugin(self) -> None:
-        result = runner.invoke(
-            app, ["plugin", "validate", "plugins/mcpradar-rule-deprecated"]
-        )
+        result = runner.invoke(app, ["plugin", "validate", "plugins/mcpradar-rule-deprecated"])
         assert result.exit_code == 0
 
 

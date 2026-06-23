@@ -1042,8 +1042,7 @@ class TestPreScanCheck:
 
         # No version-related findings for minor upgrades
         version_findings = [
-            f for f in findings
-            if "Surum dusurme" in f.title or "major" in f.title.lower()
+            f for f in findings if "Surum dusurme" in f.title or "major" in f.title.lower()
         ]
         assert len(version_findings) == 0
 

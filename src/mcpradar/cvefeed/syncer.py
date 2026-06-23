@@ -111,15 +111,14 @@ def sync_feed() -> list[CVEEntry]:
 
 
 def match_findings_to_cves(
-    findings: list[dict[str, str]], feed: list[CVEEntry],
+    findings: list[dict[str, str]],
+    feed: list[CVEEntry],
 ) -> list[dict[str, object]]:
     """Match scan findings to known CVEs by keyword overlap."""
     matches: list[dict[str, object]] = []
 
     for finding in findings:
-        f_text = (
-            f"{finding.get('title', '')} {finding.get('description', '')}".lower()
-        )
+        f_text = f"{finding.get('title', '')} {finding.get('description', '')}".lower()
         for cve in feed:
             cve_text = cve.description.lower()
             # Simple keyword overlap
@@ -127,12 +126,14 @@ def match_findings_to_cves(
             c_words = set(cve_text.split())
             overlap = f_words & c_words
             if len(overlap) >= 4:
-                matches.append({
-                    "finding_rule": finding.get("rule_id", ""),
-                    "finding_title": finding.get("title", ""),
-                    "cve_id": cve.cve_id,
-                    "cve_severity": cve.severity,
-                    "matched_keywords": sorted(overlap)[:10],
-                })
+                matches.append(
+                    {
+                        "finding_rule": finding.get("rule_id", ""),
+                        "finding_title": finding.get("title", ""),
+                        "cve_id": cve.cve_id,
+                        "cve_severity": cve.severity,
+                        "matched_keywords": sorted(overlap)[:10],
+                    }
+                )
 
     return matches

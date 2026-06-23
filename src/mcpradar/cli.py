@@ -564,10 +564,7 @@ def analyze_context(
         raise typer.Exit(code=1)
 
     servers = cfg.servers[:10]  # Max 10
-    console.print(
-        f"[bold]mcpradar analyze-context[/] — "
-        f"{len(servers)} sunucu analiz ediliyor\n"
-    )
+    console.print(f"[bold]mcpradar analyze-context[/] — {len(servers)} sunucu analiz ediliyor\n")
 
     scans: list[Any] = []
     for srv in servers:
@@ -580,14 +577,9 @@ def analyze_context(
                 )
                 report = asyncio.run(scanner.run())
                 scans.append(report)
-                console.print(
-                    f"  [green]{srv.name or srv.url}[/] "
-                    f"— {len(report.tools)} tools"
-                )
+                console.print(f"  [green]{srv.name or srv.url}[/] — {len(report.tools)} tools")
             except Exception as exc:
-                console.print(
-                    f"  [red]{srv.name or srv.url}[/] — hata: {exc}"
-                )
+                console.print(f"  [red]{srv.name or srv.url}[/] — hata: {exc}")
 
     if len(scans) < 2:
         console.print("[red]En az 2 sunucu taranabilmeli.[/]")
@@ -597,9 +589,7 @@ def analyze_context(
     ctx_report = analyzer.analyze()
 
     if json_only:
-        console.print(
-            json.dumps(ctx_report.to_dict(), indent=2, ensure_ascii=False)
-        )
+        console.print(json.dumps(ctx_report.to_dict(), indent=2, ensure_ascii=False))
     else:
         _print_context_report(ctx_report, console)
 
@@ -895,9 +885,7 @@ def plugin_uninstall(
 # fingerprint
 # ---------------------------------------------------------------------------
 
-fingerprint_app = typer.Typer(
-    help="Server fingerprint and identity tracking", no_args_is_help=True
-)
+fingerprint_app = typer.Typer(help="Server fingerprint and identity tracking", no_args_is_help=True)
 app.add_typer(fingerprint_app, name="fingerprint")
 
 
@@ -990,8 +978,7 @@ def fingerprint_compare(
     if baseline is None:
         console.print("[yellow]Bu sunucu icin daha once parmak izi kaydi yok.[/]")
         console.print(
-            f"Parmak izi olusturmak icin: "
-            f"mcpradar fingerprint create {target} -t {transport}"
+            f"Parmak izi olusturmak icin: mcpradar fingerprint create {target} -t {transport}"
         )
         return
 
@@ -1021,10 +1008,16 @@ def fingerprint_compare(
         console.print("\n[yellow]Ilk tarama — karsilastirma yapilamadi.[/]")
         return
 
-    if not any([
-        diff.tool_names_changed, diff.version_change, diff.protocol_changed,
-        diff.capabilities_changed, diff.tls_changed, diff.endpoint_changed,
-    ]):
+    if not any(
+        [
+            diff.tool_names_changed,
+            diff.version_change,
+            diff.protocol_changed,
+            diff.capabilities_changed,
+            diff.tls_changed,
+            diff.endpoint_changed,
+        ]
+    ):
         console.print("\n[green]Degisiklik tespit edilmedi.[/]")
         return
 
@@ -1038,8 +1031,7 @@ def fingerprint_compare(
             "minor_upgrade": "Minor surum degisikligi",
         }.get(diff.version_change, diff.version_change)
         console.print(
-            f"  [{color}][!][/] {label}: "
-            f"{diff.previous_version} → {diff.current_version}"
+            f"  [{color}][!][/] {label}: {diff.previous_version} → {diff.current_version}"
         )
 
     if diff.tool_names_changed:
@@ -1182,9 +1174,7 @@ def feed_update() -> None:
 
     entries = sync_feed()
     save_feed(entries)
-    console.print(
-        f"[green]{len(entries)} CVE synced.[/]"
-    )
+    console.print(f"[green]{len(entries)} CVE synced.[/]")
 
 
 # init

@@ -178,9 +178,7 @@ class PluginValidator:
                 env = os.environ.copy()
                 existing_path = env.get("PYTHONPATH", "")
                 env["PYTHONPATH"] = (
-                    src_dir + os.pathsep + existing_path
-                    if existing_path
-                    else src_dir
+                    src_dir + os.pathsep + existing_path if existing_path else src_dir
                 )
                 try:
                     result = subprocess.run(

@@ -745,6 +745,7 @@ class SchemaPoisoningDetection(Rule):
 
 class VersionAnomalyDetection(Rule):
     """Fingerprint-based: detects version rollback, unexpected upgrades, tool changes."""
+
     rule_id = "R110"
     title = "Sunucu versiyon anomalisi"
     severity = Severity.HIGH
@@ -762,6 +763,7 @@ class VersionAnomalyDetection(Rule):
 
 class InsecureTransportDetection(Rule):
     """Transport-layer: detects plain HTTP, old TLS, bad certs, missing HSTS."""
+
     rule_id = "R111"
     title = "Guvenli olmayan transport"
     severity = Severity.HIGH
@@ -1119,7 +1121,7 @@ class RuleEngine:
                     title="Ilk tarama — baseline yok",
                     description="Bu sunucu icin daha once fingerprint kaydi bulunamadi",
                     severity=Severity.MEDIUM,
-                    target=current.endpoint if hasattr(current, 'endpoint') else "",
+                    target=current.endpoint if hasattr(current, "endpoint") else "",
                     location="fingerprint",
                 )
             )
@@ -1136,7 +1138,7 @@ class RuleEngine:
                         f"{diff.current_version}'a dusuruldu — rollback saldirisi olabilir"
                     ),
                     severity=Severity.CRITICAL,
-                    target=current.endpoint if hasattr(current, 'endpoint') else "",
+                    target=current.endpoint if hasattr(current, "endpoint") else "",
                     location="fingerprint",
                     detail={
                         "previous": diff.previous_version,
@@ -1156,7 +1158,7 @@ class RuleEngine:
                         f"{diff.current_version}'a major atladi"
                     ),
                     severity=Severity.HIGH,
-                    target=current.endpoint if hasattr(current, 'endpoint') else "",
+                    target=current.endpoint if hasattr(current, "endpoint") else "",
                     location="fingerprint",
                     detail={
                         "previous": diff.previous_version,
@@ -1177,7 +1179,7 @@ class RuleEngine:
                         f"Kaldirilan: {len(diff.tools_removed)}"
                     ),
                     severity=Severity.HIGH,
-                    target=current.endpoint if hasattr(current, 'endpoint') else "",
+                    target=current.endpoint if hasattr(current, "endpoint") else "",
                     location="fingerprint",
                     detail={
                         "tools_added": diff.tools_added,
@@ -1194,7 +1196,7 @@ class RuleEngine:
                     title="TLS downgrade tespit edildi",
                     description="Sunucunun TLS surumu onceki taramaya gore dusurulmus",
                     severity=Severity.HIGH,
-                    target=current.endpoint if hasattr(current, 'endpoint') else "",
+                    target=current.endpoint if hasattr(current, "endpoint") else "",
                     location="fingerprint",
                 )
             )
@@ -1207,7 +1209,7 @@ class RuleEngine:
                     title="Sunucu adresi degisti",
                     description="Ayni sunucu kimligi farkli bir adreste goruldu",
                     severity=Severity.HIGH,
-                    target=current.endpoint if hasattr(current, 'endpoint') else "",
+                    target=current.endpoint if hasattr(current, "endpoint") else "",
                     location="fingerprint",
                 )
             )
@@ -1220,7 +1222,7 @@ class RuleEngine:
                     title="MCP protokol versiyonu degisti",
                     description="Sunucunun MCP protokol versiyonu degismis",
                     severity=Severity.MEDIUM,
-                    target=current.endpoint if hasattr(current, 'endpoint') else "",
+                    target=current.endpoint if hasattr(current, "endpoint") else "",
                     location="fingerprint",
                 )
             )

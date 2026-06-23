@@ -28,17 +28,19 @@ def main() -> None:
             continue
 
         sev = data.get("findings_by_severity", {})
-        rows.append({
-            "server": data.get("name", fpath.stem),
-            "tools": data.get("tools", 0),
-            "findings": data.get("findings", 0),
-            "critical": sev.get("critical", 0),
-            "high": sev.get("high", 0),
-            "medium": sev.get("medium", 0),
-            "low": sev.get("low", 0),
-            "last_scanned": data.get("scanned_at", "")[:10] if data.get("scanned_at") else "—",
-            "status": data.get("status", "unknown"),
-        })
+        rows.append(
+            {
+                "server": data.get("name", fpath.stem),
+                "tools": data.get("tools", 0),
+                "findings": data.get("findings", 0),
+                "critical": sev.get("critical", 0),
+                "high": sev.get("high", 0),
+                "medium": sev.get("medium", 0),
+                "low": sev.get("low", 0),
+                "last_scanned": data.get("scanned_at", "")[:10] if data.get("scanned_at") else "—",
+                "status": data.get("status", "unknown"),
+            }
+        )
 
     rows.sort(key=lambda r: r["findings"], reverse=True)
     OUTPUT.write_text(json.dumps(rows, indent=2, ensure_ascii=False), encoding="utf-8")

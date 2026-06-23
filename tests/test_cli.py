@@ -139,10 +139,14 @@ class TestCLIWatchFull:
             [
                 "watch",
                 "http://x",
-                "-t", "http",
-                "-i", "10",
-                "-c", "echo changed",
-                "-w", "https://hooks.slack.com/x",
+                "-t",
+                "http",
+                "-i",
+                "10",
+                "-c",
+                "echo changed",
+                "-w",
+                "https://hooks.slack.com/x",
             ],
         )
         # Will fail connecting but shouldn't crash on arg parsing

@@ -1,4 +1,5 @@
 """Fingerprint ve transport check testleri."""
+
 from __future__ import annotations
 
 from unittest.mock import patch
@@ -150,9 +151,7 @@ class TestTransportChecker:
             cert_valid=False,
             self_signed=False,
         )
-        findings = checker.generate_findings(
-            "http://example.com", "http", tls_info
-        )
+        findings = checker.generate_findings("http://example.com", "http", tls_info)
         assert len(findings) >= 1
         assert any("Plain HTTP" in f.description for f in findings)
 
@@ -166,9 +165,7 @@ class TestTransportChecker:
             cert_valid=True,
             self_signed=False,
         )
-        findings = checker.generate_findings(
-            "https://example.com", "http", tls_info
-        )
+        findings = checker.generate_findings("https://example.com", "http", tls_info)
         assert len(findings) >= 1
         assert any("TLS" in f.title for f in findings)
         assert any(f.severity.value == "critical" for f in findings)
@@ -183,9 +180,7 @@ class TestTransportChecker:
             cert_valid=False,
             self_signed=False,
         )
-        findings = checker.generate_findings(
-            "https://example.com", "http", tls_info
-        )
+        findings = checker.generate_findings("https://example.com", "http", tls_info)
         assert any("suresi dolmus" in f.description for f in findings)
 
     def test_findings_for_self_signed(self) -> None:
@@ -198,9 +193,7 @@ class TestTransportChecker:
             cert_valid=True,
             self_signed=True,
         )
-        findings = checker.generate_findings(
-            "https://example.com", "http", tls_info
-        )
+        findings = checker.generate_findings("https://example.com", "http", tls_info)
         assert any("Self-signed" in f.title for f in findings)
 
     def test_clean_tls_no_findings(self) -> None:
@@ -215,9 +208,7 @@ class TestTransportChecker:
         )
         # Mock HSTS check to return True
         with patch.object(checker, "check_hsts", return_value=True):
-            findings = checker.generate_findings(
-                "https://example.com", "http", tls_info
-            )
+            findings = checker.generate_findings("https://example.com", "http", tls_info)
         assert len(findings) == 0
 
 

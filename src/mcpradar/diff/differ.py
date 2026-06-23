@@ -343,22 +343,16 @@ class Differ:
         if report_a.server_version != report_b.server_version:
             a_ver = report_a.server_version or "(yok)"
             b_ver = report_b.server_version or "(yok)"
-            delta.fingerprint_changes.append(
-                f"server_version: {a_ver} → {b_ver}"
-            )
+            delta.fingerprint_changes.append(f"server_version: {a_ver} → {b_ver}")
         if report_a.protocol_version != report_b.protocol_version:
             a_proto = report_a.protocol_version or "(yok)"
             b_proto = report_b.protocol_version or "(yok)"
-            delta.fingerprint_changes.append(
-                f"protocol_version: {a_proto} → {b_proto}"
-            )
+            delta.fingerprint_changes.append(f"protocol_version: {a_proto} → {b_proto}")
         if report_a.capabilities != report_b.capabilities:
             delta.fingerprint_changes.append("capabilities: degisti")
         tool_count_a = len(report_a.tools)
         tool_count_b = len(report_b.tools)
         if tool_count_a != tool_count_b:
-            delta.fingerprint_changes.append(
-                f"tool_count: {tool_count_a} → {tool_count_b}"
-            )
+            delta.fingerprint_changes.append(f"tool_count: {tool_count_a} → {tool_count_b}")
 
         return delta

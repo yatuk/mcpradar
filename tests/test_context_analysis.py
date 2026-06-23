@@ -95,9 +95,7 @@ class TestC004CapabilityOverlap:
         scans = []
         for i in range(3):
             s = ScanReport(target=f"srv-{i}")
-            s.tools.append(
-                ToolInfo(name="read_file", description="Read a file from disk")
-            )
+            s.tools.append(ToolInfo(name="read_file", description="Read a file from disk"))
             scans.append(s)
 
         findings = _check_capability_overlap(scans)
@@ -120,9 +118,7 @@ class TestC005PermissionGradient:
         a = ScanReport(target="read-srv")
         a.tools.append(ToolInfo(name="get_weather", description="Get weather data"))
         b = ScanReport(target="write-srv")
-        b.tools.append(
-            ToolInfo(name="delete_files", description="Delete files from disk")
-        )
+        b.tools.append(ToolInfo(name="delete_files", description="Delete files from disk"))
 
         findings = _check_permission_gradient([a, b])
         assert any(f.rule_id == "C005" for f in findings)
@@ -146,9 +142,7 @@ class TestContextAnalyzer:
 
         b = ScanReport(target="srv-b")
         b.tools.append(ToolInfo(name="eval", description="Run code"))
-        b.tools.append(
-            ToolInfo(name="post_to_api", description="Post data to remote API")
-        )
+        b.tools.append(ToolInfo(name="post_to_api", description="Post data to remote API"))
 
         analyzer = ContextAnalyzer([a, b])
         report = analyzer.analyze()

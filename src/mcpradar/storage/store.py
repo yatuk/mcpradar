@@ -408,9 +408,7 @@ class Store:
         )
         self._conn.commit()
 
-    def load_fingerprint(
-        self, endpoint: str, transport: str
-    ) -> ServerFingerprint | None:
+    def load_fingerprint(self, endpoint: str, transport: str) -> ServerFingerprint | None:
         """Load the most recent fingerprint for an endpoint+transport pair."""
         from mcpradar.fingerprint.models import ServerFingerprint, TLSInfo
 
@@ -446,7 +444,9 @@ class Store:
                 cert_expiry=row[13],
                 cert_valid=bool(row[14]),
                 self_signed=bool(row[15]),
-            ) if row[10] else None,
+            )
+            if row[10]
+            else None,
         )
 
     def list_fingerprints(self) -> list[ServerFingerprint]:
@@ -464,33 +464,35 @@ class Store:
 
         results: list[ServerFingerprint] = []
         for row in rows:
-            results.append(ServerFingerprint(
-                server_id=row[0],
-                endpoint=row[1],
-                transport=row[2],
-                server_version=row[3],
-                protocol_version=row[4],
-                capabilities=json.loads(row[5]),
-                tool_names_hash=row[6],
-                tool_count=row[7],
-                first_seen=row[8],
-                last_seen=row[9],
-                tls_info=TLSInfo(
-                    version=row[10],
-                    cert_issuer=row[11],
-                    cert_subject=row[12],
-                    cert_expiry=row[13],
-                    cert_valid=bool(row[14]),
-                    self_signed=bool(row[15]),
-                ) if row[10] else None,
-            ))
+            results.append(
+                ServerFingerprint(
+                    server_id=row[0],
+                    endpoint=row[1],
+                    transport=row[2],
+                    server_version=row[3],
+                    protocol_version=row[4],
+                    capabilities=json.loads(row[5]),
+                    tool_names_hash=row[6],
+                    tool_count=row[7],
+                    first_seen=row[8],
+                    last_seen=row[9],
+                    tls_info=TLSInfo(
+                        version=row[10],
+                        cert_issuer=row[11],
+                        cert_subject=row[12],
+                        cert_expiry=row[13],
+                        cert_valid=bool(row[14]),
+                        self_signed=bool(row[15]),
+                    )
+                    if row[10]
+                    else None,
+                )
+            )
         return results
 
     def delete_fingerprint(self, server_id: str) -> bool:
         """Delete a fingerprint by server_id. Returns True if deleted."""
-        cursor = self._conn.execute(
-            "DELETE FROM fingerprints WHERE server_id = ?", (server_id,)
-        )
+        cursor = self._conn.execute("DELETE FROM fingerprints WHERE server_id = ?", (server_id,))
         self._conn.commit()
         return cursor.rowcount > 0
 
