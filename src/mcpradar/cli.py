@@ -130,6 +130,117 @@ def scan(
 
 
 # ---------------------------------------------------------------------------
+# probe
+# ---------------------------------------------------------------------------
+
+
+@app.command()
+def probe(
+    target: str = typer.Argument(help="MCP sunucu adresi (URL veya stdio komutu)"),
+    transport: str = typer.Option(  # noqa: B008
+        "http", "--transport", "-t", help="Transport protokolu: http, sse, stdio"
+    ),
+    safe_only: bool = typer.Option(  # noqa: B008
+        True, "--safe-only/--all", help="Sadece read-only tool'lari probe et (guvenli)"
+    ),
+    max_probes: int = typer.Option(  # noqa: B008
+        20, "--max", "-m", help="Maksimum probe edilecek tool sayisi"
+    ),
+    timeout: float = typer.Option(  # noqa: B008
+        5.0, "--timeout", help="Tool basina timeout (saniye)"
+    ),
+    json_only: bool = typer.Option(  # noqa: B008
+        False, "--json", help="Yalnizca JSON ciktisi"
+    ),
+    min_severity: str = typer.Option(  # noqa: B008
+        "low", "--severity", "-s", help="Minimum onem seviyesi"
+    ),
+) -> None:
+    """MCP sunucusundaki tool'lari guvenli sekilde calistirarak probe et.
+
+    Read-only tool'lara minimal guvenli girdi gonderir,
+    yanitlarda URL, script, secret ve prompt injection arar.
+    """
+    import asyncio
+
+    from mcpradar.output.console import console
+    from mcpradar.probe.prober import ReadOnlyProber
+    from mcpradar.scanner.engine import Scanner
+    from mcpradar.scanner.report import Severity
+
+    prober_obj = ReadOnlyProber()
+    prober_obj.MAX_PROBE_COUNT = max_probes
+    prober_obj.PROBE_TIMEOUT = timeout
+
+    scanner = Scanner(
+        target=target,
+        transport=transport,
+        min_severity=Severity(min_severity),
+        prober=prober_obj,
+        probe_safe_only=safe_only,
+    )
+
+    with console.status(f"[bold blue]{target}[/] probe ediliyor..."):
+        report = asyncio.run(scanner.run())
+
+    if json_only:
+        console.print(json.dumps(report.to_dict(), indent=2, ensure_ascii=False))
+    else:
+        _print_probe_results(console, report)
+
+
+def _print_probe_results(console: Any, report: Any) -> None:
+    """Rich formatted probe results output."""
+    from rich.table import Table
+
+    probed = report.probe_results
+
+    console.print(f"\n[bold]Probe Sonuclari: {report.target}[/]")
+    console.print(f"  Transport: {report.transport}")
+    console.print(f"  Tool sayisi: {len(report.tools)}, Probe edilen: {len(probed)}")
+
+    if not probed:
+        console.print(
+            "  [yellow]Hic tool probe edilmedi (safe tool bulunamadi veya tumu write-only)[/]"
+        )
+        return
+
+    success_count = sum(1 for p in probed if p.success)
+    fail_count = len(probed) - success_count
+    console.print(f"  Basarili: [green]{success_count}[/], Basarisiz: [red]{fail_count}[/]")
+
+    table = Table(
+        "Tool", "Sure (ms)", "Basarili", "URL", "Script", "Secret", "Injection", "Onizleme"
+    )
+    for p in probed:
+        table.add_row(
+            p.tool_name,
+            f"{p.response_time_ms:.0f}",
+            "✅" if p.success else f"❌ {p.error_message[:30]}",
+            "🔗" if p.contains_urls else "",
+            "⚠️" if p.contains_scripts else "",
+            "🔑" if p.contains_secrets else "",
+            "💉" if p.contains_prompt_injection else "",
+            p.response_preview[:60] + ("..." if len(p.response_preview) > 60 else ""),
+        )
+    console.print(table)
+
+    # Summary of detected issues
+    issues = []
+    if any(p.contains_urls for p in probed):
+        issues.append(f"[yellow]{sum(1 for p in probed if p.contains_urls)} URL iceren yanit[/]")
+    if any(p.contains_scripts for p in probed):
+        issues.append(f"[red]{sum(1 for p in probed if p.contains_scripts)} script iceren yanit[/]")
+    if any(p.contains_secrets for p in probed):
+        issues.append(f"[red]{sum(1 for p in probed if p.contains_secrets)} secret iceren yanit[/]")
+    if any(p.contains_prompt_injection for p in probed):
+        pi_count = sum(1 for p in probed if p.contains_prompt_injection)
+        issues.append(f"[red]{pi_count} prompt injection yaniti[/]")
+    if issues:
+        console.print("\n[bold]Tespit Edilen Riskler:[/] " + ", ".join(issues))
+
+
+# ---------------------------------------------------------------------------
 # diff
 # ---------------------------------------------------------------------------
 
@@ -544,6 +655,12 @@ def analyze_context(
     json_only: bool = typer.Option(  # noqa: B008
         False, "--json", help="Yalnızca JSON çıktı"
     ),
+    deep: bool = typer.Option(  # noqa: B008
+        False, "--deep", help="Derin graf analizi (C006, C007 kurallari)"
+    ),
+    graph_output: Path | None = typer.Option(  # noqa: B008
+        None, "--graph", "-g", help="GraphViz DOT çikti dosyasi"
+    ),
 ) -> None:
     """Birden fazla MCP server'ının birlikte güvenliğini analiz et.
 
@@ -585,8 +702,14 @@ def analyze_context(
         console.print("[red]En az 2 sunucu taranabilmeli.[/]")
         raise typer.Exit(code=1)
 
-    analyzer = ContextAnalyzer(scans)
+    analyzer = ContextAnalyzer(scans, deep=deep)
     ctx_report = analyzer.analyze()
+
+    if graph_output and ctx_report.attack_graph_dot:
+        graph_output.write_text(ctx_report.attack_graph_dot, encoding="utf-8")
+        console.print(f"[green]GraphViz DOT kaydedildi: {graph_output}[/]")
+    elif graph_output and not ctx_report.attack_graph_dot:
+        console.print("[yellow]Graf ciktisi icin --deep flag'i gerekli.[/]")
 
     if json_only:
         console.print(json.dumps(ctx_report.to_dict(), indent=2, ensure_ascii=False))
@@ -637,6 +760,16 @@ def _print_context_report(ctx_report: Any, console: Any) -> None:
         console.print("\n[bold]Risk Graph:[/]")
         for srv, deps in ctx_report.risk_graph.items():
             console.print(f"  [cyan]{srv}[/] ←→ {', '.join(deps)}")
+
+    # Risk score
+    if ctx_report.risk_score > 0:
+        if ctx_report.risk_score < 30:
+            color = "green"
+        elif ctx_report.risk_score < 60:
+            color = "yellow"
+        else:
+            color = "red"
+        console.print(f"\n[bold]Risk Skoru:[/] [{color}]{ctx_report.risk_score}/100[/]")
 
     console.print()
 

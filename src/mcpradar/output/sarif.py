@@ -40,6 +40,8 @@ RULE_HELP: dict[str, str] = {
     "R109": "Schema poisoning — additionalProps:true, missing types, buffer overflow risk",
     "R110": "Version anomaly — rollback attack, unexpected major upgrade, tool list change",
     "R111": "Insecure transport — plain HTTP, old TLS, self-signed certificates",
+    "C006": "Cross-server attack path chain — schema type matching reveals chained attacks",
+    "C007": "Cross-server privilege escalation — read-only tool output feeds write/exec input",
 }
 
 

@@ -12,6 +12,7 @@ from mcp.client.stdio import StdioServerParameters, stdio_client
 from mcp.client.streamable_http import streamablehttp_client
 from mcp.types import Tool
 
+from mcpradar.probe.prober import ReadOnlyProber
 from mcpradar.scanner.report import (
     PromptInfo,
     ResourceInfo,
@@ -28,10 +29,14 @@ class Scanner:
         target: str,
         transport: str = "http",
         min_severity: Severity = Severity.MEDIUM,
+        prober: ReadOnlyProber | None = None,
+        probe_safe_only: bool = True,
     ) -> None:
         self.target = target
         self.transport = transport
         self.min_severity = min_severity
+        self.prober = prober
+        self.probe_safe_only = probe_safe_only
         self.rule_engine = RuleEngine(min_severity=min_severity)
 
     async def run(self) -> ScanReport:
@@ -79,6 +84,16 @@ class Scanner:
                     report.capabilities = caps
             await self._collect_all(session, report)
 
+            # Runtime probing
+            if self.prober is not None:
+                if self.probe_safe_only:
+                    tools_to_probe = [t for t in report.tools if self.prober.is_safe_tool(t)]
+                else:
+                    tools_to_probe = list(report.tools)
+                for tool in tools_to_probe[: self.prober.MAX_PROBE_COUNT]:
+                    result = await self.prober.probe_tool(session, tool, report.target)
+                    report.probe_results.append(result)
+
     async def _run_sse(self, report: ScanReport) -> None:
         url = self.target
         if url.startswith("sse://"):
@@ -98,6 +113,16 @@ class Scanner:
                     report.capabilities = caps
             await self._collect_all(session, report)
 
+            # Runtime probing
+            if self.prober is not None:
+                if self.probe_safe_only:
+                    tools_to_probe = [t for t in report.tools if self.prober.is_safe_tool(t)]
+                else:
+                    tools_to_probe = list(report.tools)
+                for tool in tools_to_probe[: self.prober.MAX_PROBE_COUNT]:
+                    result = await self.prober.probe_tool(session, tool, report.target)
+                    report.probe_results.append(result)
+
     async def _run_http(self, report: ScanReport) -> None:
         url = self.target
         # streamablehttp_client returns 3-tuple — can't combine in single `with`
@@ -113,6 +138,16 @@ class Scanner:
                     elif isinstance(caps, dict):
                         report.capabilities = caps
                 await self._collect_all(session, report)
+
+                # Runtime probing
+                if self.prober is not None:
+                    if self.probe_safe_only:
+                        tools_to_probe = [t for t in report.tools if self.prober.is_safe_tool(t)]
+                    else:
+                        tools_to_probe = list(report.tools)
+                    for tool in tools_to_probe[: self.prober.MAX_PROBE_COUNT]:
+                        result = await self.prober.probe_tool(session, tool, report.target)
+                        report.probe_results.append(result)
 
     # ------------------------------------------------------------------
     # Data collection + analysis

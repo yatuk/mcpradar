@@ -5,8 +5,11 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from enum import StrEnum
-from typing import Any
+from typing import TYPE_CHECKING, Any
 from uuid import uuid4
+
+if TYPE_CHECKING:
+    from mcpradar.probe.prober import ProbeResult
 
 
 class Severity(StrEnum):
@@ -71,6 +74,7 @@ class ScanReport:
     tools: list[ToolInfo] = field(default_factory=list)
     prompts: list[PromptInfo] = field(default_factory=list)
     resources: list[ResourceInfo] = field(default_factory=list)
+    probe_results: list[ProbeResult] = field(default_factory=list)
     findings: list[Finding] = field(default_factory=list)
     summary: dict[str, int] = field(
         default_factory=lambda: {
@@ -111,6 +115,7 @@ class ScanReport:
             "resources": [
                 {"uri": r.uri, "name": r.name, "description": r.description} for r in self.resources
             ],
+            "probe_results": [pr.to_dict() for pr in self.probe_results],
             "findings": [
                 {
                     "rule_id": f.rule_id,

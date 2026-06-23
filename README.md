@@ -74,9 +74,8 @@ That's it. One command, no install, runs against any MCP server you can launch.
 - 🎯 **R001–R105** — Dangerous tool names, zero-width Unicode, prompt injection (10 patterns), base64/hex blobs, hidden HTML/Markdown, permission scope mismatch
 - ✅ **R106–R111** — Secret/token exposure, command injection, supply chain risk, schema poisoning, version anomaly, insecure transport
 
-### 🔗 Cross-Server Analysis (5 rules, all built)
-- 🌐 **C001–C005** — Tool name collision, shadowing, exfiltration chains, capability overlap, permission gradient
-- 🔜 **C006–C007** — Attack path chain (graph-based), privilege escalation via cross-server chaining (Sprint 4)
+### 🔗 Cross-Server Analysis (7 rules, all built)
+- 🌐 **C001–C007** — Tool name collision, shadowing, exfiltration chains, capability overlap, permission gradient, attack path chain (graph-based), privilege escalation via cross-server chaining
 
 ### 📦 Package & Source Scanning
 - 📂 **`scan-source`** — Scan GitHub repos, npm/pip packages, Docker images, MCP registry IDs without running the server
@@ -142,7 +141,7 @@ servers in disposable containers with network egress locked down.
 | **Command injection** | ✅ R107 | ❌ | ❌ | ✅ (live) | ✅ | ✅ | ❌ |
 | **Supply chain risk** | ✅ R108 | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ |
 | **DCI (desc ≠ code)** | ✅ AST-based | ❌ | ❌ | ❌ | ❌ | Partial | ❌ |
-| **Cross-server analysis** | ✅ C001-C005 | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Cross-server analysis** | ✅ C001-C007 | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | **Source scanning** | 🔜 GitHub/npm/Docker | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ |
 | **SBOM + dep. CVE** | 🔜 CycloneDX | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | **Sandbox execution** | 🔜 Docker egress-lock | ❌ | ❌ | N/A (proxy) | ❌ | ❌ | ❌ |
@@ -251,7 +250,7 @@ Findings appear in your repo's Security tab. Full template:
 | R110 | Version Anomaly       | HIGH/CRITICAL | MCP09 | Version rollback, major upgrade, tool list change, TLS downgrade |
 | R111 | Insecure Transport    | HIGH/CRITICAL | MCP07 | Plain HTTP, TLS < 1.2, expired/self-signed certs, missing HSTS |
 
-### Cross-Server (v0.1.0)
+### Cross-Server (v0.5.0)
 
 | ID   | Rule                  | Severity      | OWASP | Catches |
 |------|-----------------------|---------------|-------|---------|
@@ -260,13 +259,8 @@ Findings appear in your repo's Security tab. Full template:
 | C003 | Exfiltration Chain    | CRITICAL      | MCP10 | Server A reads sensitive data, Server B sends it out |
 | C004 | Capability Overlap    | MEDIUM        | MCP10 | 3+ servers exposing same capability (file_read, shell_exec…) |
 | C005 | Permission Gradient   | MEDIUM        | MCP02 | Read-only + write-capable server mix — injection may hijack write access |
-
-### Planned (see [ROADMAP.md](ROADMAP.md))
-
-| ID   | Rule                  | Sprint | OWASP |
-|------|-----------------------|--------|-------|
-| C006 | Attack Path Chain     | Sprint 4 | MCP03 |
-| C007 | Privilege Escalation  | Sprint 4 | MCP02 |
+| C006 | Attack Path Chain     | CRITICAL/HIGH/MEDIUM | MCP03/MCP10 | Schema type matching across server tool outputs and inputs reveals chained attack paths |
+| C007 | Privilege Escalation  | CRITICAL      | MCP02 | Read-only tool output on server A feeds into write/exec tool input on server B |
 
 Full docs: [docs/detection-rules.md](docs/detection-rules.md)
 
@@ -301,15 +295,15 @@ MCPRadar targets full coverage of the [OWASP MCP Top 10 (2025)](https://owasp.or
 | # | Risk | Covered By | Status |
 |---|---|---|---|
 | MCP01 | Token Mismanagement & Secret Exposure | R106 | ✅ Strong |
-| MCP02 | Privilege Escalation via Scope Creep | R105, C005, C007 | 🟡 Partial |
-| MCP03 | Tool Poisoning | R001, R104, R109, C006 | 🟡 Partial |
+| MCP02 | Privilege Escalation via Scope Creep | R105, C005, C007 | 🟢 Strong |
+| MCP03 | Tool Poisoning | R001, R104, R109, C006 | 🟢 Strong |
 | MCP04 | Supply Chain Attacks & Dependency Tampering | R108 | ✅ Strong |
 | MCP05 | Command Injection & Execution | R001, R107 | 🟢 Strong |
 | MCP06 | Prompt Injection via Contextual Payloads | R101, R102, R103, R104 | ✅ Strong |
 | MCP07 | Insufficient AuthN/AuthZ | R111 | ✅ Strong |
 | MCP08 | Lack of Audit & Telemetry | Audit trail (planned) | 🔜 Sprint 5 |
 | MCP09 | Shadow MCP Servers | R110 | ✅ Strong |
-| MCP10 | Context Injection & Over-Sharing | C001–C005, C006 | 🟡 Partial |
+| MCP10 | Context Injection & Over-Sharing | C001–C007 | 🟢 Strong |
 
 ✅ Strong · 🟡 Partial · 🔴 Minimal · 🔜 Planned — see [ROADMAP.md](ROADMAP.md)
 
@@ -347,7 +341,7 @@ See **[ROADMAP.md](ROADMAP.md)** for the full development roadmap.
 | ✅ 1 | v0.2.0 | 4 new rules — Secret exposure (R106), Command injection (R107), Supply chain (R108), Schema poisoning (R109) |
 | ✅ 2 | v0.3.0 | Plugin system — PluginManager, Validator, Scaffolder, CLI |
 | ✅ 3 | v0.4.0 | Server fingerprinting + Transport security (R110, R111) |
-| 4 | v0.5.0 | Deep cross-server analysis + Runtime probing (C006, C007) |
+| ✅ 4 | v0.5.0 | Deep cross-server analysis + Runtime probing (C006, C007) |
 | 5 | v0.6.0 | Audit trail + CVE automation + Statistics |
 | 6 | v1.0.0-rc1 | Validation, performance, documentation — OWASP 10/10 |
 

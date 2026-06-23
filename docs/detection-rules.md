@@ -1,6 +1,6 @@
 # Detection Rules
 
-MCPRadar'ın 12 built-in detection rule'u ve topluluk eklentileri, her biri ayrı bir saldırı vektörünü hedefler.
+MCPRadar'ın 12 built-in detection rule'u, 7 cross-server analiz kuralı ve topluluk eklentileri, her biri ayrı bir saldırı vektörünü hedefler.
 
 ## Rule Index
 
@@ -364,6 +364,124 @@ Endpoint: https://mcp-server.example.com (TLSv1.0, self-signed cert)
 4. **Suresi gecmis sertifika**: Gecersiz sertifikalar kullanicilari uyari mesajlarini goz ardi etmeye alistirir ve gercek MITM saldirilarini tespit etmeyi zorlastirir.
 
 **False positive riski:** Dusuk. Localhost gelistirme sunuculari self-signed sertifika kullanabilir (MEDIUM severity). stdio transport icin hic bulgu uretilmez — bu kural sadece ag uzerinden erisilen sunucularda calisir.
+
+---
+
+## Cross-Server Rules (C-serisi)
+
+Cross-server analiz, birden fazla MCP sunucusunun aynı LLM agent'a bağlanmasıyla oluşan riskleri tespit eder. `ContextAnalyzer` tarafından uygulanır; deep mod (`--deep`) C006 ve C007'yi de aktive eder.
+
+### Index
+
+| ID | Name | Severity | OWASP |
+|---|---|---|---|
+| C001 | Tool Name Collision | CRITICAL | MCP10 |
+| C002 | Tool Name Shadowing | HIGH | MCP10 |
+| C003 | Exfiltration Chain | CRITICAL | MCP10 |
+| C004 | Capability Overlap | MEDIUM | MCP10 |
+| C005 | Permission Gradient | MEDIUM | MCP02 |
+| C006 | Attack Path Chain | CRITICAL/HIGH/MEDIUM | MCP03/MCP10 |
+| C007 | Privilege Escalation Chain | CRITICAL | MCP02 |
+
+---
+
+### C001 — Tool Name Collision
+
+**Severity:** CRITICAL
+
+**Ne arar:** Aynı tool isminin birden fazla MCP sunucusunda bulunması.
+
+**Neden tehlikeli:** LLM agent, aynı isimli iki tool'dan hangisini çağıracağını ayırt edemeyebilir. Bu durum, zararlı bir sunucunun meşru bir sunucunun tool'unu "gölgelemesine" yol açar.
+
+**Detay:** [README.md cross-server bölümü](../README.md)
+
+---
+
+### C002 — Tool Name Shadowing
+
+**Severity:** HIGH
+
+**Ne arar:** Farklı sunucularda %75 veya daha fazla benzerlik gösteren tool isimleri. `SequenceMatcher` ile hesaplanır.
+
+**Neden tehlikeli:** Yakın isimli tool'lar LLM tarafından karıştırılabilir. Saldırgan, meşru bir tool'a çok benzeyen isimle zararlı bir tool sunabilir.
+
+---
+
+### C003 — Exfiltration Chain
+
+**Severity:** CRITICAL
+
+**Ne arar:** Bir sunucuda veri okuyan (`read`, `get`, `fetch`, `download`) tool ile başka bir sunucuda veri gönderen (`send`, `post`, `upload`, `publish`) tool kombinasyonu.
+
+**Neden tehlikeli:** Tek başına zararsız iki tool zincirleme kullanıldığında hassas veri sızıntısına yol açabilir. A sunucusundan okunan veri B sunucusu üzerinden dışarı sızdırılabilir.
+
+---
+
+### C004 — Capability Overlap
+
+**Severity:** MEDIUM
+
+**Ne arar:** 3 veya daha fazla sunucunun aynı yeteneği (`file_read`, `file_write`, `web_fetch`, `shell_exec`, `database`) sunması.
+
+**Neden tehlikeli:** Aynı yeteneğin çok sayıda sunucuda bulunması saldırı yüzeyini genişletir. LLM agent hangi sunucuyu kullanacağını seçerken yanlış bir seçim yapabilir.
+
+---
+
+### C005 — Permission Gradient
+
+**Severity:** MEDIUM
+
+**Ne arar:** Salt okunur sunucular ile yazma/yürütme yetkili sunucuların aynı agent konfigürasyonunda bulunması.
+
+**Neden tehlikeli:** Salt okunur bir sunucuya yapılan prompt injection saldırısı, aynı agent'taki yazma yetkili sunucuyu ele geçirmek için kullanılabilir. Yetki seviyeleri arasındaki gradyan, yatay hareket (lateral movement) riskini artırır.
+
+---
+
+### C006 — Attack Path Chain
+
+**Severity:** CRITICAL (exfiltration/komut enjeksiyon zinciri) / HIGH (3+ adımlı zincir) / MEDIUM (2 adımlı zincir)
+
+**Ne arar:** Farklı MCP sunucuları arasındaki tool'ların JSON Schema tip eşleşmeleri üzerinden oluşturduğu saldırı zincirlerini tespit eder. Bir sunucudaki tool'un `output_schema` tipi ile başka bir sunucudaki tool'un `input_schema` tipi eşleşiyorsa, bu iki tool arasında veri akışı mümkündür.
+
+**Nasıl çalışır:** `ContextAnalyzer` deep modda (`deep=True`) tüm tool çiftleri için schema tip karşılaştırması yapar. Eşleşen tipler üzerinden yönlü bir graf oluşturur. BFS algoritması (`collections.deque`) ile bu graftaki tüm zincirleri (max 5 adım) keşfeder ve sınıflandırır:
+- **Exfiltration zinciri** (CRITICAL): Kaynak tool veri okuyor (`read`/`get`/`fetch`), hedef tool veri gönderiyor (`send`/`post`/`upload`)
+- **Komut enjeksiyon zinciri** (CRITICAL): Kaynak tool input kabul ediyor, hedef tool shell/exec komutu çalıştırıyor
+- **Uzun zincir** (HIGH): 3 veya daha fazla adımdan oluşan zincir
+- **Kısa zincir** (MEDIUM): 2 adımlı zincir
+
+**Gerçek örnek:**
+```
+Server A: "get_user_data" → output: { "email": "string", "data": "object" }
+Server B: "send_report" → input: { "data": "object" }
+→ C006 CRITICAL: Veri sızdırma zinciri A:get_user_data -> B:send_report
+```
+
+**Neden tehlikeli:** Birden fazla MCP sunucusunun bağlı olduğu bir agent ortamında, tek başına zararsız görünen iki tool zincirleme olarak kullanıldığında hassas veri sızıntısına veya komut enjeksiyonuna yol açabilir. Saldırgan, ilk sunucuda veri okuyan bir tool ile ikinci sunucuda bu veriyi dışarı gönderen bir tool'u zincirleyerek exfiltration yapabilir.
+
+**False positive riski:** Orta-yüksek. Aynı JSON Schema tipini kullanan birçok tool mevcut olabilir (örneğin `string` tipi çok yaygındır). Bu nedenle sadece tip eşleşmesi değil, zincir sınıflandırması da yapılır.
+
+---
+
+### C007 — Privilege Escalation Chain
+
+**Severity:** CRITICAL
+
+**Ne arar:** Salt okunur (`get`, `list`, `read`, `fetch`, `search`, `query`, `browse`, `show`, `describe` prefix'li) tool'ların, yazma/yürütme yetkili (`write`, `exec`, `shell`, `sudo` vb.) tool'lara schema tip eşleşmesi üzerinden bağlanması.
+
+**Nasıl çalışır:** Deep modda tüm salt okunur ve yazma/yürütme yetkili tool'lar belirlenir. Schema tip eşleşmesi üzerinden iki tür tespit yapılır:
+- **Doğrudan yetki yükseltme**: Salt okunur tool'dan yazma tool'una tek adımda tip eşleşmesi
+- **Zincirleme yetki yükseltme**: Salt okunur tool'dan yazma tool'una 2-3 aracı tool üzerinden BFS ile ulaşılabilmesi (max depth 3)
+
+**Gerçek örnek:**
+```
+Server A (read-only): "list_files" → output: { "paths": "array" }
+Server B (write): "delete_files" → input: { "paths": "array" }
+→ C007 CRITICAL: Doğrudan yetki yükseltme A:list_files -> B:delete_files
+```
+
+**Neden tehlikeli:** Salt okunur olduğu varsayılan bir sunucudaki tool çıktısı, başka bir sunucuda yazma/yürütme yetkili bir tool'a girdi olarak kullanılabilir. Bu durum, salt okunur izinlerle sınırlandırılmış bir kullanıcının veya agent'in, zincirleme yoluyla yazma/yürütme yetkisi kazanmasına yol açar. OWASP MCP02 (Privilege Escalation via Scope Creep) kapsamındaki en kritik risklerden biridir.
+
+**False positive riski:** Orta. `string` gibi genel tiplerin eşleşmesi çok sayıda false positive üretebilir. Bu nedenle anlamlı yapı taşları (`array`, `object`, `number`) üzerinden eşleşme yapılır.
 
 ---
 

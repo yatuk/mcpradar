@@ -5,6 +5,34 @@ All notable changes to MCPRadar will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] - 2026-06-23
+
+### Added
+- **Runtime probing engine** (`src/mcpradar/probe/`): Safe runtime execution of read-only MCP tools
+  - `ReadOnlyProber`: Identifies safe tools by name pattern, calls them with minimal args, analyzes responses
+  - `SandboxValidator`: Pre-probe argument safety validation — rejects forbidden values, deep nesting, long strings
+  - `ProbeResult`: Captures response metadata — URLs, scripts, secrets (R106 re-run), prompt injection (R102 re-run)
+  - CLI: `mcpradar probe <target> --safe-only` with Rich table output and `--json` support
+- **C006 — Attack Path Chain** (MCP03/MCP10): Graph-based cross-server attack path detection
+  - Schema type matching between tool outputs and inputs across servers
+  - BFS chain enumeration with classification: exfiltration (CRITICAL), command injection (CRITICAL), long chains (HIGH)
+  - Manual graph algorithms — zero new dependencies (`collections.deque` BFS)
+- **C007 — Privilege Escalation** (MCP02): Read-only → write/exec cross-server chain detection
+  - Direct edge and multi-hop path detection for read-to-write escalation
+- **Risk scoring**: 0–100 score per server group (severity-weighted + server density + tool density)
+- **GraphViz DOT output**: `analyze-context --deep --graph risk.dot` with color-coded nodes
+- **CLI**: `mcpradar probe` command, `analyze-context --deep` and `--graph` flags
+
+### Changed
+- `ContextAnalyzer` now accepts `deep: bool` parameter for C006/C007 activation
+- `ContextAnalysisReport` includes `risk_score` and `attack_graph_dot` fields
+- `ScanReport` includes `probe_results` field for runtime probe data
+- `Scanner` supports optional `prober` parameter for runtime tool probing
+- `SARIF` RULE_HELP expanded to 14 entries (R001–R111 + C001–C007)
+
+### Fixed
+- CI ruff format compliance — all files auto-formatted
+
 ## [0.4.0] - 2026-06-23
 
 ### Added

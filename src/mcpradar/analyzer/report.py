@@ -26,6 +26,8 @@ class ContextAnalysisReport:
     scans: list[ScanReport] = field(default_factory=list)
     findings: list[CrossFinding] = field(default_factory=list)
     risk_graph: dict[str, list[str]] = field(default_factory=dict)
+    risk_score: int = 0
+    attack_graph_dot: str = ""
 
     def add_finding(self, f: CrossFinding) -> None:
         self.findings.append(f)
@@ -47,4 +49,6 @@ class ContextAnalysisReport:
                 for f in self.findings
             ],
             "risk_graph": self.risk_graph,
+            "risk_score": self.risk_score,
+            "attack_graph_dot": self.attack_graph_dot,
         }
