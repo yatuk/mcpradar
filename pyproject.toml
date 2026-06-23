@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "mcpradar"
-version = "1.0.0-rc2"
+version = "1.0.0-rc3"
 description = "Security scanner for Model Context Protocol servers — catch tool poisoning, prompt injection, and supply-chain attacks before your AI agent runs them."
 readme = "README.md"
 license = { text = "MIT" }

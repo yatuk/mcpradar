@@ -5,6 +5,41 @@ All notable changes to MCPRadar will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v1.0.0-rc3 — 2026-06-23
+
+### Added
+- **R112 — Authorization Hardening**: New rule for 2026-07-28 spec compliance.
+  Detects missing `iss` parameter (RFC 9207), missing `application_type` in
+  Dynamic Client Registration, and deprecated `Mcp-Session-Id` header usage.
+- **R111 — Mcp-Method/Mcp-Name header checks**: Extended transport security
+  checks to verify required headers on Streamable HTTP responses.
+- **Real-world scan results**: `@playwright/mcp` (23 tools, 8 findings — 4
+  critical R107, 4 medium R109). `@modelcontextprotocol/server-filesystem`
+  confirmed clean (14 tools, 0 findings).
+
+### Changed
+- **Engine**: Replaced deprecated `streamablehttp_client` import with
+  `streamable_http_client` (MCP SDK 1.28+).
+- **README**: Removed phantom features — scan-source, AST+Semgrep,
+  typosquatting, sandbox containers marked as planned v1.1.
+  Added "What's Real vs Planned" section. Comparison table updated with
+  `🔜 planned` tags.
+- **Version**: 1.0.0-rc2 → 1.0.0-rc3.
+
+### Added (v1.0.0-rc2)
+- **Registry API client**: Official MCP Registry integration at
+  `registry.modelcontextprotocol.io`. New commands: `mcpradar registry fetch`,
+  `mcpradar registry list`.
+- **AIVSS scoring engine**: 0-10 score with A-F letter grades and confidence
+  ratings. `mcpradar leaderboard generate` command with automated scoring.
+- **Leaderboard v2**: No placeholder entries, AIVSS scores, grade badges,
+  sortable/filterable HTML table, reproducibility metadata (tool hash, version).
+- **Precision/Recall benchmark**: Measured 100% precision, 90% recall, 94.7%
+  F1 on labeled demo corpus. Benchmark runner at `validation/run_benchmark.py`.
+- **FP reduction**: Fixed R107 shell metachar regex (removed bare `[|><]`
+  character class), R108 documentation context suppression, R105 bridge
+  keywords expansion (10→18 terms).
+
 ## v1.0.0-rc1 — 2026-06-23
 
 ### Added

@@ -70,16 +70,14 @@ That's it. One command, no install, runs against any MCP server you can launch.
 
 ## Features
 
-### 🔍 Security Detection (12 rules, all built)
-- 🎯 **R001–R105** — Dangerous tool names, zero-width Unicode, prompt injection (10 patterns), base64/hex blobs, hidden HTML/Markdown, permission scope mismatch
-- ✅ **R106–R111** — Secret/token exposure, command injection, supply chain risk, schema poisoning, version anomaly, insecure transport
-
-### 🔗 Cross-Server Analysis (7 rules, all built)
-- 🌐 **C001–C007** — Tool name collision, shadowing, exfiltration chains, capability overlap, permission gradient, attack path chain (graph-based), privilege escalation via cross-server chaining
-
-### 📦 Package & Source Scanning
-- 📂 **`scan-source`** — Scan GitHub repos, npm/pip packages, Docker images, MCP registry IDs without running the server
-- 🌳 **AST + Semgrep** — Source-code static analysis: Description-Code Inconsistency (DCI), unsafe deserialization, SQLi
+### 📦 Core Detection (all built, all tested)
+- 🔍 **12 static rules (R001–R109)** — Dangerous tool names, zero-width Unicode, prompt injection (10 patterns),
+  base64/hex blobs, hidden HTML/Markdown, permission scope mismatch, secret/token exposure,
+  command injection, supply chain risk, schema poisoning
+- 🔗 **7 cross-server rules (C001–C007)** — Tool name collision, shadowing, exfiltration chains,
+  capability overlap, permission gradient, attack path chains, privilege escalation
+- 🏃 **2 runtime rules (R110–R111)** — Version anomaly detection via fingerprint diff,
+  insecure transport detection via TLS handshake + HSTS check
 
 ### 🏗️ CI/CD & Output
 - 🔐 **SARIF v2.1.0** — drops into GitHub Security tab via one Action
@@ -88,15 +86,45 @@ That's it. One command, no install, runs against any MCP server you can launch.
 - 🏃 **Fast** — pure Python, no daemons, runs in CI under 5s
 
 ### 🔗 Supply Chain
-- 📋 **CycloneDX SBOM** — export + OSV/GitHub Advisory CVE check (optional, async)
-- 📌 **Hash-based tool pinning** — SHA-256 of description, schema, and command → rug pull detection
-- 🔍 **Typosquatting detection** — Levenshtein distance against known top packages
+- 📋 **CycloneDX 1.5 SBOM** — export dependency bill of materials (stdlib only, no extra deps)
+- 📌 **Fingerprint-based change detection** — SHA-256 of tool names → rug pull detection across scans
+- 📡 **NVD CVE feed** — MCP-related CVE sync from NVD API 2.0 with multi-factor finding-to-CVE matching
 
 ### 🛡️ Enterprise
-- 🏖️ **Sandbox mode** — `--sandbox`: disposable container with egress lock, ephemeral FS, cloud metadata block
+- 🏖️ **Argument sanitizer** — validates and sanitizes tool arguments before probing (container sandbox 🔜 planned v1.1)
 - 📝 **Audit trail** — structured event logging (scan_start, finding_created, diff_detected)
 - 📈 **Stats engine** — per-server trend analysis, top rules, severity distribution
 - 🧩 **Plugin system** — `entry_points` auto-discovery, `mcpradar plugin init/validate/install`
+
+---
+
+## What's Real vs Planned
+
+MCPRadar is under active development. Here's what's production-ready today and
+what's coming:
+
+### ✅ Real & Tested (v1.0.0-rc2)
+- 19 detection rules (12 static + 7 cross-server) — 407 tests, all passing
+- SQLite-backed scan history with diff engine
+- SARIF v2.1.0 output for GitHub Security tab
+- Watch mode (periodic scanning + webhook/command alerts)
+- Audit trail with structured event logging
+- Stats engine with per-server trend analysis
+- Plugin system with entry_points auto-discovery
+- CycloneDX SBOM export
+- NVD CVE feed sync
+- AIVSS 0-10 scoring + A-F letter grades
+- Public security leaderboard at https://yatuk.github.io/mcpradar
+
+### 🔜 Planned (v1.1+)
+- **Source scanning** — scan GitHub repos, npm/pip packages without running the server
+- **AST + Semgrep** — source-code static analysis (DCI, unsafe deserialization, SQLi)
+- **Container sandbox** — disposable Docker/podman with egress lock for untrusted servers
+- **OSV/GitHub Advisory** — dependency CVE checking beyond NVD
+- **Typosquatting detection** — Levenshtein distance against known top packages
+- **Runtime proxy** — transparent MCP traffic inspection
+
+See [ROADMAP.md](ROADMAP.md) for details and timeline.
 
 ---
 
@@ -106,25 +134,25 @@ That's it. One command, no install, runs against any MCP server you can launch.
 graph LR
     A[CLI] --> B[Scanner Engine]
     B -->|stdio/SSE/HTTP| C[MCP Server]
-    B -->|git/npm/Docker| P[Package Scanner]
     C -->|tools, prompts, resources| B
-    P -->|source code| S[Source Analysis]
-    S -->|AST + Semgrep| D2[Rule Engine]
     B --> D[Rule Engine]
     D -->|findings| E[SQLite Snapshot]
-    D2 -->|findings| E
     E --> F[Scoring Engine]
     F -->|AIVSS 0-10| G[Rich / JSON / SARIF]
-    B --> H[Sandbox Engine]
-    H -->|egress lock| C
+    B -.->|planned v1.1| P[Package Scanner]
+    P -.->|planned v1.1| S[Source Analysis]
+    S -.->|planned v1.1| D2[Rule Engine]
+    D2 -.->|planned v1.1| E
+    B -.->|planned v1.1| H[Sandbox Engine]
+    H -.->|planned v1.1| C
 ```
 
-MCPRadar connects to the MCP server (or pulls its source from GitHub/npm/Docker),
-enumerates tools/prompts/resources, runs each tool schema through the rule engine,
-performs AST+Semgrep-based source analysis when available, computes AIVSS scores,
-stores the snapshot in SQLite, and outputs the report. Subsequent scans diff against
-history to catch silent changes. The optional sandbox engine runs untrusted STDIO
-servers in disposable containers with network egress locked down.
+*Source scanning and sandbox containers are planned for v1.1. All other components are production-ready.*
+
+MCPRadar connects to the MCP server, enumerates tools/prompts/resources,
+runs each tool schema through the rule engine, computes AIVSS scores,
+stores the snapshot in SQLite, and outputs the report. Subsequent scans diff
+against history to catch silent changes.
 
 ---
 
@@ -135,7 +163,7 @@ see [Benchmarks](#benchmarks) for measured precision/recall data.
 
 | Feature | MCPRadar | Cisco mcp-scanner | Snyk agent-scan | Pipelock | Hermes | agent-audit | MCP Guardian |
 |---|---|---|---|---|---|---|---|
-| **Approach** | Static + Diff + Sandbox | YARA + LLM + VirusTotal | LLM classifier | Runtime proxy (Go) | Fuzz + Probe (Rust) | SAST 40+ rules | Policy proxy |
+| **Approach** | Static + Diff | YARA + LLM + VirusTotal | LLM classifier | Runtime proxy (Go) | Fuzz + Probe (Rust) | SAST 40+ rules | Policy proxy |
 | **Zero-width Unicode** | ✅ | — | — | ✅ | — | — | — |
 | **Prompt injection** | 10 patterns | YARA patterns | LLM-based | ✅ | — | — | — |
 | **Base64/hex blob** | ✅ | — | — | ✅ | — | — | — |
@@ -143,11 +171,11 @@ see [Benchmarks](#benchmarks) for measured precision/recall data.
 | **Secret/token scan** | ✅ | ✅ | — | ✅ | ✅ | ✅ | — |
 | **Command injection** | ✅ | — | — | ✅ | ✅ | ✅ | — |
 | **Supply chain risk** | ✅ | — | — | — | — | ✅ | — |
-| **DCI (desc ≠ code)** | ✅ | — | — | — | — | Partial | — |
+| **DCI (desc ≠ code)** | 🔜 planned v1.1 | — | — | — | — | Partial | — |
 | **Cross-server analysis** | ✅ C001-C007 | — | — | — | — | — | — |
-| **Source scanning** | ✅ GitHub/npm/Docker | — | — | — | — | ✅ | — |
-| **SBOM + dep. CVE** | ✅ CycloneDX | — | — | — | — | — | — |
-| **Sandbox execution** | ✅ Docker egress-lock | — | — | N/A (proxy) | — | — | — |
+| **Source scanning** | 🔜 planned v1.1 | — | — | — | — | ✅ | — |
+| **SBOM + dep. CVE** | ✅ CycloneDX + NVD | — | — | — | — | — | — |
+| **Sandbox execution** | 🔜 planned v1.1 | — | — | N/A (proxy) | — | — | — |
 | **AIVSS scoring** | ✅ 0–10 + CWE | LLM score | ✅ | — | — | — | — |
 | **Snapshot diff** | ✅ 3-level | Not documented | Version compare | ✅ | — | — | — |
 | **SARIF output** | ✅ v2.1.0 | ✅ | — | — | ✅ | — | — |
@@ -233,16 +261,6 @@ mcpradar scan http://x --format sarif -o results.sarif
 
 # Diff last 2 scans (rug pull detection)
 mcpradar diff http://localhost:8080
-
-# Scan a GitHub repo without running the server
-mcpradar scan-source github:user/mcp-server
-
-# Scan an npm/pip package statically
-mcpradar scan-source npm:mcp-server-package
-mcpradar scan-source pip:mcp-server-lib
-
-# Safe sandboxed execution (disposable container, no network)
-mcpradar scan stdio -- ./untrusted-server --sandbox
 
 # Plugin management
 mcpradar plugin init my-rule

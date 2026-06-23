@@ -13,7 +13,12 @@ if TYPE_CHECKING:
 from mcp import ClientSession
 from mcp.client.sse import sse_client
 from mcp.client.stdio import StdioServerParameters, stdio_client
-from mcp.client.streamable_http import streamablehttp_client
+
+# streamablehttp_client renamed to streamable_http_client in MCP SDK 1.28+
+try:
+    from mcp.client.streamable_http import streamable_http_client as streamablehttp_client
+except ImportError:
+    from mcp.client.streamable_http import streamablehttp_client  # fallback
 from mcp.types import Tool
 
 from mcpradar.probe.prober import ReadOnlyProber

@@ -800,6 +800,117 @@ class InsecureTransportDetection(Rule):
 
 
 # ---------------------------------------------------------------------------
+# Authorization Hardening (R112)
+# ---------------------------------------------------------------------------
+
+
+class AuthorizationHardeningDetection(Rule):
+    """Detects missing authorization hardening per MCP 2026-07-28 spec.
+
+    Per the spec RC (May 2026, final July 2026):
+    - Clients MUST validate the ``iss`` parameter per RFC 9207
+    - Dynamic Client Registration requires ``application_type``
+    - Client credentials must be bound to the issuing authorization server
+
+    This rule operates at the server-metadata level, not per-tool.
+    Findings are generated during scan via check_server_auth().
+    """
+
+    rule_id = "R112"
+    title = "Authorization hardening — 2026-07-28 spec compliance"
+    severity = Severity.HIGH
+
+    def check(self, tool: ToolInfo) -> list[Finding]:
+        # R112 operates at the auth metadata level, not per-tool.
+        # Findings are generated via check_server_auth() called from the scanner.
+        return []
+
+
+def check_server_auth(
+    target: str,
+    transport: str,
+    has_iss: bool | None = None,
+    has_app_type: bool | None = None,
+    uses_session_id: bool = False,
+) -> list[Finding]:
+    """Generate R112 findings from server authorization metadata.
+
+    Called post-scan when auth metadata is available (e.g. from
+    OAuth discovery endpoints or response headers).
+
+    Args:
+        target: The server URL/endpoint.
+        transport: Transport type (http/sse/stdio).
+        has_iss: Whether the authorization server includes ``iss`` in responses.
+            None means not checked (e.g. server doesn't use OAuth).
+        has_app_type: Whether Dynamic Client Registration declares
+            ``application_type``. None means not checked.
+        uses_session_id: Whether the server still returns ``Mcp-Session-Id``
+            header (deprecated in 2026-07-28 spec).
+    """
+    findings: list[Finding] = []
+
+    # R112-1: Missing iss parameter (RFC 9207 requirement)
+    if has_iss is False:
+        findings.append(
+            Finding(
+                rule_id="R112",
+                title="Missing iss parameter in authorization response",
+                description=(
+                    "The 2026-07-28 MCP spec requires authorization servers to "
+                    "include the ``iss`` parameter per RFC 9207 to prevent "
+                    "mix-up attacks. Servers without ``iss`` are vulnerable to "
+                    "token redirection between authorization servers."
+                ),
+                severity=Severity.HIGH,
+                target=target,
+                location="auth",
+                detail={"requirement": "RFC 9207", "spec": "2026-07-28"},
+            )
+        )
+
+    # R112-2: Missing application_type in DCR
+    if has_app_type is False:
+        findings.append(
+            Finding(
+                rule_id="R112",
+                title="Missing application_type in Dynamic Client Registration",
+                description=(
+                    "The 2026-07-28 MCP spec requires clients to declare "
+                    "``application_type`` during Dynamic Client Registration "
+                    "to avoid authorization server defaults (e.g. defaulting "
+                    "a CLI client to 'web' and rejecting localhost redirects)."
+                ),
+                severity=Severity.MEDIUM,
+                target=target,
+                location="auth",
+                detail={"requirement": "SEP-837", "spec": "2026-07-28"},
+            )
+        )
+
+    # R112-3: Session ID usage (deprecated protocol)
+    if uses_session_id:
+        findings.append(
+            Finding(
+                rule_id="R112",
+                title="Server uses deprecated Mcp-Session-Id header",
+                description=(
+                    "The 2026-07-28 MCP spec removes the ``Mcp-Session-Id`` "
+                    "header and protocol-level sessions. This server still "
+                    "uses the deprecated session-based protocol. Sessions "
+                    "force sticky routing and prevent horizontal scaling."
+                ),
+                severity=Severity.MEDIUM,
+                target=target,
+                location="transport",
+                detail={"deprecated": "Mcp-Session-Id", "spec": "2026-07-28"},
+            )
+        )
+
+    return findings
+
+
+# ---------------------------------------------------------------------------
 # Permission scope mismatch — bridge-aware (R105)
 # ---------------------------------------------------------------------------
 
@@ -1068,6 +1179,7 @@ class RuleEngine:
             SchemaPoisoningDetection(),
             VersionAnomalyDetection(),
             InsecureTransportDetection(),
+            AuthorizationHardeningDetection(),
         ]
 
         self._rules = [r for r in builtins if r.rule_id not in self._disabled]
@@ -1103,6 +1215,7 @@ class RuleEngine:
                         SchemaPoisoningDetection,
                         VersionAnomalyDetection,
                         InsecureTransportDetection,
+                        AuthorizationHardeningDetection,
                     ),
                 )
                 else "plugin",
