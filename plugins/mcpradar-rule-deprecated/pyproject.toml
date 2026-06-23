@@ -1,0 +1,13 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mcpradar-rule-deprecated"
+version = "0.1.0"
+description = "Detect deprecated/legacy API patterns in MCP tools"
+requires-python = ">=3.11"
+dependencies = ["mcpradar>=0.1.0"]
+
+[project.entry-points."mcpradar.rules"]
+deprecated = "mcpradar_rule_deprecated.rule:DeprecatedPatternRule"

@@ -743,6 +743,155 @@ def rules_disable(
 
 
 # ---------------------------------------------------------------------------
+# plugin
+# ---------------------------------------------------------------------------
+
+plugin_app = typer.Typer(help="Manage community plugins", no_args_is_help=True)
+app.add_typer(plugin_app, name="plugin")
+
+
+@plugin_app.command(name="init")
+def plugin_init(
+    name: str = typer.Argument(help="Plugin ismi (ornek: my-custom-sqli)"),
+    output: Path = typer.Option(  # noqa: B008
+        Path("plugins"),
+        "--output",
+        "-o",
+        help="Cikti dizini (varsayilan: ./plugins)",
+    ),
+) -> None:
+    """Yeni bir MCPRadar plugin paketi olustur."""
+    from mcpradar.output.console import console
+    from mcpradar.plugin.scaffolder import Scaffolder
+
+    scaffolder = Scaffolder()
+    try:
+        created = scaffolder.scaffold(name, output)
+    except FileNotFoundError as exc:
+        console.print(f"[red]Hata:[/] {exc}")
+        raise typer.Exit(code=1) from exc
+
+    console.print(f"[green]OK[/] Plugin olusturuldu: [bold]{created}[/]")
+    console.print(f"  cd {created}")
+    console.print("  pip install -e .")
+    console.print(f"  mcpradar plugin validate {created}")
+
+
+@plugin_app.command(name="validate")
+def plugin_validate(
+    directory: Path = typer.Argument(  # noqa: B008
+        help="Plugin dizini (ornek: ./plugins/mcpradar-rule-my-custom)",
+    ),
+    run_tests: bool = typer.Option(  # noqa: B008
+        False,
+        "--run-tests",
+        "-t",
+        help="pytest ile testleri de calistir",
+    ),
+) -> None:
+    """Plugin yapisini dogrula."""
+    from mcpradar.output.console import console
+    from mcpradar.plugin.validator import PluginValidator
+
+    if not directory.exists():
+        console.print(f"[red]Dizin bulunamadi: {directory}[/]")
+        raise typer.Exit(code=1)
+
+    validator = PluginValidator(run_tests=run_tests)
+    report = validator.validate(directory)
+
+    for result in report.results:
+        if result.passed:
+            console.print(f"  [green][✓][/] {result.message}")
+        else:
+            console.print(f"  [red][✗][/] {result.message}")
+            if result.detail:
+                console.print(f"    [dim]{result.detail}[/]")
+
+    if report.tests_passed is True:
+        console.print("  [green][✓][/] Testler basarili")
+    elif report.tests_passed is False:
+        console.print("  [red][✗][/] Testler basarisiz")
+
+    if report.is_valid:
+        console.print("\n[green]Tum kontroller basarili.[/]")
+    else:
+        console.print("\n[red]Bazi kontroller basarisiz.[/]")
+        raise typer.Exit(code=1)
+
+
+@plugin_app.command(name="list")
+def plugin_list() -> None:
+    """Yuklu community plugin'leri listele."""
+    from rich.table import Table
+
+    from mcpradar.output.console import console
+    from mcpradar.plugin.manager import PluginManager
+
+    manager = PluginManager()
+    plugins = manager.list_plugins()
+
+    if not plugins:
+        console.print("[dim]Henuz hic community plugin yuklu degil.[/]")
+        console.print("[dim]Plugin kurmak icin: mcpradar plugin install <paket>[/]")
+        return
+
+    table = Table(title="Installed Community Plugins", show_header=True)
+    table.add_column("Package", width=28)
+    table.add_column("Version", width=8)
+    table.add_column("Author", width=20)
+    table.add_column("Rules", width=30)
+
+    for p in plugins:
+        table.add_row(
+            p.name,
+            p.version,
+            p.author[:20] if p.author else "?",
+            ", ".join(p.rule_ids),
+        )
+
+    console.print(table)
+
+
+@plugin_app.command(name="install")
+def plugin_install(
+    package: str = typer.Argument(help="Paket ismi (ornek: mcpradar-rule-sqli)"),
+) -> None:
+    """Bir community plugin'i pip ile kur ve dogrula."""
+    from mcpradar.output.console import console
+    from mcpradar.plugin.manager import PluginManager
+
+    manager = PluginManager()
+    console.print(f"[dim]{package} kuruluyor...[/]")
+    success, message = manager.install(package)
+
+    if success:
+        console.print(f"[green]OK[/] {message}")
+    else:
+        console.print(f"[red]Hata:[/] {message}")
+        raise typer.Exit(code=1)
+
+
+@plugin_app.command(name="uninstall")
+def plugin_uninstall(
+    package: str = typer.Argument(help="Paket ismi"),
+) -> None:
+    """Bir community plugin'i kaldir."""
+    from mcpradar.output.console import console
+    from mcpradar.plugin.manager import PluginManager
+
+    manager = PluginManager()
+    console.print(f"[dim]{package} kaldiriliyor...[/]")
+    success, message = manager.uninstall(package)
+
+    if success:
+        console.print(f"[green]OK[/] {message}")
+    else:
+        console.print(f"[red]Hata:[/] {message}")
+        raise typer.Exit(code=1)
+
+
+# ---------------------------------------------------------------------------
 # watch
 # ---------------------------------------------------------------------------
 

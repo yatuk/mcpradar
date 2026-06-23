@@ -1,6 +1,6 @@
 # Detection Rules
 
-MCPRadar'ın 10 detection rule'u, her biri ayrı bir saldırı vektörünü hedefler.
+MCPRadar'ın 10 built-in detection rule'u ve topluluk eklentileri, her biri ayrı bir saldırı vektörünü hedefler.
 
 ## Rule Index
 
@@ -16,6 +16,8 @@ MCPRadar'ın 10 detection rule'u, her biri ayrı bir saldırı vektörünü hede
 | R107 | Command Injection via Parameters | CRITICAL/HIGH | Command injection |
 | R108 | Supply Chain Risk Indicator | MEDIUM/HIGH | Supply chain |
 | R109 | Schema Poisoning Indicator | HIGH/MEDIUM | Schema validation |
+| X001 | Suspicious Crypto/Wallet References | MEDIUM | Community (örnek) |
+| X002 | Deprecated/Legacy API Pattern | LOW | Community (örnek) |
 
 ---
 
@@ -283,6 +285,32 @@ OpenAI (`sk-*`), GitHub (`ghp_*`, `gho_*`, `github_pat_*`), Slack (`xox*`), AWS 
 **Neden tehlikeli:** `additionalProperties: true` olan bir schema, tool'a tanımlanmamış ek parametreler gönderilmesine izin verir. Bu, prompt injection payload'larının beklenmedik alanlardan sızmasına yol açabilir. Zorunlu alan olmaması, tool'un boş veya eksik girdiyle çalıştırılmasına izin verir. Aşırı büyük limitler buffer overflow ve DoS riski taşır.
 
 **False positive riski:** Yüksek. Birçok meşru MCP tool'u esnek schema kullanır. Özellikle "no required fields" MEDIUM severity ile işaretlenir.
+
+---
+
+## Community Rules (X-serisi)
+
+Topluluk eklentileri `X` + 3 haneli sayı formatını kullanır (X001–X999). Built-in kurallarla çakışmayı önler.
+
+Mevcut örnek topluluk eklentileri:
+
+### X001 — Suspicious Crypto/Wallet References
+
+**Severity:** MEDIUM
+
+**Ne arar:** Tool name ve description'da kripto para/cüzdan referansları (`crypto`, `bitcoin`, `wallet`, `mining`, `privkey`).
+
+**Plugin paketi:** `mcpradar-rule-example` (`plugins/template/`)
+
+### X002 — Deprecated/Legacy API Pattern
+
+**Severity:** LOW
+
+**Ne arar:** Tool name, description ve schema'da `v1`, `deprecated`, `legacy`, `obsolete`, `/v0/`, `/v1/` gibi eski API pattern'leri.
+
+**Plugin paketi:** `mcpradar-rule-deprecated` (`plugins/mcpradar-rule-deprecated/`)
+
+Kendi eklentinizi oluşturmak için: `mcpradar plugin init <isim>`
 
 ---
 

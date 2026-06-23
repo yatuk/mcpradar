@@ -5,6 +5,18 @@ All notable changes to MCPRadar will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2026-06-23
+
+### Added
+- **plugin** CLI komut grubu: `mcpradar plugin {init,validate,list,install,uninstall}`
+- Plugin sistemi: `PluginManager` (pip kurulum/kaldırma), `PluginValidator` (6 aşamalı doğrulama), `Scaffolder` (şablondan paket oluşturma)
+- `plugins/mcpradar-rule-deprecated/` — 2. örnek topluluk eklentisi (X002: Deprecated/legacy API pattern tespiti)
+- Şablon testleri: `plugins/template/tests/test_rule.py`
+- Plugin CLI testleri: `tests/test_plugin_cli.py` (11 test)
+
+### Changed
+- `plugins/template/`: test dizini eklendi, scaffolder kaynağı olarak kullanılıyor
+
 ## [0.2.0] - 2026-06-23
 
 ### Added
