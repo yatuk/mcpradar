@@ -20,6 +20,66 @@
     "status": "unknown"
   },
   {
+    "server": "memory",
+    "display_name": "memory",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 9,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "tool_hash": "4d709119e341da34",
+    "last_scanned": "2026-06-23",
+    "scanner_version": "1.0.0-rc3",
+    "status": "unknown"
+  },
+  {
+    "server": "sequential-thinking",
+    "display_name": "sequential-thinking",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 1,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "tool_hash": "9bbea416bf3d4e0c",
+    "last_scanned": "2026-06-23",
+    "scanner_version": "1.0.0-rc3",
+    "status": "unknown"
+  },
+  {
+    "server": "everything",
+    "display_name": "everything",
+    "version": "",
+    "aivss_score": 3.8,
+    "grade": "C",
+    "confidence": 0.84,
+    "tools": 13,
+    "findings": 5,
+    "by_severity": {
+      "critical": 1,
+      "high": 0,
+      "medium": 4,
+      "low": 0
+    },
+    "tool_hash": "3f4d3cd441fa0a80",
+    "last_scanned": "2026-06-23",
+    "scanner_version": "1.0.0-rc3",
+    "status": "unknown"
+  },
+  {
     "server": "playwright",
     "display_name": "playwright",
     "version": "",
