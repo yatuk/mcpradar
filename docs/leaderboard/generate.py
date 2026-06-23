@@ -48,6 +48,12 @@ def _fallback_entries() -> list[dict]:
 def main() -> None:
     rows: list[dict] = []
 
+    # Start with placeholder entries for all known servers
+    server_map: dict[str, dict] = {}
+    for entry in _fallback_entries():
+        server_map[entry["server"]] = entry
+
+    # Overlay real scan results on top of placeholders
     if RESULTS_DIR.exists():
         for fpath in sorted(RESULTS_DIR.glob("*.json")):
             try:
@@ -55,28 +61,22 @@ def main() -> None:
             except (json.JSONDecodeError, OSError):
                 continue
 
+            name = data.get("name", fpath.stem)
             sev = data.get("findings_by_severity", {})
-            rows.append(
-                {
-                    "server": data.get("name", fpath.stem),
-                    "tools": data.get("tools", 0),
-                    "findings": data.get("findings", 0),
-                    "critical": sev.get("critical", 0),
-                    "high": sev.get("high", 0),
-                    "medium": sev.get("medium", 0),
-                    "low": sev.get("low", 0),
-                    "last_scanned": data.get("scanned_at", "")[:10]
-                    if data.get("scanned_at")
-                    else "—",
-                    "status": data.get("status", "unknown"),
-                }
-            )
+            server_map[name] = {
+                "server": name,
+                "tools": data.get("tools", 0),
+                "findings": data.get("findings", 0),
+                "critical": sev.get("critical", 0),
+                "high": sev.get("high", 0),
+                "medium": sev.get("medium", 0),
+                "low": sev.get("low", 0),
+                "last_scanned": data.get("scanned_at", "")[:10] if data.get("scanned_at") else "—",
+                "status": data.get("status", "unknown"),
+            }
 
-    # Fallback: bilinen sunuculari placeholder olarak goster
-    if not rows:
-        rows = _fallback_entries()
-
-    rows.sort(key=lambda r: r["findings"], reverse=True)
+    rows = list(server_map.values())
+    rows.sort(key=lambda r: (r["status"] != "pending", r["findings"]), reverse=True)
     OUTPUT.write_text(json.dumps(rows, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"Generated {OUTPUT} with {len(rows)} entries")
 
