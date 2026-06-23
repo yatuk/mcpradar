@@ -10,10 +10,12 @@ Kullanim:
 
 from __future__ import annotations
 
+import asyncio
 import json
 import subprocess
 import sys
 import time
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -238,62 +240,254 @@ def generate_report(results: list[dict[str, Any]]) -> str:
     return "\n".join(lines)
 
 
+class ValidationRunner:
+    """Async validation runner that scans servers and computes metrics."""
+
+    def __init__(self, targets_path: Path | None = None) -> None:
+        if targets_path is None:
+            targets_path = Path(__file__).parent / "targets.yaml"
+        with open(targets_path) as f:
+            config = yaml.safe_load(f)
+        self.servers: list[dict] = config.get("servers", [])
+        self.results: list[dict] = []
+
+    async def run_all(self, timeout: int = 60, skip_scan: bool = False) -> None:
+        """Run validation against all configured servers.
+
+        Args:
+            timeout: Per-server timeout in seconds.
+            skip_scan: If True, re-use existing results instead of re-scanning.
+        """
+        from mcpradar.scanner.engine import ParallelScanner
+        from mcpradar.scanner.report import Severity
+
+        if skip_scan:
+            self._load_existing_results()
+            return
+
+        servers = [
+            (
+                srv.get("command", ""),
+                srv.get("transport", "stdio"),
+            )
+            for srv in self.servers
+        ]
+
+        ps = ParallelScanner(max_concurrency=3)
+        scan_results = await ps.scan_all(
+            servers,
+            min_severity=Severity.LOW,  # collect all findings for validation
+        )
+
+        results_dir = Path(__file__).parent / "results"
+        results_dir.mkdir(exist_ok=True)
+
+        for i, (srv, result) in enumerate(zip(self.servers, scan_results, strict=True)):
+            server_result = {
+                "name": srv.get("name", f"server-{i}"),
+                "command": srv.get("command", ""),
+                "transport": srv.get("transport", "stdio"),
+                "expected_rules": srv.get("expected_rules", []),
+            }
+
+            if isinstance(result, Exception):
+                server_result["error"] = str(result)
+                server_result["tools_count"] = 0
+                server_result["findings"] = []
+            else:
+                server_result["scan_id"] = getattr(result, "id", "")
+                server_result["tools_count"] = len(result.tools)
+                server_result["findings"] = [
+                    {
+                        "rule_id": f.rule_id,
+                        "title": f.title,
+                        "severity": f.severity.value,
+                        "target": f.target,
+                        "description": f.description,
+                    }
+                    for f in result.findings
+                ]
+
+            self.results.append(server_result)
+
+            # Save per-server result
+            safe_name = srv.get("name", f"server-{i}").replace("/", "_").replace(" ", "_")
+            result_path = results_dir / f"{safe_name}.json"
+            with open(result_path, "w", encoding="utf-8") as f:
+                json.dump(server_result, f, indent=2, ensure_ascii=False)
+
+    def _load_existing_results(self) -> None:
+        """Load previously saved results."""
+        results_dir = Path(__file__).parent / "results"
+        if not results_dir.exists():
+            print("No existing results found.")
+            return
+        for result_file in sorted(results_dir.glob("*.json")):
+            with open(result_file) as f:
+                self.results.append(json.load(f))
+
+    def compute_metrics(self) -> dict:
+        """Compute precision and recall metrics per rule.
+
+        Precision = TP / (TP + FP)
+        Recall = TP / (TP + FN)
+        """
+        rule_stats: dict[str, dict] = {}
+
+        for result in self.results:
+            expected = set(result.get("expected_rules", []))
+            detected = {f["rule_id"] for f in result.get("findings", [])}
+
+            for rule_id in expected | detected:
+                if rule_id not in rule_stats:
+                    rule_stats[rule_id] = {"tp": 0, "fp": 0, "fn": 0}
+
+            # True positives: detected AND expected
+            for rule_id in expected & detected:
+                rule_stats[rule_id]["tp"] += 1
+
+            # False positives: detected but NOT expected
+            for rule_id in detected - expected:
+                rule_stats[rule_id]["fp"] += 1
+
+            # False negatives: expected but NOT detected
+            for rule_id in expected - detected:
+                rule_stats[rule_id]["fn"] += 1
+
+        # Compute per-rule and overall metrics
+        total_tp = total_fp = total_fn = 0
+        rule_metrics = {}
+        for rule_id, stats in sorted(rule_stats.items()):
+            tp, fp, fn = stats["tp"], stats["fp"], stats["fn"]
+            precision = tp / (tp + fp) if (tp + fp) > 0 else 0.0
+            recall = tp / (tp + fn) if (tp + fn) > 0 else 0.0
+            f1 = 2 * precision * recall / (precision + recall) if (precision + recall) > 0 else 0.0
+            rule_metrics[rule_id] = {
+                "tp": tp,
+                "fp": fp,
+                "fn": fn,
+                "precision": round(precision, 3),
+                "recall": round(recall, 3),
+                "f1": round(f1, 3),
+            }
+            total_tp += tp
+            total_fp += fp
+            total_fn += fn
+
+        overall_precision = total_tp / (total_tp + total_fp) if (total_tp + total_fp) > 0 else 0.0
+        overall_recall = total_tp / (total_tp + total_fn) if (total_tp + total_fn) > 0 else 0.0
+        overall_f1 = (
+            2 * overall_precision * overall_recall / (overall_precision + overall_recall)
+            if (overall_precision + overall_recall) > 0
+            else 0.0
+        )
+
+        return {
+            "per_rule": rule_metrics,
+            "overall": {
+                "precision": round(overall_precision, 3),
+                "recall": round(overall_recall, 3),
+                "f1": round(overall_f1, 3),
+                "total_findings": total_tp + total_fp,
+                "total_expected": total_tp + total_fn,
+            },
+        }
+
+    def generate_report(self) -> str:
+        """Generate a Markdown validation report."""
+        metrics = self.compute_metrics()
+        lines = [
+            "# MCPRadar Validation Report",
+            "",
+            f"**Date:** {datetime.now(UTC).strftime('%Y-%m-%d %H:%M UTC')}",
+            f"**Servers tested:** {len(self.results)}",
+            f"**Total findings:** {metrics['overall']['total_findings']}",
+            "",
+            "## Overall Metrics",
+            "",
+            "| Metric | Value |",
+            "|---|---|",
+            f"| Precision | {metrics['overall']['precision']:.1%} |",
+            f"| Recall | {metrics['overall']['recall']:.1%} |",
+            f"| F1 Score | {metrics['overall']['f1']:.1%} |",
+            "",
+            "## Per-Rule Metrics",
+            "",
+            "| Rule ID | TP | FP | FN | Precision | Recall | F1 |",
+            "|---|---|---|---|---|---|---|",
+        ]
+
+        for rule_id, m in metrics["per_rule"].items():
+            lines.append(
+                f"| {rule_id} | {m['tp']} | {m['fp']} | {m['fn']} | "
+                f"{m['precision']:.1%} | {m['recall']:.1%} | {m['f1']:.1%} |"
+            )
+
+        lines.extend(
+            [
+                "",
+                "## Server Results",
+                "",
+            ]
+        )
+
+        for result in self.results:
+            name = result.get("name", "unknown")
+            error = result.get("error", "")
+            tools = result.get("tools_count", 0)
+            findings = result.get("findings", [])
+            status = "❌ Error" if error else "✅ OK"
+            lines.append(f"### {name} — {status}")
+            if error:
+                lines.append(f"Error: `{error}`")
+            lines.append(f"- Tools: {tools}")
+            lines.append(f"- Findings: {len(findings)}")
+            if findings:
+                for f_ in findings[:10]:  # top 10
+                    lines.append(f"  - `{f_['rule_id']}` {f_['title']} ({f_['severity']})")
+            lines.append("")
+
+        return "\n".join(lines)
+
+
 def main() -> None:
+    """Run the validation pipeline."""
     import argparse
 
-    parser = argparse.ArgumentParser(description="MCPRadar validation runner")
-    parser.add_argument("--server", help="Only scan this server name")
-    parser.add_argument("--timeout", type=int, default=60, help="Timeout per scan (seconds)")
+    parser = argparse.ArgumentParser(description="MCPRadar Validation Runner")
+    parser.add_argument("--server", help="Run only a specific server by name")
+    parser.add_argument("--timeout", type=int, default=60, help="Per-server timeout in seconds")
+    parser.add_argument("--skip-scan", action="store_true", help="Re-use existing results")
     parser.add_argument(
-        "--skip-scan",
-        action="store_true",
-        help="Skip scanning, just regenerate report",
+        "--report-only", action="store_true", help="Only generate report from existing results"
     )
     args = parser.parse_args()
 
-    targets = load_targets()
-    if args.server:
-        targets = [t for t in targets if args.server.lower() in t["name"].lower()]
-        if not targets:
-            print(f"No server matching '{args.server}'")
-            return
+    runner = ValidationRunner()
 
-    RESULTS_DIR.mkdir(exist_ok=True)
-    results: list[dict[str, Any]] = []
+    if args.report_only:
+        runner._load_existing_results()
+    elif args.server:
+        # Filter to single server
+        runner.servers = [s for s in runner.servers if s.get("name") == args.server]
+        if not runner.servers:
+            print(f"Server not found: {args.server}")
+            sys.exit(1)
+        asyncio.run(runner.run_all(timeout=args.timeout, skip_scan=args.skip_scan))
+    else:
+        asyncio.run(runner.run_all(timeout=args.timeout, skip_scan=args.skip_scan))
 
-    for i, target in enumerate(targets, 1):
-        print(f"\n[{i}/{len(targets)}] {target['name']}")
-        print(f"  Command: {target['scan']}")
-
-        if args.skip_scan:
-            # Load existing result
-            safe = target["name"].replace("/", "_").replace("@", "")
-            result_file = RESULTS_DIR / f"{safe}.json"
-            if result_file.exists():
-                result = json.loads(result_file.read_text(encoding="utf-8"))
-                results.append(result)
-                print(f"  (loaded from {result_file})")
-            continue
-
-        result = scan_server(target, timeout=args.timeout)
-
-        # Save individual result
-        safe = target["name"].replace("/", "_").replace("@", "")
-        result_file = RESULTS_DIR / f"{safe}.json"
-        result_file.write_text(json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8")
-
-        results.append(result)
-
-        status_icon = "OK" if result["status"] == "success" else "FAIL"
-        print(f"  {status_icon} — {result['findings']} findings, {result['duration_ms']}ms")
-        if result["error"]:
-            print(f"  Error: {result['error'][:120]}")
-
-    # Generate report
-    report = generate_report(results)
-    report_path = VALIDATION_DIR / "REPORT.md"
+    # Generate and save report
+    report = runner.generate_report()
+    report_path = Path(__file__).parent / "REPORT.md"
     report_path.write_text(report, encoding="utf-8")
-    print(f"\nReport: {report_path}")
+    print(f"Report saved to {report_path}")
+
+    # Print summary
+    metrics = runner.compute_metrics()
+    print(f"\nPrecision: {metrics['overall']['precision']:.1%}")
+    print(f"Recall: {metrics['overall']['recall']:.1%}")
+    print(f"F1: {metrics['overall']['f1']:.1%}")
 
 
 if __name__ == "__main__":

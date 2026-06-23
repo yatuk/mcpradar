@@ -2,9 +2,13 @@
 
 from __future__ import annotations
 
+import asyncio
 import contextlib
 import shlex
-from typing import Any
+from typing import TYPE_CHECKING, Any
+
+if TYPE_CHECKING:
+    from mcpradar.audit.auditor import AuditLogger
 
 from mcp import ClientSession
 from mcp.client.sse import sse_client
@@ -31,6 +35,7 @@ class Scanner:
         min_severity: Severity = Severity.MEDIUM,
         prober: ReadOnlyProber | None = None,
         probe_safe_only: bool = True,
+        audit: AuditLogger | None = None,
     ) -> None:
         self.target = target
         self.transport = transport
@@ -38,9 +43,13 @@ class Scanner:
         self.prober = prober
         self.probe_safe_only = probe_safe_only
         self.rule_engine = RuleEngine(min_severity=min_severity)
+        self.audit = audit
 
     async def run(self) -> ScanReport:
         report = ScanReport(target=self.target, transport=self.transport)
+
+        if self.audit:
+            self.audit.log_scan_start(self.target, self.transport)
 
         if self.transport == "stdio":
             await self._run_stdio(report)
@@ -59,6 +68,9 @@ class Scanner:
             for f in r111_findings:
                 if f.severity >= self.min_severity:
                     report.add_finding(f)
+
+        if self.audit:
+            self.audit.log_scan_complete(report.id, len(report.findings))
 
         return report
 
@@ -224,3 +236,53 @@ def _extract_schema(raw: Any) -> dict[str, Any]:
     if isinstance(raw, dict):
         return raw
     return {}
+
+
+class ParallelScanner:
+    """Scan multiple MCP servers concurrently with a semaphore cap."""
+
+    def __init__(self, max_concurrency: int = 5) -> None:
+        self._semaphore = asyncio.Semaphore(max_concurrency)
+
+    async def scan_one(
+        self,
+        target: str,
+        transport: str = "http",
+        min_severity: Severity = Severity.MEDIUM,
+        prober: ReadOnlyProber | None = None,
+        audit: AuditLogger | None = None,
+    ) -> ScanReport:
+        """Scan a single server, guarded by the concurrency semaphore."""
+        async with self._semaphore:
+            scanner = Scanner(
+                target=target,
+                transport=transport,
+                min_severity=min_severity,
+                prober=prober,
+                audit=audit,
+            )
+            return await scanner.run()
+
+    async def scan_all(
+        self,
+        servers: list[tuple[str, str]],
+        min_severity: Severity = Severity.MEDIUM,
+        prober: ReadOnlyProber | None = None,
+        audit: AuditLogger | None = None,
+    ) -> list[ScanReport | Exception]:
+        """Scan all servers concurrently.
+
+        Args:
+            servers: List of (target, transport) tuples.
+
+        Returns:
+            List of ScanReport or Exception for each server.
+            Exceptions are returned, not raised — one failing server
+            does not block others.
+        """
+        tasks = [
+            self.scan_one(target, transport, min_severity, prober, audit)
+            for target, transport in servers
+        ]
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+        return results  # type: ignore[return-value]

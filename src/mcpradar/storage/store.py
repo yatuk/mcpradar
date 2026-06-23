@@ -6,7 +6,7 @@ import contextlib
 import json
 import sqlite3
 from pathlib import Path
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from platformdirs import user_data_dir
 
@@ -88,6 +88,18 @@ CREATE TABLE IF NOT EXISTS fingerprints (
     tls_self_signed   INTEGER NOT NULL DEFAULT 0
 );
 CREATE INDEX IF NOT EXISTS idx_fp_endpoint ON fingerprints(endpoint);
+
+CREATE TABLE IF NOT EXISTS audit_log (
+    event_id TEXT PRIMARY KEY,
+    timestamp TEXT NOT NULL,
+    event_type TEXT NOT NULL,
+    severity TEXT NOT NULL DEFAULT 'info',
+    target TEXT NOT NULL DEFAULT '',
+    detail TEXT NOT NULL DEFAULT '{}'
+);
+CREATE INDEX IF NOT EXISTS idx_audit_timestamp ON audit_log(timestamp);
+CREATE INDEX IF NOT EXISTS idx_audit_type ON audit_log(event_type);
+CREATE INDEX IF NOT EXISTS idx_audit_target ON audit_log(target);
 """
 
 
@@ -495,6 +507,96 @@ class Store:
         cursor = self._conn.execute("DELETE FROM fingerprints WHERE server_id = ?", (server_id,))
         self._conn.commit()
         return cursor.rowcount > 0
+
+    # ------------------------------------------------------------------
+    # Audit log CRUD
+    # ------------------------------------------------------------------
+
+    def save_audit_event(
+        self,
+        event_id: str,
+        timestamp: str,
+        event_type: str,
+        severity: str,
+        target: str,
+        detail: dict[str, Any],
+    ) -> None:
+        """Persist a single audit event."""
+        self._conn.execute(
+            "INSERT INTO audit_log (event_id, timestamp, event_type, severity, target, detail) "
+            "VALUES (?, ?, ?, ?, ?, ?)",
+            (
+                event_id,
+                timestamp,
+                event_type,
+                severity,
+                target,
+                json.dumps(detail, ensure_ascii=False),
+            ),
+        )
+        self._conn.commit()
+
+    def query_audit_events(
+        self,
+        since: str | None = None,
+        event_type: str | None = None,
+        target: str | None = None,
+        limit: int = 50,
+    ) -> list[dict[str, Any]]:
+        """Query audit events with optional filters. Returns list of dicts."""
+        query = (
+            "SELECT event_id, timestamp, event_type, severity, target, detail "
+            "FROM audit_log WHERE 1=1"
+        )
+        params: list[Any] = []
+
+        if since is not None:
+            query += " AND timestamp >= ?"
+            params.append(since)
+        if event_type is not None:
+            query += " AND event_type = ?"
+            params.append(event_type)
+        if target is not None:
+            query += " AND target = ?"
+            params.append(target)
+
+        query += " ORDER BY timestamp DESC"
+
+        if limit > 0:
+            query += " LIMIT ?"
+            params.append(limit)
+
+        rows = self._conn.execute(query, params).fetchall()
+        results: list[dict[str, Any]] = []
+        for row in rows:
+            results.append(
+                {
+                    "event_id": row[0],
+                    "timestamp": row[1],
+                    "event_type": row[2],
+                    "severity": row[3],
+                    "target": row[4],
+                    "detail": json.loads(row[5]) if row[5] else {},
+                }
+            )
+        return results
+
+    def delete_audit_events(self, event_ids: list[str]) -> None:
+        """Delete specific audit events by ID."""
+        if not event_ids:
+            return
+        placeholders = ",".join("?" for _ in event_ids)
+        self._conn.execute(
+            f"DELETE FROM audit_log WHERE event_id IN ({placeholders})",
+            event_ids,
+        )
+        self._conn.commit()
+
+    def purge_audit_log(self, older_than: str) -> int:
+        """Delete audit events older than a timestamp. Returns count of deleted rows."""
+        cursor = self._conn.execute("DELETE FROM audit_log WHERE timestamp < ?", (older_than,))
+        self._conn.commit()
+        return cursor.rowcount
 
     def close(self) -> None:
         self._conn.close()

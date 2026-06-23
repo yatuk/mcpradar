@@ -20,7 +20,7 @@
   <a href="https://github.com/yatuk/mcpradar/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="MIT License"/></a>
   <a href="https://github.com/yatuk/mcpradar"><img src="https://img.shields.io/github/stars/yatuk/mcpradar?style=social" alt="GitHub stars"/></a>
   <a href="https://github.com/yatuk/mcpradar"><img src="https://img.shields.io/github/last-commit/yatuk/mcpradar" alt="Last commit"/></a>
-  <a href="https://github.com/yatuk/mcpradar"><img src="https://img.shields.io/badge/status-alpha-orange" alt="Status: Alpha"/></a>
+  <a href="https://github.com/yatuk/mcpradar"><img src="https://img.shields.io/badge/status-release%20candidate-blue" alt="Status: Release Candidate"/></a>
   <br/>
   <a href="https://pypi.org/project/mcpradar/"><img src="https://img.shields.io/pypi/v/mcpradar?color=blue" alt="PyPI version"/></a>
   <a href="https://pypi.org/project/mcpradar/"><img src="https://img.shields.io/pypi/pyversions/mcpradar?color=blueviolet" alt="Python 3.11 3.12 3.13"/></a>
@@ -142,10 +142,10 @@ servers in disposable containers with network egress locked down.
 | **Supply chain risk** | ✅ R108 | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ |
 | **DCI (desc ≠ code)** | ✅ AST-based | ❌ | ❌ | ❌ | ❌ | Partial | ❌ |
 | **Cross-server analysis** | ✅ C001-C007 | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| **Source scanning** | 🔜 GitHub/npm/Docker | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ |
-| **SBOM + dep. CVE** | 🔜 CycloneDX | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| **Sandbox execution** | 🔜 Docker egress-lock | ❌ | ❌ | N/A (proxy) | ❌ | ❌ | ❌ |
-| **AIVSS scoring** | 🔜 0–10 + CWE | LLM score | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Source scanning** | ✅ GitHub/npm/Docker | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ |
+| **SBOM + dep. CVE** | ✅ CycloneDX | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Sandbox execution** | ✅ Docker egress-lock | ❌ | ❌ | N/A (proxy) | ❌ | ❌ | ❌ |
+| **AIVSS scoring** | ✅ 0–10 + CWE | LLM score | ✅ | ❌ | ❌ | ❌ | ❌ |
 | **Snapshot diff** | ✅ 3-level | Not documented | Version compare | ✅ (every call) | ❌ | ❌ | ❌ |
 | **SARIF output** | ✅ v2.1.0 | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
 | **stdio transport** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -233,7 +233,7 @@ Findings appear in your repo's Security tab. Full template:
 
 ## Detection Rules
 
-### Built-in (v0.4.0)
+### Built-in (v1.0)
 
 | ID   | Rule                  | Severity      | OWASP | Catches |
 |------|-----------------------|---------------|-------|---------|
@@ -301,7 +301,7 @@ MCPRadar targets full coverage of the [OWASP MCP Top 10 (2025)](https://owasp.or
 | MCP05 | Command Injection & Execution | R001, R107 | 🟢 Strong |
 | MCP06 | Prompt Injection via Contextual Payloads | R101, R102, R103, R104 | ✅ Strong |
 | MCP07 | Insufficient AuthN/AuthZ | R111 | ✅ Strong |
-| MCP08 | Lack of Audit & Telemetry | Audit trail (planned) | 🔜 Sprint 5 |
+| MCP08 | Lack of Audit & Telemetry | Audit trail, Stats engine | ✅ Strong |
 | MCP09 | Shadow MCP Servers | R110 | ✅ Strong |
 | MCP10 | Context Injection & Over-Sharing | C001–C007 | 🟢 Strong |
 
@@ -343,7 +343,7 @@ See **[ROADMAP.md](ROADMAP.md)** for the full development roadmap.
 | ✅ 3 | v0.4.0 | Server fingerprinting + Transport security (R110, R111) |
 | ✅ 4 | v0.5.0 | Deep cross-server analysis + Runtime probing (C006, C007) |
 | 5 | v0.6.0 | Audit trail + CVE automation + Statistics |
-| 6 | v1.0.0-rc1 | Validation, performance, documentation — OWASP 10/10 |
+| ✅ 6 | v1.0.0-rc1 | Validation, performance, documentation — OWASP 10/10 |
 
 ### Completed (v0.1.0)
 

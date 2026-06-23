@@ -6,9 +6,12 @@ import asyncio
 import contextlib
 import shlex
 import subprocess
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import httpx
+
+if TYPE_CHECKING:
+    from mcpradar.audit.auditor import AuditLogger
 
 from mcpradar.scanner.engine import Scanner
 from mcpradar.scanner.report import ScanReport
@@ -23,12 +26,14 @@ class Watcher:
         interval: int = 300,
         alert_cmd: str | None = None,
         alert_webhook: str | None = None,
+        audit: AuditLogger | None = None,
     ) -> None:
         self.target = target
         self.transport = transport
         self.interval = interval
         self.alert_cmd = alert_cmd
         self.alert_webhook = alert_webhook
+        self.audit = audit
         self.last_report: ScanReport | None = None
         self._store = Store()
 
@@ -36,7 +41,11 @@ class Watcher:
         from mcpradar.diff.differ import Differ
         from mcpradar.output.console import console
 
-        scanner = Scanner(self.target, transport=self.transport)
+        scanner = Scanner(
+            self.target,
+            transport=self.transport,
+            audit=self.audit,
+        )
 
         try:
             while True:
@@ -51,10 +60,21 @@ class Watcher:
                     if delta.has_changes:
                         console.print("\n[bold yellow][!] Degisiklik tespit edildi![/]")
                         console.print_diff(delta)
+                        if self.audit:
+                            counts = delta.summary_counts()
+                            self.audit.log_diff(
+                                report.target,
+                                sum(counts.values()),
+                                counts.get("security", 0),
+                            )
                         if self.alert_cmd:
                             self._run_alert(delta)
+                            if self.audit:
+                                self.audit.log_alert(self.target, "shell_cmd")
                         if self.alert_webhook:
                             self._run_webhook(delta)
+                            if self.audit:
+                                self.audit.log_alert(self.target, "webhook")
 
                 self.last_report = report
                 await asyncio.sleep(self.interval)

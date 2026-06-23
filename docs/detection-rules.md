@@ -511,6 +511,21 @@ Kendi eklentinizi oluşturmak için: `mcpradar plugin init <isim>`
 
 ---
 
+## Audit Trail & Statistics (v0.6.0)
+
+MCPRadar now records structured audit events for every security-relevant operation:
+
+- **scan_started** / **scan_completed** — When a scan begins and ends (with findings count)
+- **diff_detected** — When a diff between snapshots detects changes
+- **alert_sent** — When a webhook or shell command alert is dispatched
+- **error** — Operation errors
+
+The audit trail is stored in SQLite and queryable via `mcpradar audit`. Statistics and trend analysis are available via `mcpradar stats`.
+
+Covers OWASP MCP08: Lack of Audit & Telemetry.
+
+---
+
 ## Yeni Rule Eklemek
 
 ```python

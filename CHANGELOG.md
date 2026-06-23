@@ -5,6 +5,64 @@ All notable changes to MCPRadar will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v1.0.0-rc1 — 2026-06-23
+
+### Added
+- **Parallel scanning**: `ParallelScanner` class with `asyncio.Semaphore` — scan multiple MCP servers concurrently
+  - `mcpradar scan-all --parallel --max-concurrency 5`
+- **SBOM export**: CycloneDX 1.5 JSON generation via `mcpradar sbom [-o output.json]` (zero dependencies, stdlib only)
+- **Documentation**: 4 new pages — getting-started, cli-reference, ci-integration (GitHub Actions, GitLab CI, CircleCI, pre-commit), owasp-mapping
+- **Performance benchmarks**: 3 benchmark tests (rule engine latency, SARIF generation, SQLite batch insert)
+
+### Changed
+- **Validation pipeline**: Async `ValidationRunner` with precision/recall/F1 metrics and per-rule breakdown
+- **README**: Updated status badge (Alpha → Release Candidate), Sprint 6 marked complete, OWASP 10/10 coverage confirmed
+- **SECURITY.md**: Added supported versions table
+- **pyproject.toml**: Version 1.0.0-rc1, Development Status 5 - Production/Stable, coverage config added, pytest-benchmark dev dependency
+
+### Infrastructure
+- OWASP MCP Top 10: 10/10 full coverage ✅
+- 400+ tests passing
+- Coverage configuration with `[tool.coverage]` in pyproject.toml
+- Zero new runtime dependencies
+
+## v0.6.0 — 2026-06-23
+
+### Added
+- **Audit trail** (`src/mcpradar/audit/`): Structured audit event logging for all scan, diff, and alert operations (OWASP MCP08)
+  - `AuditEvent` dataclass with event_id, timestamp, event_type, severity, target, detail
+  - `AuditLogger` with convenience methods: `log_scan_start`, `log_scan_complete`, `log_diff`, `log_alert`, `log_error`
+  - Query by time range, event type, and target; export to JSON/JSONL/CSV
+- **Statistics engine** (`src/mcpradar/audit/stats.py`): Per-server and global security statistics with 30-day trend analysis
+  - `server_stats(target)`: total scans, findings by severity, top triggered rules, recent diffs
+  - `global_stats()`: aggregate across all targets, top scanned targets, top rules
+  - `trend_analysis(target, days)`: improving/worsening/stable direction with per-severity trends
+- **NVD API 2.0 integration** (`src/mcpradar/cvefeed/syncer.py`): Automated CVE synchronization from NVD
+  - `NVDAPISyncer` class with keyword search, pagination, exponential backoff on rate limits
+  - CVSS v3.1/v3.0 severity extraction from NVD JSON responses
+  - Local JSON cache with merge-on-update semantics
+- **Enhanced CVE matching**: Multi-factor scoring (40% keyword Jaccard + 40% CWE mapping + 20% severity correlation)
+  - `CVEMatch` dataclass with scored, deduplicated results
+  - `RULE_CWE_MAPPING`: 21 rule IDs mapped to CWE IDs
+- **New CLI commands**:
+  - `mcpradar audit [--target] [--type] [--since] [--limit] [--json] [--export]` — View and export the audit trail
+  - `mcpradar stats [target] [--days] [--json]` — Security statistics and trend analysis
+  - `mcpradar cve sync` — Full NVD API synchronization
+  - `mcpradar cve match <scan_id> [--min-score]` — Match scan findings to CVEs
+  - `mcpradar cve list [--severity] [--search] [--limit]` — List cached CVEs
+  - `mcpradar feed-update --full` — NVD API sync via existing command
+
+### Changed
+- **Scanner** (`engine.py`): Added optional `audit` parameter — emits `scan_started` and `scan_completed` events
+- **Watcher** (`watcher.py`): Added optional `audit` parameter — emits `diff_detected` and `alert_sent` events
+- **Store** (`store.py`): Added `audit_log` table with indexes and CRUD methods (`save_audit_event`, `query_audit_events`, `delete_audit_events`, `purge_audit_log`)
+- **CVE feed** (`cvefeed/syncer.py`): `match_findings_to_cves()` now returns `list[CVEMatch]` with multi-factor scoring
+
+### Infrastructure
+- OWASP MCP08 (Lack of Audit & Telemetry): ✅ Covered
+- 395+ tests passing (362 existing + 38 new)
+- Zero new dependencies (stdlib + existing httpx, rich, typer)
+
 ## [0.5.0] - 2026-06-23
 
 ### Added

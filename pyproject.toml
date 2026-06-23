@@ -4,8 +4,8 @@ build-backend = "hatchling.build"
 
 [project]
 name = "mcpradar"
-version = "0.1.0"
-description = "Security scanner for MCP servers — catch tool poisoning, prompt injection, and rug pulls"
+version = "1.0.0-rc1"
+description = "Security scanner for Model Context Protocol servers — catch tool poisoning, prompt injection, and supply-chain attacks before your AI agent runs them."
 readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.11"
@@ -23,7 +23,7 @@ keywords = [
     "supply-chain",
 ]
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 5 - Production/Stable",
     "Environment :: Console",
     "Intended Audience :: Developers",
     "Intended Audience :: Information Technology",
@@ -53,6 +53,7 @@ dev = [
     "pytest>=8.0",
     "pytest-asyncio>=0.25",
     "pytest-cov>=6.0",
+    "pytest-benchmark>=5.0",
     "ruff>=0.11",
     "mypy>=1.15",
 ]
@@ -62,6 +63,7 @@ dev = [
     "pytest>=8.0",
     "pytest-asyncio>=0.25",
     "pytest-cov>=6.0",
+    "pytest-benchmark>=5.0",
     "ruff>=0.11",
     "mypy>=1.15",
 ]
@@ -95,6 +97,16 @@ indent-style = "space"
 python_version = "3.11"
 strict = true
 ignore_missing_imports = true
+
+[tool.coverage.run]
+source = ["src/mcpradar"]
+
+[tool.coverage.report]
+exclude_also = [
+    'def __repr__',
+    'if TYPE_CHECKING:',
+    'raise NotImplementedError',
+]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

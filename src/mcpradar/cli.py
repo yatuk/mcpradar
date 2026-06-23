@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+from datetime import UTC
 from pathlib import Path
 from typing import Any
 
@@ -596,6 +597,29 @@ def _parse_duration(s: str) -> str:
 
 
 # ---------------------------------------------------------------------------
+# sbom
+# ---------------------------------------------------------------------------
+
+
+@app.command()
+def sbom(
+    output_path: Path | None = typer.Option(  # noqa: B008
+        None, "--output", "-o", help="Output file path (prints to stdout if omitted)"
+    ),
+) -> None:
+    """Generate CycloneDX 1.5 SBOM in JSON format."""
+    from mcpradar.output.console import console
+    from mcpradar.output.sbom import export_sbom
+
+    path_str = str(output_path) if output_path else None
+    result = export_sbom(path_str)
+    if not output_path:
+        console.print(result)
+    else:
+        console.print(f"[green]SBOM exported to {output_path}[/]")
+
+
+# ---------------------------------------------------------------------------
 # scan-all — config dosyasındaki tüm server'ları tara
 # ---------------------------------------------------------------------------
 
@@ -614,6 +638,12 @@ def scan_all(
     json_only: bool = typer.Option(  # noqa: B008
         False, "--json", help="Yalnızca JSON çıktı"
     ),
+    parallel: bool = typer.Option(  # noqa: B008
+        False, "--parallel", help="Sunucuları paralel tara"
+    ),
+    max_concurrency: int = typer.Option(  # noqa: B008
+        5, "--max-concurrency", "-c", help="Maksimum eszamanli tarama sayisi"
+    ),
 ) -> None:
     """mcpradar.toml'daki tüm sunucuları sırayla tara."""
     from mcpradar.config import MCPRadarConfig
@@ -628,18 +658,50 @@ def scan_all(
         raise typer.Exit(code=1)
 
     console.print(f"[bold]mcpradar scan-all[/] — {len(cfg.servers)} sunucu taranacak\n")
-    for srv in cfg.servers:
-        console.print(f"\n[bold cyan]>>> {srv.name or srv.url}[/]")
-        try:
-            scan(
-                target=srv.url,
-                transport=srv.transport,
-                severity=severity,
-                json_only=json_only,
-                no_save=False,
-            )
-        except Exception as exc:
-            console.print(f"[red]Hata: {srv.url} — {exc}[/]")
+    if not parallel:
+        for srv in cfg.servers:
+            console.print(f"\n[bold cyan]>>> {srv.name or srv.url}[/]")
+            try:
+                scan(
+                    target=srv.url,
+                    transport=srv.transport,
+                    severity=severity,
+                    json_only=json_only,
+                    no_save=False,
+                )
+            except Exception as exc:
+                console.print(f"[red]Hata: {srv.url} — {exc}[/]")
+    else:
+        from mcpradar.scanner.engine import ParallelScanner
+        from mcpradar.scanner.report import ScanReport, Severity
+
+        sev = Severity.from_str(severity)
+        servers = [(srv.url, srv.transport or "http") for srv in cfg.servers]
+        ps = ParallelScanner(max_concurrency=max_concurrency)
+        console.print(
+            f"[bold]Taraniyor: {len(servers)} sunucu "
+            f"(paralel, max {max_concurrency} eszamanli)...[/]"
+        )
+
+        async def _run_parallel() -> None:
+            results = await ps.scan_all(servers, min_severity=sev)
+            for i, result in enumerate(results):
+                srv = cfg.servers[i]
+                if isinstance(result, Exception):
+                    console.print(f"[red]HATA {srv.url}: {result}[/]")
+                elif isinstance(result, ScanReport):
+                    console.print(
+                        f"[green]OK {srv.url}: "
+                        f"{len(result.tools)} tools, "
+                        f"{len(result.findings)} findings[/]"
+                    )
+                    store = Store()
+                    store.save(result)
+                    store.close()
+                    if json_only:
+                        console.print(json.dumps(result.to_dict(), indent=2, ensure_ascii=False))
+
+        asyncio.run(_run_parallel())
 
 
 # ---------------------------------------------------------------------------
@@ -772,6 +834,150 @@ def _print_context_report(ctx_report: Any, console: Any) -> None:
         console.print(f"\n[bold]Risk Skoru:[/] [{color}]{ctx_report.risk_score}/100[/]")
 
     console.print()
+
+
+# ---------------------------------------------------------------------------
+# stats
+# ---------------------------------------------------------------------------
+
+
+@app.command()
+def stats(
+    target: str | None = typer.Argument(
+        None, help="Target for server-specific stats (omit for global)"
+    ),
+    days: int = typer.Option(  # noqa: B008
+        30, "--days", "-d", help="Days for trend analysis"
+    ),
+    json_only: bool = typer.Option(  # noqa: B008
+        False, "--json", help="Output as JSON"
+    ),
+) -> None:
+    """Display security statistics and trend analysis."""
+    from mcpradar.audit.stats import StatsEngine
+    from mcpradar.output.console import console
+
+    engine = StatsEngine()
+
+    if target:
+        # Server-specific stats + trend
+        server_stats = engine.server_stats(target)
+
+        if json_only:
+            output = server_stats.to_dict()
+            trend = engine.trend_analysis(target, days=days)
+            output["trend"] = trend.to_dict()
+            console.print(json.dumps(output, indent=2, ensure_ascii=False))
+            return
+
+        if server_stats.total_scans == 0:
+            console.print(f"[dim]No data for target: {target}[/]")
+            return
+
+        # Summary panel
+        from rich.panel import Panel
+
+        summary_lines = [
+            f"Target: [bold]{server_stats.target}[/]",
+            f"Total scans: [cyan]{server_stats.total_scans}[/]",
+            f"First scan: {server_stats.first_scan[:19] if server_stats.first_scan else 'N/A'}",
+            f"Last scan: {server_stats.last_scan[:19] if server_stats.last_scan else 'N/A'}",
+            f"Total findings: [yellow]{server_stats.total_findings}[/]",
+            "",
+            "Findings by severity:",
+        ]
+        for sev in ("critical", "high", "medium", "low"):
+            count = server_stats.findings_by_severity.get(sev, 0)
+            sev_color = {
+                "critical": "bold red",
+                "high": "orange1",
+                "medium": "yellow",
+                "low": "dim cyan",
+            }.get(sev, "")
+            bar = "█" * min(count, 50)
+            summary_lines.append(f"  [{sev_color}]{sev.upper():8}[/] {count:4} {bar}")
+
+        console.print(Panel("\n".join(summary_lines), title="Server Statistics"))
+
+        # Top rules table
+        if server_stats.top_rules:
+            from rich.table import Table as RTable
+
+            rules_table = RTable(title="Top Triggered Rules", show_header=True, header_style="bold")
+            rules_table.add_column("Rule ID")
+            rules_table.add_column("Count")
+            for rule_id, count in server_stats.top_rules:
+                rules_table.add_row(rule_id, str(count))
+            console.print(rules_table)
+
+        # Trend
+        trend = engine.trend_analysis(target, days=days)
+        direction_icon = {
+            "improving": "[green]↓ improving[/]",
+            "worsening": "[red]↑ worsening[/]",
+            "stable": "[yellow]→ stable[/]",
+        }.get(trend.trend_direction, "?")
+        console.print(f"\nTrend ({days}d): {direction_icon}")
+        if trend.daily_scans:
+            scans_str = " ".join(str(d["count"]) for d in trend.daily_scans)
+            console.print(f"  Scans/day: [dim]{scans_str}[/]")
+        if trend.daily_findings:
+            findings_str = " ".join(str(d["count"]) for d in trend.daily_findings)
+            console.print(f"  Findings/day: [dim]{findings_str}[/]")
+
+    else:
+        # Global stats
+        global_stats = engine.global_stats()
+
+        if json_only:
+            console.print(json.dumps(global_stats.to_dict(), indent=2, ensure_ascii=False))
+            return
+
+        if global_stats.total_targets == 0:
+            console.print("[dim]No scan data available.[/]")
+            return
+
+        from rich.panel import Panel
+
+        summary_lines = [
+            f"Targets: [cyan]{global_stats.total_targets}[/]",
+            f"Total scans: [cyan]{global_stats.total_scans}[/]",
+            f"Total findings: [yellow]{global_stats.total_findings}[/]",
+            f"Audit events: [cyan]{global_stats.audit_event_count}[/]",
+            "",
+            "Findings by severity:",
+        ]
+        for sev in ("critical", "high", "medium", "low"):
+            count = global_stats.findings_by_severity.get(sev, 0)
+            sev_color = {
+                "critical": "bold red",
+                "high": "orange1",
+                "medium": "yellow",
+                "low": "dim cyan",
+            }.get(sev, "")
+            bar = "█" * min(count, 50)
+            summary_lines.append(f"  [{sev_color}]{sev.upper():8}[/] {count:4} {bar}")
+
+        console.print(Panel("\n".join(summary_lines), title="Global Statistics"))
+
+        # Top tables
+        from rich.table import Table as RTable
+
+        if global_stats.top_scanned_targets:
+            t_table = RTable(title="Top Scanned Targets", show_header=True, header_style="bold")
+            t_table.add_column("Target")
+            t_table.add_column("Scans")
+            for t, c in global_stats.top_scanned_targets:
+                t_table.add_row(t[:50], str(c))
+            console.print(t_table)
+
+        if global_stats.top_triggered_rules:
+            r_table = RTable(title="Top Triggered Rules", show_header=True, header_style="bold")
+            r_table.add_column("Rule ID")
+            r_table.add_column("Count")
+            for rule_id, count in global_stats.top_triggered_rules:
+                r_table.add_row(rule_id, str(count))
+            console.print(r_table)
 
 
 # rules
@@ -1224,6 +1430,148 @@ def fingerprint_list() -> None:
 
 
 # ---------------------------------------------------------------------------
+# cve
+# ---------------------------------------------------------------------------
+
+cve_app = typer.Typer(help="CVE feed management", no_args_is_help=True)
+app.add_typer(cve_app, name="cve")
+
+
+@cve_app.command(name="sync")
+def cve_sync() -> None:
+    """Synchronize CVE feed from NVD."""
+    from mcpradar.cvefeed.syncer import NVDAPISyncer, save_feed, sync_feed
+    from mcpradar.output.console import console
+
+    console.print("[bold]Syncing CVE feed from NVD...[/]")
+    try:
+        syncer = NVDAPISyncer()
+        count = syncer.sync_all()
+        console.print(f"[green]✓ {count} CVEs in feed[/]")
+    except Exception as exc:
+        console.print(f"[yellow]NVD sync failed: {exc}[/]")
+        console.print("[dim]Falling back to seed data...[/]")
+        entries = sync_feed()
+        save_feed(entries)
+        console.print(f"[green]✓ {len(entries)} CVEs synced (seed only)[/]")
+
+
+@cve_app.command(name="match")
+def cve_match(
+    scan_id: str = typer.Argument(help="Scan ID to match findings against CVEs"),
+    min_score: float = typer.Option(  # noqa: B008
+        0.3, "--min-score", help="Minimum match score (0.0-1.0)"
+    ),
+) -> None:
+    """Match scan findings to known CVEs."""
+    from mcpradar.cvefeed.syncer import load_feed, match_findings_to_cves
+    from mcpradar.output.console import console
+    from mcpradar.storage.store import Store
+
+    store = Store()
+    try:
+        report = store.load(scan_id)
+    except Exception as err:
+        console.print(f"[red]Scan not found: {scan_id}[/]")
+        raise typer.Exit(1) from err
+
+    feed = load_feed()
+    if not feed:
+        console.print("[dim]CVE feed is empty. Run 'mcpradar cve sync' first.[/]")
+        raise typer.Exit(1)
+
+    matches = match_findings_to_cves(report.findings, feed, min_score=min_score)
+
+    if not matches:
+        console.print("[dim]No CVE matches found for this scan.[/]")
+        return
+
+    from rich.table import Table
+
+    table = Table(title=f"CVE Matches for {scan_id}", show_header=True, header_style="bold")
+    table.add_column("Finding Rule")
+    table.add_column("Finding Title", width=30)
+    table.add_column("CVE ID")
+    table.add_column("CVE Severity")
+    table.add_column("Score")
+    table.add_column("Keywords")
+
+    for m in matches:
+        score_color = "green" if m.score >= 0.7 else "yellow" if m.score >= 0.5 else "dim"
+        table.add_row(
+            m.finding_rule,
+            m.finding_title[:30],
+            m.cve_id,
+            m.cve_severity.upper(),
+            f"[{score_color}]{m.score:.2f}[/]",
+            ", ".join(m.matched_keywords[:5]),
+        )
+
+    console.print(table)
+
+
+@cve_app.command(name="list")
+def cve_list(
+    severity: str | None = typer.Option(  # noqa: B008
+        None, "--severity", "-s", help="Filter by severity: low, medium, high, critical"
+    ),
+    search: str | None = typer.Option(  # noqa: B008
+        None, "--search", help="Search in CVE description"
+    ),
+    limit: int = typer.Option(  # noqa: B008
+        50, "--limit", "-n", help="Maximum CVEs to show"
+    ),
+) -> None:
+    """List cached MCP-related CVEs."""
+    from mcpradar.cvefeed.syncer import load_feed
+    from mcpradar.output.console import console
+
+    feed = load_feed()
+    if not feed:
+        console.print("[dim]CVE feed is empty. Run 'mcpradar cve sync' first.[/]")
+        return
+
+    # Filter
+    if severity:
+        feed = [c for c in feed if c.severity.lower() == severity.lower()]
+    if search:
+        search_lower = search.lower()
+        feed = [c for c in feed if search_lower in c.description.lower()]
+
+    feed = feed[:limit]
+
+    if not feed:
+        console.print("[dim]No CVEs match the filter.[/]")
+        return
+
+    from rich.table import Table
+
+    table = Table(title=f"CVEs ({len(feed)})", show_header=True, header_style="bold")
+    table.add_column("CVE ID", width=16)
+    table.add_column("Severity", width=10)
+    table.add_column("Published", width=12)
+    table.add_column("Description", width=60)
+
+    for cve in feed:
+        sev_color = {
+            "critical": "bold red",
+            "high": "orange1",
+            "medium": "yellow",
+            "low": "dim cyan",
+        }.get(cve.severity.lower(), "dim")
+        desc = cve.description[:80].replace("\n", " ")
+        published = cve.published[:10] if cve.published else "-"
+        table.add_row(
+            cve.cve_id,
+            f"[{sev_color}]{cve.severity.upper()}[/]",
+            published,
+            desc,
+        )
+
+    console.print(table)
+
+
+# ---------------------------------------------------------------------------
 # watch
 # ---------------------------------------------------------------------------
 
@@ -1269,6 +1617,121 @@ def watch(
 
 
 # ---------------------------------------------------------------------------
+# audit
+# ---------------------------------------------------------------------------
+
+
+@app.command()
+def audit(
+    target: str | None = typer.Option(  # noqa: B008
+        None, "--target", help="Filter by target URL"
+    ),
+    event_type: str | None = typer.Option(  # noqa: B008
+        None,
+        "--type",
+        help="Filter by event type: scan_started, scan_completed, diff_detected, alert_sent, error",
+    ),
+    since: str | None = typer.Option(  # noqa: B008
+        None, "--since", help="Show events since timestamp (ISO 8601 or relative: 7d, 24h, 1w)"
+    ),
+    limit: int = typer.Option(  # noqa: B008
+        50, "--limit", "-n", help="Maximum events to show"
+    ),
+    json_only: bool = typer.Option(  # noqa: B008
+        False, "--json", help="Output as JSON"
+    ),
+    export_path: Path | None = typer.Option(  # noqa: B008
+        None, "--export", "-o", help="Export audit log to file"
+    ),
+) -> None:
+    """View and export the security audit trail."""
+    from datetime import datetime, timedelta
+
+    from mcpradar.audit.auditor import AuditLogger
+    from mcpradar.output.console import console
+
+    # Parse --since for relative durations
+    since_ts = None
+    if since:
+        if since.endswith("d"):
+            try:
+                days = int(since[:-1])
+                since_ts = (datetime.now(UTC) - timedelta(days=days)).isoformat()
+            except ValueError as err:
+                console.print(f"[red]Invalid --since format: {since}[/]")
+                raise typer.Exit(1) from err
+        elif since.endswith("h"):
+            try:
+                hours = int(since[:-1])
+                since_ts = (datetime.now(UTC) - timedelta(hours=hours)).isoformat()
+            except ValueError as err:
+                console.print(f"[red]Invalid --since format: {since}[/]")
+                raise typer.Exit(1) from err
+        elif since.endswith("w"):
+            try:
+                weeks = int(since[:-1])
+                since_ts = (datetime.now(UTC) - timedelta(weeks=weeks)).isoformat()
+            except ValueError as err:
+                console.print(f"[red]Invalid --since format: {since}[/]")
+                raise typer.Exit(1) from err
+        else:
+            since_ts = since  # Assume ISO 8601
+
+    logger = AuditLogger()
+    events = logger.query(since=since_ts, event_type=event_type, target=target, limit=limit)
+
+    if export_path:
+        logger.export_audit_log(export_path, fmt="json")
+        console.print(f"[green]Audit log exported to {export_path}[/]")
+
+    if json_only:
+        console.print(json.dumps([e.to_dict() for e in events], indent=2, ensure_ascii=False))
+        return
+
+    if not events:
+        console.print("[dim]No audit events found.[/]")
+        return
+
+    from rich.table import Table
+
+    table = Table(title="Audit Trail", show_header=True, header_style="bold")
+    table.add_column("Timestamp", width=20)
+    table.add_column("Type", width=16)
+    table.add_column("Severity", width=10)
+    table.add_column("Target", width=30)
+    table.add_column("Detail", width=50)
+
+    for e in events:
+        # Severity color
+        sev_color = {"info": "dim", "warning": "yellow", "error": "bold red"}.get(e.severity, "dim")
+
+        # Event type badge
+        type_badges = {
+            "scan_started": "[dim cyan]SCAN_START[/]",
+            "scan_completed": "[cyan]SCAN_DONE[/]",
+            "diff_detected": "[yellow]DIFF[/]",
+            "alert_sent": "[orange1]ALERT[/]",
+            "error": "[bold red]ERROR[/]",
+        }
+        type_display = type_badges.get(e.event_type, e.event_type)
+
+        # Detail preview (truncated)
+        detail_str = str(e.detail) if e.detail else ""
+        if len(detail_str) > 80:
+            detail_str = detail_str[:77] + "..."
+
+        table.add_row(
+            e.timestamp[:19].replace("T", " "),
+            type_display,
+            f"[{sev_color}]{e.severity.upper()}[/]",
+            e.target[:30] if e.target else "-",
+            detail_str,
+        )
+
+    console.print(table)
+
+
+# ---------------------------------------------------------------------------
 # registry-scan
 # ---------------------------------------------------------------------------
 
@@ -1300,14 +1763,36 @@ def registry_scan(
 
 
 @app.command()
-def feed_update() -> None:
-    """CVE feed'ini güncelle (MCP-related CVE'ler)."""
-    from mcpradar.cvefeed.syncer import save_feed, sync_feed
+def feed_update(
+    full: bool = typer.Option(  # noqa: B008
+        False, "--full", help="Full NVD API sync instead of seed-only update"
+    ),
+) -> None:
+    """CVE feed'ini guncelle."""
     from mcpradar.output.console import console
 
-    entries = sync_feed()
-    save_feed(entries)
-    console.print(f"[green]{len(entries)} CVE synced.[/]")
+    if full:
+        from mcpradar.cvefeed.syncer import NVDAPISyncer
+
+        console.print("[bold]Running full NVD API sync...[/]")
+        try:
+            syncer = NVDAPISyncer()
+            count = syncer.sync_all()
+            console.print(f"[green]Synced {count} CVEs from NVD.[/]")
+        except Exception as exc:
+            console.print(f"[yellow]NVD sync failed: {exc}[/]")
+            console.print("[dim]Falling back to seed data...[/]")
+            from mcpradar.cvefeed.syncer import save_feed, sync_feed
+
+            entries = sync_feed()
+            save_feed(entries)
+            console.print(f"[green]Synced {len(entries)} CVEs (seed only).[/]")
+    else:
+        from mcpradar.cvefeed.syncer import save_feed, sync_feed
+
+        entries = sync_feed()
+        save_feed(entries)
+        console.print(f"[green]{len(entries)} CVEs synced.[/]")
 
 
 # init
