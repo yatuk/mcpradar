@@ -65,7 +65,9 @@ def main() -> None:
                     "high": sev.get("high", 0),
                     "medium": sev.get("medium", 0),
                     "low": sev.get("low", 0),
-                    "last_scanned": data.get("scanned_at", "")[:10] if data.get("scanned_at") else "—",
+                    "last_scanned": data.get("scanned_at", "")[:10]
+                    if data.get("scanned_at")
+                    else "—",
                     "status": data.get("status", "unknown"),
                 }
             )
