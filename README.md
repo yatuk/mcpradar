@@ -16,25 +16,21 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/yatuk/mcpradar/actions/workflows/ci.yml">
-    <img src="https://github.com/yatuk/mcpradar/actions/workflows/ci.yml/badge.svg" alt="CI"/>
-  </a>
-  <a href="https://github.com/yatuk/mcpradar/blob/main/LICENSE">
-    <img src="https://img.shields.io/badge/license-MIT-green" alt="License"/>
-  </a>
-  <a href="https://github.com/yatuk/mcpradar/stargazers">
-    <img src="https://img.shields.io/github/stars/yatuk/mcpradar?style=flat&color=yellow" alt="Stars"/>
-  </a>
-  <a href="https://github.com/yatuk/mcpradar/commits/main">
-    <img src="https://img.shields.io/github/last-commit/yatuk/mcpradar?color=blueviolet" alt="Last commit"/>
-  </a>
-  <img src="https://img.shields.io/badge/status-alpha-orange" alt="Status: Alpha"/>
+  <a href="https://pypi.org/project/mcpradar/"><img src="https://img.shields.io/pypi/v/mcpradar?color=blue" alt="PyPI version"/></a>
+  <a href="https://pypi.org/project/mcpradar/"><img src="https://img.shields.io/pypi/pyversions/mcpradar?color=blueviolet" alt="Python 3.11 3.12 3.13"/></a>
+  <a href="https://pypi.org/project/mcpradar/"><img src="https://img.shields.io/pypi/dm/mcpradar?color=orange" alt="PyPI downloads"/></a>
+  <a href="https://github.com/yatuk/mcpradar/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="MIT License"/></a>
+  <a href="https://github.com/astral-sh/ruff"><img src="https://img.shields.io/badge/code%20style-ruff-261230" alt="Ruff"/></a>
+  <a href="https://owasp.org/www-project-mcp-top-10/"><img src="https://img.shields.io/badge/OWASP%20MCP%20Top%2010-6/10%20covered-yellow" alt="OWASP MCP Top 10"/></a>
 </p>
 
 <p align="center">
   <a href="#quick-start">Quick Start</a> ·
   <a href="#detection-rules">Detection Rules</a> ·
+  <a href="#comparison">Comparison</a> ·
+  <a href="#owasp-coverage">OWASP Coverage</a> ·
   <a href="#github-action">GitHub Action</a> ·
+  <a href="ROADMAP.md">Roadmap</a> ·
   <a href="docs/architecture.md">Architecture</a>
 </p>
 
@@ -69,12 +65,34 @@ That's it. One command, no install, runs against any MCP server you can launch.
 
 ## Features
 
-- 🎯 **6 detection rules** — zero-width Unicode, prompt injection (10 patterns), base64/hex blobs, hidden HTML/Markdown, permission scope mismatch, dangerous tool names
-- 📡 **3 transports** — `http`, `sse`, `stdio` (any MCP server)
+### 🔍 Security Detection (11 rules planned, 6 built)
+- 🎯 **R001–R105** — Dangerous tool names, zero-width Unicode, prompt injection (10 patterns), base64/hex blobs, hidden HTML/Markdown, permission scope mismatch
+- 🔜 **R106–R111** — Secret/token exposure, SSRF detection, path traversal, tool-name shadowing, tool-output injection, insecure transport
+
+### 🔗 Cross-Server Analysis (7 rules, 5 built)
+- 🌐 **C001–C005** — Tool name collision, shadowing, exfiltration chains, capability overlap, permission gradient
+- 🔜 **C006–C007** — Attack path chain (graph-based), privilege escalation via cross-server chaining
+
+### 📦 Package & Source Scanning
+- 📂 **`scan-source`** — Scan GitHub repos, npm/pip packages, Docker images, MCP registry IDs without running the server
+- 🌳 **AST + Semgrep** — Source-code static analysis: Description-Code Inconsistency (DCI), unsafe deserialization, SQLi
+
+### 🏗️ CI/CD & Output
+- 🔐 **SARIF v2.1.0** — drops into GitHub Security tab via one Action
+- 📊 **AIVSS 0–10 scoring** — AI Vulnerability Severity Score with CWE mapping
 - 📸 **Snapshot diff** — SQLite-backed history, *cosmetic / behavioral / **security*** classification
-- 🔐 **SARIF output** — drops into GitHub Security tab via one Action
-- 🧩 **Extensible rule engine** — subclass `Rule`, register, done
 - 🏃 **Fast** — pure Python, no daemons, runs in CI under 5s
+
+### 🔗 Supply Chain
+- 📋 **CycloneDX SBOM** — export + OSV/GitHub Advisory CVE check (optional, async)
+- 📌 **Hash-based tool pinning** — SHA-256 of description, schema, and command → rug pull detection
+- 🔍 **Typosquatting detection** — Levenshtein distance against known top packages
+
+### 🛡️ Enterprise
+- 🏖️ **Sandbox mode** — `--sandbox`: disposable container with egress lock, ephemeral FS, cloud metadata block
+- 📝 **Audit trail** — structured event logging (scan_start, finding_created, diff_detected)
+- 📈 **Stats engine** — per-server trend analysis, top rules, severity distribution
+- 🧩 **Plugin system** — `entry_points` auto-discovery, `mcpradar plugin init/validate/install`
 
 ---
 
@@ -84,33 +102,54 @@ That's it. One command, no install, runs against any MCP server you can launch.
 graph LR
     A[CLI] --> B[Scanner Engine]
     B -->|stdio/SSE/HTTP| C[MCP Server]
+    B -->|git/npm/Docker| P[Package Scanner]
     C -->|tools, prompts, resources| B
+    P -->|source code| S[Source Analysis]
+    S -->|AST + Semgrep| D2[Rule Engine]
     B --> D[Rule Engine]
     D -->|findings| E[SQLite Snapshot]
-    E --> F[Rich / JSON / SARIF]
+    D2 -->|findings| E
+    E --> F[Scoring Engine]
+    F -->|AIVSS 0-10| G[Rich / JSON / SARIF]
+    B --> H[Sandbox Engine]
+    H -->|egress lock| C
 ```
 
-Scanner connects to the MCP server, enumerates tools/prompts/resources,
-runs each tool schema through 6 detection rules, stores the snapshot
-in SQLite, and outputs the report. Subsequent scans diff against
-history to catch silent changes.
+MCPRadar connects to the MCP server (or pulls its source from GitHub/npm/Docker),
+enumerates tools/prompts/resources, runs each tool schema through the rule engine,
+performs AST+Semgrep-based source analysis when available, computes AIVSS scores,
+stores the snapshot in SQLite, and outputs the report. Subsequent scans diff against
+history to catch silent changes. The optional sandbox engine runs untrusted STDIO
+servers in disposable containers with network egress locked down.
 
 ---
 
 ## Comparison
 
-| Feature                       | MCPRadar | mcp-scan | MCPSafetyScanner |
-|-------------------------------|:--------:|:--------:|:----------------:|
-| Zero-width Unicode detection  |    ✅    |    ❌    |        ❌        |
-| Prompt injection patterns     | 10 rules |  basic   |    3 patterns    |
-| Base64/hex blob detection     |    ✅    |    ❌    |        ❌        |
-| Hidden HTML/Markdown          |    ✅    |    ❌    |        ❌        |
-| Permission scope mismatch     |    ✅    |    ❌    |        ⚠️        |
-| SARIF + GitHub Action         |    ✅    |    ❌    |        ❌        |
-| SQLite snapshot history       |    ✅    |    ✅    |        ❌        |
-| Severity-classified diff      |    ✅    |    ⚠️    |        ❌        |
-| stdio transport               |    ✅    |    ✅    |        ✅        |
-| License                       |   MIT    |   MIT    |   Proprietary    |
+| Feature | MCPRadar | Cisco mcp-scanner | Snyk agent-scan | Pipelock | Hermes | agent-audit | MCP Guardian |
+|---|---|---|---|---|---|---|---|
+| **Approach** | Static + Diff + Sandbox | YARA + LLM + VirusTotal | LLM classifier | Runtime proxy (Go) | Fuzz + Probe (Rust) | SAST 40+ rules | Policy proxy |
+| **Zero-width Unicode** | ✅ | ❌ | ❌ | ✅ (live) | ❌ | ❌ | ❌ |
+| **Prompt injection** | 10 patterns | YARA patterns | LLM-based | ✅ (live) | ❌ | ❌ | ❌ |
+| **Base64/hex blob** | ✅ | ❌ | ❌ | ✅ (decode) | ❌ | ❌ | ❌ |
+| **Hidden HTML/MD** | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ |
+| **Secret/token scan** | 🔜 R106 | ✅ (YARA) | ❌ | ✅ (48 DLP) | ✅ | ✅ | ❌ |
+| **SSRF detection** | 🔜 R107 | ❌ | ❌ | ✅ (live) | ✅ | ✅ | ❌ |
+| **Path traversal** | 🔜 R108 | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ |
+| **DCI (desc ≠ code)** | 🔜 AST-based | ❌ | ❌ | ❌ | ❌ | Partial | ❌ |
+| **Cross-server analysis** | ✅ C001-C005 | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Source scanning** | 🔜 GitHub/npm/Docker | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ |
+| **SBOM + dep. CVE** | 🔜 CycloneDX | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Sandbox execution** | 🔜 Docker egress-lock | ❌ | ❌ | N/A (proxy) | ❌ | ❌ | ❌ |
+| **AIVSS scoring** | 🔜 0–10 + CWE | LLM score | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Snapshot diff** | ✅ 3-level | Not documented | Version compare | ✅ (every call) | ❌ | ❌ | ❌ |
+| **SARIF output** | ✅ v2.1.0 | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
+| **stdio transport** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Runtime proxy** | ❌ (planned v1.1) | ❌ | ❌ | ✅ | ❌ | ❌ | ✅ |
+| **License** | MIT | Apache 2.0 | Snyk platform | Apache 2.0 | Unknown | Unknown | Custom |
+| **Offline capable** | ✅ | ❌ (VT/LLM API) | ❌ (LLM API) | ✅ | ✅ | ✅ | ✅ |
+
+✅ = Built · 🔜 = Planned (see [ROADMAP.md](ROADMAP.md))
 
 ---
 
@@ -138,8 +177,36 @@ mcpradar scan http://localhost:8080 -s critical
 # SARIF for CI
 mcpradar scan http://x --format sarif -o results.sarif
 
-# Diff last 2 scans
+# Diff last 2 scans (rug pull detection)
 mcpradar diff http://localhost:8080
+
+# Scan a GitHub repo without running the server
+mcpradar scan-source github:user/mcp-server
+
+# Scan an npm/pip package statically
+mcpradar scan-source npm:mcp-server-package
+mcpradar scan-source pip:mcp-server-lib
+
+# Safe sandboxed execution (disposable container, no network)
+mcpradar scan stdio -- ./untrusted-server --sandbox
+
+# Plugin management
+mcpradar plugin init my-rule
+mcpradar plugin validate ./my-rule
+mcpradar plugin list
+
+# Runtime probing (safe read-only tools only)
+mcpradar probe http://localhost:8080 --safe-only
+
+# Server fingerprinting
+mcpradar fingerprint http://localhost:8080
+
+# Cross-server deep analysis
+mcpradar analyze-context --deep --graph -o risk.dot
+
+# Audit trail and statistics
+mcpradar audit --target http://localhost:8080
+mcpradar stats http://localhost:8080
 ```
 
 ---
@@ -162,14 +229,39 @@ Findings appear in your repo's Security tab. Full template:
 
 ## Detection Rules
 
-| ID   | Rule                  | Severity      | Catches                                                |
-|------|-----------------------|---------------|--------------------------------------------------------|
-| R001 | Dangerous Tool Name   | CRITICAL      | `eval`, `exec`, `rm`, `shell`, `curl` …                |
-| R101 | Zero-Width Unicode    | HIGH/CRITICAL | ZWSP, LRM, BOM — in tool name or description           |
-| R102 | Prompt Injection      | HIGH/CRITICAL | "ignore previous", `system:`, `<\|im_start\|>`, "you must" |
-| R103 | Encoded Blob          | MEDIUM/HIGH   | Base64/hex blob — HIGH if decodes to readable text     |
-| R104 | Hidden Content        | HIGH          | `display:none`, `font-size:0`, hidden Markdown links   |
-| R105 | Scope Mismatch        | LOW/MEDIUM    | Tool name implies X, description mentions Y            |
+### Built-in (v0.1.0)
+
+| ID   | Rule                  | Severity      | OWASP | Catches |
+|------|-----------------------|---------------|-------|---------|
+| R001 | Dangerous Tool Name   | CRITICAL      | MCP03 | `eval`, `exec`, `rm`, `shell`, `curl`, `wget`, `chmod` … |
+| R101 | Zero-Width Unicode    | HIGH/CRITICAL | MCP06 | ZWSP, LRM, RLO, BOM — in tool name (CRITICAL) or description (HIGH) |
+| R102 | Prompt Injection      | HIGH/CRITICAL | MCP06 | "ignore previous", `system:`, `<\|im_start\|>`, "you must", override, jailbreak … (10 patterns) |
+| R103 | Encoded Blob          | MEDIUM/HIGH   | MCP06 | Base64 (40+ chars), hex (32+ chars) — HIGH if decodes to readable text |
+| R104 | Hidden Content        | HIGH          | MCP03 | `display:none`, `font-size:0`, hidden Markdown links, deceptive `<a>` tags |
+| R105 | Scope Mismatch        | LOW/MEDIUM    | MCP02 | Tool name implies file/db/read-only, description mentions network/shell/write |
+
+### Cross-Server (v0.1.0)
+
+| ID   | Rule                  | Severity      | OWASP | Catches |
+|------|-----------------------|---------------|-------|---------|
+| C001 | Tool Name Collision   | CRITICAL      | MCP10 | Same tool name exposed by 2+ servers — LLM may call wrong one |
+| C002 | Tool Name Shadowing   | HIGH          | MCP10 | Similar tool names across servers (≥75% similarity) |
+| C003 | Exfiltration Chain    | CRITICAL      | MCP10 | Server A reads sensitive data, Server B sends it out |
+| C004 | Capability Overlap    | MEDIUM        | MCP10 | 3+ servers exposing same capability (file_read, shell_exec…) |
+| C005 | Permission Gradient   | MEDIUM        | MCP02 | Read-only + write-capable server mix — injection may hijack write access |
+
+### Planned (see [ROADMAP.md](ROADMAP.md))
+
+| ID   | Rule                  | Sprint | OWASP |
+|------|-----------------------|--------|-------|
+| R106 | Secret/Token Exposure | Sprint 1 | MCP01 |
+| R107 | SSRF Detection        | Sprint 1 | MCP05 |
+| R108 | Path Traversal        | Sprint 1 | MCP05 |
+| R109 | Schema Poisoning      | Sprint 1 | MCP03 |
+| R110 | Version Anomaly       | Sprint 3 | MCP09 |
+| R111 | Insecure Transport    | Sprint 3 | MCP07 |
+| C006 | Attack Path Chain     | Sprint 4 | MCP03 |
+| C007 | Privilege Escalation  | Sprint 4 | MCP02 |
 
 Full docs: [docs/detection-rules.md](docs/detection-rules.md)
 
@@ -197,18 +289,71 @@ Security scores for popular MCP servers, updated weekly:
 
 ---
 
+## OWASP MCP Top 10 Coverage
+
+MCPRadar targets full coverage of the [OWASP MCP Top 10 (2025)](https://owasp.org/www-project-mcp-top-10/):
+
+| # | Risk | Covered By | Status |
+|---|---|---|---|
+| MCP01 | Token Mismanagement & Secret Exposure | R106 (planned) | 🔜 Sprint 1 |
+| MCP02 | Privilege Escalation via Scope Creep | R105, C005, C007 | 🟡 Partial |
+| MCP03 | Tool Poisoning | R001, R104, R109, C006 | 🟡 Partial |
+| MCP04 | Supply Chain Attacks & Dependency Tampering | R108 (planned) | 🔜 Sprint 1 |
+| MCP05 | Command Injection & Execution | R001, R107 (planned) | 🔴 Minimal |
+| MCP06 | Prompt Injection via Contextual Payloads | R101, R102, R103, R104 | ✅ Strong |
+| MCP07 | Insufficient AuthN/AuthZ | R111 (planned) | 🔜 Sprint 3 |
+| MCP08 | Lack of Audit & Telemetry | Audit trail (planned) | 🔜 Sprint 5 |
+| MCP09 | Shadow MCP Servers | R110 (planned) | 🔜 Sprint 3 |
+| MCP10 | Context Injection & Over-Sharing | C001–C005, C006 | 🟡 Partial |
+
+✅ Strong · 🟡 Partial · 🔴 Minimal · 🔜 Planned — see [ROADMAP.md](ROADMAP.md)
+
+---
+
+## Claude Code Agent Team
+
+MCPRadar's development is powered by 12 specialized subagents under `.claude/agents/`:
+
+| Agent | Expertise |
+|---|---|
+| `detection-rule-engineer` | New Rule subclasses (R200+), severity classification, false-positive reduction |
+| `source-analysis-engineer` | Python `ast` + Semgrep for SSRF, path traversal, DCI, unsafe deserialization |
+| `transport-specialist` | HTTP/SSE/stdio transport layer, MCP handshake, connection errors |
+| `auth-hardening-auditor` | OAuth 2.1 anti-pattern, token passthrough, 0.0.0.0 bind, hardcoded credentials |
+| `supply-chain-analyst` | CycloneDX SBOM, OSV/GitHub Advisory, typosquatting, hash pinning |
+| `package-source-scanner` | GitHub/npm/pip/Docker/registry source fetching, scan without running |
+| `sandbox-runtime-engineer` | Disposable container, egress lock, ephemeral FS |
+| `diff-snapshot-dev` | SQLite schema, diff classification (cosmetic/behavioral/security) |
+| `scoring-fp-engineer` | AIVSS 0–10 scoring, CWE mapping, confidence-based FP reduction |
+| `ci-sarif-engineer` | SARIF output, GitHub Actions, CI matrix, OIDC PyPI publish |
+| `test-qa` | Pytest coverage, fixtures, regression, per-rule case tables |
+| `docs-maintainer` | README, CHANGELOG, docs/ synchronization |
+
+---
+
 ## Roadmap
+
+See **[ROADMAP.md](ROADMAP.md)** for the full development roadmap.
+
+### Summary
+
+| Sprint | Version | Focus |
+|--------|---------|-------|
+| 1 | v0.2.0 | 4 new rules — Secret exposure (R106), Command injection (R107), Supply chain (R108), Schema poisoning (R109) |
+| 2 | v0.3.0 | Plugin system — PluginManager, Validator, Scaffolder, CLI |
+| 3 | v0.4.0 | Server fingerprinting + Transport security (R110, R111) |
+| 4 | v0.5.0 | Deep cross-server analysis + Runtime probing (C006, C007) |
+| 5 | v0.6.0 | Audit trail + CVE automation + Statistics |
+| 6 | v1.0.0-rc1 | Validation, performance, documentation — OWASP 10/10 |
+
+### Completed (v0.1.0)
 
 - [x] 6 detection rules, 3 transports, SQLite snapshot
 - [x] Git-diff style schema diff (cosmetic/behavioral/security)
 - [x] Snapshot browser (list, show, export, purge)
 - [x] SARIF + GitHub Actions integration
 - [x] CI matrix (3.11/3.12/3.13 × ubuntu/macos/windows)
-- [ ] Real-world 10-server validation
 - [x] Public leaderboard (GitHub Pages)
-- [ ] Plugin system for community rules
-- [ ] Cross-server contamination analysis
-- [ ] MCP server fingerprinting
 
 ---
 
