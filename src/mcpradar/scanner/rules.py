@@ -911,6 +911,176 @@ def check_server_auth(
 
 
 # ---------------------------------------------------------------------------
+# Path Traversal Detection (R113)
+# ---------------------------------------------------------------------------
+
+
+class PathTraversalDetection(Rule):
+    """Detects path traversal vulnerability indicators in tool schemas.
+
+    Covers CWE-22 (Path Traversal) and CWE-59 (Symlink Attacks).
+    """
+
+    rule_id = "R113"
+    title = "Path traversal / directory traversal risk"
+    severity = Severity.MEDIUM
+
+    PATH_PARAM_NAMES: set[str] = {
+        "path",
+        "file",
+        "filepath",
+        "filename",
+        "source",
+        "dest",
+        "destination",
+        "directory",
+        "dir",
+        "target",
+        "output",
+    }
+
+    TRAVERSAL_PATTERNS: list[re.Pattern[str]] = [
+        re.compile(r"\.\.[/\\]", re.I),  # ../ or ..\
+        re.compile(r"\bpath\s*(?:traversal|injection|bypass|escape)\b", re.I),
+        re.compile(r"\b(?:symlink|symbolic\s*link)\b", re.I),
+    ]
+
+    def check(self, tool: ToolInfo) -> list[Finding]:
+        found: list[Finding] = []
+
+        # Check description for traversal risk language
+        text = f"{tool.description} {str(tool.input_schema)}"
+        for pattern in self.TRAVERSAL_PATTERNS:
+            for m in pattern.finditer(text):
+                found.append(
+                    self._finding(
+                        tool.name,
+                        f"Path traversal indicator in description: '{m.group()}'",
+                        severity=Severity.HIGH,
+                        pattern=m.group(),
+                    )
+                )
+
+        # Check for path-like params without constraints
+        for prop_path, prop_schema in _walk_schema_props(tool.input_schema):
+            prop_name = prop_path.split(".")[-1].lower()
+            if prop_name not in self.PATH_PARAM_NAMES:
+                continue
+            if not isinstance(prop_schema, dict):
+                continue
+            prop_type = prop_schema.get("type", "")
+            if prop_type != "string":
+                continue
+
+            # Flag if path param has no validation constraints
+            has_pattern = "pattern" in prop_schema
+            has_format = "format" in prop_schema
+
+            missing = []
+            if not has_pattern:
+                missing.append("pattern")
+            if not has_format:
+                missing.append("format")
+
+            if missing:
+                is_write = any(
+                    kw in tool.name.lower()
+                    for kw in ("write", "create", "edit", "move", "remove", "delete")
+                )
+                sev = Severity.HIGH if is_write else Severity.MEDIUM
+                found.append(
+                    self._finding(
+                        tool.name,
+                        f"Path parameter '{prop_path}' ({prop_type}) lacks validation "
+                        f"constraints: {', '.join(missing)}. "
+                        f"Path traversal risk (CWE-22).",
+                        severity=sev,
+                        property=prop_path,
+                        missing_constraints=missing,
+                    )
+                )
+
+            # Also check output_schema
+        for prop_path, prop_schema in _walk_schema_props(tool.output_schema):
+            prop_name = prop_path.split(".")[-1].lower()
+            if (
+                prop_name in self.PATH_PARAM_NAMES
+                and isinstance(prop_schema, dict)
+                and prop_schema.get("type") == "string"
+                and "pattern" not in prop_schema
+            ):
+                found.append(
+                    self._finding(
+                        tool.name,
+                        f"Output path parameter '{prop_path}' lacks validation",
+                        severity=Severity.LOW,
+                        property=prop_path,
+                    )
+                )
+
+        return found
+
+
+# ---------------------------------------------------------------------------
+# Unbounded Input Detection (R114)
+# ---------------------------------------------------------------------------
+
+
+class UnboundedInputDetection(Rule):
+    """Detects string parameters with no size or content constraints.
+
+    Extends R109 which only checks extreme values (>1M maxLength).
+    This rule catches the common case of missing constraints entirely.
+    """
+
+    rule_id = "R114"
+    title = "Unbounded input — no size/content constraints"
+    severity = Severity.LOW
+
+    def check(self, tool: ToolInfo) -> list[Finding]:
+        found: list[Finding] = []
+
+        for schema_name, schema in [
+            ("input_schema", tool.input_schema),
+            ("output_schema", tool.output_schema),
+        ]:
+            if not schema or not isinstance(schema, dict):
+                continue
+            for prop_path, prop_schema in _walk_schema_props(schema):
+                if not isinstance(prop_schema, dict):
+                    continue
+                if prop_schema.get("type") != "string":
+                    continue
+
+                # Check if string has ANY constraints
+                has_constraint = any(
+                    k in prop_schema
+                    for k in (
+                        "pattern",
+                        "format",
+                        "enum",
+                        "const",
+                        "minLength",
+                        "maxLength",
+                    )
+                )
+                if not has_constraint:
+                    found.append(
+                        self._finding(
+                            tool.name,
+                            f"String parameter '{prop_path}' in {schema_name} "
+                            f"has no validation constraints (no pattern, format, "
+                            f"enum, or length limits)",
+                            severity=Severity.LOW,
+                            property=prop_path,
+                            schema=schema_name,
+                        )
+                    )
+
+        return found
+
+
+# ---------------------------------------------------------------------------
 # Permission scope mismatch — bridge-aware (R105)
 # ---------------------------------------------------------------------------
 
@@ -1180,6 +1350,8 @@ class RuleEngine:
             VersionAnomalyDetection(),
             InsecureTransportDetection(),
             AuthorizationHardeningDetection(),
+            PathTraversalDetection(),
+            UnboundedInputDetection(),
         ]
 
         self._rules = [r for r in builtins if r.rule_id not in self._disabled]
@@ -1216,6 +1388,8 @@ class RuleEngine:
                         VersionAnomalyDetection,
                         InsecureTransportDetection,
                         AuthorizationHardeningDetection,
+                        PathTraversalDetection,
+                        UnboundedInputDetection,
                     ),
                 )
                 else "plugin",

@@ -1,26 +1,5 @@
 [
   {
-    "server": "@modelcontextprotocol/server-filesystem",
-    "display_name": "modelcontextprotocol / server-filesystem",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 14,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "44c35cf6ac86e32d",
-    "last_scanned": "2026-06-23",
-    "scanner_version": "1.0.0-rc3",
-    "status": "unknown"
-  },
-  {
     "server": "@modelcontextprotocol/server-memory",
     "display_name": "modelcontextprotocol / server-memory",
     "version": "",
@@ -181,6 +160,298 @@
     ],
     "tool_hash": "73c317b4aedef755",
     "last_scanned": "2026-06-23",
+    "scanner_version": "1.0.0-rc3",
+    "status": "unknown"
+  },
+  {
+    "server": "@modelcontextprotocol/server-filesystem",
+    "display_name": "modelcontextprotocol / server-filesystem",
+    "version": "",
+    "aivss_score": 10.0,
+    "grade": "F",
+    "confidence": 0.74,
+    "tools": 14,
+    "findings": 45,
+    "by_severity": {
+      "critical": 0,
+      "high": 5,
+      "medium": 8,
+      "low": 32
+    },
+    "findings_detail": [
+      {
+        "rule_id": "R113",
+        "severity": "medium",
+        "title": "Path traversal / directory traversal risk",
+        "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
+      },
+      {
+        "rule_id": "R114",
+        "severity": "low",
+        "title": "Unbounded input — no size/content constraints",
+        "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
+      },
+      {
+        "rule_id": "R114",
+        "severity": "low",
+        "title": "Unbounded input — no size/content constraints",
+        "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
+      },
+      {
+        "rule_id": "R113",
+        "severity": "medium",
+        "title": "Path traversal / directory traversal risk",
+        "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
+      },
+      {
+        "rule_id": "R114",
+        "severity": "low",
+        "title": "Unbounded input — no size/content constraints",
+        "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
+      },
+      {
+        "rule_id": "R114",
+        "severity": "low",
+        "title": "Unbounded input — no size/content constraints",
+        "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
+      },
+      {
+        "rule_id": "R113",
+        "severity": "medium",
+        "title": "Path traversal / directory traversal risk",
+        "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
+      },
+      {
+        "rule_id": "R114",
+        "severity": "low",
+        "title": "Unbounded input — no size/content constraints",
+        "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
+      },
+      {
+        "rule_id": "R114",
+        "severity": "low",
+        "title": "Unbounded input — no size/content constraints",
+        "description": "String parameter 'content.items.data' in output_schema has no validation constraints (no pattern, format, enum, or lengt"
+      },
+      {
+        "rule_id": "R114",
+        "severity": "low",
+        "title": "Unbounded input — no size/content constraints",
+        "description": "String parameter 'content.items.mimeType' in output_schema has no validation constraints (no pattern, format, enum, or l"
+      },
+      {
+        "rule_id": "R114",
+        "severity": "low",
+        "title": "Unbounded input — no size/content constraints",
+        "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
+      },
+      {
+        "rule_id": "R113",
+        "severity": "high",
+        "title": "Path traversal / directory traversal risk",
+        "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
+      },
+      {
+        "rule_id": "R114",
+        "severity": "low",
+        "title": "Unbounded input — no size/content constraints",
+        "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
+      },
+      {
+        "rule_id": "R114",
+        "severity": "low",
+        "title": "Unbounded input — no size/content constraints",
+        "description": "String parameter 'content' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
+      },
+      {
+        "rule_id": "R114",
+        "severity": "low",
+        "title": "Unbounded input — no size/content constraints",
+        "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
+      },
+      {
+        "rule_id": "R113",
+        "severity": "high",
+        "title": "Path traversal / directory traversal risk",
+        "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
+      },
+      {
+        "rule_id": "R114",
+        "severity": "low",
+        "title": "Unbounded input — no size/content constraints",
+        "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
+      },
+      {
+        "rule_id": "R114",
+        "severity": "low",
+        "title": "Unbounded input — no size/content constraints",
+        "description": "String parameter 'edits.items.oldText' in input_schema has no validation constraints (no pattern, format, enum, or lengt"
+      },
+      {
+        "rule_id": "R114",
+        "severity": "low",
+        "title": "Unbounded input — no size/content constraints",
+        "description": "String parameter 'edits.items.newText' in input_schema has no validation constraints (no pattern, format, enum, or lengt"
+      },
+      {
+        "rule_id": "R114",
+        "severity": "low",
+        "title": "Unbounded input — no size/content constraints",
+        "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
+      },
+      {
+        "rule_id": "R113",
+        "severity": "high",
+        "title": "Path traversal / directory traversal risk",
+        "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
+      },
+      {
+        "rule_id": "R114",
+        "severity": "low",
+        "title": "Unbounded input — no size/content constraints",
+        "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
+      },
+      {
+        "rule_id": "R114",
+        "severity": "low",
+        "title": "Unbounded input — no size/content constraints",
+        "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
+      },
+      {
+        "rule_id": "R113",
+        "severity": "medium",
+        "title": "Path traversal / directory traversal risk",
+        "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
+      },
+      {
+        "rule_id": "R114",
+        "severity": "low",
+        "title": "Unbounded input — no size/content constraints",
+        "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
+      },
+      {
+        "rule_id": "R114",
+        "severity": "low",
+        "title": "Unbounded input — no size/content constraints",
+        "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
+      },
+      {
+        "rule_id": "R113",
+        "severity": "medium",
+        "title": "Path traversal / directory traversal risk",
+        "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
+      },
+      {
+        "rule_id": "R114",
+        "severity": "low",
+        "title": "Unbounded input — no size/content constraints",
+        "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
+      },
+      {
+        "rule_id": "R114",
+        "severity": "low",
+        "title": "Unbounded input — no size/content constraints",
+        "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
+      },
+      {
+        "rule_id": "R113",
+        "severity": "medium",
+        "title": "Path traversal / directory traversal risk",
+        "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
+      },
+      {
+        "rule_id": "R114",
+        "severity": "low",
+        "title": "Unbounded input — no size/content constraints",
+        "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
+      },
+      {
+        "rule_id": "R114",
+        "severity": "low",
+        "title": "Unbounded input — no size/content constraints",
+        "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
+      },
+      {
+        "rule_id": "R113",
+        "severity": "high",
+        "title": "Path traversal / directory traversal risk",
+        "description": "Path parameter 'source' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
+      },
+      {
+        "rule_id": "R113",
+        "severity": "high",
+        "title": "Path traversal / directory traversal risk",
+        "description": "Path parameter 'destination' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
+      },
+      {
+        "rule_id": "R114",
+        "severity": "low",
+        "title": "Unbounded input — no size/content constraints",
+        "description": "String parameter 'source' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
+      },
+      {
+        "rule_id": "R114",
+        "severity": "low",
+        "title": "Unbounded input — no size/content constraints",
+        "description": "String parameter 'destination' in input_schema has no validation constraints (no pattern, format, enum, or length limits"
+      },
+      {
+        "rule_id": "R114",
+        "severity": "low",
+        "title": "Unbounded input — no size/content constraints",
+        "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
+      },
+      {
+        "rule_id": "R113",
+        "severity": "medium",
+        "title": "Path traversal / directory traversal risk",
+        "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
+      },
+      {
+        "rule_id": "R114",
+        "severity": "low",
+        "title": "Unbounded input — no size/content constraints",
+        "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
+      },
+      {
+        "rule_id": "R114",
+        "severity": "low",
+        "title": "Unbounded input — no size/content constraints",
+        "description": "String parameter 'pattern' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
+      },
+      {
+        "rule_id": "R114",
+        "severity": "low",
+        "title": "Unbounded input — no size/content constraints",
+        "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
+      },
+      {
+        "rule_id": "R113",
+        "severity": "medium",
+        "title": "Path traversal / directory traversal risk",
+        "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
+      },
+      {
+        "rule_id": "R114",
+        "severity": "low",
+        "title": "Unbounded input — no size/content constraints",
+        "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
+      },
+      {
+        "rule_id": "R114",
+        "severity": "low",
+        "title": "Unbounded input — no size/content constraints",
+        "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
+      },
+      {
+        "rule_id": "R114",
+        "severity": "low",
+        "title": "Unbounded input — no size/content constraints",
+        "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
+      }
+    ],
+    "tool_hash": "44c35cf6ac86e32d",
+    "last_scanned": "2026-06-24",
     "scanner_version": "1.0.0-rc3",
     "status": "unknown"
   }

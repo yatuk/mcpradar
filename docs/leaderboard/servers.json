@@ -1,28 +1,6 @@
 [
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-    "name": "io.modelcontextprotocol/server-filesystem",
-    "version": "unknown",
-    "_meta": {
-      "com.github.yatuk.mcpradar/security": {
-        "aivss_score": 0.0,
-        "grade": "A",
-        "confidence": 1.0,
-        "findings": 0,
-        "by_severity": {
-          "critical": 0,
-          "high": 0,
-          "medium": 0,
-          "low": 0
-        },
-        "last_scanned": "2026-06-23",
-        "scanner_version": "1.0.0-rc3",
-        "tool_hash": "44c35cf6ac86e32d"
-      }
-    }
-  },
-  {
-    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "io.modelcontextprotocol/server-memory",
     "version": "unknown",
     "_meta": {
@@ -106,6 +84,28 @@
         "last_scanned": "2026-06-23",
         "scanner_version": "1.0.0-rc3",
         "tool_hash": "73c317b4aedef755"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.modelcontextprotocol/server-filesystem",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "aivss_score": 10.0,
+        "grade": "F",
+        "confidence": 0.74,
+        "findings": 45,
+        "by_severity": {
+          "critical": 0,
+          "high": 5,
+          "medium": 8,
+          "low": 32
+        },
+        "last_scanned": "2026-06-24",
+        "scanner_version": "1.0.0-rc3",
+        "tool_hash": "44c35cf6ac86e32d"
       }
     }
   }

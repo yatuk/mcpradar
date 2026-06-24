@@ -114,4 +114,6 @@ testpaths = ["tests"]
 addopts = ["-v", "--tb=short", "-p", "no:warnings"]
 markers = [
     "e2e: end-to-end tests that use real MCP protocol (slow)",
+    "network: tests requiring network access (OSV API, etc.)",
+    "slow: slow tests (MCP server scanning)",
 ]

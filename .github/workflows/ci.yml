@@ -71,3 +71,29 @@ jobs:
 
       - name: Build wheel
         run: uv build
+
+  regression-gate:
+    name: Regression Gate (CVE Corpus)
+    runs-on: ubuntu-latest
+    needs: [lint, test]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.11"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - run: uv sync --group dev || uv sync --extra dev || uv sync
+
+      - name: Run regression gate (non-network)
+        run: uv run pytest tests/test_regression_gate.py -v -m "not network and not slow"
+
+      - name: Run regression gate (network + slow)
+        run: uv run pytest tests/test_regression_gate.py -v -m "network or slow"
+        continue-on-error: false
+        timeout-minutes: 15
