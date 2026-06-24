@@ -203,6 +203,74 @@
   .sev-medium { color: var(--yellow); }
   .sev-low { color: var(--dim); }
 
+  /* Tool detail table */
+  .tools-detail-row td {
+    padding: 0;
+    background: #0d1117;
+    border-bottom: 1px solid var(--border);
+  }
+  .tools-detail-table {
+    width: 100%;
+    margin: 8px 0;
+    font-size: 12px;
+  }
+  .tools-detail-table th {
+    color: var(--dim);
+    text-align: left;
+    padding: 4px 12px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  .tools-detail-table td {
+    padding: 6px 12px;
+    color: var(--text);
+    white-space: normal;
+    vertical-align: top;
+  }
+  .tool-name-cell {
+    font-weight: 600;
+    color: var(--blue);
+    white-space: nowrap;
+  }
+  .tool-desc-cell {
+    max-width: 300px;
+    color: var(--dim);
+    font-size: 12px;
+  }
+  .schema-cell {
+    max-width: 320px;
+  }
+  .schema-toggle {
+    background: var(--border);
+    color: var(--dim);
+    border: none;
+    border-radius: 3px;
+    padding: 2px 8px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .schema-toggle:hover { background: var(--dim); color: var(--text); }
+  .schema-pre {
+    background: #0d1117;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 8px;
+    margin: 0;
+    max-height: 200px;
+    overflow: auto;
+    font-size: 11px;
+    line-height: 1.4;
+    color: var(--dim);
+    white-space: pre;
+  }
+  .no-schema {
+    color: var(--dim);
+    font-style: italic;
+    font-size: 11px;
+  }
+
   /* Empty / Error state */
   .empty-state {
     text-align: center;
@@ -453,7 +521,12 @@ if (serverName) {
       html += "<td>" + serverCell + "</td>";
       html += '<td><span class="badge ' + scoreClass(s.aivss_score || 0) + '">' + sc + "</span></td>";
       html += '<td><span class="badge ' + gradeClass(g) + '">' + g + "</span></td>";
-      html += "<td>" + tools + "</td>";
+      if (s.tools > 0 && s.tools_detail && s.tools_detail.length > 0) {
+        var toolsJson = JSON.stringify(s.tools_detail).replace(/'/g, "&#39;").replace(/"/g, "&quot;");
+        html += '<td><button class="findings-btn" onclick="toggleTools(this, \'' + toolsJson + '\')">' + tools + '</button></td>';
+      } else {
+        html += "<td>" + tools + "</td>";
+      }
       if (s.findings > 0 && s.findings_detail && s.findings_detail.length > 0) {
         var detailJson = JSON.stringify(s.findings_detail).replace(/'/g, "&#39;").replace(/"/g, "&quot;");
         html += '<td><button class="findings-btn" onclick="toggleFindings(this, \'' + detailJson + '\')">' + findings + '</button></td>';
@@ -499,7 +572,7 @@ if (serverName) {
     var colspan = parentRow.querySelectorAll("td, th").length;
     var html = '<tr class="findings-detail-row"><td colspan="' + colspan + '">';
     html += '<table class="findings-detail-table">';
-    html += '<thead><tr><th>Severity</th><th>Rule ID</th><th>Title</th><th>Description</th></tr></thead>';
+    html += '<thead><tr><th>Severity</th><th>Rule ID</th><th>Target</th><th>Title</th><th>Description</th></tr></thead>';
     html += '<tbody>';
     for (var i = 0; i < detail.length; i++) {
       var f = detail[i];
@@ -512,8 +585,67 @@ if (serverName) {
       html += '<tr>';
       html += '<td class="' + sevClass + '">' + escapeHtml(f.severity || "—") + '</td>';
       html += '<td>' + escapeHtml(f.rule_id || "—") + '</td>';
+      html += '<td>' + escapeHtml(f.target || "—") + '</td>';
       html += '<td>' + escapeHtml(f.title || "—") + '</td>';
       html += '<td>' + escapeHtml(f.description || "—") + '</td>';
+      html += '</tr>';
+    }
+    html += '</tbody></table>';
+    html += '</td></tr>';
+    parentRow.insertAdjacentHTML("afterend", html);
+  }
+
+  function toggleTools(btn, toolsJson) {
+    var tools;
+    try {
+      tools = JSON.parse(toolsJson.replace(/&quot;/g, '"').replace(/&#39;/g, "'"));
+    } catch (e) {
+      return;
+    }
+    var parentRow = btn.closest("tr");
+    var existingRow = parentRow.nextElementSibling;
+    if (existingRow && existingRow.classList.contains("tools-detail-row")) {
+      existingRow.remove();
+      return;
+    }
+
+    var colspan = parentRow.querySelectorAll("td, th").length;
+    var html = '<tr class="tools-detail-row"><td colspan="' + colspan + '">';
+    html += '<table class="tools-detail-table">';
+    html += '<thead><tr><th>Tool Name</th><th>Description</th><th>Input Schema</th><th>Output Schema</th></tr></thead>';
+    html += '<tbody>';
+    for (var i = 0; i < tools.length; i++) {
+      var t = tools[i];
+      var inputSchema = t.input_schema || null;
+      var outputSchema = t.output_schema || null;
+      var toolId = 'tool-' + i + '-' + Date.now();
+
+      html += '<tr>';
+      html += '<td class="tool-name-cell">' + escapeHtml(t.name || "—") + '</td>';
+      html += '<td class="tool-desc-cell">' + escapeHtml(t.description || "—") + '</td>';
+
+      // Input schema cell
+      html += '<td class="schema-cell">';
+      if (inputSchema) {
+        var schemaStr = JSON.stringify(inputSchema, null, 2);
+        html += '<button class="schema-toggle" onclick="var p=this.nextElementSibling;p.style.display=p.style.display===\'none\'?\'block\':\'none\';">Show/Hide Schema</button>';
+        html += '<pre class="schema-pre" style="display:none">' + escapeHtml(schemaStr) + '</pre>';
+      } else {
+        html += '<span class="no-schema">—</span>';
+      }
+      html += '</td>';
+
+      // Output schema cell
+      html += '<td class="schema-cell">';
+      if (outputSchema) {
+        var outStr = JSON.stringify(outputSchema, null, 2);
+        html += '<button class="schema-toggle" onclick="var p=this.nextElementSibling;p.style.display=p.style.display===\'none\'?\'block\':\'none\';">Show/Hide Schema</button>';
+        html += '<pre class="schema-pre" style="display:none">' + escapeHtml(outStr) + '</pre>';
+      } else {
+        html += '<span class="no-schema">—</span>';
+      }
+      html += '</td>';
+
       html += '</tr>';
     }
     html += '</tbody></table>';

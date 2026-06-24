@@ -126,11 +126,29 @@ def main() -> None:
                 {
                     "rule_id": f.get("rule_id", "?"),
                     "severity": f.get("severity", "?"),
+                    "target": f.get("target", "?") or "—",
                     "title": f.get("title", "")[:80],
                     "description": f.get("description", "")[:120],
                 }
                 for f in findings_list
             ]
+
+            # Extract tool details: name, description, schemas
+            tools_list = data.get("tools", [])
+            tools_detail: list[dict] = []
+            for t in tools_list:
+                td: dict = {
+                    "name": t.get("name", "?"),
+                    "description": t.get("description", "")[:200],
+                }
+                # Include schemas but strip empty ones to save space
+                input_schema = t.get("input_schema")
+                if input_schema and isinstance(input_schema, dict) and input_schema != {}:
+                    td["input_schema"] = input_schema
+                output_schema = t.get("output_schema")
+                if output_schema and isinstance(output_schema, dict) and output_schema != {}:
+                    td["output_schema"] = output_schema
+                tools_detail.append(td)
 
             score, grade, confidence = score_from_counts(sev, tools)
             tool_hash = compute_tool_hash(scan_id) if scan_id else ""
@@ -152,6 +170,7 @@ def main() -> None:
                         "low": sev.get("low", 0),
                     },
                     "findings_detail": findings_detail,
+                    "tools_detail": tools_detail,
                     "tool_hash": tool_hash,
                     "last_scanned": (
                         data.get("scanned_at", "")[:10] if data.get("scanned_at") else "—"
