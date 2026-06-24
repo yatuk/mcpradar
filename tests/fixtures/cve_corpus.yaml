@@ -27,7 +27,9 @@ targets:
       min_findings: 3
       rules_triggered: ["R109", "R113", "R114"]
       max_grade: "C"
-      notes: "Latest version is patched for CVEs but still has design-level risks"
+      notes: >-
+        Latest version is patched for CVEs but still has design-level risks:
+        unbounded path strings, no schema validation on file params
 
   # Layer 3: Negative Control (FP calibration)
   - server: "benign-echo-server"

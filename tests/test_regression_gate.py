@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import contextlib
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -29,7 +30,7 @@ def scan_server(command: str, transport: str, timeout: int = 120) -> dict:
     Uses -o/--output to write clean JSON (bypassing Rich console wrapping).
     """
     fd, tmp_path = tempfile.mkstemp(suffix=".json", prefix="mcpradar_test_")
-    Path(tmp_path).close()
+    os.close(fd)
     try:
         proc = subprocess.run(
             [
