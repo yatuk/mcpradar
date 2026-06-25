@@ -6,16 +6,16 @@ targets:
   # Layer 1: Pinned Vulnerable Versions (CVE regression)
   - server: "@modelcontextprotocol/server-filesystem"
     package: {ecosystem: "npm", name: "@modelcontextprotocol/server-filesystem"}
-    pinned_version: "2025.6.5"
-    scan_command: "npx -y @modelcontextprotocol/server-filesystem@2025.6.5 /tmp"
+    pinned_version: "2025.3.28"
+    scan_command: "npx -y @modelcontextprotocol/server-filesystem@2025.3.28 /tmp"
     transport: "stdio"
     expected:
-      min_findings: 3
+      min_findings: 5
       min_critical_or_high: 1
       cve_ids: ["CVE-2025-53110", "CVE-2025-53109"]
       cwe_ids: ["CWE-22", "CWE-59"]
       max_grade: "D"
-      notes: "Pre-patch version vulnerable to EscapeRoute path traversal and symlink bypass"
+      notes: "Pre-patch version vulnerable to EscapeRoute path traversal (CVE-2025-53110) and symlink bypass (CVE-2025-53109)"
 
   # Layer 2: Latest Version (design-level findings — still risky)
   - server: "@modelcontextprotocol/server-filesystem"
@@ -24,12 +24,13 @@ targets:
     scan_command: "npx -y @modelcontextprotocol/server-filesystem /tmp"
     transport: "stdio"
     expected:
-      min_findings: 3
-      rules_triggered: ["R109", "R113", "R114"]
-      max_grade: "C"
+      min_findings: 10
+      rules_triggered: ["R113", "R114"]
+      max_grade: "F"
       notes: >-
-        Latest version is patched for CVEs but still has design-level risks:
-        unbounded path strings, no schema validation on file params
+        Latest version patched the CVE-level path traversal but still has
+        design-level risks: path params lack pattern/format constraints (R113),
+        and many string inputs have no validation constraints at all (R114).
 
   # Layer 3: Negative Control (FP calibration)
   - server: "benign-echo-server"

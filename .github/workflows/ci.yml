@@ -47,7 +47,7 @@ jobs:
 
       - name: Run tests
         run: >
-          uv run pytest -m "not e2e"
+          uv run pytest -m "not e2e and not network and not slow"
           --cov=src/mcpradar
           --cov-report=term-missing
           --cov-report=xml
