@@ -589,6 +589,8 @@ footer a:hover { text-decoration: underline; }
   }
 
   function inferScope(s) {
+    var isPending = s.status === "registry-pending" || s.status === "pending";
+    if (isPending) return ["pending"];
     var scopes = [];
     if (s.tools_detail && s.tools_detail.length > 0) {
       scopes.push("schema");
@@ -596,7 +598,6 @@ footer a:hover { text-decoration: underline; }
     if (s.tool_hash) {
       scopes.push("fingerprint");
     }
-    // CVE scope if any finding rule matches CVE-related patterns
     if (s.findings_detail && s.findings_detail.length > 0) {
       var hasCve = s.findings_detail.some(function (f) {
         return f.rule_id && (f.rule_id === "R107" || f.rule_id === "R108" || f.rule_id === "R113");
@@ -668,21 +669,33 @@ footer a:hover { text-decoration: underline; }
       calBadge.style.display = "none";
       return;
     }
+    var scanned = 0;
     var sum = 0;
     var latest = "";
     for (var i = 0; i < allServers.length; i++) {
-      sum += allServers[i].aivss_score || 0;
-      if ((allServers[i].last_scanned || "") > latest) {
-        latest = allServers[i].last_scanned;
+      var s = allServers[i];
+      var isPending = s.status === "registry-pending" || s.status === "pending";
+      if (!isPending) {
+        scanned++;
+        sum += s.aivss_score || 0;
+      }
+      if ((s.last_scanned || "") > latest) {
+        latest = s.last_scanned;
+      }
+      if (s.version) {
+        // version is present
       }
     }
-    var avg = (sum / total).toFixed(1);
-    var previewHtml = total < 5
-      ? ' <span class="preview-tag">Preview — ' + total + ' servers</span>'
+    var pending = total - scanned;
+    var avg = scanned > 0 ? (sum / scanned).toFixed(1) : "—";
+    var previewHtml = scanned < 5
+      ? ' <span class="preview-tag">Preview — ' + scanned + ' servers scanned</span>'
       : "";
+
     statsBar.innerHTML =
-      '<span><strong>' + total + '</strong> servers scored' + previewHtml + '</span>' +
-      (total >= 5 ? '<span>Avg risk <strong>' + avg + '</strong></span>' : '') +
+      '<span><strong>' + scanned + '</strong> scanned' + previewHtml + '</span>' +
+      (pending > 0 ? '<span><strong>' + pending + '</strong> pending</span>' : '') +
+      (scanned >= 5 ? '<span>Avg risk <strong>' + avg + '</strong></span>' : '') +
       (latest ? '<span>Updated <strong>' + latest + '</strong></span>' : '');
 
     // Calibration badge — show if we have at least one non-A server (real findings)
@@ -768,15 +781,22 @@ footer a:hover { text-decoration: underline; }
         .replace("@playwright/", "com.microsoft.playwright/")
         .replace("@", "io.github.");
 
-      html += '<tr>';
+      var isPending = s.status === "registry-pending" || s.status === "pending";
+      var ver = s.version ? s.version : "";
+      var gDisplay = isPending ? "—" : g;
+      var gradeLabel = isPending ? "Pending" : g;
+
+      html += '<tr' + (isPending ? ' style="opacity:0.6"' : '') + '>';
       html += '<td style="color:var(--dim)">' + (i + 1) + '</td>';
       html += '<td>' +
         '<a class="server-link" href="' + detailHref + '" aria-label="View detail for ' + esc(name) + '">' + esc(name) + '</a>' +
+        (ver ? ' <span style="font-size:10px;color:var(--dim)">v' + esc(ver) + '</span>' : '') +
+        (isPending ? ' <span style="font-size:9px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:0 5px;color:var(--dim)">pending</span>' : '') +
         '<br><span style="font-size:10px;color:var(--dim)">' +
         '<a href="https://registry.modelcontextprotocol.io/v0.1/servers/' + encodeURIComponent(registryName) + '/versions/latest" target="_blank" rel="noopener" style="color:inherit">registry ↗</a>' +
         '</span></td>';
       html += '<td class="risk-cell">' + renderRiskBar(sc) + '</td>';
-      html += '<td><span class="grade-badge ' + g + '" aria-label="Grade ' + g + '">' + g + '</span></td>';
+      html += '<td><span class="grade-badge ' + g + '" aria-label="Grade ' + gradeLabel + '">' + gDisplay + '</span></td>';
       html += '<td>' + renderScopeTags(s) + '</td>';
       // Tools
       html += '<td><span style="font-weight:600">' + tools + '</span></td>';
@@ -837,10 +857,16 @@ footer a:hover { text-decoration: underline; }
       var serverId = s.server || "";
       var detailHref = "#server=" + encodeServer(serverId);
 
-      html += '<div class="server-card">';
+      var isPending = s.status === "registry-pending" || s.status === "pending";
+      var ver = s.version ? s.version : "";
+
+      html += '<div class="server-card"' + (isPending ? ' style="opacity:0.55"' : '') + '>';
       html += '<div class="card-head">';
-      html += '<a class="card-name" href="' + detailHref + '">' + esc(name) + '</a>';
-      html += '<span class="card-grade ' + g + '" aria-label="Grade ' + g + '">' + g + '</span>';
+      html += '<div><a class="card-name" href="' + detailHref + '">' + esc(name) + '</a>';
+      if (ver) html += ' <span style="font-size:11px;color:var(--dim)">v' + esc(ver) + '</span>';
+      if (isPending) html += ' <span style="font-size:9px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:0 5px;color:var(--dim)">pending</span>';
+      html += '</div>';
+      html += '<span class="card-grade ' + g + '" aria-label="Grade ' + (isPending ? 'Pending' : g) + '">' + (isPending ? '—' : g) + '</span>';
       html += '</div>';
       html += '<div class="card-stats">';
       html += '<div>Risk</div><div>' + renderRiskBar(sc) + '</div>';

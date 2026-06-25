@@ -1,0 +1,21 @@
+{
+  "name": "@anthropic/mcp-server-outlook",
+  "version": "latest",
+  "target": "@anthropic/mcp-server-outlook",
+  "transport": "stdio",
+  "scan_id": "21a8e6db",
+  "scanned_at": "2026-06-25T19:48:31Z",
+  "status": "registry-pending",
+  "summary": {
+    "total_tools": 0,
+    "total_prompts": 0,
+    "total_resources": 0,
+    "clean": 0
+  },
+  "tools": [],
+  "prompts": [],
+  "resources": [],
+  "findings": [],
+  "description": "Outlook calendar integration",
+  "repository": ""
+}
