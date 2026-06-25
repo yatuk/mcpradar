@@ -5,396 +5,617 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MCPRadar Security Leaderboard</title>
 <style>
-  :root {
-    --bg: #0d1117;
-    --card: #161b22;
-    --border: #30363d;
-    --text: #c9d1d9;
-    --dim: #8b949e;
-    --green: #3fb950;
-    --light-green: #56d364;
-    --yellow: #d29922;
-    --orange: #db6d28;
-    --red: #f85149;
-    --blue: #58a6ff;
-  }
-  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font: 14px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px 20px;
-  }
+/* ========================================================================
+   Design Tokens — "Radar" Observability Theme
+   ======================================================================== */
+:root {
+  --bg: #0d1117;
+  --card: #161b22;
+  --border: #30363d;
+  --text: #c9d1d9;
+  --dim: #8b949e;
+  --bright: #f0f6fc;
 
-  /* Header */
-  header { margin-bottom: 24px; }
-  h1 { font-size: 28px; margin-bottom: 6px; color: #f0f6fc; }
-  h1 span { color: var(--red); }
-  .subtitle { color: var(--dim); font-size: 14px; margin-bottom: 20px; }
-  .subtitle a { color: var(--blue); text-decoration: none; }
-  .subtitle a:hover { text-decoration: underline; }
+  --green: #3fb950;
+  --green-dim: #1a3a1a;
+  --light-green: #56d364;
+  --yellow: #d29922;
+  --yellow-dim: #3a2e1a;
+  --orange: #db6d28;
+  --orange-dim: #3a241a;
+  --red: #f85149;
+  --red-dim: #3a1a1a;
+  --blue: #58a6ff;
+  --blue-dim: #0c2d6b;
+}
 
-  /* Stats bar */
-  .stats-bar {
-    display: flex;
-    gap: 32px;
-    flex-wrap: wrap;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 12px 20px;
-    font-size: 13px;
-    color: var(--dim);
-    margin-bottom: 20px;
-  }
-  .stats-bar strong { color: var(--text); }
+/* Reset */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
-  /* Controls */
-  .controls {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    align-items: center;
-    margin-bottom: 16px;
-  }
-  .search-wrap { position: relative; flex: 1; min-width: 200px; max-width: 360px; }
-  .search-wrap input {
-    width: 100%;
-    padding: 8px 12px 8px 32px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    color: var(--text);
-    font-size: 13px;
-    outline: none;
-    transition: border-color 0.15s;
-  }
-  .search-wrap input:focus { border-color: var(--blue); }
-  .search-wrap input::placeholder { color: var(--dim); }
-  .search-icon {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--dim);
-    font-size: 13px;
-    pointer-events: none;
-  }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px 32px;
+}
 
-  /* Grade filter buttons */
-  .grade-filters { display: flex; gap: 6px; align-items: center; }
-  .grade-filters .label { color: var(--dim); font-size: 12px; margin-right: 4px; }
-  .grade-btn {
-    padding: 5px 12px;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    background: var(--card);
-    color: var(--dim);
-    cursor: pointer;
-    font-size: 12px;
-    font-weight: 600;
-    transition: all 0.12s;
-    user-select: none;
-  }
-  .grade-btn:hover { border-color: var(--dim); color: var(--text); }
-  .grade-btn.active { background: var(--border); color: var(--text); border-color: var(--dim); }
-  .grade-btn.grade-a.active { background: #1a3a1a; color: var(--green); border-color: var(--green); }
-  .grade-btn.grade-b.active { background: #1a3a1a; color: var(--light-green); border-color: var(--light-green); }
-  .grade-btn.grade-c.active { background: #3a2e1a; color: var(--yellow); border-color: var(--yellow); }
-  .grade-btn.grade-d.active { background: #3a241a; color: var(--orange); border-color: var(--orange); }
-  .grade-btn.grade-f.active { background: #3a1a1a; color: var(--red); border-color: var(--red); }
+/* ========================================================================
+   Header
+   ======================================================================== */
+header { margin-bottom: 20px; }
+h1 { font-size: 26px; margin-bottom: 4px; color: var(--bright); letter-spacing: -0.3px; }
+h1 span { color: var(--red); }
+.subtitle { color: var(--dim); font-size: 13px; }
+.subtitle a { color: var(--blue); text-decoration: none; }
+.subtitle a:hover { text-decoration: underline; }
 
-  /* Table */
-  .table-wrap {
-    overflow-x: auto;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    background: var(--card);
-  }
-  table { width: 100%; border-collapse: collapse; min-width: 750px; }
-  thead th {
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    text-align: left;
-    padding: 10px 12px;
-    background: var(--card);
-    border-bottom: 1px solid var(--border);
-    color: var(--dim);
-    font-weight: 600;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    cursor: pointer;
-    user-select: none;
-    white-space: nowrap;
-  }
-  thead th:hover { color: var(--text); }
-  thead th .sort-arrow { margin-left: 3px; font-size: 10px; opacity: 0.5; }
-  thead th.sorted { color: var(--text); }
-  thead th.sorted .sort-arrow { opacity: 1; color: var(--blue); }
-  tbody td {
-    padding: 10px 12px;
-    border-bottom: 1px solid var(--border);
-    white-space: nowrap;
-  }
-  tbody tr:last-child td { border-bottom: none; }
-  tbody tr:hover td { background: rgba(255,255,255,0.03); }
+/* ========================================================================
+   Methodology Panel
+   ======================================================================== */
+.methodology {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+.methodology summary {
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dim);
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.methodology summary:hover { color: var(--text); }
+.methodology summary::marker { font-size: 10px; }
+.methodology .body {
+  padding: 0 16px 14px;
+  font-size: 13px;
+  color: var(--dim);
+  line-height: 1.7;
+}
+.methodology .body strong { color: var(--text); }
+.methodology .body code {
+  background: var(--bg);
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 12px;
+  color: var(--text);
+}
+.methodology .cal-badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  background: var(--green-dim);
+  color: var(--green);
+}
 
-  /* Badges */
-  .badge {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 10px;
-    font-size: 12px;
-    font-weight: 600;
-    min-width: 32px;
-    text-align: center;
-  }
-  .badge.score-green  { background: #1a3a1a; color: var(--green); }
-  .badge.score-yellow { background: #3a2e1a; color: var(--yellow); }
-  .badge.score-orange { background: #3a241a; color: var(--orange); }
-  .badge.score-red    { background: #3a1a1a; color: var(--red); }
-  .badge.grade-a { background: #1a3a1a; color: var(--green); }
-  .badge.grade-b { background: #1a3a1a; color: var(--light-green); }
-  .badge.grade-c { background: #3a2e1a; color: var(--yellow); }
-  .badge.grade-d { background: #3a241a; color: var(--orange); }
-  .badge.grade-f { background: #3a1a1a; color: var(--red); }
+/* ========================================================================
+   Stats Bar
+   ======================================================================== */
+.stats-bar {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-size: 13px;
+  color: var(--dim);
+  margin-bottom: 16px;
+}
+.stats-bar strong { color: var(--text); }
+.stats-bar .preview-tag {
+  padding: 1px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  background: var(--yellow-dim);
+  color: var(--yellow);
+}
 
-  .server-link { color: var(--blue); text-decoration: none; }
-  .server-link:hover { text-decoration: underline; }
-  .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; color: var(--dim); font-size: 12px; }
+/* ========================================================================
+   Controls
+   ======================================================================== */
+.controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.search-wrap { position: relative; flex: 1; min-width: 180px; max-width: 340px; }
+.search-wrap input {
+  width: 100%;
+  padding: 7px 12px 7px 30px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 13px;
+  outline: none;
+}
+.search-wrap input:focus { border-color: var(--blue); }
+.search-icon {
+  position: absolute;
+  left: 9px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--dim);
+  font-size: 12px;
+  pointer-events: none;
+}
+/* Grade filter pills */
+.grade-filters { display: flex; gap: 5px; align-items: center; }
+.grade-filters .label { color: var(--dim); font-size: 12px; margin-right: 2px; }
+.grade-btn {
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--card);
+  color: var(--dim);
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  transition: all 0.12s;
+  user-select: none;
+}
+.grade-btn:hover { border-color: var(--dim); color: var(--text); }
+.grade-btn.on { color: var(--text); }
+.grade-btn[data-grade="A"].on { background: var(--green-dim); color: var(--green); border-color: var(--green); }
+.grade-btn[data-grade="B"].on { background: var(--green-dim); color: var(--light-green); border-color: var(--light-green); }
+.grade-btn[data-grade="C"].on { background: var(--yellow-dim); color: var(--yellow); border-color: var(--yellow); }
+.grade-btn[data-grade="D"].on { background: var(--orange-dim); color: var(--orange); border-color: var(--orange); }
+.grade-btn[data-grade="F"].on { background: var(--red-dim); color: var(--red); border-color: var(--red); }
 
-  .findings-btn {
-    background: var(--blue);
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    padding: 2px 8px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 13px;
-  }
-  .findings-btn:hover { opacity: 0.8; }
-  .findings-detail-row td {
-    padding: 0;
-    background: #0d1117;
-    border-bottom: 1px solid var(--border);
-  }
-  .findings-detail-table {
-    width: 100%;
-    margin: 8px 0;
-    font-size: 12px;
-  }
-  .findings-detail-table th {
-    color: var(--dim);
-    text-align: left;
-    padding: 4px 12px;
-    border-bottom: 1px solid var(--border);
-  }
-  .findings-detail-table td {
-    padding: 4px 12px;
-    color: var(--text);
-  }
-  .sev-critical { color: var(--red); font-weight: 700; }
-  .sev-high { color: var(--orange); font-weight: 600; }
-  .sev-medium { color: var(--yellow); }
-  .sev-low { color: var(--dim); }
+/* ========================================================================
+   Table (Desktop)
+   ======================================================================== */
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--card);
+}
+table { width: 100%; border-collapse: collapse; min-width: 680px; }
+thead th {
+  position: sticky; top: 0; z-index: 2;
+  text-align: left; padding: 9px 10px;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  color: var(--dim);
+  font-weight: 600; font-size: 11px;
+  text-transform: uppercase; letter-spacing: 0.4px;
+  cursor: pointer; user-select: none; white-space: nowrap;
+}
+thead th:hover { color: var(--text); }
+thead th[aria-sort] { color: var(--text); }
+thead th[aria-sort]::after { margin-left: 3px; font-size: 9px; opacity: 0.5; }
+thead th[aria-sort="ascending"]::after { content: "▲"; opacity: 1; color: var(--blue); }
+thead th[aria-sort="descending"]::after { content: "▼"; opacity: 1; color: var(--blue); }
+thead th[aria-sort="none"]::after { content: "⇅"; }
+tbody td { padding: 9px 10px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: rgba(255,255,255,0.025); }
+.server-link { color: var(--blue); text-decoration: none; }
+.server-link:hover { text-decoration: underline; }
+.mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 11px; color: var(--dim); }
 
-  /* Tool detail table */
-  .tools-detail-row td {
-    padding: 0;
-    background: #0d1117;
-    border-bottom: 1px solid var(--border);
-  }
-  .tools-detail-table {
-    width: 100%;
-    margin: 8px 0;
-    font-size: 12px;
-  }
-  .tools-detail-table th {
-    color: var(--dim);
-    text-align: left;
-    padding: 4px 12px;
-    border-bottom: 1px solid var(--border);
-    white-space: nowrap;
-  }
-  .tools-detail-table td {
-    padding: 6px 12px;
-    color: var(--text);
-    white-space: normal;
-    vertical-align: top;
-  }
-  .tool-name-cell {
-    font-weight: 600;
-    color: var(--blue);
-    white-space: nowrap;
-  }
-  .tool-desc-cell {
-    max-width: 300px;
-    color: var(--dim);
-    font-size: 12px;
-  }
-  .schema-cell {
-    max-width: 320px;
-  }
-  .schema-toggle {
-    background: var(--border);
-    color: var(--dim);
-    border: none;
-    border-radius: 3px;
-    padding: 2px 8px;
-    cursor: pointer;
-    font-size: 11px;
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-  .schema-toggle:hover { background: var(--dim); color: var(--text); }
-  .schema-pre {
-    background: #0d1117;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 8px;
-    margin: 0;
-    max-height: 200px;
-    overflow: auto;
-    font-size: 11px;
-    line-height: 1.4;
-    color: var(--dim);
-    white-space: pre;
-  }
-  .no-schema {
-    color: var(--dim);
-    font-style: italic;
-    font-size: 11px;
-  }
+/* ========================================================================
+   Risk Bar
+   ======================================================================== */
+.risk-cell { min-width: 110px; }
+.risk-bar-wrap {
+  display: flex; align-items: center; gap: 8px;
+}
+.risk-bar-track {
+  flex: 1; max-width: 70px; height: 6px;
+  background: var(--border); border-radius: 3px;
+  overflow: hidden;
+}
+.risk-bar-fill {
+  height: 100%; border-radius: 3px;
+  transition: width 0.3s;
+}
+.risk-bar-fill.low    { background: var(--green); }
+.risk-bar-fill.med    { background: var(--yellow); }
+.risk-bar-fill.high   { background: var(--orange); }
+.risk-bar-fill.crit   { background: var(--red); }
+.risk-value { font-size: 12px; font-weight: 600; color: var(--text); width: 28px; text-align: right; }
 
-  /* Empty / Error state */
-  .empty-state {
-    text-align: center;
-    padding: 60px 20px;
-    color: var(--dim);
-  }
-  .empty-state p { margin-bottom: 8px; }
-  .empty-state .icon { font-size: 36px; margin-bottom: 12px; }
+/* ========================================================================
+   Grade Badge
+   ======================================================================== */
+.grade-badge {
+  display: inline-block; padding: 2px 10px; border-radius: 10px;
+  font-size: 12px; font-weight: 700; text-align: center; min-width: 28px;
+}
+.grade-badge.A { background: var(--green-dim); color: var(--green); }
+.grade-badge.B { background: var(--green-dim); color: var(--light-green); }
+.grade-badge.C { background: var(--yellow-dim); color: var(--yellow); }
+.grade-badge.D { background: var(--orange-dim); color: var(--orange); }
+.grade-badge.F { background: var(--red-dim); color: var(--red); }
 
-  /* Footer */
-  footer {
-    margin-top: 32px;
-    padding-top: 16px;
-    border-top: 1px solid var(--border);
-    color: var(--dim);
-    font-size: 12px;
-    text-align: center;
-    line-height: 1.8;
-  }
-  footer a { color: var(--blue); text-decoration: none; }
-  footer a:hover { text-decoration: underline; }
+/* ========================================================================
+   Scope Badges
+   ======================================================================== */
+.scope-tags { display: flex; gap: 4px; flex-wrap: wrap; }
+.scope-tag {
+  display: inline-block; padding: 1px 7px; border-radius: 10px;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.3px;
+  background: var(--card); border: 1px solid var(--border); color: var(--dim);
+}
 
-  @media (max-width: 600px) {
-    body { padding: 20px 12px 12px; }
-    h1 { font-size: 22px; }
-    .stats-bar { gap: 16px; padding: 10px 14px; }
-    .controls { flex-direction: column; align-items: stretch; }
-    .search-wrap { max-width: none; }
-    .grade-filters { flex-wrap: wrap; }
+/* ========================================================================
+   Findings Button
+   ======================================================================== */
+.findings-link {
+  font-weight: 600; color: var(--blue); cursor: pointer;
+  text-decoration: none; font-size: 13px;
+}
+.findings-link:hover { text-decoration: underline; }
+
+/* ========================================================================
+   Card Layout (Mobile)
+   ======================================================================== */
+.card-grid { display: none; gap: 12px; }
+.card-grid.active { display: grid; }
+.table-wrap.hidden { display: none; }
+
+.server-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 6px; padding: 14px;
+}
+.card-head {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  margin-bottom: 10px;
+}
+.card-name {
+  font-weight: 600; font-size: 15px; color: var(--blue);
+  text-decoration: none;
+}
+.card-name:hover { text-decoration: underline; }
+.card-grade {
+  font-size: 18px; font-weight: 800; min-width: 32px; text-align: center;
+}
+.card-grade.A { color: var(--green); }
+.card-grade.B { color: var(--light-green); }
+.card-grade.C { color: var(--yellow); }
+.card-grade.D { color: var(--orange); }
+.card-grade.F { color: var(--red); }
+.card-stats {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 8px 16px; font-size: 12px; color: var(--dim);
+}
+.card-stats strong { color: var(--text); }
+.card-risk-bar {
+  grid-column: 1 / -1;
+  display: flex; align-items: center; gap: 8px;
+  margin-top: 4px;
+}
+.card-scope { grid-column: 1 / -1; margin-top: 2px; }
+.card-link {
+  grid-column: 1 / -1; margin-top: 6px; text-align: right;
+}
+
+/* ========================================================================
+   Detail View (Server Detail Page)
+   ======================================================================== */
+.detail-view { display: none; }
+.detail-view.active { display: block; }
+.detail-back {
+  display: inline-flex; align-items: center; gap: 4px;
+  margin-bottom: 16px; padding: 5px 12px;
+  background: var(--card); border: 1px solid var(--border); border-radius: 6px;
+  color: var(--dim); cursor: pointer; font-size: 12px; font-weight: 600;
+}
+.detail-back:hover { color: var(--text); border-color: var(--dim); }
+.detail-header {
+  background: var(--card); border: 1px solid var(--border); border-radius: 6px;
+  padding: 16px 20px; margin-bottom: 16px;
+}
+.detail-header h2 { font-size: 20px; color: var(--bright); margin-bottom: 6px; }
+.detail-header .meta { font-size: 12px; color: var(--dim); }
+.detail-header .meta strong { color: var(--text); }
+.detail-score-breakdown {
+  display: flex; gap: 24px; flex-wrap: wrap;
+  margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border);
+}
+.detail-score-breakdown .item { font-size: 12px; color: var(--dim); }
+.detail-score-breakdown .item b { color: var(--text); }
+
+.detail-section {
+  background: var(--card); border: 1px solid var(--border); border-radius: 6px;
+  padding: 14px 18px; margin-bottom: 14px;
+}
+.detail-section h3 {
+  font-size: 14px; color: var(--bright); margin-bottom: 10px;
+  border-bottom: 1px solid var(--border); padding-bottom: 8px;
+}
+.finding-row {
+  display: grid;
+  grid-template-columns: 70px 50px 130px 1fr;
+  gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--border);
+  font-size: 12px; align-items: baseline;
+}
+.finding-row:last-child { border-bottom: none; }
+.finding-row.critical { border-left: 2px solid var(--red); padding-left: 8px; }
+.finding-row.high { border-left: 2px solid var(--orange); padding-left: 8px; }
+.finding-row.medium { border-left: 2px solid var(--yellow); padding-left: 8px; }
+.finding-row.low { border-left: 2px solid var(--dim); padding-left: 8px; }
+.sev-tag {
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px;
+}
+.sev-tag.critical { color: var(--red); }
+.sev-tag.high { color: var(--orange); }
+.sev-tag.medium { color: var(--yellow); }
+.sev-tag.low { color: var(--dim); }
+.finding-desc { color: var(--dim); grid-column: 4; }
+
+.tool-mini-list { font-size: 12px; }
+.tool-mini {
+  padding: 6px 0; border-bottom: 1px solid var(--border);
+  display: grid; grid-template-columns: 160px 1fr; gap: 8px;
+}
+.tool-mini:last-child { border-bottom: none; }
+.tool-mini .tn { font-weight: 600; color: var(--blue); }
+.tool-mini .td { color: var(--dim); }
+.tool-mini .ts {
+  grid-column: 1 / -1; margin-top: 4px;
+  font-size: 11px; color: var(--dim);
+}
+
+/* ========================================================================
+   State Screens
+   ======================================================================== */
+.state-msg {
+  text-align: center; padding: 56px 20px; color: var(--dim);
+}
+.state-msg p { margin-bottom: 6px; }
+.state-msg .icon { font-size: 28px; margin-bottom: 10px; opacity: 0.5; }
+.state-msg a { color: var(--blue); cursor: pointer; }
+
+/* Loading skeleton */
+.skeleton {
+  background: linear-gradient(90deg, var(--card) 25%, var(--border) 50%, var(--card) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.skeleton-row { display: flex; gap: 12px; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+.skeleton-row .sk { height: 16px; border-radius: 4px; }
+.skeleton-row .sk:nth-child(1) { width: 30px; }
+.skeleton-row .sk:nth-child(2) { width: 200px; }
+.skeleton-row .sk:nth-child(3) { width: 80px; }
+.skeleton-row .sk:nth-child(4) { width: 60px; }
+.skeleton-row .sk:nth-child(5) { width: 50px; }
+.skeleton-row .sk:nth-child(6) { width: 70px; }
+.skeleton-row .sk:nth-child(7) { width: 90px; }
+.skeleton-row .sk:nth-child(8) { width: 80px; }
+
+/* ========================================================================
+   Footer
+   ======================================================================== */
+footer {
+  margin-top: 28px; padding-top: 14px;
+  border-top: 1px solid var(--border);
+  color: var(--dim); font-size: 11px; text-align: center; line-height: 1.8;
+}
+footer a { color: var(--blue); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+
+/* ========================================================================
+   Responsive
+   ======================================================================== */
+@media (max-width: 700px) {
+  body { padding: 20px 10px 16px; }
+  h1 { font-size: 20px; }
+  .controls { flex-direction: column; align-items: stretch; }
+  .search-wrap { max-width: none; }
+  .grade-filters { flex-wrap: wrap; }
+  .stats-bar { gap: 14px; padding: 8px 12px; }
+
+  /* Switch to cards */
+  .table-wrap { display: none; }
+  .card-grid.active { display: grid; }
+
+  /* Detail view */
+  .finding-row {
+    grid-template-columns: 60px 45px 1fr;
   }
+  .finding-row .rule-cell { grid-column: 3; }
+  .finding-desc { grid-column: 1 / -1; }
+  .detail-score-breakdown { flex-direction: column; gap: 8px; }
+}
 </style>
 </head>
 <body>
 
+<!-- ===== HEADER ===== -->
 <header>
-  <h1><span>MCPRadar</span> Security Leaderboard</h1>
-  <p class="subtitle">
-    Independent security scores for MCP servers — powered by the
-    <a href="https://registry.modelcontextprotocol.io">official registry</a>
-  </p>
-  <div class="stats-bar" id="statsBar">
-    Loading stats…
-  </div>
+<h1><span>MCPRadar</span> Security Leaderboard</h1>
+<p class="subtitle">
+  Independent security scores for MCP servers — sourced from the
+  <a href="https://registry.modelcontextprotocol.io">official registry</a>
+</p>
 </header>
 
+<!-- ===== METHODOLOGY PANEL ===== -->
+<details class="methodology" id="methodologyPanel">
+<summary>How scores work ▾</summary>
+<div class="body">
+  <p><strong>AIVSS</strong> (AI Vulnerability Scoring System) rates MCP server security
+  on a <strong>0–10</strong> scale where <strong>0 = safe</strong> and
+  <strong>10 = critical</strong>.</p><br>
+  <p>The score combines <strong>severity-weighted findings</strong> (critical×10,
+  high×7, medium×4, low×1) divided by tool count, multiplied by a
+  <strong>density factor</strong> (capped between 0.5× and 2.0×). The result is
+  clamped to 10.0 and mapped to a letter grade:</p><br>
+  <p><code>A</code> 0.0–0.9 &nbsp; <code>B</code> 1.0–2.9 &nbsp;
+  <code>C</code> 3.0–4.9 &nbsp; <code>D</code> 5.0–6.9 &nbsp;
+  <code>F</code> 7.0–10.0</p><br>
+  <p><strong>Hash</strong>: SHA-256 of the alphabetically sorted tool names —
+  used to detect tool-list changes across scans (drift detection).</p><br>
+  <p><strong>Scope</strong>: <i>schema</i> = tool schemas analyzed,
+  <i>fingerprint</i> = tool signature comparison, <i>cve</i> = known-vulnerability
+  matching against OSV/GitHub Advisory.</p>
+  <span class="cal-badge" id="calBadge" style="display:none"></span>
+</div>
+</details>
+
+<!-- ===== STATS BAR ===== -->
+<div class="stats-bar" id="statsBar" aria-live="polite">Loading…</div>
+
+<!-- ===== CONTROLS ===== -->
 <div class="controls">
-  <div class="search-wrap">
-    <span class="search-icon">&#x1F50D;</span>
-    <input type="text" id="searchInput" placeholder="Filter by server name…" autocomplete="off">
-  </div>
-  <div class="grade-filters">
-    <span class="label">Grade:</span>
-    <button class="grade-btn active" data-grade="all">All</button>
-    <button class="grade-btn grade-a active" data-grade="A">A</button>
-    <button class="grade-btn grade-b active" data-grade="B">B</button>
-    <button class="grade-btn grade-c active" data-grade="C">C</button>
-    <button class="grade-btn grade-d active" data-grade="D">D</button>
-    <button class="grade-btn grade-f active" data-grade="F">F</button>
-  </div>
+<div class="search-wrap">
+  <span class="search-icon" aria-hidden="true">⌕</span>
+  <input type="text" id="searchInput" placeholder="Filter by server name…" autocomplete="off" aria-label="Search servers">
+</div>
+<div class="grade-filters" role="group" aria-label="Filter by grade">
+  <span class="label">Grade:</span>
+  <button class="grade-btn on" data-grade="all">All</button>
+  <button class="grade-btn on" data-grade="A">A</button>
+  <button class="grade-btn on" data-grade="B">B</button>
+  <button class="grade-btn on" data-grade="C">C</button>
+  <button class="grade-btn on" data-grade="D">D</button>
+  <button class="grade-btn on" data-grade="F">F</button>
+</div>
 </div>
 
-<div class="table-wrap">
-  <table>
-    <thead>
-      <tr>
-        <th data-sort="rank" class="sorted">Rank <span class="sort-arrow">&#9650;</span></th>
-        <th data-sort="server">Server</th>
-        <th data-sort="score">Score <span class="sort-arrow">&#9650;&#9660;</span></th>
-        <th data-sort="grade">Grade</th>
-        <th data-sort="tools">Tools</th>
-        <th data-sort="findings">Findings</th>
-        <th data-sort="last_scanned">Last Scanned</th>
-        <th data-sort="version">Version</th>
-        <th data-sort="hash">Hash</th>
-      </tr>
-    </thead>
-    <tbody id="tbody">
-      <tr><td colspan="9" class="empty-state"><p>Loading data&#8230;</p></td></tr>
-    </tbody>
-  </table>
+<!-- ===== MAIN VIEW ===== -->
+<div id="mainView">
+  <!-- Desktop table -->
+  <div class="table-wrap" id="tableWrap">
+    <table>
+      <thead>
+        <tr>
+          <th data-sort="rank" scope="col" aria-sort="ascending">Rank</th>
+          <th data-sort="server" scope="col" aria-sort="none">Server</th>
+          <th data-sort="risk" scope="col" aria-sort="none">Risk <span style="font-weight:400;font-size:10px;text-transform:none;letter-spacing:0">0→10</span></th>
+          <th data-sort="grade" scope="col" aria-sort="none">Grade</th>
+          <th scope="col">Scope</th>
+          <th data-sort="tools" scope="col" aria-sort="none">Tools</th>
+          <th data-sort="findings" scope="col" aria-sort="none">Findings</th>
+          <th data-sort="last_scanned" scope="col" aria-sort="none">Scanned</th>
+          <th data-sort="hash" scope="col" aria-sort="none">Hash</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+
+  <!-- Mobile cards -->
+  <div class="card-grid" id="cardGrid"></div>
 </div>
 
+<!-- ===== DETAIL VIEW (hash-routed, hidden by default) ===== -->
+<div class="detail-view" id="detailView"></div>
+
+<!-- ===== FOOTER ===== -->
 <footer>
   Scores computed by <strong>MCPRadar AIVSS engine</strong>.
   Updated weekly via GitHub Actions. &nbsp;|&nbsp;
   <a href="https://github.com/yatuk/mcpradar">GitHub</a>
 </footer>
 
+<!-- ========================================================================
+     JavaScript — Vanilla, no dependencies
+     ======================================================================== -->
 <script>
 (function () {
   "use strict";
 
+  /* ------------------------------------------------------------------
+     State
+     ------------------------------------------------------------------ */
   var allServers = [];
   var activeGrades = { A: true, B: true, C: true, D: true, F: true };
-  var sortKey = "score";
+  var sortKey = "risk";
   var sortAsc = true;
   var searchQuery = "";
+  var isLoading = true;
+  var loadError = false;
 
-  // --- DOM refs ---
-  var tbody = document.getElementById("tbody");
-  var statsBar = document.getElementById("statsBar");
-  var searchInput = document.getElementById("searchInput");
-  var gradeButtons = document.querySelectorAll(".grade-btn");
-  var tableHeaders = document.querySelectorAll("thead th[data-sort]");
+  /* ------------------------------------------------------------------
+     DOM refs
+     ------------------------------------------------------------------ */
+  var $ = document.querySelector.bind(document);
+  var tbody = $("#tbody");
+  var cardGrid = $("#cardGrid");
+  var tableWrap = $("#tableWrap");
+  var detailView = $("#detailView");
+  var mainView = $("#mainView");
+  var statsBar = $("#statsBar");
+  var searchInput = $("#searchInput");
+  var calBadge = $("#calBadge");
+  var methodologyPanel = $("#methodologyPanel");
 
-  // --- Helpers ---
-  function scoreClass(val) {
-    if (val < 3) return "score-green";
-    if (val < 5) return "score-yellow";
-    if (val < 7) return "score-orange";
-    return "score-red";
+  /* ------------------------------------------------------------------
+     Helpers
+     ------------------------------------------------------------------ */
+  function esc(str) {
+    var d = document.createElement("div");
+    d.appendChild(document.createTextNode(str));
+    return d.innerHTML;
   }
 
-  function gradeClass(g) {
-    return "grade-" + g.toLowerCase();
+  function riskClass(val) {
+    if (val < 3) return "low";
+    if (val < 5) return "med";
+    if (val < 7) return "high";
+    return "crit";
   }
 
+  function encodeServer(name) {
+    return encodeURIComponent(name);
+  }
+  function decodeServer(hash) {
+    return decodeURIComponent(hash);
+  }
+
+  function inferScope(s) {
+    var scopes = [];
+    if (s.tools_detail && s.tools_detail.length > 0) {
+      scopes.push("schema");
+    }
+    if (s.tool_hash) {
+      scopes.push("fingerprint");
+    }
+    // CVE scope if any finding rule matches CVE-related patterns
+    if (s.findings_detail && s.findings_detail.length > 0) {
+      var hasCve = s.findings_detail.some(function (f) {
+        return f.rule_id && (f.rule_id === "R107" || f.rule_id === "R108" || f.rule_id === "R113");
+      });
+      if (hasCve) scopes.push("cve");
+    }
+    return scopes.length ? scopes : ["schema"];
+  }
+
+  /* ------------------------------------------------------------------
+     Sort / Filter
+     ------------------------------------------------------------------ */
   function sortedServers() {
     var copy = allServers.slice();
     copy.sort(function (a, b) {
       var va, vb;
-      if (sortKey === "rank" || sortKey === "score") {
-        va = a.aivss_score;
-        vb = b.aivss_score;
+      if (sortKey === "rank" || sortKey === "risk") {
+        va = a.aivss_score || 0;
+        vb = b.aivss_score || 0;
       } else if (sortKey === "server") {
         va = (a.display_name || a.server || "").toLowerCase();
         vb = (b.display_name || b.server || "").toLowerCase();
@@ -410,26 +631,17 @@
       } else if (sortKey === "last_scanned") {
         va = a.last_scanned || "";
         vb = b.last_scanned || "";
-      } else if (sortKey === "version") {
-        va = a.version || "";
-        vb = b.version || "";
       } else if (sortKey === "hash") {
         va = (a.tool_hash || "").toLowerCase();
         vb = (b.tool_hash || "").toLowerCase();
       } else {
-        va = a.aivss_score;
-        vb = b.aivss_score;
+        va = a.aivss_score || 0;
+        vb = b.aivss_score || 0;
       }
       if (va < vb) return sortAsc ? -1 : 1;
       if (va > vb) return sortAsc ? 1 : -1;
       return 0;
     });
-    // For rank sort, also sort by score asc
-    if (sortKey === "rank") {
-      copy.sort(function (a, b) {
-        return (a.aivss_score - b.aivss_score) * (sortAsc ? 1 : -1);
-      });
-    }
     return copy;
   }
 
@@ -446,40 +658,94 @@
     });
   }
 
+  /* ------------------------------------------------------------------
+     Render: Stats
+     ------------------------------------------------------------------ */
   function renderStats() {
     var total = allServers.length;
     if (total === 0) {
       statsBar.innerHTML = "No scan data available.";
+      calBadge.style.display = "none";
       return;
     }
     var sum = 0;
     var latest = "";
     for (var i = 0; i < allServers.length; i++) {
       sum += allServers[i].aivss_score || 0;
-      var d = allServers[i].last_scanned || "";
-      if (d > latest) latest = d;
+      if ((allServers[i].last_scanned || "") > latest) {
+        latest = allServers[i].last_scanned;
+      }
     }
     var avg = (sum / total).toFixed(1);
+    var previewHtml = total < 5
+      ? ' <span class="preview-tag">Preview — ' + total + ' servers</span>'
+      : "";
     statsBar.innerHTML =
-      "<span><strong>" + total + "</strong> servers scored</span>" +
-      "<span>Avg score <strong>" + avg + "</strong></span>" +
-      (latest ? "<span>Updated <strong>" + latest + "</strong></span>" : "");
+      '<span><strong>' + total + '</strong> servers scored' + previewHtml + '</span>' +
+      (total >= 5 ? '<span>Avg risk <strong>' + avg + '</strong></span>' : '') +
+      (latest ? '<span>Updated <strong>' + latest + '</strong></span>' : '');
+
+    // Calibration badge — show if we have at least one non-A server (real findings)
+    var nonA = allServers.filter(function (s) { return s.grade !== "A"; }).length;
+    if (nonA > 0) {
+      calBadge.style.display = "inline-block";
+      calBadge.textContent = "Calibrated against " + total + " servers (incl. " + nonA + " with findings)";
+    }
   }
 
+  /* ------------------------------------------------------------------
+     Render: Scope Tags
+     ------------------------------------------------------------------ */
+  function renderScopeTags(s) {
+    var scopes = inferScope(s);
+    var html = '<span class="scope-tags">';
+    for (var i = 0; i < scopes.length; i++) {
+      html += '<span class="scope-tag">' + esc(scopes[i]) + '</span>';
+    }
+    html += '</span>';
+    return html;
+  }
+
+  /* ------------------------------------------------------------------
+     Render: Risk Bar
+     ------------------------------------------------------------------ */
+  function renderRiskBar(score) {
+    var val = score != null ? score : 0;
+    var pct = Math.min(100, Math.max(0, val * 10));
+    var cls = riskClass(val);
+    return '<div class="risk-bar-wrap">' +
+      '<div class="risk-bar-track" role="meter" aria-valuenow="' + val.toFixed(1) + '" aria-valuemin="0" aria-valuemax="10" aria-label="Risk score ' + val.toFixed(1) + ' out of 10">' +
+      '<div class="risk-bar-fill ' + cls + '" style="width:' + pct + '%"></div></div>' +
+      '<span class="risk-value">' + val.toFixed(1) + '</span></div>';
+  }
+
+  /* ------------------------------------------------------------------
+     Render: Table (Desktop)
+     ------------------------------------------------------------------ */
   function renderTable() {
     var filtered = filteredServers();
+    if (isLoading) {
+      renderSkeleton();
+      return;
+    }
+    if (loadError) {
+      tbody.innerHTML = '<tr><td colspan="9" class="state-msg">' +
+        '<p>Data unavailable — check back soon.</p>' +
+        '<p><a onclick="location.reload()">Retry</a></p>' +
+        '</td></tr>';
+      return;
+    }
     if (filtered.length === 0) {
       if (allServers.length === 0) {
-        tbody.innerHTML =
-          '<tr><td colspan="9" class="empty-state">' +
+        tbody.innerHTML = '<tr><td colspan="9" class="state-msg">' +
+          '<p class="icon">&#9729;</p>' +
           '<p>No scan results yet.</p>' +
-          '<p>The leaderboard updates weekly. Check back soon!</p>' +
-          "</td></tr>";
+          '<p>The leaderboard updates weekly via GitHub Actions. Check back soon!</p>' +
+          '</td></tr>';
       } else {
-        tbody.innerHTML =
-          '<tr><td colspan="9" class="empty-state">' +
-          "<p>No servers match your filters.</p>" +
-          "</td></tr>";
+        tbody.innerHTML = '<tr><td colspan="9" class="state-msg">' +
+          '<p>No servers match your filters.</p>' +
+          '</td></tr>';
       }
       return;
     }
@@ -487,255 +753,391 @@
     var html = "";
     for (var i = 0; i < filtered.length; i++) {
       var s = filtered[i];
-      var sc = s.aivss_score != null ? s.aivss_score.toFixed(1) : "—";
+      var sc = s.aivss_score != null ? s.aivss_score : 0;
       var g = s.grade || "—";
-      var tools = s.tools != null ? s.tools : "—";
-      var findings = s.findings != null ? s.findings : "—";
+      var tools = s.tools != null ? s.tools : 0;
+      var findings = s.findings != null ? s.findings : 0;
       var ls = s.last_scanned || "—";
-      var ver = s.version || "—";
-      var hash = s.tool_hash
-        ? s.tool_hash.substring(0, 8)
-        : "—";
+      var hash = s.tool_hash ? s.tool_hash.substring(0, 8) : "—";
       var name = s.display_name || s.server || "—";
+      var serverId = s.server || "";
+      var detailHref = "#server=" + encodeServer(serverId);
+      var registryName = serverId
+        .replace("@modelcontextprotocol/", "io.modelcontextprotocol/")
+        .replace("@anthropic/", "io.anthropic/")
+        .replace("@playwright/", "com.microsoft.playwright/")
+        .replace("@", "io.github.");
 
-      var serverName = s.server || "";
-var serverCell;
-if (serverName) {
-  var registryName = serverName
-    .replace("@modelcontextprotocol/", "io.modelcontextprotocol/")
-    .replace("@anthropic/", "io.anthropic/")
-    .replace("@playwright/", "com.microsoft.playwright/")
-    .replace("@", "io.github.");
-  serverCell =
-    '<a class="server-link" href="https://registry.modelcontextprotocol.io/v0.1/servers/' +
-    encodeURIComponent(registryName) +
-    '/versions/latest" target="_blank" rel="noopener">' +
-    escapeHtml(name) +
-    "</a>";
-} else {
-  serverCell = escapeHtml(name);
-}
-
-      html += "<tr>";
-      html += '<td style="color:var(--dim)">' + (i + 1) + "</td>";
-      html += "<td>" + serverCell + "</td>";
-      html += '<td><span class="badge ' + scoreClass(s.aivss_score || 0) + '">' + sc + "</span></td>";
-      html += '<td><span class="badge ' + gradeClass(g) + '">' + g + "</span></td>";
-      if (s.tools > 0 && s.tools_detail && s.tools_detail.length > 0) {
-        var toolsJson = JSON.stringify(s.tools_detail).replace(/'/g, "&#39;").replace(/"/g, "&quot;");
-        html += '<td><button class="findings-btn" onclick="toggleTools(this, \'' + toolsJson + '\')">' + tools + '</button></td>';
+      html += '<tr>';
+      html += '<td style="color:var(--dim)">' + (i + 1) + '</td>';
+      html += '<td>' +
+        '<a class="server-link" href="' + detailHref + '" aria-label="View detail for ' + esc(name) + '">' + esc(name) + '</a>' +
+        '<br><span style="font-size:10px;color:var(--dim)">' +
+        '<a href="https://registry.modelcontextprotocol.io/v0.1/servers/' + encodeURIComponent(registryName) + '/versions/latest" target="_blank" rel="noopener" style="color:inherit">registry ↗</a>' +
+        '</span></td>';
+      html += '<td class="risk-cell">' + renderRiskBar(sc) + '</td>';
+      html += '<td><span class="grade-badge ' + g + '" aria-label="Grade ' + g + '">' + g + '</span></td>';
+      html += '<td>' + renderScopeTags(s) + '</td>';
+      // Tools
+      html += '<td><span style="font-weight:600">' + tools + '</span></td>';
+      // Findings — clickable to detail
+      if (findings > 0 && s.findings_detail && s.findings_detail.length > 0) {
+        html += '<td><a class="findings-link" href="' + detailHref + '">' + findings + '</a></td>';
       } else {
-        html += "<td>" + tools + "</td>";
+        html += '<td><span style="color:var(--dim)">' + findings + '</span></td>';
       }
-      if (s.findings > 0 && s.findings_detail && s.findings_detail.length > 0) {
-        var detailJson = JSON.stringify(s.findings_detail).replace(/'/g, "&#39;").replace(/"/g, "&quot;");
-        html += '<td><button class="findings-btn" onclick="toggleFindings(this, \'' + detailJson + '\')">' + findings + '</button></td>';
-      } else {
-        html += "<td>" + findings + "</td>";
-      }
-      html += '<td style="color:var(--dim)">' + ls + "</td>";
-      html += '<td style="color:var(--dim)">' + escapeHtml(ver) + "</td>";
-      html += '<td class="mono">' + escapeHtml(hash) + "</td>";
-      html += "</tr>";
+      html += '<td style="color:var(--dim)">' + esc(ls) + '</td>';
+      html += '<td class="mono">' + esc(hash) + '</td>';
+      html += '</tr>';
     }
     tbody.innerHTML = html;
   }
 
-  function escapeHtml(str) {
-    var div = document.createElement("div");
-    div.appendChild(document.createTextNode(str));
-    return div.innerHTML;
+  /* ------------------------------------------------------------------
+     Render: Skeleton (loading)
+     ------------------------------------------------------------------ */
+  function renderSkeleton() {
+    var html = "";
+    for (var i = 0; i < 5; i++) {
+      html += '<tr><td colspan="9"><div class="skeleton-row">' +
+        '<div class="skeleton sk"></div>' +
+        '<div class="skeleton sk"></div>' +
+        '<div class="skeleton sk"></div>' +
+        '<div class="skeleton sk"></div>' +
+        '<div class="skeleton sk"></div>' +
+        '<div class="skeleton sk"></div>' +
+        '<div class="skeleton sk"></div>' +
+        '<div class="skeleton sk"></div>' +
+        '</div></td></tr>';
+    }
+    tbody.innerHTML = html;
   }
 
-  function toggleFindings(btn, detailJson) {
-    var detail;
-    try {
-      detail = JSON.parse(detailJson.replace(/&quot;/g, '"').replace(/&#39;/g, "'"));
-    } catch (e) {
-      return;
-    }
-    var parentRow = btn.closest("tr");
-    var existingRow = parentRow.nextElementSibling;
-    if (existingRow && existingRow.classList.contains("findings-detail-row")) {
-      existingRow.remove();
+  /* ------------------------------------------------------------------
+     Render: Cards (Mobile)
+     ------------------------------------------------------------------ */
+  function renderCards() {
+    var filtered = filteredServers();
+    if (isLoading) return;
+    if (loadError || filtered.length === 0) {
+      cardGrid.innerHTML = "";
       return;
     }
 
-    // Sort: critical → high → medium → low
-    var sevOrder = { critical: 0, high: 1, medium: 2, low: 3 };
-    detail.sort(function (a, b) {
-      var sa = sevOrder[(a.severity || "").toLowerCase()] || 99;
-      var sb = sevOrder[(b.severity || "").toLowerCase()] || 99;
-      return sa - sb;
-    });
+    var html = "";
+    for (var i = 0; i < filtered.length; i++) {
+      var s = filtered[i];
+      var sc = s.aivss_score != null ? s.aivss_score : 0;
+      var g = s.grade || "—";
+      var tools = s.tools != null ? s.tools : 0;
+      var findings = s.findings != null ? s.findings : 0;
+      var ls = s.last_scanned || "—";
+      var hash = s.tool_hash ? s.tool_hash.substring(0, 8) : "—";
+      var name = s.display_name || s.server || "—";
+      var serverId = s.server || "";
+      var detailHref = "#server=" + encodeServer(serverId);
 
-    var colspan = parentRow.querySelectorAll("td, th").length;
-    var html = '<tr class="findings-detail-row"><td colspan="' + colspan + '">';
-    html += '<table class="findings-detail-table">';
-    html += '<thead><tr><th>Severity</th><th>Rule ID</th><th>Target</th><th>Title</th><th>Description</th></tr></thead>';
-    html += '<tbody>';
-    for (var i = 0; i < detail.length; i++) {
-      var f = detail[i];
-      var sev = (f.severity || "").toLowerCase();
-      var sevClass = "";
-      if (sev === "critical") sevClass = "sev-critical";
-      else if (sev === "high") sevClass = "sev-high";
-      else if (sev === "medium") sevClass = "sev-medium";
-      else if (sev === "low") sevClass = "sev-low";
-      html += '<tr>';
-      html += '<td class="' + sevClass + '">' + escapeHtml(f.severity || "—") + '</td>';
-      html += '<td>' + escapeHtml(f.rule_id || "—") + '</td>';
-      html += '<td>' + escapeHtml(f.target || "—") + '</td>';
-      html += '<td>' + escapeHtml(f.title || "—") + '</td>';
-      html += '<td>' + escapeHtml(f.description || "—") + '</td>';
-      html += '</tr>';
-    }
-    html += '</tbody></table>';
-    html += '</td></tr>';
-    parentRow.insertAdjacentHTML("afterend", html);
-  }
-
-  function toggleTools(btn, toolsJson) {
-    var tools;
-    try {
-      tools = JSON.parse(toolsJson.replace(/&quot;/g, '"').replace(/&#39;/g, "'"));
-    } catch (e) {
-      return;
-    }
-    var parentRow = btn.closest("tr");
-    var existingRow = parentRow.nextElementSibling;
-    if (existingRow && existingRow.classList.contains("tools-detail-row")) {
-      existingRow.remove();
-      return;
-    }
-
-    var colspan = parentRow.querySelectorAll("td, th").length;
-    var html = '<tr class="tools-detail-row"><td colspan="' + colspan + '">';
-    html += '<table class="tools-detail-table">';
-    html += '<thead><tr><th>Tool Name</th><th>Description</th><th>Input Schema</th><th>Output Schema</th></tr></thead>';
-    html += '<tbody>';
-    for (var i = 0; i < tools.length; i++) {
-      var t = tools[i];
-      var inputSchema = t.input_schema || null;
-      var outputSchema = t.output_schema || null;
-      var toolId = 'tool-' + i + '-' + Date.now();
-
-      html += '<tr>';
-      html += '<td class="tool-name-cell">' + escapeHtml(t.name || "—") + '</td>';
-      html += '<td class="tool-desc-cell">' + escapeHtml(t.description || "—") + '</td>';
-
-      // Input schema cell
-      html += '<td class="schema-cell">';
-      if (inputSchema) {
-        var schemaStr = JSON.stringify(inputSchema, null, 2);
-        html += '<button class="schema-toggle" onclick="var p=this.nextElementSibling;p.style.display=p.style.display===\'none\'?\'block\':\'none\';">Show/Hide Schema</button>';
-        html += '<pre class="schema-pre" style="display:none">' + escapeHtml(schemaStr) + '</pre>';
-      } else {
-        html += '<span class="no-schema">—</span>';
+      html += '<div class="server-card">';
+      html += '<div class="card-head">';
+      html += '<a class="card-name" href="' + detailHref + '">' + esc(name) + '</a>';
+      html += '<span class="card-grade ' + g + '" aria-label="Grade ' + g + '">' + g + '</span>';
+      html += '</div>';
+      html += '<div class="card-stats">';
+      html += '<div>Risk</div><div>' + renderRiskBar(sc) + '</div>';
+      html += '<div>Tools</div><div><strong>' + tools + '</strong></div>';
+      html += '<div>Findings</div><div><strong>' + findings + '</strong></div>';
+      html += '<div>Scanned</div><div>' + esc(ls) + '</div>';
+      html += '<div>Hash</div><div class="mono">' + esc(hash) + '</div>';
+      html += '</div>';
+      html += '<div class="card-scope">' + renderScopeTags(s) + '</div>';
+      html += '<div class="card-link">';
+      if (findings > 0) {
+        html += '<a class="findings-link" href="' + detailHref + '">View detail →</a>';
       }
-      html += '</td>';
-
-      // Output schema cell
-      html += '<td class="schema-cell">';
-      if (outputSchema) {
-        var outStr = JSON.stringify(outputSchema, null, 2);
-        html += '<button class="schema-toggle" onclick="var p=this.nextElementSibling;p.style.display=p.style.display===\'none\'?\'block\':\'none\';">Show/Hide Schema</button>';
-        html += '<pre class="schema-pre" style="display:none">' + escapeHtml(outStr) + '</pre>';
-      } else {
-        html += '<span class="no-schema">—</span>';
-      }
-      html += '</td>';
-
-      html += '</tr>';
+      html += '</div>';
+      html += '</div>';
     }
-    html += '</tbody></table>';
-    html += '</td></tr>';
-    parentRow.insertAdjacentHTML("afterend", html);
+    cardGrid.innerHTML = html;
   }
 
-  function updateHeaderSortIndicator() {
-    tableHeaders.forEach(function (th) {
-      th.classList.remove("sorted");
-      var arrow = th.querySelector(".sort-arrow");
+  /* ------------------------------------------------------------------
+     Layout: Table vs Cards
+     ------------------------------------------------------------------ */
+  function updateLayout() {
+    var mobile = window.innerWidth <= 700;
+    if (mobile) {
+      tableWrap.classList.add("hidden");
+      cardGrid.classList.add("active");
+      renderCards();
+    } else {
+      tableWrap.classList.remove("hidden");
+      cardGrid.classList.remove("active");
+      renderTable();
+    }
+  }
+
+  /* ------------------------------------------------------------------
+     Detail View
+     ------------------------------------------------------------------ */
+  function showDetail(serverName) {
+    var decoded = decodeServer(serverName);
+    var s = null;
+    for (var i = 0; i < allServers.length; i++) {
+      if (allServers[i].server === decoded) { s = allServers[i]; break; }
+    }
+    if (!s) {
+      showMain();
+      return;
+    }
+
+    mainView.style.display = "none";
+    detailView.classList.add("active");
+
+    var g = s.grade || "—";
+    var sc = s.aivss_score != null ? s.aivss_score : 0;
+    var name = s.display_name || s.server || "—";
+    var findings = s.findings_detail || [];
+    var tools = s.tools_detail || [];
+    var bySev = s.by_severity || {};
+
+    // Group findings by severity
+    var groups = { critical: [], high: [], medium: [], low: [] };
+    var sevOrder = ["critical", "high", "medium", "low"];
+    for (var j = 0; j < findings.length; j++) {
+      var f = findings[j];
+      var sev = (f.severity || "low").toLowerCase();
+      if (groups[sev]) groups[sev].push(f);
+      else groups.low.push(f);
+    }
+
+    // Build HTML
+    var html = "";
+    html += '<button class="detail-back" onclick="showMain()" aria-label="Back to leaderboard">&#8592; Back to leaderboard</button>';
+
+    // Header
+    html += '<div class="detail-header">';
+    html += '<h2>' + esc(name) + '</h2>';
+    html += '<div class="meta">';
+    html += '<span>Server ID: <strong>' + esc(s.server || "") + '</strong></span> &nbsp;|&nbsp; ';
+    html += '<span>Last scanned: <strong>' + esc(s.last_scanned || "—") + '</strong></span> &nbsp;|&nbsp; ';
+    html += '<span>Scanner: <strong>' + esc(s.scanner_version || "—") + '</strong></span>';
+    html += '</div>';
+
+    // Score breakdown
+    html += '<div class="detail-score-breakdown">';
+    html += '<div class="item">AIVSS Risk: <b>' + sc.toFixed(1) + ' / 10</b></div>';
+    html += '<div class="item">Grade: <b style="color:' + (g === "F" || g === "D" ? "var(--red)" : g === "A" || g === "B" ? "var(--green)" : "var(--yellow)") + '">' + g + '</b></div>';
+    html += '<div class="item">Confidence: <b>' + (s.confidence != null ? (s.confidence * 100).toFixed(0) + '%' : '—') + '</b></div>';
+    html += '<div class="item">Tools: <b>' + (s.tools || 0) + '</b></div>';
+    html += '<div class="item">Findings: <b>' + (s.findings || 0) + '</b></div>';
+    html += '<div class="item">Full hash: <b class="mono">' + esc(s.tool_hash || "—") + '</b></div>';
+    html += '</div>';
+
+    // Severity breakdown
+    html += '<div class="detail-score-breakdown" style="margin-top:8px;padding-top:8px;border-top-style:dashed">';
+    html += '<div class="item">Critical: <b style="color:var(--red)">' + (bySev.critical || 0) + '</b></div>';
+    html += '<div class="item">High: <b style="color:var(--orange)">' + (bySev.high || 0) + '</b></div>';
+    html += '<div class="item">Medium: <b style="color:var(--yellow)">' + (bySev.medium || 0) + '</b></div>';
+    html += '<div class="item">Low: <b style="color:var(--dim)">' + (bySev.low || 0) + '</b></div>';
+    html += '<div class="item">Scope: ' + renderScopeTags(s) + '</div>';
+    html += '</div>';
+    html += '</div>';
+
+    // Findings section
+    html += '<div class="detail-section">';
+    html += '<h3>Findings (' + findings.length + ')</h3>';
+    if (findings.length === 0) {
+      html += '<p style="color:var(--dim)">No findings detected — server is clean.</p>';
+    } else {
+      for (var gx = 0; gx < sevOrder.length; gx++) {
+        var sev = sevOrder[gx];
+        var group = groups[sev];
+        if (!group || group.length === 0) continue;
+        html += '<div style="margin-bottom:12px">';
+        html += '<span class="sev-tag ' + sev + '">' + sev + ' (' + group.length + ')</span>';
+        for (var fx = 0; fx < group.length; fx++) {
+          var ff = group[fx];
+          html += '<div class="finding-row ' + sev + '">';
+          html += '<span>' + esc(ff.rule_id || "—") + '</span>';
+          html += '<span class="sev-tag ' + sev + '">' + esc(ff.severity || "") + '</span>';
+          html += '<span class="rule-cell">' + esc(ff.target || "—") + '</span>';
+          html += '<span style="color:var(--text)">' + esc(ff.title || "—") + '</span>';
+          if (ff.description) {
+            html += '<span class="finding-desc">' + esc(ff.description) + '</span>';
+          }
+          html += '</div>';
+        }
+        html += '</div>';
+      }
+    }
+    html += '</div>';
+
+    // Tools section
+    html += '<div class="detail-section">';
+    html += '<h3>Tools (' + tools.length + ')</h3>';
+    if (tools.length === 0) {
+      html += '<p style="color:var(--dim)">No tool schemas available.</p>';
+    } else {
+      html += '<div class="tool-mini-list">';
+      for (var tx = 0; tx < tools.length; tx++) {
+        var t = tools[tx];
+        html += '<div class="tool-mini">';
+        html += '<span class="tn">' + esc(t.name || "—") + '</span>';
+        html += '<span class="td">' + esc((t.description || "—").substring(0, 140)) + '</span>';
+        if (t.input_schema) {
+          var schemaId = 'schema-in-' + tx;
+          html += '<div class="ts"><button class="schema-toggle" onclick="var el=document.getElementById(\'' + schemaId + '\');el.style.display=el.style.display===\'none\'?\'block\':\'none\'" style="background:var(--border);color:var(--dim);border:none;border-radius:3px;padding:1px 8px;cursor:pointer;font-size:10px;font-weight:600">Input Schema</button>';
+          html += '<pre id="' + schemaId + '" style="display:none;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:8px;margin:4px 0 0;max-height:200px;overflow:auto;font-size:10px;line-height:1.4;color:var(--dim);white-space:pre;grid-column:1/-1">' + esc(JSON.stringify(t.input_schema, null, 2)) + '</pre></div>';
+        }
+        if (t.output_schema) {
+          var outId = 'schema-out-' + tx;
+          html += '<div class="ts"><button class="schema-toggle" onclick="var el=document.getElementById(\'' + outId + '\');el.style.display=el.style.display===\'none\'?\'block\':\'none\'" style="background:var(--border);color:var(--dim);border:none;border-radius:3px;padding:1px 8px;cursor:pointer;font-size:10px;font-weight:600;margin-top:2px">Output Schema</button>';
+          html += '<pre id="' + outId + '" style="display:none;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:8px;margin:4px 0 0;max-height:200px;overflow:auto;font-size:10px;line-height:1.4;color:var(--dim);white-space:pre;grid-column:1/-1">' + esc(JSON.stringify(t.output_schema, null, 2)) + '</pre></div>';
+        }
+        html += '</div>';
+      }
+      html += '</div>';
+    }
+    html += '</div>';
+
+    detailView.innerHTML = html;
+    window.scrollTo(0, 0);
+  }
+
+  function showMain() {
+    mainView.style.display = "";
+    detailView.classList.remove("active");
+    detailView.innerHTML = "";
+    window.location.hash = "";
+    updateLayout();
+  }
+
+  /* ------------------------------------------------------------------
+     Hash Routing
+     ------------------------------------------------------------------ */
+  function handleHash() {
+    var hash = window.location.hash;
+    if (hash.indexOf("#server=") === 0) {
+      var name = hash.substring(8);
+      if (name) showDetail(name);
+    } else {
+      showMain();
+    }
+  }
+
+  /* ------------------------------------------------------------------
+     Sort Header
+     ------------------------------------------------------------------ */
+  function updateSortIndicators() {
+    var allTh = document.querySelectorAll("thead th[data-sort]");
+    for (var i = 0; i < allTh.length; i++) {
+      var th = allTh[i];
       var key = th.getAttribute("data-sort");
       if (key === sortKey) {
-        th.classList.add("sorted");
-        if (arrow) arrow.innerHTML = sortAsc ? " &#9650;" : " &#9660;";
+        th.setAttribute("aria-sort", sortAsc ? "ascending" : "descending");
       } else {
-        if (arrow) arrow.innerHTML = " &#9650;&#9660;";
+        th.setAttribute("aria-sort", "none");
       }
-    });
+    }
   }
 
+  /* ------------------------------------------------------------------
+     Full Render
+     ------------------------------------------------------------------ */
   function fullRender() {
+    updateSortIndicators();
+    updateLayout();
     renderStats();
-    renderTable();
-    updateHeaderSortIndicator();
   }
 
-  // --- Event Handlers ---
-
+  /* ------------------------------------------------------------------
+     Event Handlers
+     ------------------------------------------------------------------ */
   searchInput.addEventListener("input", function () {
     searchQuery = searchInput.value;
     fullRender();
   });
 
-  gradeButtons.forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      var grade = btn.getAttribute("data-grade");
+  // Grade filter buttons
+  var gradeBtns = document.querySelectorAll(".grade-btn");
+  for (var bi = 0; bi < gradeBtns.length; bi++) {
+    gradeBtns[bi].addEventListener("click", function () {
+      var grade = this.getAttribute("data-grade");
       if (grade === "all") {
-        var becomingActive = !btn.classList.contains("active");
-        btn.classList.toggle("active");
-        gradeButtons.forEach(function (b) {
+        var becomingActive = !this.classList.contains("on");
+        this.classList.toggle("on");
+        for (var j = 0; j < gradeBtns.length; j++) {
+          var b = gradeBtns[j];
           var g = b.getAttribute("data-grade");
           if (g !== "all") {
-            if (becomingActive) {
-              b.classList.add("active");
-              activeGrades[g] = true;
-            } else {
-              b.classList.remove("active");
-              activeGrades[g] = false;
-            }
+            if (becomingActive) { b.classList.add("on"); activeGrades[g] = true; }
+            else { b.classList.remove("on"); activeGrades[g] = false; }
           }
-        });
+        }
         if (!becomingActive) {
           activeGrades.A = activeGrades.B = activeGrades.C = activeGrades.D = activeGrades.F = false;
         }
       } else {
-        btn.classList.toggle("active");
-        activeGrades[grade] = btn.classList.contains("active");
-        // Sync "All" button
-        var allOn =
-          activeGrades.A &&
-          activeGrades.B &&
-          activeGrades.C &&
-          activeGrades.D &&
-          activeGrades.F;
+        this.classList.toggle("on");
+        activeGrades[grade] = this.classList.contains("on");
+        var allOn = activeGrades.A && activeGrades.B && activeGrades.C && activeGrades.D && activeGrades.F;
         var allBtn = document.querySelector('.grade-btn[data-grade="all"]');
-        if (allOn) {
-          allBtn.classList.add("active");
-        } else {
-          allBtn.classList.remove("active");
-        }
+        if (allOn) allBtn.classList.add("on");
+        else allBtn.classList.remove("on");
       }
       fullRender();
     });
-  });
+  }
 
-  tableHeaders.forEach(function (th) {
-    th.addEventListener("click", function () {
-      var key = th.getAttribute("data-sort");
+  // Sort headers
+  var thList = document.querySelectorAll("thead th[data-sort]");
+  for (var ti = 0; ti < thList.length; ti++) {
+    thList[ti].addEventListener("click", function () {
+      var key = this.getAttribute("data-sort");
       if (key === sortKey) {
         sortAsc = !sortAsc;
       } else {
         sortKey = key;
-        sortAsc = key === "score" || key === "rank";
+        sortAsc = key === "risk" || key === "rank";
       }
       fullRender();
     });
+  }
+
+  // Hash change
+  window.addEventListener("hashchange", handleHash);
+
+  // Resize
+  var resizeTimer;
+  window.addEventListener("resize", function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(updateLayout, 100);
   });
 
-  // --- Init ---
+  // Methodology panel — remember open/closed state
+  methodologyPanel.addEventListener("toggle", function () {
+    try { localStorage.setItem("mcpradar:methodology", methodologyPanel.open ? "1" : "0"); } catch (e) {}
+  });
+
+  // Expose key functions for inline onclick handlers
+  window.showMain = showMain;
+
+  /* ------------------------------------------------------------------
+     Init
+     ------------------------------------------------------------------ */
+  // Restore methodology state
+  try {
+    var mOpen = localStorage.getItem("mcpradar:methodology");
+    if (mOpen === "1") methodologyPanel.open = true;
+  } catch (e) {}
+
+  // Restore cal badge visibility from methodology
+  if (methodologyPanel.open) {
+    // will show after data load
+  }
+
+  // Fetch data
+  renderSkeleton();
   fetch("data.json")
     .then(function (r) {
       if (!r.ok) throw new Error("HTTP " + r.status);
@@ -743,16 +1145,17 @@ if (serverName) {
     })
     .then(function (data) {
       allServers = data || [];
+      isLoading = false;
+      loadError = false;
       fullRender();
+      // Check hash after data loads
+      handleHash();
     })
     .catch(function () {
       allServers = [];
-      tbody.innerHTML =
-        '<tr><td colspan="9" class="empty-state">' +
-        "<p>No scan results yet.</p>" +
-        "<p>The leaderboard updates weekly. Check back soon!</p>" +
-        "</td></tr>";
-      statsBar.innerHTML = "Data unavailable.";
+      isLoading = false;
+      loadError = true;
+      fullRender();
     });
 })();
 </script>

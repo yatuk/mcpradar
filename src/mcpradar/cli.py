@@ -81,6 +81,9 @@ def scan(
     no_save: bool = typer.Option(  # noqa: B008
         False, "--no-save", help="Snapshot'i veritabanina kaydetme"
     ),
+    sandbox: bool = typer.Option(  # noqa: B008
+        False, "--sandbox", help="Sandbox arguman dogrulamasi ile probe et"
+    ),
 ) -> None:
     """MCP server'i güvenlik açısından tara ve SQLite'a kaydet."""
     import warnings
@@ -103,7 +106,22 @@ def scan(
         raise typer.Exit(code=1)
 
     sev = Severity.from_str(severity)
-    scanner = Scanner(target=target, transport=transport, min_severity=sev)
+
+    # When --sandbox is enabled, wire SandboxValidator into the prober
+    prober = None
+    if sandbox:
+        from mcpradar.probe.prober import ReadOnlyProber
+        from mcpradar.probe.sandbox import SandboxValidator
+
+        prober = ReadOnlyProber(sandbox_validator=SandboxValidator())
+
+    scanner = Scanner(
+        target=target,
+        transport=transport,
+        min_severity=sev,
+        prober=prober,
+        probe_safe_only=True,
+    )
 
     with console.status(f"[bold blue]{target}[/] taranıyor..."):
         report = asyncio.run(scanner.run())
@@ -156,20 +174,28 @@ def probe(
     min_severity: str = typer.Option(  # noqa: B008
         "low", "--severity", "-s", help="Minimum onem seviyesi"
     ),
+    sandbox: bool = typer.Option(  # noqa: B008
+        False, "--sandbox", help="Sandbox arguman dogrulamasi ile probe et"
+    ),
 ) -> None:
     """MCP sunucusundaki tool'lari guvenli sekilde calistirarak probe et.
 
     Read-only tool'lara minimal guvenli girdi gonderir,
     yanitlarda URL, script, secret ve prompt injection arar.
+
+    --sandbox: SandboxValidator ile argumanlari dogrular ve yazma
+    kabiliyetli tool'lari probe disinda birakir.
     """
     import asyncio
 
     from mcpradar.output.console import console
     from mcpradar.probe.prober import ReadOnlyProber
+    from mcpradar.probe.sandbox import SandboxValidator
     from mcpradar.scanner.engine import Scanner
     from mcpradar.scanner.report import Severity
 
-    prober_obj = ReadOnlyProber()
+    sandbox_validator = SandboxValidator() if sandbox else None
+    prober_obj = ReadOnlyProber(sandbox_validator=sandbox_validator)
     prober_obj.MAX_PROBE_COUNT = max_probes
     prober_obj.PROBE_TIMEOUT = timeout
 
@@ -1462,9 +1488,28 @@ def cve_match(
     min_score: float = typer.Option(  # noqa: B008
         0.3, "--min-score", help="Minimum match score (0.0-1.0)"
     ),
+    backend: str = typer.Option(  # noqa: B008
+        "nvd",
+        "--backend",
+        help="CVE lookup backend: nvd (local feed) or osv (OSV.dev API)",
+    ),
+    ecosystem: str | None = typer.Option(  # noqa: B008
+        None, "--ecosystem", help="Package ecosystem for OSV backend (npm, PyPI, etc.)"
+    ),
+    package: str | None = typer.Option(  # noqa: B008
+        None, "--package", help="Package name for OSV backend"
+    ),
+    version: str | None = typer.Option(  # noqa: B008
+        None, "--version", help="Package version for OSV backend"
+    ),
 ) -> None:
-    """Match scan findings to known CVEs."""
-    from mcpradar.cvefeed.syncer import load_feed, match_findings_to_cves
+    """Match scan findings to known CVEs.
+
+    Supports two backends:
+    - nvd (default): matches findings against a local NVD-derived CVE feed.
+    - osv: queries OSV.dev for vulnerabilities affecting a specific package version.
+      Requires --ecosystem, --package, and --version.
+    """
     from mcpradar.output.console import console
     from mcpradar.storage.store import Store
 
@@ -1474,6 +1519,60 @@ def cve_match(
     except Exception as err:
         console.print(f"[red]Scan not found: {scan_id}[/]")
         raise typer.Exit(1) from err
+
+    if backend == "osv":
+        # --- OSV backend ---
+        if not ecosystem or not package or not version:
+            console.print(
+                "[red]OSV backend requires --ecosystem, --package, and --version[/]"
+            )
+            raise typer.Exit(1)
+
+        from mcpradar.cvefeed.osv import enrich_scan_with_osv
+
+        matches = enrich_scan_with_osv(
+            findings=report.findings,
+            package_ecosystem=ecosystem,
+            package_name=package,
+            package_version=version,
+        )
+
+        if not matches:
+            console.print(
+                f"[dim]No OSV vulnerabilities found for {package}@{version} "
+                f"({ecosystem})[/]"
+            )
+            return
+
+        from rich.table import Table
+
+        table = Table(
+            title=f"OSV CVE Matches — {package}@{version} ({ecosystem})",
+            show_header=True,
+            header_style="bold",
+        )
+        table.add_column("OSV ID")
+        table.add_column("Aliases")
+        table.add_column("Severity")
+        table.add_column("Fixed Version")
+        table.add_column("Summary", width=50)
+
+        for m in matches:
+            sev = m.get("severity_score")
+            sev_display = f"{sev:.1f}" if sev else "—"
+            table.add_row(
+                m.get("id", "?"),
+                ", ".join(m.get("aliases", [])),
+                sev_display,
+                m.get("fixed_version", "—") or "—",
+                m.get("summary", "")[:50],
+            )
+
+        console.print(table)
+        return
+
+    # --- NVD backend (default) ---
+    from mcpradar.cvefeed.syncer import load_feed, match_findings_to_cves
 
     feed = load_feed()
     if not feed:

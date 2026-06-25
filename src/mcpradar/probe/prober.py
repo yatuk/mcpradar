@@ -15,6 +15,9 @@ if TYPE_CHECKING:
 
 from mcpradar.scanner.rules import PROMPT_INJECTION_PATTERNS, SECRET_PATTERNS
 
+# Import SandboxValidator lazily to avoid circular imports
+from mcpradar.probe.sandbox import SandboxValidator
+
 # ---------------------------------------------------------------------------
 # ProbeResult
 # ---------------------------------------------------------------------------
@@ -64,6 +67,10 @@ class ReadOnlyProber:
 
     Amac: statik analizde yakalanamayan dinamik tehditleri (gizli URL'ler,
     script enjeksiyonu, token sizintisi) tespit etmek.
+
+    When *sandbox_validator* is provided (via ``--sandbox`` CLI flag), also:
+    - Excludes write-capable tools detected by the sandbox validator
+    - Validates and sanitizes generated arguments before probe execution
     """
 
     SAFE_TOOL_PATTERNS: list[re.Pattern[str]] = [
@@ -89,6 +96,9 @@ class ReadOnlyProber:
     MAX_PROBE_COUNT: int = 20
     PROBE_TIMEOUT: float = 5.0
 
+    def __init__(self, sandbox_validator: SandboxValidator | None = None) -> None:
+        self.sandbox_validator = sandbox_validator
+
     # ------------------------------------------------------------------
     # Public API
     # ------------------------------------------------------------------
@@ -97,6 +107,9 @@ class ReadOnlyProber:
         """Tool adi safe pattern'lerden birine uyuyor MU VE
         description DANGEROUS_KEYWORDS icermiyorsa True doner.
 
+        If sandbox validator is configured, also rejects write-capable tools
+        detected by the sandbox validator's is_write_tool() check.
+
         Her iki kosul da saglanmali.
         """
         name_safe = any(p.search(tool.name) for p in self.SAFE_TOOL_PATTERNS)
@@ -104,7 +117,15 @@ class ReadOnlyProber:
             return False
 
         desc_lower = tool.description.lower()
-        return all(kw not in desc_lower for kw in self.DANGEROUS_KEYWORDS)
+        if any(kw in desc_lower for kw in self.DANGEROUS_KEYWORDS):
+            return False
+
+        # Sandbox: exclude write-capable tools
+        if self.sandbox_validator is not None:
+            if self.sandbox_validator.is_write_tool(tool):
+                return False
+
+        return True
 
     def generate_minimal_args(self, tool: ToolInfo) -> dict[str, Any]:
         """Tool'un input_schema'sindaki required alanlar icin minimal guvenli degerler uretir.
@@ -191,6 +212,13 @@ class ReadOnlyProber:
         7. Timeout veya hata durumunda success=False
         """
         args = self.generate_minimal_args(tool)
+
+        # Sandbox: validate and sanitize arguments before probe
+        if self.sandbox_validator is not None and args:
+            is_safe, reason = self.sandbox_validator.validate_args(args)
+            if not is_safe:
+                # Sanitize dangerous args and try again
+                args = self.sandbox_validator.sanitize_args(args)
 
         try:
             start = time.perf_counter()

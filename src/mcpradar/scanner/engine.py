@@ -26,7 +26,7 @@ from mcpradar.scanner.report import (
     Severity,
     ToolInfo,
 )
-from mcpradar.scanner.rules import RuleEngine
+from mcpradar.scanner.rules import RuleEngine, check_server_auth
 
 
 class Scanner:
@@ -77,6 +77,33 @@ class Scanner:
         return report
 
     # ------------------------------------------------------------------
+    # Auth hardening check (R112)
+    # ------------------------------------------------------------------
+
+    def _check_auth(
+        self,
+        report: ScanReport,
+        session_id: str | None = None,
+    ) -> None:
+        """Run authorization hardening checks (R112) after server initialization.
+
+        Args:
+            report: Scan report to add findings to.
+            session_id: The session ID if one was negotiated (Mcp-Session-Id header),
+                None if the server uses stateless transports.
+        """
+        findings = check_server_auth(
+            target=report.target,
+            transport=report.transport,
+            has_iss=None,  # OAuth discovery requires separate endpoint probing
+            has_app_type=None,  # DCR metadata requires separate endpoint probing
+            uses_session_id=bool(session_id),
+        )
+        for f in findings:
+            if f.severity >= self.min_severity:
+                report.add_finding(f)
+
+    # ------------------------------------------------------------------
     # Transport runners
     # ------------------------------------------------------------------
 
@@ -97,6 +124,7 @@ class Scanner:
                 elif isinstance(caps, dict):
                     report.capabilities = caps
             await self._collect_all(session, report)
+            self._check_auth(report, session_id=None)
 
             # Runtime probing
             if self.prober is not None:
@@ -112,8 +140,15 @@ class Scanner:
         url = self.target
         if url.startswith("sse://"):
             url = url.replace("sse://", "http://", 1)
+
+        sse_session_id: str | None = None
+
+        def _on_session_created(sid: str) -> None:
+            nonlocal sse_session_id
+            sse_session_id = sid
+
         async with (
-            sse_client(url) as (read, write),
+            sse_client(url, on_session_created=_on_session_created) as (read, write),
             ClientSession(read, write) as session,
         ):
             init_result = await session.initialize()
@@ -126,6 +161,7 @@ class Scanner:
                 elif isinstance(caps, dict):
                     report.capabilities = caps
             await self._collect_all(session, report)
+            self._check_auth(report, session_id=sse_session_id)
 
             # Runtime probing
             if self.prober is not None:
@@ -139,8 +175,8 @@ class Scanner:
 
     async def _run_http(self, report: ScanReport) -> None:
         url = self.target
-        # streamablehttp_client returns 3-tuple — can't combine in single `with`
-        async with streamablehttp_client(url) as (read, write, _):  # noqa: SIM117
+        # streamablehttp_client returns 3-tuple — get_session_id callback
+        async with streamablehttp_client(url) as (read, write, get_session_id):
             async with ClientSession(read, write) as session:
                 init_result = await session.initialize()
                 report.server_version = getattr(init_result, "serverVersion", "") or ""
@@ -152,6 +188,10 @@ class Scanner:
                     elif isinstance(caps, dict):
                         report.capabilities = caps
                 await self._collect_all(session, report)
+
+                # Detect session ID for R112
+                http_session_id = get_session_id() if callable(get_session_id) else None
+                self._check_auth(report, session_id=http_session_id)
 
                 # Runtime probing
                 if self.prober is not None:
