@@ -13,12 +13,14 @@ from mcpradar.scanner.rules import (
     EncodedBlobDetection,
     HiddenContentDetection,
     InsecureTransportDetection,
+    PathTraversalDetection,
     PermissionScopeMismatch,
     PromptInjectionDetection,
     RuleEngine,
     SchemaPoisoningDetection,
     SecretExposureDetection,
     SupplyChainRiskDetection,
+    UnboundedInputDetection,
     VersionAnomalyDetection,
     ZeroWidthDetection,
     _collect_all_texts,
@@ -1113,4 +1115,280 @@ class TestPreScanCheck:
         current = _make_fingerprint()
         findings = engine.pre_scan_check(baseline=baseline, current=current)
 
+        assert len(findings) == 0
+
+
+# ---------------------------------------------------------------------------
+# R113 — PathTraversalDetection
+# ---------------------------------------------------------------------------
+
+
+class TestPathTraversalDetection:
+    def test_detects_path_param_without_constraints(self) -> None:
+        rule = PathTraversalDetection()
+        tool = ToolInfo(
+            name="read_file",
+            description="Read a file",
+            input_schema={
+                "type": "object",
+                "properties": {"path": {"type": "string", "description": "File path"}},
+            },
+        )
+        findings = rule.check(tool)
+        assert len(findings) >= 1
+        assert any(f.rule_id == "R113" for f in findings)
+        path_finding = [f for f in findings if f.severity == Severity.MEDIUM]
+        assert len(path_finding) >= 1
+        assert "pattern" in str(path_finding[0].detail.get("missing_constraints", []))
+
+    def test_upgrades_to_high_for_write_tool(self) -> None:
+        rule = PathTraversalDetection()
+        tool = ToolInfo(
+            name="write_file",
+            description="Write content to a file",
+            input_schema={
+                "type": "object",
+                "properties": {"path": {"type": "string"}},
+            },
+        )
+        findings = rule.check(tool)
+        high_findings = [f for f in findings if f.severity == Severity.HIGH]
+        assert len(high_findings) >= 1
+        assert high_findings[0].target == "write_file"
+
+    def test_path_param_with_both_constraints_is_clean(self) -> None:
+        """Path param with both pattern AND format should not trigger R113."""
+        rule = PathTraversalDetection()
+        tool = ToolInfo(
+            name="read_file",
+            description="Read a file",
+            input_schema={
+                "type": "object",
+                "properties": {
+                    "path": {
+                        "type": "string",
+                        "pattern": "^[a-zA-Z0-9_/.-]+$",
+                        "format": "uri-reference",
+                        "description": "Safe file path",
+                    }
+                },
+            },
+        )
+        findings = rule.check(tool)
+        traversal = [f for f in findings if f.rule_id == "R113"]
+        assert len(traversal) == 0
+
+    def test_path_param_with_only_pattern_still_flags(self) -> None:
+        """Pattern alone is not sufficient — format is also required."""
+        rule = PathTraversalDetection()
+        tool = ToolInfo(
+            name="read_file",
+            description="Read a file",
+            input_schema={
+                "type": "object",
+                "properties": {
+                    "path": {
+                        "type": "string",
+                        "pattern": "^[a-zA-Z0-9_/.-]+$",
+                    }
+                },
+            },
+        )
+        findings = rule.check(tool)
+        traversal = [f for f in findings if f.rule_id == "R113"]
+        assert len(traversal) == 1
+        assert "format" in str(traversal[0].detail.get("missing_constraints", []))
+
+    def test_dot_dot_pattern_in_description(self) -> None:
+        rule = PathTraversalDetection()
+        tool = ToolInfo(
+            name="read_file",
+            description="Reads a file. Does not prevent ../ path traversal.",
+            input_schema={"type": "object", "properties": {}},
+        )
+        findings = rule.check(tool)
+        assert len(findings) >= 1
+        assert findings[0].severity == Severity.HIGH
+        assert "../" in str(findings[0].detail.get("pattern", ""))
+
+    def test_non_path_param_ignored(self) -> None:
+        rule = PathTraversalDetection()
+        tool = ToolInfo(
+            name="echo",
+            description="Echo a message",
+            input_schema={
+                "type": "object",
+                "properties": {"message": {"type": "string"}},
+            },
+        )
+        findings = rule.check(tool)
+        traversal = [f for f in findings if f.rule_id == "R113"]
+        assert len(traversal) == 0
+
+    def test_empty_schema_no_false_positive(self) -> None:
+        rule = PathTraversalDetection()
+        tool = ToolInfo(name="safe_tool", description="Safe tool", input_schema={})
+        findings = rule.check(tool)
+        assert len(findings) == 0
+
+    def test_non_string_path_param_ignored(self) -> None:
+        rule = PathTraversalDetection()
+        tool = ToolInfo(
+            name="configure",
+            description="Set config",
+            input_schema={
+                "type": "object",
+                "properties": {"path": {"type": "object", "properties": {}}},
+            },
+        )
+        findings = rule.check(tool)
+        traversal = [f for f in findings if f.rule_id == "R113"]
+        assert len(traversal) == 0
+
+
+# ---------------------------------------------------------------------------
+# R114 — UnboundedInputDetection
+# ---------------------------------------------------------------------------
+
+
+class TestUnboundedInputDetection:
+    def test_detects_unconstrained_string(self) -> None:
+        rule = UnboundedInputDetection()
+        tool = ToolInfo(
+            name="process",
+            description="Process data",
+            input_schema={
+                "type": "object",
+                "properties": {"data": {"type": "string", "description": "Raw data"}},
+            },
+        )
+        findings = rule.check(tool)
+        assert len(findings) == 1
+        assert findings[0].rule_id == "R114"
+        assert findings[0].severity == Severity.LOW
+        assert findings[0].detail.get("property") == "data"
+
+    def test_string_with_maxlength_is_clean(self) -> None:
+        rule = UnboundedInputDetection()
+        tool = ToolInfo(
+            name="process",
+            description="Process data",
+            input_schema={
+                "type": "object",
+                "properties": {"data": {"type": "string", "maxLength": 1024}},
+            },
+        )
+        findings = rule.check(tool)
+        assert len(findings) == 0
+
+    def test_string_with_pattern_is_clean(self) -> None:
+        rule = UnboundedInputDetection()
+        tool = ToolInfo(
+            name="validate",
+            description="Validate input",
+            input_schema={
+                "type": "object",
+                "properties": {
+                    "email": {"type": "string", "pattern": "^.+@.+$"}
+                },
+            },
+        )
+        findings = rule.check(tool)
+        assert len(findings) == 0
+
+    def test_string_with_enum_is_clean(self) -> None:
+        rule = UnboundedInputDetection()
+        tool = ToolInfo(
+            name="set_mode",
+            description="Set mode",
+            input_schema={
+                "type": "object",
+                "properties": {
+                    "mode": {"type": "string", "enum": ["read", "write", "admin"]}
+                },
+            },
+        )
+        findings = rule.check(tool)
+        assert len(findings) == 0
+
+    def test_string_with_format_is_clean(self) -> None:
+        rule = UnboundedInputDetection()
+        tool = ToolInfo(
+            name="fetch_url",
+            description="Fetch a URL",
+            input_schema={
+                "type": "object",
+                "properties": {"url": {"type": "string", "format": "uri"}},
+            },
+        )
+        findings = rule.check(tool)
+        assert len(findings) == 0
+
+    def test_multiple_unconstrained_strings(self) -> None:
+        rule = UnboundedInputDetection()
+        tool = ToolInfo(
+            name="multi_input",
+            description="Multiple inputs",
+            input_schema={
+                "type": "object",
+                "properties": {
+                    "name": {"type": "string"},
+                    "comment": {"type": "string"},
+                    "tags": {"type": "string"},
+                },
+            },
+        )
+        findings = rule.check(tool)
+        assert len(findings) == 3
+
+    def test_constrained_and_unconstrained_mix(self) -> None:
+        rule = UnboundedInputDetection()
+        tool = ToolInfo(
+            name="mixed",
+            description="Mixed constraints",
+            input_schema={
+                "type": "object",
+                "properties": {
+                    "safe": {"type": "string", "maxLength": 100},
+                    "unsafe": {"type": "string"},
+                },
+            },
+        )
+        findings = rule.check(tool)
+        assert len(findings) == 1
+        assert findings[0].detail.get("property") == "unsafe"
+
+    def test_output_schema_checked(self) -> None:
+        rule = UnboundedInputDetection()
+        tool = ToolInfo(
+            name="get_data",
+            description="Get data",
+            input_schema={"type": "object", "properties": {}},
+            output_schema={
+                "type": "object",
+                "properties": {"result": {"type": "string"}},
+            },
+        )
+        findings = rule.check(tool)
+        assert len(findings) >= 1
+        assert findings[0].detail.get("property") == "result"
+        assert findings[0].detail.get("schema") == "output_schema"
+
+    def test_empty_schema_no_false_positive(self) -> None:
+        rule = UnboundedInputDetection()
+        tool = ToolInfo(name="simple", description="Simple", input_schema={})
+        findings = rule.check(tool)
+        assert len(findings) == 0
+
+    def test_non_string_type_ignored(self) -> None:
+        rule = UnboundedInputDetection()
+        tool = ToolInfo(
+            name="count",
+            description="Count items",
+            input_schema={
+                "type": "object",
+                "properties": {"limit": {"type": "integer"}},
+            },
+        )
+        findings = rule.check(tool)
         assert len(findings) == 0

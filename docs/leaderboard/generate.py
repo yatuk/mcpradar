@@ -15,61 +15,30 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent / "src"))
 
 from mcpradar import __version__
-
-# AIVSS scoring implemented inline in score_from_counts() below
-# to compute directly from severity counts without Finding objects
+from mcpradar.scoring.engine import compute_aivss, compute_confidence, compute_grade
 
 _SCRIPT_ROOT = Path(__file__).resolve().parent.parent.parent
 RESULTS_DIR = _SCRIPT_ROOT / "validation/results"
 OUTPUT = _SCRIPT_ROOT / "docs/leaderboard/data.json"
 
 
-def score_from_counts(severity_counts: dict[str, int], tool_count: int) -> tuple[float, str, float]:
-    """Compute AIVSS score, grade and confidence from severity counts.
+class _DictFinding:
+    """Minimal Finding-compatible object bridging raw dicts to the scoring engine."""
 
-    Returns (aivss_score, grade, confidence).
-    """
-    total = sum(severity_counts.values())
-    if total == 0:
-        return 0.0, "A", 1.0
+    __slots__ = ("rule_id", "severity")
 
-    tc = max(tool_count, 1)
-    weighted = (
-        severity_counts.get("critical", 0) * 10
-        + severity_counts.get("high", 0) * 7
-        + severity_counts.get("medium", 0) * 4
-        + severity_counts.get("low", 0) * 1
-    )
-    density = total / tc
-    density_factor = max(0.5, min(2.0, density * 5))
-    raw = weighted / tc * density_factor
-    score = min(10.0, round(raw, 1))
+    def __init__(self, data: dict) -> None:
+        self.rule_id: str = data.get("rule_id", "?")
+        self.severity = _DictSeverity(data.get("severity", "low"))
 
-    if score <= 0.9:
-        grade = "A"
-    elif score <= 2.9:
-        grade = "B"
-    elif score <= 4.9:
-        grade = "C"
-    elif score <= 6.9:
-        grade = "D"
-    else:
-        grade = "F"
 
-    # Confidence: weighted by severity composition
-    # More high/critical findings = higher confidence
-    confidence = min(
-        1.0,
-        (
-            severity_counts.get("critical", 0) * 0.3
-            + severity_counts.get("high", 0) * 0.2
-            + severity_counts.get("medium", 0) * 0.1
-        )
-        / max(total, 1)
-        + 0.7,
-    )
+class _DictSeverity:
+    """Minimal Severity-compatible object with .value attribute."""
 
-    return score, grade, round(confidence, 2)
+    __slots__ = ("value",)
+
+    def __init__(self, value: str) -> None:
+        self.value = value
 
 
 def compute_tool_hash(scan_id: str) -> str:
@@ -150,7 +119,11 @@ def main() -> None:
                     td["output_schema"] = output_schema
                 tools_detail.append(td)
 
-            score, grade, confidence = score_from_counts(sev, tools)
+            # Convert raw dict findings to scoring-engine-compatible objects
+            dict_findings = [_DictFinding(f) for f in findings_list]
+            aivss_score = compute_aivss(dict_findings, tools)  # type: ignore[arg-type]
+            grade = compute_grade(aivss_score)
+            confidence = round(compute_confidence(dict_findings), 2)  # type: ignore[arg-type]
             tool_hash = compute_tool_hash(scan_id) if scan_id else ""
 
             rows.append(
@@ -158,7 +131,7 @@ def main() -> None:
                     "server": name,
                     "display_name": name.replace("@", "").replace("/", " / "),
                     "version": data.get("version", ""),
-                    "aivss_score": score,
+                    "aivss_score": aivss_score,
                     "grade": grade,
                     "confidence": confidence,
                     "tools": tools,

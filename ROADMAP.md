@@ -1,6 +1,6 @@
 # MCPRadar Stratejik Gelişim Yol Haritası
 
-> **Son güncelleme:** 2026-06-23 · **Mevcut sürüm:** v0.4.0 · **Hedef:** v1.0.0-rc1 (12 hafta)
+> **Son güncelleme:** 2026-06-25 · **Mevcut sürüm:** v1.0.0-rc3 · **Hedef:** v1.0.0 (GA)
 
 ---
 

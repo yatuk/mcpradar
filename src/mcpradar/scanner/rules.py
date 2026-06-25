@@ -1299,18 +1299,14 @@ def _discover_plugins() -> list[Rule]:
     import logging
 
     try:
-        from importlib.metadata import entry_points
+        from mcpradar._compat import get_entry_points
     except ImportError:
         return []
 
     logger = logging.getLogger("mcpradar.plugins")
     discovered: list[Rule] = []
 
-    try:
-        eps = entry_points(group="mcpradar.rules")
-    except TypeError:
-        # Python 3.11 compat
-        eps = entry_points().get("mcpradar.rules", [])  # type: ignore[arg-type]
+    eps = list(get_entry_points("mcpradar.rules"))
 
     for ep in eps:
         try:

@@ -50,7 +50,7 @@ def to_sarif(report: ScanReport) -> dict[str, Any]:
         name="MCPRadar",
         full_name="MCPRadar — MCP Server Security Scanner",
         information_uri="https://github.com/yatuk/mcpradar",
-        semantic_version="0.1.0",
+        semantic_version="0.1.0",  # SARIF tool version — independent of scanner version
         rules=[
             sarif.ReportingDescriptor(
                 id=rid,

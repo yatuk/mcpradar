@@ -111,9 +111,9 @@ class OSVClient:
         for sev in raw.get("severity", []):
             if sev.get("type") == "CVSS_V3":
                 score_str = sev.get("score", "")
-                if score_str and "CVSS:3" in score_str:
+                if isinstance(score_str, str) and "CVSS:3" in score_str:
                     severity_vector = score_str
-                # Try numeric score
+                # Try numeric score (may be separate or same entry)
                 numeric = sev.get("score")
                 if isinstance(numeric, (int, float)):
                     severity_score = float(numeric)

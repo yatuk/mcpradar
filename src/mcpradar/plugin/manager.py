@@ -7,6 +7,8 @@ import sys
 from dataclasses import dataclass, field
 from typing import Any
 
+from mcpradar._compat import get_entry_points
+
 
 @dataclass
 class PluginInfo:
@@ -63,12 +65,9 @@ class PluginManager:
 
     def list_plugins(self) -> list[PluginInfo]:
         """List all installed community plugins with metadata."""
-        from importlib.metadata import PackageNotFoundError, entry_points, metadata
+        from importlib.metadata import PackageNotFoundError, metadata
 
-        try:
-            eps = entry_points(group="mcpradar.rules")
-        except TypeError:
-            eps = entry_points().get("mcpradar.rules", [])  # type: ignore[arg-type]
+        eps = list(get_entry_points("mcpradar.rules"))
 
         # Group entry points by package
         by_package: dict[str, list[Any]] = {}

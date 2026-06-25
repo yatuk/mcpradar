@@ -1,12 +1,13 @@
 # Security Policy
 
-MCPRadar is currently at **v1.0.0-rc1 (Release Candidate)**. We recommend upgrading to the latest release for the most complete security coverage, including all 12 detection rules, 7 cross-server analysis checks, and full OWASP MCP Top 10 coverage.
+MCPRadar is currently at **v1.0.0-rc3 (Release Candidate)**. We recommend upgrading to the latest release for the most complete security coverage, including all 15 detection rules, 7 cross-server analysis checks, OSV.dev CVE feed integration, and full OWASP MCP Top 10 coverage.
 
 ## Supported Versions
 
 | Version | Supported |
 |---|---|
-| 1.0.0-rc1 | ✅ |
+| 1.0.0-rc3 | ✅ |
+| 1.0.0-rc1–rc2 | ✅ |
 | < 1.0.0 | ⚠️ Pre-release |
 
 ## Reporting a Vulnerability

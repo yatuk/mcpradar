@@ -1989,8 +1989,11 @@ def leaderboard_generate(
                     if report.tools:
                         names = sorted(t.name for t in report.tools)
                         tool_hash = hashlib.sha256(",".join(names).encode()).hexdigest()[:16]
-                except Exception:
-                    pass
+                except Exception as exc:
+                    import logging
+                    logging.getLogger("mcpradar").warning(
+                        "Failed to compute tool hash for %s: %s", scan_id, exc
+                    )
 
             rows.append(
                 {
