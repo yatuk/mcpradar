@@ -11,7 +11,6 @@ import tempfile
 from pathlib import Path
 
 import pytest
-import yaml
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
 CORPUS_PATH = FIXTURES_DIR / "cve_corpus.yaml"
@@ -19,6 +18,8 @@ GRADE_ORDER = {"A": 0, "B": 1, "C": 2, "D": 3, "F": 4}
 
 
 def load_corpus() -> list[dict]:
+    import yaml  # lazy import — pyyaml only needed when running (not collecting)
+
     with open(CORPUS_PATH, encoding="utf-8") as f:
         data = yaml.safe_load(f)
     return data.get("targets", [])
