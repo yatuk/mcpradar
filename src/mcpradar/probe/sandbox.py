@@ -1,4 +1,4 @@
-"""Sandbox validator — arguman guvenligi ve yazma-kabiliyeti kontrolu."""
+"""Sandbox validator — argument safety and write-capability checks."""
 
 from __future__ import annotations
 
@@ -14,7 +14,7 @@ from mcpradar.scanner.report import ToolInfo
 
 @dataclass
 class SandboxPolicy:
-    """Sandbox arguman dogrulamasi icin politika parametreleri."""
+    """Policy parameters for sandbox argument validation."""
 
     max_args_depth: int = 3
     max_arg_string_length: int = 50
@@ -39,10 +39,10 @@ class SandboxPolicy:
 
 
 class SandboxValidator:
-    """Tool argumanlarini guvenlik politikalariyla dogrular ve temizler.
+    """Validates and sanitizes tool arguments using security policies.
 
-    Amac: probe sirasinda yanlislikla yazma/degistirme/silme islemi
-    yapilmasini engellemek.
+    Purpose: prevent accidental write/modify/delete operations
+    during probing.
     """
 
     WRITE_KEYWORDS: set[str] = {
@@ -69,18 +69,18 @@ class SandboxValidator:
     # ------------------------------------------------------------------
 
     def validate_args(self, args: dict[str, Any], depth: int = 0) -> tuple[bool, str]:
-        """Argumanlari recursive olarak dogrular.
+        """Validate arguments recursively.
 
-        Kontroller:
-        - Derinlik > max_args_depth: reddedilir
-        - String deger uzunlugu > max_arg_string_length: reddedilir
-        - String deger (lowered) forbidden_arg_values icinde: reddedilir
+        Checks:
+        - Depth > max_args_depth: rejected
+        - String value length > max_arg_string_length: rejected
+        - String value (lowered) in forbidden_arg_values: rejected
 
         Returns:
-            (is_safe, reason_string). is_safe=True ise reason bos olur.
+            (is_safe, reason_string). reason is empty when is_safe=True.
         """
         if depth > self.policy.max_args_depth:
-            return False, f"Arguman derinligi siniri ({self.policy.max_args_depth}) asildi"
+            return False, f"Argument depth limit ({self.policy.max_args_depth}) exceeded"
 
         for key, value in args.items():
             result = self._validate_value(value, str(key), depth)
@@ -90,18 +90,18 @@ class SandboxValidator:
         return True, ""
 
     def _validate_value(self, value: Any, path: str, depth: int) -> tuple[bool, str]:
-        """Tek bir degeri recursive dogrula."""
+        """Recursively validate a single value."""
         if isinstance(value, str):
             lowered = value.lower()
             if lowered in self.policy.forbidden_arg_values:
                 return (
                     False,
-                    f"Yasakli arguman degeri tespit edildi: '{value}' ({path})",
+                    f"Forbidden argument value detected: '{value}' ({path})",
                 )
             if len(value) > self.policy.max_arg_string_length:
                 return (
                     False,
-                    f"Arguman cok uzun ({len(value)} > "
+                    f"Argument too long ({len(value)} > "
                     f"{self.policy.max_arg_string_length}): {path}",
                 )
         elif isinstance(value, dict):
@@ -121,13 +121,13 @@ class SandboxValidator:
     # ------------------------------------------------------------------
 
     def sanitize_args(self, args: dict[str, Any]) -> dict[str, Any]:
-        """Guvenli olmayan degerleri guvenli alternatiflerle degistirir.
+        """Replace unsafe values with safe alternatives.
 
-        - Uzun string'ler max_arg_string_length'e kisaltilir
-        - Yasakli degerler "test" ile degistirilir
-        - Derin ic ice gecmis degerler None yapilir (ust dict'te)
+        - Long strings are truncated to max_arg_string_length
+        - Forbidden values are replaced with "test"
+        - Deeply nested values become None (in parent dict)
 
-        Yeni bir dict olusturur, orijinal degismez.
+        Creates a new dict, original is unchanged.
         """
         result = self._sanitize_value(args, 0)
         if not isinstance(result, dict):
@@ -151,7 +151,7 @@ class SandboxValidator:
             sanitized: dict[str, Any] = {}
             for key, val in value.items():
                 result = self._sanitize_value(val, depth + 1)
-                # None sonuclari ekleme (derinlik asimi vs.)
+                # Skip None results (depth exceeded etc.)
                 if result is not None or not isinstance(val, (dict, list)):
                     sanitized[key] = result if result is not None else val
             return sanitized
@@ -166,9 +166,9 @@ class SandboxValidator:
     # ------------------------------------------------------------------
 
     def is_write_tool(self, tool: ToolInfo) -> bool:
-        """Tool adi veya description'i WRITE_KEYWORDS iceriyorsa True doner.
+        """Return True if tool name or description contains WRITE_KEYWORDS.
 
-        Bu, write/exec/shell capable tool'lari belirlemek icin kullanilir.
+        Used to identify write/exec/shell capable tools.
         """
         name_lower = tool.name.lower()
         desc_lower = tool.description.lower()

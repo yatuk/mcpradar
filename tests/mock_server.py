@@ -1,6 +1,6 @@
-"""Mock MCP server — bilinen tum injection pattern'lerini icerir.
+"""Mock MCP server — contains all known injection patterns.
 
-E2E testler tarafindan subprocess olarak calistirilir.
+Used by E2E tests as a subprocess.
 """
 
 from __future__ import annotations

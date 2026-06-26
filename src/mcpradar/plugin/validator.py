@@ -45,10 +45,10 @@ class PluginValidator:
         pyproject = directory / "pyproject.toml"
         if not pyproject.exists():
             report.results.append(
-                ValidationResult(False, "pyproject.toml bulunamadi", str(pyproject))
+                ValidationResult(False, "pyproject.toml not found", str(pyproject))
             )
             return report  # Can't continue without pyproject.toml
-        report.results.append(ValidationResult(True, "pyproject.toml bulundu"))
+        report.results.append(ValidationResult(True, "pyproject.toml found"))
 
         # 2. Entry point section exists
         entry_points = self._parse_entry_points(pyproject)
@@ -56,15 +56,15 @@ class PluginValidator:
             report.results.append(
                 ValidationResult(
                     False,
-                    "entry_point tanimlanmamis",
-                    '[project.entry-points."mcpradar.rules"] bulunamadi',
+                    "No entry_point defined",
+                    '[project.entry-points."mcpradar.rules"] not found',
                 )
             )
             return report
         report.results.append(
             ValidationResult(
                 True,
-                f"{len(entry_points)} entry_point tanimli",
+                f"{len(entry_points)} entry_point(s) defined",
                 ", ".join(entry_points),
             )
         )
@@ -85,8 +85,8 @@ class PluginValidator:
                     report.results.append(
                         ValidationResult(
                             False,
-                            f"Gecersiz entry_point formati: '{ep_ref}'",
-                            "module:Class bekleniyor",
+                            f"Invalid entry_point format: '{ep_ref}'",
+                            "Expected module:Class",
                         )
                     )
                     continue
@@ -100,7 +100,7 @@ class PluginValidator:
                     report.results.append(
                         ValidationResult(
                             False,
-                            f"Modul ice aktarilamadi: {module_path}",
+                            f"Module could not be imported: {module_path}",
                             str(exc),
                         )
                     )
@@ -111,8 +111,8 @@ class PluginValidator:
                     report.results.append(
                         ValidationResult(
                             False,
-                            f"Sinif bulunamadi: {class_name}",
-                            f"{module_path} modulunde '{class_name}' yok",
+                            f"Class not found: {class_name}",
+                            f"'{class_name}' not in module {module_path}",
                         )
                     )
                     continue
@@ -124,7 +124,7 @@ class PluginValidator:
                     report.results.append(
                         ValidationResult(
                             False,
-                            f"Rule sinifi Rule'dan turemiyor: {class_name}",
+                            f"Rule class does not inherit from Rule: {class_name}",
                         )
                     )
                     continue
@@ -136,7 +136,7 @@ class PluginValidator:
                     report.results.append(
                         ValidationResult(
                             False,
-                            f"Rule ornegi olusturulamadi: {class_name}",
+                            f"Could not instantiate rule: {class_name}",
                             str(exc),
                         )
                     )
@@ -146,15 +146,15 @@ class PluginValidator:
                     report.results.append(
                         ValidationResult(
                             False,
-                            f"rule_id formati gecersiz: '{instance.rule_id}'",
-                            "X### bekleniyor (orn: X001)",
+                            f"Invalid rule_id format: '{instance.rule_id}'",
+                            "Expected X### (e.g. X001)",
                         )
                     )
                 else:
                     report.results.append(
                         ValidationResult(
                             True,
-                            f"Rule gecerli: {class_name} ({instance.rule_id}) - {instance.title}",
+                            f"Rule valid: {class_name} ({instance.rule_id}) - {instance.title}",
                         )
                     )
 
@@ -168,7 +168,7 @@ class PluginValidator:
             if not tests_dir.exists() or not list(tests_dir.glob("test_*.py")):
                 report.tests_passed = None
                 report.results.append(
-                    ValidationResult(True, "Test dizini bos veya yok — atlaniyor")
+                    ValidationResult(True, "Test directory empty or missing — skipping")
                 )
             else:
                 # Resolve to absolute so relative cwd doesn't break paths
@@ -191,12 +191,12 @@ class PluginValidator:
                     )
                     report.tests_passed = result.returncode == 0
                     if report.tests_passed:
-                        report.results.append(ValidationResult(True, "Testler basarili"))
+                        report.results.append(ValidationResult(True, "Tests passed"))
                     else:
                         report.results.append(
                             ValidationResult(
                                 False,
-                                "Testler basarisiz",
+                                "Tests failed",
                                 result.stdout.split("\n")[-3]
                                 if result.stdout
                                 else str(result.stderr),
@@ -204,10 +204,10 @@ class PluginValidator:
                         )
                 except FileNotFoundError:
                     report.results.append(
-                        ValidationResult(False, "pytest bulunamadi — testler calistirilamadi")
+                        ValidationResult(False, "pytest not found — tests could not run")
                     )
                 except subprocess.TimeoutExpired:
-                    report.results.append(ValidationResult(False, "Testler zaman asimina ugradi"))
+                    report.results.append(ValidationResult(False, "Tests timed out"))
 
         return report
 

@@ -1,4 +1,4 @@
-"""Detection rule engine — plugin tarzi, kolayca yeni kural eklenebilir."""
+"""Detection rule engine — plugin-style, easily extensible with new rules."""
 
 from __future__ import annotations
 
@@ -65,7 +65,7 @@ ZERO_WIDTH_NAMES: dict[str, str] = {
 
 class ZeroWidthDetection(Rule):
     rule_id = "R101"
-    title = "Zero-width Unicode karakter tespiti"
+    title = "Zero-width Unicode character detection"
     severity = Severity.HIGH
 
     def check(self, tool: ToolInfo) -> list[Finding]:
@@ -80,12 +80,12 @@ class ZeroWidthDetection(Rule):
             for m in ZERO_WIDTH_CHARS.finditer(text):
                 char = m.group()
                 char_name = ZERO_WIDTH_NAMES.get(char, f"U+{ord(char):04X}")
-                # Tool isminde ZWSP neredeyse her zaman saldırıdır
+                # ZWSP in tool name is almost always an attack
                 sev = Severity.CRITICAL if field_name == "name" else Severity.HIGH
                 found.append(
                     self._finding(
                         tool.name,
-                        f"'{field_name}' alaninda gizli Unicode: {char_name} (U+{ord(char):04X})",
+                        f"Hidden Unicode in '{field_name}' field: {char_name} (U+{ord(char):04X})",
                         severity=sev,
                         field=field_name,
                         char=char_name,
@@ -178,7 +178,7 @@ PROMPT_INJECTION_PATTERNS: list[tuple[re.Pattern[str], str, Severity]] = [
 
 class PromptInjectionDetection(Rule):
     rule_id = "R102"
-    title = "Prompt injection pattern tespiti"
+    title = "Prompt injection pattern detection"
     severity = Severity.HIGH
 
     def check(self, tool: ToolInfo) -> list[Finding]:
@@ -190,7 +190,7 @@ class PromptInjectionDetection(Rule):
                 found.append(
                     self._finding(
                         tool.name,
-                        f"Prompt injection deseni: '{label}'",
+                        f"Prompt injection pattern: '{label}'",
                         severity=severity,
                         pattern=label,
                         matched=m.group()[:120],
@@ -213,7 +213,7 @@ HEX_RE = re.compile(r"(?:0x)?([0-9a-fA-F]{32,})")
 
 class EncodedBlobDetection(Rule):
     rule_id = "R103"
-    title = "Base64 / hex blob tespiti"
+    title = "Base64 / hex blob detection"
     severity = Severity.MEDIUM
 
     def check(self, tool: ToolInfo) -> list[Finding]:
@@ -231,10 +231,10 @@ class EncodedBlobDetection(Rule):
             sev = Severity.HIGH if decoded and _is_printable(decoded) else Severity.MEDIUM
             f = self._finding(
                 tool.name,
-                f"Description icinde base64 blob ({len(blob)} chars)",
+                f"Base64 blob in description ({len(blob)} chars)",
                 severity=sev,
                 blob_length=len(blob),
-                decoded_preview=decoded[:80] if decoded else "(decode edilemedi)",
+                decoded_preview=decoded[:80] if decoded else "(could not decode)",
             )
             f.severity = sev
             found.append(f)
@@ -249,7 +249,7 @@ class EncodedBlobDetection(Rule):
                 found.append(
                     self._finding(
                         tool.name,
-                        f"Description icinde hex blob ({len(blob)} chars) — decode: {decoded[:60]}",
+                        f"Hex blob in description ({len(blob)} chars) — decoded: {decoded[:60]}",
                         severity=Severity.HIGH,
                         blob_length=len(blob),
                         decoded_preview=decoded[:80],
@@ -265,7 +265,7 @@ def _is_printable(s: str) -> bool:
 
 
 # ---------------------------------------------------------------------------
-# Yardimci fonksiyonlar — entropi, isim ayrıştirma, schema walk
+# Helper functions — entropy, name decomposition, schema walk
 # ---------------------------------------------------------------------------
 
 
@@ -373,7 +373,7 @@ HIDDEN_MD_LINK_RE = re.compile(r"\[(?:.{0,2}|click here|here|more)\]\([^)]+\)", 
 
 class HiddenContentDetection(Rule):
     rule_id = "R104"
-    title = "Gizli HTML / Markdown content tespiti"
+    title = "Hidden HTML / Markdown content detection"
     severity = Severity.HIGH
 
     def check(self, tool: ToolInfo) -> list[Finding]:
@@ -381,10 +381,10 @@ class HiddenContentDetection(Rule):
         found: list[Finding] = []
 
         checks: list[tuple[re.Pattern[str], str]] = [
-            (HIDDEN_HTML_RE, "CSS ile gizlenmis HTML elementi"),
-            (ZERO_FONT_RE, "font-size:0 (gorunmez metin)"),
-            (HIDDEN_LINK_RE, "Aldatici baglanti metni"),
-            (HIDDEN_MD_LINK_RE, "Aldatici Markdown link"),
+            (HIDDEN_HTML_RE, "CSS-hidden HTML element"),
+            (ZERO_FONT_RE, "font-size:0 (invisible text)"),
+            (HIDDEN_LINK_RE, "Deceptive link text"),
+            (HIDDEN_MD_LINK_RE, "Deceptive Markdown link"),
         ]
 
         for pattern, label in checks:
@@ -392,7 +392,7 @@ class HiddenContentDetection(Rule):
                 found.append(
                     self._finding(
                         tool.name,
-                        f"{label} tespit edildi",
+                        f"{label} detected",
                         pattern=label,
                         matched=m.group()[:120],
                     )
@@ -432,7 +432,7 @@ SECRET_PATTERNS: list[tuple[re.Pattern[str], str]] = [
 
 class SecretExposureDetection(Rule):
     rule_id = "R106"
-    title = "Gizli kimlik bilgisi / token ifsasi"
+    title = "Secret credential / token exposure"
     severity = Severity.CRITICAL
 
     def check(self, tool: ToolInfo) -> list[Finding]:
@@ -448,7 +448,7 @@ class SecretExposureDetection(Rule):
                     found.append(
                         self._finding(
                             tool.name,
-                            f"'{label}' tespit edildi: {source} alaninda",
+                            f"'{label}' detected in {source} field",
                             format=label,
                             source=source,
                             matched=matched[:80],
@@ -467,7 +467,7 @@ class SecretExposureDetection(Rule):
                     found.append(
                         self._finding(
                             tool.name,
-                            f"Yuksek entropili string ({ent:.1f}): {source} alaninda",
+                            f"High-entropy string ({ent:.1f}) in {source} field",
                             severity=Severity.HIGH,
                             entropy=round(ent, 1),
                             source=source,
@@ -526,7 +526,7 @@ COMMAND_LIKE_ENUM_VALUES: set[str] = {
 
 class CommandInjectionDetection(Rule):
     rule_id = "R107"
-    title = "Tool parametrelerinde komut enjeksiyonu riski"
+    title = "Command injection risk in tool parameters"
     severity = Severity.CRITICAL
 
     def check(self, tool: ToolInfo) -> list[Finding]:
@@ -539,7 +539,7 @@ class CommandInjectionDetection(Rule):
                     found.append(
                         self._finding(
                             tool.name,
-                            f"Shell metakarakteri: '{prop_path}.{field}' = '{val[:60]}'",
+                            f"Shell metacharacter: '{prop_path}.{field}' = '{val[:60]}'",
                             property=prop_path,
                             field=field,
                             matched=val[:120],
@@ -551,7 +551,7 @@ class CommandInjectionDetection(Rule):
                 found.append(
                     self._finding(
                         tool.name,
-                        f"Tehlikeli varsayilan deger: '{prop_path}.default' = '{default_val[:60]}'",
+                        f"Dangerous default value: '{prop_path}.default' = '{default_val[:60]}'",
                         severity=Severity.CRITICAL,
                         property=prop_path,
                         matched=default_val[:120],
@@ -564,7 +564,7 @@ class CommandInjectionDetection(Rule):
                     found.append(
                         self._finding(
                             tool.name,
-                            f"Asiri genis regex: '{prop_path}.{regex_field}' = "
+                            f"Overly broad regex: '{prop_path}.{regex_field}' = "
                             f"'{pattern_val[:60]}'",
                             severity=Severity.HIGH,
                             property=prop_path,
@@ -580,7 +580,7 @@ class CommandInjectionDetection(Rule):
                         found.append(
                             self._finding(
                                 tool.name,
-                                f"Komut benzeri enum degeri: '{prop_path}' enum = '{val}'",
+                                f"Command-like enum value: '{prop_path}' enum = '{val}'",
                                 severity=Severity.HIGH,
                                 property=prop_path,
                                 matched=val,
@@ -594,7 +594,7 @@ class CommandInjectionDetection(Rule):
                     found.append(
                         self._finding(
                             tool.name,
-                            f"Shell metakarakteri (output): '{prop_path}.{field}'",
+                            f"Shell metacharacter (output): '{prop_path}.{field}'",
                             property=prop_path,
                             field=field,
                             matched=val[:120],
@@ -651,7 +651,7 @@ def _is_install_docs(text: str, label: str) -> bool:
 
 class SupplyChainRiskDetection(Rule):
     rule_id = "R108"
-    title = "Supply chain risk gostergesi"
+    title = "Supply chain risk indicator"
     severity = Severity.MEDIUM
 
     def check(self, tool: ToolInfo) -> list[Finding]:
@@ -681,7 +681,7 @@ class SupplyChainRiskDetection(Rule):
 
 class SchemaPoisoningDetection(Rule):
     rule_id = "R109"
-    title = "Schema poisoning gostergesi"
+    title = "Schema poisoning indicator"
     severity = Severity.HIGH
 
     def check(self, tool: ToolInfo) -> list[Finding]:
@@ -697,7 +697,7 @@ class SchemaPoisoningDetection(Rule):
                 found.append(
                     self._finding(
                         tool.name,
-                        f"{schema_name}: additionalProperties: true — arbitrary injection'a acik",
+                        f"{schema_name}: additionalProperties: true — open to arbitrary injection",
                         schema=schema_name,
                         issue="additional_properties_true",
                     )
@@ -710,7 +710,7 @@ class SchemaPoisoningDetection(Rule):
                     found.append(
                         self._finding(
                             tool.name,
-                            f"{schema_name}: zorunlu alan yok — bos girdi kabul edilebilir",
+                            f"{schema_name}: no required fields — empty input acceptable",
                             severity=Severity.MEDIUM,
                             schema=schema_name,
                             issue="no_required_fields",
@@ -722,7 +722,7 @@ class SchemaPoisoningDetection(Rule):
                         found.append(
                             self._finding(
                                 tool.name,
-                                f"{schema_name}.{prop_name}: tip kisitlamasi eksik",
+                                f"{schema_name}.{prop_name}: missing type constraint",
                                 severity=Severity.MEDIUM,
                                 schema=schema_name,
                                 property=prop_name,
@@ -737,8 +737,8 @@ class SchemaPoisoningDetection(Rule):
                             found.append(
                                 self._finding(
                                     tool.name,
-                                    f"{schema_name}.{prop_name}: asiri maxLength = {max_len} "
-                                    f"(buffer overflow riski)",
+                                    f"{schema_name}.{prop_name}: excessive maxLength = {max_len} "
+                                    f"(buffer overflow risk)",
                                     severity=Severity.MEDIUM,
                                     schema=schema_name,
                                     property=prop_name,
@@ -751,8 +751,8 @@ class SchemaPoisoningDetection(Rule):
                             found.append(
                                 self._finding(
                                     tool.name,
-                                    f"{schema_name}.{prop_name}: asiri maxItems = {max_items} "
-                                    f"(buffer overflow riski)",
+                                    f"{schema_name}.{prop_name}: excessive maxItems = {max_items} "
+                                    f"(buffer overflow risk)",
                                     severity=Severity.MEDIUM,
                                     schema=schema_name,
                                     property=prop_name,
@@ -772,7 +772,7 @@ class VersionAnomalyDetection(Rule):
     """Fingerprint-based: detects version rollback, unexpected upgrades, tool changes."""
 
     rule_id = "R110"
-    title = "Sunucu versiyon anomalisi"
+    title = "Server version anomaly"
     severity = Severity.HIGH
 
     def check(self, tool: ToolInfo) -> list[Finding]:
@@ -790,7 +790,7 @@ class InsecureTransportDetection(Rule):
     """Transport-layer: detects plain HTTP, old TLS, bad certs, missing HSTS."""
 
     rule_id = "R111"
-    title = "Guvenli olmayan transport"
+    title = "Insecure transport"
     severity = Severity.HIGH
 
     def check(self, tool: ToolInfo) -> list[Finding]:
@@ -1231,8 +1231,8 @@ class PermissionScopeMismatch(Rule):
                 found.append(
                     self._finding(
                         tool.name,
-                        f"Tool ismi '{scope_name}' kapsaminda ama description "
-                        f"'{desc_name}' operasyonlarindan bahsediyor",
+                        f"Tool name is in '{scope_name}' scope but description "
+                        f"mentions '{desc_name}' operations",
                         name_scope=scope_name,
                         description_scope=desc_name,
                         name_matched=name_match.group(),
@@ -1274,7 +1274,7 @@ DANGEROUS_NAMES = {
 
 class DangerousNameDetection(Rule):
     rule_id = "R001"
-    title = "Tehlikeli tool ismi"
+    title = "Dangerous tool name"
     severity = Severity.CRITICAL
 
     def check(self, tool: ToolInfo) -> list[Finding]:
@@ -1282,7 +1282,7 @@ class DangerousNameDetection(Rule):
             return [
                 self._finding(
                     tool.name,
-                    f"'{tool.name}' potansiyel tehlikeli sistem komutuyla eslesiyor",
+                    f"'{tool.name}' matches a potentially dangerous system command",
                     matched_name=tool.name.lower(),
                 )
             ]
@@ -1434,8 +1434,8 @@ class RuleEngine:
             findings.append(
                 Finding(
                     rule_id="R110",
-                    title="Ilk tarama — baseline yok",
-                    description="Bu sunucu icin daha once fingerprint kaydi bulunamadi",
+                    title="First scan — no baseline",
+                    description="No previous fingerprint record found for this server",
                     severity=Severity.MEDIUM,
                     target=current.endpoint if hasattr(current, "endpoint") else "",
                     location="fingerprint",
@@ -1448,10 +1448,10 @@ class RuleEngine:
             findings.append(
                 Finding(
                     rule_id="R110",
-                    title="Surum dusurme (rollback) saldirisi tespit edildi",
+                    title="Version rollback attack detected",
                     description=(
-                        f"Sunucu surumu {diff.previous_version}'dan "
-                        f"{diff.current_version}'a dusuruldu — rollback saldirisi olabilir"
+                        f"Server version downgraded from {diff.previous_version} "
+                        f"to {diff.current_version} — possible rollback attack"
                     ),
                     severity=Severity.CRITICAL,
                     target=current.endpoint if hasattr(current, "endpoint") else "",
@@ -1468,10 +1468,10 @@ class RuleEngine:
             findings.append(
                 Finding(
                     rule_id="R110",
-                    title="Beklenmeyen major surum atlamasi",
+                    title="Unexpected major version upgrade",
                     description=(
-                        f"Sunucu surumu {diff.previous_version}'dan "
-                        f"{diff.current_version}'a major atladi"
+                        f"Server version jumped from {diff.previous_version} "
+                        f"to {diff.current_version} (major upgrade)"
                     ),
                     severity=Severity.HIGH,
                     target=current.endpoint if hasattr(current, "endpoint") else "",
@@ -1488,11 +1488,11 @@ class RuleEngine:
             findings.append(
                 Finding(
                     rule_id="R110",
-                    title="Tool listesi degisti",
+                    title="Tool list changed",
                     description=(
-                        f"Sunucudaki tool listesi onceki taramaya gore degismis. "
-                        f"Eklenen: {len(diff.tools_added)}, "
-                        f"Kaldirilan: {len(diff.tools_removed)}"
+                        f"Server tool list has changed since previous scan. "
+                        f"Added: {len(diff.tools_added)}, "
+                        f"Removed: {len(diff.tools_removed)}"
                     ),
                     severity=Severity.HIGH,
                     target=current.endpoint if hasattr(current, "endpoint") else "",
@@ -1509,8 +1509,8 @@ class RuleEngine:
             findings.append(
                 Finding(
                     rule_id="R110",
-                    title="TLS downgrade tespit edildi",
-                    description="Sunucunun TLS surumu onceki taramaya gore dusurulmus",
+                    title="TLS downgrade detected",
+                    description="Server TLS version has been downgraded since previous scan",
                     severity=Severity.HIGH,
                     target=current.endpoint if hasattr(current, "endpoint") else "",
                     location="fingerprint",
@@ -1522,8 +1522,8 @@ class RuleEngine:
             findings.append(
                 Finding(
                     rule_id="R110",
-                    title="Sunucu adresi degisti",
-                    description="Ayni sunucu kimligi farkli bir adreste goruldu",
+                    title="Server address changed",
+                    description="Same server identity observed at a different address",
                     severity=Severity.HIGH,
                     target=current.endpoint if hasattr(current, "endpoint") else "",
                     location="fingerprint",
@@ -1535,8 +1535,8 @@ class RuleEngine:
             findings.append(
                 Finding(
                     rule_id="R110",
-                    title="MCP protokol versiyonu degisti",
-                    description="Sunucunun MCP protokol versiyonu degismis",
+                    title="MCP protocol version changed",
+                    description="Server MCP protocol version has changed",
                     severity=Severity.MEDIUM,
                     target=current.endpoint if hasattr(current, "endpoint") else "",
                     location="fingerprint",

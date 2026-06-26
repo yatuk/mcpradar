@@ -1,4 +1,4 @@
-"""mcpradar.toml konfigürasyon dosyası oluşturucu."""
+"""mcpradar.toml configuration file generator."""
 
 from __future__ import annotations
 

@@ -1,4 +1,4 @@
-"""mcpradar.toml konfigürasyon okuyucu."""
+"""mcpradar.toml configuration reader."""
 
 from __future__ import annotations
 

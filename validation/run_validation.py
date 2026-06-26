@@ -1,10 +1,10 @@
 """MCPRadar validation pipeline.
 
-targets.yaml'daki tum server'lari sirayla tarar,
-sonuclari validation/ klasorune JSON olarak kaydeder,
-ve aggregate REPORT.md olusturur.
+Scans all servers in targets.yaml sequentially,
+saves results to the validation/ folder as JSON,
+and generates an aggregate REPORT.md.
 
-Kullanim:
+Usage:
     python validation/run_validation.py [--server NAME] [--timeout 60]
 """
 
@@ -229,9 +229,9 @@ def generate_report(results: list[dict[str, Any]]) -> str:
     lines.append("## Triage Legend\n")
     lines.append("| Icon | Classification | Meaning |")
     lines.append("|------|----------------|---------|")
-    lines.append("| 🔴 TP | True Positive | Gerçek güvenlik açığı |")
-    lines.append("| 🟢 FP | False Positive | Meşru kullanım, alarm yanlış |")
-    lines.append("| 🟡 ? | Needs Review | Manuel inceleme gerekli |")
+    lines.append("| 🔴 TP | True Positive | Real security vulnerability |")
+    lines.append("| 🟢 FP | False Positive | Legitimate use, false alarm |")
+    lines.append("| 🟡 ? | Needs Review | Manual investigation required |")
 
     lines.append("")
     lines.append(f"*Generated: {time.strftime('%Y-%m-%d %H:%M UTC')}*")

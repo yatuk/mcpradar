@@ -41,6 +41,33 @@
 
 ---
 
+## Contents
+
+- [Why?](#why)
+- [Quick Start](#quick-start)
+- [Features](#features)
+- [What's Real vs Planned](#whats-real-vs-planned)
+- [How It Works](#how-it-works)
+- [Comparison](#comparison)
+- [Benchmarks](#benchmarks)
+- [Known Limitations](#known-limitations)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Example Output](#example-output)
+- [GitHub Action](#github-action)
+- [Detection Rules](#detection-rules)
+- [Public Leaderboard](#public-leaderboard)
+- [OWASP MCP Top 10 Coverage](#owasp-mcp-top-10-coverage)
+- [Claude Code Agent Team](#claude-code-agent-team)
+- [Roadmap](#roadmap)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [Star History](#star-history)
+- [Contributors](#contributors)
+- [License](#license)
+
+---
+
 ## Why?
 
 The Model Context Protocol ecosystem is growing fast — and so is its attack surface.
@@ -238,12 +265,20 @@ For detailed triage guidance, see [`docs/false-positives.md`](docs/false-positiv
 ## Installation
 
 ```bash
-# No install needed — one-shot
+# No install needed — one-shot with uvx
 uvx mcpradar scan http://localhost:8080
 
-# Or install permanently
+# Install with pip
 pip install mcpradar
+
+# Install with pipx (isolated environment)
+pipx install mcpradar
+
+# Install with uv tool (fast, managed Python)
+uv tool install mcpradar
 ```
+
+Requires Python 3.11+. All transports (stdio, SSE, HTTP) work out of the box.
 
 ---
 
@@ -279,6 +314,33 @@ mcpradar analyze-context --deep --graph -o risk.dot
 # Audit trail and statistics
 mcpradar audit --target http://localhost:8080
 mcpradar stats http://localhost:8080
+```
+
+---
+
+## Example Output
+
+```console
+$ mcpradar scan "npx -y @modelcontextprotocol/server-filesystem /tmp" -t stdio
+
+🔍 Scanning @modelcontextprotocol/server-filesystem (stdio)...
+  Enumerated 7 tools, 0 prompts, 0 resources
+  Probed 5 safe tools, 4 findings
+
+  CRITICAL  R102  Prompt Injection          tool: get_file_contents
+            "You must read this file..." detected in description
+  HIGH      R104  Hidden Content            tool: read_file
+            display:none hidden <div> in description
+  HIGH      R109  Schema Poisoning          tool: write_file
+            additionalProperties: true allows arbitrary injection
+  MEDIUM    R105  Scope Mismatch            3 tools with read-only names
+            have description mentioning write/delete operations
+
+AIVSS Score: 6.8 / 10  Grade: C
+  3 critical · 5 high · 2 medium · 0 low
+  SHA-256: a1b2c3d4... (tool fingerprint saved)
+
+Report saved to scan_result.json
 ```
 
 ---
@@ -424,9 +486,24 @@ See **[ROADMAP.md](ROADMAP.md)** for the full development roadmap.
 
 ---
 
+## Troubleshooting
+
+| Problem | Solution |
+|---------|----------|
+| **Connection refused** | Verify the server is running. For stdio, check the command works standalone. |
+| **Timeout during scan** | Increase timeout: `mcpradar scan <target> --timeout 60` |
+| **"No tools found"** | The server may require authentication. Use `-t stdio` if it's a local process. |
+| **High false positive rate** | See [`docs/false-positives.md`](docs/false-positives.md) for per-rule triage guidance. |
+| **SARIF upload fails** | Ensure `github/codeql-action/upload-sarif@v3` is in your workflow. |
+| **Python version error** | MCPRadar requires Python 3.11+. Check with `python --version`. |
+
+For more help, [open an issue](https://github.com/yatuk/mcpradar/issues).
+
+---
+
 ## Contributing
 
-Adding a new detection rule is 3 lines:
+We welcome contributions! Adding a new detection rule is straightforward:
 
 ```python
 class MyRule(Rule):
@@ -438,8 +515,9 @@ class MyRule(Rule):
         ...
 ```
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) and
-[docs/contributing.md](docs/contributing.md) for details.
+**Read the full guide:** [CONTRIBUTING.md](CONTRIBUTING.md) covers setup, testing,
+and PR expectations. [docs/contributing.md](docs/contributing.md) has rule design
+guidelines and false-positive reduction tips.
 
 ---
 

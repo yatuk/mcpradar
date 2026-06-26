@@ -34,23 +34,23 @@ class AuditEvent:
 
 
 class AuditLogger:
-    """Yapilandirilmis denetim gunlugu (Store uzerinden SQLite destegi).
+    """Structured audit log (SQLite backing via Store).
 
-    Tum kolaylik metotlari log_event() uzerinden gecer boylece depolamaya
-    tek bir kod yolu vardir. Store enjekte edilebilir; None ise varsayilan
-    Store() olusturulur.
+    All convenience methods pass through log_event() so there is a single
+    code path to storage. Store is injectable; if None, the default
+    Store() is created.
     """
 
     def __init__(self, store: Any | None = None) -> None:
-        # Dairesel bagimliligi onlemek icin modul seviyesinde degil burada import
+        # Import here instead of module level to avoid circular dependency
         from mcpradar.storage.store import Store
 
         self._store: Store = store if store is not None else Store()
 
-    # -- Kolaylik metotlari --------------------------------------------------
+    # -- Convenience methods -------------------------------------------------
 
     def log_scan_start(self, target: str, transport: str = "http") -> str:
-        """Taramaya baslandigini kaydet. event_id dondurur."""
+        """Log scan start. Returns event_id."""
         return self.log_event(
             "scan_started",
             target,
@@ -59,17 +59,17 @@ class AuditLogger:
         )
 
     def log_scan_complete(self, scan_id: str, findings_count: int) -> None:
-        """Tarama tamamlandigini bulgu ozetiyle kaydet."""
+        """Log scan completion with finding summary."""
         sev = "warning" if findings_count > 0 else "info"
         self.log_event(
             "scan_completed",
-            "",  # target detayda saklaniyor
+            "",  # target stored in detail
             {"scan_id": scan_id, "findings_count": findings_count},
             severity=sev,
         )
 
     def log_diff(self, server: str, change_count: int, security_count: int) -> None:
-        """Iki tarama anlik goruntusu arasindaki farki kaydet."""
+        """Log diff between two scan snapshots."""
         sev = "warning" if security_count > 0 else "info"
         self.log_event(
             "diff_detected",
@@ -79,7 +79,7 @@ class AuditLogger:
         )
 
     def log_alert(self, server: str, alert_type: str) -> None:
-        """Uyari gonderimini kaydet (shell_cmd veya webhook)."""
+        """Log alert notification (shell_cmd or webhook)."""
         self.log_event(
             "alert_sent",
             server,
@@ -88,7 +88,7 @@ class AuditLogger:
         )
 
     def log_error(self, target: str, error_message: str) -> None:
-        """Operasyonel hatayi kaydet."""
+        """Log an operational error."""
         self.log_event(
             "error",
             target,
@@ -96,7 +96,7 @@ class AuditLogger:
             severity="error",
         )
 
-    # -- Ana gunluk metodu --------------------------------------------------
+    # -- Main logging method -------------------------------------------------
 
     def log_event(
         self,
@@ -105,7 +105,7 @@ class AuditLogger:
         detail: dict[str, Any],
         severity: str = "info",
     ) -> str:
-        """Genel amacli denetim olayi. event_id dondurur."""
+        """General-purpose audit event. Returns event_id."""
         event_id = f"evt_{uuid4().hex[:12]}"
         timestamp = datetime.now(UTC).isoformat()
         self._store.save_audit_event(
@@ -118,7 +118,7 @@ class AuditLogger:
         )
         return event_id
 
-    # -- Sorgu --------------------------------------------------------------
+    # -- Query --------------------------------------------------------------
 
     def query(
         self,
@@ -127,7 +127,7 @@ class AuditLogger:
         target: str | None = None,
         limit: int = 50,
     ) -> list[AuditEvent]:
-        """Denetim olaylarini istege bagli filtrelerle sorgula."""
+        """Query audit events with optional filters."""
         rows = self._store.query_audit_events(
             since=since,
             event_type=event_type,
@@ -146,14 +146,14 @@ class AuditLogger:
             for r in rows
         ]
 
-    # -- Disa aktar ---------------------------------------------------------
+    # -- Export -------------------------------------------------------------
 
     def export_audit_log(self, path: Path, fmt: str = "json") -> None:
-        """Denetim gunlugunu dosyaya aktar.
+        """Export audit log to file.
 
-        Formatlar: json (liste), jsonl (satir basina bir nesne), csv (duz).
+        Formats: json (list), jsonl (one object per line), csv (flat).
         """
-        # Tum olaylari yukle (sinirsiz)
+        # Load all events (unlimited)
         events = self.query(limit=0)
 
         if fmt == "json":
@@ -182,4 +182,4 @@ class AuditLogger:
                     row["detail"] = json.dumps(row["detail"], ensure_ascii=False)
                     writer.writerow(row)
         else:
-            raise ValueError(f"Desteklenmeyen disa aktarim formati: {fmt}")
+            raise ValueError(f"Unsupported export format: {fmt}")

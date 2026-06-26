@@ -1,4 +1,4 @@
-"""Derin schema karsilastirma — cosmetic / behavioral / security-impact."""
+"""Deep schema comparison — cosmetic / behavioral / security-impact."""
 
 from __future__ import annotations
 
@@ -345,11 +345,11 @@ class Differ:
             b_ver = report_b.server_version or "(yok)"
             delta.fingerprint_changes.append(f"server_version: {a_ver} → {b_ver}")
         if report_a.protocol_version != report_b.protocol_version:
-            a_proto = report_a.protocol_version or "(yok)"
-            b_proto = report_b.protocol_version or "(yok)"
+            a_proto = report_a.protocol_version or "(none)"
+            b_proto = report_b.protocol_version or "(none)"
             delta.fingerprint_changes.append(f"protocol_version: {a_proto} → {b_proto}")
         if report_a.capabilities != report_b.capabilities:
-            delta.fingerprint_changes.append("capabilities: degisti")
+            delta.fingerprint_changes.append("capabilities: changed")
         tool_count_a = len(report_a.tools)
         tool_count_b = len(report_b.tools)
         if tool_count_a != tool_count_b:

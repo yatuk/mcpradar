@@ -1,4 +1,4 @@
-"""Guvenlik istatistikleri ve egilim analizi motoru."""
+"""Security statistics and trend analysis engine."""
 
 from __future__ import annotations
 
@@ -9,7 +9,7 @@ from typing import Any, cast
 
 @dataclass
 class ServerStats:
-    """Sunucu bazli guvenlik istatistikleri."""
+    """Per-server security statistics."""
 
     target: str
     total_scans: int = 0
@@ -44,7 +44,7 @@ class ServerStats:
 
 @dataclass
 class GlobalStats:
-    """Tum taranan hedefler arasinda toplu istatistikler."""
+    """Aggregate statistics across all scanned targets."""
 
     total_targets: int = 0
     total_scans: int = 0
@@ -77,7 +77,7 @@ class GlobalStats:
 
 @dataclass
 class TrendReport:
-    """Tek bir hedef icin zaman serisi egilim analizi."""
+    """Time-series trend analysis for a single target."""
 
     target: str
     days: int
@@ -104,9 +104,9 @@ class TrendReport:
         }
 
 
-# Modul seviyesinde 5 dakika TTL'li bellek ici onbellek
+# Module-level in-memory cache with 5-minute TTL
 _stats_cache: dict[str, tuple[float, Any]] = {}
-_CACHE_TTL = 300  # 5 dakika
+_CACHE_TTL = 300  # 5 minutes
 
 
 def _cache_key(method: str, *args: Any) -> str:
@@ -129,17 +129,17 @@ def _cache_set(key: str, val: Any) -> None:
 
 
 class StatsEngine:
-    """SQLite Store verilerinden guvenlik istatistikleri hesaplar."""
+    """Computes security statistics from SQLite Store data."""
 
     def __init__(self, store: Any | None = None) -> None:
         from mcpradar.storage.store import Store
 
         self._store: Store = store if store is not None else Store()
 
-    # -- Sunucu Istatistikleri ---------------------------------------------
+    # -- Server Statistics ------------------------------------------------
 
     def server_stats(self, target: str) -> ServerStats:
-        """Hedef sunucu bazinda istatistik hesapla."""
+        """Compute statistics for a specific target server."""
         cache_key = _cache_key("server_stats", target)
         cached = _cache_get(cache_key)
         if cached is not None:
@@ -148,7 +148,7 @@ class StatsEngine:
         stats = ServerStats(target=target)
         conn = self._store._conn
 
-        # Bu hedef icin toplam tarama sayisi
+        # Total scan count for this target
         row = conn.execute("SELECT COUNT(*) FROM scans WHERE target = ?", (target,)).fetchone()
         stats.total_scans = row[0] if row else 0
 
@@ -156,7 +156,7 @@ class StatsEngine:
             _cache_set(cache_key, stats)
             return stats
 
-        # Ilk ve son tarama zaman damgalari
+        # First and last scan timestamps
         row = conn.execute(
             "SELECT MIN(scanned_at), MAX(scanned_at) FROM scans WHERE target = ?",
             (target,),
@@ -165,7 +165,7 @@ class StatsEngine:
             stats.first_scan = row[0] or ""
             stats.last_scan = row[1] or ""
 
-        # Bu hedefin tum taramalarindaki toplam bulgu sayisi
+        # Total findings across all scans for this target
         row = conn.execute(
             """
             SELECT COUNT(*) FROM findings
@@ -175,7 +175,7 @@ class StatsEngine:
         ).fetchone()
         stats.total_findings = row[0] if row else 0
 
-        # Onem derecesine gore bulgu sayilari
+        # Finding counts by severity
         for sev in ("low", "medium", "high", "critical"):
             row = conn.execute(
                 """
@@ -187,7 +187,7 @@ class StatsEngine:
             ).fetchone()
             stats.findings_by_severity[sev] = row[0] if row else 0
 
-        # Bu hedef icin en cok tetiklenen 5 kural
+        # Top 5 most triggered rules for this target
         rows = conn.execute(
             """
             SELECT rule_id, COUNT(*) as cnt FROM findings
@@ -198,7 +198,7 @@ class StatsEngine:
         ).fetchall()
         stats.top_rules = [(r[0], r[1]) for r in rows]
 
-        # Son 30 gundeki farkliliklar (denetim gunlugunden)
+        # Differences in the last 30 days (from audit log)
         rows = conn.execute(
             """
             SELECT COUNT(*) FROM audit_log
@@ -209,7 +209,7 @@ class StatsEngine:
         ).fetchone()
         stats.recent_diffs = rows[0] if rows else 0
 
-        # Guvenlik etkili farkliliklar (security_count > 0)
+        # Security-impact differences (security_count > 0)
         rows = conn.execute(
             """
             SELECT COUNT(*) FROM audit_log
@@ -224,10 +224,10 @@ class StatsEngine:
         _cache_set(cache_key, stats)
         return stats
 
-    # -- Kuresel Istatistikler ---------------------------------------------
+    # -- Global Statistics -------------------------------------------------
 
     def global_stats(self) -> GlobalStats:
-        """Tum hedefler arasinda kuresel istatistik hesapla."""
+        """Compute global statistics across all targets."""
         cache_key = _cache_key("global_stats")
         cached = _cache_get(cache_key)
         if cached is not None:
@@ -236,49 +236,49 @@ class StatsEngine:
         stats = GlobalStats()
         conn = self._store._conn
 
-        # Toplam hedef sayisi (benzersiz)
+        # Total unique target count
         row = conn.execute("SELECT COUNT(DISTINCT target) FROM scans").fetchone()
         stats.total_targets = row[0] if row else 0
 
-        # Toplam tarama sayisi
+        # Total scan count
         row = conn.execute("SELECT COUNT(*) FROM scans").fetchone()
         stats.total_scans = row[0] if row else 0
 
-        # Toplam bulgu sayisi
+        # Total finding count
         row = conn.execute("SELECT COUNT(*) FROM findings").fetchone()
         stats.total_findings = row[0] if row else 0
 
-        # Onem derecesine gore bulgular
+        # Findings by severity
         for sev in ("low", "medium", "high", "critical"):
             row = conn.execute(
                 "SELECT COUNT(*) FROM findings WHERE severity = ?", (sev,)
             ).fetchone()
             stats.findings_by_severity[sev] = row[0] if row else 0
 
-        # Kuresel en cok tetiklenen 5 kural
+        # Global top 5 most triggered rules
         rows = conn.execute(
             "SELECT rule_id, COUNT(*) as cnt FROM findings "
             "GROUP BY rule_id ORDER BY cnt DESC LIMIT 5"
         ).fetchall()
         stats.top_triggered_rules = [(r[0], r[1]) for r in rows]
 
-        # En cok taranan 5 hedef
+        # Top 5 most scanned targets
         rows = conn.execute(
             "SELECT target, COUNT(*) as cnt FROM scans GROUP BY target ORDER BY cnt DESC LIMIT 5"
         ).fetchall()
         stats.top_scanned_targets = [(r[0], r[1]) for r in rows]
 
-        # Toplam denetim olayi sayisi
+        # Total audit event count
         row = conn.execute("SELECT COUNT(*) FROM audit_log").fetchone()
         stats.audit_event_count = row[0] if row else 0
 
         _cache_set(cache_key, stats)
         return stats
 
-    # -- Egilim Analizi ----------------------------------------------------
+    # -- Trend Analysis ----------------------------------------------------
 
     def trend_analysis(self, target: str, days: int = 30) -> TrendReport:
-        """Bir hedefin N gunluk guvenlik egilimini analiz et."""
+        """Analyze N-day security trend for a target."""
         cache_key = _cache_key("trend", target, str(days))
         cached = _cache_get(cache_key)
         if cached is not None:
@@ -287,7 +287,7 @@ class StatsEngine:
         report = TrendReport(target=target, days=days)
         conn = self._store._conn
 
-        # Gunluk tarama sayilari
+        # Daily scan counts
         rows = conn.execute(
             """
             SELECT DATE(scanned_at) as day, COUNT(*) as cnt
@@ -299,7 +299,7 @@ class StatsEngine:
         ).fetchall()
         report.daily_scans = [{"date": r[0], "count": r[1]} for r in rows]
 
-        # Gunluk bulgu sayilari
+        # Daily finding counts
         rows = conn.execute(
             """
             SELECT DATE(s.scanned_at) as day, COUNT(f.id) as cnt
@@ -312,18 +312,18 @@ class StatsEngine:
         ).fetchall()
         report.daily_findings = [{"date": r[0], "count": r[1]} for r in rows]
 
-        # Egilim yonu: ilk yari ile ikinci yariyi karsilastir
+        # Trend direction: compare first half vs second half
         findings_list = [d["count"] for d in report.daily_findings]
         if len(findings_list) >= 2:
             mid = len(findings_list) // 2
             first_half_avg = sum(findings_list[:mid]) / mid
             second_half_avg = sum(findings_list[mid:]) / (len(findings_list) - mid)
 
-            # Sifira bolmeyi onle
+            # Prevent division by zero
             if first_half_avg > 0:
                 change_pct = (second_half_avg - first_half_avg) / first_half_avg
             elif second_half_avg > 0:
-                change_pct = 1.0  # sifirdan pozitife gecis = kotulesme
+                change_pct = 1.0  # zero to positive transition = worsening
             else:
                 change_pct = 0.0
 
@@ -334,7 +334,7 @@ class StatsEngine:
             else:
                 report.trend_direction = "stable"
 
-        # Onem seviyesi bazinda egilim
+        # Severity-level trend
         for sev in ("low", "medium", "high", "critical"):
             rows = conn.execute(
                 """

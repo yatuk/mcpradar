@@ -1,6 +1,6 @@
 # Architecture
 
-MCPRadar kod tabanı turu.
+A tour of the MCPRadar codebase.
 
 ## Directory Structure
 
@@ -76,7 +76,7 @@ sequenceDiagram
     Scanner->>MCP: list_resources()
     MCP-->>Scanner: [Resource, ...]
 
-    loop Her tool için
+    loop For each tool
         Scanner->>Rules: analyze(tool_info)
         Rules->>Rules: R001, R101, R102, R103, R104, R105
         Rules-->>Scanner: [Finding, ...]
@@ -91,23 +91,23 @@ sequenceDiagram
 
 ### Rule Plugins
 
-Her rule `Rule` base class'ından inherit alır. Yeni kural eklemek için:
-1. `Rule` subclass'ı oluştur
-2. `rule_id`, `title`, `severity` belirle
-3. `check(tool) -> list[Finding]` implement et
-4. `RuleEngine.__init__`'e `self._rules.append(MyRule())` ekle
+Each rule inherits from the `Rule` base class. To add a new rule:
+1. Create a `Rule` subclass
+2. Set `rule_id`, `title`, `severity`
+3. Implement `check(tool) -> list[Finding]`
+4. Add `self._rules.append(MyRule())` to `RuleEngine.__init__`
 
-Kurallar birbirinden bağımsızdır, paralel çalıştırılabilir.
+Rules are independent of each other and can run in parallel.
 
 ### Transport Abstraction
 
-Scanner 3 transport destekler:
+Scanner supports 3 transports:
 - **stdio:** `StdioServerParameters` → `stdio_client()`
-- **sse:** URL dönüştürme → `sse_client()`
-- **http:** direkt → `streamablehttp_client()`
+- **sse:** URL conversion → `sse_client()`
+- **http:** direct → `streamablehttp_client()`
 
-Her transport `(read_stream, write_stream)` tuple'ı üretir. `ClientSession` 
-transport-agnostiktir.
+Each transport produces a `(read_stream, write_stream)` tuple. `ClientSession`
+is transport-agnostic.
 
 ### SQLite Schema
 

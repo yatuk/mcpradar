@@ -1,207 +1,207 @@
-# MCPRadar Stratejik Gelişim Yol Haritası
+# MCPRadar Strategic Development Roadmap
 
-> **Son güncelleme:** 2026-06-25 · **Mevcut sürüm:** v1.0.0-rc3 · **Hedef:** v1.0.0 (GA)
-
----
-
-## Vizyon
-
-MCPRadar, Model Context Protocol (MCP) ekosisteminin **referans güvenlik aracı** olmayı hedefler. Her MCP sunucu geliştiricisinin CI hattında çalıştırdığı, her kurumsal güvenlik ekibinin yapay zeka ajanlarını denetlerken başvurduğu açık kaynak standart.
-
-## Misyon
-
-Tool poisoning, prompt injection, supply-chain rug pull ve cross-server contamination saldırılarını **LLM agent bir tool çağrısı yapmadan önce** yakalamak. Deterministik, CI-dostu, SARIF uyumlu güvenlik taramasını geliştirici iş akışının doğal bir parçası haline getirmek.
+> **Last update:** 2026-06-25 · **Current version:** v1.0.0-rc3 · **Target:** v1.0.0 (GA)
 
 ---
 
-## Mevcut Durum — v0.1.0 (2026-05-25)
+## Vision
 
-### Tamamlanan Özellikler
+MCPRadar aims to become the **reference security tool** for the Model Context Protocol (MCP) ecosystem. An open source standard that every MCP server developer runs in their CI pipeline and every enterprise security team consults when auditing AI agents.
 
-| Bileşen | Durum | Detay |
+## Mission
+
+Catch tool poisoning, prompt injection, supply-chain rug pull, and cross-server contamination attacks **before the LLM agent makes a tool call**. Make deterministic, CI-friendly, SARIF-compliant security scanning a natural part of the developer workflow.
+
+---
+
+## Current Status — v0.1.0 (2026-05-25)
+
+### Completed Features
+
+| Component | Status | Detail |
 |---|---|---|
-| Tespit kuralları | ✅ 6 kural | R001, R101, R102 (10 pattern), R103, R104, R105 |
-| Transport katmanı | ✅ 3 protokol | HTTP (streamable), SSE, stdio |
-| Veritabanı | ✅ SQLite (WAL) | scans, tools, prompts, resources, findings tabloları |
-| Diff motoru | ✅ 3 seviye | cosmetic / behavioral / security sınıflandırma |
-| Çıktı formatları | ✅ 3 format | Rich terminal, JSON, SARIF v2.1.0 |
-| CI/CD | ✅ Tam matris | Python 3.11–3.13 × ubuntu/macos/windows |
+| Detection rules | ✅ 6 rules | R001, R101, R102 (10 patterns), R103, R104, R105 |
+| Transport layer | ✅ 3 protocols | HTTP (streamable), SSE, stdio |
+| Database | ✅ SQLite (WAL) | scans, tools, prompts, resources, findings tables |
+| Diff engine | ✅ 3 levels | cosmetic / behavioral / security classification |
+| Output formats | ✅ 3 formats | Rich terminal, JSON, SARIF v2.1.0 |
+| CI/CD | ✅ Full matrix | Python 3.11–3.13 × ubuntu/macos/windows |
 | PyPI publish | ✅ OIDC | GitHub Actions → PyPI trusted publishing |
-| Plugin keşif | ✅ Temel | `entry_points(group="mcpradar.rules")` otomatik yükleme |
-| Cross-server analiz | ✅ 5 kural | C001–C005 (temel seviye) |
-| CVE feed | ✅ Tohum veri | 2 MCP-ilgili CVE, anahtar kelime eşleştirme |
-| Watch modu | ✅ Temel | Periyodik tarama + webhook/shell alert |
-| Public leaderboard | ✅ GitHub Pages | Statik markdown, manuel güncelleme |
-| VS Code uzantısı | ✅ Scaffold | `vscode-mcpradar/` dizini |
-| Validasyon pipeline | ⚠️ Hedefler tanımlı | 10 sunucu, henüz tam çalıştırılmadı |
+| Plugin discovery | ✅ Basic | `entry_points(group="mcpradar.rules")` auto-loading |
+| Cross-server analysis | ✅ 5 rules | C001–C005 (basic level) |
+| CVE feed | ✅ Seed data | 2 MCP-related CVEs, keyword matching |
+| Watch mode | ✅ Basic | Periodic scanning + webhook/shell alert |
+| Public leaderboard | ✅ GitHub Pages | Static markdown, manual update |
+| VS Code extension | ✅ Scaffold | `vscode-mcpradar/` directory |
+| Validation pipeline | ⚠️ Targets defined | 10 servers, not yet fully executed |
 
-### OWASP MCP Top 10 (2025) Kapsam Matrisi
+### OWASP MCP Top 10 (2025) Coverage Matrix
 
-| OWASP ID | Kategori | Mevcut Kapsam | Seviye |
+| OWASP ID | Category | Current Coverage | Level |
 |---|---|---|---|
-| **MCP01** | Token Mismanagement & Secret Exposure | — | ❌ Kapsanmıyor |
-| **MCP02** | Privilege Escalation via Scope Creep | R105 (scope pairs) | 🟡 Temel |
-| **MCP03** | Tool Poisoning | R001, R104, C001, C002 | 🟡 Kısmi |
-| **MCP04** | Supply Chain Attacks | — | ❌ Kapsanmıyor |
-| **MCP05** | Command Injection & Execution | R001 (isim eşleşmesi) | 🔴 Minimal |
-| **MCP06** | Prompt Injection | R102, R103, R104 | 🟢 Güçlü |
-| **MCP07** | Insufficient AuthN/AuthZ | — | ❌ Kapsanmıyor |
-| **MCP08** | Lack of Audit & Telemetry | — | ❌ Kapsanmıyor |
-| **MCP09** | Shadow MCP Servers | — | ❌ Kapsanmıyor |
-| **MCP10** | Context Injection & Over-Sharing | C001–C005 | 🟡 Kısmi |
+| **MCP01** | Token Mismanagement & Secret Exposure | — | ❌ Not covered |
+| **MCP02** | Privilege Escalation via Scope Creep | R105 (scope pairs) | 🟡 Basic |
+| **MCP03** | Tool Poisoning | R001, R104, C001, C002 | 🟡 Partial |
+| **MCP04** | Supply Chain Attacks | — | ❌ Not covered |
+| **MCP05** | Command Injection & Execution | R001 (name matching) | 🔴 Minimal |
+| **MCP06** | Prompt Injection | R102, R103, R104 | 🟢 Strong |
+| **MCP07** | Insufficient AuthN/AuthZ | — | ❌ Not covered |
+| **MCP08** | Lack of Audit & Telemetry | — | ❌ Not covered |
+| **MCP09** | Shadow MCP Servers | — | ❌ Not covered |
+| **MCP10** | Context Injection & Over-Sharing | C001–C005 | 🟡 Partial |
 
-**Kapsam oranı: 3/10 tam kapsam, 3/10 kısmi, 4/10 kapsam dışı**
+**Coverage rate: 3/10 full coverage, 3/10 partial, 4/10 not covered**
 
-### Rakip Karşılaştırması
+### Competitor Comparison
 
-| Araç | Yaklaşım | MCPRadar Farkı |
+| Tool | Approach | MCPRadar Differentiator |
 |---|---|---|
-| **Cisco mcp-scanner** | YARA + LLM + VirusTotal, yalnızca statik | Transport çeşitliliği, diff, SARIF, MIT lisans |
-| **Snyk agent-scan** | LLM sınıflandırıcı, CI odaklı, platform-bağımlı | Platform bağımsız, çevrimdışı çalışabilir |
-| **Pipelock** | Runtime proxy (Go), canlı trafik | Deterministik, runtime overhead yok |
-| **Hermes** | Rust, fuzzing + probing, OWASP-uyumlu | Python ekosistemi, daha basit kural yazımı |
-| **agent-audit** | SAST, 40+ kural, taint analysis | MCP transport farkındalığı |
-| **MCP Guardian** | Policy-as-code, YAML kuralları, proxy | Agent'dan bağımsız, proxy zorunlu değil |
-| **MCPSafetyScanner** | LLM agent ile dinamik fuzzing | Deterministik sonuçlar, CI'da tekrarlanabilir |
+| **Cisco mcp-scanner** | YARA + LLM + VirusTotal, static only | Transport variety, diff, SARIF, MIT license |
+| **Snyk agent-scan** | LLM classifier, CI-focused, platform-dependent | Platform independent, works offline |
+| **Pipelock** | Runtime proxy (Go), live traffic | Deterministic, no runtime overhead |
+| **Hermes** | Rust, fuzzing + probing, OWASP-compliant | Python ecosystem, simpler rule authoring |
+| **agent-audit** | SAST, 40+ rules, taint analysis | MCP transport awareness |
+| **MCP Guardian** | Policy-as-code, YAML rules, proxy | Agent-independent, no proxy required |
+| **MCPSafetyScanner** | Dynamic fuzzing via LLM agent | Deterministic results, reproducible in CI |
 
 ---
 
-## Sprint Planı
+## Sprint Plan
 
-Tüm sprint'ler 2'şer haftalıktır. Her sprint bir sürüm artışı hedefler ve belirli OWASP kapsam açıklarını kapatır.
+All sprints are 2 weeks each. Each sprint targets a version increment and closes specific OWASP coverage gaps.
 
 ---
 
-### 🚀 Sprint 1: "Detection Depth" — Yeni Tespit Kuralları
+### 🚀 Sprint 1: "Detection Depth" — New Detection Rules
 
-**Hedef Sürüm:** v0.2.0 · **Süre:** 2 hafta · **OWASP:** MCP01, MCP04, MCP05
+**Target Version:** v0.2.0 · **Duration:** 2 weeks · **OWASP:** MCP01, MCP04, MCP05
 
-#### Hedef
+#### Goal
 
-En büyük üç OWASP kapsam açığını kapatmak: gizli kimlik bilgisi ifşası (MCP01), bağımlılık manipülasyonu (MCP04) ve parametreler üzerinden komut enjeksiyonu (MCP05). 4 yeni kural ve 1 mevcut kural iyileştirmesi.
+Close the three largest OWASP coverage gaps: secret credential exposure (MCP01), dependency manipulation (MCP04), and command injection via parameters (MCP05). 4 new rules and 1 existing rule improvement.
 
-#### Yeni Kurallar
+#### New Rules
 
 **R106 — Secret/Token Exposure** (`Severity.CRITICAL`)
-- Shannon entropi tabanlı yüksek entropili string tespiti
-- 15+ bilinen gizli format regex'i: `sk-*`, `ghp_*`, `xoxb-*`, `eyJ*` (JWT), AWS access key, GitHub token, Slack token, OpenAI key, bağlantı string'leri
-- Tool name, description, input_schema default değerleri, output_schema taranır
-- Entropi > 4.5 VE bilinen format → CRITICAL; sadece entropi > 4.5 → HIGH
+- Shannon entropy-based high-entropy string detection
+- 15+ known secret format regexes: `sk-*`, `ghp_*`, `xoxb-*`, `eyJ*` (JWT), AWS access key, GitHub token, Slack token, OpenAI key, connection strings
+- Tool name, description, input_schema default values, output_schema scanned
+- Entropy > 4.5 AND known format → CRITICAL; only entropy > 4.5 → HIGH
 
 **R107 — Command Injection via Tool Parameters** (`Severity.CRITICAL`)
-- `input_schema` properties'lerini recursive walk
-- Shell metakarakterleri: `$()`, `backticks`, `|`, `;`, `&&`, `||`, `>`, `<`
-- Tehlikeli varsayılan değerler: `"rm -rf"`, `"DROP TABLE"`, `"shutdown"`
-- `pattern`/`regex` alanlarında aşırı geniş regex desenleri
-- `enum` değerlerinde komut benzeri string'ler
+- Recursive walk of `input_schema` properties
+- Shell metacharacters: `$()`, `backticks`, `|`, `;`, `&&`, `||`, `>`, `<`
+- Dangerous default values: `"rm -rf"`, `"DROP TABLE"`, `"shutdown"`
+- Overly broad regex patterns in `pattern`/`regex` fields
+- Command-like strings in `enum` values
 
 **R108 — Supply Chain Risk Indicator** (`Severity.MEDIUM`/`HIGH`)
-- Tool description'da harici paket kurulumu referansları: `pip install`, `npm install`, `cargo add`
-- URL'den script çalıştırma: `curl \| bash`, `wget -O - \| sh`
-- Dinamik kod yükleme: `importlib`, `require()`, `eval()`
-- `curl|bash` pattern'i → HIGH, diğerleri → MEDIUM
+- External package installation references in tool description: `pip install`, `npm install`, `cargo add`
+- Running scripts from URLs: `curl \| bash`, `wget -O - \| sh`
+- Dynamic code loading: `importlib`, `require()`, `eval()`
+- `curl|bash` pattern → HIGH, others → MEDIUM
 
 **R109 — Schema Poisoning Indicator** (`Severity.HIGH`)
-- `additionalProperties: true` (arbitrary injection'a açık)
-- Tüm parametrelerde tip kısıtlaması eksikliği
-- Zorunlu alan yok (boş girdi kabulü)
-- Aşırı büyük `maxLength`/`maxItems` (buffer overflow riski)
+- `additionalProperties: true` (open to arbitrary injection)
+- Missing type constraints on all parameters
+- No required fields (accepting empty input)
+- Excessively large `maxLength`/`maxItems` (buffer overflow risk)
 
-**R105 İyileştirmesi — Permission Scope Mismatch v2**
-- `SCOPE_PAIRS` 3 çiftten 10+ çifte genişletme (crypto/wallet, browser/system, notification/execution)
-- snake_case/camelCase tool ismi ayrıştırma (`_decompose_name()` yardımcısı)
-- LOW downgrade mantığını kaldır, yerine "bridge keyword" kontrolü
+**R105 Improvement — Permission Scope Mismatch v2**
+- `SCOPE_PAIRS` expansion from 3 pairs to 10+ pairs (crypto/wallet, browser/system, notification/execution)
+- snake_case/camelCase tool name parsing (`_decompose_name()` helper)
+- Remove LOW downgrade logic, replace with "bridge keyword" check
 
-#### Dosya Değişiklikleri
+#### File Changes
 
-| Dosya | İşlem |
+| File | Action |
 |---|---|
-| `src/mcpradar/scanner/rules.py` | R106, R107, R108, R109 sınıfları; R105 genişletme; RuleEngine kayıt |
-| `tests/test_rules.py` | 4 yeni test sınıfı, 80+ test vakası |
-| `src/mcpradar/output/sarif.py` | RULE_HELP dict genişletme |
-| `docs/detection-rules.md` | 4 yeni kural dokümantasyonu |
-| `CHANGELOG.md` | v0.2.0 girişi |
+| `src/mcpradar/scanner/rules.py` | R106, R107, R108, R109 classes; R105 expansion; RuleEngine registration |
+| `tests/test_rules.py` | 4 new test classes, 80+ test cases |
+| `src/mcpradar/output/sarif.py` | RULE_HELP dict expansion |
+| `docs/detection-rules.md` | 4 new rule documentation pages |
+| `CHANGELOG.md` | v0.2.0 entry |
 
-#### Tamamlanma Kriterleri
+#### Completion Criteria
 
-- [x] R106: 25+ parametrize test, 15+ gizli format tespiti
-- [x] R107: 20+ test, shell metakarakter + tehlikeli varsayılan + recursive walk
-- [x] R108: 15+ test, pip/npm/curl-bash pattern'leri
-- [x] R109: 15+ test, schema poisoning vektörleri
-- [x] R105: 10+ yeni scope çifti, 10+ test
-- [x] mypy strict: sıfır hata
-- [x] CI tam matris geçer
-- [x] Yeni kod için test coverage ≥ %95
+- [x] R106: 25+ parameterized tests, 15+ secret format detections
+- [x] R107: 20+ tests, shell metacharacter + dangerous default + recursive walk
+- [x] R108: 15+ tests, pip/npm/curl-bash patterns
+- [x] R109: 15+ tests, schema poisoning vectors
+- [x] R105: 10+ new scope pairs, 10+ tests
+- [x] mypy strict: zero errors
+- [x] CI full matrix passes
+- [x] Test coverage for new code ≥ 95%
 
 ---
 
-### 🧩 Sprint 2: "Plugin Engine" — Topluluk Kural Ekosistemi
+### 🧩 Sprint 2: "Plugin Engine" — Community Rule Ecosystem
 
-**Hedef Sürüm:** v0.3.0 · **Süre:** 2 hafta · **OWASP:** Cross-cutting (tüm kategoriler için topluluk katkısı)
+**Target Version:** v0.3.0 · **Duration:** 2 weeks · **OWASP:** Cross-cutting (community contribution for all categories)
 
-#### Hedef
+#### Goal
 
-Mevcut `entry_points` keşif mekanizmasını tam teşekküllü bir eklenti yaşam döngüsü yönetim sistemine dönüştürmek.
+Transform the existing `entry_points` discovery mechanism into a full-fledged plugin lifecycle management system.
 
-#### Yeni Modül: `src/mcpradar/plugin/`
+#### New Module: `src/mcpradar/plugin/`
 
 ```
 src/mcpradar/plugin/
     __init__.py
-    manager.py      # PluginManager: kurulum, kaldırma, listeleme, metaveri
-    validator.py    # PluginValidator: şema kontrolü, uyumluluk, test çalıştırma
-    scaffolder.py   # Scaffolder: şablondan eklenti paketi oluşturma
+    manager.py      # PluginManager: install, uninstall, list, metadata
+    validator.py    # PluginValidator: schema check, compatibility, test runner
+    scaffolder.py   # Scaffolder: generate plugin package from template
 ```
 
-#### Yeni CLI Komutları
+#### New CLI Commands
 
 ```bash
-mcpradar plugin init <isim> [-o ./plugins]     # Yeni eklenti iskeleti oluştur
-mcpradar plugin validate <dizin>                # Eklenti yapısını doğrula
-mcpradar plugin list                            # Yüklü topluluk eklentilerini listele
-mcpradar plugin install <paket>                 # pip install + doğrula
-mcpradar plugin uninstall <paket>               # pip uninstall
+mcpradar plugin init <name> [-o ./plugins]     # Create new plugin skeleton
+mcpradar plugin validate <directory>            # Validate plugin structure
+mcpradar plugin list                            # List installed community plugins
+mcpradar plugin install <package>               # pip install + validate
+mcpradar plugin uninstall <package>             # pip uninstall
 ```
 
-#### Plugin Sistemi Özellikleri
+#### Plugin System Features
 
-- **Scaffolder:** Cookiecutter benzeri şablon değişken değiştirme; `pyproject.toml`, `src/<isim>/__init__.py`, `src/<isim>/rule.py`, `tests/test_rule.py`, `README.md` otomatik oluşturma
-- **Validator:** Entry point varlığı, Rule sınıf kalıtımı, rule_id formatı (X###), testlerin geçerliliği
-- **Manager:** Plugin metaveri çıkarma (versiyon, yazar), `_discover_plugins()` entegrasyonu
+- **Scaffolder:** Cookiecutter-like template variable substitution; auto-generates `pyproject.toml`, `src/<name>/__init__.py`, `src/<name>/rule.py`, `tests/test_rule.py`, `README.md`
+- **Validator:** Entry point presence, Rule class inheritance, rule_id format (X###), test validity
+- **Manager:** Plugin metadata extraction (version, author), `_discover_plugins()` integration
 
-#### Dosya Değişiklikleri
+#### File Changes
 
-| Dosya | İşlem |
+| File | Action |
 |---|---|
-| `src/mcpradar/plugin/__init__.py` | **Yeni** paket |
-| `src/mcpradar/plugin/manager.py` | **Yeni** (~200 satır) |
-| `src/mcpradar/plugin/validator.py` | **Yeni** (~150 satır) |
-| `src/mcpradar/plugin/scaffolder.py` | **Yeni** (~100 satır) |
-| `src/mcpradar/cli.py` | `plugin_app` typer alt komutları |
-| `src/mcpradar/scanner/rules.py` | `_discover_plugins()` metaveri geliştirmesi |
-| `plugins/template/` | test/, README.md, CI şablonu ekleme |
-| `tests/test_plugin_loading.py` | 20+ yeni test |
-| `docs/writing-rules.md` | Tam eklenti geliştirme rehberi |
+| `src/mcpradar/plugin/__init__.py` | **New** package |
+| `src/mcpradar/plugin/manager.py` | **New** (~200 lines) |
+| `src/mcpradar/plugin/validator.py` | **New** (~150 lines) |
+| `src/mcpradar/plugin/scaffolder.py` | **New** (~100 lines) |
+| `src/mcpradar/cli.py` | `plugin_app` typer subcommands |
+| `src/mcpradar/scanner/rules.py` | `_discover_plugins()` metadata enhancement |
+| `plugins/template/` | test/, README.md, CI template additions |
+| `tests/test_plugin_loading.py` | 20+ new tests |
+| `docs/writing-rules.md` | Complete plugin development guide |
 
-#### Tamamlanma Kriterleri
+#### Completion Criteria
 
-- [x] `mcpradar plugin init` tam çalışan eklenti paketi üretir
-- [x] `mcpradar plugin validate` hataları yakalar: eksik entry_point, bozuk rule_id, Rule kalıtımı yok, import hatası
-- [x] `mcpradar plugin list` tüm eklentileri versiyon/yazar bilgisiyle gösterir
-- [x] 2 örnek topluluk eklentisi (`plugins/` altında)
-- [x] Mevcut tüm plugin testleri değişmeden geçer
+- [x] `mcpradar plugin init` produces a fully working plugin package
+- [x] `mcpradar plugin validate` catches errors: missing entry_point, malformed rule_id, no Rule inheritance, import error
+- [x] `mcpradar plugin list` shows all plugins with version/author info
+- [x] 2 example community plugins (under `plugins/`)
+- [x] All existing plugin tests pass unchanged
 
 ---
 
-### 🔍 Sprint 3: "Fingerprint & Transport Security" — Sunucu Kimliği
+### 🔍 Sprint 3: "Fingerprint & Transport Security" — Server Identity
 
-**Hedef Sürüm:** v0.4.0 · **Süre:** 2 hafta · **OWASP:** MCP07, MCP09
+**Target Version:** v0.4.0 · **Duration:** 2 weeks · **OWASP:** MCP07, MCP09
 
-#### Hedef
+#### Goal
 
-Shadow MCP sunucularını ve yetkisiz sunucu değişimlerini tespit etmek için parmak izi (fingerprint) sistemi. Transport katmanı güvenlik validasyonu.
+Fingerprint system to detect shadow MCP servers and unauthorized server changes. Transport layer security validation.
 
-#### Yeni Modül: `src/mcpradar/fingerprint/`
+#### New Module: `src/mcpradar/fingerprint/`
 
 ```python
 @dataclass
@@ -209,10 +209,10 @@ class ServerFingerprint:
     server_id: str            # SHA256(endpoint + capabilities + tools_hash)
     endpoint: str
     transport: str
-    server_version: str       # initialize() yanıtından
+    server_version: str       # from initialize() response
     protocol_version: str
     capabilities: dict
-    tool_names_hash: str      # SHA256(sıralı tool isimleri)
+    tool_names_hash: str      # SHA256(sorted tool names)
     tool_count: int
     first_seen: str
     last_seen: str
@@ -227,130 +227,130 @@ class TLSInfo:
     self_signed: bool
 ```
 
-#### Yeni Kurallar
+#### New Rules
 
 **R110 — Version Anomaly** (`Severity.HIGH`)
-- Cross-scan: önceki fingerprint ile karşılaştırma
-- Sürüm düşürme (rollback saldırısı) → CRITICAL
-- Beklenmeyen major sürüm atlaması → HIGH
-- İlk tarama (baseline yok) → MEDIUM
+- Cross-scan: compare with previous fingerprint
+- Version downgrade (rollback attack) → CRITICAL
+- Unexpected major version jump → HIGH
+- First scan (no baseline) → MEDIUM
 
 **R111 — Insecure Transport** (`Severity.HIGH`)
-- Düz HTTP (TLS yok) → HIGH
+- Plain HTTP (no TLS) → HIGH
 - TLS < 1.2 → CRITICAL
-- Sertifika süresi dolmuş → HIGH
-- Self-signed sertifika → MEDIUM
-- HSTS header eksik → MEDIUM
+- Certificate expired → HIGH
+- Self-signed certificate → MEDIUM
+- HSTS header missing → MEDIUM
 
-#### Yeni CLI Komutları
+#### New CLI Commands
 
 ```bash
-mcpradar fingerprint <hedef>                # Parmak izi oluştur
-mcpradar fingerprint --compare <hedef>      # Baseline ile karşılaştır
+mcpradar fingerprint <target>                # Create fingerprint
+mcpradar fingerprint --compare <target>      # Compare with baseline
 ```
 
-#### Dosya Değişiklikleri
+#### File Changes
 
-| Dosya | İşlem |
+| File | Action |
 |---|---|
-| `src/mcpradar/fingerprint/__init__.py` | **Yeni** |
-| `src/mcpradar/fingerprint/fingerprinter.py` | **Yeni** (~250 satır) |
-| `src/mcpradar/fingerprint/transport_check.py` | **Yeni** (~150 satır) |
-| `src/mcpradar/scanner/rules.py` | R110, R111 sınıfları; `pre_scan_check()` hook'u |
-| `src/mcpradar/scanner/engine.py` | Scanner'a TransportChecker entegrasyonu |
-| `src/mcpradar/storage/store.py` | `fingerprints` tablosu; fingerprint CRUD |
-| `src/mcpradar/cli.py` | `fingerprint` komutu |
-| `tests/test_fingerprint.py` | **Yeni** 30+ test |
-| `tests/test_transport_check.py` | **Yeni** 20+ test |
+| `src/mcpradar/fingerprint/__init__.py` | **New** |
+| `src/mcpradar/fingerprint/fingerprinter.py` | **New** (~250 lines) |
+| `src/mcpradar/fingerprint/transport_check.py` | **New** (~150 lines) |
+| `src/mcpradar/scanner/rules.py` | R110, R111 classes; `pre_scan_check()` hook |
+| `src/mcpradar/scanner/engine.py` | TransportChecker integration into Scanner |
+| `src/mcpradar/storage/store.py` | `fingerprints` table; fingerprint CRUD |
+| `src/mcpradar/cli.py` | `fingerprint` command |
+| `tests/test_fingerprint.py` | **New** 30+ tests |
+| `tests/test_transport_check.py` | **New** 20+ tests |
 
-#### Tamamlanma Kriterleri
+#### Completion Criteria
 
-- [x] Parmak izi: endpoint hash, versiyon, capabilities, tools hash, TLS bilgisi
-- [x] Karşılaştırma: tool listesi değişimi, versiyon sapması, endpoint değişimi, TLS downgrade
-- [x] TransportChecker: TLS ≥ 1.2, sertifika geçerli, self-signed değil, HSTS mevcut
-- [x] Parmak izleri SQLite'da saklanır
-- [x] R110 diff pipeline ile entegre
+- [x] Fingerprint: endpoint hash, version, capabilities, tools hash, TLS info
+- [x] Comparison: tool list change, version deviation, endpoint change, TLS downgrade
+- [x] TransportChecker: TLS ≥ 1.2, certificate valid, not self-signed, HSTS present
+- [x] Fingerprints stored in SQLite
+- [x] R110 integrated with diff pipeline
 
 ---
 
 ### 🔗 Sprint 4: "Deep Cross-Server & Runtime Probing"
 
-**Hedef Sürüm:** v0.5.0 · **Süre:** 2 hafta · **OWASP:** MCP02, MCP03, MCP10
+**Target Version:** v0.5.0 · **Duration:** 2 weeks · **OWASP:** MCP02, MCP03, MCP10
 
-#### Hedef
+#### Goal
 
-Cross-server analizi statik isim eşleştirmesinden çalışma zamanı saldırı yolu keşfine yükseltmek. Read-only tool'ların güvenli probing'i. C-kurallarını 5'ten 7'ye çıkarmak.
+Elevate cross-server analysis from static name matching to runtime attack path discovery. Safe probing of read-only tools. Increase C-rules from 5 to 7.
 
-#### Yeni Modül: `src/mcpradar/probe/`
+#### New Module: `src/mcpradar/probe/`
 
 ```python
 class ReadOnlyProber:
-    """Read-only olarak sınıflandırılan MCP tool'larını güvenli şekilde probe eder."""
+    """Safely probes MCP tools classified as read-only."""
     SAFE_TOOL_PATTERNS = [r"^(get|list|read|fetch|search|query|browse|show|describe)"]
     MAX_PROBE_COUNT = 20
-    PROBE_TIMEOUT = 5.0  # saniye/tool
+    PROBE_TIMEOUT = 5.0  # seconds/tool
 
     async def probe_tool(self, session, tool) -> ProbeResult:
-        """Minimal güvenli girdi ile tool'u çalıştırır, yanıtı analiz eder."""
+        """Runs the tool with minimal safe input, analyzes the response."""
 ```
 
 **ProbeResult:** `tool_name`, `success`, `response_time_ms`, `response_preview`, `contains_urls`, `contains_scripts`, `contains_secrets` (R106 re-run), `contains_prompt_injection` (R102 re-run)
 
-#### Yeni Cross-Server Kuralları
+#### New Cross-Server Rules
 
 **C006 — Attack Path Chain** (MCP03/MCP10)
-- (sunucu, tool) düğümlerinden oluşan yönlendirilmiş graf
-- Kenarlar: tool A'nın output schema'sı ile tool B'nin input schema'sı tip bazlı eşleşme
-- Tespit: "read sensitive" → "send external" (exfiltration zinciri), "receive input" → "execute command" (RCE zinciri), ≥3 uzunlukta zincirler
+- Directed graph of (server, tool) nodes
+- Edges: type-based match between tool A's output schema and tool B's input schema
+- Detection: "read sensitive" → "send external" (exfiltration chain), "receive input" → "execute command" (RCE chain), chains ≥3 length
 
 **C007 — Privilege Escalation via Cross-Server Chaining** (MCP02)
-- Read-only tool çıktısının write/exec tool girdisine dönüşebildiği durumlar
-- Yetkisiz yetki yükseltme yolları
+- Cases where read-only tool output can become write/exec tool input
+- Unauthorized privilege escalation paths
 
-#### Yeni CLI
+#### New CLI
 
 ```bash
-mcpradar probe <hedef> --safe-only          # Sadece read-only tool'ları probe et
-mcpradar analyze-context --deep              # Tam graf analizi
-mcpradar analyze-context --graph -o risk.dot # GraphViz çıktısı
+mcpradar probe <target> --safe-only          # Only probe read-only tools
+mcpradar analyze-context --deep              # Full graph analysis
+mcpradar analyze-context --graph -o risk.dot # GraphViz output
 ```
 
-#### Dosya Değişiklikleri
+#### File Changes
 
-| Dosya | İşlem |
+| File | Action |
 |---|---|
-| `src/mcpradar/probe/__init__.py` | **Yeni** |
-| `src/mcpradar/probe/prober.py` | **Yeni** (~250 satır) |
-| `src/mcpradar/probe/sandbox.py` | **Yeni** (~100 satır) |
-| `src/mcpradar/analyzer/context.py` | C006, C007; graf oluşturucu; risk skorlayıcı |
-| `src/mcpradar/analyzer/report.py` | `risk_score` alanı |
-| `src/mcpradar/cli.py` | `probe` komutu; `--deep`, `--graph` flag'leri |
-| `src/mcpradar/scanner/engine.py` | Prober entegrasyonu |
-| `tests/test_probe.py` | **Yeni** 30+ test |
-| `tests/test_context_analysis.py` | C006, C007 testleri |
+| `src/mcpradar/probe/__init__.py` | **New** |
+| `src/mcpradar/probe/prober.py` | **New** (~250 lines) |
+| `src/mcpradar/probe/sandbox.py` | **New** (~100 lines) |
+| `src/mcpradar/analyzer/context.py` | C006, C007; graph builder; risk scorer |
+| `src/mcpradar/analyzer/report.py` | `risk_score` field |
+| `src/mcpradar/cli.py` | `probe` command; `--deep`, `--graph` flags |
+| `src/mcpradar/scanner/engine.py` | Prober integration |
+| `tests/test_probe.py` | **New** 30+ tests |
+| `tests/test_context_analysis.py` | C006, C007 tests |
 
-#### Tamamlanma Kriterleri
+#### Completion Criteria
 
-- [ ] Prober read-only tool'ları güvenle tanımlar ve çalıştırır
-- [ ] Timeout: yavaş/bozuk tool'larda asılı kalmaz
-- [ ] ProbeResult R106 (secrets) ve R102 (prompt injection) re-run yapar
-- [ ] C006 ≥2 uzunlukta saldırı zincirlerini tip-bazlı kenar benzerliğiyle tespit eder
-- [ ] C007 sunucu sınırları arası yetki yükseltme zincirlerini tespit eder
-- [ ] Risk skoru 0-100 her sunucu grubu için hesaplanır
-- [ ] GraphViz DOT çıktısı
-- [ ] Toplam 7 cross-server kuralı (C001–C007)
+- [ ] Prober safely identifies and runs read-only tools
+- [ ] Timeout: does not hang on slow/broken tools
+- [ ] ProbeResult re-runs R106 (secrets) and R102 (prompt injection)
+- [ ] C006 detects attack chains ≥2 length via type-based edge similarity
+- [ ] C007 detects privilege escalation chains across server boundaries
+- [ ] Risk score 0-100 calculated for each server group
+- [ ] GraphViz DOT output
+- [ ] Total 7 cross-server rules (C001–C007)
 
 ---
 
 ### 📊 Sprint 5: "Audit Trail & CVE Automation"
 
-**Hedef Sürüm:** v0.6.0 · **Süre:** 2 hafta · **OWASP:** MCP08
+**Target Version:** v0.6.0 · **Duration:** 2 weeks · **OWASP:** MCP08
 
-#### Hedef
+#### Goal
 
-Tüm tarama aktiviteleri için yapılandırılmış denetim kaydı. NVD API'den otomatik CVE senkronizasyonu. Bulguları CVSS skorlu CVE'lere eşleme. Güvenlik istatistikleri ve trend analizi.
+Structured audit trail for all scan activities. Automated CVE synchronization from NVD API. Mapping findings to CVEs with CVSS scores. Security statistics and trend analysis.
 
-#### Yeni Modül: `src/mcpradar/audit/`
+#### New Module: `src/mcpradar/audit/`
 
 ```python
 @dataclass
@@ -376,13 +376,13 @@ class StatsEngine:
     def trend_analysis(self, target, days=30) -> TrendReport: ...
 
 class NVDAPISyncer:
-    """NVD API 2.0 üzerinden MCP-ilgili CVE'leri senkronize eder."""
+    """Syncs MCP-related CVEs via NVD API 2.0."""
     BASE_URL = "https://services.nvd.nist.gov/rest/json/cves/2.0"
     def search_mcp_cves(self) -> list[CVEEntry]: ...
     def sync_all(self) -> int: ...
 ```
 
-#### SQLite Şema Genişletme
+#### SQLite Schema Expansion
 
 ```sql
 CREATE TABLE IF NOT EXISTS audit_log (
@@ -397,74 +397,74 @@ CREATE INDEX IF NOT EXISTS idx_audit_timestamp ON audit_log(timestamp);
 CREATE INDEX IF NOT EXISTS idx_audit_type ON audit_log(event_type);
 ```
 
-#### Yeni CLI
+#### New CLI
 
 ```bash
-mcpradar audit                            # Son denetim olayları
-mcpradar audit --target <url>             # Sunucuya göre filtrele
-mcpradar audit --type diff_detected       # Olay tipine göre filtrele
-mcpradar stats                            # Global güvenlik istatistikleri
-mcpradar stats <hedef>                    # Sunucu bazlı istatistik + trend
-mcpradar cve sync                         # Tam NVD senkronizasyonu
-mcpradar cve match <scan_id>              # Bulguları CVE'lere eşle
-mcpradar cve list                         # Önbellekteki CVE'leri listele
+mcpradar audit                            # Recent audit events
+mcpradar audit --target <url>             # Filter by server
+mcpradar audit --type diff_detected       # Filter by event type
+mcpradar stats                            # Global security statistics
+mcpradar stats <target>                   # Per-server stats + trend
+mcpradar cve sync                         # Full NVD synchronization
+mcpradar cve match <scan_id>              # Match findings to CVEs
+mcpradar cve list                         # List cached CVEs
 ```
 
-#### Dosya Değişiklikleri
+#### File Changes
 
-| Dosya | İşlem |
+| File | Action |
 |---|---|
-| `src/mcpradar/audit/__init__.py` | **Yeni** |
-| `src/mcpradar/audit/auditor.py` | **Yeni** (~200 satır) |
-| `src/mcpradar/audit/stats.py` | **Yeni** (~200 satır) |
-| `src/mcpradar/storage/store.py` | `audit_log` tablosu; audit CRUD |
-| `src/mcpradar/cvefeed/syncer.py` | NVDAPISyncer; gelişmiş CVE eşleştirme |
-| `src/mcpradar/cli.py` | `audit`, `stats`, `cve sync/match/list` komutları |
-| `src/mcpradar/scanner/engine.py` | Scanner audit olayları yayar |
-| `src/mcpradar/diff/differ.py` | Differ audit olayları yayar |
-| `tests/test_audit.py` | **Yeni** 25+ test |
-| `tests/test_stats.py` | **Yeni** 20+ test |
-| `tests/test_cvefeed.py` | **Yeni** 20+ test (mock NVD API) |
+| `src/mcpradar/audit/__init__.py` | **New** |
+| `src/mcpradar/audit/auditor.py` | **New** (~200 lines) |
+| `src/mcpradar/audit/stats.py` | **New** (~200 lines) |
+| `src/mcpradar/storage/store.py` | `audit_log` table; audit CRUD |
+| `src/mcpradar/cvefeed/syncer.py` | NVDAPISyncer; enhanced CVE matching |
+| `src/mcpradar/cli.py` | `audit`, `stats`, `cve sync/match/list` commands |
+| `src/mcpradar/scanner/engine.py` | Scanner emits audit events |
+| `src/mcpradar/diff/differ.py` | Differ emits audit events |
+| `tests/test_audit.py` | **New** 25+ tests |
+| `tests/test_stats.py` | **New** 20+ tests |
+| `tests/test_cvefeed.py` | **New** 20+ tests (mock NVD API) |
 
-#### Tamamlanma Kriterleri
+#### Completion Criteria
 
 - [ ] AuditLogger: scan_start, scan_complete, finding_created, diff_detected, alert_sent, error
-- [ ] Audit sorgulama: zaman aralığı, olay tipi, hedef filtreleme
-- [ ] StatsEngine: trend eğimi, en çok tetiklenen kurallar, severity dağılımı
-- [ ] NVD API: gerçek CVE'leri CVSS skoruyla çeker (rate-limited, önbellekli)
-- [ ] CVE eşleştirme: CWE mapping + anahtar kelime overlap skorlaması
-- [ ] `mcpradar cve match <scan_id>` bulguları CVE referanslarıyla zenginleştirir
+- [ ] Audit querying: time range, event type, target filtering
+- [ ] StatsEngine: trend slope, most triggered rules, severity distribution
+- [ ] NVD API: fetches real CVEs with CVSS scores (rate-limited, cached)
+- [ ] CVE matching: CWE mapping + keyword overlap scoring
+- [ ] `mcpradar cve match <scan_id>` enriches findings with CVE references
 
 ---
 
 ### 🏁 Sprint 6: "Validation, Performance & v1.0 Polish"
 
-**Hedef Sürüm:** v0.7.0 → v1.0.0-rc1 · **Süre:** 2 hafta · **OWASP:** 10/10 tam kapsam
+**Target Version:** v0.7.0 → v1.0.0-rc1 · **Duration:** 2 weeks · **OWASP:** 10/10 full coverage
 
-#### Hedef
+#### Goal
 
-10 sunuculuk gerçek dünya validasyon pipeline'ını tamamlamak. Performans optimizasyonu (paralel tarama). Dokümantasyonu tamamlamak. v1.0 sürüm adayı için hazırlık.
+Complete the 10-server real-world validation pipeline. Performance optimization (parallel scanning). Complete documentation. Preparation for v1.0 release candidate.
 
-#### Validasyon Pipeline
+#### Validation Pipeline
 
 ```python
 class ValidationRunner:
     async def run_all(self) -> ValidationReport:
-        # 10 sunucuyu targets.yaml'dan tara
-        # Tüm R ve C kurallarını çalıştır
-        # Her bulgu için TP/FP/belirsiz sınıflandırması (auto-triage)
-        # Kural bazlı precision/recall hesapla
+        # Scan 10 servers from targets.yaml
+        # Run all R and C rules
+        # TP/FP/uncertain classification for each finding (auto-triage)
+        # Calculate per-rule precision/recall
 
     def generate_report(self) -> str:
-        # Markdown rapor: sunucu bazlı bulgu tablosu,
-        #   false positive analizi, kural etkinlik metrikleri
+        # Markdown report: per-server finding table,
+        #   false positive analysis, rule effectiveness metrics
 ```
 
-#### Performans Optimizasyonu
+#### Performance Optimization
 
 ```python
 class ParallelScanner:
-    """Birden fazla sunucuyu eşzamanlı tarar."""
+    """Scans multiple servers concurrently."""
     async def scan_all(self, servers, max_concurrency=5) -> list[ScanReport]:
         # asyncio.gather + semaphore
 ```
@@ -479,92 +479,92 @@ mcpradar scan-all --parallel --max-concurrency 10
 # tests/test_benchmark.py
 class TestBenchmarks:
     def test_rule_engine_latency(self, benchmark): ...     # ≤5ms/tool (100 tools)
-    def test_sarif_generation_scale(self): ...             # ≤50ms (100 bulgu)
-    def test_sqlite_insert_batch(self): ...                # ≤10ms (100 bulgu)
+    def test_sarif_generation_scale(self): ...             # ≤50ms (100 findings)
+    def test_sqlite_insert_batch(self): ...                # ≤10ms (100 findings)
 ```
 
-#### Dokümantasyon (8 yeni sayfa)
+#### Documentation (8 new pages)
 
-| Sayfa | İçerik |
+| Page | Content |
 |---|---|
-| `docs/getting-started.md` | Kurulum, ilk tarama |
-| `docs/cli-reference.md` | Tam CLI referansı (tüm komutlar, flag'ler) |
-| `docs/plugin-authoring.md` | Eklenti geliştirme rehberi |
-| `docs/api-reference.md` | Python API dokümantasyonu |
-| `docs/fingerprinting.md` | Parmak izi rehberi |
-| `docs/ci-integration.md` | CI/CD entegrasyon örnekleri (GitHub Actions, GitLab CI, CircleCI) |
-| `docs/owasp-mapping.md` | OWASP MCP Top 10 kapsam matrisi |
-| `docs/benchmarks.md` | Performans verileri |
+| `docs/getting-started.md` | Installation, first scan |
+| `docs/cli-reference.md` | Full CLI reference (all commands, flags) |
+| `docs/plugin-authoring.md` | Plugin development guide |
+| `docs/api-reference.md` | Python API documentation |
+| `docs/fingerprinting.md` | Fingerprint guide |
+| `docs/ci-integration.md` | CI/CD integration examples (GitHub Actions, GitLab CI, CircleCI) |
+| `docs/owasp-mapping.md` | OWASP MCP Top 10 coverage matrix |
+| `docs/benchmarks.md` | Performance data |
 
-#### v1.0 Öncesi Sertleştirme
+#### Pre-v1.0 Hardening
 
-- mypy strict: sıfır hata
-- ruff: sıfır uyarı
-- Test coverage ≥ %90
-- Kendi bağımlılıklarının güvenlik denetimi
-- SBOM oluşturma (cyclonedx veya spdx)
-- `SECURITY.md` güncelleme
+- mypy strict: zero errors
+- ruff: zero warnings
+- Test coverage ≥ 90%
+- Security audit of own dependencies
+- SBOM generation (cyclonedx or spdx)
+- `SECURITY.md` update
 
-#### Dosya Değişiklikleri
+#### File Changes
 
-| Dosya | İşlem |
+| File | Action |
 |---|---|
-| `validation/run_validation.py` | ValidationRunner tam uygulama |
-| `src/mcpradar/scanner/engine.py` | ParallelScanner sınıfı |
-| `src/mcpradar/cli.py` | `--parallel` flag'i |
-| `tests/test_benchmark.py` | **Yeni** performans benchmark'ları |
-| `docs/getting-started.md` | **Yeni** |
-| `docs/cli-reference.md` | **Yeni** |
-| `docs/plugin-authoring.md` | **Yeni** |
-| `docs/api-reference.md` | **Yeni** |
-| `docs/fingerprinting.md` | **Yeni** |
-| `docs/ci-integration.md` | **Yeni** |
-| `docs/owasp-mapping.md` | **Yeni** |
-| `docs/benchmarks.md` | **Yeni** |
-| `CHANGELOG.md` | v0.7.0 ve v1.0.0-rc1 girişleri |
+| `validation/run_validation.py` | ValidationRunner full implementation |
+| `src/mcpradar/scanner/engine.py` | ParallelScanner class |
+| `src/mcpradar/cli.py` | `--parallel` flag |
+| `tests/test_benchmark.py` | **New** performance benchmarks |
+| `docs/getting-started.md` | **New** |
+| `docs/cli-reference.md` | **New** |
+| `docs/plugin-authoring.md` | **New** |
+| `docs/api-reference.md` | **New** |
+| `docs/fingerprinting.md` | **New** |
+| `docs/ci-integration.md` | **New** |
+| `docs/owasp-mapping.md` | **New** |
+| `docs/benchmarks.md` | **New** |
+| `CHANGELOG.md` | v0.7.0 and v1.0.0-rc1 entries |
 
-#### Tamamlanma Kriterleri
+#### Completion Criteria
 
-- [ ] 10 sunucu validasyonu tamamlandı, sonuçlar yayınlandı
-- [ ] False positive analizi: precision ≥ %85 (tüm kurallar)
-- [ ] False negative analizi: recall ≥ %90 (malicious_server.py baseline)
-- [ ] Paralel tarama: ≥ 5 sunucu/saniye
-- [ ] Kural motoru: ≤ 5ms/tool (100 tools)
-- [ ] SARIF üretimi: ≤ 50ms (100 bulgu)
-- [ ] Dokümantasyon: 8 sayfa tamamlandı
-- [ ] mypy + ruff + pytest: sıfır hata/uyarı
-- [ ] SBOM oluşturuldu
-- [ ] v1.0.0-rc1 PyPI'da yayınlandı
+- [ ] 10-server validation completed, results published
+- [ ] False positive analysis: precision ≥ 85% (all rules)
+- [ ] False negative analysis: recall ≥ 90% (malicious_server.py baseline)
+- [ ] Parallel scanning: ≥ 5 servers/second
+- [ ] Rule engine: ≤ 5ms/tool (100 tools)
+- [ ] SARIF generation: ≤ 50ms (100 findings)
+- [ ] Documentation: 8 pages completed
+- [ ] mypy + ruff + pytest: zero errors/warnings
+- [ ] SBOM generated
+- [ ] v1.0.0-rc1 published on PyPI
 
 ---
 
-## Uzun Vadeli Hedefler (v1.1+)
+## Long-Term Goals (v1.1+)
 
 ### v1.1 — Runtime Behavioral Analysis
-- WebSocket transport desteği (gelişmekte olan MCP transport'u)
-- Tool call interception proxy modu (Pipelock benzeri, opsiyonel)
-- Tool description'larında anomali tespiti için ML sınıflandırıcı
-- LLM-as-a-judge entegrasyonu (yanıt kalitesi değerlendirme)
+- WebSocket transport support (emerging MCP transport)
+- Tool call interception proxy mode (Pipelock-like, optional)
+- ML classifier for anomaly detection in tool descriptions
+- LLM-as-a-judge integration (response quality assessment)
 
 ### v1.2 — Ecosystem Integration
-- MCP sunucu kayıt defteri doğrulama servisi (otomatik leaderboard)
-- Badge/shield sistemi: `![MCPRadar Score](https://img.shields.io/mcpradar/score/<sunucu>)`
-- IDE eklentileri (VS Code, JetBrains) — `vscode-mcpradar/` zaten scaffold edildi
+- MCP server registry verification service (automated leaderboard)
+- Badge/shield system: `![MCPRadar Score](https://img.shields.io/mcpradar/score/<server>)`
+- IDE plugins (VS Code, JetBrains) — `vscode-mcpradar/` already scaffolded
 - Pre-commit hook: `- repo: https://github.com/yatuk/mcpradar`
 
 ### v1.3+ — Enterprise Features
-- Multi-tenant veritabanı (namespace izolasyonlu paylaşımlı SQLite)
-- Policy-as-code kuralları (YAML-tanımlı, Python gerektirmez — MCP Guardian benzeri ama açık kaynak)
+- Multi-tenant database (namespace-isolated shared SQLite)
+- Policy-as-code rules (YAML-defined, no Python required — MCP Guardian-like but open source)
 - Web dashboard (FastAPI + htmx, self-hosted)
-- OPA/Rego entegrasyonu (ileri politika değerlendirme)
+- OPA/Rego integration (advanced policy evaluation)
 
 ---
 
-## Kural ID Kayıt Defteri
+## Rule ID Registry
 
-### Tespit Kuralları (R-serisi)
+### Detection Rules (R-series)
 
-| ID | İsim | Sprint | OWASP | Severity |
+| ID | Name | Sprint | OWASP | Severity |
 |---|---|---|---|---|
 | R001 | Dangerous Tool Name | v0.1.0 | MCP03 | CRITICAL |
 | R101 | Zero-Width Unicode Detection | v0.1.0 | MCP06 | HIGH/CRITICAL |
@@ -579,9 +579,9 @@ class TestBenchmarks:
 | **R110** | **Version Anomaly** | **Sprint 3** | **MCP09** | **HIGH/CRITICAL** |
 | **R111** | **Insecure Transport** | **Sprint 3** | **MCP07** | **HIGH/CRITICAL** |
 
-### Cross-Server Kuralları (C-serisi)
+### Cross-Server Rules (C-series)
 
-| ID | İsim | Sprint | OWASP |
+| ID | Name | Sprint | OWASP |
 |---|---|---|---|
 | C001 | Tool Name Collision | v0.1.0 | MCP10 |
 | C002 | Tool Name Shadowing | v0.1.0 | MCP10 |
@@ -591,106 +591,106 @@ class TestBenchmarks:
 | **C006** | **Attack Path Chain** | **Sprint 4** | **MCP03/MCP10** |
 | **C007** | **Privilege Escalation Chain** | **Sprint 4** | **MCP02** |
 
-### Topluluk Kuralları (X-serisi, rezerve)
+### Community Rules (X-series, reserved)
 
-Topluluk eklentileri `X` + 3 haneli sayı formatını kullanır (X001–X999). Built-in kurallarla çakışmayı önler.
+Community plugins use the `X` + 3-digit number format (X001–X999). Prevents conflicts with built-in rules.
 
 ---
 
-## Komut Matrisi (Tam CLI)
+## Command Matrix (Full CLI)
 
-| Komut | Sürüm | Açıklama |
+| Command | Version | Description |
 |---|---|---|
-| `mcpradar scan <hedef> -t <transport>` | v0.1.0 | Tek MCP sunucusu tara |
-| `mcpradar scan-all [--config] [--parallel]` | v0.1.0 | Tüm sunucuları tara |
-| `mcpradar diff [sunucu] [-a] [-b] [--since]` | v0.1.0 | İki snapshot'u karşılaştır |
-| `mcpradar watch <hedef> [-i] [--alert-cmd] [--alert-webhook]` | v0.1.0 | Periyodik tarama + alert |
-| `mcpradar list [hedef] [-n]` | v0.1.0 | Snapshot geçmişi |
-| `mcpradar show <scan_id>` | v0.1.0 | Tek snapshot detayı |
+| `mcpradar scan <target> -t <transport>` | v0.1.0 | Scan a single MCP server |
+| `mcpradar scan-all [--config] [--parallel]` | v0.1.0 | Scan all servers |
+| `mcpradar diff [server] [-a] [-b] [--since]` | v0.1.0 | Compare two snapshots |
+| `mcpradar watch <target> [-i] [--alert-cmd] [--alert-webhook]` | v0.1.0 | Periodic scan + alert |
+| `mcpradar list [target] [-n]` | v0.1.0 | Snapshot history |
+| `mcpradar show <scan_id>` | v0.1.0 | Single snapshot detail |
 | `mcpradar export <scan_id> [-f] [-o]` | v0.1.0 | JSON/SARIF/CSV export |
-| `mcpradar purge [--older-than] [--keep-last]` | v0.1.0 | Eski snapshot temizliği |
-| `mcpradar init [-o]` | v0.1.0 | mcpradar.toml oluştur |
-| `mcpradar registry-scan [-o]` | v0.1.0 | Leaderboard oluştur |
-| `mcpradar rules list` | v0.1.0 | Kuralları listele |
-| `mcpradar rules info <rule_id>` | v0.1.0 | Kural detayı |
-| `mcpradar rules disable <rule_id>` | v0.1.0 | Kural devre dışı bırak |
-| `mcpradar analyze-context [--config] [--deep] [--graph]` | v0.1.0 | Cross-server analiz |
-| `mcpradar feed-update` | v0.1.0 | CVE feed güncelle |
-| `mcpradar plugin init <isim> [-o]` | Sprint 2 | Yeni eklenti iskeleti |
-| `mcpradar plugin validate <dizin>` | Sprint 2 | Eklenti doğrulama |
-| `mcpradar plugin list` | Sprint 2 | Eklentileri listele |
-| `mcpradar plugin install <paket>` | Sprint 2 | Eklenti yükle |
-| `mcpradar plugin uninstall <paket>` | Sprint 2 | Eklenti kaldır |
-| `mcpradar fingerprint <hedef> [--compare]` | Sprint 3 | Parmak izi |
-| `mcpradar probe <hedef> [--safe-only \| --all]` | Sprint 4 | Runtime probing |
-| `mcpradar audit [--target] [--type] [--since]` | Sprint 5 | Denetim kaydı |
-| `mcpradar stats [hedef]` | Sprint 5 | Güvenlik istatistikleri |
-| `mcpradar cve sync` | Sprint 5 | NVD senkronizasyonu |
-| `mcpradar cve match <scan_id>` | Sprint 5 | CVE eşleştirme |
-| `mcpradar cve list` | Sprint 5 | CVE listesi |
+| `mcpradar purge [--older-than] [--keep-last]` | v0.1.0 | Old snapshot cleanup |
+| `mcpradar init [-o]` | v0.1.0 | Generate mcpradar.toml |
+| `mcpradar registry-scan [-o]` | v0.1.0 | Generate leaderboard |
+| `mcpradar rules list` | v0.1.0 | List rules |
+| `mcpradar rules info <rule_id>` | v0.1.0 | Rule detail |
+| `mcpradar rules disable <rule_id>` | v0.1.0 | Disable rule |
+| `mcpradar analyze-context [--config] [--deep] [--graph]` | v0.1.0 | Cross-server analysis |
+| `mcpradar feed-update` | v0.1.0 | Update CVE feed |
+| `mcpradar plugin init <name> [-o]` | Sprint 2 | New plugin skeleton |
+| `mcpradar plugin validate <directory>` | Sprint 2 | Plugin validation |
+| `mcpradar plugin list` | Sprint 2 | List plugins |
+| `mcpradar plugin install <package>` | Sprint 2 | Install plugin |
+| `mcpradar plugin uninstall <package>` | Sprint 2 | Uninstall plugin |
+| `mcpradar fingerprint <target> [--compare]` | Sprint 3 | Fingerprint |
+| `mcpradar probe <target> [--safe-only \| --all]` | Sprint 4 | Runtime probing |
+| `mcpradar audit [--target] [--type] [--since]` | Sprint 5 | Audit trail |
+| `mcpradar stats [target]` | Sprint 5 | Security statistics |
+| `mcpradar cve sync` | Sprint 5 | NVD synchronization |
+| `mcpradar cve match <scan_id>` | Sprint 5 | CVE matching |
+| `mcpradar cve list` | Sprint 5 | CVE listing |
 
 ---
 
-## Başarı Metrikleri
+## Success Metrics
 
-| Metrik | v0.1.0 (Mevcut) | v0.7.0 Hedef | v1.0 Hedef |
+| Metric | v0.1.0 (Current) | v0.7.0 Target | v1.0 Target |
 |---|---|---|---|
-| OWASP MCP Top 10 kapsamı | 3/10 | 10/10 | 10/10 |
-| Tespit kuralı sayısı | 6 | 11 | 11 |
-| Cross-server kuralı sayısı | 5 | 7 | 7 |
-| Transport protokolü | 3 | 3 | 4 (WebSocket) |
-| Test coverage | ~%80 | ≥ %90 | ≥ %92 |
-| Test kodu (satır) | ~2,150 | 4,000+ | 4,500+ |
-| Tarama gecikmesi (tool başına) | ~10ms | ≤ 5ms | ≤ 3ms |
-| Paralel tarama hızı | — | 5 sunucu/s | 10 sunucu/s |
-| Topluluk eklentisi | 0 | 2 örnek | 5+ |
-| Validasyon sunucusu | 0/10 | 10/10 | CI otomasyonu |
-| NVD CVE veritabanı | 2 tohum | 50+ MCP-ilgili | 100+ otomatik |
-| SARIF entegrasyonu | 6 kural | 11 kural + CVE | Code Scanning alert'leri |
+| OWASP MCP Top 10 coverage | 3/10 | 10/10 | 10/10 |
+| Detection rule count | 6 | 11 | 11 |
+| Cross-server rule count | 5 | 7 | 7 |
+| Transport protocols | 3 | 3 | 4 (WebSocket) |
+| Test coverage | ~80% | ≥ 90% | ≥ 92% |
+| Test code (lines) | ~2,150 | 4,000+ | 4,500+ |
+| Scan latency (per tool) | ~10ms | ≤ 5ms | ≤ 3ms |
+| Parallel scan speed | — | 5 servers/s | 10 servers/s |
+| Community plugins | 0 | 2 examples | 5+ |
+| Validation servers | 0/10 | 10/10 | CI automation |
+| NVD CVE database | 2 seeds | 50+ MCP-related | 100+ automated |
+| SARIF integration | 6 rules | 11 rules + CVE | Code Scanning alerts |
 
 ---
 
-## Risk Değerlendirmesi
+## Risk Assessment
 
-| Risk | Etki | Olasılık | Azaltma |
+| Risk | Impact | Probability | Mitigation |
 |---|---|---|---|
-| **MCP protokolünde breaking change** | Yüksek | Orta | MCP SDK sürümü sabitle; CI'da çoklu SDK testi; MCP spec reposunu izle |
-| **Plugin API kararsızlığı** | Orta | Yüksek | Plugin API için SemVer; 2 minör sürüm deprecation warning |
-| **False positive yorgunluğu** | Yüksek | Orta | Sprint 1+6 FP analizi; kural bazlı precision takibi; `--severity` filtreleme; kural disable UI |
-| **NVD API rate limiting** | Düşük | Yüksek | TTL'li lokal önbellek; exponential backoff; tohum veri fallback |
-| **Topluluk eklenti kalitesi** | Orta | Orta | Plugin validation CLI; test şablonu; eklenti inceleme checklist'i |
-| **Kural büyümesiyle performans gerilemesi** | Orta | Düşük | Sprint 6 benchmark'ları; CI perf regresyon testi; kural seviyesinde profiling |
-| **OWASP MCP Top 10 güncellemeleri** | Düşük | Düşük | Sprint 6 OWASP mapping dokümanı; aylık OWASP güncelleme takibi |
-| **Rakip özellik paritesi baskısı** | Düşük | Düşük | Farklılaşmaya odaklan: deterministik + CI-dostu + MIT lisans + Python ekosistemi |
+| **Breaking change in MCP protocol** | High | Medium | Pin MCP SDK version; multi-SDK CI testing; monitor MCP spec repo |
+| **Plugin API instability** | Medium | High | SemVer for Plugin API; deprecation warning for 2 minor releases |
+| **False positive fatigue** | High | Medium | Sprint 1+6 FP analysis; per-rule precision tracking; `--severity` filtering; rule disable UI |
+| **NVD API rate limiting** | Low | High | Local cache with TTL; exponential backoff; seed data fallback |
+| **Community plugin quality** | Medium | Medium | Plugin validation CLI; test template; plugin review checklist |
+| **Performance regression with rule growth** | Medium | Low | Sprint 6 benchmarks; CI perf regression test; per-rule profiling |
+| **OWASP MCP Top 10 updates** | Low | Low | Sprint 6 OWASP mapping doc; monthly OWASP update tracking |
+| **Competitor feature parity pressure** | Low | Low | Focus on differentiation: deterministic + CI-friendly + MIT license + Python ecosystem |
 
 ---
 
-## Ek: Tespit Edilen MCP CV'leri ve MCPRadar Kapsamı (2025–2026)
+## Appendix: Detected MCP CVEs and MCPRadar Coverage (2025–2026)
 
-OX Security araştırmacıları tarafından keşfedilen ve MCPRadar'ın hedeflediği kritik CVE'ler:
+Critical CVEs discovered by OX Security researchers that MCPRadar targets:
 
-| CVE ID | Ürün | Açıklama | Durum | MCPRadar Kapsamı |
+| CVE ID | Product | Description | Status | MCPRadar Coverage |
 |---|---|---|---|---|
-| CVE-2025-54136 | Cursor IDE | STDIO Komut Enjeksiyonu / RCE | ✅ Yamalandı | R107 (parametre enjeksiyonu) |
-| CVE-2026-30623 | LiteLLM | Unauthenticated Command Injection | ✅ Yamalandı | R107 |
-| CVE-2025-49596 | MCP Inspector | DNS Rebinding / RCE | ✅ Yamalandı | R111 (transport güvenliği) |
-| CVE-2026-30615 | Windsurf | Yapılandırma Üzerinden RCE | ❌ Yamalanmadı | R107 + R108 |
-| CVE-2026-30616 | Jaaz | STDIO Privilege Escalation | ❌ Yamalanmadı | R107 |
-| CVE-2026-30617 | Langchain-Chatchat | STDIO RCE | ❌ Yamalanmadı | R107 |
-| CVE-2026-30618 | Fay Framework | STDIO RCE | ❌ Yamalanmadı | R107 |
-| CVE-2026-30624 | Agent Zero | STDIO RCE | ❌ Yamalanmadı | R107 |
-| CVE-2026-30625 | Upsonic | Hardening Bypass | ⚠️ Uyarı eklendi | R107 + R108 |
-| CVE-2026-33224 | Bisheng | STDIO RCE | ✅ Yamalandı | R107 |
-| CVE-2026-40933 | Flowise | Auth RCE (CVSS 10) | ✅ Yamalandı | R107 |
-| CVE-2026-30861 | WeKnora | Allowlist Bypass RCE | ❌ Yamalanmadı | R107 + R108 |
-| CVE-2025-65720 | GPT Researcher | STDIO RCE | ❌ Yamalanmadı | R107 |
-| CVE-2026-22252 | LibreChat | STDIO RCE | ✅ Yamalandı | R107 |
+| CVE-2025-54136 | Cursor IDE | STDIO Command Injection / RCE | ✅ Patched | R107 (parameter injection) |
+| CVE-2026-30623 | LiteLLM | Unauthenticated Command Injection | ✅ Patched | R107 |
+| CVE-2025-49596 | MCP Inspector | DNS Rebinding / RCE | ✅ Patched | R111 (transport security) |
+| CVE-2026-30615 | Windsurf | RCE via Configuration | ❌ Unpatched | R107 + R108 |
+| CVE-2026-30616 | Jaaz | STDIO Privilege Escalation | ❌ Unpatched | R107 |
+| CVE-2026-30617 | Langchain-Chatchat | STDIO RCE | ❌ Unpatched | R107 |
+| CVE-2026-30618 | Fay Framework | STDIO RCE | ❌ Unpatched | R107 |
+| CVE-2026-30624 | Agent Zero | STDIO RCE | ❌ Unpatched | R107 |
+| CVE-2026-30625 | Upsonic | Hardening Bypass | ⚠️ Warning added | R107 + R108 |
+| CVE-2026-33224 | Bisheng | STDIO RCE | ✅ Patched | R107 |
+| CVE-2026-40933 | Flowise | Auth RCE (CVSS 10) | ✅ Patched | R107 |
+| CVE-2026-30861 | WeKnora | Allowlist Bypass RCE | ❌ Unpatched | R107 + R108 |
+| CVE-2025-65720 | GPT Researcher | STDIO RCE | ❌ Unpatched | R107 |
+| CVE-2026-22252 | LibreChat | STDIO RCE | ✅ Patched | R107 |
 
-> **Not:** 17 atanmış CVE'nin sadece 6'sı yamalanmış durumda. MCPRadar'ın R107 (Command Injection via Parameters), R108 (Supply Chain Risk) ve R111 (Insecure Transport) kuralları bu CVE'lerin çoğuna karşı koruma sağlamayı hedefler.
+> **Note:** Only 6 of the 17 assigned CVEs are patched. MCPRadar's R107 (Command Injection via Parameters), R108 (Supply Chain Risk), and R111 (Insecure Transport) rules aim to provide protection against most of these CVEs.
 
 ---
 
-## Referanslar
+## References
 
 - [OWASP MCP Top 10 (2025)](https://owasp.org/www-project-mcp-top-10/)
 - [MCP Supply Chain Advisory — OX Security](https://www.ox.security/blog/mcp-supply-chain-advisory-rce-vulnerabilities-across-the-ai-ecosystem/)
@@ -705,6 +705,6 @@ OX Security araştırmacıları tarafından keşfedilen ve MCPRadar'ın hedefled
 ---
 
 <p align="center">
-  <b>📋 Bu yol haritası canlı bir dokümandır.</b><br/>
-  <sub>Sprint'ler tamamlandıkça güncellenecektir. Katkıda bulunmak için <a href="CONTRIBUTING.md">CONTRIBUTING.md</a>'ye bakın.</sub>
+  <b>📋 This roadmap is a living document.</b><br/>
+  <sub>It will be updated as sprints are completed. To contribute, see <a href="CONTRIBUTING.md">CONTRIBUTING.md</a>.</sub>
 </p>

@@ -129,55 +129,55 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.4.0] - 2026-06-23
 
 ### Added
-- **fingerprint** CLI komut grubu: `mcpradar fingerprint {create,compare,list}`
-- Parmak izi sistemi: `Fingerprinter` (SHA256 tabanlı sunucu kimliği), `TransportChecker` (TLS/sertifika/HSTS validasyonu)
-- `ServerFingerprint` ve `TLSInfo` veri modelleri
-- 2 yeni tespit kuralı:
-  - R110: Version Anomaly Detection — sürüm rollback, major upgrade, tool listesi değişimi tespiti
-  - R111: Insecure Transport Detection — plain HTTP, eski TLS, expired cert, self-signed cert, HSTS eksikliği
-- `ScanReport`: `server_version`, `protocol_version`, `capabilities` alanları eklendi
-- `Scanner`: `initialize()` yanıtından sunucu kimlik bilgilerini yakalar
-- `Store`: `fingerprints` tablosu + CRUD (save/load/list/delete)
-- `DiffDelta`: `fingerprint_changes` alanı (versiyon, protokol, capabilities, tool sayısı değişimi)
-- `RuleEngine.pre_scan_check()`: fingerprint tabanlı tarama öncesi kontrol hook'u
+- **fingerprint** CLI command group: `mcpradar fingerprint {create,compare,list}`
+- Fingerprint system: `Fingerprinter` (SHA256-based server identity), `TransportChecker` (TLS/cert/HSTS validation)
+- `ServerFingerprint` and `TLSInfo` data models
+- 2 new detection rules:
+  - R110: Version Anomaly Detection — version rollback, major upgrade, tool list change detection
+  - R111: Insecure Transport Detection — plain HTTP, old TLS, expired cert, self-signed cert, missing HSTS
+- `ScanReport`: `server_version`, `protocol_version`, `capabilities` fields added
+- `Scanner`: Captures server identity info from `initialize()` response
+- `Store`: `fingerprints` table + CRUD (save/load/list/delete)
+- `DiffDelta`: `fingerprint_changes` field (version, protocol, capabilities, tool count changes)
+- `RuleEngine.pre_scan_check()`: fingerprint-based pre-scan check hook
 
 ### Security
-- OWASP MCP07 (Insufficient AuthN/AuthZ): R111 ile kapsanıyor (transport güvenliği)
-- OWASP MCP09 (Shadow MCP Servers): R110 + fingerprint sistemi ile kapsanıyor
+- OWASP MCP07 (Insufficient AuthN/AuthZ): Covered by R111 (transport security)
+- OWASP MCP09 (Shadow MCP Servers): Covered by R110 + fingerprint system
 
 ## [0.3.0] - 2026-06-23
 
 ### Added
-- **plugin** CLI komut grubu: `mcpradar plugin {init,validate,list,install,uninstall}`
-- Plugin sistemi: `PluginManager` (pip kurulum/kaldırma), `PluginValidator` (6 aşamalı doğrulama), `Scaffolder` (şablondan paket oluşturma)
-- `plugins/mcpradar-rule-deprecated/` — 2. örnek topluluk eklentisi (X002: Deprecated/legacy API pattern tespiti)
-- Şablon testleri: `plugins/template/tests/test_rule.py`
-- Plugin CLI testleri: `tests/test_plugin_cli.py` (11 test)
+- **plugin** CLI command group: `mcpradar plugin {init,validate,list,install,uninstall}`
+- Plugin system: `PluginManager` (pip install/uninstall), `PluginValidator` (6-stage validation), `Scaffolder` (template-based package generation)
+- `plugins/mcpradar-rule-deprecated/` — 2nd example community plugin (X002: Deprecated/legacy API pattern detection)
+- Template tests: `plugins/template/tests/test_rule.py`
+- Plugin CLI tests: `tests/test_plugin_cli.py` (11 tests)
 
 ### Changed
-- `plugins/template/`: test dizini eklendi, scaffolder kaynağı olarak kullanılıyor
+- `plugins/template/`: test directory added, used as scaffolder source
 
 ## [0.2.0] - 2026-06-23
 
 ### Added
-- 4 yeni tespit kuralı:
-  - R106: Secret/Token Exposure — 16 bilinen gizli format regex'i + Shannon entropi tabanlı tespit
-  - R107: Command Injection via Tool Parameters — recursive schema walk ile shell metakarakter, tehlikeli varsayılan değer ve komut benzeri enum tespiti
-  - R108: Supply Chain Risk Indicator — curl-bash, pip/npm install, eval/exec, dinamik kod yükleme tespiti
-  - R109: Schema Poisoning Indicator — additionalProperties:true, eksik tip kısıtlaması, aşırı maxLength/maxItems tespiti
-- Yardımcı fonksiyonlar: `_shannon_entropy()`, `_decompose_name()`, `_walk_schema_props()`, `_collect_all_texts()`
-- R105 Permission Scope Mismatch iyileştirmesi: 10+ scope çifti, bridge keyword suppression, snake_case/camelCase isim ayrıştırma
+- 4 new detection rules:
+  - R106: Secret/Token Exposure — 16 known secret format regexes + Shannon entropy-based detection
+  - R107: Command Injection via Tool Parameters — recursive schema walk for shell metacharacters, dangerous default values, and command-like enum detection
+  - R108: Supply Chain Risk Indicator — curl-bash, pip/npm install, eval/exec, dynamic code loading detection
+  - R109: Schema Poisoning Indicator — additionalProperties:true, missing type constraints, excessive maxLength/maxItems detection
+- Helper functions: `_shannon_entropy()`, `_decompose_name()`, `_walk_schema_props()`, `_collect_all_texts()`
+- R105 Permission Scope Mismatch improvements: 10+ scope pairs, bridge keyword suppression, snake_case/camelCase name decomposition
 
 ### Changed
-- R105: LOW severity downgrade kaldırıldı, yerine bridge keyword + isim ayrıştırma tabanlı false positive suppression
-- R105: minimum severity MEDIUM olarak sabitlendi
-- E2E mock server `safe_tool`: schema'ya `required` alanı eklendi (R109 uyumluluğu)
+- R105: LOW severity downgrade removed, replaced with bridge keyword + name decomposition based false positive suppression
+- R105: minimum severity fixed at MEDIUM
+- E2E mock server `safe_tool`: `required` field added to schema (R109 compliance)
 
 ### Security
-- OWASP MCP01 (Token Mismanagement): R106 ile kapsanıyor
-- OWASP MCP04 (Supply Chain): R108 ile kapsanıyor
-- OWASP MCP05 (Command Injection): R107 ile güçlendirildi
-- OWASP MCP03 (Tool Poisoning): R109 ile genişletildi
+- OWASP MCP01 (Token Mismanagement): Covered by R106
+- OWASP MCP04 (Supply Chain): Covered by R108
+- OWASP MCP05 (Command Injection): Strengthened with R107
+- OWASP MCP03 (Tool Poisoning): Expanded with R109
 
 ## [0.1.0] - 2026-05-25
 

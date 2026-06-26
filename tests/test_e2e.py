@@ -88,7 +88,7 @@ async def _run_mock_server(
 @pytest.mark.e2e
 class TestE2EScannerMemory:
     def test_scan_mock_via_memory_stream(self) -> None:
-        """Memory-stream mock server taramasi."""
+        """Scan memory-stream mock server."""
         report = asyncio.run(self._do_scan(Severity.LOW))
 
         assert len(report.tools) == 6, f"Expected 6 tools, got {len(report.tools)}"

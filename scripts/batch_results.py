@@ -3,11 +3,10 @@
 Fetches MCP registry, creates validation results for all entries, and
 scans additional well-known MCP servers.
 """
+
 import json
-import os
 import sys
 import time
-import hashlib
 import uuid
 from pathlib import Path
 
@@ -42,9 +41,11 @@ print(f"  Unique server names: {len(unique_names)}")
 OUTPUT_DIR = Path(__file__).resolve().parent.parent / "validation/results"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
+
 def sanitize_filename(name: str) -> str:
     """Convert server name to safe filename."""
     return name.replace("/", "-").replace("@", "").replace(":", "-")[:80]
+
 
 def make_result(
     name: str,
@@ -78,6 +79,7 @@ def make_result(
         "description": description,
         "repository": repository,
     }
+
 
 # Process all registry entries
 results: list[dict] = []

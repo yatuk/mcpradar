@@ -1,4 +1,4 @@
-"""Periyodik tarama ve degisiklik bildirimi — SQLite destegi."""
+"""Periodic scanning and change notification — SQLite support."""
 
 from __future__ import annotations
 
@@ -58,7 +58,7 @@ class Watcher:
                     differ = Differ()
                     delta = differ.compare(self.last_report, report)
                     if delta.has_changes:
-                        console.print("\n[bold yellow][!] Degisiklik tespit edildi![/]")
+                        console.print("\n[bold yellow][!] Change detected![/]")
                         console.print_diff(delta)
                         if self.audit:
                             counts = delta.summary_counts()

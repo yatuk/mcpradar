@@ -1,10 +1,8 @@
 """Batch scan pending MCP servers — try to get real data for each."""
+
 import asyncio
 import json
-import os
 import sys
-import subprocess
-import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
@@ -53,13 +51,20 @@ STDIO_SERVERS = {
     "mcp-server-chart": "npx -y mcp-server-chart",
 }
 
+
 async def scan_one_stdio(server_name: str, cmd: str) -> dict | None:
     """Scan one server via stdio. Returns parsed JSON result or None on failure."""
     try:
         proc = await asyncio.create_subprocess_exec(
-            sys.executable, "-m", "mcpradar", "scan", cmd,
-            "-t", "stdio",
-            "-f", "json",
+            sys.executable,
+            "-m",
+            "mcpradar",
+            "scan",
+            cmd,
+            "-t",
+            "stdio",
+            "-f",
+            "json",
             "--no-save",
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
@@ -80,7 +85,7 @@ async def scan_one_stdio(server_name: str, cmd: str) -> dict | None:
                 except json.JSONDecodeError:
                     continue
             return {"error": f"not json: {text[:200]}"}
-    except asyncio.TimeoutError:
+    except TimeoutError:
         return {"error": "timeout"}
     except Exception as e:
         return {"error": str(e)[:200]}
@@ -126,7 +131,9 @@ async def main():
                 try:
                     result["status"] = "scanned"
                     result["name"] = name
-                    fp.write_text(json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8")
+                    fp.write_text(
+                        json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8"
+                    )
                     tools = len(result.get("tools", []))
                     findings = len(result.get("findings", []))
                     print(f"    OK: {tools} tools, {findings} findings -> {fp.name}")

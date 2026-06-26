@@ -231,7 +231,7 @@ class Store:
         ).fetchone()
 
         if row is None:
-            raise LookupError(f"Snapshot bulunamadi: {scan_id}")
+            raise LookupError(f"Snapshot not found: {scan_id}")
 
         report = ScanReport(
             id=row[0],

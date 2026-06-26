@@ -3,39 +3,39 @@
 ## What MCPRadar Detects
 
 ### 1. Tool Poisoning (Supply Chain)
-**Vector:** Bir MCP server geliştiricisi, zararlı tool tanımları yayınlar.
-- R001: `eval`, `exec`, `rm` gibi tehlikeli isimler
-- R105: Tool isminin ima ettiğinden farklı yetkiler
+**Vector:** An MCP server developer publishes malicious tool definitions.
+- R001: Dangerous names like `eval`, `exec`, `rm`
+- R105: Capabilities different from what the tool name implies
 
 ### 2. Prompt Injection via Tool Metadata
-**Vector:** Tool description/schema'sına LLM'i manipüle edecek pattern'ler 
-gizlenir.
-- R102: 10 prompt injection pattern'i
-- R103: Base64/hex ile gizlenmiş injection
-- R104: HTML/Markdown ile gizlenmiş injection
+**Vector:** Patterns that manipulate the LLM are hidden in the tool
+description/schema.
+- R102: 10 prompt injection patterns
+- R103: Injection hidden with Base64/hex
+- R104: Injection hidden with HTML/Markdown
 
 ### 3. Hidden Text Attacks
-**Vector:** Unicode trick'leriyle tool ismi veya description'ı değiştirme.
-- R101: Zero-width karakterler, BOM, directional override
+**Vector:** Altering tool name or description using Unicode tricks.
+- R101: Zero-width characters, BOM, directional override
 
 ## What MCPRadar Does NOT Detect
 
 ### Runtime Exploits
-MCPRadar **static analysis** yapar — tool tanımını inceler, çalışma zamanı 
-davranışını değil. Şunları yakalayamaz:
-- Tool'un gerçek implementasyonundaki buffer overflow
-- API key'lerin loglanması
-- Network trafiğinin sniff edilmesi
+MCPRadar performs **static analysis** — it examines tool definitions, not runtime
+behavior. It cannot catch:
+- Buffer overflows in the actual tool implementation
+- API keys being logged
+- Network traffic being sniffed
 
 ### Server Infrastructure
-- MCP server'ın kendisinin CVE'leri
-- Transport-level güvenlik (TLS, auth bypass)
+- CVEs in the MCP server itself
+- Transport-level security (TLS, auth bypass)
 - Resource exhaustion / DoS
 
 ### Behavioral Anomalies
-- Tool'un çağrılma sıklığındaki anormallikler
-- Beklenmedik tool kombinasyonları (cross-tool attack)
-- Kullanıcı input'larının tool'lara geçiş pattern'leri
+- Anomalies in tool call frequency
+- Unexpected tool combinations (cross-tool attack)
+- Patterns of user input being passed to tools
 
 ## Attack Surface
 
@@ -57,10 +57,10 @@ davranışını değil. Şunları yakalayamaz:
 
 ## Responsible Disclosure
 
-Eğer MCPRadar ile gerçek bir güvenlik açığı bulursanız:
-1. Etkilenen MCP server'ın maintainer'ına 30 gün verin
-2. CVE talep edin
-3. MCPRadar'ın [SECURITY.md](../SECURITY.md) dosyasındaki adımları izleyin
+If you find a real security vulnerability with MCPRadar:
+1. Give the affected MCP server's maintainer 30 days
+2. Request a CVE
+3. Follow the steps in MCPRadar's [SECURITY.md](../SECURITY.md)
 
-MCPRadar'ın kendisinde bir güvenlik açığı bulursanız: 
-`security@` adresine veya GPG anahtarıyla bildirin.
+If you find a security vulnerability in MCPRadar itself:
+Report it to the `security@` address or with the GPG key.

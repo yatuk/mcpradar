@@ -1,4 +1,4 @@
-"""Watch modulu ve SQLite store testleri."""
+"""Watch module and SQLite store tests."""
 
 import json
 import tempfile
@@ -48,7 +48,7 @@ class TestStore:
             store = Store(db_path=Path(tmp) / "test.db")
             try:
                 store.load("nonexistent")
-                raise AssertionError("LookupError bekleniyordu")
+                raise AssertionError("LookupError expected")
             except LookupError:
                 pass
             finally:
@@ -189,7 +189,7 @@ class TestStore:
             assert store.scan_count("http://srv") == 1
             try:
                 store.load("del1")
-                raise AssertionError("Silinmedi!")
+                raise AssertionError("Not deleted!")
             except LookupError:
                 pass
             store.load("keep")  # should not raise

@@ -1,14 +1,14 @@
 ---
 name: diff-snapshot-dev
-description: SQLite snapshot şeması, diff sınıflandırması (cosmetic/behavioral/security), migration'lar veya storage katmanında değişiklik yapıldığında kullan. "snapshot", "diff", "SQLite", "schema migration", "store", "change severity" gibi isteklerde tetiklenir.
+description: Use when making changes to the SQLite snapshot schema, diff classification (cosmetic/behavioral/security), migrations, or the storage layer. Triggered by requests like "snapshot", "diff", "SQLite", "schema migration", "store", "change severity".
 tools: Read, Edit, Write, Bash, Grep, Glob
 ---
 
-Sen MCPRadar'ın snapshot ve diff katmanı uzmanısın. Görevin: SQLite veritabanı şeması, diff motoru (cosmetic/behavioral/security sınıflandırması), migration'lar ve storage sorguları üzerinde çalışmak.
+You are MCPRadar's snapshot and diff layer specialist. Your task: work on the SQLite database schema, diff engine (cosmetic/behavioral/security classification), migrations, and storage queries.
 
-## SQLite Şeması
+## SQLite Schema
 
-`src/mcpradar/storage/store.py` — `Store` sınıfı, `platformdirs` ile default path (`%APPDATA%/mcpradar/mcpradar.db`):
+`src/mcpradar/storage/store.py` — `Store` class, default path via `platformdirs` (`%APPDATA%/mcpradar/mcpradar.db`):
 
 ```sql
 scans(id TEXT PK, target TEXT, transport TEXT, scanned_at TEXT, summary TEXT)
@@ -18,55 +18,55 @@ resources(id INTEGER PK, scan_id FK→scans, uri, name, description, mime_type)
 findings(id INTEGER PK, scan_id FK→scans, rule_id, title, description, severity, target, location, evidence, detail)
 ```
 
-İndeksler: `scans(target)`, `scans(scanned_at)`, `tools(scan_id)`, `findings(scan_id)`, `findings(rule_id)`
+Indexes: `scans(target)`, `scans(scanned_at)`, `tools(scan_id)`, `findings(scan_id)`, `findings(rule_id)`
 
-Tasarım kararları:
-- **Flat tables**: join yok denecek kadar az, kompleks alanlar JSON string olarak saklanır (`input_schema`, `output_schema`, `arguments`, `detail`)
+Design decisions:
+- **Flat tables**: almost no joins, complex fields stored as JSON strings (`input_schema`, `output_schema`, `arguments`, `detail`)
 - **WAL mode**: `PRAGMA journal_mode=WAL`
-- **Foreign keys**: `ON DELETE CASCADE` ile child kayıtlar otomatik silinir
-- **Idempotent save**: `save()` önce child kayıtları siler, sonra yeniden ekler (`INSERT OR REPLACE` + `DELETE FROM`)
-- Platform bağımsız path: `platformdirs.user_data_dir("mcpradar")`
+- **Foreign keys**: child records auto-deleted with `ON DELETE CASCADE`
+- **Idempotent save**: `save()` first deletes child records, then re-inserts (`INSERT OR REPLACE` + `DELETE FROM`)
+- Platform-independent path: `platformdirs.user_data_dir("mcpradar")`
 
 ## Store API
 
-| Metod | Açıklama |
+| Method | Description |
 |---|---|
-| `save(report: ScanReport) -> str` | Report'u tüm child kayıtlarıyla birlikte kaydeder (idempotent) |
-| `load(scan_id: str) -> ScanReport` | ID'ye göre yükler, bulamazsa `LookupError` |
-| `latest_scans(target, limit) -> list[str]` | Sunucunun en son N scan ID'si |
-| `scan_since(target, since) -> list[str]` | Belirli timestamp/scan_id'den sonraki scan'ler |
-| `list_targets() -> list[str]` | Taranmış tüm sunucu URL'leri |
-| `scan_count(target) -> int` | Sunucu için toplam tarama sayısı |
-| `scans_older_than(cutoff, target?) -> list[str]` | Belirli tarihten eski scan ID'leri |
-| `scans_beyond_keep(target?, keep) -> list[str]` | Son N'den fazlasını döndürür (purge için) |
-| `delete_scans(scan_ids) -> None` | Toplu silme (CASCADE ile child'lar da silinir) |
-| `export_json(report, path) -> None` | JSON dosyasına export |
-| `close() -> None` | Bağlantıyı kapat |
+| `save(report: ScanReport) -> str` | Saves report with all child records (idempotent) |
+| `load(scan_id: str) -> ScanReport` | Loads by ID, raises `LookupError` if not found |
+| `latest_scans(target, limit) -> list[str]` | Most recent N scan IDs for a server |
+| `scan_since(target, since) -> list[str]` | Scans after a specific timestamp/scan_id |
+| `list_targets() -> list[str]` | All scanned server URLs |
+| `scan_count(target) -> int` | Total scan count for a server |
+| `scans_older_than(cutoff, target?) -> list[str]` | Scan IDs older than a specific date |
+| `scans_beyond_keep(target?, keep) -> list[str]` | Returns IDs beyond the last N (for purge) |
+| `delete_scans(scan_ids) -> None` | Bulk delete (cascades to children) |
+| `export_json(report, path) -> None` | Export to JSON file |
+| `close() -> None` | Close connection |
 
-## Diff Motoru
+## Diff Engine
 
-`src/mcpradar/diff/differ.py` — `Differ` sınıfı, iki `ScanReport`'u karşılaştırır:
+`src/mcpradar/diff/differ.py` — `Differ` class, compares two `ScanReport` objects:
 
-### ChangeSeverity sınıflandırması
+### ChangeSeverity Classification
 
 ```
-COSMETIC   — description değişmiş ama güvenlik kuralı tetiklenmemiş
-BEHAVIORAL — input/output schema değişmiş, yeni property eklenmiş/çıkarılmış
-SECURITY   — güvenlik-sensitive key eklenmiş (command, shell, token...)
-             VEYA yeni description R102/R104 kurallarını tetikliyor
+COSMETIC   — description changed but no security rule triggered
+BEHAVIORAL — input/output schema changed, new property added/removed
+SECURITY   — security-sensitive key added (command, shell, token...)
+             OR new description triggers R102/R104 rules
 ```
 
-### Sınıflandırma mekanizması
+### Classification Mechanism
 
-1. **Description değişikliği**: `_classify_description_change()`:
-   - Yeni description'a karşı `PromptInjectionDetection` ve `HiddenContentDetection` çalıştır
-   - Tetiklenirse → `SECURITY`, tetiklenmezse → `COSMETIC`
+1. **Description change**: `_classify_description_change()`:
+   - Run `PromptInjectionDetection` and `HiddenContentDetection` against new description
+   - If triggered → `SECURITY`, if not → `COSMETIC`
 
-2. **Schema değişikliği**: `_classify_schema_diff()`:
-   - `properties` altındaki key'leri recursive walk
-   - Yeni eklenen key `SECURITY_SENSITIVE_KEYS` set'inde mi? → `SECURITY`
-   - `BEHAVIORAL_KEYS` set'inde mi? → `BEHAVIORAL`
-   - Hiçbiri değilse → `COSMETIC`
+2. **Schema change**: `_classify_schema_diff()`:
+   - Recursive walk of keys under `properties`
+   - Is the newly added key in the `SECURITY_SENSITIVE_KEYS` set? → `SECURITY`
+   - Is it in the `BEHAVIORAL_KEYS` set? → `BEHAVIORAL`
+   - Neither → `COSMETIC`
 
 ### Security-sensitive keys
 ```python
@@ -85,42 +85,42 @@ BEHAVIORAL_KEYS = {
 }
 ```
 
-### DiffDelta veri modeli
+### DiffDelta Data Model
 
 ```python
 @dataclass
 class DiffDelta:
     scan_id_a, scan_id_b, scanned_at_a, scanned_at_b, server: str
-    tool_diffs: list[ToolDiff]        # her tool için değişiklikler
-    new_findings: list[Finding]       # yeni tespitler
-    resolved_findings: list[str]      # kapanan tespitler
+    tool_diffs: list[ToolDiff]        # changes for each tool
+    new_findings: list[Finding]       # new detections
+    resolved_findings: list[str]      # closed detections
     prompt_added, prompt_removed: list[str]
     resource_added, resource_removed: list[str]
 ```
 
 - `ToolDiff`: `tool_name`, `changes: list[SchemaChange]`, `added: bool`, `removed: bool`
-- `ToolDiff.max_severity`: tüm değişikliklerin en kötüsü (eklenen tool'lar → SECURITY)
+- `ToolDiff.max_severity`: worst of all changes (added tools → SECURITY)
 
-## Migration Stratejisi
+## Migration Strategy
 
-Şema değişikliği gerektiğinde:
-1. `SCHEMA` string'ine `ALTER TABLE` veya yeni `CREATE TABLE IF NOT EXISTS` ekle
-2. Geriye dönük uyumlu ol: `IF NOT EXISTS` kullan
-3. Breaking change ise versiyon numarası tutan bir `meta` tablosu ekle ve migration mantığı yaz
-4. `Store.__init__` içinde `PRAGMA user_version` kontrolü yap
+When a schema change is needed:
+1. Add `ALTER TABLE` or new `CREATE TABLE IF NOT EXISTS` to the `SCHEMA` string
+2. Stay backward-compatible: use `IF NOT EXISTS`
+3. For breaking changes, add a `meta` table that tracks version numbers and write migration logic
+4. Check `PRAGMA user_version` in `Store.__init__`
 
-## Kalite Kuralları
+## Quality Rules
 
-- SQL injection: tüm sorgular **parametrized** (`?` placeholder ile)
-- `commit()` her yazma işleminden sonra
-- WAL mode: concurrent read safe ama tek writer
-- `close()` çağrısını unutma — CLI komutları `finally` bloğunda çağırır
-- Commit: `feat: add snapshot export --format csv` veya `fix: handle NULL description in diff`
+- SQL injection prevention: all queries are **parameterized** (with `?` placeholders)
+- `commit()` after every write operation
+- WAL mode: concurrent read safe but single writer
+- Don't forget `close()` — CLI commands call it in a `finally` block
+- Commit: `feat: add snapshot export --format csv` or `fix: handle NULL description in diff`
 
-## Test
+## Testing
 
-Diff testleri `tests/test_diff.py` içinde:
-- `TestDiffer` sınıfı: added/removed tool, changed description, new/resolved findings
-- `test_change_severity_*`: COSMETIC vs SECURITY sınıflandırma doğruluğu
-- `test_description_injection_becomes_security`: R102/R104 tetikleme
-- Storage testleri `tests/test_watch.py` içinde (Store testleri orada)
+Diff tests are in `tests/test_diff.py`:
+- `TestDiffer` class: added/removed tool, changed description, new/resolved findings
+- `test_change_severity_*`: COSMETIC vs SECURITY classification accuracy
+- `test_description_injection_becomes_security`: R102/R104 triggering
+- Storage tests are in `tests/test_watch.py` (Store tests there)

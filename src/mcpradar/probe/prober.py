@@ -13,10 +13,9 @@ if TYPE_CHECKING:
 
     from mcpradar.scanner.report import ToolInfo
 
-from mcpradar.scanner.rules import PROMPT_INJECTION_PATTERNS, SECRET_PATTERNS
-
 # Import SandboxValidator lazily to avoid circular imports
 from mcpradar.probe.sandbox import SandboxValidator
+from mcpradar.scanner.rules import PROMPT_INJECTION_PATTERNS, SECRET_PATTERNS
 
 # ---------------------------------------------------------------------------
 # ProbeResult
@@ -31,7 +30,7 @@ class ProbeResult:
     server_name: str
     success: bool
     response_time_ms: float
-    response_preview: str  # Ilk 500 karakter
+    response_preview: str  # First 500 characters
     contains_urls: bool
     contains_scripts: bool
     contains_secrets: bool
@@ -62,11 +61,10 @@ class ProbeResult:
 
 
 class ReadOnlyProber:
-    """Sadece okuma-amacli gorunen tool'lari guvenli parametrelerle calistirir
-    ve donen yanitlari tarar.
+    """Runs read-only-appearing tools with safe parameters and scans responses.
 
-    Amac: statik analizde yakalanamayan dinamik tehditleri (gizli URL'ler,
-    script enjeksiyonu, token sizintisi) tespit etmek.
+    Purpose: detect dynamic threats invisible to static analysis (hidden URLs,
+    script injection, token leakage).
 
     When *sandbox_validator* is provided (via ``--sandbox`` CLI flag), also:
     - Excludes write-capable tools detected by the sandbox validator
@@ -104,13 +102,13 @@ class ReadOnlyProber:
     # ------------------------------------------------------------------
 
     def is_safe_tool(self, tool: ToolInfo) -> bool:
-        """Tool adi safe pattern'lerden birine uyuyor MU VE
-        description DANGEROUS_KEYWORDS icermiyorsa True doner.
+        """Return True if tool name matches safe patterns AND
+        description does not contain DANGEROUS_KEYWORDS.
 
         If sandbox validator is configured, also rejects write-capable tools
         detected by the sandbox validator's is_write_tool() check.
 
-        Her iki kosul da saglanmali.
+        Both conditions must be met.
         """
         name_safe = any(p.search(tool.name) for p in self.SAFE_TOOL_PATTERNS)
         if not name_safe:
@@ -121,28 +119,26 @@ class ReadOnlyProber:
             return False
 
         # Sandbox: exclude write-capable tools
-        if self.sandbox_validator is not None:
-            if self.sandbox_validator.is_write_tool(tool):
-                return False
-
-        return True
+        return not (
+            self.sandbox_validator is not None and self.sandbox_validator.is_write_tool(tool)
+        )
 
     def generate_minimal_args(self, tool: ToolInfo) -> dict[str, Any]:
-        """Tool'un input_schema'sindaki required alanlar icin minimal guvenli degerler uretir.
+        """Generate minimal safe values for required fields in the tool's input_schema.
 
-        Her tip icin:
-        - "string": "test" (veya schema'daki default deger)
-        - "number" veya "integer": 0
+        Per type:
+        - "string": "test" (or default value from schema)
+        - "number" or "integer": 0
         - "boolean": False
-        - "array": [] (items default'u varsa [default])
+        - "array": [] (or [default] if items has a default)
         - "object": {}
-        - tip belirtilmemis: "test"
+        - no type specified: "test"
         """
         schema = tool.input_schema
         if not isinstance(schema, dict) or not schema:
             return {}
 
-        # Hic properties yoksa bos don
+        # Return empty if no properties
         properties = schema.get("properties")
         if not isinstance(properties, dict) or not properties:
             return {}
@@ -167,7 +163,7 @@ class ReadOnlyProber:
                 args[prop_name] = "test"
                 continue
 
-            # default varsa onu kullan
+            # Use default if present
             if "default" in prop_schema:
                 args[prop_name] = prop_schema["default"]
                 continue
@@ -181,7 +177,7 @@ class ReadOnlyProber:
             elif prop_type == "boolean":
                 args[prop_name] = False
             elif prop_type == "array":
-                # items icinde default varsa kullan
+                # Use default from items if present
                 items = prop_schema.get("items")
                 if isinstance(items, dict) and "default" in items:
                     args[prop_name] = [items["default"]]
@@ -190,7 +186,7 @@ class ReadOnlyProber:
             elif prop_type == "object":
                 args[prop_name] = {}
             else:
-                # tip belirtilmemis ya da taninmayan tip
+                # No type specified or unrecognized type
                 args[prop_name] = "test"
         return args
 
@@ -200,16 +196,16 @@ class ReadOnlyProber:
         tool: ToolInfo,
         server_name: str = "",
     ) -> ProbeResult:
-        """Tek bir tool'u guvenli parametrelerle calistirir ve yaniti tarar.
+        """Execute a single tool with safe parameters and scan the response.
 
-        Adimlar:
-        1. Minimal arguman uret
-        2. Zaman olcumu baslat
-        3. PROBE_TIMEOUT suresiyle call_tool
-        4. Yanit text'ini cikar
-        5. URL, script, secret, prompt injection tara
-        6. ProbeResult dondur
-        7. Timeout veya hata durumunda success=False
+        Steps:
+        1. Generate minimal arguments
+        2. Start timing
+        3. call_tool with PROBE_TIMEOUT
+        4. Extract response text
+        5. Scan for URL, script, secret, prompt injection
+        6. Return ProbeResult
+        7. On timeout or error: success=False
         """
         args = self.generate_minimal_args(tool)
 
@@ -266,7 +262,7 @@ class ReadOnlyProber:
                 contains_scripts=False,
                 contains_secrets=False,
                 contains_prompt_injection=False,
-                error_message=f"Timeout ({self.PROBE_TIMEOUT}s) asildi",
+                error_message=f"Timeout ({self.PROBE_TIMEOUT}s) exceeded",
             )
 
         except Exception as exc:
@@ -289,7 +285,7 @@ class ReadOnlyProber:
         tools: list[ToolInfo],
         server_name: str = "",
     ) -> list[ProbeResult]:
-        """Guvenli tool'lari filtrele, sirali calistir (en fazla MAX_PROBE_COUNT), sonuclari don."""
+        """Filter safe tools, run sequentially (up to MAX_PROBE_COUNT), return results."""
         safe_tools = [t for t in tools if self.is_safe_tool(t)]
         results: list[ProbeResult] = []
 
@@ -307,9 +303,9 @@ class ReadOnlyProber:
 
     @staticmethod
     def _extract_response_text(result: Any) -> str:
-        """CallToolResult.content listesinden metin icerigini cikarir.
+        """Extract text content from CallToolResult.content list.
 
-        Her content ogesinde .text attribute'u varsa toplar, yoksa gormezden gelir.
+        Collects .text attribute from each content item, ignores items without it.
         """
         parts: list[str] = []
         try:
@@ -329,7 +325,7 @@ class ReadOnlyProber:
 
     @staticmethod
     def _scan_dynamic_patterns(text: str) -> tuple[bool, bool]:
-        """Yanit metninde URL ve script/exec pattern'lerini tara.
+        """Scan response text for URL and script/exec patterns.
 
         Returns:
             (contains_urls, contains_scripts)
@@ -349,10 +345,10 @@ class ReadOnlyProber:
 
     @staticmethod
     def _scan_secrets(text: str) -> tuple[bool, list[str]]:
-        """Yanit metnini SECRET_PATTERNS ile tara.
+        """Scan response text against SECRET_PATTERNS.
 
         Returns:
-            (contains_secrets, [rule_id listesi])
+            (contains_secrets, [rule_id list])
         """
         contains = False
         finding_ids: list[str] = []
@@ -360,15 +356,15 @@ class ReadOnlyProber:
             if pattern.search(text):
                 contains = True
                 finding_ids.append("R106")
-                break  # Her pattern icin ayri id eklemeye gerek yok, R106 yeterli
+                break  # No need to add separate ID per pattern, R106 is sufficient
         return contains, finding_ids
 
     @staticmethod
     def _scan_prompt_injection(text: str) -> tuple[bool, list[str]]:
-        """Yanit metnini PROMPT_INJECTION_PATTERNS ile tara.
+        """Scan response text against PROMPT_INJECTION_PATTERNS.
 
         Returns:
-            (contains_prompt_injection, [rule_id listesi])
+            (contains_prompt_injection, [rule_id list])
         """
         contains = False
         finding_ids: list[str] = []
@@ -376,6 +372,6 @@ class ReadOnlyProber:
             if pattern.search(text):
                 contains = True
                 finding_ids.append("R102")
-                # Ilk eslesmede yeterli; tum pattern'leri tek tek raporlamaya gerek yok
+                # First match is enough; no need to report every pattern individually
                 break
         return contains, finding_ids

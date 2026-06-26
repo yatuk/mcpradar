@@ -1,4 +1,4 @@
-"""Detection rule'lari icin unit testler."""
+"""Unit tests for detection rules."""
 
 import base64
 import math
@@ -584,7 +584,7 @@ class TestSecretExposureDetection:
         )
         findings = rule.check(tool)
         # Should trigger entropy-based detection
-        entropy_findings = [f for f in findings if "entropi" in f.description.lower()]
+        entropy_findings = [f for f in findings if "entropy" in f.description.lower()]
         assert len(entropy_findings) >= 1
 
     def test_detects_in_input_schema(self) -> None:
@@ -627,7 +627,7 @@ class TestCommandInjectionDetection:
         )
         findings = rule.check(tool)
         assert any(f.rule_id == "R107" for f in findings)
-        shell_findings = [f for f in findings if "Shell metakarakteri" in f.description]
+        shell_findings = [f for f in findings if "Shell metacharacter" in f.description]
         assert len(shell_findings) >= 1
 
     def test_dangerous_default_value(self) -> None:
@@ -645,7 +645,7 @@ class TestCommandInjectionDetection:
             },
         )
         findings = rule.check(tool)
-        dangerous = [f for f in findings if "Tehlikeli" in f.description]
+        dangerous = [f for f in findings if "Dangerous" in f.description]
         assert len(dangerous) >= 1
 
     def test_overly_broad_regex_pattern(self) -> None:
@@ -663,7 +663,7 @@ class TestCommandInjectionDetection:
             },
         )
         findings = rule.check(tool)
-        regex_findings = [f for f in findings if "Asiri genis regex" in f.description]
+        regex_findings = [f for f in findings if "Overly broad regex" in f.description]
         assert len(regex_findings) >= 1
 
     def test_command_like_enum_value(self) -> None:
@@ -681,7 +681,7 @@ class TestCommandInjectionDetection:
             },
         )
         findings = rule.check(tool)
-        enum_findings = [f for f in findings if "Komut benzeri enum" in f.description]
+        enum_findings = [f for f in findings if "Command-like enum" in f.description]
         assert len(enum_findings) >= 1
 
     def test_clean_schema_passes(self) -> None:
@@ -1000,7 +1000,7 @@ class TestPreScanCheck:
         assert len(findings) == 1
         assert findings[0].rule_id == "R110"
         assert findings[0].severity == Severity.MEDIUM
-        assert "Ilk tarama" in findings[0].title
+        assert "First scan" in findings[0].title
 
     def test_first_scan_with_none_baseline_returns_empty_when_non_fingerprint(self) -> None:
         """If baseline is not None but not a ServerFingerprint, treated as None."""
@@ -1055,7 +1055,7 @@ class TestPreScanCheck:
         current = _make_fingerprint(tool_names_hash="bbbbb")
         findings = engine.pre_scan_check(baseline=baseline, current=current)
 
-        tool_findings = [f for f in findings if "Tool listesi" in f.title]
+        tool_findings = [f for f in findings if "Tool list" in f.title]
         assert len(tool_findings) >= 1
         assert tool_findings[0].severity == Severity.HIGH
 
@@ -1094,7 +1094,7 @@ class TestPreScanCheck:
         current = _make_fingerprint(endpoint="http://new-host:8080")
         findings = engine.pre_scan_check(baseline=baseline, current=current)
 
-        endpoint_findings = [f for f in findings if "adresi degisti" in f.title]
+        endpoint_findings = [f for f in findings if "address changed" in f.title]
         assert len(endpoint_findings) >= 1
 
     def test_protocol_version_changed_detected(self) -> None:
@@ -1104,7 +1104,7 @@ class TestPreScanCheck:
         current = _make_fingerprint(protocol_version="2025-03-26")
         findings = engine.pre_scan_check(baseline=baseline, current=current)
 
-        protocol_findings = [f for f in findings if "protokol versiyonu" in f.title.lower()]
+        protocol_findings = [f for f in findings if "protocol version" in f.title.lower()]
         assert len(protocol_findings) >= 1
         assert protocol_findings[0].severity == Severity.MEDIUM
 
@@ -1288,9 +1288,7 @@ class TestUnboundedInputDetection:
             description="Validate input",
             input_schema={
                 "type": "object",
-                "properties": {
-                    "email": {"type": "string", "pattern": "^.+@.+$"}
-                },
+                "properties": {"email": {"type": "string", "pattern": "^.+@.+$"}},
             },
         )
         findings = rule.check(tool)
@@ -1303,9 +1301,7 @@ class TestUnboundedInputDetection:
             description="Set mode",
             input_schema={
                 "type": "object",
-                "properties": {
-                    "mode": {"type": "string", "enum": ["read", "write", "admin"]}
-                },
+                "properties": {"mode": {"type": "string", "enum": ["read", "write", "admin"]}},
             },
         )
         findings = rule.check(tool)

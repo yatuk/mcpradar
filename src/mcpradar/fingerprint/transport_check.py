@@ -188,8 +188,8 @@ class TransportChecker:
             findings.append(
                 Finding(
                     rule_id="R111",
-                    title="Guvenli olmayan transport",
-                    description="Plain HTTP kullaniliyor — trafik sifrelenmemis",
+                    title="Insecure transport",
+                    description="Plain HTTP in use — traffic is not encrypted",
                     severity=Severity.HIGH,
                     target=target,
                     location="transport",
@@ -201,8 +201,8 @@ class TransportChecker:
             findings.append(
                 Finding(
                     rule_id="R111",
-                    title="Guvenli olmayan transport",
-                    description="Plain HTTP kullaniliyor — trafik sifrelenmemis",
+                    title="Insecure transport",
+                    description="Plain HTTP in use — traffic is not encrypted",
                     severity=Severity.HIGH,
                     target=target,
                     location="transport",
@@ -213,8 +213,9 @@ class TransportChecker:
             findings.append(
                 Finding(
                     rule_id="R111",
-                    title="TLS baglanti hatasi",
-                    description="TLS handshake basarisiz — sunucuya guvenli baglanilamadi",
+                    title="TLS connection error",
+                    description="TLS handshake failed — could not establish secure "
+                    "connection to server",
                     severity=Severity.HIGH,
                     target=target,
                     location="transport",
@@ -227,8 +228,8 @@ class TransportChecker:
                 findings.append(
                     Finding(
                         rule_id="R111",
-                        title="Eski TLS surumu",
-                        description=f"{tls_info.version} kullaniliyor — TLS >= 1.2 gerekli",
+                        title="Outdated TLS version",
+                        description=f"{tls_info.version} in use — TLS >= 1.2 required",
                         severity=Severity.CRITICAL,
                         target=target,
                         location="transport",
@@ -241,8 +242,8 @@ class TransportChecker:
                 findings.append(
                     Finding(
                         rule_id="R111",
-                        title="Sertifika suresi dolmus",
-                        description="Sunucu sertifikasi gecersiz veya suresi dolmus",
+                        title="Certificate expired",
+                        description="Server certificate is invalid or expired",
                         severity=Severity.HIGH,
                         target=target,
                         location="transport",
@@ -254,8 +255,8 @@ class TransportChecker:
                 findings.append(
                     Finding(
                         rule_id="R111",
-                        title="Self-signed sertifika",
-                        description="Sunucu self-signed sertifika kullaniyor",
+                        title="Self-signed certificate",
+                        description="Server uses a self-signed certificate",
                         severity=Severity.MEDIUM,
                         target=target,
                         location="transport",
@@ -267,8 +268,8 @@ class TransportChecker:
                 findings.append(
                     Finding(
                         rule_id="R111",
-                        title="HSTS header eksik",
-                        description="Strict-Transport-Security header'i gonderilmemis",
+                        title="Missing HSTS header",
+                        description="Strict-Transport-Security header not sent",
                         severity=Severity.MEDIUM,
                         target=target,
                         location="transport",

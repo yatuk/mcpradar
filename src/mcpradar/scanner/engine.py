@@ -1,4 +1,4 @@
-"""MCP server tarama motoru — stdio + SSE + HTTP transport destegi."""
+"""MCP server scan engine — stdio + SSE + HTTP transport support."""
 
 from __future__ import annotations
 
@@ -176,32 +176,34 @@ class Scanner:
     async def _run_http(self, report: ScanReport) -> None:
         url = self.target
         # streamablehttp_client returns 3-tuple — get_session_id callback
-        async with streamablehttp_client(url) as (read, write, get_session_id):
-            async with ClientSession(read, write) as session:
-                init_result = await session.initialize()
-                report.server_version = getattr(init_result, "serverVersion", "") or ""
-                report.protocol_version = getattr(init_result, "protocolVersion", "") or ""
-                caps = getattr(init_result, "capabilities", None)
-                if caps is not None:
-                    if hasattr(caps, "model_dump"):
-                        report.capabilities = caps.model_dump()
-                    elif isinstance(caps, dict):
-                        report.capabilities = caps
-                await self._collect_all(session, report)
+        async with (
+            streamablehttp_client(url) as (read, write, get_session_id),
+            ClientSession(read, write) as session,
+        ):
+            init_result = await session.initialize()
+            report.server_version = getattr(init_result, "serverVersion", "") or ""
+            report.protocol_version = getattr(init_result, "protocolVersion", "") or ""
+            caps = getattr(init_result, "capabilities", None)
+            if caps is not None:
+                if hasattr(caps, "model_dump"):
+                    report.capabilities = caps.model_dump()
+                elif isinstance(caps, dict):
+                    report.capabilities = caps
+            await self._collect_all(session, report)
 
-                # Detect session ID for R112
-                http_session_id = get_session_id() if callable(get_session_id) else None
-                self._check_auth(report, session_id=http_session_id)
+            # Detect session ID for R112
+            http_session_id = get_session_id() if callable(get_session_id) else None
+            self._check_auth(report, session_id=http_session_id)
 
-                # Runtime probing
-                if self.prober is not None:
-                    if self.probe_safe_only:
-                        tools_to_probe = [t for t in report.tools if self.prober.is_safe_tool(t)]
-                    else:
-                        tools_to_probe = list(report.tools)
-                    for tool in tools_to_probe[: self.prober.MAX_PROBE_COUNT]:
-                        result = await self.prober.probe_tool(session, tool, report.target)
-                        report.probe_results.append(result)
+            # Runtime probing
+            if self.prober is not None:
+                if self.probe_safe_only:
+                    tools_to_probe = [t for t in report.tools if self.prober.is_safe_tool(t)]
+                else:
+                    tools_to_probe = list(report.tools)
+                for tool in tools_to_probe[: self.prober.MAX_PROBE_COUNT]:
+                    result = await self.prober.probe_tool(session, tool, report.target)
+                    report.probe_results.append(result)
 
     # ------------------------------------------------------------------
     # Data collection + analysis

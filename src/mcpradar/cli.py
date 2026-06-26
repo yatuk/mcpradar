@@ -1,4 +1,4 @@
-"""MCPRadar CLI — Typer uygulaması ve komut tanımları."""
+"""MCPRadar CLI — Typer application and command definitions."""
 
 from __future__ import annotations
 
@@ -15,7 +15,7 @@ from mcpradar.storage.store import Store
 
 app = typer.Typer(
     name="mcpradar",
-    help="MCP server güvenlik tarayıcısı — tool poisoning ve zaafiyet tespiti",
+    help="MCP server security scanner — tool poisoning and vulnerability detection",
     no_args_is_help=True,
 )
 
@@ -34,7 +34,7 @@ def main(
         "-v",
         callback=version_callback,
         is_eager=True,
-        help="Sürüm bilgisi göster",
+        help="Show version information",
     ),
 ) -> None:
     pass
@@ -49,43 +49,43 @@ def main(
 def scan(
     target: str = typer.Argument(
         help="MCP server URL (http://host:port), SSE URL (sse://host:port), "
-        "veya stdio komutu ('uvx my-mcp-server --port 0')"
+        "or stdio command ('uvx my-mcp-server --port 0')"
     ),
     transport: str = typer.Option(  # noqa: B008
         "http",
         "--transport",
         "-t",
-        help="Transport tipi: http, sse, stdio",
+        help="Transport type: http, sse, stdio",
     ),
     output: Path | None = typer.Option(  # noqa: B008
-        None, "--output", "-o", help="Sonuçları JSON dosyasına yaz"
+        None, "--output", "-o", help="Write results to JSON file"
     ),
     severity: str = typer.Option(  # noqa: B008
         "medium",
         "--severity",
         "-s",
-        help="Minimum severity esigi (low/medium/high/critical)",
+        help="Minimum severity threshold (low/medium/high/critical)",
     ),
     json_only: bool = typer.Option(  # noqa: B008
         False,
         "--json",
         hidden=True,
-        help="Deprecated: --format json kullanın",
+        help="Deprecated: use --format json instead",
     ),
     output_format: str = typer.Option(  # noqa: B008
         "rich",
         "--format",
         "-f",
-        help="Çıktı formatı: rich, json, sarif",
+        help="Output format: rich, json, sarif",
     ),
     no_save: bool = typer.Option(  # noqa: B008
-        False, "--no-save", help="Snapshot'i veritabanina kaydetme"
+        False, "--no-save", help="Do not save snapshot to database"
     ),
     sandbox: bool = typer.Option(  # noqa: B008
-        False, "--sandbox", help="Sandbox arguman dogrulamasi ile probe et"
+        False, "--sandbox", help="Probe with sandbox argument validation"
     ),
 ) -> None:
-    """MCP server'i güvenlik açısından tara ve SQLite'a kaydet."""
+    """Scan an MCP server for security issues and save to SQLite."""
     import warnings
 
     from mcpradar.output.console import console
@@ -102,7 +102,7 @@ def scan(
 
     valid_transports = {"http", "sse", "stdio"}
     if transport not in valid_transports:
-        console.print(f"[red]Gecersiz transport: {transport}. Gecerli: {valid_transports}[/]")
+        console.print(f"[red]Invalid transport: {transport}. Valid: {valid_transports}[/]")
         raise typer.Exit(code=1)
 
     sev = Severity.from_str(severity)
@@ -123,7 +123,7 @@ def scan(
         probe_safe_only=True,
     )
 
-    with console.status(f"[bold blue]{target}[/] taranıyor..."):
+    with console.status(f"[bold blue]{target}[/] scanning..."):
         report = asyncio.run(scanner.run())
 
     if json_only or output_format == "json":
@@ -142,7 +142,7 @@ def scan(
         store.save(report)
         count = store.scan_count(target)
         store.close()
-        console.print(f"\n[dim]DB'ye kaydedildi: {report.id} (sunucuda #{count} scan)[/]")
+        console.print(f"\n[dim]Saved to DB: {report.id} (#{count} scan for server)[/]")
 
     if output:
         _save_output(report, output, output_format)
@@ -155,36 +155,36 @@ def scan(
 
 @app.command()
 def probe(
-    target: str = typer.Argument(help="MCP sunucu adresi (URL veya stdio komutu)"),
+    target: str = typer.Argument(help="MCP server address (URL or stdio command)"),
     transport: str = typer.Option(  # noqa: B008
-        "http", "--transport", "-t", help="Transport protokolu: http, sse, stdio"
+        "http", "--transport", "-t", help="Transport protocol: http, sse, stdio"
     ),
     safe_only: bool = typer.Option(  # noqa: B008
-        True, "--safe-only/--all", help="Sadece read-only tool'lari probe et (guvenli)"
+        True, "--safe-only/--all", help="Only probe read-only tools (safe)"
     ),
     max_probes: int = typer.Option(  # noqa: B008
-        20, "--max", "-m", help="Maksimum probe edilecek tool sayisi"
+        20, "--max", "-m", help="Maximum number of tools to probe"
     ),
     timeout: float = typer.Option(  # noqa: B008
-        5.0, "--timeout", help="Tool basina timeout (saniye)"
+        5.0, "--timeout", help="Timeout per tool (seconds)"
     ),
     json_only: bool = typer.Option(  # noqa: B008
-        False, "--json", help="Yalnizca JSON ciktisi"
+        False, "--json", help="JSON output only"
     ),
     min_severity: str = typer.Option(  # noqa: B008
-        "low", "--severity", "-s", help="Minimum onem seviyesi"
+        "low", "--severity", "-s", help="Minimum severity level"
     ),
     sandbox: bool = typer.Option(  # noqa: B008
-        False, "--sandbox", help="Sandbox arguman dogrulamasi ile probe et"
+        False, "--sandbox", help="Probe with sandbox argument validation"
     ),
 ) -> None:
-    """MCP sunucusundaki tool'lari guvenli sekilde calistirarak probe et.
+    """Probe MCP server tools by executing them safely.
 
-    Read-only tool'lara minimal guvenli girdi gonderir,
-    yanitlarda URL, script, secret ve prompt injection arar.
+    Sends minimal safe input to read-only tools,
+    scans responses for URLs, scripts, secrets, and prompt injection.
 
-    --sandbox: SandboxValidator ile argumanlari dogrular ve yazma
-    kabiliyetli tool'lari probe disinda birakir.
+    --sandbox: Validates arguments via SandboxValidator and excludes
+    write-capable tools from probing.
     """
     import asyncio
 
@@ -207,7 +207,7 @@ def probe(
         probe_safe_only=safe_only,
     )
 
-    with console.status(f"[bold blue]{target}[/] probe ediliyor..."):
+    with console.status(f"[bold blue]{target}[/] probing..."):
         report = asyncio.run(scanner.run())
 
     if json_only:
@@ -222,23 +222,19 @@ def _print_probe_results(console: Any, report: Any) -> None:
 
     probed = report.probe_results
 
-    console.print(f"\n[bold]Probe Sonuclari: {report.target}[/]")
+    console.print(f"\n[bold]Probe Results: {report.target}[/]")
     console.print(f"  Transport: {report.transport}")
-    console.print(f"  Tool sayisi: {len(report.tools)}, Probe edilen: {len(probed)}")
+    console.print(f"  Tool count: {len(report.tools)}, Probed: {len(probed)}")
 
     if not probed:
-        console.print(
-            "  [yellow]Hic tool probe edilmedi (safe tool bulunamadi veya tumu write-only)[/]"
-        )
+        console.print("  [yellow]No tools probed (no safe tools found or all are write-only)[/]")
         return
 
     success_count = sum(1 for p in probed if p.success)
     fail_count = len(probed) - success_count
-    console.print(f"  Basarili: [green]{success_count}[/], Basarisiz: [red]{fail_count}[/]")
+    console.print(f"  Successful: [green]{success_count}[/], Failed: [red]{fail_count}[/]")
 
-    table = Table(
-        "Tool", "Sure (ms)", "Basarili", "URL", "Script", "Secret", "Injection", "Onizleme"
-    )
+    table = Table("Tool", "Time (ms)", "Success", "URL", "Script", "Secret", "Injection", "Preview")
     for p in probed:
         table.add_row(
             p.tool_name,
@@ -255,16 +251,22 @@ def _print_probe_results(console: Any, report: Any) -> None:
     # Summary of detected issues
     issues = []
     if any(p.contains_urls for p in probed):
-        issues.append(f"[yellow]{sum(1 for p in probed if p.contains_urls)} URL iceren yanit[/]")
+        issues.append(
+            f"[yellow]{sum(1 for p in probed if p.contains_urls)} response(s) containing URLs[/]"
+        )
     if any(p.contains_scripts for p in probed):
-        issues.append(f"[red]{sum(1 for p in probed if p.contains_scripts)} script iceren yanit[/]")
+        issues.append(
+            f"[red]{sum(1 for p in probed if p.contains_scripts)} response(s) containing scripts[/]"
+        )
     if any(p.contains_secrets for p in probed):
-        issues.append(f"[red]{sum(1 for p in probed if p.contains_secrets)} secret iceren yanit[/]")
+        issues.append(
+            f"[red]{sum(1 for p in probed if p.contains_secrets)} response(s) containing secrets[/]"
+        )
     if any(p.contains_prompt_injection for p in probed):
         pi_count = sum(1 for p in probed if p.contains_prompt_injection)
-        issues.append(f"[red]{pi_count} prompt injection yaniti[/]")
+        issues.append(f"[red]{pi_count} prompt injection response(s)[/]")
     if issues:
-        console.print("\n[bold]Tespit Edilen Riskler:[/] " + ", ".join(issues))
+        console.print("\n[bold]Detected Risks:[/] " + ", ".join(issues))
 
 
 # ---------------------------------------------------------------------------
@@ -276,31 +278,31 @@ def _print_probe_results(console: Any, report: Any) -> None:
 def diff(
     server: str | None = typer.Argument(
         default=None,
-        help="Karsilastirilacak server URL'si (bos birakilirsa tum server'lar listelenir)",
+        help="Server URL to compare (leave empty to list all servers)",
     ),
     snapshot_a: str | None = typer.Option(  # noqa: B008
-        None, "--snapshot-a", "-a", help="Ilk snapshot ID (manuel kiyas)"
+        None, "--snapshot-a", "-a", help="First snapshot ID (manual comparison)"
     ),
     snapshot_b: str | None = typer.Option(  # noqa: B008
-        None, "--snapshot-b", "-b", help="Ikinci snapshot ID (manuel kiyas)"
+        None, "--snapshot-b", "-b", help="Second snapshot ID (manual comparison)"
     ),
     since: str | None = typer.Option(  # noqa: B008
-        None, "--since", help="Bu timestamp veya scan ID'den beri degisiklikleri goster"
+        None, "--since", help="Show changes since this timestamp or scan ID"
     ),
     output: Path | None = typer.Option(  # noqa: B008
-        None, "--output", "-o", help="Diff sonucunu JSON dosyasina yaz"
+        None, "--output", "-o", help="Write diff result to JSON file"
     ),
     json_only: bool = typer.Option(  # noqa: B008
-        False, "--json", help="Yalnizca JSON cikti"
+        False, "--json", help="JSON output only"
     ),
 ) -> None:
-    """Iki scan snapshot'u arasindaki schema degisikliklerini karsilastir.
+    """Compare schema changes between two scan snapshots.
 
-    Ornekler:
-        mcpradar diff                    # tum sunuculari listele
-        mcpradar diff http://x           # en son 2 scan'i kiyasla
+    Examples:
+        mcpradar diff                    # list all servers
+        mcpradar diff http://x           # compare latest 2 scans
         mcpradar diff http://x --since 2026-01-01
-        mcpradar diff -a abc -b def      # belirli iki snapshot
+        mcpradar diff -a abc -b def      # specific two snapshots
     """
     from mcpradar.diff.differ import Differ
     from mcpradar.output.console import console
@@ -321,14 +323,14 @@ def diff(
     if server is None:
         targets = store.list_targets()
         if not targets:
-            console.print("[dim]Henuz hic scan yok. Once 'mcpradar scan <url>' calistirin.[/]")
+            console.print("[dim]No scans yet. Run 'mcpradar scan <url>' first.[/]")
         else:
-            console.print("[bold]Taranan sunucular:[/]")
+            console.print("[bold]Scanned servers:[/]")
             for t in targets:
                 count = store.scan_count(t)
                 last = store.latest_scans(t, 1)
                 last_id = last[0][:12] if last else "-"
-                console.print(f"  [cyan]{t}[/] — {count} scan, son: {last_id}")
+                console.print(f"  [cyan]{t}[/] — {count} scans, last: {last_id}")
         store.close()
         return
 
@@ -341,20 +343,19 @@ def diff(
     if since:
         ids = store.scan_since(server, since)
         if not ids:
-            console.print(f"[dim]{server} icin '{since}' sonrasi scan yok.[/]")
+            console.print(f"[dim]No scans after '{since}' for {server}.[/]")
             store.close()
             return
         if len(ids) >= 2:
             ids = [ids[0], ids[-1]]  # newest vs oldest in range
             console.print(
-                f"[dim]{len(store.scan_since(server, since))} scan, "
-                f"en yeni vs en eski kiyaslaniyor[/]"
+                f"[dim]{len(store.scan_since(server, since))} scans, comparing newest vs oldest[/]"
             )
 
     if len(ids) < 2:
         console.print(
-            f"[dim]{server} icin en az 2 scan gerekli (su an {len(ids)}). "
-            "Once birden fazla 'mcpradar scan' calistirin.[/]"
+            f"[dim]At least 2 scans needed for {server} (currently {len(ids)}). "
+            "Run 'mcpradar scan' multiple times first.[/]"
         )
         store.close()
         return
@@ -388,7 +389,7 @@ def _save_output(report: Any, output: Path, fmt: str) -> None:
                 json.dumps(report, indent=2, ensure_ascii=False),
                 encoding="utf-8",
             )
-    console.print(f"[dim]Çıktı: {out_path}[/]")
+    console.print(f"[dim]Output: {out_path}[/]")
 
 
 def _output_diff(delta: Any, json_only: bool, output: Path | None) -> None:
@@ -414,13 +415,13 @@ def _output_diff(delta: Any, json_only: bool, output: Path | None) -> None:
 def list_snapshots(
     target: str | None = typer.Argument(
         default=None,
-        help="Sunucu URL'si (bos birakilirsa tum sunuculari listeler)",
+        help="Server URL (leave empty to list all servers)",
     ),
     limit: int = typer.Option(  # noqa: B008
-        20, "--limit", "-n", help="Gösterilecek maksimum snapshot sayısı"
+        20, "--limit", "-n", help="Maximum number of snapshots to show"
     ),
 ) -> None:
-    """Bir sunucunun tüm snapshot'larını listele."""
+    """List all snapshots for a server."""
     from rich.table import Table
 
     from mcpradar.output.console import console
@@ -430,12 +431,12 @@ def list_snapshots(
     if target is None:
         targets = store.list_targets()
         if not targets:
-            console.print("[dim]Henüz hiç scan yok.[/]")
+            console.print("[dim]No scans yet.[/]")
         else:
-            table = Table(title="Taranan Sunucular", show_header=True)
-            table.add_column("Sunucu")
-            table.add_column("Scan Sayısı", justify="right")
-            table.add_column("Son Scan")
+            table = Table(title="Scanned Servers", show_header=True)
+            table.add_column("Server")
+            table.add_column("Scan Count", justify="right")
+            table.add_column("Last Scan")
             for t in targets:
                 count = store.scan_count(t)
                 last = store.latest_scans(t, 1)
@@ -447,13 +448,13 @@ def list_snapshots(
 
     ids = store.latest_scans(target, limit)
     if not ids:
-        console.print(f"[dim]{target} için snapshot bulunamadı.[/]")
+        console.print(f"[dim]No snapshots found for {target}.[/]")
         store.close()
         return
 
     table = Table(title=f"Snapshots: {target}", show_header=True)
     table.add_column("ID", width=14)
-    table.add_column("Tarih", width=22)
+    table.add_column("Date", width=22)
     table.add_column("Transport", width=8)
     table.add_column("Tools", justify="right")
     table.add_column("L", justify="right")
@@ -484,9 +485,9 @@ def list_snapshots(
 
 @app.command()
 def show(
-    scan_id: str = typer.Argument(help="Gösterilecek snapshot ID'si"),
+    scan_id: str = typer.Argument(help="Snapshot ID to show"),
 ) -> None:
-    """Tek bir snapshot'ın detaylı raporunu göster."""
+    """Show detailed report for a single snapshot."""
     from mcpradar.output.console import console
 
     store = Store()
@@ -494,22 +495,22 @@ def show(
         report = store.load(scan_id)
         console.print_report(report)
     except LookupError:
-        console.print(f"[red]Snapshot bulunamadı: {scan_id}[/]")
+        console.print(f"[red]Snapshot not found: {scan_id}[/]")
     finally:
         store.close()
 
 
 @app.command()
 def export(
-    scan_id: str = typer.Argument(help="Export edilecek snapshot ID'si"),
+    scan_id: str = typer.Argument(help="Snapshot ID to export"),
     output_format: str = typer.Option(  # noqa: B008
         "json", "--format", "-f", help="Format: json, sarif, csv"
     ),
     output: Path = typer.Option(  # noqa: B008
-        ..., "--output", "-o", help="Çıktı dosyası"
+        ..., "--output", "-o", help="Output file"
     ),
 ) -> None:
-    """Bir snapshot'ı JSON, SARIF veya CSV formatında dışa aktar."""
+    """Export a snapshot in JSON, SARIF, or CSV format."""
     from mcpradar.output.console import console
 
     store = Store()
@@ -529,7 +530,7 @@ def export(
             store.export_json(report, p)
         console.print(f"[green]Export: {p}[/]")
     except LookupError:
-        console.print(f"[red]Snapshot bulunamadı: {scan_id}[/]")
+        console.print(f"[red]Snapshot not found: {scan_id}[/]")
     finally:
         store.close()
 
@@ -556,19 +557,19 @@ def _export_csv(report: Any, path: Path) -> None:
 @app.command()
 def purge(
     older_than: str | None = typer.Option(  # noqa: B008
-        None, "--older-than", help="Bu tarihten eski snapshot'ları sil (örn: 30d, 7d, 2026-01-01)"
+        None, "--older-than", help="Delete snapshots older than this (e.g. 30d, 7d, 2026-01-01)"
     ),
     keep_last: int | None = typer.Option(  # noqa: B008
-        None, "--keep-last", help="Sadece son N snapshot'ı tut, eskileri sil"
+        None, "--keep-last", help="Keep only the last N snapshots, delete older ones"
     ),
     target: str | None = typer.Option(  # noqa: B008
-        None, "--target", help="Sadece bu sunucu için temizlik yap"
+        None, "--target", help="Clean up only for this server"
     ),
     dry_run: bool = typer.Option(  # noqa: B008
-        False, "--dry-run", help="Silme işlemini yapmadan göster"
+        False, "--dry-run", help="Preview deletions without executing"
     ),
 ) -> None:
-    """Eski snapshot'ları temizle."""
+    """Purge old snapshots."""
     from mcpradar.output.console import console
 
     store = Store()
@@ -579,26 +580,26 @@ def purge(
     elif keep_last:
         ids = store.scans_beyond_keep(target, keep_last)
     else:
-        console.print("[dim]--older-than veya --keep-last belirtmelisiniz.[/]")
+        console.print("[dim]You must specify --older-than or --keep-last.[/]")
         store.close()
         return
 
     if not ids:
-        console.print("[dim]Silinecek snapshot yok.[/]")
+        console.print("[dim]No snapshots to delete.[/]")
         store.close()
         return
 
-    console.print(f"[yellow]{len(ids)} snapshot silinecek:[/]")
+    console.print(f"[yellow]{len(ids)} snapshot(s) to delete:[/]")
     for sid in ids[:10]:
         console.print(f"  [dim]- {sid}[/]")
     if len(ids) > 10:
-        console.print(f"  [dim]... ve {len(ids) - 10} tane daha[/]")
+        console.print(f"  [dim]... and {len(ids) - 10} more[/]")
 
     if not dry_run:
         store.delete_scans(ids)
-        console.print(f"[green]{len(ids)} snapshot silindi.[/]")
+        console.print(f"[green]{len(ids)} snapshot(s) deleted.[/]")
     else:
-        console.print("[dim](--dry-run: işlem yapılmadı)[/]")
+        console.print("[dim](--dry-run: no action taken)[/]")
 
     store.close()
 
@@ -646,44 +647,43 @@ def sbom(
 
 
 # ---------------------------------------------------------------------------
-# scan-all — config dosyasındaki tüm server'ları tara
+# scan-all — scan all servers from config file
 # ---------------------------------------------------------------------------
 
 
 @app.command()
 def scan_all(
     config_path: Path | None = typer.Option(  # noqa: B008
-        None, "--config", help="Konfigürasyon dosyası yolu (varsayılan: mcpradar.toml)"
+        None, "--config", help="Configuration file path (default: mcpradar.toml)"
     ),
     severity: str = typer.Option(  # noqa: B008
         "medium",
         "--severity",
         "-s",
-        help="Minimum severity eşiği (low/medium/high/critical)",
+        help="Minimum severity threshold (low/medium/high/critical)",
     ),
     json_only: bool = typer.Option(  # noqa: B008
-        False, "--json", help="Yalnızca JSON çıktı"
+        False, "--json", help="JSON output only"
     ),
     parallel: bool = typer.Option(  # noqa: B008
-        False, "--parallel", help="Sunucuları paralel tara"
+        False, "--parallel", help="Scan servers in parallel"
     ),
     max_concurrency: int = typer.Option(  # noqa: B008
-        5, "--max-concurrency", "-c", help="Maksimum eszamanli tarama sayisi"
+        5, "--max-concurrency", "-c", help="Maximum concurrent scan count"
     ),
 ) -> None:
-    """mcpradar.toml'daki tüm sunucuları sırayla tara."""
+    """Scan all servers from mcpradar.toml sequentially."""
     from mcpradar.config import MCPRadarConfig
     from mcpradar.output.console import console
 
     cfg = MCPRadarConfig.from_file(config_path)
     if cfg is None or not cfg.servers:
         console.print(
-            "[red]Konfigürasyon bulunamadı. Önce 'mcpradar init' çalıştırın "
-            "veya mcpradar.toml oluşturun.[/]"
+            "[red]Configuration not found. Run 'mcpradar init' first or create mcpradar.toml.[/]"
         )
         raise typer.Exit(code=1)
 
-    console.print(f"[bold]mcpradar scan-all[/] — {len(cfg.servers)} sunucu taranacak\n")
+    console.print(f"[bold]mcpradar scan-all[/] — {len(cfg.servers)} server(s) to scan\n")
     if not parallel:
         for srv in cfg.servers:
             console.print(f"\n[bold cyan]>>> {srv.name or srv.url}[/]")
@@ -696,7 +696,7 @@ def scan_all(
                     no_save=False,
                 )
             except Exception as exc:
-                console.print(f"[red]Hata: {srv.url} — {exc}[/]")
+                console.print(f"[red]Error: {srv.url} — {exc}[/]")
     else:
         from mcpradar.scanner.engine import ParallelScanner
         from mcpradar.scanner.report import ScanReport, Severity
@@ -705,8 +705,8 @@ def scan_all(
         servers = [(srv.url, srv.transport or "http") for srv in cfg.servers]
         ps = ParallelScanner(max_concurrency=max_concurrency)
         console.print(
-            f"[bold]Taraniyor: {len(servers)} sunucu "
-            f"(paralel, max {max_concurrency} eszamanli)...[/]"
+            f"[bold]Scanning: {len(servers)} server(s) "
+            f"(parallel, max {max_concurrency} concurrent)...[/]"
         )
 
         async def _run_parallel() -> None:
@@ -714,7 +714,7 @@ def scan_all(
             for i, result in enumerate(results):
                 srv = cfg.servers[i]
                 if isinstance(result, Exception):
-                    console.print(f"[red]HATA {srv.url}: {result}[/]")
+                    console.print(f"[red]ERROR {srv.url}: {result}[/]")
                 elif isinstance(result, ScanReport):
                     console.print(
                         f"[green]OK {srv.url}: "
@@ -738,22 +738,22 @@ def scan_all(
 @app.command()
 def analyze_context(
     config_path: Path | None = typer.Option(  # noqa: B008
-        None, "--config", help="Konfigürasyon dosyası yolu"
+        None, "--config", help="Configuration file path"
     ),
     json_only: bool = typer.Option(  # noqa: B008
-        False, "--json", help="Yalnızca JSON çıktı"
+        False, "--json", help="JSON output only"
     ),
     deep: bool = typer.Option(  # noqa: B008
-        False, "--deep", help="Derin graf analizi (C006, C007 kurallari)"
+        False, "--deep", help="Deep graph analysis (C006, C007 rules)"
     ),
     graph_output: Path | None = typer.Option(  # noqa: B008
-        None, "--graph", "-g", help="GraphViz DOT çikti dosyasi"
+        None, "--graph", "-g", help="GraphViz DOT output file"
     ),
 ) -> None:
-    """Birden fazla MCP server'ının birlikte güvenliğini analiz et.
+    """Analyze the security of multiple MCP servers together.
 
-    Cross-server contamination risklerini tespit eder:
-    tool ismi çakışmaları, shadowing, veri sızdırma zincirleri.
+    Detects cross-server contamination risks:
+    tool name collisions, shadowing, data exfiltration chains.
     """
     import asyncio
 
@@ -765,15 +765,15 @@ def analyze_context(
 
     cfg = MCPRadarConfig.from_file(config_path)
     if cfg is None or not cfg.servers:
-        console.print("[red]Konfigürasyon bulunamadı veya servers listesi boş.[/]")
+        console.print("[red]Configuration not found or servers list is empty.[/]")
         raise typer.Exit(code=1)
 
     servers = cfg.servers[:10]  # Max 10
-    console.print(f"[bold]mcpradar analyze-context[/] — {len(servers)} sunucu analiz ediliyor\n")
+    console.print(f"[bold]mcpradar analyze-context[/] — analyzing {len(servers)} server(s)\n")
 
     scans: list[Any] = []
     for srv in servers:
-        with console.status(f"[dim]{srv.name or srv.url}[/] taranıyor..."):
+        with console.status(f"[dim]{srv.name or srv.url}[/] scanning..."):
             try:
                 scanner = Scanner(
                     target=srv.url,
@@ -784,10 +784,10 @@ def analyze_context(
                 scans.append(report)
                 console.print(f"  [green]{srv.name or srv.url}[/] — {len(report.tools)} tools")
             except Exception as exc:
-                console.print(f"  [red]{srv.name or srv.url}[/] — hata: {exc}")
+                console.print(f"  [red]{srv.name or srv.url}[/] — error: {exc}")
 
     if len(scans) < 2:
-        console.print("[red]En az 2 sunucu taranabilmeli.[/]")
+        console.print("[red]At least 2 servers must be scannable.[/]")
         raise typer.Exit(code=1)
 
     analyzer = ContextAnalyzer(scans, deep=deep)
@@ -795,9 +795,9 @@ def analyze_context(
 
     if graph_output and ctx_report.attack_graph_dot:
         graph_output.write_text(ctx_report.attack_graph_dot, encoding="utf-8")
-        console.print(f"[green]GraphViz DOT kaydedildi: {graph_output}[/]")
+        console.print(f"[green]GraphViz DOT saved: {graph_output}[/]")
     elif graph_output and not ctx_report.attack_graph_dot:
-        console.print("[yellow]Graf ciktisi icin --deep flag'i gerekli.[/]")
+        console.print("[yellow]--deep flag is required for graph output.[/]")
 
     if json_only:
         console.print(json.dumps(ctx_report.to_dict(), indent=2, ensure_ascii=False))
@@ -857,7 +857,7 @@ def _print_context_report(ctx_report: Any, console: Any) -> None:
             color = "yellow"
         else:
             color = "red"
-        console.print(f"\n[bold]Risk Skoru:[/] [{color}]{ctx_report.risk_score}/100[/]")
+        console.print(f"\n[bold]Risk Score:[/] [{color}]{ctx_report.risk_score}/100[/]")
 
     console.print()
 
@@ -1049,7 +1049,7 @@ def rules_list() -> None:
 
 @rules_app.command(name="info")
 def rules_info(
-    rule_id: str = typer.Argument(help="Rule ID (örnek: R102)"),
+    rule_id: str = typer.Argument(help="Rule ID (example: R102)"),
 ) -> None:
     """Show detailed info for a specific rule."""
     from mcpradar.output.console import console
@@ -1068,7 +1068,7 @@ def rules_info(
 
 @rules_app.command(name="disable")
 def rules_disable(
-    rule_id: str = typer.Argument(help="Disable edilecek rule ID"),
+    rule_id: str = typer.Argument(help="Rule ID to disable"),
 ) -> None:
     """Disable a rule (updates mcpradar.toml)."""
     import tomllib
@@ -1107,15 +1107,15 @@ app.add_typer(plugin_app, name="plugin")
 
 @plugin_app.command(name="init")
 def plugin_init(
-    name: str = typer.Argument(help="Plugin ismi (ornek: my-custom-sqli)"),
+    name: str = typer.Argument(help="Plugin name (example: my-custom-sqli)"),
     output: Path = typer.Option(  # noqa: B008
         Path("plugins"),
         "--output",
         "-o",
-        help="Cikti dizini (varsayilan: ./plugins)",
+        help="Output directory (default: ./plugins)",
     ),
 ) -> None:
-    """Yeni bir MCPRadar plugin paketi olustur."""
+    """Create a new MCPRadar plugin package."""
     from mcpradar.output.console import console
     from mcpradar.plugin.scaffolder import Scaffolder
 
@@ -1123,10 +1123,10 @@ def plugin_init(
     try:
         created = scaffolder.scaffold(name, output)
     except FileNotFoundError as exc:
-        console.print(f"[red]Hata:[/] {exc}")
+        console.print(f"[red]Error:[/] {exc}")
         raise typer.Exit(code=1) from exc
 
-    console.print(f"[green]OK[/] Plugin olusturuldu: [bold]{created}[/]")
+    console.print(f"[green]OK[/] Plugin created: [bold]{created}[/]")
     console.print(f"  cd {created}")
     console.print("  pip install -e .")
     console.print(f"  mcpradar plugin validate {created}")
@@ -1135,21 +1135,21 @@ def plugin_init(
 @plugin_app.command(name="validate")
 def plugin_validate(
     directory: Path = typer.Argument(  # noqa: B008
-        help="Plugin dizini (ornek: ./plugins/mcpradar-rule-my-custom)",
+        help="Plugin directory (example: ./plugins/mcpradar-rule-my-custom)",
     ),
     run_tests: bool = typer.Option(  # noqa: B008
         False,
         "--run-tests",
         "-t",
-        help="pytest ile testleri de calistir",
+        help="Also run tests with pytest",
     ),
 ) -> None:
-    """Plugin yapisini dogrula."""
+    """Validate plugin structure."""
     from mcpradar.output.console import console
     from mcpradar.plugin.validator import PluginValidator
 
     if not directory.exists():
-        console.print(f"[red]Dizin bulunamadi: {directory}[/]")
+        console.print(f"[red]Directory not found: {directory}[/]")
         raise typer.Exit(code=1)
 
     validator = PluginValidator(run_tests=run_tests)
@@ -1164,20 +1164,20 @@ def plugin_validate(
                 console.print(f"    [dim]{result.detail}[/]")
 
     if report.tests_passed is True:
-        console.print("  [green][✓][/] Testler basarili")
+        console.print("  [green][✓][/] Tests passed")
     elif report.tests_passed is False:
-        console.print("  [red][✗][/] Testler basarisiz")
+        console.print("  [red][✗][/] Tests failed")
 
     if report.is_valid:
-        console.print("\n[green]Tum kontroller basarili.[/]")
+        console.print("\n[green]All checks passed.[/]")
     else:
-        console.print("\n[red]Bazi kontroller basarisiz.[/]")
+        console.print("\n[red]Some checks failed.[/]")
         raise typer.Exit(code=1)
 
 
 @plugin_app.command(name="list")
 def plugin_list() -> None:
-    """Yuklu community plugin'leri listele."""
+    """List installed community plugins."""
     from rich.table import Table
 
     from mcpradar.output.console import console
@@ -1187,8 +1187,8 @@ def plugin_list() -> None:
     plugins = manager.list_plugins()
 
     if not plugins:
-        console.print("[dim]Henuz hic community plugin yuklu degil.[/]")
-        console.print("[dim]Plugin kurmak icin: mcpradar plugin install <paket>[/]")
+        console.print("[dim]No community plugins installed yet.[/]")
+        console.print("[dim]To install a plugin: mcpradar plugin install <package>[/]")
         return
 
     table = Table(title="Installed Community Plugins", show_header=True)
@@ -1210,39 +1210,39 @@ def plugin_list() -> None:
 
 @plugin_app.command(name="install")
 def plugin_install(
-    package: str = typer.Argument(help="Paket ismi (ornek: mcpradar-rule-sqli)"),
+    package: str = typer.Argument(help="Package name (example: mcpradar-rule-sqli)"),
 ) -> None:
-    """Bir community plugin'i pip ile kur ve dogrula."""
+    """Install and validate a community plugin via pip."""
     from mcpradar.output.console import console
     from mcpradar.plugin.manager import PluginManager
 
     manager = PluginManager()
-    console.print(f"[dim]{package} kuruluyor...[/]")
+    console.print(f"[dim]Installing {package}...[/]")
     success, message = manager.install(package)
 
     if success:
         console.print(f"[green]OK[/] {message}")
     else:
-        console.print(f"[red]Hata:[/] {message}")
+        console.print(f"[red]Error:[/] {message}")
         raise typer.Exit(code=1)
 
 
 @plugin_app.command(name="uninstall")
 def plugin_uninstall(
-    package: str = typer.Argument(help="Paket ismi"),
+    package: str = typer.Argument(help="Package name"),
 ) -> None:
-    """Bir community plugin'i kaldir."""
+    """Uninstall a community plugin."""
     from mcpradar.output.console import console
     from mcpradar.plugin.manager import PluginManager
 
     manager = PluginManager()
-    console.print(f"[dim]{package} kaldiriliyor...[/]")
+    console.print(f"[dim]Uninstalling {package}...[/]")
     success, message = manager.uninstall(package)
 
     if success:
         console.print(f"[green]OK[/] {message}")
     else:
-        console.print(f"[red]Hata:[/] {message}")
+        console.print(f"[red]Error:[/] {message}")
         raise typer.Exit(code=1)
 
 
@@ -1256,15 +1256,15 @@ app.add_typer(fingerprint_app, name="fingerprint")
 
 @fingerprint_app.command(name="create")
 def fingerprint_create(
-    target: str = typer.Argument(help="MCP sunucu adresi"),
+    target: str = typer.Argument(help="MCP server address"),
     transport: str = typer.Option(  # noqa: B008
         "http",
         "--transport",
         "-t",
-        help="Transport protokolu (http, sse, stdio)",
+        help="Transport protocol (http, sse, stdio)",
     ),
 ) -> None:
-    """Sunucu parmak izi olustur ve kaydet."""
+    """Create and save a server fingerprint."""
     import asyncio
 
     from mcpradar.fingerprint.fingerprinter import Fingerprinter
@@ -1277,7 +1277,7 @@ def fingerprint_create(
     # Scan the server
     sev = Severity.from_str("low")
     scanner = Scanner(target=target, transport=transport, min_severity=sev)
-    with console.status(f"[bold blue]{target}[/] taranıyor..."):
+    with console.status(f"[bold blue]{target}[/] scanning..."):
         report = asyncio.run(scanner.run())
 
     # Transport check
@@ -1293,40 +1293,40 @@ def fingerprint_create(
     store.save_fingerprint(fp)
 
     # Display
-    console.print("\n[bold]Parmak Izi (Fingerprint)[/]")
+    console.print("\n[bold]Fingerprint[/]")
     console.print(f"  Server ID:      [bold cyan]{fp.server_id}[/]")
     console.print(f"  Endpoint:       {fp.endpoint}")
     console.print(f"  Transport:      {fp.transport}")
-    console.print(f"  Server Version: {fp.server_version or '(bilinmiyor)'}")
-    console.print(f"  Protocol:       {fp.protocol_version or '(bilinmiyor)'}")
+    console.print(f"  Server Version: {fp.server_version or '(unknown)'}")
+    console.print(f"  Protocol:       {fp.protocol_version or '(unknown)'}")
     console.print(f"  Tool Count:     {fp.tool_count}")
     console.print(f"  Tools Hash:     [dim]{fp.tool_names_hash[:16]}...[/]")
     if tls_info and tls_info.version != "N/A":
         console.print(f"  TLS Version:    {tls_info.version}")
         if tls_info.cert_issuer:
             console.print(f"  Cert Issuer:    {tls_info.cert_issuer}")
-        cert_ok = "[green]Evet[/]" if tls_info.cert_valid else "[red]Hayir[/]"
+        cert_ok = "[green]Yes[/]" if tls_info.cert_valid else "[red]No[/]"
         console.print(f"  Cert Valid:     {cert_ok}")
-        ss_ok = "[yellow]Evet[/]" if tls_info.self_signed else "[green]Hayir[/]"
+        ss_ok = "[yellow]Yes[/]" if tls_info.self_signed else "[green]No[/]"
         console.print(f"  Self-Signed:    {ss_ok}")
     elif tls_info and tls_info.version == "plain":
-        console.print("  TLS:            [red]Plain HTTP (sifresiz)[/]")
+        console.print("  TLS:            [red]Plain HTTP (unencrypted)[/]")
 
-    console.print("\n[green]Parmak izi kaydedildi.[/]")
-    console.print(f"Karsilastirma icin: mcpradar fingerprint compare {target} -t {transport}")
+    console.print("\n[green]Fingerprint saved.[/]")
+    console.print(f"To compare: mcpradar fingerprint compare {target} -t {transport}")
 
 
 @fingerprint_app.command(name="compare")
 def fingerprint_compare(
-    target: str = typer.Argument(help="MCP sunucu adresi"),
+    target: str = typer.Argument(help="MCP server address"),
     transport: str = typer.Option(  # noqa: B008
         "http",
         "--transport",
         "-t",
-        help="Transport protokolu (http, sse, stdio)",
+        help="Transport protocol (http, sse, stdio)",
     ),
 ) -> None:
-    """Onceki parmak izi ile karsilastir."""
+    """Compare against a previous fingerprint."""
     import asyncio
 
     from mcpradar.fingerprint.fingerprinter import Fingerprinter
@@ -1341,16 +1341,16 @@ def fingerprint_compare(
     baseline = store.load_fingerprint(target, transport)
 
     if baseline is None:
-        console.print("[yellow]Bu sunucu icin daha once parmak izi kaydi yok.[/]")
+        console.print("[yellow]No previous fingerprint record for this server.[/]")
         console.print(
-            f"Parmak izi olusturmak icin: mcpradar fingerprint create {target} -t {transport}"
+            f"To create a fingerprint: mcpradar fingerprint create {target} -t {transport}"
         )
         return
 
     # Current scan
     sev = Severity.from_str("low")
     scanner = Scanner(target=target, transport=transport, min_severity=sev)
-    with console.status(f"[bold blue]{target}[/] taranıyor..."):
+    with console.status(f"[bold blue]{target}[/] scanning..."):
         report = asyncio.run(scanner.run())
 
     # Transport check
@@ -1365,12 +1365,12 @@ def fingerprint_compare(
     diff = fingerprinter.compare(baseline, current)
 
     # Display
-    console.print("\n[bold]Parmak Izi Karsilastirmasi[/]")
-    console.print(f"  [dim]Onceki:[/] {baseline.first_seen}")
-    console.print(f"  [dim]Simdi: [/] {current.first_seen}")
+    console.print("\n[bold]Fingerprint Comparison[/]")
+    console.print(f"  [dim]Previous:[/] {baseline.first_seen}")
+    console.print(f"  [dim]Now:     [/] {current.first_seen}")
 
     if diff.is_first_scan:
-        console.print("\n[yellow]Ilk tarama — karsilastirma yapilamadi.[/]")
+        console.print("\n[yellow]First scan — comparison not available.[/]")
         return
 
     if not any(
@@ -1383,43 +1383,43 @@ def fingerprint_compare(
             diff.endpoint_changed,
         ]
     ):
-        console.print("\n[green]Degisiklik tespit edilmedi.[/]")
+        console.print("\n[green]No changes detected.[/]")
         return
 
-    console.print("\n[bold]Tespit Edilen Degisiklikler:[/]")
+    console.print("\n[bold]Detected Changes:[/]")
 
     if diff.version_change:
         color = "red" if diff.version_change == "rollback" else "yellow"
         label = {
-            "rollback": "SURUM DUSURME (rollback)",
-            "major_upgrade": "Major surum atlamasi",
-            "minor_upgrade": "Minor surum degisikligi",
+            "rollback": "VERSION ROLLBACK",
+            "major_upgrade": "Major version upgrade",
+            "minor_upgrade": "Minor version change",
         }.get(diff.version_change, diff.version_change)
         console.print(
             f"  [{color}][!][/] {label}: {diff.previous_version} → {diff.current_version}"
         )
 
     if diff.tool_names_changed:
-        console.print("  [yellow][!][/] Tool listesi degisti")
+        console.print("  [yellow][!][/] Tool list changed")
 
     if diff.tls_downgrade:
-        console.print("  [red][!][/] TLS downgrade tespit edildi")
+        console.print("  [red][!][/] TLS downgrade detected")
     elif diff.tls_changed:
-        console.print("  [yellow][!][/] TLS bilgisi degisti")
+        console.print("  [yellow][!][/] TLS info changed")
 
     if diff.endpoint_changed:
-        console.print("  [red][!][/] Sunucu adresi degisti")
+        console.print("  [red][!][/] Server address changed")
 
     if diff.protocol_changed:
-        console.print("  [dim][i][/] MCP protokol versiyonu degisti")
+        console.print("  [dim][i][/] MCP protocol version changed")
 
     if diff.capabilities_changed:
-        console.print("  [dim][i][/] Yetenekler (capabilities) degisti")
+        console.print("  [dim][i][/] Capabilities changed")
 
 
 @fingerprint_app.command(name="list")
 def fingerprint_list() -> None:
-    """Kayitli parmak izlerini listele."""
+    """List stored fingerprints."""
     from rich.table import Table
 
     from mcpradar.output.console import console
@@ -1429,8 +1429,8 @@ def fingerprint_list() -> None:
     fingerprints = store.list_fingerprints()
 
     if not fingerprints:
-        console.print("[dim]Henuz hic parmak izi kaydi yok.[/]")
-        console.print("[dim]Parmak izi olusturmak icin: mcpradar fingerprint create <hedef>[/]")
+        console.print("[dim]No fingerprint records yet.[/]")
+        console.print("[dim]To create a fingerprint: mcpradar fingerprint create <target>[/]")
         return
 
     table = Table(title="Stored Fingerprints", show_header=True)
@@ -1523,9 +1523,7 @@ def cve_match(
     if backend == "osv":
         # --- OSV backend ---
         if not ecosystem or not package or not version:
-            console.print(
-                "[red]OSV backend requires --ecosystem, --package, and --version[/]"
-            )
+            console.print("[red]OSV backend requires --ecosystem, --package, and --version[/]")
             raise typer.Exit(1)
 
         from mcpradar.cvefeed.osv import enrich_scan_with_osv
@@ -1539,8 +1537,7 @@ def cve_match(
 
         if not matches:
             console.print(
-                f"[dim]No OSV vulnerabilities found for {package}@{version} "
-                f"({ecosystem})[/]"
+                f"[dim]No OSV vulnerabilities found for {package}@{version} ({ecosystem})[/]"
             )
             return
 
@@ -1677,24 +1674,24 @@ def cve_list(
 
 @app.command()
 def watch(
-    target: str = typer.Argument(help="MCP server URL veya stdio komutu"),
+    target: str = typer.Argument(help="MCP server URL or stdio command"),
     transport: str = typer.Option(  # noqa: B008
-        "http", "--transport", "-t", help="Transport tipi: http, sse, stdio"
+        "http", "--transport", "-t", help="Transport type: http, sse, stdio"
     ),
     interval: int = typer.Option(  # noqa: B008
-        300, "--interval", "-i", help="Tarama araligi (saniye, varsayilan 300)"
+        300, "--interval", "-i", help="Scan interval (seconds, default 300)"
     ),
     alert_cmd: str | None = typer.Option(  # noqa: B008
         None,
         "--alert-cmd",
         "-c",
-        help="Değişiklikte çalıştırılacak komut (shlex, shell=False)",
+        help="Command to run on change (shlex, shell=False)",
     ),
     alert_webhook: str | None = typer.Option(  # noqa: B008
-        None, "--alert-webhook", "-w", help="Degisiklikte POST yapilacak webhook URL"
+        None, "--alert-webhook", "-w", help="Webhook URL to POST on change"
     ),
 ) -> None:
-    """MCP server'i periyodik olarak tara, degisiklikleri bildir."""
+    """Periodically scan an MCP server and notify on changes."""
     from mcpradar.output.console import console
     from mcpradar.watch.watcher import Watcher
 
@@ -1706,13 +1703,13 @@ def watch(
         alert_webhook=alert_webhook,
     )
 
-    console.print(f"[bold]mcpradar watch baslatildi: {target}[/]")
-    console.print(f"[dim]Aralik: {interval}s | Cikmak icin Ctrl+C[/]\n")
+    console.print(f"[bold]mcpradar watch started: {target}[/]")
+    console.print(f"[dim]Interval: {interval}s | Ctrl+C to exit[/]\n")
 
     try:
         asyncio.run(watcher.run())
     except KeyboardInterrupt:
-        console.print("\n[dim]Watch durduruldu.[/]")
+        console.print("\n[dim]Watch stopped.[/]")
 
 
 # ---------------------------------------------------------------------------
@@ -2090,6 +2087,7 @@ def leaderboard_generate(
                         tool_hash = hashlib.sha256(",".join(names).encode()).hexdigest()[:16]
                 except Exception as exc:
                     import logging
+
                     logging.getLogger("mcpradar").warning(
                         "Failed to compute tool hash for %s: %s", scan_id, exc
                     )
@@ -2162,7 +2160,7 @@ def feed_update(
         False, "--full", help="Full NVD API sync instead of seed-only update"
     ),
 ) -> None:
-    """CVE feed'ini guncelle."""
+    """Update the CVE feed."""
     from mcpradar.output.console import console
 
     if full:
@@ -2196,13 +2194,13 @@ def feed_update(
 @app.command()
 def init(
     path: Path = typer.Option(  # noqa: B008
-        Path("mcpradar.toml"), "--output", "-o", help="Konfigurasyon dosyasi yolu"
+        Path("mcpradar.toml"), "--output", "-o", help="Configuration file path"
     ),
 ) -> None:
-    """mcpradar.toml konfigürasyon dosyası oluştur."""
+    """Create mcpradar.toml configuration file."""
     from mcpradar.init.initializer import Initializer
     from mcpradar.output.console import console
 
     init_ = Initializer()
     init_.generate(path)
-    console.print(f"[green]OK[/] Konfigürasyon dosyası oluşturuldu: [bold]{path}[/]")
+    console.print(f"[green]OK[/] Configuration file created: [bold]{path}[/]")

@@ -118,13 +118,13 @@ All green? PR ready.
 
 ## Rule Design Guidelines
 
-- **Minimize false positives.** Her kural gerçek dünyada test edilmeli
+- **Minimize false positives.** Every rule should be tested in the real world
 - **Severity matters.** CRITICAL = immediate danger, LOW = informational
-- **Evidence.** `_finding()` metoduna `detail=` dict'i ile match konumu, 
-  decode edilmiş text gibi kanıtlar ekleyin
-- **Performance.** Kurallar senkron çalışır, regex compile edilmeli
-- **No network calls.** Kurallar sadece tool metadata'sına bakar, 
-  dış dünyaya çıkmaz
+- **Evidence.** Add evidence like match location, decoded text, etc. to the
+  `_finding()` method via the `detail=` dict
+- **Performance.** Rules run synchronously, regex should be compiled
+- **No network calls.** Rules only look at tool metadata,
+  they don't reach out to the outside world
 
 ## Commit Convention
 

@@ -1,4 +1,4 @@
-"""Rich tabanli terminal cikti — scan raporu + git-diff style diff."""
+"""Rich-based terminal output — scan report + git-diff style diff."""
 
 from __future__ import annotations
 

@@ -34,7 +34,7 @@ class PluginManager:
         )
         if result.returncode != 0:
             error_msg = result.stderr.strip().split("\n")[-1] if result.stderr else "Unknown error"
-            return False, f"Kurulum basarisiz: {error_msg}"
+            return False, f"Install failed: {error_msg}"
 
         # Validate by discovering plugins
         from mcpradar.scanner.rules import _discover_plugins
@@ -46,10 +46,11 @@ class PluginManager:
         if package_rules:
             rule_ids = ", ".join(r.rule_id for r in package_rules)
             msg = (
-                f"Plugin '{package}' kuruldu ve dogrulandi ({len(package_rules)} kural: {rule_ids})"
+                f"Plugin '{package}' installed and validated "
+                f"({len(package_rules)} rules: {rule_ids})"
             )
             return (True, msg)
-        return True, f"Plugin '{package}' kuruldu (kural bulunamadi — entry_point kontrol edin)"
+        return True, f"Plugin '{package}' installed (no rules found — check entry_point)"
 
     def uninstall(self, package: str) -> tuple[bool, str]:
         """pip uninstall. Returns (success, message)."""
@@ -60,8 +61,8 @@ class PluginManager:
         )
         if result.returncode != 0:
             error_msg = result.stderr.strip().split("\n")[-1] if result.stderr else "Unknown error"
-            return False, f"Kaldirma basarisiz: {error_msg}"
-        return True, f"Plugin '{package}' kaldirildi"
+            return False, f"Uninstall failed: {error_msg}"
+        return True, f"Plugin '{package}' uninstalled"
 
     def list_plugins(self) -> list[PluginInfo]:
         """List all installed community plugins with metadata."""

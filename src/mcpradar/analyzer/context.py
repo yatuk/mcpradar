@@ -31,7 +31,7 @@ from mcpradar.scanner.rules import _walk_schema_props
 
 @dataclass
 class AttackGraphNode:
-    """(sunucu, tool) ikilisi -- graf dugumu."""
+    """(server, tool) pair -- graph node."""
 
     server: str
     tool_name: str
@@ -48,12 +48,12 @@ class AttackGraphNode:
 
 @dataclass
 class AttackGraphEdge:
-    """Tip eslesmesi ile olusan yonlu kenar."""
+    """Directed edge formed by type matching."""
 
     source: AttackGraphNode
     target: AttackGraphNode
     match_type: str  # "schema_type_match"
-    shared_types: list[str]  # Eslesen JSON Schema tipleri
+    shared_types: list[str]  # Matching JSON Schema types
 
 
 # ---------------------------------------------------------------------------
@@ -423,8 +423,8 @@ def _check_attack_path_chain(
             findings.append(
                 CrossFinding(
                     rule_id="C006",
-                    title="Veri sizdirma zinciri (Attack path chain)",
-                    description=f"Veri sizdirma zinciri: {path_desc}",
+                    title="Data exfiltration chain (Attack path chain)",
+                    description=f"Data exfiltration chain: {path_desc}",
                     severity=Severity.CRITICAL,
                     servers=servers,
                     detail={
@@ -438,8 +438,8 @@ def _check_attack_path_chain(
             findings.append(
                 CrossFinding(
                     rule_id="C006",
-                    title="Komut enjeksiyon zinciri (Attack path chain)",
-                    description=f"Komut enjeksiyon zinciri: {path_desc}",
+                    title="Command injection chain (Attack path chain)",
+                    description=f"Command injection chain: {path_desc}",
                     severity=Severity.CRITICAL,
                     servers=servers,
                     detail={
@@ -453,8 +453,8 @@ def _check_attack_path_chain(
             findings.append(
                 CrossFinding(
                     rule_id="C006",
-                    title=f"Uzun saldiri zinciri ({len(path_nodes)} adim)",
-                    description=f"Uzun saldiri zinciri ({len(path_nodes)} adim): {path_desc}",
+                    title=f"Long attack chain ({len(path_nodes)} steps)",
+                    description=f"Long attack chain ({len(path_nodes)} steps): {path_desc}",
                     severity=Severity.HIGH,
                     servers=servers,
                     detail={
@@ -468,8 +468,8 @@ def _check_attack_path_chain(
             findings.append(
                 CrossFinding(
                     rule_id="C006",
-                    title="Kisa saldiri zinciri",
-                    description=f"Kisa saldiri zinciri: {path_desc}",
+                    title="Short attack chain",
+                    description=f"Short attack chain: {path_desc}",
                     severity=Severity.MEDIUM,
                     servers=servers,
                     detail={
@@ -538,12 +538,12 @@ def _check_privilege_escalation(
                 findings.append(
                     CrossFinding(
                         rule_id="C007",
-                        title="Dogrudan yetki yukseltme (Privilege escalation)",
+                        title="Direct privilege escalation",
                         description=(
-                            f"Salt okunur '{read_node.server}:{read_node.tool_name}' araci "
-                            f"dogrudan yazma/yurutme yetkili "
+                            f"Read-only '{read_node.server}:{read_node.tool_name}' tool "
+                            f"connects directly to write/exec-capable "
                             f"'{write_node.server}:{write_node.tool_name}' "
-                            f"aracina baglaniyor -- yetki yukseltme riski."
+                            f"tool -- privilege escalation risk."
                         ),
                         severity=Severity.CRITICAL,
                         servers=[read_node.server, write_node.server],
@@ -577,12 +577,12 @@ def _check_privilege_escalation(
                         findings.append(
                             CrossFinding(
                                 rule_id="C007",
-                                title="Zincirleme yetki yukseltme (Privilege escalation chain)",
+                                title="Chained privilege escalation",
                                 description=(
-                                    f"Salt okunur '{read_node.server}:{read_node.tool_name}' "
-                                    f"aracindan yazma/yurutme yetkili "
+                                    f"Read-only '{read_node.server}:{read_node.tool_name}' "
+                                    f"tool can reach write/exec-capable "
                                     f"'{write_node.server}:{write_node.tool_name}' "
-                                    f"aracina {len(path)} adimda ulasilabiliyor: {path_desc}"
+                                    f"tool in {len(path)} steps: {path_desc}"
                                 ),
                                 severity=Severity.CRITICAL,
                                 servers=list({n.server for n in [read_node, write_node] + path}),

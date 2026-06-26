@@ -47,7 +47,7 @@ class TestCLIInit:
 class TestCLIDiff:
     def test_diff_no_args_lists_targets(self) -> None:
         result = runner.invoke(app, ["diff"])
-        # May say "henuz hic scan yok" or list targets
+        # May say "No scans yet" or list targets
         assert result.exit_code == 0
 
     def test_diff_missing_server(self) -> None:

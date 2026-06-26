@@ -4,18 +4,16 @@ from __future__ import annotations
 
 from unittest.mock import MagicMock, patch
 
-import pytest
-
 from mcpradar.cvefeed.osv import (
     OSVClient,
     OSVVulnerability,
     enrich_scan_with_osv,
 )
 
-
 # ---------------------------------------------------------------------------
 # Mock responses
 # ---------------------------------------------------------------------------
+
 
 def _mock_vuln_response() -> dict:
     """A realistic OSV query response with one vulnerability."""
@@ -46,7 +44,9 @@ def _mock_vuln_response() -> dict:
                     }
                 ],
                 "references": [
-                    {"url": "https://github.com/modelcontextprotocol/servers/security/advisories/GHSA-hc55-p739-j48w"}
+                    {
+                        "url": "https://github.com/modelcontextprotocol/servers/security/advisories/GHSA-hc55-p739-j48w"
+                    }
                 ],
             }
         ]
@@ -70,9 +70,7 @@ def _mock_batch_response() -> dict:
                         "severity": [{"type": "CVSS_V3", "score": 9.8}],
                         "database_specific": {"cwe_ids": ["CWE-22"]},
                         "affected": [
-                            {
-                                "ranges": [{"type": "SEMVER", "events": [{"fixed": "2025.7.1"}]}]
-                            }
+                            {"ranges": [{"type": "SEMVER", "events": [{"fixed": "2025.7.1"}]}]}
                         ],
                         "references": [],
                     }
@@ -96,7 +94,9 @@ class TestQueryPackage:
 
         with patch("httpx.post", return_value=mock_response) as mock_post:
             client = OSVClient()
-            vulns = client.query_package("npm", "@modelcontextprotocol/server-filesystem", "2025.6.5")
+            vulns = client.query_package(
+                "npm", "@modelcontextprotocol/server-filesystem", "2025.6.5"
+            )
 
         assert len(vulns) == 1
         v = vulns[0]
@@ -177,10 +177,12 @@ class TestQueryBatch:
 
         with patch("httpx.post", return_value=mock_response):
             client = OSVClient()
-            results = client.query_batch([
-                ("npm", "pkg-a", "1.0"),
-                ("npm", "pkg-b", "2.0"),
-            ])
+            results = client.query_batch(
+                [
+                    ("npm", "pkg-a", "1.0"),
+                    ("npm", "pkg-b", "2.0"),
+                ]
+            )
 
         assert len(results) == 2
         assert len(results["pkg-a"]) == 1

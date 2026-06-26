@@ -521,7 +521,7 @@ class TestSandboxValidatorValidate:
     def test_forbidden_string_value_rejected(self) -> None:
         ok, reason = self.validator.validate_args({"cmd": "rm -rf"})
         assert ok is False
-        assert "Yasakli" in reason
+        assert "Forbidden" in reason
 
     def test_forbidden_case_insensitive(self) -> None:
         ok, reason = self.validator.validate_args({"cmd": "RM -RF"})
@@ -530,7 +530,7 @@ class TestSandboxValidatorValidate:
     def test_long_string_rejected(self) -> None:
         ok, reason = self.validator.validate_args({"desc": "x" * 100})
         assert ok is False
-        assert "uzun" in reason.lower()
+        assert "too long" in reason.lower()
 
     def test_string_at_limit_passes(self) -> None:
         ok, _ = self.validator.validate_args({"desc": "x" * 50})

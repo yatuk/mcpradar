@@ -1,4 +1,4 @@
-"""Fingerprint ve transport check testleri."""
+"""Fingerprint and transport check tests."""
 
 from __future__ import annotations
 
@@ -181,7 +181,7 @@ class TestTransportChecker:
             self_signed=False,
         )
         findings = checker.generate_findings("https://example.com", "http", tls_info)
-        assert any("suresi dolmus" in f.description for f in findings)
+        assert any("expired" in f.description for f in findings)
 
     def test_findings_for_self_signed(self) -> None:
         checker = TransportChecker()
