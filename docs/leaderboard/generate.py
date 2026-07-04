@@ -412,26 +412,33 @@ def _generate_badges(rows: list[dict], output_dir: Path) -> None:
         "D": "#db6d28",
         "F": "#f85149",
     }
-    base_url = "https://yatuk.github.io/mcpradar"
 
     for r in rows:
         safe_name = r["server"].replace("@", "").replace("/", "-")
         grade = r.get("grade", "?")
         color = grades.get(grade, "#8b949e")
         score = f"{r.get('aivss_score', 0):.1f}"
-        server_encoded = r["server"].replace("@", "").replace("/", "-")
 
+        aria = f"MCPRadar Security: {grade} - {score}/10"
+        title = f"MCPRadar Security Score: {grade} ({score}/10)"
+        text_style = (
+            'font-size="10" font-family="sans-serif" text-anchor="middle" font-weight="600"'
+        )
         svg = (
-            f'<svg xmlns="http://www.w3.org/2000/svg" width="140" height="20" role="img" aria-label="MCPRadar Security: {grade} - {score}/10">\n'
-            f"  <title>MCPRadar Security Score: {grade} ({score}/10)</title>\n"
+            f'<svg xmlns="http://www.w3.org/2000/svg"'
+            f' width="140" height="20" role="img" aria-label="{aria}">\n'
+            f"  <title>{title}</title>\n"
             f'  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="0">\n'
             f'    <stop offset="0%" stop-color="#444"/>\n'
             f'    <stop offset="100%" stop-color="#333"/>\n'
             f"  </linearGradient>\n"
             f'  <rect width="140" height="20" rx="3" fill="url(#bg)"/>\n'
-            f'  <rect x="68" width="72" height="20" rx="0" fill="{color}" fill-opacity="0.15"/>\n'
-            f'  <text x="34" y="14" fill="#c9d1d9" font-size="10" font-family="sans-serif" text-anchor="middle" font-weight="600">MCPRadar</text>\n'
-            f'  <text x="104" y="14" fill="{color}" font-size="10" font-family="sans-serif" text-anchor="middle" font-weight="600">{grade} &middot; {score}</text>\n'
+            f'  <rect x="68" width="72" height="20" rx="0"'
+            f' fill="{color}" fill-opacity="0.15"/>\n'
+            f'  <text x="34" y="14" fill="#c9d1d9" {text_style}>'
+            f"MCPRadar</text>\n"
+            f'  <text x="104" y="14" fill="{color}" {text_style}>'
+            f"{grade} &middot; {score}</text>\n"
             f"</svg>"
         )
         (badge_dir / f"{safe_name}.svg").write_text(svg, encoding="utf-8")
