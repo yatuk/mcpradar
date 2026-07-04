@@ -18,13 +18,15 @@ _CEF_SEVERITY: dict[Severity, str] = {
 }
 
 # Characters that must be escaped in CEF extension values
-_CEF_ESCAPE_MAP = str.maketrans({
-    "\\": "\\\\",
-    "=": "\\=",
-    "\n": "\\n",
-    "\r": "\\r",
-    "|": "\\|",
-})
+_CEF_ESCAPE_MAP = str.maketrans(
+    {
+        "\\": "\\\\",
+        "=": "\\=",
+        "\n": "\\n",
+        "\r": "\\r",
+        "|": "\\|",
+    }
+)
 
 
 def _escape(value: str) -> str:
@@ -79,10 +81,7 @@ def to_cef(report: ScanReport) -> str:
             f"msg={title}"
         )
 
-        line = (
-            f"CEF:0|MCPRadar|mcpradar|{__version__}|"
-            f"{rule_id}|{title}|{sev_cef}|{extensions}"
-        )
+        line = f"CEF:0|MCPRadar|mcpradar|{__version__}|{rule_id}|{title}|{sev_cef}|{extensions}"
         lines.append(line)
 
     return "\n".join(lines)

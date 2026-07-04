@@ -135,21 +135,34 @@ _SERVER_CATEGORIES: dict[str, str] = {
 }
 
 # Categories that indicate API-free / local-first operation
-_API_FREE_CATEGORIES: frozenset[str] = frozenset({
-    "Desktop Automation",
-    "Knowledge/RAG",
-    "Financial",
-    "Browser/DevTools",
-    "IoT/Smart Home",
-    "Security",
-    "Component Library",
-})
+_API_FREE_CATEGORIES: frozenset[str] = frozenset(
+    {
+        "Desktop Automation",
+        "Knowledge/RAG",
+        "Financial",
+        "Browser/DevTools",
+        "IoT/Smart Home",
+        "Security",
+        "Component Library",
+    }
+)
 
-_API_FREE_KEYWORDS: frozenset[str] = frozenset({
-    "local-mcp", "dotmd", "chrome-devtools", "searxng",
-    "duckduckgo", "wardn", "ha-mcp", "frigate",
-    "untitled-ui", "db-mcp", "equibles",
-})
+_API_FREE_KEYWORDS: frozenset[str] = frozenset(
+    {
+        "local-mcp",
+        "dotmd",
+        "chrome-devtools",
+        "searxng",
+        "duckduckgo",
+        "wardn",
+        "ha-mcp",
+        "frigate",
+        "untitled-ui",
+        "db-mcp",
+        "equibles",
+    }
+)
+
 
 def _is_api_free(server_name: str, category: str) -> bool:
     """Detect API-free / local-first servers."""
@@ -159,6 +172,7 @@ def _is_api_free(server_name: str, category: str) -> bool:
             return True
     return category in _API_FREE_CATEGORIES
 
+
 def _infer_category(server_name: str) -> str:
     """Infer category from server name keywords."""
     lower = server_name.lower()
@@ -166,6 +180,7 @@ def _infer_category(server_name: str) -> str:
         if key in lower:
             return cat
     return "Other"
+
 
 def _compute_vuln_types(findings_list: list[dict]) -> list[str]:
     """Compute unique vulnerability types from findings."""
@@ -198,16 +213,25 @@ def _compute_history(server_name: str, current_findings: list[dict], tool_count:
         for sid in matching[-12:]:
             try:
                 report = store.load(sid)
-                df = [_DictFinding({
-                    "rule_id": f.rule_id,
-                    "severity": f.severity.value if hasattr(f.severity, 'value') else str(f.severity),
-                }) for f in report.findings]
+                df = [
+                    _DictFinding(
+                        {
+                            "rule_id": f.rule_id,
+                            "severity": f.severity.value
+                            if hasattr(f.severity, "value")
+                            else str(f.severity),
+                        }
+                    )
+                    for f in report.findings
+                ]
                 score = compute_aivss(df, max(report.tools_count or tool_count, 1))  # type: ignore[arg-type]
-                history.append({
-                    "date": report.scanned_at[:10] if hasattr(report, 'scanned_at') else "",
-                    "score": round(score, 1),
-                    "grade": compute_grade(score),
-                })
+                history.append(
+                    {
+                        "date": report.scanned_at[:10] if hasattr(report, "scanned_at") else "",
+                        "score": round(score, 1),
+                        "grade": compute_grade(score),
+                    }
+                )
             except Exception:
                 continue
         store.close()
@@ -382,7 +406,11 @@ def _generate_badges(rows: list[dict], output_dir: Path) -> None:
     badge_dir.mkdir(parents=True, exist_ok=True)
 
     grades: dict[str, str] = {
-        "A": "#3fb950", "B": "#56d364", "C": "#d29922", "D": "#db6d28", "F": "#f85149",
+        "A": "#3fb950",
+        "B": "#56d364",
+        "C": "#d29922",
+        "D": "#db6d28",
+        "F": "#f85149",
     }
     base_url = "https://yatuk.github.io/mcpradar"
 
@@ -395,16 +423,16 @@ def _generate_badges(rows: list[dict], output_dir: Path) -> None:
 
         svg = (
             f'<svg xmlns="http://www.w3.org/2000/svg" width="140" height="20" role="img" aria-label="MCPRadar Security: {grade} - {score}/10">\n'
-            f'  <title>MCPRadar Security Score: {grade} ({score}/10)</title>\n'
+            f"  <title>MCPRadar Security Score: {grade} ({score}/10)</title>\n"
             f'  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="0">\n'
             f'    <stop offset="0%" stop-color="#444"/>\n'
             f'    <stop offset="100%" stop-color="#333"/>\n'
-            f'  </linearGradient>\n'
+            f"  </linearGradient>\n"
             f'  <rect width="140" height="20" rx="3" fill="url(#bg)"/>\n'
             f'  <rect x="68" width="72" height="20" rx="0" fill="{color}" fill-opacity="0.15"/>\n'
             f'  <text x="34" y="14" fill="#c9d1d9" font-size="10" font-family="sans-serif" text-anchor="middle" font-weight="600">MCPRadar</text>\n'
             f'  <text x="104" y="14" fill="{color}" font-size="10" font-family="sans-serif" text-anchor="middle" font-weight="600">{grade} &middot; {score}</text>\n'
-            f'</svg>'
+            f"</svg>"
         )
         (badge_dir / f"{safe_name}.svg").write_text(svg, encoding="utf-8")
 

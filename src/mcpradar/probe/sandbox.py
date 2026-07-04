@@ -165,7 +165,9 @@ class SandboxValidator:
     # Write capability detection
     # ------------------------------------------------------------------
 
-    def is_write_tool(self, tool: ToolInfo | None = None, *, name: str = "", description: str = "") -> bool:
+    def is_write_tool(
+        self, tool: ToolInfo | None = None, *, name: str = "", description: str = ""
+    ) -> bool:
         """Return True if tool name or description contains WRITE_KEYWORDS.
 
         Can be called with a ToolInfo object, OR with plain name+description
