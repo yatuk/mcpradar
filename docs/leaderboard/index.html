@@ -1253,9 +1253,42 @@ footer a:hover { text-decoration: underline; }
   function showDetail(serverName) {
     var decoded = decodeServer(serverName);
     var s = null;
+
+    // Multi-strategy lookup for robust hash routing
+    var decodedLower = decoded.trim().toLowerCase();
     for (var i = 0; i < allServers.length; i++) {
       if (allServers[i].server === decoded) { s = allServers[i]; break; }
     }
+    // Fallback 1: case-insensitive + trimmed
+    if (!s) {
+      for (var i = 0; i < allServers.length; i++) {
+        if ((allServers[i].server || "").trim().toLowerCase() === decodedLower) {
+          s = allServers[i]; break;
+        }
+      }
+    }
+    // Fallback 2: double-decode (browser may have partially decoded hash)
+    if (!s) {
+      try {
+        var doubleDecoded = decodeURIComponent(decoded);
+        if (doubleDecoded !== decoded) {
+          for (var i = 0; i < allServers.length; i++) {
+            if (allServers[i].server === doubleDecoded) { s = allServers[i]; break; }
+          }
+        }
+      } catch(e) {}
+    }
+    // Fallback 3: match by display_name (/ → @ conversion)
+    if (!s) {
+      for (var i = 0; i < allServers.length; i++) {
+        var dn = (allServers[i].display_name || "").replace(/\s+\/\s+/g, "/");
+        if (dn.trim().toLowerCase() === decodedLower ||
+            ("@" + dn.trim()).toLowerCase() === decodedLower) {
+          s = allServers[i]; break;
+        }
+      }
+    }
+
     if (!s) {
       showMain();
       return;
