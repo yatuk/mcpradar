@@ -1,0 +1,20 @@
+{
+  "name": "demo/malicious_server.py (baseline)",
+  "command": "",
+  "transport": "stdio",
+  "expected_rules": [
+    "R001",
+    "R101",
+    "R102",
+    "R103",
+    "R104",
+    "R105",
+    "R106",
+    "R107",
+    "R108",
+    "R109"
+  ],
+  "error": "list index out of range",
+  "tools_count": 0,
+  "findings": []
+}
