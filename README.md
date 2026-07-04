@@ -16,6 +16,10 @@
 </p>
 
 <p align="center">
+  <img src="docs/Animation.gif" alt="MCPRadar scanning a vulnerable MCP server" width="750"/>
+</p>
+
+<p align="center">
   <a href="https://github.com/yatuk/mcpradar/actions/workflows/ci.yml"><img src="https://github.com/yatuk/mcpradar/actions/workflows/ci.yml/badge.svg" alt="CI"/></a>
   <a href="https://github.com/yatuk/mcpradar/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="MIT License"/></a>
   <a href="https://github.com/yatuk/mcpradar"><img src="https://img.shields.io/github/stars/yatuk/mcpradar?style=social" alt="GitHub stars"/></a>
@@ -38,20 +42,7 @@
   <a href="ROADMAP.md">Roadmap</a> ·
   <a href="docs/architecture.md">Architecture</a>
 </p>
-<h1 align="center">MCPRadar</h1>
 
-<p align="center">
-  <b>Security scanner for Model Context Protocol servers.</b><br/>
-  Catch tool poisoning, prompt injection, and supply-chain rug pulls before your agent runs them.
-</p>
-
-<p align="center">
-  <img src="docs/Animation.gif" alt="MCPRadar scanning a vulnerable MCP server" width="750"/>
-</p>
-
-<p align="center">
-  <a href="https://github.com/yatuk/mcpradar/actions/workflows/ci.yml"><img src="https://github.com/yatuk/mcpradar/actions/workflows/ci.yml/badge.svg" alt="CI"/></a>
-  ...
 ---
 
 ## Contents
