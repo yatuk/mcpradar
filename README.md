@@ -2,9 +2,9 @@
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/logo-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="docs/logo-light.svg">
-    <img src="docs/logo-light.svg" width="160" alt="MCPRadar"/>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/yatuk/mcpradar/main/docs/logo-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/yatuk/mcpradar/main/docs/logo-light.svg">
+    <img src="https://raw.githubusercontent.com/yatuk/mcpradar/main/docs/logo-light.svg" width="160" alt="MCPRadar"/>
   </picture>
 </p>
 
@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-  <img src="docs/Animation.gif" alt="MCPRadar scanning a vulnerable MCP server" width="750"/>
+  <img src="https://raw.githubusercontent.com/yatuk/mcpradar/main/docs/Animation.gif" alt="MCPRadar scanning a vulnerable MCP server" width="750"/>
 </p>
 
 <p align="center">
