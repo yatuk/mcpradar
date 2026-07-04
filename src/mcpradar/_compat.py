@@ -20,4 +20,4 @@ def get_entry_points(group: str) -> Iterator[EntryPoint]:
     try:
         return iter(entry_points(group=group))
     except TypeError:
-        return iter(entry_points().get(group, []))  # type: ignore[arg-type]
+        return iter(entry_points().get(group, []))

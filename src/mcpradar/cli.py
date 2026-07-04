@@ -1,4 +1,4 @@
-"""MCPRadar CLI — Typer application and command definitions."""
+"""MCPRadar CLI - Typer application and command definitions."""
 
 from __future__ import annotations
 
@@ -15,7 +15,7 @@ from mcpradar.storage.store import Store
 
 app = typer.Typer(
     name="mcpradar",
-    help="MCP server security scanner — tool poisoning and vulnerability detection",
+    help="MCP server security scanner - tool poisoning and vulnerability detection",
     no_args_is_help=True,
 )
 
@@ -330,7 +330,7 @@ def diff(
                 count = store.scan_count(t)
                 last = store.latest_scans(t, 1)
                 last_id = last[0][:12] if last else "-"
-                console.print(f"  [cyan]{t}[/] — {count} scans, last: {last_id}")
+                console.print(f"  [cyan]{t}[/] - {count} scans, last: {last_id}")
         store.close()
         return
 
@@ -407,7 +407,7 @@ def _output_diff(delta: Any, json_only: bool, output: Path | None) -> None:
 
 
 # ---------------------------------------------------------------------------
-# list / show / export / purge — snapshot browser
+# list / show / export / purge - snapshot browser
 # ---------------------------------------------------------------------------
 
 
@@ -647,7 +647,7 @@ def sbom(
 
 
 # ---------------------------------------------------------------------------
-# scan-all — scan all servers from config file
+# scan-all - scan all servers from config file
 # ---------------------------------------------------------------------------
 
 
@@ -683,7 +683,7 @@ def scan_all(
         )
         raise typer.Exit(code=1)
 
-    console.print(f"[bold]mcpradar scan-all[/] — {len(cfg.servers)} server(s) to scan\n")
+    console.print(f"[bold]mcpradar scan-all[/] - {len(cfg.servers)} server(s) to scan\n")
     if not parallel:
         for srv in cfg.servers:
             console.print(f"\n[bold cyan]>>> {srv.name or srv.url}[/]")
@@ -696,7 +696,7 @@ def scan_all(
                     no_save=False,
                 )
             except Exception as exc:
-                console.print(f"[red]Error: {srv.url} — {exc}[/]")
+                console.print(f"[red]Error: {srv.url} - {exc}[/]")
     else:
         from mcpradar.scanner.engine import ParallelScanner
         from mcpradar.scanner.report import ScanReport, Severity
@@ -769,7 +769,7 @@ def analyze_context(
         raise typer.Exit(code=1)
 
     servers = cfg.servers[:10]  # Max 10
-    console.print(f"[bold]mcpradar analyze-context[/] — analyzing {len(servers)} server(s)\n")
+    console.print(f"[bold]mcpradar analyze-context[/] - analyzing {len(servers)} server(s)\n")
 
     scans: list[Any] = []
     for srv in servers:
@@ -782,9 +782,9 @@ def analyze_context(
                 )
                 report = asyncio.run(scanner.run())
                 scans.append(report)
-                console.print(f"  [green]{srv.name or srv.url}[/] — {len(report.tools)} tools")
+                console.print(f"  [green]{srv.name or srv.url}[/] - {len(report.tools)} tools")
             except Exception as exc:
-                console.print(f"  [red]{srv.name or srv.url}[/] — error: {exc}")
+                console.print(f"  [red]{srv.name or srv.url}[/] - error: {exc}")
 
     if len(scans) < 2:
         console.print("[red]At least 2 servers must be scannable.[/]")
@@ -1059,7 +1059,7 @@ def rules_info(
     engine = RuleEngine(min_severity=Severity("low"))
     for r in engine._rules:
         if r.rule_id == rule_id.upper():
-            console.print(f"[bold]{r.rule_id}[/] — {r.title}")
+            console.print(f"[bold]{r.rule_id}[/] - {r.title}")
             console.print(f"  Severity: {r.severity.value}")
             console.print(f"  Class: {type(r).__module__}.{type(r).__name__}")
             return
@@ -1370,7 +1370,7 @@ def fingerprint_compare(
     console.print(f"  [dim]Now:     [/] {current.first_seen}")
 
     if diff.is_first_scan:
-        console.print("\n[yellow]First scan — comparison not available.[/]")
+        console.print("\n[yellow]First scan - comparison not available.[/]")
         return
 
     if not any(
@@ -1528,14 +1528,14 @@ def cve_match(
 
         from mcpradar.cvefeed.osv import enrich_scan_with_osv
 
-        matches = enrich_scan_with_osv(
+        osv_matches = enrich_scan_with_osv(
             findings=report.findings,
             package_ecosystem=ecosystem,
             package_name=package,
             package_version=version,
         )
 
-        if not matches:
+        if not osv_matches:
             console.print(
                 f"[dim]No OSV vulnerabilities found for {package}@{version} ({ecosystem})[/]"
             )
@@ -1544,7 +1544,7 @@ def cve_match(
         from rich.table import Table
 
         table = Table(
-            title=f"OSV CVE Matches — {package}@{version} ({ecosystem})",
+            title=f"OSV CVE Matches - {package}@{version} ({ecosystem})",
             show_header=True,
             header_style="bold",
         )
@@ -1554,14 +1554,14 @@ def cve_match(
         table.add_column("Fixed Version")
         table.add_column("Summary", width=50)
 
-        for m in matches:
+        for m in osv_matches:
             sev = m.get("severity_score")
-            sev_display = f"{sev:.1f}" if sev else "—"
+            sev_display = f"{sev:.1f}" if sev else "-"
             table.add_row(
                 m.get("id", "?"),
                 ", ".join(m.get("aliases", [])),
                 sev_display,
-                m.get("fixed_version", "—") or "—",
+                m.get("fixed_version", "-") or "-",
                 m.get("summary", "")[:50],
             )
 
@@ -1828,7 +1828,7 @@ def audit(
 
 
 # ---------------------------------------------------------------------------
-# registry — MCP Registry integration
+# registry - MCP Registry integration
 # ---------------------------------------------------------------------------
 
 registry_app = typer.Typer(help="MCP Registry integration", no_args_is_help=True)
@@ -2126,7 +2126,7 @@ def leaderboard_generate(
                     "tool_hash": tool_hash,
                     "last_scanned": data.get("scanned_at", "")[:10]
                     if data.get("scanned_at")
-                    else "—",
+                    else "-",
                     "scanner_version": __version__,
                     "status": data.get("status", "unknown"),
                 }
