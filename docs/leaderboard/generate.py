@@ -356,8 +356,14 @@ def main() -> None:
                 }
             )
 
-    # Sort by AIVSS score ascending (best/safest first)
-    rows.sort(key=lambda r: (r["aivss_score"], -r["tools"]))
+    # Sort: pending servers last, then by AIVSS score ascending (best first)
+    rows.sort(
+        key=lambda r: (
+            0 if r["status"] not in ("pending", "registry-pending") else 1,
+            r["aivss_score"],
+            -r["tools"],
+        )
+    )
 
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT.write_text(json.dumps(rows, indent=2, ensure_ascii=False), encoding="utf-8")

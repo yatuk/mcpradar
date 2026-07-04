@@ -826,6 +826,12 @@ footer a:hover { text-decoration: underline; }
   function sortedServers() {
     var copy = allServers.slice();
     copy.sort(function (a, b) {
+      // Pending servers always at the bottom
+      var pa = a.status === "registry-pending" || a.status === "pending";
+      var pb = b.status === "registry-pending" || b.status === "pending";
+      if (pa && !pb) return 1;
+      if (!pa && pb) return -1;
+
       var va, vb;
       if (sortKey === "rank" || sortKey === "risk") {
         va = a.aivss_score || 0;
