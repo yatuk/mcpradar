@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "mcpradar"
 version = "1.0.0-rc3"
-description = "Security scanner for Model Context Protocol servers — catch tool poisoning, prompt injection, and supply-chain attacks before your AI agent runs them."
+description = "Security scanner for Model Context Protocol servers. Catch tool poisoning, prompt injection, and supply-chain attacks before your AI agent runs them."
 readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.11"
@@ -14,6 +14,8 @@ keywords = [
     "mcp",
     "model-context-protocol",
     "security",
+    "security-scanner",
+    "vulnerability-scanner",
     "prompt-injection",
     "tool-poisoning",
     "llm-security",
@@ -21,6 +23,13 @@ keywords = [
     "scanner",
     "sarif",
     "supply-chain",
+    "static-analysis",
+    "devsecops",
+    "ci-cd",
+    "owasp",
+    "sast",
+    "cli",
+    "detection-rules",
 ]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
