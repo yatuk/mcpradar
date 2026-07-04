@@ -1592,15 +1592,15 @@ def cve_match(
     table.add_column("Score")
     table.add_column("Keywords")
 
-    for m in matches:
-        score_color = "green" if m.score >= 0.7 else "yellow" if m.score >= 0.5 else "dim"
+    for match in matches:
+        score_color = "green" if match.score >= 0.7 else "yellow" if match.score >= 0.5 else "dim"
         table.add_row(
-            m.finding_rule,
-            m.finding_title[:30],
-            m.cve_id,
-            m.cve_severity.upper(),
-            f"[{score_color}]{m.score:.2f}[/]",
-            ", ".join(m.matched_keywords[:5]),
+            match.finding_rule,
+            match.finding_title[:30],
+            match.cve_id,
+            match.cve_severity.upper(),
+            f"[{score_color}]{match.score:.2f}[/]",
+            ", ".join(match.matched_keywords[:5]),
         )
 
     console.print(table)
