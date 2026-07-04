@@ -42,6 +42,8 @@ jobs:
           cp docs/leaderboard/index.html docs/index.html
           cp docs/leaderboard/data.json docs/data.json
           cp docs/leaderboard/servers.json docs/servers.json
+          mkdir -p docs/badges
+          cp -r docs/leaderboard/badges/* docs/badges/
 
       - name: Commit updates
         run: |

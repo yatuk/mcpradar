@@ -76,7 +76,7 @@ def scan(
         "rich",
         "--format",
         "-f",
-        help="Output format: rich, json, sarif",
+        help="Output format: rich, json, sarif, cef",
     ),
     no_save: bool = typer.Option(  # noqa: B008
         False, "--no-save", help="Do not save snapshot to database"
@@ -133,6 +133,12 @@ def scan(
 
         sarif_data = to_sarif(report)
         console.print(json.dumps(sarif_data, indent=2, ensure_ascii=False))
+    elif output_format == "cef":
+        from mcpradar.output.cef import to_cef
+
+        cef_output = to_cef(report)
+        if cef_output:
+            console.print(cef_output)
     else:
         console.print_report(report)
 
@@ -377,6 +383,12 @@ def _save_output(report: Any, output: Path, fmt: str) -> None:
         data = to_sarif(report)
         out_path = output if output.suffix == ".sarif" else output.with_suffix(".sarif")
         out_path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
+    elif fmt == "cef":
+        from mcpradar.output.cef import to_cef
+
+        cef_text = to_cef(report)
+        out_path = output if output.suffix == ".cef" else output.with_suffix(".cef")
+        out_path.write_text(cef_text, encoding="utf-8")
     else:
         out_path = output if output.suffix == ".json" else output.with_suffix(".json")
         if hasattr(report, "to_dict"):
@@ -504,7 +516,7 @@ def show(
 def export(
     scan_id: str = typer.Argument(help="Snapshot ID to export"),
     output_format: str = typer.Option(  # noqa: B008
-        "json", "--format", "-f", help="Format: json, sarif, csv"
+        "json", "--format", "-f", help="Format: json, sarif, csv, cef"
     ),
     output: Path = typer.Option(  # noqa: B008
         ..., "--output", "-o", help="Output file"
@@ -525,6 +537,12 @@ def export(
         elif output_format == "csv":
             p = output if output.suffix == ".csv" else output.with_suffix(".csv")
             _export_csv(report, p)
+        elif output_format == "cef":
+            from mcpradar.output.cef import to_cef
+
+            cef_text = to_cef(report)
+            p = output if output.suffix == ".cef" else output.with_suffix(".cef")
+            p.write_text(cef_text, encoding="utf-8")
         else:
             p = output if output.suffix == ".json" else output.with_suffix(".json")
             store.export_json(report, p)

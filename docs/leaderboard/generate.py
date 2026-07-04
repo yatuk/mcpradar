@@ -41,6 +41,181 @@ class _DictSeverity:
         self.value = value
 
 
+# Rule ID to vulnerability type mapping for filtering
+RULE_VULN_TYPE: dict[str, str] = {
+    "R001": "Command Execution",
+    "R101": "Unicode Attack",
+    "R102": "Prompt Injection",
+    "R103": "Encoded Payload",
+    "R104": "Hidden Content",
+    "R105": "Scope Mismatch",
+    "R106": "Secret Exposure",
+    "R107": "Command Injection",
+    "R108": "Supply Chain",
+    "R109": "Schema Poisoning",
+    "R110": "Version Anomaly",
+    "R111": "Insecure Transport",
+    "R112": "Authorization",
+    "R113": "Path Traversal",
+    "R114": "Unbounded Input",
+    "C001": "Cross-Server Collision",
+    "C002": "Cross-Server Shadowing",
+    "C003": "Cross-Server Exfiltration",
+    "C004": "Cross-Server Overlap",
+    "C005": "Cross-Server Gradient",
+    "C006": "Cross-Server Attack Path",
+    "C007": "Cross-Server Escalation",
+}
+
+# Category inference from server name patterns
+_SERVER_CATEGORIES: dict[str, str] = {
+    "filesystem": "File System",
+    "memory": "AI/ML",
+    "sequential-thinking": "AI/ML",
+    "everything": "Reference",
+    "playwright": "Browser",
+    "puppeteer": "Browser",
+    "sqlite": "Database",
+    "postgres": "Database",
+    "mysql": "Database",
+    "redis": "Database",
+    "slack": "Communication",
+    "discord": "Communication",
+    "github": "DevOps",
+    "gitlab": "DevOps",
+    "git": "DevOps",
+    "docker": "DevOps",
+    "kubernetes": "DevOps",
+    "aws": "Cloud",
+    "gcp": "Cloud",
+    "jira": "DevOps",
+    "confluence": "DevOps",
+    "brave": "Web Search",
+    "tavily": "Web Search",
+    "exa": "Web Search",
+    "serper": "Web Search",
+    "fetch": "Web Search",
+    "pinecone": "Vector DB",
+    "weaviate": "Vector DB",
+    "qdrant": "Vector DB",
+    "milvus": "Vector DB",
+    "shodan": "OSINT",
+    "virustotal": "OSINT",
+    "email": "Communication",
+    "sendgrid": "Communication",
+    "teams": "Communication",
+    "local-mcp": "Desktop Automation",
+    "lmcp": "Desktop Automation",
+    "dotmd": "Knowledge/RAG",
+    "chrome-devtools": "Browser/DevTools",
+    "searxng": "Web Search",
+    "duckduckgo": "Web Search",
+    "wardn": "Security",
+    "ha-mcp": "IoT/Smart Home",
+    "frigate": "IoT/Smart Home",
+    "untitled-ui": "Component Library",
+    "db-mcp": "Database",
+    "equibles": "Financial",
+    "stripe": "Financial",
+    "paypal": "Financial",
+    "crypto": "Crypto Wallets",
+    "wallet": "Crypto Wallets",
+    "bitcoin": "Crypto Wallets",
+    "ethereum": "Crypto Wallets",
+    "solana": "Crypto Wallets",
+    "blockchain": "Crypto Wallets",
+    "web3": "Crypto Wallets",
+    "ollama": "Local LLM",
+    "lm-studio": "Local LLM",
+    "lmstudio": "Local LLM",
+    "openwebui": "Local LLM",
+    "local-ai": "Local LLM",
+    "gpt4all": "Local LLM",
+    "jan": "Local LLM",
+}
+
+# Categories that indicate API-free / local-first operation
+_API_FREE_CATEGORIES: frozenset[str] = frozenset({
+    "Desktop Automation",
+    "Knowledge/RAG",
+    "Financial",
+    "Browser/DevTools",
+    "IoT/Smart Home",
+    "Security",
+    "Component Library",
+})
+
+_API_FREE_KEYWORDS: frozenset[str] = frozenset({
+    "local-mcp", "dotmd", "chrome-devtools", "searxng",
+    "duckduckgo", "wardn", "ha-mcp", "frigate",
+    "untitled-ui", "db-mcp", "equibles",
+})
+
+def _is_api_free(server_name: str, category: str) -> bool:
+    """Detect API-free / local-first servers."""
+    lower = server_name.lower()
+    for kw in _API_FREE_KEYWORDS:
+        if kw in lower:
+            return True
+    return category in _API_FREE_CATEGORIES
+
+def _infer_category(server_name: str) -> str:
+    """Infer category from server name keywords."""
+    lower = server_name.lower()
+    for key, cat in _SERVER_CATEGORIES.items():
+        if key in lower:
+            return cat
+    return "Other"
+
+def _compute_vuln_types(findings_list: list[dict]) -> list[str]:
+    """Compute unique vulnerability types from findings."""
+    types: set[str] = set()
+    for f in findings_list:
+        vt = RULE_VULN_TYPE.get(f.get("rule_id", ""))
+        if vt:
+            types.add(vt)
+    return sorted(types)
+
+
+def _compute_history(server_name: str, current_findings: list[dict], tool_count: int) -> list[dict]:
+    """Pull scan history from SQLite store for sparkline trend data."""
+    try:
+        from mcpradar.storage.store import Store
+
+        store = Store()
+        # Find scan IDs for this server by matching against target patterns
+        scans = store.list_targets()
+        matching: list[str] = []
+        for t in scans:
+            if server_name.lower() in t.lower():
+                ids = store.latest_scans(t, limit=12)
+                matching.extend(ids)
+        if not matching:
+            store.close()
+            return []
+
+        history: list[dict] = []
+        for sid in matching[-12:]:
+            try:
+                report = store.load(sid)
+                df = [_DictFinding({
+                    "rule_id": f.rule_id,
+                    "severity": f.severity.value if hasattr(f.severity, 'value') else str(f.severity),
+                }) for f in report.findings]
+                score = compute_aivss(df, max(report.tools_count or tool_count, 1))  # type: ignore[arg-type]
+                history.append({
+                    "date": report.scanned_at[:10] if hasattr(report, 'scanned_at') else "",
+                    "score": round(score, 1),
+                    "grade": compute_grade(score),
+                })
+            except Exception:
+                continue
+        store.close()
+        return history
+    except Exception:
+        return []
+
+
 def compute_tool_hash(scan_id: str) -> str:
     """Compute tool_names_hash from the SQLite store for a given scan_id."""
     try:
@@ -95,7 +270,7 @@ def main() -> None:
                 {
                     "rule_id": f.get("rule_id", "?"),
                     "severity": f.get("severity", "?"),
-                    "target": f.get("target", "?") or "—",
+                    "target": f.get("target", "?") or "-",
                     "title": f.get("title", "")[:80],
                     "description": f.get("description", "")[:120],
                 }
@@ -146,10 +321,14 @@ def main() -> None:
                     "tools_detail": tools_detail,
                     "tool_hash": tool_hash,
                     "last_scanned": (
-                        data.get("scanned_at", "")[:10] if data.get("scanned_at") else "—"
+                        data.get("scanned_at", "")[:10] if data.get("scanned_at") else "-"
                     ),
                     "scanner_version": __version__,
                     "status": data.get("status", "unknown"),
+                    "category": _infer_category(name),
+                    "vuln_types": _compute_vuln_types(findings_list),
+                    "history": _compute_history(name, findings_list, tools),
+                    "api_free": _is_api_free(name, _infer_category(name)),
                 }
             )
 
@@ -192,6 +371,44 @@ def main() -> None:
         json.dumps(servers_json, indent=2, ensure_ascii=False), encoding="utf-8"
     )
     print(f"Generated {servers_output} with {len(servers_json)} entries (subregistry format)")
+
+    # Generate per-server SVG badges
+    _generate_badges(rows, OUTPUT.parent)
+
+
+def _generate_badges(rows: list[dict], output_dir: Path) -> None:
+    """Generate per-server SVG security badges for README embedding."""
+    badge_dir = output_dir / "badges"
+    badge_dir.mkdir(parents=True, exist_ok=True)
+
+    grades: dict[str, str] = {
+        "A": "#3fb950", "B": "#56d364", "C": "#d29922", "D": "#db6d28", "F": "#f85149",
+    }
+    base_url = "https://yatuk.github.io/mcpradar"
+
+    for r in rows:
+        safe_name = r["server"].replace("@", "").replace("/", "-")
+        grade = r.get("grade", "?")
+        color = grades.get(grade, "#8b949e")
+        score = f"{r.get('aivss_score', 0):.1f}"
+        server_encoded = r["server"].replace("@", "").replace("/", "-")
+
+        svg = (
+            f'<svg xmlns="http://www.w3.org/2000/svg" width="140" height="20" role="img" aria-label="MCPRadar Security: {grade} - {score}/10">\n'
+            f'  <title>MCPRadar Security Score: {grade} ({score}/10)</title>\n'
+            f'  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="0">\n'
+            f'    <stop offset="0%" stop-color="#444"/>\n'
+            f'    <stop offset="100%" stop-color="#333"/>\n'
+            f'  </linearGradient>\n'
+            f'  <rect width="140" height="20" rx="3" fill="url(#bg)"/>\n'
+            f'  <rect x="68" width="72" height="20" rx="0" fill="{color}" fill-opacity="0.15"/>\n'
+            f'  <text x="34" y="14" fill="#c9d1d9" font-size="10" font-family="sans-serif" text-anchor="middle" font-weight="600">MCPRadar</text>\n'
+            f'  <text x="104" y="14" fill="{color}" font-size="10" font-family="sans-serif" text-anchor="middle" font-weight="600">{grade} &middot; {score}</text>\n'
+            f'</svg>'
+        )
+        (badge_dir / f"{safe_name}.svg").write_text(svg, encoding="utf-8")
+
+    print(f"Generated {len(rows)} badges in {badge_dir}")
 
 
 if __name__ == "__main__":

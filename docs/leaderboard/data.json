@@ -632,7 +632,11 @@
     "tool_hash": "4d709119e341da34",
     "last_scanned": "2026-06-23",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "category": "AI/ML",
+    "vuln_types": [],
+    "history": [],
+    "api_free": false
   },
   {
     "server": "@anthropic/server-sequential-thinking",
@@ -747,7 +751,11 @@
     "tool_hash": "9bbea416bf3d4e0c",
     "last_scanned": "2026-06-23",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "category": "AI/ML",
+    "vuln_types": [],
+    "history": [],
+    "api_free": false
   },
   {
     "server": "demo/malicious_server.py (baseline)",
@@ -767,9 +775,13 @@
     "findings_detail": [],
     "tools_detail": [],
     "tool_hash": "",
-    "last_scanned": "—",
+    "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "category": "Other",
+    "vuln_types": [],
+    "history": [],
+    "api_free": false
   },
   {
     "server": "@modelcontextprotocol/server-everything",
@@ -792,14 +804,14 @@
         "severity": "medium",
         "target": "get-resource-links",
         "title": "Schema poisoning gostergesi",
-        "description": "input_schema: zorunlu alan yok — bos girdi kabul edilebilir"
+        "description": "input_schema: zorunlu alan yok; bos girdi kabul edilebilir"
       },
       {
         "rule_id": "R109",
         "severity": "medium",
         "target": "get-resource-reference",
         "title": "Schema poisoning gostergesi",
-        "description": "input_schema: zorunlu alan yok — bos girdi kabul edilebilir"
+        "description": "input_schema: zorunlu alan yok; bos girdi kabul edilebilir"
       },
       {
         "rule_id": "R106",
@@ -813,14 +825,14 @@
         "severity": "medium",
         "target": "gzip-file-as-resource",
         "title": "Schema poisoning gostergesi",
-        "description": "input_schema: zorunlu alan yok — bos girdi kabul edilebilir"
+        "description": "input_schema: zorunlu alan yok; bos girdi kabul edilebilir"
       },
       {
         "rule_id": "R109",
         "severity": "medium",
         "target": "trigger-long-running-operation",
         "title": "Schema poisoning gostergesi",
-        "description": "input_schema: zorunlu alan yok — bos girdi kabul edilebilir"
+        "description": "input_schema: zorunlu alan yok; bos girdi kabul edilebilir"
       }
     ],
     "tools_detail": [
@@ -1097,7 +1109,14 @@
     "tool_hash": "3f4d3cd441fa0a80",
     "last_scanned": "2026-06-23",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "category": "Reference",
+    "vuln_types": [
+      "Schema Poisoning",
+      "Secret Exposure"
+    ],
+    "history": [],
+    "api_free": false
   },
   {
     "server": "@playwright/mcp",
@@ -1120,7 +1139,7 @@
         "severity": "medium",
         "target": "browser_file_upload",
         "title": "Schema poisoning gostergesi",
-        "description": "input_schema: zorunlu alan yok — bos girdi kabul edilebilir"
+        "description": "input_schema: zorunlu alan yok - bos girdi kabul edilebilir"
       },
       {
         "rule_id": "R107",
@@ -1148,7 +1167,7 @@
         "severity": "medium",
         "target": "browser_run_code_unsafe",
         "title": "Schema poisoning gostergesi",
-        "description": "input_schema: zorunlu alan yok — bos girdi kabul edilebilir"
+        "description": "input_schema: zorunlu alan yok - bos girdi kabul edilebilir"
       },
       {
         "rule_id": "R107",
@@ -1162,14 +1181,14 @@
         "severity": "medium",
         "target": "browser_snapshot",
         "title": "Schema poisoning gostergesi",
-        "description": "input_schema: zorunlu alan yok — bos girdi kabul edilebilir"
+        "description": "input_schema: zorunlu alan yok - bos girdi kabul edilebilir"
       },
       {
         "rule_id": "R109",
         "severity": "medium",
         "target": "browser_wait_for",
         "title": "Schema poisoning gostergesi",
-        "description": "input_schema: zorunlu alan yok — bos girdi kabul edilebilir"
+        "description": "input_schema: zorunlu alan yok - bos girdi kabul edilebilir"
       }
     ],
     "tools_detail": [
@@ -1823,7 +1842,14 @@
     "tool_hash": "73c317b4aedef755",
     "last_scanned": "2026-06-23",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "category": "Browser",
+    "vuln_types": [
+      "Command Injection",
+      "Schema Poisoning"
+    ],
+    "history": [],
+    "api_free": false
   },
   {
     "server": "@modelcontextprotocol/server-filesystem",
@@ -1852,14 +1878,14 @@
         "rule_id": "R114",
         "severity": "low",
         "target": "read_file",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
         "rule_id": "R114",
         "severity": "low",
         "target": "read_file",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
@@ -1873,14 +1899,14 @@
         "rule_id": "R114",
         "severity": "low",
         "target": "read_text_file",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
         "rule_id": "R114",
         "severity": "low",
         "target": "read_text_file",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
@@ -1894,28 +1920,28 @@
         "rule_id": "R114",
         "severity": "low",
         "target": "read_media_file",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
         "rule_id": "R114",
         "severity": "low",
         "target": "read_media_file",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'content.items.data' in output_schema has no validation constraints (no pattern, format, enum, or lengt"
       },
       {
         "rule_id": "R114",
         "severity": "low",
         "target": "read_media_file",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'content.items.mimeType' in output_schema has no validation constraints (no pattern, format, enum, or l"
       },
       {
         "rule_id": "R114",
         "severity": "low",
         "target": "read_multiple_files",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
@@ -1929,21 +1955,21 @@
         "rule_id": "R114",
         "severity": "low",
         "target": "write_file",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
         "rule_id": "R114",
         "severity": "low",
         "target": "write_file",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'content' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
         "rule_id": "R114",
         "severity": "low",
         "target": "write_file",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
@@ -1957,28 +1983,28 @@
         "rule_id": "R114",
         "severity": "low",
         "target": "edit_file",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
         "rule_id": "R114",
         "severity": "low",
         "target": "edit_file",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'edits.items.oldText' in input_schema has no validation constraints (no pattern, format, enum, or lengt"
       },
       {
         "rule_id": "R114",
         "severity": "low",
         "target": "edit_file",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'edits.items.newText' in input_schema has no validation constraints (no pattern, format, enum, or lengt"
       },
       {
         "rule_id": "R114",
         "severity": "low",
         "target": "edit_file",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
@@ -1992,14 +2018,14 @@
         "rule_id": "R114",
         "severity": "low",
         "target": "create_directory",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
         "rule_id": "R114",
         "severity": "low",
         "target": "create_directory",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
@@ -2013,14 +2039,14 @@
         "rule_id": "R114",
         "severity": "low",
         "target": "list_directory",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
         "rule_id": "R114",
         "severity": "low",
         "target": "list_directory",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
@@ -2034,14 +2060,14 @@
         "rule_id": "R114",
         "severity": "low",
         "target": "list_directory_with_sizes",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
         "rule_id": "R114",
         "severity": "low",
         "target": "list_directory_with_sizes",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
@@ -2055,14 +2081,14 @@
         "rule_id": "R114",
         "severity": "low",
         "target": "directory_tree",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
         "rule_id": "R114",
         "severity": "low",
         "target": "directory_tree",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
@@ -2083,21 +2109,21 @@
         "rule_id": "R114",
         "severity": "low",
         "target": "move_file",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'source' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
         "rule_id": "R114",
         "severity": "low",
         "target": "move_file",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'destination' in input_schema has no validation constraints (no pattern, format, enum, or length limits"
       },
       {
         "rule_id": "R114",
         "severity": "low",
         "target": "move_file",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
@@ -2111,21 +2137,21 @@
         "rule_id": "R114",
         "severity": "low",
         "target": "search_files",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
         "rule_id": "R114",
         "severity": "low",
         "target": "search_files",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'pattern' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
         "rule_id": "R114",
         "severity": "low",
         "target": "search_files",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
@@ -2139,21 +2165,21 @@
         "rule_id": "R114",
         "severity": "low",
         "target": "get_file_info",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
         "rule_id": "R114",
         "severity": "low",
         "target": "get_file_info",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
         "rule_id": "R114",
         "severity": "low",
         "target": "list_allowed_directories",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
       }
     ],
@@ -2668,6 +2694,13 @@
     "tool_hash": "44c35cf6ac86e32d",
     "last_scanned": "2026-06-24",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "category": "File System",
+    "vuln_types": [
+      "Path Traversal",
+      "Unbounded Input"
+    ],
+    "history": [],
+    "api_free": false
   }
 ]

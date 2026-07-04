@@ -681,7 +681,7 @@
     {
       "rule_id": "R109",
       "title": "Schema poisoning gostergesi",
-      "description": "input_schema: zorunlu alan yok — bos girdi kabul edilebilir",
+      "description": "input_schema: zorunlu alan yok - bos girdi kabul edilebilir",
       "severity": "medium",
       "target": "browser_file_upload",
       "location": "tool",
@@ -736,7 +736,7 @@
     {
       "rule_id": "R109",
       "title": "Schema poisoning gostergesi",
-      "description": "input_schema: zorunlu alan yok — bos girdi kabul edilebilir",
+      "description": "input_schema: zorunlu alan yok - bos girdi kabul edilebilir",
       "severity": "medium",
       "target": "browser_run_code_unsafe",
       "location": "tool",
@@ -763,7 +763,7 @@
     {
       "rule_id": "R109",
       "title": "Schema poisoning gostergesi",
-      "description": "input_schema: zorunlu alan yok — bos girdi kabul edilebilir",
+      "description": "input_schema: zorunlu alan yok - bos girdi kabul edilebilir",
       "severity": "medium",
       "target": "browser_snapshot",
       "location": "tool",
@@ -776,7 +776,7 @@
     {
       "rule_id": "R109",
       "title": "Schema poisoning gostergesi",
-      "description": "input_schema: zorunlu alan yok — bos girdi kabul edilebilir",
+      "description": "input_schema: zorunlu alan yok - bos girdi kabul edilebilir",
       "severity": "medium",
       "target": "browser_wait_for",
       "location": "tool",

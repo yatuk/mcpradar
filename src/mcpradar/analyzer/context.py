@@ -1,15 +1,15 @@
 """Cross-server contamination analysis engine.
 
 Detects risks that emerge only when multiple MCP servers are
-connected to the same LLM agent — the attack surface of the
+connected to the same LLM agent -- the attack surface of the
 combined set, not individual tools.
 
 Rules:
-  C001 — Tool name collision (same name in 2+ servers)
-  C002 — Tool name shadowing (similar names across servers)
-  C003 — Cross-server data exfiltration chain
-  C004 — Capability overlap (3+ servers with same capability)
-  C005 — Permission gradient (read-only + write-capable mix)
+  C001 -- Tool name collision (same name in 2+ servers)
+  C002 -- Tool name shadowing (similar names across servers)
+  C003 -- Cross-server data exfiltration chain
+  C004 -- Capability overlap (3+ servers with same capability)
+  C005 -- Permission gradient (read-only + write-capable mix)
 """
 
 from __future__ import annotations
@@ -57,7 +57,7 @@ class AttackGraphEdge:
 
 
 # ---------------------------------------------------------------------------
-# C001 — Tool name collision
+# C001 -- Tool name collision
 # ---------------------------------------------------------------------------
 
 
@@ -89,7 +89,7 @@ def _check_name_collisions(scans: list[ScanReport]) -> list[CrossFinding]:
 
 
 # ---------------------------------------------------------------------------
-# C002 — Tool name shadowing
+# C002 -- Tool name shadowing
 # ---------------------------------------------------------------------------
 
 
@@ -112,7 +112,7 @@ def _check_shadowing(scans: list[ScanReport]) -> list[CrossFinding]:
                         title="Tool name shadowing",
                         description=(
                             f"'{name_a}' ({srv_a}) and '{name_b}' ({srv_b}) "
-                            f"are {ratio:.0%} similar — LLM may confuse them."
+                            f"are {ratio:.0%} similar; LLM may confuse them."
                         ),
                         severity=Severity.HIGH,
                         servers=[srv_a, srv_b],
@@ -124,7 +124,7 @@ def _check_shadowing(scans: list[ScanReport]) -> list[CrossFinding]:
 
 
 # ---------------------------------------------------------------------------
-# C003 — Cross-server data exfiltration chain
+# C003 -- Cross-server data exfiltration chain
 # ---------------------------------------------------------------------------
 
 EXFIL_PATTERNS = [
@@ -171,7 +171,7 @@ def _check_exfiltration(scans: list[ScanReport]) -> list[CrossFinding]:
                         f"'{reader_srv}' reads data "
                         f"({', '.join(readers[reader_srv][:3])}), "
                         f"'{sender_srv}' sends out "
-                        f"({', '.join(senders[sender_srv][:3])}) — "
+                        f"({', '.join(senders[sender_srv][:3])}); "
                         f"possible exfiltration chain."
                     ),
                     severity=Severity.CRITICAL,
@@ -187,7 +187,7 @@ def _check_exfiltration(scans: list[ScanReport]) -> list[CrossFinding]:
 
 
 # ---------------------------------------------------------------------------
-# C004 — Capability overlap
+# C004 -- Capability overlap
 # ---------------------------------------------------------------------------
 
 CAPABILITY_KEYWORDS = {
@@ -229,7 +229,7 @@ def _check_capability_overlap(scans: list[ScanReport]) -> list[CrossFinding]:
                     title=f"Capability overload: {cap_name}",
                     description=(
                         f"{len(servers_with_cap)} servers expose '{cap_name}' "
-                        f"capability — attack surface too wide."
+                        f"capability; attack surface too wide."
                     ),
                     severity=Severity.MEDIUM,
                     servers=servers_with_cap,
@@ -241,7 +241,7 @@ def _check_capability_overlap(scans: list[ScanReport]) -> list[CrossFinding]:
 
 
 # ---------------------------------------------------------------------------
-# C005 — Permission gradient
+# C005 -- Permission gradient
 # ---------------------------------------------------------------------------
 
 WRITE_KEYWORDS = [
@@ -276,7 +276,7 @@ def _check_permission_gradient(scans: list[ScanReport]) -> list[CrossFinding]:
         findings.append(
             CrossFinding(
                 rule_id="C005",
-                title="Permission gradient — read + write mix",
+                title="Permission gradient: read+write mix",
                 description=(
                     f"Read-only servers ({', '.join(read_only[:5])}) coexist with "
                     f"write-capable servers ({', '.join(write_capable[:5])}). "
@@ -295,7 +295,7 @@ def _check_permission_gradient(scans: list[ScanReport]) -> list[CrossFinding]:
 
 
 # ---------------------------------------------------------------------------
-# C006 — Attack path chain (schema type matching)
+# C006 -- Attack path chain (schema type matching)
 # ---------------------------------------------------------------------------
 
 
@@ -484,7 +484,7 @@ def _check_attack_path_chain(
 
 
 # ---------------------------------------------------------------------------
-# C007 — Privilege escalation
+# C007 -- Privilege escalation
 # ---------------------------------------------------------------------------
 
 

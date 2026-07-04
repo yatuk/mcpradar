@@ -533,7 +533,7 @@
     },
     {
       "rule_id": "R114",
-      "title": "Unbounded input — no size/content constraints",
+      "title": "Unbounded input: no size/content constraints",
       "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
       "severity": "low",
       "target": "read_file",
@@ -546,7 +546,7 @@
     },
     {
       "rule_id": "R114",
-      "title": "Unbounded input — no size/content constraints",
+      "title": "Unbounded input: no size/content constraints",
       "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
       "severity": "low",
       "target": "read_file",
@@ -575,7 +575,7 @@
     },
     {
       "rule_id": "R114",
-      "title": "Unbounded input — no size/content constraints",
+      "title": "Unbounded input: no size/content constraints",
       "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
       "severity": "low",
       "target": "read_text_file",
@@ -588,7 +588,7 @@
     },
     {
       "rule_id": "R114",
-      "title": "Unbounded input — no size/content constraints",
+      "title": "Unbounded input: no size/content constraints",
       "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
       "severity": "low",
       "target": "read_text_file",
@@ -617,7 +617,7 @@
     },
     {
       "rule_id": "R114",
-      "title": "Unbounded input — no size/content constraints",
+      "title": "Unbounded input: no size/content constraints",
       "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
       "severity": "low",
       "target": "read_media_file",
@@ -630,7 +630,7 @@
     },
     {
       "rule_id": "R114",
-      "title": "Unbounded input — no size/content constraints",
+      "title": "Unbounded input: no size/content constraints",
       "description": "String parameter 'content.items.data' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
       "severity": "low",
       "target": "read_media_file",
@@ -643,7 +643,7 @@
     },
     {
       "rule_id": "R114",
-      "title": "Unbounded input — no size/content constraints",
+      "title": "Unbounded input: no size/content constraints",
       "description": "String parameter 'content.items.mimeType' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
       "severity": "low",
       "target": "read_media_file",
@@ -656,7 +656,7 @@
     },
     {
       "rule_id": "R114",
-      "title": "Unbounded input — no size/content constraints",
+      "title": "Unbounded input: no size/content constraints",
       "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
       "severity": "low",
       "target": "read_multiple_files",
@@ -685,7 +685,7 @@
     },
     {
       "rule_id": "R114",
-      "title": "Unbounded input — no size/content constraints",
+      "title": "Unbounded input: no size/content constraints",
       "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
       "severity": "low",
       "target": "write_file",
@@ -698,7 +698,7 @@
     },
     {
       "rule_id": "R114",
-      "title": "Unbounded input — no size/content constraints",
+      "title": "Unbounded input: no size/content constraints",
       "description": "String parameter 'content' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
       "severity": "low",
       "target": "write_file",
@@ -711,7 +711,7 @@
     },
     {
       "rule_id": "R114",
-      "title": "Unbounded input — no size/content constraints",
+      "title": "Unbounded input: no size/content constraints",
       "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
       "severity": "low",
       "target": "write_file",
@@ -740,7 +740,7 @@
     },
     {
       "rule_id": "R114",
-      "title": "Unbounded input — no size/content constraints",
+      "title": "Unbounded input: no size/content constraints",
       "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
       "severity": "low",
       "target": "edit_file",
@@ -753,7 +753,7 @@
     },
     {
       "rule_id": "R114",
-      "title": "Unbounded input — no size/content constraints",
+      "title": "Unbounded input: no size/content constraints",
       "description": "String parameter 'edits.items.oldText' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
       "severity": "low",
       "target": "edit_file",
@@ -766,7 +766,7 @@
     },
     {
       "rule_id": "R114",
-      "title": "Unbounded input — no size/content constraints",
+      "title": "Unbounded input: no size/content constraints",
       "description": "String parameter 'edits.items.newText' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
       "severity": "low",
       "target": "edit_file",
@@ -779,7 +779,7 @@
     },
     {
       "rule_id": "R114",
-      "title": "Unbounded input — no size/content constraints",
+      "title": "Unbounded input: no size/content constraints",
       "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
       "severity": "low",
       "target": "edit_file",
@@ -808,7 +808,7 @@
     },
     {
       "rule_id": "R114",
-      "title": "Unbounded input — no size/content constraints",
+      "title": "Unbounded input: no size/content constraints",
       "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
       "severity": "low",
       "target": "create_directory",
@@ -821,7 +821,7 @@
     },
     {
       "rule_id": "R114",
-      "title": "Unbounded input — no size/content constraints",
+      "title": "Unbounded input: no size/content constraints",
       "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
       "severity": "low",
       "target": "create_directory",
@@ -850,7 +850,7 @@
     },
     {
       "rule_id": "R114",
-      "title": "Unbounded input — no size/content constraints",
+      "title": "Unbounded input: no size/content constraints",
       "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
       "severity": "low",
       "target": "list_directory",
@@ -863,7 +863,7 @@
     },
     {
       "rule_id": "R114",
-      "title": "Unbounded input — no size/content constraints",
+      "title": "Unbounded input: no size/content constraints",
       "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
       "severity": "low",
       "target": "list_directory",
@@ -892,7 +892,7 @@
     },
     {
       "rule_id": "R114",
-      "title": "Unbounded input — no size/content constraints",
+      "title": "Unbounded input: no size/content constraints",
       "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
       "severity": "low",
       "target": "list_directory_with_sizes",
@@ -905,7 +905,7 @@
     },
     {
       "rule_id": "R114",
-      "title": "Unbounded input — no size/content constraints",
+      "title": "Unbounded input: no size/content constraints",
       "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
       "severity": "low",
       "target": "list_directory_with_sizes",
@@ -934,7 +934,7 @@
     },
     {
       "rule_id": "R114",
-      "title": "Unbounded input — no size/content constraints",
+      "title": "Unbounded input: no size/content constraints",
       "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
       "severity": "low",
       "target": "directory_tree",
@@ -947,7 +947,7 @@
     },
     {
       "rule_id": "R114",
-      "title": "Unbounded input — no size/content constraints",
+      "title": "Unbounded input: no size/content constraints",
       "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
       "severity": "low",
       "target": "directory_tree",
@@ -992,7 +992,7 @@
     },
     {
       "rule_id": "R114",
-      "title": "Unbounded input — no size/content constraints",
+      "title": "Unbounded input: no size/content constraints",
       "description": "String parameter 'source' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
       "severity": "low",
       "target": "move_file",
@@ -1005,7 +1005,7 @@
     },
     {
       "rule_id": "R114",
-      "title": "Unbounded input — no size/content constraints",
+      "title": "Unbounded input: no size/content constraints",
       "description": "String parameter 'destination' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
       "severity": "low",
       "target": "move_file",
@@ -1018,7 +1018,7 @@
     },
     {
       "rule_id": "R114",
-      "title": "Unbounded input — no size/content constraints",
+      "title": "Unbounded input: no size/content constraints",
       "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
       "severity": "low",
       "target": "move_file",
@@ -1047,7 +1047,7 @@
     },
     {
       "rule_id": "R114",
-      "title": "Unbounded input — no size/content constraints",
+      "title": "Unbounded input: no size/content constraints",
       "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
       "severity": "low",
       "target": "search_files",
@@ -1060,7 +1060,7 @@
     },
     {
       "rule_id": "R114",
-      "title": "Unbounded input — no size/content constraints",
+      "title": "Unbounded input: no size/content constraints",
       "description": "String parameter 'pattern' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
       "severity": "low",
       "target": "search_files",
@@ -1073,7 +1073,7 @@
     },
     {
       "rule_id": "R114",
-      "title": "Unbounded input — no size/content constraints",
+      "title": "Unbounded input: no size/content constraints",
       "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
       "severity": "low",
       "target": "search_files",
@@ -1102,7 +1102,7 @@
     },
     {
       "rule_id": "R114",
-      "title": "Unbounded input — no size/content constraints",
+      "title": "Unbounded input: no size/content constraints",
       "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
       "severity": "low",
       "target": "get_file_info",
@@ -1115,7 +1115,7 @@
     },
     {
       "rule_id": "R114",
-      "title": "Unbounded input — no size/content constraints",
+      "title": "Unbounded input: no size/content constraints",
       "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
       "severity": "low",
       "target": "get_file_info",
@@ -1128,7 +1128,7 @@
     },
     {
       "rule_id": "R114",
-      "title": "Unbounded input — no size/content constraints",
+      "title": "Unbounded input: no size/content constraints",
       "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
       "severity": "low",
       "target": "list_allowed_directories",

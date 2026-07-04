@@ -1,4 +1,4 @@
-"""Detection rule engine — plugin-style, easily extensible with new rules."""
+"""Detection rule engine -- plugin-style, easily extensible with new rules."""
 
 from __future__ import annotations
 
@@ -249,7 +249,7 @@ class EncodedBlobDetection(Rule):
                 found.append(
                     self._finding(
                         tool.name,
-                        f"Hex blob in description ({len(blob)} chars) — decoded: {decoded[:60]}",
+                        f"Hex blob in description ({len(blob)} chars); decoded: {decoded[:60]}",
                         severity=Severity.HIGH,
                         blob_length=len(blob),
                         decoded_preview=decoded[:80],
@@ -265,7 +265,7 @@ def _is_printable(s: str) -> bool:
 
 
 # ---------------------------------------------------------------------------
-# Helper functions — entropy, name decomposition, schema walk
+# Helper functions -- entropy, name decomposition, schema walk
 # ---------------------------------------------------------------------------
 
 
@@ -697,7 +697,7 @@ class SchemaPoisoningDetection(Rule):
                 found.append(
                     self._finding(
                         tool.name,
-                        f"{schema_name}: additionalProperties: true — open to arbitrary injection",
+                        f"{schema_name}: additionalProperties: true; open to arbitrary injection",
                         schema=schema_name,
                         issue="additional_properties_true",
                     )
@@ -710,7 +710,7 @@ class SchemaPoisoningDetection(Rule):
                     found.append(
                         self._finding(
                             tool.name,
-                            f"{schema_name}: no required fields — empty input acceptable",
+                            f"{schema_name}: no required fields; empty input acceptable",
                             severity=Severity.MEDIUM,
                             schema=schema_name,
                             issue="no_required_fields",
@@ -817,7 +817,7 @@ class AuthorizationHardeningDetection(Rule):
     """
 
     rule_id = "R112"
-    title = "Authorization hardening — 2026-07-28 spec compliance"
+    title = "Authorization hardening for 2026-07-28 spec compliance"
     severity = Severity.HIGH
 
     def check(self, tool: ToolInfo) -> list[Finding]:
@@ -1034,7 +1034,7 @@ class UnboundedInputDetection(Rule):
     """
 
     rule_id = "R114"
-    title = "Unbounded input — no size/content constraints"
+    title = "Unbounded input: no size/content constraints"
     severity = Severity.LOW
 
     def check(self, tool: ToolInfo) -> list[Finding]:
@@ -1081,7 +1081,7 @@ class UnboundedInputDetection(Rule):
 
 
 # ---------------------------------------------------------------------------
-# Permission scope mismatch — bridge-aware (R105)
+# Permission scope mismatch -- bridge-aware (R105)
 # ---------------------------------------------------------------------------
 
 BRIDGE_KEYWORDS: set[str] = {
@@ -1134,7 +1134,7 @@ SCOPE_PAIRS: list[tuple[re.Pattern[str], re.Pattern[str], str, str]] = [
         "read-only",
         "write/exec",
     ),
-    # crypto/wallet — crypto tools that talk to network
+    # crypto/wallet -- crypto tools that talk to network
     (
         re.compile(r"\b(?:crypto|wallet|key|sign|encrypt|decrypt)\b", re.I),
         re.compile(
@@ -1144,7 +1144,7 @@ SCOPE_PAIRS: list[tuple[re.Pattern[str], re.Pattern[str], str, str]] = [
         "crypto",
         "network",
     ),
-    # browser/system — browser tools accessing filesystem
+    # browser/system -- browser tools accessing filesystem
     (
         re.compile(r"\b(?:browser|tab|window|dom|render|html)\b", re.I),
         re.compile(
@@ -1154,7 +1154,7 @@ SCOPE_PAIRS: list[tuple[re.Pattern[str], re.Pattern[str], str, str]] = [
         "browser",
         "system",
     ),
-    # notification/execution — messaging tools that can execute
+    # notification/execution -- messaging tools that can execute
     (
         re.compile(r"\b(?:notify|alert|message|chat|send)\b", re.I),
         re.compile(
@@ -1164,7 +1164,7 @@ SCOPE_PAIRS: list[tuple[re.Pattern[str], re.Pattern[str], str, str]] = [
         "notification",
         "execution",
     ),
-    # config/remote-exec — config tools that deploy
+    # config/remote-exec -- config tools that deploy
     (
         re.compile(r"\b(?:config|setting|env|environment)\b", re.I),
         re.compile(
@@ -1174,7 +1174,7 @@ SCOPE_PAIRS: list[tuple[re.Pattern[str], re.Pattern[str], str, str]] = [
         "configuration",
         "remote-exec",
     ),
-    # search/write — readonly tools with write access
+    # search/write -- readonly tools with write access
     (
         re.compile(r"\b(?:search|find|lookup|locate)\b", re.I),
         re.compile(
@@ -1184,7 +1184,7 @@ SCOPE_PAIRS: list[tuple[re.Pattern[str], re.Pattern[str], str, str]] = [
         "search",
         "write",
     ),
-    # log/command — logging tools with cmd execution
+    # log/command -- logging tools with cmd execution
     (
         re.compile(r"\b(?:log|audit|monitor|track|observe)\b", re.I),
         re.compile(
@@ -1194,7 +1194,7 @@ SCOPE_PAIRS: list[tuple[re.Pattern[str], re.Pattern[str], str, str]] = [
         "logging",
         "command execution",
     ),
-    # cache/download — temp storage fetching remote
+    # cache/download -- temp storage fetching remote
     (
         re.compile(r"\b(?:cache|temp|tmp|scratch)\b", re.I),
         re.compile(
@@ -1290,7 +1290,7 @@ class DangerousNameDetection(Rule):
 
 
 # ---------------------------------------------------------------------------
-# Rule engine — collects and runs all rules
+# Rule engine -- collects and runs all rules
 # ---------------------------------------------------------------------------
 
 
@@ -1434,7 +1434,7 @@ class RuleEngine:
             findings.append(
                 Finding(
                     rule_id="R110",
-                    title="First scan — no baseline",
+                    title="First scan; no baseline",
                     description="No previous fingerprint record found for this server",
                     severity=Severity.MEDIUM,
                     target=current.endpoint if hasattr(current, "endpoint") else "",
@@ -1451,7 +1451,7 @@ class RuleEngine:
                     title="Version rollback attack detected",
                     description=(
                         f"Server version downgraded from {diff.previous_version} "
-                        f"to {diff.current_version} — possible rollback attack"
+                        f"to {diff.current_version}; possible rollback attack"
                     ),
                     severity=Severity.CRITICAL,
                     target=current.endpoint if hasattr(current, "endpoint") else "",

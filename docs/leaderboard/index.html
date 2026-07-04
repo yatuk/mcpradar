@@ -6,7 +6,7 @@
 <title>MCPRadar Security Leaderboard</title>
 <style>
 /* ========================================================================
-   Design Tokens — "Radar" Observability Theme
+   Design Tokens -- "Radar" Observability Theme
    ======================================================================== */
 :root {
   --bg: #0d1117;
@@ -178,6 +178,24 @@ h1 span { color: var(--red); }
 .grade-btn[data-grade="D"].on { background: var(--orange-dim); color: var(--orange); border-color: var(--orange); }
 .grade-btn[data-grade="F"].on { background: var(--red-dim); color: var(--red); border-color: var(--red); }
 
+/* Extra filter dropdowns */
+.extra-filters {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+.extra-filters select {
+  padding: 4px 10px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 12px;
+  cursor: pointer;
+  max-width: 190px;
+}
+.extra-filters select:focus { outline: none; border-color: var(--blue); }
+
 /* ========================================================================
    Table (Desktop)
    ======================================================================== */
@@ -254,6 +272,9 @@ tbody tr:hover td { background: rgba(255,255,255,0.025); }
   display: inline-block; padding: 1px 7px; border-radius: 10px;
   font-size: 10px; font-weight: 600; letter-spacing: 0.3px;
   background: var(--card); border: 1px solid var(--border); color: var(--dim);
+}
+.scope-tag.local-first {
+  background: #0d2e2e; color: #3cc6c6; border-color: #1a5c5c;
 }
 
 /* ========================================================================
@@ -441,6 +462,48 @@ footer a:hover { text-decoration: underline; }
   .finding-desc { grid-column: 1 / -1; }
   .detail-score-breakdown { flex-direction: column; gap: 8px; }
 }
+
+/* ========================================================================
+   Detail: Accordion, SARIF, Rule Help
+   ======================================================================== */
+.finding-group { margin-bottom: 8px; }
+.finding-group summary {
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 4px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  list-style: none;
+}
+.finding-group summary::-webkit-details-marker { display: none; }
+.finding-group summary:hover { border-color: var(--dim); }
+.finding-group summary .count { float: right; font-weight: 400; color: var(--dim); }
+
+/* Detail: SARIF button */
+.sarif-btn {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 6px 14px;
+  background: var(--blue-dim);
+  color: var(--blue);
+  border: 1px solid var(--blue);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.sarif-btn:hover { filter: brightness(1.2); }
+
+/* Detail: rule description tooltip */
+.rule-help {
+  font-size: 11px;
+  color: var(--dim);
+  display: block;
+  margin-top: 1px;
+}
 </style>
 </head>
 <body>
@@ -449,7 +512,7 @@ footer a:hover { text-decoration: underline; }
 <header>
 <h1><span>MCPRadar</span> Security Leaderboard</h1>
 <p class="subtitle">
-  Independent security scores for MCP servers — sourced from the
+  Independent security scores for MCP servers, sourced from the
   <a href="https://registry.modelcontextprotocol.io">official registry</a>
 </p>
 </header>
@@ -468,7 +531,7 @@ footer a:hover { text-decoration: underline; }
   <p><code>A</code> 0.0–0.9 &nbsp; <code>B</code> 1.0–2.9 &nbsp;
   <code>C</code> 3.0–4.9 &nbsp; <code>D</code> 5.0–6.9 &nbsp;
   <code>F</code> 7.0–10.0</p><br>
-  <p><strong>Hash</strong>: SHA-256 of the alphabetically sorted tool names —
+  <p><strong>Hash</strong>: SHA-256 of the alphabetically sorted tool names,
   used to detect tool-list changes across scans (drift detection).</p><br>
   <p><strong>Scope</strong>: <i>schema</i> = tool schemas analyzed,
   <i>fingerprint</i> = tool signature comparison, <i>cve</i> = known-vulnerability
@@ -477,8 +540,64 @@ footer a:hover { text-decoration: underline; }
 </div>
 </details>
 
+<!-- ===== SUBMIT SERVER PANEL ===== -->
+<details class="methodology" id="submitPanel">
+<summary>Submit a Server for Scanning ▾</summary>
+<div class="body">
+  <form id="submitForm">
+    <input type="text" id="serverName" placeholder="Server name (e.g., @org/server-name)" required
+      style="width:100%;padding:7px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:13px;margin-bottom:8px;box-sizing:border-box">
+    <input type="url" id="serverUrl" placeholder="GitHub or npm URL (optional)"
+      style="width:100%;padding:7px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:13px;margin-bottom:8px;box-sizing:border-box">
+    <select id="serverCategory" style="width:100%;padding:7px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:13px;margin-bottom:8px;box-sizing:border-box">
+      <option value="">Category (optional)</option>
+      <option value="devops">DevOps & Cloud</option>
+      <option value="database">Database</option>
+      <option value="search">Search & Web</option>
+      <option value="communication">Communication</option>
+      <option value="vectordb">Vector DB / RAG</option>
+      <option value="other">Other</option>
+    </select>
+    <button type="submit" style="background:var(--blue-dim);color:var(--blue);border:1px solid var(--blue);border-radius:6px;padding:7px 20px;cursor:pointer;font-weight:600;font-size:12px">Submit for Scan</button>
+    <span id="submitMsg" style="display:none;margin-left:10px;font-size:12px;color:var(--green)"></span>
+  </form>
+</div>
+</details>
+
+<!-- ===== ENTERPRISE PANEL ===== -->
+<details class="methodology" id="enterprisePanel">
+<summary>Enterprise Integration ▾</summary>
+<div class="body">
+  <p><strong>SOC/SIEM ingestion:</strong> Export findings as SARIF v2.1.0 via the Download button
+  on each server detail page. Ingest into <strong>Splunk</strong> (SARIF add-on),
+  <strong>Elastic Security</strong> (via sarif-to-elastic pipeline), or
+  <strong>Microsoft Sentinel</strong> (Logic Apps SARIF connector).</p><br>
+  <p><strong>Automated monitoring:</strong> Poll <code>data.json</code> weekly and diff
+  tool hashes to detect silent additions. Use <code>mcpradar audit diff</code> to
+  compare snapshots programmatically.</p><br>
+  <p>Detailed guides: <a href="https://github.com/yatuk/mcpradar/blob/main/docs/enterprise.md" style="color:var(--blue)">Enterprise Integration docs</a></p>
+</div>
+</details>
+
 <!-- ===== STATS BAR ===== -->
 <div class="stats-bar" id="statsBar" aria-live="polite">Loading…</div>
+
+<!-- ===== THREAT LANDSCAPE ===== -->
+<details class="methodology" id="landscapePanel">
+<summary>Threat Landscape ▾</summary>
+<div class="body" id="landscapeBody">
+  <div id="landscapeContent" style="display:flex;flex-wrap:wrap;gap:24px">
+    <div style="flex:1;min-width:220px">
+      <strong style="color:var(--text)">Grade Distribution</strong>
+      <div id="gradeDist" style="margin-top:6px"></div>
+    </div>
+    <div style="flex:1;min-width:280px">
+      <strong style="color:var(--text)">Top Vulnerabilities</strong>
+      <div id="vulnDist" style="margin-top:6px"></div>
+    </div>
+  </div>
+</div>
+</details>
 
 <!-- ===== CONTROLS ===== -->
 <div class="controls">
@@ -495,6 +614,44 @@ footer a:hover { text-decoration: underline; }
   <button class="grade-btn on" data-grade="D">D</button>
   <button class="grade-btn on" data-grade="F">F</button>
 </div>
+<div class="extra-filters">
+  <select id="apiFreeFilter" aria-label="Filter by API-free status">
+    <option value="">All Servers</option>
+    <option value="api-free">Local-First / API-Free</option>
+    <option value="api-based">API-Based</option>
+  </select>
+  <select id="categoryFilter" aria-label="Filter by category">
+    <option value="">All Categories</option>
+    <option value="AI/ML">AI/ML</option>
+    <option value="Browser">Browser</option>
+    <option value="Cloud">Cloud</option>
+    <option value="Communication">Communication</option>
+    <option value="Database">Database</option>
+    <option value="DevOps">DevOps</option>
+    <option value="File System">File System</option>
+    <option value="OSINT">OSINT</option>
+    <option value="Reference">Reference</option>
+    <option value="Vector DB">Vector DB</option>
+    <option value="Web Search">Web Search</option>
+    <option value="Other">Other</option>
+  </select>
+  <select id="vulnFilter" aria-label="Filter by vulnerability type">
+    <option value="">All Vulnerability Types</option>
+    <option value="Command Execution">Command Execution</option>
+    <option value="Command Injection">Command Injection</option>
+    <option value="Cross-Server Attack Path">Cross-Server Attack Path</option>
+    <option value="Cross-Server Exfiltration">Cross-Server Exfiltration</option>
+    <option value="Encoded Payload">Encoded Payload</option>
+    <option value="Hidden Content">Hidden Content</option>
+    <option value="Insecure Transport">Insecure Transport</option>
+    <option value="Path Traversal">Path Traversal</option>
+    <option value="Prompt Injection">Prompt Injection</option>
+    <option value="Schema Poisoning">Schema Poisoning</option>
+    <option value="Secret Exposure">Secret Exposure</option>
+    <option value="Supply Chain">Supply Chain</option>
+    <option value="Unbounded Input">Unbounded Input</option>
+  </select>
+</div>
 </div>
 
 <!-- ===== MAIN VIEW ===== -->
@@ -508,6 +665,7 @@ footer a:hover { text-decoration: underline; }
           <th data-sort="server" scope="col" aria-sort="none">Server</th>
           <th data-sort="risk" scope="col" aria-sort="none">Risk <span style="font-weight:400;font-size:10px;text-transform:none;letter-spacing:0">0→10</span></th>
           <th data-sort="grade" scope="col" aria-sort="none">Grade</th>
+          <th scope="col">Trend</th>
           <th scope="col">Scope</th>
           <th data-sort="tools" scope="col" aria-sort="none">Tools</th>
           <th data-sort="findings" scope="col" aria-sort="none">Findings</th>
@@ -534,11 +692,39 @@ footer a:hover { text-decoration: underline; }
 </footer>
 
 <!-- ========================================================================
-     JavaScript — Vanilla, no dependencies
+     JavaScript -- Vanilla, no dependencies
      ======================================================================== -->
 <script>
 (function () {
   "use strict";
+
+  /* ------------------------------------------------------------------
+     Rule descriptions for detail view
+     ------------------------------------------------------------------ */
+  var RULE_HELP = {
+    "R001": "Dangerous tool name matching system commands like eval, exec, rm",
+    "R101": "Zero-width Unicode character hidden in tool name or description",
+    "R102": "Prompt injection pattern containing LLM jailbreak directives",
+    "R103": "Base64 or hex encoded blob possibly hiding malicious payloads",
+    "R104": "Hidden HTML or Markdown content invisible to users but visible to LLMs",
+    "R105": "Permission scope mismatch between tool name and description",
+    "R106": "Secret or credential exposure in tool description",
+    "R107": "Command injection risk via shell metacharacters or dangerous defaults (CWE-78)",
+    "R108": "Supply chain risk via install commands or dynamic imports in description",
+    "R109": "Schema poisoning via missing type constraints or excessive limits",
+    "R110": "Version or fingerprint anomaly indicating rollback or unexpected change",
+    "R111": "Insecure transport via plain HTTP, old TLS, or bad certificates",
+    "R112": "Missing authorization hardening per RFC 9207 or deprecated sessions",
+    "R113": "Path traversal risk from file params without validation (CWE-22)",
+    "R114": "Unbounded input with no size or content constraints on string params",
+    "C001": "Same tool name used in 2+ servers causing collision risk",
+    "C002": "Similar tool names across servers that may confuse the LLM",
+    "C003": "Cross-server data exfiltration chain between reader and sender tools",
+    "C004": "Capability overlap across 3+ servers expanding attack surface",
+    "C005": "Permission gradient where read-only and write-capable servers coexist",
+    "C006": "Attack path chain via schema type matching across servers",
+    "C007": "Privilege escalation path from read-only to write or exec tools"
+  };
 
   /* ------------------------------------------------------------------
      State
@@ -548,6 +734,9 @@ footer a:hover { text-decoration: underline; }
   var sortKey = "risk";
   var sortAsc = true;
   var searchQuery = "";
+  var activeCategory = "";
+  var activeVulnType = "";
+  var activeApiFree = "";
   var isLoading = true;
   var loadError = false;
 
@@ -586,6 +775,30 @@ footer a:hover { text-decoration: underline; }
   }
   function decodeServer(hash) {
     return decodeURIComponent(hash);
+  }
+
+  function renderSparkline(history) {
+    if (!history || history.length < 2) return '-';
+    var scores = history.map(function (h) { return h.score; });
+    var min = Math.min.apply(null, scores);
+    var max = Math.max.apply(null, scores);
+    var range = max - min || 1;
+    var w = 64, h = 20, pad = 2;
+    var points = '';
+    for (var i = 0; i < scores.length; i++) {
+      var x = pad + (i / Math.max(scores.length - 1, 1)) * (w - 2 * pad);
+      var y = h - pad - ((scores[i] - min) / range) * (h - 2 * pad);
+      points += x.toFixed(1) + ',' + y.toFixed(1) + ' ';
+    }
+    var first = scores[0];
+    var last = scores[scores.length - 1];
+    var trend = last < first ? 'improving' : last > first ? 'worsening' : 'stable';
+    var color = trend === 'improving' ? 'var(--green)' : trend === 'worsening' ? 'var(--red)' : 'var(--dim)';
+    var lastPoint = points.trim().split(' ').pop().split(',');
+    return '<svg width="' + w + '" height="' + h + '" style="vertical-align:middle" aria-label="Score trend: ' + trend + '">' +
+      '<polyline points="' + points.trim() + '" fill="none" stroke="' + color + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<circle cx="' + lastPoint[0] + '" cy="' + lastPoint[1] + '" r="2.5" fill="' + color + '"/>' +
+      '</svg>';
   }
 
   function inferScope(s) {
@@ -655,6 +868,10 @@ footer a:hover { text-decoration: underline; }
         var id = (s.server || "").toLowerCase();
         if (name.indexOf(q) === -1 && id.indexOf(q) === -1) return false;
       }
+      if (activeCategory && (s.category || "Other") !== activeCategory) return false;
+      if (activeVulnType && (s.vuln_types || []).indexOf(activeVulnType) === -1) return false;
+      if (activeApiFree === "api-free" && !s.api_free) return false;
+      if (activeApiFree === "api-based" && s.api_free) return false;
       return true;
     });
   }
@@ -687,9 +904,9 @@ footer a:hover { text-decoration: underline; }
       }
     }
     var pending = total - scanned;
-    var avg = scanned > 0 ? (sum / scanned).toFixed(1) : "—";
+    var avg = scanned > 0 ? (sum / scanned).toFixed(1) : "-";
     var previewHtml = scanned < 5
-      ? ' <span class="preview-tag">Preview — ' + scanned + ' servers scanned</span>'
+      ? ' <span class="preview-tag">Preview: ' + scanned + ' servers scanned</span>'
       : "";
 
     statsBar.innerHTML =
@@ -698,7 +915,7 @@ footer a:hover { text-decoration: underline; }
       (scanned >= 5 ? '<span>Avg risk <strong>' + avg + '</strong></span>' : '') +
       (latest ? '<span>Updated <strong>' + latest + '</strong></span>' : '');
 
-    // Calibration badge — show if we have at least one non-A server (real findings)
+    // Calibration badge: show if we have at least one non-A server (real findings)
     var nonA = allServers.filter(function (s) { return s.grade !== "A"; }).length;
     if (nonA > 0) {
       calBadge.style.display = "inline-block";
@@ -707,13 +924,71 @@ footer a:hover { text-decoration: underline; }
   }
 
   /* ------------------------------------------------------------------
+     Render: Threat Landscape
+     ------------------------------------------------------------------ */
+  function renderLandscape() {
+    if (allServers.length === 0 || isLoading) return;
+    var total = allServers.length;
+    // Grade distribution
+    var gradeCounts = {A:0, B:0, C:0, D:0, F:0};
+    var grades = ["A","B","C","D","F"];
+    var gradeColors = {"A":"var(--green)","B":"var(--light-green)","C":"var(--yellow)","D":"var(--orange)","F":"var(--red)"};
+    for (var i = 0; i < allServers.length; i++) {
+      var g = (allServers[i].grade || "").toUpperCase();
+      if (gradeCounts[g] !== undefined) gradeCounts[g]++;
+    }
+    var ghtml = '<div style="display:flex;height:20px;border-radius:3px;overflow:hidden;gap:2px;margin-bottom:4px">';
+    for (var j = 0; j < grades.length; j++) {
+      var gc = grades[j];
+      var pct = total > 0 ? (gradeCounts[gc] / total * 100).toFixed(1) : 0;
+      ghtml += '<div style="width:' + pct + '%;background:' + gradeColors[gc] + ';display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;color:#000;min-width:' + (gradeCounts[gc] > 0 ? '24px' : '0') + '" title="' + gc + ': ' + gradeCounts[gc] + ' servers">' + (gradeCounts[gc] > 0 ? gradeCounts[gc] : '') + '</div>';
+    }
+    ghtml += '</div>';
+    ghtml += '<div style="font-size:10px;color:var(--dim);display:flex;gap:10px">';
+    for (var k = 0; k < grades.length; k++) {
+      ghtml += '<span><span style="color:' + gradeColors[grades[k]] + '">' + grades[k] + '</span>: ' + gradeCounts[grades[k]] + '</span>';
+    }
+    ghtml += '</div>';
+    document.getElementById("gradeDist").innerHTML = ghtml;
+
+    // Vulnerability type distribution (top 8)
+    var vulnCounts = {};
+    for (var vi = 0; vi < allServers.length; vi++) {
+      var vts = allServers[vi].vuln_types || [];
+      for (var vj = 0; vj < vts.length; vj++) {
+        vulnCounts[vts[vj]] = (vulnCounts[vts[vj]] || 0) + 1;
+      }
+    }
+    var sorted = Object.keys(vulnCounts).sort(function(a,b){ return vulnCounts[b] - vulnCounts[a]; }).slice(0, 8);
+    var vhtml = '';
+    if (sorted.length === 0) {
+      vhtml = '<p style="color:var(--dim);font-size:12px">No vulnerabilities detected across scanned servers.</p>';
+    } else {
+      for (var vi = 0; vi < sorted.length; vi++) {
+        var vn = sorted[vi];
+        var vc = vulnCounts[vn];
+        var vpct = total > 0 ? (vc / total * 100) : 0;
+        vhtml += '<div style="margin-bottom:4px">';
+        vhtml += '<div style="display:flex;justify-content:space-between;font-size:11px"><span>' + esc(vn) + '</span><span style="color:var(--dim)">' + vc + ' (' + vpct.toFixed(0) + '%)</span></div>';
+        vhtml += '<div style="height:4px;background:var(--card);border-radius:2px;overflow:hidden"><div style="height:100%;width:' + vpct + '%;background:var(--orange);border-radius:2px"></div></div>';
+        vhtml += '</div>';
+      }
+    }
+    document.getElementById("vulnDist").innerHTML = vhtml;
+  }
+
+  /* ------------------------------------------------------------------
      Render: Scope Tags
      ------------------------------------------------------------------ */
   function renderScopeTags(s) {
     var scopes = inferScope(s);
+    if (s.api_free) {
+      scopes.push("local-first");
+    }
     var html = '<span class="scope-tags">';
     for (var i = 0; i < scopes.length; i++) {
-      html += '<span class="scope-tag">' + esc(scopes[i]) + '</span>';
+      var cls = scopes[i] === "local-first" ? 'scope-tag local-first' : 'scope-tag';
+      html += '<span class="' + cls + '">' + esc(scopes[i]) + '</span>';
     }
     html += '</span>';
     return html;
@@ -742,21 +1017,21 @@ footer a:hover { text-decoration: underline; }
       return;
     }
     if (loadError) {
-      tbody.innerHTML = '<tr><td colspan="9" class="state-msg">' +
-        '<p>Data unavailable — check back soon.</p>' +
+      tbody.innerHTML = '<tr><td colspan="10" class="state-msg">' +
+        '<p>Data unavailable. Check back soon.</p>' +
         '<p><a onclick="location.reload()">Retry</a></p>' +
         '</td></tr>';
       return;
     }
     if (filtered.length === 0) {
       if (allServers.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="9" class="state-msg">' +
+        tbody.innerHTML = '<tr><td colspan="10" class="state-msg">' +
           '<p class="icon">&#9729;</p>' +
           '<p>No scan results yet.</p>' +
           '<p>The leaderboard updates weekly via GitHub Actions. Check back soon!</p>' +
           '</td></tr>';
       } else {
-        tbody.innerHTML = '<tr><td colspan="9" class="state-msg">' +
+        tbody.innerHTML = '<tr><td colspan="10" class="state-msg">' +
           '<p>No servers match your filters.</p>' +
           '</td></tr>';
       }
@@ -767,12 +1042,12 @@ footer a:hover { text-decoration: underline; }
     for (var i = 0; i < filtered.length; i++) {
       var s = filtered[i];
       var sc = s.aivss_score != null ? s.aivss_score : 0;
-      var g = s.grade || "—";
+      var g = s.grade || "-";
       var tools = s.tools != null ? s.tools : 0;
       var findings = s.findings != null ? s.findings : 0;
-      var ls = s.last_scanned || "—";
-      var hash = s.tool_hash ? s.tool_hash.substring(0, 8) : "—";
-      var name = s.display_name || s.server || "—";
+      var ls = s.last_scanned || "-";
+      var hash = s.tool_hash ? s.tool_hash.substring(0, 8) : "-";
+      var name = s.display_name || s.server || "-";
       var serverId = s.server || "";
       var detailHref = "#server=" + encodeServer(serverId);
       var registryName = serverId
@@ -783,7 +1058,7 @@ footer a:hover { text-decoration: underline; }
 
       var isPending = s.status === "registry-pending" || s.status === "pending";
       var ver = s.version ? s.version : "";
-      var gDisplay = isPending ? "—" : g;
+      var gDisplay = isPending ? "-" : g;
       var gradeLabel = isPending ? "Pending" : g;
 
       html += '<tr' + (isPending ? ' style="opacity:0.6"' : '') + '>';
@@ -797,10 +1072,11 @@ footer a:hover { text-decoration: underline; }
         '</span></td>';
       html += '<td class="risk-cell">' + renderRiskBar(sc) + '</td>';
       html += '<td><span class="grade-badge ' + g + '" aria-label="Grade ' + gradeLabel + '">' + gDisplay + '</span></td>';
+      html += '<td style="text-align:center">' + renderSparkline(s.history) + '</td>';
       html += '<td>' + renderScopeTags(s) + '</td>';
       // Tools
       html += '<td><span style="font-weight:600">' + tools + '</span></td>';
-      // Findings — clickable to detail
+      // Findings: clickable to detail
       if (findings > 0 && s.findings_detail && s.findings_detail.length > 0) {
         html += '<td><a class="findings-link" href="' + detailHref + '">' + findings + '</a></td>';
       } else {
@@ -819,7 +1095,7 @@ footer a:hover { text-decoration: underline; }
   function renderSkeleton() {
     var html = "";
     for (var i = 0; i < 5; i++) {
-      html += '<tr><td colspan="9"><div class="skeleton-row">' +
+      html += '<tr><td colspan="10"><div class="skeleton-row">' +
         '<div class="skeleton sk"></div>' +
         '<div class="skeleton sk"></div>' +
         '<div class="skeleton sk"></div>' +
@@ -848,12 +1124,12 @@ footer a:hover { text-decoration: underline; }
     for (var i = 0; i < filtered.length; i++) {
       var s = filtered[i];
       var sc = s.aivss_score != null ? s.aivss_score : 0;
-      var g = s.grade || "—";
+      var g = s.grade || "-";
       var tools = s.tools != null ? s.tools : 0;
       var findings = s.findings != null ? s.findings : 0;
-      var ls = s.last_scanned || "—";
-      var hash = s.tool_hash ? s.tool_hash.substring(0, 8) : "—";
-      var name = s.display_name || s.server || "—";
+      var ls = s.last_scanned || "-";
+      var hash = s.tool_hash ? s.tool_hash.substring(0, 8) : "-";
+      var name = s.display_name || s.server || "-";
       var serverId = s.server || "";
       var detailHref = "#server=" + encodeServer(serverId);
 
@@ -866,10 +1142,11 @@ footer a:hover { text-decoration: underline; }
       if (ver) html += ' <span style="font-size:11px;color:var(--dim)">v' + esc(ver) + '</span>';
       if (isPending) html += ' <span style="font-size:9px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:0 5px;color:var(--dim)">pending</span>';
       html += '</div>';
-      html += '<span class="card-grade ' + g + '" aria-label="Grade ' + (isPending ? 'Pending' : g) + '">' + (isPending ? '—' : g) + '</span>';
+      html += '<span class="card-grade ' + g + '" aria-label="Grade ' + (isPending ? 'Pending' : g) + '">' + (isPending ? '-' : g) + '</span>';
       html += '</div>';
       html += '<div class="card-stats">';
       html += '<div>Risk</div><div>' + renderRiskBar(sc) + '</div>';
+      html += '<div>Trend</div><div>' + (s.history && s.history.length > 1 ? (s.history[s.history.length - 1].score < s.history[0].score ? '<span style="color:var(--green)">improving</span>' : s.history[s.history.length - 1].score > s.history[0].score ? '<span style="color:var(--red)">worsening</span>' : '<span style="color:var(--dim)">stable</span>') : '-') + '</div>';
       html += '<div>Tools</div><div><strong>' + tools + '</strong></div>';
       html += '<div>Findings</div><div><strong>' + findings + '</strong></div>';
       html += '<div>Scanned</div><div>' + esc(ls) + '</div>';
@@ -903,6 +1180,68 @@ footer a:hover { text-decoration: underline; }
   }
 
   /* ------------------------------------------------------------------
+     SARIF Download
+     ------------------------------------------------------------------ */
+  function downloadSarif(serverName, s) {
+    var sarif = {
+      "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+      "version": "2.1.0",
+      "runs": [{
+        "tool": {
+          "driver": {
+            "name": "MCPRadar",
+            "informationUri": "https://github.com/yatuk/mcpradar",
+            "semanticVersion": (s.scanner_version || "unknown"),
+            "rules": []
+          }
+        },
+        "results": [],
+        "properties": {
+          "target": serverName,
+          "aivss_score": s.aivss_score,
+          "grade": s.grade,
+          "confidence": s.confidence
+        }
+      }]
+    };
+    var seenRules = {};
+    var findings = s.findings_detail || [];
+    var sevMap = { "low": "note", "medium": "warning", "high": "error", "critical": "error" };
+    for (var i = 0; i < findings.length; i++) {
+      var f = findings[i];
+      var rid = f.rule_id || "?";
+      if (!seenRules[rid]) {
+        seenRules[rid] = true;
+        sarif.runs[0].tool.driver.rules.push({
+          "id": rid,
+          "shortDescription": { "text": f.title || rid },
+          "helpUri": "https://github.com/yatuk/mcpradar/blob/main/docs/detection-rules.md"
+        });
+      }
+      sarif.runs[0].results.push({
+        "ruleId": rid,
+        "level": sevMap[(f.severity || "low").toLowerCase()] || "warning",
+        "message": { "text": f.description || f.title || "" },
+        "locations": [{
+          "physicalLocation": {
+            "artifactLocation": { "uri": f.target || serverName, "uriBaseId": serverName },
+            "region": { "snippet": { "text": f.evidence || "" } }
+          }
+        }],
+        "properties": { "severity": f.severity, "title": f.title }
+      });
+    }
+    var blob = new Blob([JSON.stringify(sarif, null, 2)], { type: "application/sarif+json" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = (serverName.replace(/[@/]/g, "_") || "scan") + ".sarif.json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(a.href);
+  }
+
+  /* ------------------------------------------------------------------
      Detail View
      ------------------------------------------------------------------ */
   function showDetail(serverName) {
@@ -919,9 +1258,9 @@ footer a:hover { text-decoration: underline; }
     mainView.style.display = "none";
     detailView.classList.add("active");
 
-    var g = s.grade || "—";
+    var g = s.grade || "-";
     var sc = s.aivss_score != null ? s.aivss_score : 0;
-    var name = s.display_name || s.server || "—";
+    var name = s.display_name || s.server || "-";
     var findings = s.findings_detail || [];
     var tools = s.tools_detail || [];
     var bySev = s.by_severity || {};
@@ -945,18 +1284,25 @@ footer a:hover { text-decoration: underline; }
     html += '<h2>' + esc(name) + '</h2>';
     html += '<div class="meta">';
     html += '<span>Server ID: <strong>' + esc(s.server || "") + '</strong></span> &nbsp;|&nbsp; ';
-    html += '<span>Last scanned: <strong>' + esc(s.last_scanned || "—") + '</strong></span> &nbsp;|&nbsp; ';
-    html += '<span>Scanner: <strong>' + esc(s.scanner_version || "—") + '</strong></span>';
+    html += '<span>Last scanned: <strong>' + esc(s.last_scanned || "-") + '</strong></span> &nbsp;|&nbsp; ';
+    html += '<span>Scanner: <strong>' + esc(s.scanner_version || "-") + '</strong></span>';
+    html += '</div>';
+
+    // Badge embed code
+    var badgename = (s.server || "").replace(/@/g, "").replace(/\//g, "-");
+    html += '<div style="margin-top:8px;padding:8px 10px;background:var(--card);border:1px solid var(--border);border-radius:6px;font-size:12px;color:var(--dim)">';
+    html += '<span style="color:var(--text);font-weight:600">README Badge:</span><br>';
+    html += '<code style="font-size:11px;word-break:break-all">[![MCPRadar Security](https://yatuk.github.io/mcpradar/badges/' + esc(badgename) + '.svg)](https://yatuk.github.io/mcpradar/)</code>';
     html += '</div>';
 
     // Score breakdown
     html += '<div class="detail-score-breakdown">';
     html += '<div class="item">AIVSS Risk: <b>' + sc.toFixed(1) + ' / 10</b></div>';
     html += '<div class="item">Grade: <b style="color:' + (g === "F" || g === "D" ? "var(--red)" : g === "A" || g === "B" ? "var(--green)" : "var(--yellow)") + '">' + g + '</b></div>';
-    html += '<div class="item">Confidence: <b>' + (s.confidence != null ? (s.confidence * 100).toFixed(0) + '%' : '—') + '</b></div>';
+    html += '<div class="item">Confidence: <b>' + (s.confidence != null ? (s.confidence * 100).toFixed(0) + '%' : '-') + '</b></div>';
     html += '<div class="item">Tools: <b>' + (s.tools || 0) + '</b></div>';
     html += '<div class="item">Findings: <b>' + (s.findings || 0) + '</b></div>';
-    html += '<div class="item">Full hash: <b class="mono">' + esc(s.tool_hash || "—") + '</b></div>';
+    html += '<div class="item">Full hash: <b class="mono">' + esc(s.tool_hash || "-") + '</b></div>';
     html += '</div>';
 
     // Severity breakdown
@@ -967,33 +1313,38 @@ footer a:hover { text-decoration: underline; }
     html += '<div class="item">Low: <b style="color:var(--dim)">' + (bySev.low || 0) + '</b></div>';
     html += '<div class="item">Scope: ' + renderScopeTags(s) + '</div>';
     html += '</div>';
+    html += '<button class="sarif-btn" id="sarifBtn" title="Download SARIF v2.1.0 report">Download SARIF</button>';
     html += '</div>';
 
-    // Findings section
+    // Findings section with accordion groups
     html += '<div class="detail-section">';
     html += '<h3>Findings (' + findings.length + ')</h3>';
     if (findings.length === 0) {
-      html += '<p style="color:var(--dim)">No findings detected — server is clean.</p>';
+      html += '<p style="color:var(--dim)">No findings detected; server is clean.</p>';
     } else {
       for (var gx = 0; gx < sevOrder.length; gx++) {
         var sev = sevOrder[gx];
         var group = groups[sev];
         if (!group || group.length === 0) continue;
-        html += '<div style="margin-bottom:12px">';
-        html += '<span class="sev-tag ' + sev + '">' + sev + ' (' + group.length + ')</span>';
+        html += '<details class="finding-group" open>';
+        html += '<summary><span class="sev-tag ' + sev + '">' + sev.toUpperCase() + '</span> <span class="count">' + group.length + ' finding' + (group.length !== 1 ? 's' : '') + '</span></summary>';
         for (var fx = 0; fx < group.length; fx++) {
           var ff = group[fx];
+          var ruleHelp = RULE_HELP[ff.rule_id] || "";
           html += '<div class="finding-row ' + sev + '">';
-          html += '<span>' + esc(ff.rule_id || "—") + '</span>';
+          html += '<span>' + esc(ff.rule_id || "-") + '</span>';
           html += '<span class="sev-tag ' + sev + '">' + esc(ff.severity || "") + '</span>';
-          html += '<span class="rule-cell">' + esc(ff.target || "—") + '</span>';
-          html += '<span style="color:var(--text)">' + esc(ff.title || "—") + '</span>';
+          html += '<span class="rule-cell">' + esc(ff.target || "-") + '</span>';
+          html += '<span style="color:var(--text)">' + esc(ff.title || "-") + '</span>';
           if (ff.description) {
             html += '<span class="finding-desc">' + esc(ff.description) + '</span>';
           }
+          if (ruleHelp) {
+            html += '<span class="rule-help">' + esc(ruleHelp) + '</span>';
+          }
           html += '</div>';
         }
-        html += '</div>';
+        html += '</details>';
       }
     }
     html += '</div>';
@@ -1008,8 +1359,8 @@ footer a:hover { text-decoration: underline; }
       for (var tx = 0; tx < tools.length; tx++) {
         var t = tools[tx];
         html += '<div class="tool-mini">';
-        html += '<span class="tn">' + esc(t.name || "—") + '</span>';
-        html += '<span class="td">' + esc((t.description || "—").substring(0, 140)) + '</span>';
+        html += '<span class="tn">' + esc(t.name || "-") + '</span>';
+        html += '<span class="td">' + esc((t.description || "-").substring(0, 140)) + '</span>';
         if (t.input_schema) {
           var schemaId = 'schema-in-' + tx;
           html += '<div class="ts"><button class="schema-toggle" onclick="var el=document.getElementById(\'' + schemaId + '\');el.style.display=el.style.display===\'none\'?\'block\':\'none\'" style="background:var(--border);color:var(--dim);border:none;border-radius:3px;padding:1px 8px;cursor:pointer;font-size:10px;font-weight:600">Input Schema</button>';
@@ -1027,6 +1378,11 @@ footer a:hover { text-decoration: underline; }
     html += '</div>';
 
     detailView.innerHTML = html;
+    // Wire SARIF download button
+    var btn = document.getElementById("sarifBtn");
+    if (btn) {
+      btn.onclick = function () { downloadSarif(decoded, s); };
+    }
     window.scrollTo(0, 0);
   }
 
@@ -1074,6 +1430,7 @@ footer a:hover { text-decoration: underline; }
     updateSortIndicators();
     updateLayout();
     renderStats();
+    renderLandscape();
   }
 
   /* ------------------------------------------------------------------
@@ -1081,6 +1438,25 @@ footer a:hover { text-decoration: underline; }
      ------------------------------------------------------------------ */
   searchInput.addEventListener("input", function () {
     searchQuery = searchInput.value;
+    fullRender();
+  });
+
+  // Category + vuln type filter dropdowns
+  var catFilter = document.getElementById("categoryFilter");
+  var vulnFilter = document.getElementById("vulnFilter");
+  catFilter.addEventListener("change", function () {
+    activeCategory = catFilter.value;
+    fullRender();
+  });
+  vulnFilter.addEventListener("change", function () {
+    activeVulnType = vulnFilter.value;
+    fullRender();
+  });
+
+  // API-Free filter dropdown
+  var apiFreeFilter = document.getElementById("apiFreeFilter");
+  apiFreeFilter.addEventListener("change", function () {
+    activeApiFree = apiFreeFilter.value;
     fullRender();
   });
 
@@ -1140,9 +1516,28 @@ footer a:hover { text-decoration: underline; }
     resizeTimer = setTimeout(updateLayout, 100);
   });
 
-  // Methodology panel — remember open/closed state
+  // Methodology panel: remember open/closed state
   methodologyPanel.addEventListener("toggle", function () {
     try { localStorage.setItem("mcpradar:methodology", methodologyPanel.open ? "1" : "0"); } catch (e) {}
+  });
+
+  // Submit server form
+  var submitForm = document.getElementById("submitForm");
+  submitForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var name = document.getElementById("serverName").value.trim();
+    var url = document.getElementById("serverUrl").value.trim();
+    var cat = document.getElementById("serverCategory").value;
+    if (!name) return;
+    var body = "Scan request for: `" + name + "`\nURL: " + (url || "N/A") + "\nCategory: " + (cat || "unspecified");
+    var issueUrl = "https://github.com/yatuk/mcpradar/issues/new?title=" + encodeURIComponent("Scan request: " + name) + "&body=" + encodeURIComponent(body) + "&labels=scan-request";
+    window.open(issueUrl, "_blank");
+    var btn = submitForm.querySelector("button");
+    var msg = document.getElementById("submitMsg");
+    btn.textContent = "Submitted!";
+    btn.disabled = true;
+    msg.style.display = "inline";
+    msg.textContent = "Opening issue in new tab...";
   });
 
   // Expose key functions for inline onclick handlers

@@ -60,4 +60,183 @@ servers:
     scan: "python demo/malicious_server.py"
     transport: stdio
     expected_rules: [R001, R101, R102, R103, R104, R105, R106, R107, R108, R109]
-    notes: "Project's own malicious demo. Should trigger all 6 rules — baseline test."
+    notes: "Project's own malicious demo. Should trigger all 6 rules -- baseline test."
+
+  # ── Vector Databases & RAG ──
+  - name: "@anthropic/server-pinecone"
+    scan: "npx -y @anthropic/server-pinecone"
+    transport: stdio
+    expected_rules: []
+    notes: "Community. Pinecone vector DB. Category: Vector DB. Scope mismatch risk (R105) high."
+
+  - name: "@anthropic/server-qdrant"
+    scan: "npx -y @anthropic/server-qdrant"
+    transport: stdio
+    expected_rules: []
+    notes: "Community. Qdrant vector DB. Category: Vector DB."
+
+  # ── DevOps & Cloud Infrastructure ──
+  - name: "@anthropic/server-gitlab"
+    scan: "npx -y @anthropic/server-gitlab"
+    transport: stdio
+    expected_rules: []
+    notes: "Community. GitLab API. Category: DevOps. Command injection (R107) and privilege escalation (C007) risk high."
+
+  - name: "@anthropic/server-kubernetes"
+    scan: "npx -y @anthropic/server-kubernetes"
+    transport: stdio
+    expected_rules: []
+    notes: "Community. Kubernetes cluster operations. Category: DevOps. Critical target for privilege escalation testing."
+
+  - name: "@anthropic/server-docker"
+    scan: "npx -y @anthropic/server-docker"
+    transport: stdio
+    expected_rules: []
+    notes: "Community. Docker container management. Category: DevOps. Command injection risk high."
+
+  - name: "@anthropic/server-jira"
+    scan: "npx -y @anthropic/server-jira"
+    transport: stdio
+    expected_rules: []
+    notes: "Community. Jira issue tracking API. Category: DevOps."
+
+  - name: "@anthropic/server-confluence"
+    scan: "npx -y @anthropic/server-confluence"
+    transport: stdio
+    expected_rules: []
+    notes: "Community. Confluence wiki API. Category: DevOps."
+
+  # ── Search & OSINT ──
+  - name: "@anthropic/server-exa"
+    scan: "npx -y @anthropic/server-exa"
+    transport: stdio
+    expected_rules: []
+    notes: "Community. Exa (Metaphor) web search. Category: Web Search. Prompt injection risk (R102)."
+
+  - name: "@anthropic/server-serper"
+    scan: "npx -y @anthropic/server-serper"
+    transport: stdio
+    expected_rules: []
+    notes: "Community. Serper Google Search API. Category: Web Search."
+
+  - name: "@anthropic/server-brave-search"
+    scan: "npx -y @anthropic/server-brave-search"
+    transport: stdio
+    expected_rules: []
+    notes: "Community. Brave Search API. Category: Web Search."
+
+  # ── Communication & Automation ──
+  - name: "@anthropic/server-discord"
+    scan: "npx -y @anthropic/server-discord"
+    transport: stdio
+    expected_rules: []
+    notes: "Community. Discord messaging. Category: Communication. Exfiltration chain (C003) risk."
+
+  - name: "@anthropic/server-microsoft-teams"
+    scan: "npx -y @anthropic/server-microsoft-teams"
+    transport: stdio
+    expected_rules: []
+    notes: "Community. Microsoft Teams messaging. Category: Communication."
+
+  - name: "@anthropic/server-sendgrid"
+    scan: "npx -y @anthropic/server-sendgrid"
+    transport: stdio
+    expected_rules: []
+    notes: "Community. SendGrid email API. Category: Communication."
+
+  # ── Additional Database ──
+  - name: "@anthropic/server-sqlite"
+    scan: "npx -y @anthropic/server-sqlite"
+    transport: stdio
+    expected_rules: []
+    notes: "Community. SQLite database. Category: Database. SQL injection risk."
+
+  - name: "@anthropic/server-redis"
+    scan: "npx -y @anthropic/server-redis"
+    transport: stdio
+    expected_rules: []
+    notes: "Community. Redis key-value store. Category: Database."
+
+  # ── API-Free / Local-First Servers ──
+  # These require no API keys, run entirely on local hardware via stdio.
+
+  - name: "local-mcp"
+    scan: "npx -y local-mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "macOS desktop automation (182+ tools). Mail, iMessage, Teams SQLite cache, Office docs, Safari bookmarks, Finder. Category: Desktop Automation. API-free, 100% local. No OAuth/Graph API needed."
+
+  - name: "dotmd-mcp"
+    scan: "uvx dotmd"
+    transport: stdio
+    expected_rules: []
+    notes: "Markdown hybrid search engine. LanceDB vectors + LadybugDB graph + SQLite + BM25 keyword matching + recursive rank fusion. Category: Knowledge/RAG. Fully embedded, zero API cost."
+
+  - name: "chrome-devtools-mcp"
+    scan: "npx -y chrome-devtools-mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "Google official. CDP-based browser control: heap snapshots, performance traces, DOM inspection, console errors, headful CAPTCHA bypass. Category: Browser/DevTools. No API keys."
+
+  - name: "db-mcp-server"
+    scan: "npx -y db-mcp-server"
+    transport: stdio
+    expected_rules: []
+    notes: "Multi-database unified interface: MySQL, PostgreSQL, SQLite, Oracle. Lazy loading connections. Category: Database. FreePeak/cortex. SQL injection risk (R107)."
+
+  - name: "searxng-mcp"
+    scan: "uvx searxng-mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "Self-hosted SearXNG metasearch wrapper. JSON format results, anonymous queries, multi-engine aggregation. Category: Web Search. Privacy-focused, no API subscription needed."
+
+  - name: "duckduckgo-mcp"
+    scan: "npx -y duckduckgo-mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "DuckDuckGo public endpoints. 2,400+ installs. Category: Web Search. Zero API keys, free web search."
+
+  - name: "wardn-mcp"
+    scan: "npx -y wardn-mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "Encrypted vault with token injection proxy. AES-256-GCM. API keys never enter LLM context window. Category: Security. Zero-trust, placeholder token substitution."
+
+  - name: "ha-mcp"
+    scan: "uvx ha-mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "Home Assistant MCP integration. Sensor data analysis, automation YAML management, device control. Category: IoT/Smart Home. Cloud-free, LAN-only operations."
+
+  - name: "frigate-mcp"
+    scan: "uvx frigate-mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "Frigate NVR camera configuration. Person detection tuning, zone management, false alarm reduction. Category: IoT/Smart Home. Local network only, no cloud dependency."
+
+  # ── Financial & Transactional ──
+  - name: "@stripe/mcp"
+    scan: "npx -y @stripe/mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "Official Stripe payment integration. Category: Financial. R106 (secret exposure) risk high due to API keys. C003 (exfiltration chain) risk with communication tools."
+
+  # ── Crypto Wallets ──
+  - name: "@anthropic/server-crypto-wallet"
+    scan: "npx -y @anthropic/server-crypto-wallet"
+    transport: stdio
+    expected_rules: []
+    notes: "Community. Crypto wallet interactions. Category: Crypto Wallets. R106 critical for private key exposure. R105 scope mismatch (wallet+network)."
+
+  # ── Local LLM ──
+  - name: "ollama-mcp"
+    scan: "uvx ollama-mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "Ollama local LLM bridge (localhost:11434). Category: Local LLM. C005 permission gradient risk high when combined with filesystem tools. Model file path traversal (R113)."
+
+  - name: "lm-studio-mcp"
+    scan: "uvx lm-studio-mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "LM Studio local inference server bridge. Category: Local LLM. Resource exhaustion (GPU/CPU DoS) and GGUF model file exfiltration risk."
