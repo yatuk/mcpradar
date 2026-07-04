@@ -240,3 +240,414 @@ servers:
     transport: stdio
     expected_rules: []
     notes: "LM Studio local inference server bridge. Category: Local LLM. Resource exhaustion (GPU/CPU DoS) and GGUF model file exfiltration risk."
+
+  # ══════════════════════════════════════════════════════════════
+  # Browser Automation (API-free, local browser control)
+  # ══════════════════════════════════════════════════════════════
+  - name: "@browsermcp/mcp"
+    scan: "npx -y @browsermcp/mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "Automate local Chrome browser. Category: Browser. No API keys."
+
+  - name: "safari-mcp"
+    scan: "npx -y safari-mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "Native Safari automation (80+ tools), Apple Silicon optimized. Category: Browser."
+
+  - name: "selenium-mcp"
+    scan: "pip install selenium-mcp && python -m selenium_mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "84 browser automation tools with self-healing locators. Category: Browser."
+
+  - name: "agent-scraper-mcp"
+    scan: "pip install agent-scraper-mcp && python -m agent_scraper_mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "Web scraping with clean content extraction and screenshots. Category: Web Search."
+
+  - name: "pskill9/web-search"
+    scan: "npx -y pskill9/web-search"
+    transport: stdio
+    expected_rules: []
+    notes: "Free Google web search, no API keys required. Category: Web Search."
+
+  # ══════════════════════════════════════════════════════════════
+  # Command Line / Shell (API-free)
+  # ══════════════════════════════════════════════════════════════
+  - name: "cli-mcp"
+    scan: "npx -y @zueai/cli-mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "Execute CLI commands safely. Category: DevOps. R107 (command injection) risk."
+
+  - name: "DesktopCommanderMCP"
+    scan: "npx -y @wonderwhy-er/desktop-commander"
+    transport: stdio
+    expected_rules: []
+    notes: "Terminal execution, process management, env var configuration. Category: Desktop Automation. R107 critical."
+
+  - name: "@anthropic/server-commands"
+    scan: "npx -y @anthropic/server-commands"
+    transport: stdio
+    expected_rules: []
+    notes: "Run shell commands with output capture. Category: DevOps. Command injection risk (R107)."
+
+  # ══════════════════════════════════════════════════════════════
+  # Documents & File System (API-free)
+  # ══════════════════════════════════════════════════════════════
+  - name: "adeu"
+    scan: "uvx adeu"
+    transport: stdio
+    expected_rules: []
+    notes: "Automated DOCX redlining engine. Category: Documents. pip + npm. No API keys."
+
+  - name: "markdownify-mcp"
+    scan: "npx -y markdownify-mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "Convert various file formats to Markdown. Category: Documents."
+
+  - name: "@modelcontextprotocol/server-git"
+    scan: "npx -y @modelcontextprotocol/server-git"
+    transport: stdio
+    expected_rules: []
+    notes: "Git repository operations via local .git directory. Category: DevOps. No API keys."
+
+  - name: "pdf-reader-mcp"
+    scan: "npx -y pdf-reader-mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "Extract text and metadata from PDF files locally. Category: Documents."
+
+  # ══════════════════════════════════════════════════════════════
+  # Databases (API-free, direct connections)
+  # ══════════════════════════════════════════════════════════════
+  - name: "@anthropic/server-mysql"
+    scan: "npx -y @anthropic/server-mysql"
+    transport: stdio
+    expected_rules: []
+    notes: "MySQL database direct connection. Category: Database. SQL injection risk (R107)."
+
+  - name: "@anthropic/server-neo4j"
+    scan: "npx -y @anthropic/server-neo4j"
+    transport: stdio
+    expected_rules: []
+    notes: "Neo4j graph database. Category: Database. Cypher injection risk."
+
+  - name: "@anthropic/server-clickhouse"
+    scan: "npx -y @anthropic/server-clickhouse"
+    transport: stdio
+    expected_rules: []
+    notes: "ClickHouse analytical database. Category: Database."
+
+  - name: "@anthropic/server-elasticsearch"
+    scan: "npx -y @anthropic/server-elasticsearch"
+    transport: stdio
+    expected_rules: []
+    notes: "Elasticsearch full-text search engine. Category: Database."
+
+  # ══════════════════════════════════════════════════════════════
+  # Development Tools (API-free)
+  # ══════════════════════════════════════════════════════════════
+  - name: "proposalcraft"
+    scan: "npx -y github:jabbawocky/proposalcraft"
+    transport: stdio
+    expected_rules: []
+    notes: "Drafts client proposals, stores everything locally. Category: Documents."
+
+  - name: "codemcp"
+    scan: "npx -y codemcp"
+    transport: stdio
+    expected_rules: []
+    notes: "Code editing and refactoring assistant. Category: Development."
+
+  - name: "eslint-mcp-server"
+    scan: "npx -y eslint-mcp-server"
+    transport: stdio
+    expected_rules: []
+    notes: "ESLint integration for code quality. Category: Development."
+
+  - name: "@anthropic/server-fetch"
+    scan: "npx -y @anthropic/server-fetch"
+    transport: stdio
+    expected_rules: []
+    notes: "HTTP fetch tool for URL content retrieval. Category: Web Search."
+
+  - name: "@anthropic/server-time"
+    scan: "npx -y @anthropic/server-time"
+    transport: stdio
+    expected_rules: []
+    notes: "Time/timezone utilities. Category: Utility. Simple, clean."
+
+  - name: "context7"
+    scan: "npx -y context7"
+    transport: stdio
+    expected_rules: []
+    notes: "Up-to-date code documentation retrieval. Category: Development."
+
+  # ══════════════════════════════════════════════════════════════
+  # Media & Creative (API-free, local rendering)
+  # ══════════════════════════════════════════════════════════════
+  - name: "manim-mcp-server"
+    scan: "pip install manim-mcp-server && python -m manim_mcp_server"
+    transport: stdio
+    expected_rules: []
+    notes: "Generate mathematical animations with Manim locally. Category: Media."
+
+  - name: "blender-mcp"
+    scan: "pip install blender-mcp && python -m blender_mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "3D modeling and rendering via Blender. Category: Media."
+
+  - name: "aseprite-mcp"
+    scan: "pip install aseprite-mcp && python -m aseprite_mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "Pixel art creation using Aseprite API. Category: Media."
+
+  - name: "nakkas"
+    scan: "npx -y nakkas"
+    transport: stdio
+    expected_rules: []
+    notes: "AI SVG artist: CSS animations, gradients, filters. Category: Media."
+
+  - name: "flstudio-mcp"
+    scan: "pip install flstudio-mcp && python -m flstudio_mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "FL Studio music production control (67 tools). Category: Media."
+
+  - name: "comfy-pilot"
+    scan: "pip install comfy-pilot && python -m comfy_pilot"
+    transport: stdio
+    expected_rules: []
+    notes: "ComfyUI node-based image generation workflows. Category: Media."
+
+  - name: "video-editing-mcp"
+    scan: "pip install video-editing-mcp && python -m video_editing_mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "Video editing: analyze, search, generate edits. Category: Media."
+
+  # ══════════════════════════════════════════════════════════════
+  # Architecture & Design (API-free)
+  # ══════════════════════════════════════════════════════════════
+  - name: "excalidraw-architect-mcp"
+    scan: "pip install excalidraw-architect-mcp && python -m excalidraw_architect_mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "Generate Excalidraw architecture diagrams with auto-layout. No API keys required. Category: Design."
+
+  - name: "mermaid-grammer-inspector-mcp"
+    scan: "npx -y mermaid-grammer-inspector-mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "Validate Mermaid diagram syntax. Category: Design."
+
+  - name: "tentra-mcp"
+    scan: "npx -y tentra-mcp --local init"
+    transport: stdio
+    expected_rules: []
+    notes: "AI-native architecture platform, typed diagrams, export to 14 frameworks. Category: Design."
+
+  # ══════════════════════════════════════════════════════════════
+  # Bioinformatics & Science (API-free, local data)
+  # ══════════════════════════════════════════════════════════════
+  - name: "opengenes-mcp"
+    scan: "pip install opengenes-mcp && python -m opengenes_mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "Aging and longevity research database. Category: Science."
+
+  - name: "synergy-age-mcp"
+    scan: "pip install synergy-age-mcp && python -m synergy_age_mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "Synergistic/antagonistic genetic interactions in longevity. Category: Science."
+
+  - name: "plant-genomics-mcp"
+    scan: "pipx install plant-genomics-mcp && plant-genomics-mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "32 tools for plant genomics across 11 public databases. Category: Science."
+
+  - name: "gget-mcp"
+    scan: "pip install gget-mcp && python -m gget_mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "Bioinformatics toolkit wrapping gget library. Category: Science."
+
+  - name: "biothings-mcp"
+    scan: "pip install biothings-mcp && python -m biothings_mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "Genes, variants, drugs, taxonomy queries. Category: Science."
+
+  # ══════════════════════════════════════════════════════════════
+  # AI / ML (API-free, local models)
+  # ══════════════════════════════════════════════════════════════
+  - name: "mcp-server-ollama-bridge"
+    scan: "uvx mcp-server-ollama-bridge"
+    transport: stdio
+    expected_rules: []
+    notes: "Bridge to local Ollama: Llama, Mistral, Qwen via MCP. Category: Local LLM."
+
+  - name: "anyquery"
+    scan: "anyquery"
+    transport: stdio
+    expected_rules: []
+    notes: "Query 40+ apps with one binary using SQL. Category: AI/ML."
+
+  - name: "@anthropic/server-llamaindex"
+    scan: "npx -y @anthropic/server-llamaindex"
+    transport: stdio
+    expected_rules: []
+    notes: "LlamaIndex RAG framework integration. Category: AI/ML."
+
+  - name: "@anthropic/server-langchain"
+    scan: "npx -y @anthropic/server-langchain"
+    transport: stdio
+    expected_rules: []
+    notes: "LangChain framework integration. Category: AI/ML."
+
+  - name: "cortex"
+    scan: "npx -y @gzoonet/cortex"
+    transport: stdio
+    expected_rules: []
+    notes: "Local-first knowledge graph, watches project files. Category: Knowledge/RAG."
+
+  # ══════════════════════════════════════════════════════════════
+  # OS / System Tools (API-free)
+  # ══════════════════════════════════════════════════════════════
+  - name: "@anthropic/server-apple-shortcuts"
+    scan: "npx -y @anthropic/server-apple-shortcuts"
+    transport: stdio
+    expected_rules: []
+    notes: "macOS Shortcuts automation. Category: Desktop Automation."
+
+  - name: "windows-mcp"
+    scan: "npx -y windows-mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "Windows OS automation and PowerShell script isolation. Category: Desktop Automation."
+
+  - name: "@anthropic/server-terminal"
+    scan: "npx -y @anthropic/server-terminal"
+    transport: stdio
+    expected_rules: []
+    notes: "Terminal/shell access for AI agents. Category: DevOps."
+
+  # ══════════════════════════════════════════════════════════════
+  # Proxy / Aggregator (API-free infrastructure)
+  # ══════════════════════════════════════════════════════════════
+  - name: "forage"
+    scan: "npx -y forage-mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "Self-improving tool discovery, installs MCP servers as subprocesses. Category: Infrastructure."
+
+  - name: "ncp"
+    scan: "npx -y ncp"
+    transport: stdio
+    expected_rules: []
+    notes: "MCP ecosystem orchestrator with intelligent discovery. Category: Infrastructure."
+
+  - name: "liquid"
+    scan: "uvx --from liquid-api[mcp] liquid-mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "Connect agents to any HTTP API deterministically. Category: Infrastructure."
+
+  - name: "mcp-gateway"
+    scan: "uvx mcp-gateway"
+    transport: stdio
+    expected_rules: []
+    notes: "Single-port multiplexing MCP gateway with hot-reload. Category: Infrastructure."
+
+  # ══════════════════════════════════════════════════════════════
+  # Text & Content (API-free)
+  # ══════════════════════════════════════════════════════════════
+  - name: "@anthropic/server-everart"
+    scan: "npx -y @anthropic/server-everart"
+    transport: stdio
+    expected_rules: []
+    notes: "AI art generation prompts and styles. Category: Media."
+
+  - name: "@anthropic/server-pandoc"
+    scan: "npx -y @anthropic/server-pandoc"
+    transport: stdio
+    expected_rules: []
+    notes: "Universal document converter via Pandoc. Category: Documents."
+
+  - name: "@anthropic/server-rss"
+    scan: "npx -y @anthropic/server-rss"
+    transport: stdio
+    expected_rules: []
+    notes: "RSS/Atom feed reader and parser. Category: Content."
+
+  # ══════════════════════════════════════════════════════════════
+  # Additional Utilities
+  # ══════════════════════════════════════════════════════════════
+  - name: "firefox-devtools-mcp"
+    scan: "npx -y firefox-devtools-mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "Firefox automation via WebDriver BiDi. Category: Browser."
+
+  - name: "zen-mcp"
+    scan: "npx -y zen-mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "Zen Browser automation, 20 tools, no Selenium/Playwright needed. Category: Browser."
+
+  - name: "domcp"
+    scan: "npx -y domcp"
+    transport: stdio
+    expected_rules: []
+    notes: "Rust-based DOM manipulation via accessibility tree. Category: Browser."
+
+  - name: "periscope-mcp"
+    scan: "pip install periscope-mcp && python -m periscope_mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "Website testing: 66 Playwright tools with assertions, form-fill, Lighthouse. Category: Browser."
+
+  - name: "davinci-resolve-mcp"
+    scan: "pip install davinci-resolve-mcp && python -m davinci_resolve_mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "DaVinci Resolve video editing, color grading, media management. Category: Media."
+
+  - name: "reaper-mcp"
+    scan: "pip install reaper-mcp && python -m reaper_mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "REAPER DAW: mixing, mastering, MIDI composition (129 tools). Category: Media."
+
+  - name: "thiri-mcp"
+    scan: "npx -y @bluesprincemedia/thiri-mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "Deterministic music theory: chord analysis, Roman numeral, voicing. Category: Media."
+
+  - name: "dicom-hl7-mcp-server"
+    scan: "pip install dicom-hl7-mcp-server && python -m dicom_hl7_mcp"
+    transport: stdio
+    expected_rules: []
+    notes: "DICOM + HL7v2 + FHIR medical imaging bridge. Category: Science."
+
+  - name: "genomic-agent-discovery"
+    scan: "npx -y genomic-agent-discovery"
+    transport: stdio
+    expected_rules: []
+    notes: "Privacy-first multi-agent genomic analysis, 16 databases. Category: Science."
+
+  - name: "depwire"
+    scan: "npx -y depwire"
+    transport: stdio
+    expected_rules: []
+    notes: "Dependency graph: arc diagrams, health scoring, dead code detection. Category: Development."
