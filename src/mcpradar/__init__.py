@@ -7,12 +7,16 @@ Public SDK:
     safe_args = sanitize({"cmd": "rm -rf"})
 """
 
+from __future__ import annotations
+
+from typing import Any
+
 __version__ = "1.0.0-rc4"
 
 from mcpradar.probe.sandbox import SandboxPolicy, SandboxValidator  # noqa: E402, F401
 
 
-def sanitize(args: dict, policy: SandboxPolicy | None = None) -> dict:
+def sanitize(args: dict[str, Any], policy: SandboxPolicy | None = None) -> dict[str, Any]:
     """Sanitize tool arguments before calling an MCP tool.
 
     Import and use in your own MCP server to prevent command injection

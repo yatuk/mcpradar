@@ -62,7 +62,7 @@ def to_cef(report: ScanReport) -> str:
     lines: list[str] = []
     for f in report.findings:
         sev_str = str(f.severity.value) if hasattr(f.severity, "value") else str(f.severity)
-        sev_cef = _CEF_SEVERITY.get(f.severity, "5")  # type: ignore[arg-type]
+        sev_cef = _CEF_SEVERITY.get(f.severity, "5")
 
         title = _escape(f.title or f.rule_id)
         rule_id = _escape(f.rule_id)
@@ -87,7 +87,7 @@ def to_cef(report: ScanReport) -> str:
     return "\n".join(lines)
 
 
-def to_cef_json(report: ScanReport) -> dict:
+def to_cef_json(report: ScanReport) -> dict[str, object]:
     """Convert a ScanReport to a JSON payload suitable for webhook POST.
 
     Returns a dict with CEF lines + metadata for SIEM ingestion.
