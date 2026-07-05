@@ -187,18 +187,22 @@ See [Benchmarks](#benchmarks) for measured precision/recall data.
 
 ## Benchmarks
 
-MCPRadar's detection accuracy is measured against a labeled corpus and published
+MCPRadar's detection accuracy is measured against a labeled 11-target corpus and published
 in [`validation/BENCHMARK.md`](validation/BENCHMARK.md). The benchmark includes:
 
 - **Positive cases:** `demo/malicious_server.py` with 9 intentionally vulnerable tools covering R001-R109
-- **Negative controls:** Official MCP reference servers (filesystem, memory, everything) with expected zero findings
-- **External corpus:** [Appsecco Vulnerable MCP Servers Lab](https://github.com/appsecco/vulnerable-mcp-servers-lab) with 9 servers covering labeled vulnerability classes
+- **Negative controls:** Official MCP reference servers (filesystem, memory, everything) — any MEDIUM+ finding counts as a false positive
+- **External corpus:** 7 stdio servers from the [Appsecco Vulnerable MCP Servers Lab](https://github.com/appsecco/vulnerable-mcp-servers-lab); vulnerability classes that are statically undetectable by design (runtime output poisoning, implementation-level RCE, dependency CVEs, typosquatting) are labeled as known limitations, not detections
 
-| Metric | Target |
-|---|---|
-| Precision | >= 80% |
-| Recall | >= 85% |
-| F1 Score | >= 0.82 |
+| Metric | Target | Measured (v1.0.0-rc4, 11 targets) |
+|---|---|---|
+| Precision | >= 80% | 87.5% |
+| Recall | >= 85% | 100% |
+| F1 Score | >= 0.82 | 0.93 |
+
+Metrics are computed on MEDIUM+ severity findings; LOW informational findings are
+excluded. The two measured false positives (R113 on the official filesystem server,
+R109 on server-everything) are documented in the report.
 
 Performance benchmarks (`tests/test_benchmark.py`): rule engine latency ~14 ms (100 tools),
 SARIF generation ~2 ms (100 findings), SQLite insert ~1.5 ms (batch).

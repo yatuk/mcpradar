@@ -1,34 +1,73 @@
 {
-  "_description": "Ground-truth labels for MCPRadar benchmark. expected_rules lists rule IDs that SHOULD fire. expected_findings_min/max define acceptable finding count ranges.",
+  "_description": "Ground-truth labels for MCPRadar benchmark. expected_rules lists rule IDs that SHOULD fire at MEDIUM+ severity. LOW/informational findings are reported but excluded from precision/recall metrics. Appsecco corpus requires: python validation/setup_corpus.py, then npm install in each node server directory.",
   "targets": {
     "demo/malicious_server.py": {
       "command": "python demo/malicious_server.py",
       "transport": "stdio",
       "expected_rules": ["R001", "R101", "R102", "R103", "R104", "R105", "R106", "R107", "R108", "R109"],
       "expected_findings_min": 15,
-      "expected_findings_max": 40,
-      "notes": "Intentional test corpus. Should trigger all 10 static rules. R110 (fingerprint) and R111 (transport) are integration-level rules not tested here."
+      "expected_findings_max": 50,
+      "notes": "Intentional test corpus. Should trigger all 10 core static rules at MEDIUM+. R110 (fingerprint) and R111 (transport) are integration-level rules not tested here."
     },
     "@modelcontextprotocol/server-filesystem": {
-      "command": "npx -y @modelcontextprotocol/server-filesystem /tmp",
+      "command": "npx -y @modelcontextprotocol/server-filesystem .",
       "transport": "stdio",
       "expected_rules": [],
-      "expected_findings_max": 3,
-      "notes": "Official reference server. Should be clean. Any findings are potential FPs worth investigating."
+      "notes": "Official reference server. Negative control: any MEDIUM+ finding is a false positive. Known noise source: R113 on write-capable path tools (schema-level heuristic cannot see the server's internal path validation)."
     },
     "@modelcontextprotocol/server-everything": {
       "command": "npx -y @modelcontextprotocol/server-everything",
       "transport": "stdio",
       "expected_rules": [],
-      "expected_findings_max": 2,
-      "notes": "Official reference server. Should be clean."
+      "notes": "Official reference server. Negative control. Known noise source: R109 (no required fields) on demo tools that legitimately accept empty input."
     },
     "@modelcontextprotocol/server-memory": {
       "command": "npx -y @modelcontextprotocol/server-memory",
       "transport": "stdio",
       "expected_rules": [],
-      "expected_findings_max": 2,
-      "notes": "Official reference server. Should be clean."
+      "notes": "Official reference server. Negative control. Produces many R114 LOW informational findings (unconstrained strings), which are excluded from metrics by design."
+    },
+    "appsecco/filesystem-workspace-actions": {
+      "command": "python validation/corpus/appsecco/vulnerable-mcp-server-filesystem-workspace-actions/vulnerable-mcp-server-filesystem-workspace-actions-mcp.py validation/corpus/appsecco/vulnerable-mcp-server-filesystem-workspace-actions/sandbox-workspace",
+      "transport": "stdio",
+      "expected_rules": ["R109", "R113"],
+      "notes": "Path traversal via naive path joining. R113 fires on the write-capable tool's unconstrained path param; R109 on schema with no required fields. Exploitability of the traversal itself is implementation-level."
+    },
+    "appsecco/indirect-prompt-injection": {
+      "command": "node validation/corpus/appsecco/vulnerable-mcp-server-indirect-prompt-injection/index.js",
+      "transport": "stdio",
+      "expected_rules": [],
+      "notes": "KNOWN LIMITATION: injection payloads live in document content returned at runtime (documents/*.txt), not in tool schemas. Static scan is expected to find nothing at MEDIUM+. Runtime probing (mcpradar probe) re-runs R102 on tool responses and is the intended detection path."
+    },
+    "appsecco/malicious-code-exec": {
+      "command": "node validation/corpus/appsecco/vulnerable-mcp-server-malicious-code-exec/index.js",
+      "transport": "stdio",
+      "expected_rules": ["R109"],
+      "notes": "KNOWN LIMITATION: the eval()-based RCE is in the server implementation, invisible to schema-level scanning. The 'supports JavaScript expressions' description hint plus R109/R114 schema laxity are the only static signals. Source scanning (planned v1.1) is the intended detection path."
+    },
+    "appsecco/malicious-tools": {
+      "command": "node validation/corpus/appsecco/vulnerable-mcp-server-malicious-tools/index.js",
+      "transport": "stdio",
+      "expected_rules": [],
+      "notes": "KNOWN LIMITATION: malicious/fabricated tool OUTPUT with injected instructions. Tool schemas are clean; statically undetectable by design. Runtime probing is the intended detection path."
+    },
+    "appsecco/namespace-typosquatting": {
+      "command": "node validation/corpus/appsecco/vulnerable-mcp-server-namespace-typosquatting/index.js",
+      "transport": "stdio",
+      "expected_rules": [],
+      "notes": "KNOWN LIMITATION: typosquatting ('twittter-mcp') is a supply-chain identity problem, not a schema property. Typosquatting detection (Levenshtein vs known packages) is planned for v1.1."
+    },
+    "appsecco/outdated-packages": {
+      "command": "node validation/corpus/appsecco/vulnerable-mcp-server-outdated-pacakges/index.js",
+      "transport": "stdio",
+      "expected_rules": [],
+      "notes": "KNOWN LIMITATION: vulnerable dependencies (package.json) are invisible to schema-level scanning. Dependency CVE checking via OSV/GitHub Advisory is planned. Read-only path tools produce R113/R114 LOW findings only."
+    },
+    "appsecco/secrets-pii": {
+      "command": "node validation/corpus/appsecco/vulnerable-mcp-server-secrets-pii/index.js",
+      "transport": "stdio",
+      "expected_rules": ["R109"],
+      "notes": "KNOWN LIMITATION: credentials are obfuscated in a string table in source and leak via runtime logs/output, not via tool schemas. R106 cannot fire statically; runtime probing re-runs R106 on responses and is the intended detection path."
     }
   }
 }

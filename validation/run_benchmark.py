@@ -86,11 +86,17 @@ def scan_target(name: str, command: str, transport: str, timeout: int = 120) -> 
         result["tools"] = data.get("summary", {}).get("total_tools", 0)
         for f in data.get("findings", []):
             rule_id = f.get("rule_id", "unknown")
-            result["detected_rules"].add(rule_id)
+            severity = f.get("severity", "")
+            # LOW findings are informational lint (e.g. R114 unconstrained
+            # strings) and excluded from precision/recall metrics.
+            if severity == "low":
+                result["low_findings"] = result.get("low_findings", 0) + 1
+            else:
+                result["detected_rules"].add(rule_id)
             result["findings"].append(
                 {
                     "rule_id": rule_id,
-                    "severity": f.get("severity", ""),
+                    "severity": severity,
                     "title": f.get("title", ""),
                     "target": f.get("target", ""),
                 }
@@ -193,6 +199,14 @@ def generate_report(targets: dict, results: dict, metrics: dict) -> str:
         "- **False Positive (FP):** Rule fired but was NOT expected",
         "- **False Negative (FN):** Rule was expected but did NOT fire",
         "",
+        "Metrics are computed on findings of **MEDIUM severity and above**. LOW "
+        "findings are informational lint (e.g. R114 unconstrained-string notes) and "
+        "are reported per target but excluded from precision/recall. Vulnerability "
+        "classes that are invisible to static schema scanning (runtime output "
+        "poisoning, implementation-level RCE, dependency CVEs, typosquatting) are "
+        "labeled `expected_rules: []` with a KNOWN LIMITATION note rather than "
+        "counted as detections — see the notes column in `labels.json`.",
+        "",
         "## Overall Results",
         "",
         "| Metric | Value |",
@@ -220,8 +234,9 @@ def generate_report(targets: dict, results: dict, metrics: dict) -> str:
             "",
             "## Per-Target Results",
             "",
-            "| Target | Status | Tools | Findings | Expected Rules | Detected |",
-            "|--------|--------|-------|----------|---------------|----------|",
+            "| Target | Status | Tools | Findings | Low (info) "
+            "| Expected Rules | Detected (medium+) |",
+            "|--------|--------|-------|----------|-----------|---------------|-----------------|",
         ]
     )
 
@@ -235,7 +250,7 @@ def generate_report(targets: dict, results: dict, metrics: dict) -> str:
         detected_str = ", ".join(sorted(r["detected_rules"])) or "(none)"
         lines.append(
             f"| {name[:50]} | {status_icon} | {r['tools']} | {len(r['findings'])} | "
-            f"{expected_str} | {detected_str} |"
+            f"{r.get('low_findings', 0)} | {expected_str} | {detected_str} |"
         )
 
     if any(r["error"] for r in results.values()):
@@ -253,13 +268,16 @@ def generate_report(targets: dict, results: dict, metrics: dict) -> str:
             "Intentionally vulnerable MCP server with 9 tools covering rules R001-R109.",
             "",
             "### Appsecco Vulnerable MCP Servers Lab",
-            "External corpus: 9 intentionally vulnerable MCP servers covering path traversal, "
-            "prompt injection, RCE, typosquatting, secrets exposure, and outdated packages.",
+            "External corpus: intentionally vulnerable MCP servers covering path traversal, "
+            "prompt injection, RCE, typosquatting, secrets exposure, and outdated packages. "
+            "Several of these vulnerability classes live in runtime behavior or "
+            "implementation code and are statically undetectable by design; those targets "
+            "are labeled as clean-for-static-scan with KNOWN LIMITATION notes.",
             "Repository: https://github.com/appsecco/vulnerable-mcp-servers-lab",
             "",
             "### Official MCP Reference Servers",
             "Clean negative controls from https://github.com/modelcontextprotocol/servers. "
-            "Expected to produce zero findings — any detection is a false positive.",
+            "Expected to produce zero MEDIUM+ findings — any detection is a false positive.",
             "",
         ]
     )
