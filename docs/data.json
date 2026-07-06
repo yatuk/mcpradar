@@ -17,12 +17,12 @@
     "findings_detail": [],
     "tool_hash": "",
     "last_scanned": "2026-06-23",
-    "scanner_version": "1.0.0-rc3",
-    "status": "unknown"
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
   },
   {
-    "server": "@modelcontextprotocol/server-sequential-thinking",
-    "display_name": "modelcontextprotocol / server-sequential-thinking",
+    "server": "@anthropic/server-sequential-thinking",
+    "display_name": "anthropic / server-sequential-thinking",
     "version": "",
     "aivss_score": 0.0,
     "grade": "A",
@@ -38,7 +38,553 @@
     "findings_detail": [],
     "tool_hash": "",
     "last_scanned": "2026-06-23",
-    "scanner_version": "1.0.0-rc3",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "@anthropic/server-apple-shortcuts",
+    "display_name": "anthropic / server-apple-shortcuts",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@anthropic/server-brave-search",
+    "display_name": "anthropic / server-brave-search",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@anthropic/server-clickhouse",
+    "display_name": "anthropic / server-clickhouse",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@anthropic/server-commands",
+    "display_name": "anthropic / server-commands",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@anthropic/server-confluence",
+    "display_name": "anthropic / server-confluence",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@anthropic/server-crypto-wallet",
+    "display_name": "anthropic / server-crypto-wallet",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@anthropic/server-discord",
+    "display_name": "anthropic / server-discord",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@anthropic/server-docker",
+    "display_name": "anthropic / server-docker",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@anthropic/server-elasticsearch",
+    "display_name": "anthropic / server-elasticsearch",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@anthropic/server-everart",
+    "display_name": "anthropic / server-everart",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@anthropic/server-exa",
+    "display_name": "anthropic / server-exa",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@anthropic/server-fetch",
+    "display_name": "anthropic / server-fetch",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@anthropic/server-gitlab",
+    "display_name": "anthropic / server-gitlab",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@anthropic/server-jira",
+    "display_name": "anthropic / server-jira",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@anthropic/server-kubernetes",
+    "display_name": "anthropic / server-kubernetes",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@anthropic/server-langchain",
+    "display_name": "anthropic / server-langchain",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@anthropic/server-llamaindex",
+    "display_name": "anthropic / server-llamaindex",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@anthropic/server-microsoft-teams",
+    "display_name": "anthropic / server-microsoft-teams",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@anthropic/server-mysql",
+    "display_name": "anthropic / server-mysql",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@anthropic/server-neo4j",
+    "display_name": "anthropic / server-neo4j",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@anthropic/server-pandoc",
+    "display_name": "anthropic / server-pandoc",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@anthropic/server-pinecone",
+    "display_name": "anthropic / server-pinecone",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@anthropic/server-qdrant",
+    "display_name": "anthropic / server-qdrant",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@anthropic/server-redis",
+    "display_name": "anthropic / server-redis",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@anthropic/server-rss",
+    "display_name": "anthropic / server-rss",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@anthropic/server-sendgrid",
+    "display_name": "anthropic / server-sendgrid",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "unknown"
   },
   {
@@ -58,8 +604,113 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "—",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@anthropic/server-serper",
+    "display_name": "anthropic / server-serper",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@anthropic/server-sqlite",
+    "display_name": "anthropic / server-sqlite",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@anthropic/server-terminal",
+    "display_name": "anthropic / server-terminal",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@anthropic/server-time",
+    "display_name": "anthropic / server-time",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@browsermcp/mcp",
+    "display_name": "browsermcp / mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "unknown"
   },
   {
@@ -79,8 +730,8 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "—",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "unknown"
   },
   {
@@ -100,8 +751,8 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "—",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "unknown"
   },
   {
@@ -121,8 +772,29 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "—",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@modelcontextprotocol/server-git",
+    "display_name": "modelcontextprotocol / server-git",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "unknown"
   },
   {
@@ -142,8 +814,8 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "—",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "unknown"
   },
   {
@@ -163,8 +835,8 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "—",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "unknown"
   },
   {
@@ -184,8 +856,8 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "—",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "unknown"
   },
   {
@@ -205,8 +877,8 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "—",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "unknown"
   },
   {
@@ -226,14 +898,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "—",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "unknown"
   },
   {
-    "server": "ac.inference.sh/mcp",
-    "display_name": "ac.inference.sh / mcp",
-    "version": "1.0.0",
+    "server": "@stripe/mcp",
+    "display_name": "stripe / mcp",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -247,14 +919,98 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "DesktopCommanderMCP",
+    "display_name": "DesktopCommanderMCP",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "adeu",
+    "display_name": "adeu",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "agent-scraper-mcp",
+    "display_name": "agent-scraper-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@anthropic/server-apple-shortcuts",
+    "display_name": "anthropic / server-apple-shortcuts",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "ac.tandem/docs-mcp",
-    "display_name": "ac.tandem / docs-mcp",
-    "version": "0.3.0",
+    "server": "@anthropic/server-brave-search",
+    "display_name": "anthropic / server-brave-search",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -268,14 +1024,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "agency.lona/trading",
-    "display_name": "agency.lona / trading",
-    "version": "2.0.0",
+    "server": "@anthropic/server-clickhouse",
+    "display_name": "anthropic / server-clickhouse",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -289,14 +1045,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "ai.aarna/atars-mcp",
-    "display_name": "ai.aarna / atars-mcp",
-    "version": "0.1.0",
+    "server": "@anthropic/server-commands",
+    "display_name": "anthropic / server-commands",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -310,14 +1066,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "ai.abmeter/abmeter",
-    "display_name": "ai.abmeter / abmeter",
-    "version": "0.1.0",
+    "server": "@anthropic/server-confluence",
+    "display_name": "anthropic / server-confluence",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -331,14 +1087,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "ai.adadvisor/mcp-server",
-    "display_name": "ai.adadvisor / mcp-server",
-    "version": "1.0.0",
+    "server": "@anthropic/server-crypto-wallet",
+    "display_name": "anthropic / server-crypto-wallet",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -352,14 +1108,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "ai.adeu/adeu",
-    "display_name": "ai.adeu / adeu",
-    "version": "1.5.2",
+    "server": "@anthropic/server-discord",
+    "display_name": "anthropic / server-discord",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -373,14 +1129,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "ai.adramp/google-ads",
-    "display_name": "ai.adramp / google-ads",
-    "version": "1.0.0",
+    "server": "@anthropic/server-docker",
+    "display_name": "anthropic / server-docker",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -394,14 +1150,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "ai.adweave/meta-ads-mcp",
-    "display_name": "ai.adweave / meta-ads-mcp",
-    "version": "1.0.0",
+    "server": "@anthropic/server-elasticsearch",
+    "display_name": "anthropic / server-elasticsearch",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -415,14 +1171,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "ai.agentberg/agentberg",
-    "display_name": "ai.agentberg / agentberg",
-    "version": "0.2.0",
+    "server": "@anthropic/server-everart",
+    "display_name": "anthropic / server-everart",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -436,14 +1192,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "ai.agentdm/agentdm",
-    "display_name": "ai.agentdm / agentdm",
-    "version": "1.0.0",
+    "server": "@anthropic/server-exa",
+    "display_name": "anthropic / server-exa",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -457,14 +1213,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "ai.agentic-news/mcp",
-    "display_name": "ai.agentic-news / mcp",
-    "version": "1.0.0",
+    "server": "@anthropic/server-fetch",
+    "display_name": "anthropic / server-fetch",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -478,14 +1234,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "ai.agenticshelf/graffeo",
-    "display_name": "ai.agenticshelf / graffeo",
-    "version": "1.0.0",
+    "server": "@anthropic/server-gitlab",
+    "display_name": "anthropic / server-gitlab",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -499,14 +1255,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "ai.agenticshelf/mcp",
-    "display_name": "ai.agenticshelf / mcp",
-    "version": "1.0.0",
+    "server": "@anthropic/server-jira",
+    "display_name": "anthropic / server-jira",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -520,14 +1276,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "ai.agenticterminal/directory",
-    "display_name": "ai.agenticterminal / directory",
-    "version": "1.0.0",
+    "server": "@anthropic/server-kubernetes",
+    "display_name": "anthropic / server-kubernetes",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -541,14 +1297,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "ai.agentrapay/agentra",
-    "display_name": "ai.agentrapay / agentra",
-    "version": "1.0.0",
+    "server": "@anthropic/server-langchain",
+    "display_name": "anthropic / server-langchain",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -562,14 +1318,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "ai.agenttrust/mcp-server",
-    "display_name": "ai.agenttrust / mcp-server",
-    "version": "1.1.1",
+    "server": "@anthropic/server-llamaindex",
+    "display_name": "anthropic / server-llamaindex",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -583,14 +1339,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "ai.aient/mcp",
-    "display_name": "ai.aient / mcp",
-    "version": "0.1.0",
+    "server": "@anthropic/server-microsoft-teams",
+    "display_name": "anthropic / server-microsoft-teams",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -604,14 +1360,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "ai.airshelf/catalog",
-    "display_name": "ai.airshelf / catalog",
-    "version": "1.0.0",
+    "server": "@anthropic/server-mysql",
+    "display_name": "anthropic / server-mysql",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -625,14 +1381,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "@anthropic/mcp-server-asana",
-    "display_name": "anthropic / mcp-server-asana",
-    "version": "latest",
+    "server": "@anthropic/server-neo4j",
+    "display_name": "anthropic / server-neo4j",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -646,14 +1402,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "@anthropic/mcp-server-gdrive",
-    "display_name": "anthropic / mcp-server-gdrive",
-    "version": "latest",
+    "server": "@anthropic/server-pandoc",
+    "display_name": "anthropic / server-pandoc",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -667,14 +1423,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "@anthropic/mcp-server-google-sheets",
-    "display_name": "anthropic / mcp-server-google-sheets",
-    "version": "latest",
+    "server": "@anthropic/server-pinecone",
+    "display_name": "anthropic / server-pinecone",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -688,14 +1444,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "@anthropic/mcp-server-hubspot",
-    "display_name": "anthropic / mcp-server-hubspot",
-    "version": "latest",
+    "server": "@anthropic/server-qdrant",
+    "display_name": "anthropic / server-qdrant",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -709,14 +1465,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "@anthropic/mcp-server-intercom",
-    "display_name": "anthropic / mcp-server-intercom",
-    "version": "latest",
+    "server": "@anthropic/server-redis",
+    "display_name": "anthropic / server-redis",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -730,14 +1486,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "@anthropic/mcp-server-jira",
-    "display_name": "anthropic / mcp-server-jira",
-    "version": "latest",
+    "server": "@anthropic/server-rss",
+    "display_name": "anthropic / server-rss",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -751,14 +1507,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "@anthropic/mcp-server-linear",
-    "display_name": "anthropic / mcp-server-linear",
-    "version": "latest",
+    "server": "@anthropic/server-sendgrid",
+    "display_name": "anthropic / server-sendgrid",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -772,14 +1528,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "@anthropic/mcp-server-notion",
-    "display_name": "anthropic / mcp-server-notion",
-    "version": "latest",
+    "server": "@anthropic/server-serper",
+    "display_name": "anthropic / server-serper",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -793,14 +1549,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "@anthropic/mcp-server-outlook",
-    "display_name": "anthropic / mcp-server-outlook",
-    "version": "latest",
+    "server": "@anthropic/server-sqlite",
+    "display_name": "anthropic / server-sqlite",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -814,14 +1570,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "@anthropic/mcp-server-servicenow",
-    "display_name": "anthropic / mcp-server-servicenow",
-    "version": "latest",
+    "server": "@anthropic/server-terminal",
+    "display_name": "anthropic / server-terminal",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -835,14 +1591,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "@anthropic/mcp-server-slack",
-    "display_name": "anthropic / mcp-server-slack",
-    "version": "latest",
+    "server": "@anthropic/server-time",
+    "display_name": "anthropic / server-time",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -856,14 +1612,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "@anthropic/mcp-server-zendesk",
-    "display_name": "anthropic / mcp-server-zendesk",
-    "version": "latest",
+    "server": "anyquery",
+    "display_name": "anyquery",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -877,14 +1633,98 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "aseprite-mcp",
+    "display_name": "aseprite-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "biothings-mcp",
+    "display_name": "biothings-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "blender-mcp",
+    "display_name": "blender-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "@browsermcp/mcp",
+    "display_name": "browsermcp / mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "@browserbase/mcp-server-browserbase",
-    "display_name": "browserbase / mcp-server-browserbase",
-    "version": "latest",
+    "server": "chrome-devtools-mcp",
+    "display_name": "chrome-devtools-mcp",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -898,14 +1738,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
-    "status": "registry-pending"
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
   },
   {
-    "server": "@cloudflare/mcp-server-workers",
-    "display_name": "cloudflare / mcp-server-workers",
-    "version": "latest",
+    "server": "cli-mcp",
+    "display_name": "cli-mcp",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -919,9 +1759,135 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
-    "status": "registry-pending"
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "codemcp",
+    "display_name": "codemcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "comfy-pilot",
+    "display_name": "comfy-pilot",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "context7",
+    "display_name": "context7",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "cortex",
+    "display_name": "cortex",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "davinci-resolve-mcp",
+    "display_name": "davinci-resolve-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "db-mcp-server",
+    "display_name": "db-mcp-server",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
   },
   {
     "server": "demo/malicious_server.py (baseline)",
@@ -940,14 +1906,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "—",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "unknown"
   },
   {
-    "server": "@langchain/mcp-server",
-    "display_name": "langchain / mcp-server",
-    "version": "latest",
+    "server": "depwire",
+    "display_name": "depwire",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -961,14 +1927,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
-    "status": "registry-pending"
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
   },
   {
-    "server": "mcp-server-chart",
-    "display_name": "mcp-server-chart",
-    "version": "latest",
+    "server": "dicom-hl7-mcp-server",
+    "display_name": "dicom-hl7-mcp-server",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -982,14 +1948,434 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
-    "status": "registry-pending"
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "domcp",
+    "display_name": "domcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "dotmd-mcp",
+    "display_name": "dotmd-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "duckduckgo-mcp",
+    "display_name": "duckduckgo-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "eslint-mcp-server",
+    "display_name": "eslint-mcp-server",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "excalidraw-architect-mcp",
+    "display_name": "excalidraw-architect-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "firefox-devtools-mcp",
+    "display_name": "firefox-devtools-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "flstudio-mcp",
+    "display_name": "flstudio-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "forage",
+    "display_name": "forage",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "frigate-mcp",
+    "display_name": "frigate-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "genomic-agent-discovery",
+    "display_name": "genomic-agent-discovery",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "gget-mcp",
+    "display_name": "gget-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "ha-mcp",
+    "display_name": "ha-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "liquid",
+    "display_name": "liquid",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "lm-studio-mcp",
+    "display_name": "lm-studio-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "local-mcp",
+    "display_name": "local-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "manim-mcp-server",
+    "display_name": "manim-mcp-server",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "markdownify-mcp",
+    "display_name": "markdownify-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "mcp-gateway",
+    "display_name": "mcp-gateway",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "mcp-server-ollama-bridge",
+    "display_name": "mcp-server-ollama-bridge",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "mermaid-grammer-inspector-mcp",
+    "display_name": "mermaid-grammer-inspector-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
   },
   {
     "server": "@modelcontextprotocol/server-brave-search",
     "display_name": "modelcontextprotocol / server-brave-search",
-    "version": "latest",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -1003,14 +2389,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "@modelcontextprotocol/server-everart",
-    "display_name": "modelcontextprotocol / server-everart",
-    "version": "latest",
+    "server": "@modelcontextprotocol/server-git",
+    "display_name": "modelcontextprotocol / server-git",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -1024,35 +2410,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@modelcontextprotocol/server-fetch",
-    "display_name": "modelcontextprotocol / server-fetch",
-    "version": "latest",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
     "server": "@modelcontextprotocol/server-github",
     "display_name": "modelcontextprotocol / server-github",
-    "version": "latest",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -1066,56 +2431,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@modelcontextprotocol/server-gitlab",
-    "display_name": "modelcontextprotocol / server-gitlab",
-    "version": "latest",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@modelcontextprotocol/server-google-maps",
-    "display_name": "modelcontextprotocol / server-google-maps",
-    "version": "latest",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
     "server": "@modelcontextprotocol/server-postgres",
     "display_name": "modelcontextprotocol / server-postgres",
-    "version": "latest",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -1129,14 +2452,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
     "server": "@modelcontextprotocol/server-puppeteer",
     "display_name": "modelcontextprotocol / server-puppeteer",
-    "version": "latest",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -1150,35 +2473,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@modelcontextprotocol/server-sentry",
-    "display_name": "modelcontextprotocol / server-sentry",
-    "version": "latest",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
     "server": "@modelcontextprotocol/server-slack",
     "display_name": "modelcontextprotocol / server-slack",
-    "version": "latest",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -1192,14 +2494,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "@modelcontextprotocol/server-sqlite",
-    "display_name": "modelcontextprotocol / server-sqlite",
-    "version": "latest",
+    "server": "nakkas",
+    "display_name": "nakkas",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -1213,14 +2515,182 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "ncp",
+    "display_name": "ncp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "ollama-mcp",
+    "display_name": "ollama-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "opengenes-mcp",
+    "display_name": "opengenes-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "pdf-reader-mcp",
+    "display_name": "pdf-reader-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "periscope-mcp",
+    "display_name": "periscope-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "plant-genomics-mcp",
+    "display_name": "plant-genomics-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "proposalcraft",
+    "display_name": "proposalcraft",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "pskill9/web-search",
+    "display_name": "pskill9 / web-search",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "@openai/mcp-server",
-    "display_name": "openai / mcp-server",
-    "version": "latest",
+    "server": "pskill9/web-search",
+    "display_name": "pskill9 / web-search",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -1234,14 +2704,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
-    "status": "registry-pending"
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
   },
   {
-    "server": "puppeteer-mcp-server",
-    "display_name": "puppeteer-mcp-server",
-    "version": "latest",
+    "server": "reaper-mcp",
+    "display_name": "reaper-mcp",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -1255,14 +2725,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
-    "status": "registry-pending"
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
   },
   {
-    "server": "@smithery/cli",
-    "display_name": "smithery / cli",
-    "version": "latest",
+    "server": "safari-mcp",
+    "display_name": "safari-mcp",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -1276,14 +2746,56 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
-    "status": "registry-pending"
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "searxng-mcp",
+    "display_name": "searxng-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "selenium-mcp",
+    "display_name": "selenium-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
   },
   {
     "server": "@stripe/mcp",
     "display_name": "stripe / mcp",
-    "version": "latest",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -1297,14 +2809,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
     "status": "registry-pending"
   },
   {
-    "server": "@supabase/mcp-server-supabase",
-    "display_name": "supabase / mcp-server-supabase",
-    "version": "latest",
+    "server": "synergy-age-mcp",
+    "display_name": "synergy-age-mcp",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -1318,14 +2830,14 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
-    "status": "registry-pending"
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
   },
   {
-    "server": "@vercel/mcp-server-ai-sdk",
-    "display_name": "vercel / mcp-server-ai-sdk",
-    "version": "latest",
+    "server": "tentra-mcp",
+    "display_name": "tentra-mcp",
+    "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
@@ -1339,9 +2851,114 @@
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-25",
-    "scanner_version": "1.0.0-rc3",
-    "status": "registry-pending"
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "thiri-mcp",
+    "display_name": "thiri-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "video-editing-mcp",
+    "display_name": "video-editing-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "wardn-mcp",
+    "display_name": "wardn-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "windows-mcp",
+    "display_name": "windows-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
+  },
+  {
+    "server": "zen-mcp",
+    "display_name": "zen-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "unknown"
   },
   {
     "server": "@modelcontextprotocol/server-everything",
@@ -1363,13 +2980,13 @@
         "rule_id": "R109",
         "severity": "medium",
         "title": "Schema poisoning gostergesi",
-        "description": "input_schema: zorunlu alan yok — bos girdi kabul edilebilir"
+        "description": "input_schema: zorunlu alan yok; bos girdi kabul edilebilir"
       },
       {
         "rule_id": "R109",
         "severity": "medium",
         "title": "Schema poisoning gostergesi",
-        "description": "input_schema: zorunlu alan yok — bos girdi kabul edilebilir"
+        "description": "input_schema: zorunlu alan yok; bos girdi kabul edilebilir"
       },
       {
         "rule_id": "R106",
@@ -1381,19 +2998,19 @@
         "rule_id": "R109",
         "severity": "medium",
         "title": "Schema poisoning gostergesi",
-        "description": "input_schema: zorunlu alan yok — bos girdi kabul edilebilir"
+        "description": "input_schema: zorunlu alan yok; bos girdi kabul edilebilir"
       },
       {
         "rule_id": "R109",
         "severity": "medium",
         "title": "Schema poisoning gostergesi",
-        "description": "input_schema: zorunlu alan yok — bos girdi kabul edilebilir"
+        "description": "input_schema: zorunlu alan yok; bos girdi kabul edilebilir"
       }
     ],
     "tool_hash": "",
     "last_scanned": "2026-06-23",
-    "scanner_version": "1.0.0-rc3",
-    "status": "unknown"
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
   },
   {
     "server": "@playwright/mcp",
@@ -1415,7 +3032,7 @@
         "rule_id": "R109",
         "severity": "medium",
         "title": "Schema poisoning gostergesi",
-        "description": "input_schema: zorunlu alan yok — bos girdi kabul edilebilir"
+        "description": "input_schema: zorunlu alan yok - bos girdi kabul edilebilir"
       },
       {
         "rule_id": "R107",
@@ -1439,7 +3056,7 @@
         "rule_id": "R109",
         "severity": "medium",
         "title": "Schema poisoning gostergesi",
-        "description": "input_schema: zorunlu alan yok — bos girdi kabul edilebilir"
+        "description": "input_schema: zorunlu alan yok - bos girdi kabul edilebilir"
       },
       {
         "rule_id": "R107",
@@ -1451,19 +3068,19 @@
         "rule_id": "R109",
         "severity": "medium",
         "title": "Schema poisoning gostergesi",
-        "description": "input_schema: zorunlu alan yok — bos girdi kabul edilebilir"
+        "description": "input_schema: zorunlu alan yok - bos girdi kabul edilebilir"
       },
       {
         "rule_id": "R109",
         "severity": "medium",
         "title": "Schema poisoning gostergesi",
-        "description": "input_schema: zorunlu alan yok — bos girdi kabul edilebilir"
+        "description": "input_schema: zorunlu alan yok - bos girdi kabul edilebilir"
       }
     ],
     "tool_hash": "",
     "last_scanned": "2026-06-23",
-    "scanner_version": "1.0.0-rc3",
-    "status": "unknown"
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
   },
   {
     "server": "@modelcontextprotocol/server-filesystem",
@@ -1490,13 +3107,13 @@
       {
         "rule_id": "R114",
         "severity": "low",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
         "rule_id": "R114",
         "severity": "low",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
@@ -1508,13 +3125,13 @@
       {
         "rule_id": "R114",
         "severity": "low",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
         "rule_id": "R114",
         "severity": "low",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
@@ -1526,25 +3143,25 @@
       {
         "rule_id": "R114",
         "severity": "low",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
         "rule_id": "R114",
         "severity": "low",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'content.items.data' in output_schema has no validation constraints (no pattern, format, enum, or lengt"
       },
       {
         "rule_id": "R114",
         "severity": "low",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'content.items.mimeType' in output_schema has no validation constraints (no pattern, format, enum, or l"
       },
       {
         "rule_id": "R114",
         "severity": "low",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
@@ -1556,19 +3173,19 @@
       {
         "rule_id": "R114",
         "severity": "low",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
         "rule_id": "R114",
         "severity": "low",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'content' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
         "rule_id": "R114",
         "severity": "low",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
@@ -1580,25 +3197,25 @@
       {
         "rule_id": "R114",
         "severity": "low",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
         "rule_id": "R114",
         "severity": "low",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'edits.items.oldText' in input_schema has no validation constraints (no pattern, format, enum, or lengt"
       },
       {
         "rule_id": "R114",
         "severity": "low",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'edits.items.newText' in input_schema has no validation constraints (no pattern, format, enum, or lengt"
       },
       {
         "rule_id": "R114",
         "severity": "low",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
@@ -1610,13 +3227,13 @@
       {
         "rule_id": "R114",
         "severity": "low",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
         "rule_id": "R114",
         "severity": "low",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
@@ -1628,13 +3245,13 @@
       {
         "rule_id": "R114",
         "severity": "low",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
         "rule_id": "R114",
         "severity": "low",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
@@ -1646,13 +3263,13 @@
       {
         "rule_id": "R114",
         "severity": "low",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
         "rule_id": "R114",
         "severity": "low",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
@@ -1664,13 +3281,13 @@
       {
         "rule_id": "R114",
         "severity": "low",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
         "rule_id": "R114",
         "severity": "low",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
@@ -1688,19 +3305,19 @@
       {
         "rule_id": "R114",
         "severity": "low",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'source' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
         "rule_id": "R114",
         "severity": "low",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'destination' in input_schema has no validation constraints (no pattern, format, enum, or length limits"
       },
       {
         "rule_id": "R114",
         "severity": "low",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
@@ -1712,19 +3329,19 @@
       {
         "rule_id": "R114",
         "severity": "low",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
         "rule_id": "R114",
         "severity": "low",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'pattern' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
         "rule_id": "R114",
         "severity": "low",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
@@ -1736,25 +3353,25 @@
       {
         "rule_id": "R114",
         "severity": "low",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
         "rule_id": "R114",
         "severity": "low",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
       },
       {
         "rule_id": "R114",
         "severity": "low",
-        "title": "Unbounded input — no size/content constraints",
+        "title": "Unbounded input: no size/content constraints",
         "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
       }
     ],
     "tool_hash": "",
     "last_scanned": "2026-06-24",
-    "scanner_version": "1.0.0-rc3",
-    "status": "unknown"
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
   }
 ]

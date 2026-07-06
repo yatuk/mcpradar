@@ -1,14 +1,9 @@
 {
   "name": "forage",
-  "target": "",
+  "command": "",
   "transport": "stdio",
-  "version": "",
-  "scanned_at": "",
-  "scan_id": "",
-  "status": "registry-pending",
-  "findings": [],
-  "tools": [],
-  "summary": {
-    "total_tools": 0
-  }
+  "expected_rules": [],
+  "error": "list index out of range",
+  "tools_count": 0,
+  "findings": []
 }
