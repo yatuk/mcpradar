@@ -30,8 +30,8 @@
     "appsecco/filesystem-workspace-actions": {
       "command": "python validation/corpus/appsecco/vulnerable-mcp-server-filesystem-workspace-actions/vulnerable-mcp-server-filesystem-workspace-actions-mcp.py validation/corpus/appsecco/vulnerable-mcp-server-filesystem-workspace-actions/sandbox-workspace",
       "transport": "stdio",
-      "expected_rules": ["R109", "R113"],
-      "notes": "Path traversal via naive path joining. R113 fires on the write-capable tool's unconstrained path param; R109 on schema with no required fields. Exploitability of the traversal itself is implementation-level."
+      "expected_rules": ["R113"],
+      "notes": "Path traversal via naive path joining. R113 fires on the write-capable tool's unconstrained path param. (R109 previously counted here fired only on 'no required fields', now correctly LOW/informational — optional input is not schema poisoning.)"
     },
     "appsecco/indirect-prompt-injection": {
       "command": "node validation/corpus/appsecco/vulnerable-mcp-server-indirect-prompt-injection/index.js",
@@ -42,8 +42,8 @@
     "appsecco/malicious-code-exec": {
       "command": "node validation/corpus/appsecco/vulnerable-mcp-server-malicious-code-exec/index.js",
       "transport": "stdio",
-      "expected_rules": ["R109"],
-      "notes": "KNOWN LIMITATION: the eval()-based RCE is in the server implementation, invisible to schema-level scanning. The 'supports JavaScript expressions' description hint plus R109/R114 schema laxity are the only static signals. Source scanning (planned v1.1) is the intended detection path."
+      "expected_rules": [],
+      "notes": "KNOWN LIMITATION: the eval()-based RCE is in the server implementation, invisible to schema-level scanning. Only R114 LOW schema-laxity lint fires. Source scanning (planned v1.1) is the intended detection path."
     },
     "appsecco/malicious-tools": {
       "command": "node validation/corpus/appsecco/vulnerable-mcp-server-malicious-tools/index.js",
@@ -66,7 +66,7 @@
     "appsecco/secrets-pii": {
       "command": "node validation/corpus/appsecco/vulnerable-mcp-server-secrets-pii/index.js",
       "transport": "stdio",
-      "expected_rules": ["R109"],
+      "expected_rules": [],
       "notes": "KNOWN LIMITATION: credentials are obfuscated in a string table in source and leak via runtime logs/output, not via tool schemas. R106 cannot fire statically; runtime probing re-runs R106 on responses and is the intended detection path."
     }
   }

@@ -906,6 +906,9 @@ class TestSchemaPoisoningDetection:
         findings = rule.check(tool)
         no_req = [f for f in findings if "no_required_fields" in f.detail.get("issue", "")]
         assert len(no_req) >= 1
+        # Informational only — a tool accepting optional input is common and
+        # benign, so it must not drive the grade (excluded as LOW).
+        assert all(f.severity == Severity.LOW for f in no_req)
 
     def test_missing_type_constraint(self) -> None:
         rule = SchemaPoisoningDetection()
@@ -923,6 +926,27 @@ class TestSchemaPoisoningDetection:
         findings = rule.check(tool)
         mt = [f for f in findings if "missing_type" in f.detail.get("issue", "")]
         assert len(mt) >= 1
+
+    def test_union_type_not_flagged_as_missing_type(self) -> None:
+        """anyOf/oneOf/$ref/enum are valid typing. Pydantic/FastMCP emit
+        `anyOf: [{type: X}, {type: null}]` for every Optional[...] param —
+        regression: this fired 32 MEDIUM 'missing type' FPs on yatuk/itu-mcp."""
+        rule = SchemaPoisoningDetection()
+        tool = ToolInfo(
+            name="obs_tool",
+            description="Optional typed params",
+            input_schema={
+                "required": ["a"],
+                "properties": {
+                    "a": {"anyOf": [{"type": "integer"}, {"type": "null"}], "default": None},
+                    "b": {"oneOf": [{"type": "string"}]},
+                    "c": {"$ref": "#/$defs/Thing"},
+                    "d": {"enum": ["x", "y"]},
+                },
+            },
+        )
+        mt = [f for f in rule.check(tool) if f.detail.get("issue") == "missing_type"]
+        assert mt == []
 
     def test_excessive_max_length(self) -> None:
         rule = SchemaPoisoningDetection()
@@ -969,11 +993,15 @@ class TestSchemaPoisoningDetection:
         findings = rule.check(tool)
         assert len(findings) == 0
 
-    def test_checks_output_schema_too(self) -> None:
+    def test_output_schema_additional_properties_not_flagged(self) -> None:
+        """`additionalProperties: true` on an OUTPUT schema is not an injection
+        surface — the client cannot inject into a tool's return value, and
+        structured-output frameworks emit it routinely. Regression: this fired a
+        HIGH on all 55 tools of yatuk/itu-mcp."""
         rule = SchemaPoisoningDetection()
         tool = ToolInfo(
-            name="normal",
-            description="Normal tool",
+            name="get_dashboard",
+            description="Read-only dashboard",
             input_schema={
                 "required": ["x"],
                 "properties": {"x": {"type": "string"}},
@@ -981,14 +1009,19 @@ class TestSchemaPoisoningDetection:
             },
             output_schema={"type": "object", "additionalProperties": True},
         )
-        findings = rule.check(tool)
-        ap_findings = [
-            f
-            for f in findings
-            if "additional_properties_true" in f.detail.get("issue", "")
-            and f.detail.get("schema") == "output_schema"
-        ]
-        assert len(ap_findings) >= 1
+        assert rule.check(tool) == []
+
+    def test_input_schema_additional_properties_still_flagged(self) -> None:
+        rule = SchemaPoisoningDetection()
+        tool = ToolInfo(
+            name="risky",
+            description="Accepts arbitrary input",
+            input_schema={"type": "object", "additionalProperties": True},
+            output_schema={"type": "object", "additionalProperties": False},
+        )
+        ap = [f for f in rule.check(tool) if f.detail.get("issue") == "additional_properties_true"]
+        assert len(ap) == 1
+        assert ap[0].detail.get("schema") == "input_schema"
 
 
 # ---------------------------------------------------------------------------

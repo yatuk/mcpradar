@@ -2221,6 +2221,23 @@ def leaderboard_generate(
                 }
             )
 
+    # Deduplicate by server name. The catalog carries the same server under two
+    # filename conventions (e.g. "@anthropic_server-time.json" and
+    # "anthropic-server-time.json"), which otherwise renders as duplicate rows.
+    # Keep the most-informative copy: scanned over pending, then more tools.
+    by_name: dict[str, dict[str, Any]] = {}
+    for r in rows:
+        key = r["server"]
+        existing = by_name.get(key)
+        if existing is None:
+            by_name[key] = r
+            continue
+        cur_rank = (existing["status"] != "pending", existing["tools"])
+        new_rank = (r["status"] != "pending", r["tools"])
+        if new_rank > cur_rank:
+            by_name[key] = r
+    rows = list(by_name.values())
+
     # Scanned servers first (by ascending risk), pending servers last.
     rows.sort(key=lambda r: (r["status"] == "pending", r["aivss_score"] or 0.0, -r["tools"]))
 

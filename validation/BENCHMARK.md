@@ -1,6 +1,6 @@
 # MCPRadar Precision/Recall Benchmark
 
-**Generated:** 2026-07-12 11:34 UTC
+**Generated:** 2026-07-12 12:29 UTC
 **Scanner version:** 1.0.0-rc4
 
 ## Methodology
@@ -17,11 +17,11 @@ Metrics are computed on findings of **MEDIUM severity and above**. LOW findings 
 
 | Metric | Value |
 |---|---|
-| Precision | 87.5% |
+| Precision | 91.7% |
 | Recall | 100.0% |
-| F1 Score | 93.3% |
+| F1 Score | 95.7% |
 | Targets scanned | 11 |
-| Total findings | 16 |
+| Total findings | 12 |
 
 ## Per-Rule Metrics
 
@@ -36,24 +36,24 @@ Metrics are computed on findings of **MEDIUM severity and above**. LOW findings 
 | R106 | 1 | 0 | 0 | 100.0% | 100.0% | 100.0% |
 | R107 | 1 | 0 | 0 | 100.0% | 100.0% | 100.0% |
 | R108 | 1 | 0 | 0 | 100.0% | 100.0% | 100.0% |
-| R109 | 4 | 1 | 0 | 80.0% | 100.0% | 88.9% |
+| R109 | 1 | 0 | 0 | 100.0% | 100.0% | 100.0% |
 | R113 | 1 | 1 | 0 | 50.0% | 100.0% | 66.7% |
 
 ## Per-Target Results
 
 | Target | Status | Tools | Findings | Low (info) | Expected Rules | Detected (medium+) |
 |--------|--------|-------|----------|-----------|---------------|-----------------|
-| @modelcontextprotocol/server-everything | ✅ | 13 | 8 | 4 | (clean) | R109 |
+| @modelcontextprotocol/server-everything | ✅ | 13 | 8 | 8 | (clean) | (none) |
 | @modelcontextprotocol/server-filesystem | ✅ | 14 | 43 | 38 | (clean) | R113 |
 | @modelcontextprotocol/server-memory | ✅ | 9 | 35 | 35 | (clean) | (none) |
-| appsecco/filesystem-workspace-actions | ✅ | 4 | 10 | 8 | R109, R113 | R109, R113 |
+| appsecco/filesystem-workspace-actions | ✅ | 4 | 10 | 9 | R113 | R113 |
 | appsecco/indirect-prompt-injection | ✅ | 2 | 2 | 2 | (clean) | (none) |
-| appsecco/malicious-code-exec | ✅ | 1 | 2 | 1 | R109 | R109 |
+| appsecco/malicious-code-exec | ✅ | 1 | 2 | 2 | (clean) | (none) |
 | appsecco/malicious-tools | ✅ | 2 | 0 | 0 | (clean) | (none) |
 | appsecco/namespace-typosquatting | ✅ | 2 | 2 | 2 | (clean) | (none) |
 | appsecco/outdated-packages | ✅ | 5 | 8 | 8 | (clean) | (none) |
-| appsecco/secrets-pii | ✅ | 3 | 2 | 1 | R109 | R109 |
-| demo/malicious_server.py | ✅ | 9 | 46 | 11 | R001, R101, R102, R103, R104, R105, R106, R107, R108, R109 | R001, R101, R102, R103, R104, R105, R106, R107, R108, R109 |
+| appsecco/secrets-pii | ✅ | 3 | 2 | 2 | (clean) | (none) |
+| demo/malicious_server.py | ✅ | 9 | 46 | 20 | R001, R101, R102, R103, R104, R105, R106, R107, R108, R109 | R001, R101, R102, R103, R104, R105, R106, R107, R108, R109 |
 
 ## Test Corpus
 

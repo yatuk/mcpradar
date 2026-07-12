@@ -197,13 +197,13 @@ in [`validation/BENCHMARK.md`](validation/BENCHMARK.md). The benchmark includes:
 
 | Metric | Target | Measured (v1.0.0-rc4, 11 targets) |
 |---|---|---|
-| Precision | >= 80% | 87.5% |
+| Precision | >= 80% | 91.7% |
 | Recall | >= 85% | 100% |
-| F1 Score | >= 0.82 | 0.93 |
+| F1 Score | >= 0.82 | 0.96 |
 
 Metrics are computed on MEDIUM+ severity findings; LOW informational findings are
-excluded. The two measured false positives (R113 on the official filesystem server,
-R109 on server-everything) are documented in the report.
+excluded. The one measured false positive (R113 on the official filesystem server's
+write tools) is documented in the report.
 
 Performance benchmarks (`tests/test_benchmark.py`): rule engine latency ~14 ms (100 tools),
 SARIF generation ~2 ms (100 findings), SQLite insert ~1.5 ms (batch).

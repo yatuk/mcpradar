@@ -1,8 +1,8 @@
 {
-  "id": "5d37856b71f2",
+  "id": "953da600c5be",
   "target": "npx -y @modelcontextprotocol/server-everything",
   "transport": "stdio",
-  "scanned_at": "2026-07-12T11:30:53.596840+00:00",
+  "scanned_at": "2026-07-12T12:18:00.945252+00:00",
   "tools": [
     {
       "name": "echo",
@@ -388,7 +388,7 @@
       "rule_id": "R109",
       "title": "Schema poisoning indicator",
       "description": "input_schema: no required fields; empty input acceptable",
-      "severity": "medium",
+      "severity": "low",
       "target": "get-resource-links",
       "location": "tool",
       "evidence": "",
@@ -401,7 +401,7 @@
       "rule_id": "R109",
       "title": "Schema poisoning indicator",
       "description": "input_schema: no required fields; empty input acceptable",
-      "severity": "medium",
+      "severity": "low",
       "target": "get-resource-reference",
       "location": "tool",
       "evidence": "",
@@ -427,7 +427,7 @@
       "rule_id": "R109",
       "title": "Schema poisoning indicator",
       "description": "input_schema: no required fields; empty input acceptable",
-      "severity": "medium",
+      "severity": "low",
       "target": "gzip-file-as-resource",
       "location": "tool",
       "evidence": "",
@@ -453,7 +453,7 @@
       "rule_id": "R109",
       "title": "Schema poisoning indicator",
       "description": "input_schema: no required fields; empty input acceptable",
-      "severity": "medium",
+      "severity": "low",
       "target": "trigger-long-running-operation",
       "location": "tool",
       "evidence": "",
@@ -481,8 +481,8 @@
     "total_prompts": 4,
     "total_resources": 7,
     "clean": 6,
-    "low": 4,
-    "medium": 4,
+    "low": 8,
+    "medium": 0,
     "high": 0,
     "critical": 0
   }

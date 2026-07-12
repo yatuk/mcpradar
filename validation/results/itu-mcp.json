@@ -1,0 +1,2240 @@
+{
+  "id": "66b8a19f5f8b",
+  "target": "python -m ninova_mcp.server",
+  "transport": "stdio",
+  "scanned_at": "2026-07-12T12:16:59.960343+00:00",
+  "tools": [
+    {
+      "name": "auth_status",
+      "description": "Check whether Ninova credentials are configured and whether a fresh session can be created.",
+      "input_schema": {
+        "properties": {},
+        "title": "auth_statusArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "auth_statusDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "refresh_session",
+      "description": "Force a new login with NINOVA_USERNAME and NINOVA_PASSWORD.",
+      "input_schema": {
+        "properties": {},
+        "title": "refresh_sessionArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "refresh_sessionDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_dashboard",
+      "description": "Read the Ninova dashboard and summarize courses, recent announcements, assignments, and messages.",
+      "input_schema": {
+        "properties": {
+          "compact": {
+            "default": false,
+            "title": "Compact",
+            "type": "boolean"
+          }
+        },
+        "title": "get_dashboardArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "get_dashboardDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "list_courses",
+      "description": "List all discovered Ninova courses from the dashboard (TTL-cached).",
+      "input_schema": {
+        "properties": {
+          "refresh": {
+            "default": false,
+            "title": "Refresh",
+            "type": "boolean"
+          }
+        },
+        "title": "list_coursesArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "list_coursesDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_courses",
+      "description": "Return all courses visible in the Ninova dashboard (alias of list_courses).",
+      "input_schema": {
+        "properties": {
+          "refresh": {
+            "default": false,
+            "title": "Refresh",
+            "type": "boolean"
+          }
+        },
+        "title": "get_coursesArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "get_coursesDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_course_announcements",
+      "description": "Return announcements for a specific Ninova course.",
+      "input_schema": {
+        "properties": {
+          "course": {
+            "title": "Course",
+            "type": "string"
+          },
+          "include_full_text": {
+            "default": false,
+            "title": "Include Full Text",
+            "type": "boolean"
+          },
+          "limit": {
+            "default": 50,
+            "title": "Limit",
+            "type": "integer"
+          },
+          "compact": {
+            "default": false,
+            "title": "Compact",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "course"
+        ],
+        "title": "get_course_announcementsArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "get_course_announcementsDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_course_class_files",
+      "description": "List files and folders under the Ninova 'Sınıf Dosyaları' section for a course.",
+      "input_schema": {
+        "properties": {
+          "course": {
+            "title": "Course",
+            "type": "string"
+          },
+          "recursive": {
+            "default": true,
+            "title": "Recursive",
+            "type": "boolean"
+          },
+          "max_depth": {
+            "default": 3,
+            "title": "Max Depth",
+            "type": "integer"
+          },
+          "compact": {
+            "default": false,
+            "title": "Compact",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "course"
+        ],
+        "title": "get_course_class_filesArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "get_course_class_filesDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_course_lesson_files",
+      "description": "List files and folders under the Ninova 'Ders Dosyaları' section for a course.",
+      "input_schema": {
+        "properties": {
+          "course": {
+            "title": "Course",
+            "type": "string"
+          },
+          "recursive": {
+            "default": true,
+            "title": "Recursive",
+            "type": "boolean"
+          },
+          "max_depth": {
+            "default": 3,
+            "title": "Max Depth",
+            "type": "integer"
+          },
+          "compact": {
+            "default": false,
+            "title": "Compact",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "course"
+        ],
+        "title": "get_course_lesson_filesArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "get_course_lesson_filesDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_course_assignments",
+      "description": "Return a course's assignment list. By default also fetches each assignment detail/upload page; set include_details=false for a faster list-only read.",
+      "input_schema": {
+        "properties": {
+          "course": {
+            "title": "Course",
+            "type": "string"
+          },
+          "limit": {
+            "default": 100,
+            "title": "Limit",
+            "type": "integer"
+          },
+          "include_details": {
+            "default": true,
+            "title": "Include Details",
+            "type": "boolean"
+          },
+          "compact": {
+            "default": false,
+            "title": "Compact",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "course"
+        ],
+        "title": "get_course_assignmentsArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "get_course_assignmentsDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_course_info",
+      "description": "Return structured information from a course's 'Sınıf Bilgileri' page.",
+      "input_schema": {
+        "properties": {
+          "course": {
+            "title": "Course",
+            "type": "string"
+          }
+        },
+        "required": [
+          "course"
+        ],
+        "title": "get_course_infoArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "get_course_infoDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_course_sections",
+      "description": "List the direct course routes exposed on the Ninova course home page.",
+      "input_schema": {
+        "properties": {
+          "course": {
+            "title": "Course",
+            "type": "string"
+          }
+        },
+        "required": [
+          "course"
+        ],
+        "title": "get_course_sectionsArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "get_course_sectionsDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_course_grades",
+      "description": "Read the Ninova 'Notlar' page for a course.",
+      "input_schema": {
+        "properties": {
+          "course": {
+            "title": "Course",
+            "type": "string"
+          }
+        },
+        "required": [
+          "course"
+        ],
+        "title": "get_course_gradesArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "get_course_gradesDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_course_message_board",
+      "description": "Read the Ninova 'Mesaj Panosu' page for a course.",
+      "input_schema": {
+        "properties": {
+          "course": {
+            "title": "Course",
+            "type": "string"
+          },
+          "include_thread_details": {
+            "default": false,
+            "title": "Include Thread Details",
+            "type": "boolean"
+          },
+          "limit": {
+            "default": 50,
+            "title": "Limit",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "course"
+        ],
+        "title": "get_course_message_boardArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "get_course_message_boardDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_course_attendance",
+      "description": "Read the Ninova 'Yoklama' page for a course.",
+      "input_schema": {
+        "properties": {
+          "course": {
+            "title": "Course",
+            "type": "string"
+          }
+        },
+        "required": [
+          "course"
+        ],
+        "title": "get_course_attendanceArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "get_course_attendanceDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_course_remote_learning",
+      "description": "Read the Ninova 'Uzaktan Eğitim' page for a course.",
+      "input_schema": {
+        "properties": {
+          "course": {
+            "title": "Course",
+            "type": "string"
+          }
+        },
+        "required": [
+          "course"
+        ],
+        "title": "get_course_remote_learningArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "get_course_remote_learningDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_course_overview",
+      "description": "Return a combined view of a course's sections, announcements, assignments, files, grades, message board, attendance, and remote learning routes.",
+      "input_schema": {
+        "properties": {
+          "course": {
+            "title": "Course",
+            "type": "string"
+          },
+          "refresh": {
+            "default": false,
+            "title": "Refresh",
+            "type": "boolean"
+          },
+          "file_max_depth": {
+            "default": 3,
+            "title": "File Max Depth",
+            "type": "integer"
+          },
+          "include_assignment_details": {
+            "default": false,
+            "title": "Include Assignment Details",
+            "type": "boolean"
+          },
+          "compact": {
+            "default": false,
+            "title": "Compact",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "course"
+        ],
+        "title": "get_course_overviewArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "get_course_overviewDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_dashboard_announcements",
+      "description": "Return the announcements listed under the Ninova dashboard's aggregated announcements page.",
+      "input_schema": {
+        "properties": {
+          "include_full_text": {
+            "default": false,
+            "title": "Include Full Text",
+            "type": "boolean"
+          },
+          "limit": {
+            "default": 20,
+            "title": "Limit",
+            "type": "integer"
+          }
+        },
+        "title": "get_dashboard_announcementsArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "get_dashboard_announcementsDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_dashboard_assignments",
+      "description": "Return the assignments listed under the Ninova dashboard's aggregated assignments page. Set include_details=false for a faster list-only read.",
+      "input_schema": {
+        "properties": {
+          "limit": {
+            "default": 20,
+            "title": "Limit",
+            "type": "integer"
+          },
+          "include_details": {
+            "default": true,
+            "title": "Include Details",
+            "type": "boolean"
+          }
+        },
+        "title": "get_dashboard_assignmentsArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "get_dashboard_assignmentsDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "sync_all_courses",
+      "description": "Fetch all visible courses, store a tracking snapshot, and return newly detected changes since the previous sync. Assignment detail pages are skipped by default for speed.",
+      "input_schema": {
+        "properties": {
+          "include_files": {
+            "default": true,
+            "title": "Include Files",
+            "type": "boolean"
+          },
+          "file_max_depth": {
+            "default": 3,
+            "title": "File Max Depth",
+            "type": "integer"
+          },
+          "course_limit": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Course Limit"
+          },
+          "include_assignment_details": {
+            "default": false,
+            "title": "Include Assignment Details",
+            "type": "boolean"
+          }
+        },
+        "title": "sync_all_coursesArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "sync_all_coursesDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_updates",
+      "description": "Read the stored Ninova tracking history and return recent detected changes.",
+      "input_schema": {
+        "properties": {
+          "limit": {
+            "default": 100,
+            "title": "Limit",
+            "type": "integer"
+          },
+          "course": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Course"
+          },
+          "entity_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Entity Type"
+          }
+        },
+        "title": "get_updatesArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "get_updatesDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_upcoming_deadlines",
+      "description": "Return assignments whose submission deadline is approaching based on the stored tracking snapshot.",
+      "input_schema": {
+        "properties": {
+          "days": {
+            "default": 14,
+            "title": "Days",
+            "type": "integer"
+          },
+          "refresh": {
+            "default": false,
+            "title": "Refresh",
+            "type": "boolean"
+          }
+        },
+        "title": "get_upcoming_deadlinesArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "get_upcoming_deadlinesDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "read_page",
+      "description": "Fetch any Ninova page and return a structured summary of text, headings, links, tables, and attachments.",
+      "input_schema": {
+        "properties": {
+          "url": {
+            "title": "Url",
+            "type": "string"
+          },
+          "include_text": {
+            "default": true,
+            "title": "Include Text",
+            "type": "boolean"
+          },
+          "link_limit": {
+            "default": 200,
+            "title": "Link Limit",
+            "type": "integer"
+          },
+          "compact": {
+            "default": false,
+            "title": "Compact",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "title": "read_pageArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "read_pageDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "crawl_course",
+      "description": "Inventory pages and downloadable resources inside a Ninova course tree.",
+      "input_schema": {
+        "properties": {
+          "course_url": {
+            "title": "Course Url",
+            "type": "string"
+          },
+          "max_depth": {
+            "default": 2,
+            "title": "Max Depth",
+            "type": "integer"
+          },
+          "max_pages": {
+            "default": 25,
+            "title": "Max Pages",
+            "type": "integer"
+          },
+          "include_downloads": {
+            "default": true,
+            "title": "Include Downloads",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "course_url"
+        ],
+        "title": "crawl_courseArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "crawl_courseDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "download_resource",
+      "description": "Download a Ninova file or other authenticated resource to disk.",
+      "input_schema": {
+        "properties": {
+          "url": {
+            "title": "Url",
+            "type": "string"
+          },
+          "output_dir": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Output Dir"
+          },
+          "filename": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Filename"
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "title": "download_resourceArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "download_resourceDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "read_resource_text",
+      "description": "Extract plain text from a Ninova PDF/DOCX/TXT (or a local path from download_resource) so the assistant can read lecture notes and assignments.",
+      "input_schema": {
+        "properties": {
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Url"
+          },
+          "path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Path"
+          },
+          "max_chars": {
+            "default": 50000,
+            "title": "Max Chars",
+            "type": "integer"
+          },
+          "filename": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Filename"
+          },
+          "save_download": {
+            "default": false,
+            "title": "Save Download",
+            "type": "boolean"
+          }
+        },
+        "title": "read_resource_textArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "read_resource_textDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_assignment_upload_slots",
+      "description": "List the file slots on an assignment's 'Ödevi Yükle / OdevGonder' page, including which slots are already filled and allowed extensions.",
+      "input_schema": {
+        "properties": {
+          "course": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Course"
+          },
+          "assignment": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Assignment"
+          },
+          "upload_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Upload Url"
+          }
+        },
+        "title": "get_assignment_upload_slotsArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "get_assignment_upload_slotsDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "submit_assignment",
+      "description": "Upload a local file to one Ninova assignment slot via the official multipart form. Requires confirm=true to actually post; without it, returns a dry-run preview only. Ask the user before confirming.",
+      "input_schema": {
+        "properties": {
+          "file_path": {
+            "title": "File Path",
+            "type": "string"
+          },
+          "course": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Course"
+          },
+          "assignment": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Assignment"
+          },
+          "upload_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Upload Url"
+          },
+          "slot_index": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Slot Index"
+          },
+          "slot_description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Slot Description"
+          },
+          "confirm": {
+            "default": false,
+            "title": "Confirm",
+            "type": "boolean"
+          },
+          "allow_replace": {
+            "default": false,
+            "title": "Allow Replace",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "file_path"
+        ],
+        "title": "submit_assignmentArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "submit_assignmentDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "snapshot_page",
+      "description": "Save a structured snapshot of a Ninova page for later comparison.",
+      "input_schema": {
+        "properties": {
+          "url": {
+            "title": "Url",
+            "type": "string"
+          },
+          "label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Label"
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "title": "snapshot_pageArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "snapshot_pageDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "diff_snapshot",
+      "description": "Compare the current state of a Ninova page against a previously stored snapshot.",
+      "input_schema": {
+        "properties": {
+          "url": {
+            "title": "Url",
+            "type": "string"
+          },
+          "snapshot_path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Snapshot Path"
+          },
+          "label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Label"
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "title": "diff_snapshotArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "diff_snapshotDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "obs_auth_status",
+      "description": "Check whether an OBS JWT can be obtained with the configured İTÜ credentials.",
+      "input_schema": {
+        "properties": {},
+        "title": "obs_auth_statusArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "obs_auth_statusDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "obs_get_profile",
+      "description": "Read OBS personal/program profile. Sensitive fields are redacted unless include_sensitive=true.",
+      "input_schema": {
+        "properties": {
+          "include_sensitive": {
+            "default": false,
+            "title": "Include Sensitive",
+            "type": "boolean"
+          }
+        },
+        "title": "obs_get_profileArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "obs_get_profileDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "obs_list_programs",
+      "description": "List the student's OBS academic programs (e.g. undergraduate major).",
+      "input_schema": {
+        "properties": {},
+        "title": "obs_list_programsArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "obs_list_programsDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "obs_list_semesters",
+      "description": "List academic semesters available in OBS for the student.",
+      "input_schema": {
+        "properties": {},
+        "title": "obs_list_semestersArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "obs_list_semestersDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "obs_get_registration_status",
+      "description": "Read OBS registration and course-registration status (active/class level).",
+      "input_schema": {
+        "properties": {},
+        "title": "obs_get_registration_statusArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "obs_get_registration_statusDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "obs_get_advisor",
+      "description": "Read academic advisor information from OBS.",
+      "input_schema": {
+        "properties": {},
+        "title": "obs_get_advisorArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "obs_get_advisorDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "obs_get_internships",
+      "description": "Read internship records from OBS.",
+      "input_schema": {
+        "properties": {},
+        "title": "obs_get_internshipsArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "obs_get_internshipsDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "obs_get_contacts",
+      "description": "Read contact records from OBS (phones/emails redacted by default).",
+      "input_schema": {
+        "properties": {
+          "include_sensitive": {
+            "default": false,
+            "title": "Include Sensitive",
+            "type": "boolean"
+          }
+        },
+        "title": "obs_get_contactsArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "obs_get_contactsDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "obs_list_registered_courses",
+      "description": "List courses registered in OBS for a semester (default: latest).",
+      "input_schema": {
+        "properties": {
+          "semester": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Semester"
+          }
+        },
+        "title": "obs_list_registered_coursesArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "obs_list_registered_coursesDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "obs_get_course_grades",
+      "description": "Read midterm and/or letter grades for an OBS class (by sinifId or course code).",
+      "input_schema": {
+        "properties": {
+          "class_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Class Id"
+          },
+          "semester": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Semester"
+          },
+          "course": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Course"
+          },
+          "include_midterms": {
+            "default": true,
+            "title": "Include Midterms",
+            "type": "boolean"
+          },
+          "include_letter": {
+            "default": true,
+            "title": "Include Letter",
+            "type": "boolean"
+          }
+        },
+        "title": "obs_get_course_gradesArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "obs_get_course_gradesDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "obs_get_attendance",
+      "description": "Read attendance for an OBS class. Includes computed absence-risk summary by default.",
+      "input_schema": {
+        "properties": {
+          "class_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Class Id"
+          },
+          "semester": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Semester"
+          },
+          "course": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Course"
+          },
+          "include_summary": {
+            "default": true,
+            "title": "Include Summary",
+            "type": "boolean"
+          },
+          "max_absence_ratio": {
+            "default": 0.3,
+            "title": "Max Absence Ratio",
+            "type": "number"
+          }
+        },
+        "title": "obs_get_attendanceArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "obs_get_attendanceDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "obs_get_schedule",
+      "description": "Read weekly class schedule and final exam calendar for a semester.",
+      "input_schema": {
+        "properties": {
+          "semester": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Semester"
+          }
+        },
+        "title": "obs_get_scheduleArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "obs_get_scheduleDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "obs_get_graduation_remaining",
+      "description": "Read 'mezuniyetime ne kaldı', academic status, and debts for a program.",
+      "input_schema": {
+        "properties": {
+          "program_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Program Id"
+          }
+        },
+        "title": "obs_get_graduation_remainingArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "obs_get_graduation_remainingDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "obs_get_campus_card",
+      "description": "Read campus card balance and recent transactions from OBS (requires login).",
+      "input_schema": {
+        "properties": {},
+        "title": "obs_get_campus_cardArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "obs_get_campus_cardDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "obs_download_transcript",
+      "description": "Download OBS transcript preview PDF to the local state downloads folder.",
+      "input_schema": {
+        "properties": {
+          "english": {
+            "default": false,
+            "title": "English",
+            "type": "boolean"
+          },
+          "output_dir": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Output Dir"
+          }
+        },
+        "title": "obs_download_transcriptArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "obs_download_transcriptDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "obs_search_courses",
+      "description": "Search the public OBS course catalog by code or name (no auth required).",
+      "input_schema": {
+        "properties": {
+          "query": {
+            "title": "Query",
+            "type": "string"
+          },
+          "limit": {
+            "default": 15,
+            "title": "Limit",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "title": "obs_search_coursesArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "obs_search_coursesDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "obs_get_course_prerequisites",
+      "description": "Query prerequisite and postrequisite relationships for a course from the OBS public catalog. Supports chain queries up to 10 levels deep.",
+      "input_schema": {
+        "properties": {
+          "course_code": {
+            "title": "Course Code",
+            "type": "string"
+          },
+          "direction": {
+            "default": "prerequisites",
+            "title": "Direction",
+            "type": "string"
+          },
+          "max_depth": {
+            "default": 1,
+            "title": "Max Depth",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "course_code"
+        ],
+        "title": "obs_get_course_prerequisitesArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "obs_get_course_prerequisitesDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "obs_calculate_gpa",
+      "description": "Calculate GPA/GANO from OBS registered courses. Supports projected grades for what-if scenarios. Uses İTÜ 4.00-scale letter grade conversion.",
+      "input_schema": {
+        "properties": {
+          "semester": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Semester"
+          },
+          "projected_grades": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Projected Grades"
+          }
+        },
+        "title": "obs_calculate_gpaArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "obs_calculate_gpaDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "check_course_conflicts",
+      "description": "Check for schedule time conflicts between courses by CRN. Uses the public course schedule to look up session day/time/room.",
+      "input_schema": {
+        "properties": {
+          "crns": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Crns",
+            "type": "array"
+          },
+          "program_type": {
+            "default": "LS",
+            "title": "Program Type",
+            "type": "string"
+          },
+          "department_code": {
+            "default": "BLG",
+            "title": "Department Code",
+            "type": "string"
+          }
+        },
+        "required": [
+          "crns"
+        ],
+        "title": "check_course_conflictsArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "check_course_conflictsDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "obs_get_notifications",
+      "description": "Read İTÜ Portal notifications (requires login).",
+      "input_schema": {
+        "properties": {},
+        "title": "obs_get_notificationsArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "obs_get_notificationsDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "obs_get_help_tickets",
+      "description": "Read İTÜ Portal help desk tickets (requires login).",
+      "input_schema": {
+        "properties": {},
+        "title": "obs_get_help_ticketsArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "obs_get_help_ticketsDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "obs_get_cloud_quota",
+      "description": "Read İTÜ Mail and İTÜ Bulut storage quota from the Portal (requires login).",
+      "input_schema": {
+        "properties": {},
+        "title": "obs_get_cloud_quotaArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "obs_get_cloud_quotaDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_academic_calendar",
+      "description": "Read the İTÜ academic calendar — semester dates, exams, holidays, registration periods (public, no login).",
+      "input_schema": {
+        "properties": {},
+        "title": "get_academic_calendarArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "get_academic_calendarDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_cafeteria_menu",
+      "description": "Read today's cafeteria menu from the İTÜ Portal (requires login). Shows daily lunch/dinner meals.",
+      "input_schema": {
+        "properties": {},
+        "title": "get_cafeteria_menuArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "get_cafeteria_menuDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_public_course_schedule",
+      "description": "Read the public OBS course schedule for a department. No login required — reads the open DersProgram page. Returns structured course list with CRN, instructor, sessions (day/time/room), capacity, enrolled count, and prerequisite links.",
+      "input_schema": {
+        "properties": {
+          "program_type": {
+            "title": "Program Type",
+            "type": "string"
+          },
+          "department_code": {
+            "title": "Department Code",
+            "type": "string"
+          },
+          "crn": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Crn"
+          }
+        },
+        "required": [
+          "program_type",
+          "department_code"
+        ],
+        "title": "get_public_course_scheduleArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "get_public_course_scheduleDictOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_public_course_prerequisites",
+      "description": "Read prerequisite details from a course's public OBS DersBilgi page. No login required. Returns structured prerequisite list with codes, names, groups, and types.",
+      "input_schema": {
+        "properties": {
+          "brans_kodu": {
+            "title": "Brans Kodu",
+            "type": "string"
+          },
+          "ders_no": {
+            "title": "Ders No",
+            "type": "string"
+          }
+        },
+        "required": [
+          "brans_kodu",
+          "ders_no"
+        ],
+        "title": "get_public_course_prerequisitesArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "title": "get_public_course_prerequisitesDictOutput",
+        "type": "object"
+      }
+    }
+  ],
+  "prompts": [],
+  "resources": [],
+  "probe_results": [],
+  "findings": [
+    {
+      "rule_id": "R109",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
+      "severity": "low",
+      "target": "get_dashboard",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "schema": "input_schema",
+        "issue": "no_required_fields"
+      }
+    },
+    {
+      "rule_id": "R109",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
+      "severity": "low",
+      "target": "list_courses",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "schema": "input_schema",
+        "issue": "no_required_fields"
+      }
+    },
+    {
+      "rule_id": "R109",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
+      "severity": "low",
+      "target": "get_courses",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "schema": "input_schema",
+        "issue": "no_required_fields"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'course' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_course_announcements",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "course",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'course' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_course_class_files",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "course",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'course' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_course_lesson_files",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "course",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'course' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_course_assignments",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "course",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'course' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_course_info",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "course",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'course' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_course_sections",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "course",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'course' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_course_grades",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "course",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'course' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_course_message_board",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "course",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'course' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_course_attendance",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "course",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'course' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_course_remote_learning",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "course",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'course' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_course_overview",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "course",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R109",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
+      "severity": "low",
+      "target": "get_dashboard_announcements",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "schema": "input_schema",
+        "issue": "no_required_fields"
+      }
+    },
+    {
+      "rule_id": "R109",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
+      "severity": "low",
+      "target": "get_dashboard_assignments",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "schema": "input_schema",
+        "issue": "no_required_fields"
+      }
+    },
+    {
+      "rule_id": "R109",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
+      "severity": "low",
+      "target": "sync_all_courses",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "schema": "input_schema",
+        "issue": "no_required_fields"
+      }
+    },
+    {
+      "rule_id": "R109",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
+      "severity": "low",
+      "target": "get_updates",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "schema": "input_schema",
+        "issue": "no_required_fields"
+      }
+    },
+    {
+      "rule_id": "R109",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
+      "severity": "low",
+      "target": "get_upcoming_deadlines",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "schema": "input_schema",
+        "issue": "no_required_fields"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'url' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "read_page",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "url",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'course_url' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "crawl_course",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "course_url",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'url' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "download_resource",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "url",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R109",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
+      "severity": "low",
+      "target": "read_resource_text",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "schema": "input_schema",
+        "issue": "no_required_fields"
+      }
+    },
+    {
+      "rule_id": "R109",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
+      "severity": "low",
+      "target": "get_assignment_upload_slots",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "schema": "input_schema",
+        "issue": "no_required_fields"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'file_path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "submit_assignment",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "file_path",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'url' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "snapshot_page",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "url",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'url' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "diff_snapshot",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "url",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R109",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
+      "severity": "low",
+      "target": "obs_get_profile",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "schema": "input_schema",
+        "issue": "no_required_fields"
+      }
+    },
+    {
+      "rule_id": "R109",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
+      "severity": "low",
+      "target": "obs_get_contacts",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "schema": "input_schema",
+        "issue": "no_required_fields"
+      }
+    },
+    {
+      "rule_id": "R109",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
+      "severity": "low",
+      "target": "obs_list_registered_courses",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "schema": "input_schema",
+        "issue": "no_required_fields"
+      }
+    },
+    {
+      "rule_id": "R109",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
+      "severity": "low",
+      "target": "obs_get_course_grades",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "schema": "input_schema",
+        "issue": "no_required_fields"
+      }
+    },
+    {
+      "rule_id": "R109",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
+      "severity": "low",
+      "target": "obs_get_attendance",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "schema": "input_schema",
+        "issue": "no_required_fields"
+      }
+    },
+    {
+      "rule_id": "R109",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
+      "severity": "low",
+      "target": "obs_get_schedule",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "schema": "input_schema",
+        "issue": "no_required_fields"
+      }
+    },
+    {
+      "rule_id": "R109",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
+      "severity": "low",
+      "target": "obs_get_graduation_remaining",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "schema": "input_schema",
+        "issue": "no_required_fields"
+      }
+    },
+    {
+      "rule_id": "R109",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
+      "severity": "low",
+      "target": "obs_download_transcript",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "schema": "input_schema",
+        "issue": "no_required_fields"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'query' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "obs_search_courses",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "query",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'course_code' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "obs_get_course_prerequisites",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "course_code",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'direction' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "obs_get_course_prerequisites",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "direction",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R109",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
+      "severity": "low",
+      "target": "obs_calculate_gpa",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "schema": "input_schema",
+        "issue": "no_required_fields"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'program_type' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "check_course_conflicts",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "program_type",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'department_code' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "check_course_conflicts",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "department_code",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'program_type' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_public_course_schedule",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "program_type",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'department_code' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_public_course_schedule",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "department_code",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'brans_kodu' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_public_course_prerequisites",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "brans_kodu",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'ders_no' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_public_course_prerequisites",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "ders_no",
+        "schema": "input_schema"
+      }
+    }
+  ],
+  "summary": {
+    "total_tools": 55,
+    "total_prompts": 0,
+    "total_resources": 0,
+    "clean": 14,
+    "low": 45,
+    "medium": 0,
+    "high": 0,
+    "critical": 0
+  },
+  "name": "itu-mcp",
+  "version": "0.2.3"
+}

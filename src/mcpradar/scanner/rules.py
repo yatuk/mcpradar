@@ -716,10 +716,14 @@ class SchemaPoisoningDetection(Rule):
 
     def check(self, tool: ToolInfo) -> list[Finding]:
         found: list[Finding] = []
-        for schema_name, schema in [
-            ("input_schema", tool.input_schema),
-            ("output_schema", tool.output_schema),
-        ]:
+        # Only the INPUT schema is an injection surface. `additionalProperties:
+        # true`, missing `required`, and missing `type` on an OUTPUT schema are
+        # not attack vectors — the client cannot inject into a tool's return
+        # value, and structured-output MCP frameworks (e.g. FastMCP) routinely
+        # emit `additionalProperties: true` on output schemas for dict returns.
+        # Scanning output schemas here fired a HIGH on essentially every tool of
+        # well-built servers.
+        for schema_name, schema in [("input_schema", tool.input_schema)]:
             if not schema or not isinstance(schema, dict):
                 continue
             # additionalProperties: true
@@ -734,21 +738,34 @@ class SchemaPoisoningDetection(Rule):
                 )
             props = schema.get("properties", {})
             if props:
-                # No required fields
+                # No required fields — informational only. A tool accepting
+                # empty/optional input is extremely common and benign (every
+                # read-only tool with optional filters), so on its own this is
+                # not a poisoning vector. Kept LOW so it is surfaced but does not
+                # drive the grade; the real R109 risks (additionalProperties on
+                # input, missing types, excessive limits) stay MEDIUM/HIGH.
                 required = schema.get("required", [])
                 if not required:
                     found.append(
                         self._finding(
                             tool.name,
                             f"{schema_name}: no required fields; empty input acceptable",
-                            severity=Severity.MEDIUM,
+                            severity=Severity.LOW,
                             schema=schema_name,
                             issue="no_required_fields",
                         )
                     )
-                # Missing type constraints
+                # Missing type constraints. A property is typed not only via a
+                # bare `type`, but also via JSON Schema composition
+                # (anyOf/oneOf/allOf), a `$ref`, or an enumerated value set
+                # (enum/const). Pydantic/FastMCP emit `anyOf: [{type: X},
+                # {type: null}]` for every Optional[...] parameter, so requiring
+                # a bare `type` flagged essentially all optional typed params.
+                type_keywords = ("type", "anyOf", "oneOf", "allOf", "$ref", "enum", "const")
                 for prop_name, prop_schema in props.items():
-                    if isinstance(prop_schema, dict) and "type" not in prop_schema:
+                    if isinstance(prop_schema, dict) and not any(
+                        k in prop_schema for k in type_keywords
+                    ):
                         found.append(
                             self._finding(
                                 tool.name,

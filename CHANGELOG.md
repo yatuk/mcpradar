@@ -18,6 +18,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   New module `src/mcpradar/sandbox/`, 21 tests.
 
 ### Fixed
+- **R109 (schema poisoning) false positives** surfaced by scanning real
+  servers (yatuk/itu-mcp, 55 tools):
+  - No longer scans **output** schemas — `additionalProperties: true` there is
+    not an injection surface and structured-output frameworks (FastMCP) emit it
+    for every dict-returning tool. This fired a HIGH on all 55 itu-mcp tools.
+  - "No required fields" downgraded from MEDIUM to LOW — a tool accepting
+    optional input is common and benign, not schema poisoning.
+  - "Missing type" now recognizes `anyOf`/`oneOf`/`allOf`/`$ref`/`enum`/`const`
+    as valid typing; Pydantic/FastMCP emit `anyOf: [{type: X}, {type: null}]`
+    for every `Optional[...]` param, which was wrongly flagged 32× on itu-mcp.
+- **Leaderboard deduplication**: the catalog carried 39 servers under two
+  filename conventions, rendering as duplicate rows. The generator now
+  deduplicates by server name, keeping the scanned copy over a pending stub
+  (145 result files → 103 unique servers).
 - **Leaderboard honesty**: 139 of 144 catalog entries had never actually been
   scanned yet were shown as clean grade-A passes. The generator now marks any
   result without scan evidence (no tools, scan id, or timestamp) as `pending`
