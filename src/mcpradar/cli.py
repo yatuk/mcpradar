@@ -2290,11 +2290,63 @@ def leaderboard_generate(
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(rows, indent=2, ensure_ascii=False), encoding="utf-8")
 
+    # Regenerate the README badges from the current data so an embedded badge
+    # always reflects the server's real grade (they used to be static files
+    # that drifted out of sync). Filename matches the detail page's derivation:
+    # strip "@", turn "/" into "-".
+    _grade_color = {
+        "A": "#3fb950",
+        "B": "#56d364",
+        "C": "#d29922",
+        "D": "#db6d28",
+        "F": "#f85149",
+    }
+    badges_dir = output.parent / "badges"
+    badges_dir.mkdir(parents=True, exist_ok=True)
+    # Clear stale badges (dropped aliases, renamed servers) — they are fully
+    # derived from the current data, so a clean rebuild keeps them in sync.
+    for old in badges_dir.glob("*.svg"):
+        old.unlink()
+    badge_count = 0
+    for r in rows:
+        slug = r["server"].replace("@", "").replace("/", "-")
+        if not slug:
+            continue
+        if r["status"] == "pending":
+            color, right, aria = "#8b949e", "not scanned", "not scanned"
+        else:
+            g = r["grade"]
+            color = _grade_color.get(g, "#8b949e")
+            right = f"{g} · {r['aivss_score']:.1f}"
+            aria = f"{g} - {r['aivss_score']:.1f}/10"
+        # Right panel widens for the longer "not scanned" label.
+        right_w = 96 if r["status"] == "pending" else 72
+        total_w = 68 + right_w
+        svg = (
+            f'<svg xmlns="http://www.w3.org/2000/svg" width="{total_w}" height="20" '
+            f'role="img" aria-label="MCPRadar Security: {aria}">\n'
+            f"  <title>MCPRadar Security Score: {aria}</title>\n"
+            '  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="0">\n'
+            '    <stop offset="0%" stop-color="#444"/>\n'
+            '    <stop offset="100%" stop-color="#333"/>\n'
+            "  </linearGradient>\n"
+            f'  <rect width="{total_w}" height="20" rx="3" fill="url(#bg)"/>\n'
+            f'  <rect x="68" width="{right_w}" height="20" fill="{color}" fill-opacity="0.15"/>\n'
+            '  <text x="34" y="14" fill="#c9d1d9" font-size="10" font-family="sans-serif" '
+            'text-anchor="middle" font-weight="600">MCPRadar</text>\n'
+            f'  <text x="{68 + right_w // 2}" y="14" fill="{color}" font-size="10" '
+            f'font-family="sans-serif" text-anchor="middle" font-weight="600">{right}</text>\n'
+            "</svg>\n"
+        )
+        (badges_dir / f"{slug}.svg").write_text(svg, encoding="utf-8")
+        badge_count += 1
+
     scanned_rows = [r for r in rows if r["status"] != "pending"]
     pending_rows = [r for r in rows if r["status"] == "pending"]
     console.print(
         f"[green]Generated {output}[/] — "
-        f"{len(scanned_rows)} scanned, {len(pending_rows)} pending, {len(rows)} total"
+        f"{len(scanned_rows)} scanned, {len(pending_rows)} pending, {len(rows)} total; "
+        f"{badge_count} badges"
     )
     for r in scanned_rows:
         grade_color = {

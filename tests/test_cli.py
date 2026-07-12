@@ -139,6 +139,31 @@ class TestCLILeaderboard:
         assert result.exit_code == 0, result.output
         return json.loads(out.read_text(encoding="utf-8"))
 
+    def test_badges_generated_from_current_grade(self) -> None:
+        """Each row gets a README badge SVG derived from the live grade, so an
+        embedded badge never drifts out of sync with the data."""
+        with tempfile.TemporaryDirectory() as tmp:
+            self._generate(
+                Path(tmp),
+                {
+                    "srv.json": {
+                        "name": "@vendor/clean",
+                        "id": "abc",
+                        "target": "npx -y @vendor/clean",
+                        "scanned_at": "2026-07-10T00:00:00+00:00",
+                        "tools": [{"name": "t1"}],
+                        "summary": {"total_tools": 1},
+                        "findings": [],
+                    },
+                    "stub.json": {"name": "@vendor/pending", "status": "registry-pending"},
+                },
+            )
+            badges = Path(tmp) / "badges"
+            scanned_svg = (badges / "vendor-clean.svg").read_text(encoding="utf-8")
+            assert "MCPRadar Security: A - 0.0/10" in scanned_svg
+            pending_svg = (badges / "vendor-pending.svg").read_text(encoding="utf-8")
+            assert "not scanned" in pending_svg
+
     def test_unscanned_stub_is_pending_not_grade_a(self) -> None:
         """A registry stub (no tools, no scan id) must render as pending with no
         grade — never as a clean grade-A pass."""
