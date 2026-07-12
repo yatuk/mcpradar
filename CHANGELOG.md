@@ -8,6 +8,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
+- **Dependency vulnerability scan (`mcpradar deps <path>`)**: the end-to-end
+  SBOM → OSV path. Resolves a server's dependency list from its manifests
+  (package.json / package-lock.json / requirements.txt / pyproject.toml /
+  uv.lock, preferring lockfiles for exact versions), batch-queries the OSV.dev
+  database, hydrates each advisory via `/vulns/{id}`, and reports every
+  known-vulnerable dependency as a **D001** finding. Severity is the real CVSS
+  v3.x base score computed from the advisory vector (with a GitHub-Advisory
+  label fallback). `--list` prints resolved dependencies offline. Verified
+  against the Appsecco `outdated-packages` server (82 advisories) and
+  `malicious-code-exec` (10, incl. 3 CVEs in an old `@modelcontextprotocol/sdk`).
+  New module `src/mcpradar/supply/`, `OSVClient.get_vuln` + CVSS scorer, 12 tests.
 - **Source-code analysis (`mcpradar scan-source <path>`)**: static AST analysis
   of MCP server Python source, no server execution required. New `S` rule
   namespace:

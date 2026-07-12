@@ -770,6 +770,79 @@ def sbom(
 
 
 # ---------------------------------------------------------------------------
+# deps - dependency vulnerability scan (SBOM -> OSV)
+# ---------------------------------------------------------------------------
+
+
+@app.command()
+def deps(
+    path: str = typer.Argument(  # noqa: B008
+        help="Path to an MCP server's source (dir or manifest) to check dependencies for"
+    ),
+    severity: str = typer.Option(  # noqa: B008
+        "low", "--severity", "-s", help="Minimum severity: low/medium/high/critical"
+    ),
+    output_format: str = typer.Option(  # noqa: B008
+        "rich", "--format", "-f", help="Output format: rich, json, sarif"
+    ),
+    output: Path | None = typer.Option(  # noqa: B008
+        None, "--output", "-o", help="Write results to a file"
+    ),
+    list_only: bool = typer.Option(  # noqa: B008
+        False, "--list", help="Only list resolved dependencies; skip the OSV query"
+    ),
+) -> None:
+    """Resolve a server's dependencies and check them against OSV.dev.
+
+    Parses package.json / package-lock.json / requirements.txt / pyproject.toml
+    / uv.lock, then batch-queries the OSV vulnerability database (GitHub
+    Advisory, PyPA, npm) and reports each known-vulnerable dependency (D001).
+    """
+    from mcpradar.output.console import console
+    from mcpradar.scanner.report import ScanReport, Severity
+    from mcpradar.supply import extract_dependencies, scan_dependencies
+
+    src = Path(path)
+    if not src.exists():
+        console.print(f"[red]Path not found: {path}[/]")
+        raise typer.Exit(code=1)
+
+    if list_only:
+        found = extract_dependencies(src)
+        console.print(f"[bold]{len(found)}[/] dependencies resolved:")
+        for d in found:
+            console.print(f"  [dim]{d.ecosystem}[/] {d.name}@{d.version}")
+        return
+
+    sev = Severity.from_str(severity)
+    with console.status(f"[bold blue]{path}[/] checking dependencies against OSV..."):
+        resolved, all_findings = scan_dependencies(src)
+
+    report = ScanReport(target=str(src), transport="deps")
+    for f in all_findings:
+        if f.severity >= sev:
+            report.add_finding(f)
+
+    vuln_pkgs = {f.detail.get("package") for f in report.findings}
+    if output_format == "json":
+        console.print(json.dumps(report.to_dict(), indent=2, ensure_ascii=False))
+    elif output_format == "sarif":
+        from mcpradar.output.sarif import to_sarif
+
+        console.print(json.dumps(to_sarif(report), indent=2, ensure_ascii=False))
+    else:
+        console.print(
+            f"[bold]{len(resolved)}[/] dependencies scanned, "
+            f"[bold]{len(report.findings)}[/] advisories across "
+            f"[bold]{len(vuln_pkgs)}[/] vulnerable package(s)\n"
+        )
+        console.print_report(report)
+
+    if output:
+        _save_output(report, output, output_format)
+
+
+# ---------------------------------------------------------------------------
 # scan-all - scan all servers from config file
 # ---------------------------------------------------------------------------
 

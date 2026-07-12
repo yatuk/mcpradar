@@ -12,6 +12,48 @@ from typing import Any
 import httpx
 
 
+def _cvss_base_score(vector: str) -> float | None:
+    """Compute the CVSS v3.x base score from a vector string.
+
+    Returns None if the vector is not a parseable CVSS:3.x vector.
+    """
+    if "CVSS:3" not in vector:
+        return None
+    metrics = {}
+    for part in vector.split("/"):
+        if ":" in part:
+            k, _, v = part.partition(":")
+            metrics[k] = v
+    try:
+        av = {"N": 0.85, "A": 0.62, "L": 0.55, "P": 0.2}[metrics["AV"]]
+        ac = {"L": 0.77, "H": 0.44}[metrics["AC"]]
+        ui = {"N": 0.85, "R": 0.62}[metrics["UI"]]
+        scope_changed = metrics["S"] == "C"
+        pr_map = (
+            {"N": 0.85, "L": 0.68, "H": 0.50}
+            if scope_changed
+            else {"N": 0.85, "L": 0.62, "H": 0.27}
+        )
+        pr = pr_map[metrics["PR"]]
+        cia = {"H": 0.56, "L": 0.22, "N": 0.0}
+        c, i, a = cia[metrics["C"]], cia[metrics["I"]], cia[metrics["A"]]
+    except KeyError:
+        return None
+
+    isc_base = 1 - (1 - c) * (1 - i) * (1 - a)
+    if scope_changed:
+        impact = 7.52 * (isc_base - 0.029) - 3.25 * (isc_base - 0.02) ** 15
+    else:
+        impact = 6.42 * isc_base
+    if impact <= 0:
+        return 0.0
+    exploitability = 8.22 * av * ac * pr * ui
+    raw = (1.08 * (impact + exploitability)) if scope_changed else (impact + exploitability)
+    import math
+
+    return min(math.ceil(raw * 10) / 10, 10.0)
+
+
 @dataclass
 class OSVVulnerability:
     """A parsed vulnerability entry from OSV."""
@@ -35,6 +77,7 @@ class OSVClient:
 
     def __init__(self, cache_ttl: int = 86400) -> None:
         self._cache_ttl = cache_ttl
+        self._detail_cache: dict[str, OSVVulnerability | None] = {}
 
     def query_package(
         self, ecosystem: str, name: str, version: str | None = None
@@ -103,23 +146,51 @@ class OSVClient:
                 results[name] = [self._parse_vuln(v) for v in result.get("vulns", [])]
         return results
 
+    def get_vuln(self, vuln_id: str) -> OSVVulnerability | None:
+        """Fetch a single vulnerability's full record by OSV/GHSA id.
+
+        The ``/querybatch`` endpoint returns only ids; severity, summary, and
+        fix data must be hydrated from ``/vulns/{id}``.
+        """
+        if vuln_id in self._detail_cache:
+            return self._detail_cache[vuln_id]
+        try:
+            response = httpx.get(f"{self.BASE_URL}/vulns/{vuln_id}", timeout=30.0)
+            response.raise_for_status()
+            parsed = self._parse_vuln(response.json())
+        except Exception:
+            parsed = None
+        self._detail_cache[vuln_id] = parsed
+        return parsed
+
     def _parse_vuln(self, raw: dict[str, Any]) -> OSVVulnerability:
         """Parse a raw OSV vulnerability dict."""
         # Extract CVSS score
         severity_score = None
         severity_vector = ""
         for sev in raw.get("severity", []):
-            if sev.get("type") == "CVSS_V3":
+            if sev.get("type", "").startswith("CVSS"):
                 score_str = sev.get("score", "")
-                if isinstance(score_str, str) and "CVSS:3" in score_str:
+                if isinstance(score_str, str) and "CVSS:" in score_str:
                     severity_vector = score_str
-                # Try numeric score (may be separate or same entry)
-                numeric = sev.get("score")
-                if isinstance(numeric, (int, float)):
-                    severity_score = float(numeric)
+                    severity_score = _cvss_base_score(score_str)
+                elif isinstance(score_str, (int, float)):
+                    severity_score = float(score_str)
+
+        db_specific = raw.get("database_specific", {})
+        # OSV rarely carries a numeric score; the GitHub Advisory label
+        # (CRITICAL/HIGH/MODERATE/LOW) is the reliable fallback.
+        if severity_score is None:
+            label = str(db_specific.get("severity", "")).upper()
+            severity_score = {
+                "CRITICAL": 9.5,
+                "HIGH": 7.5,
+                "MODERATE": 5.0,
+                "MEDIUM": 5.0,
+                "LOW": 2.0,
+            }.get(label)
 
         # Extract CWE IDs
-        db_specific = raw.get("database_specific", {})
         cwe_ids = db_specific.get("cwe_ids", [])
         if isinstance(cwe_ids, str):
             cwe_ids = [cwe_ids]

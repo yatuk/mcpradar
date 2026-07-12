@@ -113,12 +113,12 @@ One command, no install, runs against any MCP server you can launch.
 - AIVSS 0-10 scoring + A-F letter grades
 - Container sandbox (`--sandbox`) for isolating untrusted stdio servers during a scan
 - Source-code analysis (`mcpradar scan-source`): AST-based SSRF, unsafe deserialization, command/SQL injection, and Description-Code Inconsistency (S001-S007) — no server execution required
+- Dependency vulnerability scan (`mcpradar deps`): resolves a server's npm/pip manifests and checks every dependency against OSV.dev (GitHub Advisory / PyPA), with CVSS-derived severity (D001)
 - Public security leaderboard at https://yatuk.github.io/mcpradar
 
 ### Planned (v1.1+)
-- **Package fetch:** Pull source from a GitHub URL / npm / pip package automatically before `scan-source` (currently takes a local path)
+- **Package fetch:** Pull source from a GitHub URL / npm / pip package automatically before `scan-source` / `deps` (currently take a local path)
 - **Semgrep integration:** Complement the built-in AST rules with a Semgrep ruleset
-- **OSV/GitHub Advisory:** Dependency CVE checking beyond NVD
 - **Typosquatting detection:** Levenshtein distance against known top packages
 - **Runtime proxy:** Transparent MCP traffic inspection
 
@@ -172,7 +172,7 @@ See [Benchmarks](#benchmarks) for measured precision/recall data.
 | **DCI (desc vs code)** | Yes (S007) | - | - | - | - | Partial | - |
 | **Cross-server analysis** | Yes (C001-C007) | - | - | - | - | - | - |
 | **Source scanning** | Yes (`scan-source`) | - | - | - | - | Yes | - |
-| **SBOM + dep. CVE** | Yes (CycloneDX + NVD) | - | - | - | - | - | - |
+| **SBOM + dep. CVE** | Yes (CycloneDX + NVD + OSV) | - | - | - | - | - | - |
 | **Sandbox execution** | Yes (container isolation) | - | - | N/A (proxy) | - | - | - |
 | **AIVSS scoring** | Yes (0-10 + CWE) | LLM score | Yes | - | - | - | - |
 | **Snapshot diff** | Yes (3-level) | Not documented | Version compare | Yes | - | - | - |
