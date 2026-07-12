@@ -8,6 +8,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
+- **Source-code analysis (`mcpradar scan-source <path>`)**: static AST analysis
+  of MCP server Python source, no server execution required. New `S` rule
+  namespace:
+  - S001 cloud-metadata SSRF (169.254.169.254 / metadata.google.internal)
+  - S002 outbound request to an attacker-controllable host (host-pinned URLs
+    are not flagged)
+  - S003 unsafe deserialization (pickle / `yaml.load` without SafeLoader /
+    marshal)
+  - S004 dynamic code execution (`eval`/`exec` on a non-literal)
+  - S005 SQL injection (`execute()` built with an f-string / concat / %-format)
+  - S006 shell execution (`subprocess(..., shell=True)` / `os.system` / `os.popen`)
+  - S007 **Description-Code Inconsistency** — a tool that presents as read-only
+    (get/list/read/search…) whose handler writes to disk or executes commands.
+    Network I/O is deliberately not a DCI signal (a read tool fetching from an
+    API is normal), keeping the false-positive rate low.
+  New module `src/mcpradar/source/`, 18 tests. Verified against the Appsecco
+  corpus (wikipedia server: 0 false positives after the host-pinning and
+  network-DCI guards).
 - **Container sandbox (`--sandbox`)**: Untrusted stdio servers now run in a
   disposable Docker/Podman container during a scan — egress locked
   (`--network none` by default), ephemeral filesystem (`--rm` + tmpfs), all
