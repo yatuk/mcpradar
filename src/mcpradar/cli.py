@@ -82,7 +82,23 @@ def scan(
         False, "--no-save", help="Do not save snapshot to database"
     ),
     sandbox: bool = typer.Option(  # noqa: B008
-        False, "--sandbox", help="Probe with sandbox argument validation"
+        False,
+        "--sandbox",
+        help="Isolate the scan: run stdio servers in a disposable "
+        "Docker/Podman container (egress locked, ephemeral FS) and "
+        "validate probe arguments",
+    ),
+    sandbox_image: str | None = typer.Option(  # noqa: B008
+        None,
+        "--sandbox-image",
+        help="Container image for --sandbox (default: auto-picked from the "
+        "launch command: python:3.12-slim or node:22-slim)",
+    ),
+    sandbox_network: str = typer.Option(  # noqa: B008
+        "none",
+        "--sandbox-network",
+        help="Container network for --sandbox: 'none' (egress lock, default) "
+        "or 'bridge' (needed for npx/uvx package download)",
     ),
 ) -> None:
     """Scan an MCP server for security issues and save to SQLite."""
@@ -115,12 +131,39 @@ def scan(
 
         prober = ReadOnlyProber(sandbox_validator=SandboxValidator())
 
+    # --sandbox + stdio: launch the server inside a disposable container
+    launch_command = None
+    if sandbox and transport == "stdio":
+        from mcpradar.sandbox import (
+            ContainerPolicy,
+            SandboxUnavailableError,
+            network_warning,
+            wrap_stdio_command,
+        )
+
+        if sandbox_network not in {"none", "bridge"}:
+            console.print(
+                f"[red]Invalid --sandbox-network: {sandbox_network}. Valid: none, bridge[/]"
+            )
+            raise typer.Exit(code=1)
+        policy = ContainerPolicy(image=sandbox_image, network=sandbox_network)
+        try:
+            launch_command = wrap_stdio_command(target, policy)
+        except SandboxUnavailableError as e:
+            console.print(f"[red]{e}[/]")
+            raise typer.Exit(code=2) from None
+        warning = network_warning(target, policy)
+        if warning:
+            console.print(f"[yellow]{warning}[/]")
+        console.print("[dim]Sandbox: server runs in a disposable container[/]")
+
     scanner = Scanner(
         target=target,
         transport=transport,
         min_severity=sev,
         prober=prober,
         probe_safe_only=True,
+        launch_command=launch_command,
     )
 
     with console.status(f"[bold blue]{target}[/] scanning..."):

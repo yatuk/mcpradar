@@ -90,7 +90,8 @@ One command, no install, runs against any MCP server you can launch.
 - **NVD CVE feed:** MCP-related CVE sync from NVD API 2.0 with multi-factor finding-to-CVE matching
 
 ### Enterprise
-- **Argument sanitizer:** Validates and sanitizes tool arguments before probing (container sandbox planned v1.1)
+- **Container sandbox:** `--sandbox` runs untrusted stdio servers in a disposable Docker/Podman container — egress locked (`--network none`), ephemeral filesystem, all capabilities dropped, no privilege escalation, bounded pids/memory/cpu
+- **Argument sanitizer:** Validates and sanitizes tool arguments before probing
 - **Audit trail:** Structured event logging (scan_start, finding_created, diff_detected)
 - **Stats engine:** Per-server trend analysis, top rules, severity distribution
 - **Plugin system:** entry_points auto-discovery, `mcpradar plugin init/validate/install`
@@ -110,12 +111,12 @@ One command, no install, runs against any MCP server you can launch.
 - CycloneDX SBOM export
 - NVD CVE feed sync
 - AIVSS 0-10 scoring + A-F letter grades
+- Container sandbox (`--sandbox`) for isolating untrusted stdio servers during a scan
 - Public security leaderboard at https://yatuk.github.io/mcpradar
 
 ### Planned (v1.1+)
 - **Source scanning:** Scan GitHub repos, npm/pip packages without running the server
 - **AST + Semgrep:** Source-code static analysis (DCI, unsafe deserialization, SQLi)
-- **Container sandbox:** Disposable Docker/Podman with egress lock for untrusted servers
 - **OSV/GitHub Advisory:** Dependency CVE checking beyond NVD
 - **Typosquatting detection:** Levenshtein distance against known top packages
 - **Runtime proxy:** Transparent MCP traffic inspection
@@ -135,15 +136,15 @@ graph LR
     D -->|findings| E[SQLite Snapshot]
     E --> F[Scoring Engine]
     F -->|AIVSS 0-10| G[Rich / JSON / SARIF]
+    B -->|--sandbox| H[Disposable Container]
+    H -->|isolated stdio| C
     B -.->|planned v1.1| P[Package Scanner]
     P -.->|planned v1.1| S[Source Analysis]
     S -.->|planned v1.1| D2[Rule Engine]
     D2 -.->|planned v1.1| E
-    B -.->|planned v1.1| H[Sandbox Engine]
-    H -.->|planned v1.1| C
 ```
 
-*Source scanning and sandbox containers are planned for v1.1. All other components are production-ready.*
+*Source scanning is planned for v1.1. All other components, including the container sandbox, are production-ready.*
 
 MCPRadar connects to the MCP server, enumerates tools/prompts/resources,
 runs each tool schema through the rule engine, computes AIVSS scores,
@@ -171,7 +172,7 @@ See [Benchmarks](#benchmarks) for measured precision/recall data.
 | **Cross-server analysis** | Yes (C001-C007) | - | - | - | - | - | - |
 | **Source scanning** | Planned v1.1 | - | - | - | - | Yes | - |
 | **SBOM + dep. CVE** | Yes (CycloneDX + NVD) | - | - | - | - | - | - |
-| **Sandbox execution** | Planned v1.1 | - | - | N/A (proxy) | - | - | - |
+| **Sandbox execution** | Yes (container isolation) | - | - | N/A (proxy) | - | - | - |
 | **AIVSS scoring** | Yes (0-10 + CWE) | LLM score | Yes | - | - | - | - |
 | **Snapshot diff** | Yes (3-level) | Not documented | Version compare | Yes | - | - | - |
 | **SARIF output** | Yes (v2.1.0) | Yes | - | - | Yes | - | - |
@@ -256,6 +257,12 @@ Requires Python 3.11+. All transports (stdio, SSE, HTTP) work out of the box.
 ```bash
 # Scan a local stdio server
 mcpradar scan stdio -- npx -y @modelcontextprotocol/server-filesystem /tmp
+
+# Isolate an untrusted stdio server in a disposable container (egress locked)
+mcpradar scan "python ./suspicious_server.py" -t stdio --sandbox
+
+# Sandbox a server that fetches its package at startup (npx/uvx need network)
+mcpradar scan "npx -y @scope/unknown-server" -t stdio --sandbox --sandbox-network bridge
 
 # Scan an HTTP server, only critical findings
 mcpradar scan http://localhost:8080 -s critical

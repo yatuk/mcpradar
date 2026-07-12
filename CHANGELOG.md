@@ -5,6 +5,39 @@ All notable changes to MCPRadar will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+### Added
+- **Container sandbox (`--sandbox`)**: Untrusted stdio servers now run in a
+  disposable Docker/Podman container during a scan — egress locked
+  (`--network none` by default), ephemeral filesystem (`--rm` + tmpfs), all
+  capabilities dropped, `no-new-privileges`, and bounded pids/memory/cpu. The
+  working directory is mounted read-only at `/workspace`. New
+  `--sandbox-image` and `--sandbox-network` flags; the base image is
+  auto-picked (python:3.12-slim / node:22-slim) from the launch command.
+  New module `src/mcpradar/sandbox/`, 21 tests.
+
+### Fixed
+- **R107 (command injection)** had 0% recall on real servers: the
+  dangerous-default check compared a lowercased value against a mixed-case set
+  and used exact matching, so entries like `DROP TABLE` were unreachable and
+  variants like `rm -rf /tmp/cache` never matched. Replaced with a
+  case-insensitive prefix regex.
+- **R106 (secret exposure)** flagged URL path segments as CRITICAL secrets —
+  the "base64-like" pattern claimed an entropy check it never applied. Now
+  gated on Shannon entropy > 4.5 and reported at HIGH.
+- **R113 (path traversal)** over-reported: schema-constraint-absence findings
+  demoted to LOW (MEDIUM for write-capable tools), and traversal-language
+  matches inside protective documentation ("prevents path traversal") are no
+  longer flagged.
+
+### Changed
+- **Benchmark**: `validation/` now scans an 11-target corpus (demo server + 3
+  official reference servers as negative controls + 7 Appsecco lab servers)
+  instead of a single self-made target. Metrics computed on MEDIUM+ findings;
+  statically-undetectable classes labeled as known limitations. Measured:
+  precision 87.5%, recall 100%, F1 0.93.
+
 ## v1.0.0-rc3 — 2026-06-23
 
 ### Added

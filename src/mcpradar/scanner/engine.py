@@ -38,6 +38,7 @@ class Scanner:
         prober: ReadOnlyProber | None = None,
         probe_safe_only: bool = True,
         audit: AuditLogger | None = None,
+        launch_command: str | None = None,
     ) -> None:
         self.target = target
         self.transport = transport
@@ -46,6 +47,10 @@ class Scanner:
         self.probe_safe_only = probe_safe_only
         self.rule_engine = RuleEngine(min_severity=min_severity)
         self.audit = audit
+        # stdio only: actual command to launch (e.g. container-wrapped by
+        # --sandbox) while `target` stays the server's identity for
+        # reports, snapshots and diffs.
+        self.launch_command = launch_command
 
     async def run(self) -> ScanReport:
         report = ScanReport(target=self.target, transport=self.transport)
@@ -108,7 +113,7 @@ class Scanner:
     # ------------------------------------------------------------------
 
     async def _run_stdio(self, report: ScanReport) -> None:
-        parts = shlex.split(self.target)
+        parts = shlex.split(self.launch_command or self.target)
         params = StdioServerParameters(command=parts[0], args=parts[1:])
         async with (
             stdio_client(params) as (read, write),

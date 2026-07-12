@@ -21,13 +21,30 @@ Scan a single MCP server.
 | `--severity`, `-s` | TEXT | `medium` | Min severity: `low`, `medium`, `high`, `critical` |
 | `--format`, `-f` | TEXT | `rich` | Output format: `rich`, `json`, `sarif` |
 | `--no-save` | FLAG | — | Skip saving to database |
+| `--sandbox` | FLAG | — | Run stdio servers in a disposable container (egress locked, ephemeral FS) and validate probe arguments |
+| `--sandbox-image` | TEXT | auto | Container image for `--sandbox` (default auto-picked: `python:3.12-slim` / `node:22-slim`) |
+| `--sandbox-network` | TEXT | `none` | Container network for `--sandbox`: `none` (egress lock) or `bridge` (needed for npx/uvx package download) |
 
 **Examples:**
 ```bash
 mcpradar scan http://localhost:8080
 mcpradar scan stdio -- npx -y @modelcontextprotocol/server-filesystem /tmp
 mcpradar scan http://x -s critical -f json
+
+# Isolate an untrusted stdio server in a disposable container
+mcpradar scan "python ./suspicious_server.py" -t stdio --sandbox
+
+# Allow network for launchers that download the package at startup
+mcpradar scan "npx -y @scope/server" -t stdio --sandbox --sandbox-network bridge
 ```
+
+The container sandbox requires a running Docker or Podman daemon. Docker is
+preferred when both are present. Isolation applied per scan: `--rm` (ephemeral
+container + filesystem), `--network none` by default (egress lock),
+`--cap-drop ALL`, `--security-opt no-new-privileges`, and bounded
+pids/memory/cpu. The current directory is mounted read-only at `/workspace` so
+relative script paths resolve. `--sandbox` only wraps `stdio` scans; for
+`http`/`sse` targets it just enables probe-argument validation.
 
 ### `mcpradar scan-all`
 
