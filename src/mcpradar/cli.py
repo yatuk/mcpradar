@@ -260,6 +260,68 @@ def scan_source(
 
 
 # ---------------------------------------------------------------------------
+# scan-config
+# ---------------------------------------------------------------------------
+
+
+@app.command(name="scan-config")
+def scan_config(
+    path: str = typer.Argument(  # noqa: B008
+        help="Path to an MCP/agent config file or a project directory to scan"
+    ),
+    severity: str = typer.Option(  # noqa: B008
+        "low", "--severity", "-s", help="Minimum severity: low/medium/high/critical"
+    ),
+    output_format: str = typer.Option(  # noqa: B008
+        "rich", "--format", "-f", help="Output format: rich, json, sarif"
+    ),
+    output: Path | None = typer.Option(  # noqa: B008
+        None, "--output", "-o", help="Write results to a file"
+    ),
+) -> None:
+    """Scan MCP / agent config files for poisoning.
+
+    Inspects the launch commands, hook commands, and permission grants in
+    config files (claude_desktop_config.json, .mcp.json, .cursor/mcp.json,
+    .claude/settings.json, …) for download-to-shell RCE, credential
+    exfiltration, reverse shells, and over-broad permissions (M001-M007).
+    """
+    from mcpradar.config_scan import scan_config_path
+    from mcpradar.output.console import console
+    from mcpradar.scanner.report import ScanReport, Severity
+
+    src = Path(path)
+    if not src.exists():
+        console.print(f"[red]Path not found: {path}[/]")
+        raise typer.Exit(code=1)
+
+    sev = Severity.from_str(severity)
+    with console.status(f"[bold blue]{path}[/] scanning config..."):
+        result = scan_config_path(src)
+
+    report = ScanReport(target=str(src), transport="config")
+    for f in result.findings:
+        if f.severity >= sev:
+            report.add_finding(f)
+
+    if output_format == "json":
+        console.print(json.dumps(report.to_dict(), indent=2, ensure_ascii=False))
+    elif output_format == "sarif":
+        from mcpradar.output.sarif import to_sarif
+
+        console.print(json.dumps(to_sarif(report), indent=2, ensure_ascii=False))
+    else:
+        console.print(
+            f"[bold]{result.files_scanned}[/] config file(s) scanned, "
+            f"[bold]{len(report.findings)}[/] finding(s)\n"
+        )
+        console.print_report(report)
+
+    if output:
+        _save_output(report, output, output_format)
+
+
+# ---------------------------------------------------------------------------
 # probe
 # ---------------------------------------------------------------------------
 

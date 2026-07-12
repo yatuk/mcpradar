@@ -11,6 +11,7 @@ schema rules (``R``) and cross-server rules (``C``):
 - S006  Shell execution (subprocess shell=True / os.system / os.popen)
 - S007  Description-Code Inconsistency (read-only tool that writes / sends /
         executes) — the flagship differentiator
+- S008  Trojan Source: bidirectional / invisible unicode (CVE-2021-42574)
 """
 
 from __future__ import annotations
@@ -72,6 +73,16 @@ _SUBPROCESS_SINKS = (
 _SQL_METHODS = ("execute", "executemany", "executescript")
 
 _CLOUD_METADATA = ("169.254.169.254", "metadata.google.internal", "100.100.100.200")
+
+# Trojan Source (CVE-2021-42574): bidirectional-control and invisible unicode
+# that make source read differently from how it compiles/executes.
+# Bidi: LRE/RLE/PDF/LRO/RLO (202A-202E) and isolates LRI/RLI/FSI/PDI (2066-2069).
+_BIDI_CHARS = frozenset(chr(c) for c in [*range(0x202A, 0x202F), *range(0x2066, 0x206A)])
+# Zero-width / directional marks / word joiner / BOM.
+_INVISIBLE_CHARS = frozenset(
+    chr(c) for c in (0x200B, 0x200C, 0x200D, 0x200E, 0x200F, 0x2060, 0xFEFF)
+)
+_TROJAN_CHARS = _BIDI_CHARS | _INVISIBLE_CHARS
 
 # Tool-name / description tokens that promise read-only behavior.
 _READONLY_TOKENS = (
@@ -253,15 +264,45 @@ class SourceAnalyzer:
             source = path.read_text(encoding="utf-8", errors="replace")
         except OSError:
             return []
+        rel = path.name
+        findings: list[Finding] = []
+        # S008 works on raw text and does not need a parseable AST.
+        findings += self._scan_trojan_source(source, rel)
         try:
             tree = ast.parse(source, filename=str(path))
         except SyntaxError:
-            return []
-        rel = path.name
-        findings: list[Finding] = []
+            return findings
         findings += self._scan_sinks(tree, rel)
         findings += self._scan_dci(tree, rel)
         return findings
+
+    # ------------------------------------------------------------------
+    # S008: Trojan Source (CVE-2021-42574) — bidi / invisible unicode
+    # ------------------------------------------------------------------
+    def _scan_trojan_source(self, source: str, loc: str) -> list[Finding]:
+        found: list[Finding] = []
+        for lineno, line in enumerate(source.splitlines(), start=1):
+            hits = {ch for ch in line if ch in _TROJAN_CHARS}
+            if hits:
+                names = ", ".join(f"U+{ord(c):04X}" for c in sorted(hits))
+                bidi = any(c in _BIDI_CHARS for c in hits)
+                found.append(
+                    self._f(
+                        "S008",
+                        "Trojan Source: bidirectional / invisible unicode in code",
+                        Severity.HIGH if bidi else Severity.MEDIUM,
+                        loc,
+                        lineno,
+                        (
+                            "Source line contains "
+                            + ("bidirectional-control" if bidi else "invisible")
+                            + f" unicode ({names}); code may not read as it executes "
+                            "(CVE-2021-42574)"
+                        ),
+                        chars=names,
+                    )
+                )
+        return found
 
     # ------------------------------------------------------------------
     # S001-S006: sink-based checks

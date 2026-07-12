@@ -232,9 +232,7 @@ def scan_dependencies(
         return [], []
 
     client = client or OSVClient()
-    queries: list[tuple[str, str, str | None]] = [
-        (d.ecosystem, d.name, d.version) for d in deps
-    ]
+    queries: list[tuple[str, str, str | None]] = [(d.ecosystem, d.name, d.version) for d in deps]
     # querybatch returns only ids; hydrate full details (severity/summary/fix)
     # once per unique id via /vulns/{id}.
     by_name = client.query_batch(queries)

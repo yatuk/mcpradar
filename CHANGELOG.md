@@ -8,6 +8,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
+- **Config poisoning scan (`mcpradar scan-config <path>`)**: inspects MCP /
+  agent config files (`claude_desktop_config.json`, `.mcp.json`,
+  `.cursor/mcp.json`, `.vscode/mcp.json`, `.claude/settings.json`, …) for the
+  "malicious server / poisoned hook added to your config" threat that
+  server-side scanning cannot see. New `M` rule namespace: M001 download-to-shell
+  RCE (curl|bash), M002 base64-decode-to-shell, M003 credential read + network
+  egress, M004 exfiltration to a known collector host, M005 reverse shell, M006
+  over-broad permission (`Bash(*)`, `bypassPermissions`), M007 destructive
+  launch command. Scans MCP server launch commands, agent hook commands, and
+  permission grants. New module `src/mcpradar/config_scan/`, 13 tests.
+  (Inspired by patterns in Pantheon-Security/medusa.)
+- **Trojan Source detection (S008)**: `scan-source` now flags bidirectional-
+  control and invisible unicode (CVE-2021-42574) in source — code that does not
+  read the way it executes. Runs on raw text, so it fires even when the file
+  won't parse.
 - **Dependency vulnerability scan (`mcpradar deps <path>`)**: the end-to-end
   SBOM → OSV path. Resolves a server's dependency list from its manifests
   (package.json / package-lock.json / requirements.txt / pyproject.toml /

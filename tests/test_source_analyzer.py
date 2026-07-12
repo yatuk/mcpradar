@@ -165,6 +165,36 @@ class TestDCI:
         assert "S007" not in _ids(f)
 
 
+class TestTrojanSource:
+    def test_bidi_override_flagged_high(self, tmp_path: Path) -> None:
+        # RLO (U+202E) can visually reorder code.
+        src = "amount = 100  # ‮return admin\n"
+        f = tmp_path / "server.py"
+        f.write_text(src, encoding="utf-8")
+        s008 = [x for x in SourceAnalyzer().analyze_file(f) if x.rule_id == "S008"]
+        assert len(s008) == 1
+        assert s008[0].severity == Severity.HIGH
+
+    def test_zero_width_flagged_medium(self, tmp_path: Path) -> None:
+        src = "pass​​\n"
+        f = tmp_path / "server.py"
+        f.write_text(src, encoding="utf-8")
+        s008 = [x for x in SourceAnalyzer().analyze_file(f) if x.rule_id == "S008"]
+        assert len(s008) == 1
+        assert s008[0].severity == Severity.MEDIUM
+
+    def test_clean_ascii_not_flagged(self, tmp_path: Path) -> None:
+        f = tmp_path / "server.py"
+        f.write_text("x = 1  # normal comment\n", encoding="utf-8")
+        assert [x for x in SourceAnalyzer().analyze_file(f) if x.rule_id == "S008"] == []
+
+    def test_reported_even_when_unparseable(self, tmp_path: Path) -> None:
+        # S008 runs on raw text, so it fires even if the AST won't parse.
+        f = tmp_path / "broken.py"
+        f.write_text("def (:\n  x‮\n", encoding="utf-8")
+        assert any(x.rule_id == "S008" for x in SourceAnalyzer().analyze_file(f))
+
+
 class TestClean:
     def test_clean_source_no_findings(self, tmp_path: Path) -> None:
         f = _scan(

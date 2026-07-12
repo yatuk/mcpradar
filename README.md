@@ -112,7 +112,8 @@ One command, no install, runs against any MCP server you can launch.
 - NVD CVE feed sync
 - AIVSS 0-10 scoring + A-F letter grades
 - Container sandbox (`--sandbox`) for isolating untrusted stdio servers during a scan
-- Source-code analysis (`mcpradar scan-source`): AST-based SSRF, unsafe deserialization, command/SQL injection, and Description-Code Inconsistency (S001-S007) — no server execution required
+- Source-code analysis (`mcpradar scan-source`): AST-based SSRF, unsafe deserialization, command/SQL injection, Description-Code Inconsistency, and Trojan Source / bidi unicode (S001-S008) — no server execution required
+- Config poisoning scan (`mcpradar scan-config`): inspects MCP/agent config files (`claude_desktop_config.json`, `.mcp.json`, `.cursor/mcp.json`, `.claude/settings.json`, …) for download-to-shell RCE, credential exfiltration, reverse shells, and over-broad permissions (M001-M007)
 - Dependency vulnerability scan (`mcpradar deps`): resolves a server's npm/pip manifests and checks every dependency against OSV.dev (GitHub Advisory / PyPA), with CVSS-derived severity (D001)
 - Public security leaderboard at https://yatuk.github.io/mcpradar
 
@@ -259,8 +260,14 @@ Requires Python 3.11+. All transports (stdio, SSE, HTTP) work out of the box.
 # Scan a local stdio server
 mcpradar scan stdio -- npx -y @modelcontextprotocol/server-filesystem /tmp
 
-# Analyze source code without running the server (SSRF, injection, DCI)
+# Analyze source code without running the server (SSRF, injection, DCI, Trojan Source)
 mcpradar scan-source ./path/to/mcp_server_src
+
+# Scan MCP/agent config files for poisoning (curl|bash servers, poisoned hooks)
+mcpradar scan-config ./my-project
+
+# Check a server's dependencies against OSV.dev
+mcpradar deps ./path/to/mcp_server_src
 
 # Isolate an untrusted stdio server in a disposable container (egress locked)
 mcpradar scan "python ./suspicious_server.py" -t stdio --sandbox
