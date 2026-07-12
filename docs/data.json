@@ -8,3007 +8,38 @@
     "confidence": 1.0,
     "tools": 9,
     "findings": 0,
+    "low_findings": 35,
     "by_severity": {
       "critical": 0,
       "high": 0,
       "medium": 0,
-      "low": 0
+      "low": 35
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-23",
+    "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
     "status": "scanned"
   },
   {
-    "server": "@anthropic/server-sequential-thinking",
-    "display_name": "anthropic / server-sequential-thinking",
+    "server": "@modelcontextprotocol/server-sequential-thinking",
+    "display_name": "modelcontextprotocol / server-sequential-thinking",
     "version": "",
     "aivss_score": 0.0,
     "grade": "A",
     "confidence": 1.0,
     "tools": 1,
     "findings": 0,
+    "low_findings": 2,
     "by_severity": {
       "critical": 0,
       "high": 0,
       "medium": 0,
-      "low": 0
+      "low": 2
     },
     "findings_detail": [],
     "tool_hash": "",
-    "last_scanned": "2026-06-23",
-    "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
-  },
-  {
-    "server": "@anthropic/server-apple-shortcuts",
-    "display_name": "anthropic / server-apple-shortcuts",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@anthropic/server-brave-search",
-    "display_name": "anthropic / server-brave-search",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@anthropic/server-clickhouse",
-    "display_name": "anthropic / server-clickhouse",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@anthropic/server-commands",
-    "display_name": "anthropic / server-commands",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@anthropic/server-confluence",
-    "display_name": "anthropic / server-confluence",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@anthropic/server-crypto-wallet",
-    "display_name": "anthropic / server-crypto-wallet",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@anthropic/server-discord",
-    "display_name": "anthropic / server-discord",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@anthropic/server-docker",
-    "display_name": "anthropic / server-docker",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@anthropic/server-elasticsearch",
-    "display_name": "anthropic / server-elasticsearch",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@anthropic/server-everart",
-    "display_name": "anthropic / server-everart",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@anthropic/server-exa",
-    "display_name": "anthropic / server-exa",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@anthropic/server-fetch",
-    "display_name": "anthropic / server-fetch",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@anthropic/server-gitlab",
-    "display_name": "anthropic / server-gitlab",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@anthropic/server-jira",
-    "display_name": "anthropic / server-jira",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@anthropic/server-kubernetes",
-    "display_name": "anthropic / server-kubernetes",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@anthropic/server-langchain",
-    "display_name": "anthropic / server-langchain",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@anthropic/server-llamaindex",
-    "display_name": "anthropic / server-llamaindex",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@anthropic/server-microsoft-teams",
-    "display_name": "anthropic / server-microsoft-teams",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@anthropic/server-mysql",
-    "display_name": "anthropic / server-mysql",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@anthropic/server-neo4j",
-    "display_name": "anthropic / server-neo4j",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@anthropic/server-pandoc",
-    "display_name": "anthropic / server-pandoc",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@anthropic/server-pinecone",
-    "display_name": "anthropic / server-pinecone",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@anthropic/server-qdrant",
-    "display_name": "anthropic / server-qdrant",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@anthropic/server-redis",
-    "display_name": "anthropic / server-redis",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@anthropic/server-rss",
-    "display_name": "anthropic / server-rss",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@anthropic/server-sendgrid",
-    "display_name": "anthropic / server-sendgrid",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@anthropic/server-sequential-thinking",
-    "display_name": "anthropic / server-sequential-thinking",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@anthropic/server-serper",
-    "display_name": "anthropic / server-serper",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@anthropic/server-sqlite",
-    "display_name": "anthropic / server-sqlite",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@anthropic/server-terminal",
-    "display_name": "anthropic / server-terminal",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@anthropic/server-time",
-    "display_name": "anthropic / server-time",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@browsermcp/mcp",
-    "display_name": "browsermcp / mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@modelcontextprotocol/server-brave-search",
-    "display_name": "modelcontextprotocol / server-brave-search",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@modelcontextprotocol/server-everything",
-    "display_name": "modelcontextprotocol / server-everything",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@modelcontextprotocol/server-filesystem",
-    "display_name": "modelcontextprotocol / server-filesystem",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@modelcontextprotocol/server-git",
-    "display_name": "modelcontextprotocol / server-git",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@modelcontextprotocol/server-github",
-    "display_name": "modelcontextprotocol / server-github",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@modelcontextprotocol/server-memory",
-    "display_name": "modelcontextprotocol / server-memory",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@modelcontextprotocol/server-postgres",
-    "display_name": "modelcontextprotocol / server-postgres",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@modelcontextprotocol/server-puppeteer",
-    "display_name": "modelcontextprotocol / server-puppeteer",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@modelcontextprotocol/server-slack",
-    "display_name": "modelcontextprotocol / server-slack",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@stripe/mcp",
-    "display_name": "stripe / mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "DesktopCommanderMCP",
-    "display_name": "DesktopCommanderMCP",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "adeu",
-    "display_name": "adeu",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "agent-scraper-mcp",
-    "display_name": "agent-scraper-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@anthropic/server-apple-shortcuts",
-    "display_name": "anthropic / server-apple-shortcuts",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@anthropic/server-brave-search",
-    "display_name": "anthropic / server-brave-search",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@anthropic/server-clickhouse",
-    "display_name": "anthropic / server-clickhouse",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@anthropic/server-commands",
-    "display_name": "anthropic / server-commands",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@anthropic/server-confluence",
-    "display_name": "anthropic / server-confluence",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@anthropic/server-crypto-wallet",
-    "display_name": "anthropic / server-crypto-wallet",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@anthropic/server-discord",
-    "display_name": "anthropic / server-discord",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@anthropic/server-docker",
-    "display_name": "anthropic / server-docker",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@anthropic/server-elasticsearch",
-    "display_name": "anthropic / server-elasticsearch",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@anthropic/server-everart",
-    "display_name": "anthropic / server-everart",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@anthropic/server-exa",
-    "display_name": "anthropic / server-exa",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@anthropic/server-fetch",
-    "display_name": "anthropic / server-fetch",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@anthropic/server-gitlab",
-    "display_name": "anthropic / server-gitlab",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@anthropic/server-jira",
-    "display_name": "anthropic / server-jira",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@anthropic/server-kubernetes",
-    "display_name": "anthropic / server-kubernetes",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@anthropic/server-langchain",
-    "display_name": "anthropic / server-langchain",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@anthropic/server-llamaindex",
-    "display_name": "anthropic / server-llamaindex",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@anthropic/server-microsoft-teams",
-    "display_name": "anthropic / server-microsoft-teams",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@anthropic/server-mysql",
-    "display_name": "anthropic / server-mysql",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@anthropic/server-neo4j",
-    "display_name": "anthropic / server-neo4j",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@anthropic/server-pandoc",
-    "display_name": "anthropic / server-pandoc",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@anthropic/server-pinecone",
-    "display_name": "anthropic / server-pinecone",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@anthropic/server-qdrant",
-    "display_name": "anthropic / server-qdrant",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@anthropic/server-redis",
-    "display_name": "anthropic / server-redis",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@anthropic/server-rss",
-    "display_name": "anthropic / server-rss",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@anthropic/server-sendgrid",
-    "display_name": "anthropic / server-sendgrid",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@anthropic/server-serper",
-    "display_name": "anthropic / server-serper",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@anthropic/server-sqlite",
-    "display_name": "anthropic / server-sqlite",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@anthropic/server-terminal",
-    "display_name": "anthropic / server-terminal",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@anthropic/server-time",
-    "display_name": "anthropic / server-time",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "anyquery",
-    "display_name": "anyquery",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "aseprite-mcp",
-    "display_name": "aseprite-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "biothings-mcp",
-    "display_name": "biothings-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "blender-mcp",
-    "display_name": "blender-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@browsermcp/mcp",
-    "display_name": "browsermcp / mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "chrome-devtools-mcp",
-    "display_name": "chrome-devtools-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "cli-mcp",
-    "display_name": "cli-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "codemcp",
-    "display_name": "codemcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "comfy-pilot",
-    "display_name": "comfy-pilot",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "context7",
-    "display_name": "context7",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "cortex",
-    "display_name": "cortex",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "davinci-resolve-mcp",
-    "display_name": "davinci-resolve-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "db-mcp-server",
-    "display_name": "db-mcp-server",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "demo/malicious_server.py (baseline)",
-    "display_name": "demo / malicious_server.py (baseline)",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "depwire",
-    "display_name": "depwire",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "dicom-hl7-mcp-server",
-    "display_name": "dicom-hl7-mcp-server",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "domcp",
-    "display_name": "domcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "dotmd-mcp",
-    "display_name": "dotmd-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "duckduckgo-mcp",
-    "display_name": "duckduckgo-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "eslint-mcp-server",
-    "display_name": "eslint-mcp-server",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "excalidraw-architect-mcp",
-    "display_name": "excalidraw-architect-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "firefox-devtools-mcp",
-    "display_name": "firefox-devtools-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "flstudio-mcp",
-    "display_name": "flstudio-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "forage",
-    "display_name": "forage",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "frigate-mcp",
-    "display_name": "frigate-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "genomic-agent-discovery",
-    "display_name": "genomic-agent-discovery",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "gget-mcp",
-    "display_name": "gget-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "ha-mcp",
-    "display_name": "ha-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "liquid",
-    "display_name": "liquid",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "lm-studio-mcp",
-    "display_name": "lm-studio-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "local-mcp",
-    "display_name": "local-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "manim-mcp-server",
-    "display_name": "manim-mcp-server",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "markdownify-mcp",
-    "display_name": "markdownify-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "mcp-gateway",
-    "display_name": "mcp-gateway",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "mcp-server-ollama-bridge",
-    "display_name": "mcp-server-ollama-bridge",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "mermaid-grammer-inspector-mcp",
-    "display_name": "mermaid-grammer-inspector-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@modelcontextprotocol/server-brave-search",
-    "display_name": "modelcontextprotocol / server-brave-search",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@modelcontextprotocol/server-git",
-    "display_name": "modelcontextprotocol / server-git",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@modelcontextprotocol/server-github",
-    "display_name": "modelcontextprotocol / server-github",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@modelcontextprotocol/server-postgres",
-    "display_name": "modelcontextprotocol / server-postgres",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@modelcontextprotocol/server-puppeteer",
-    "display_name": "modelcontextprotocol / server-puppeteer",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "@modelcontextprotocol/server-slack",
-    "display_name": "modelcontextprotocol / server-slack",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "nakkas",
-    "display_name": "nakkas",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "ncp",
-    "display_name": "ncp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "ollama-mcp",
-    "display_name": "ollama-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "opengenes-mcp",
-    "display_name": "opengenes-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "pdf-reader-mcp",
-    "display_name": "pdf-reader-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "periscope-mcp",
-    "display_name": "periscope-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "plant-genomics-mcp",
-    "display_name": "plant-genomics-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "proposalcraft",
-    "display_name": "proposalcraft",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "pskill9/web-search",
-    "display_name": "pskill9 / web-search",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "pskill9/web-search",
-    "display_name": "pskill9 / web-search",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "reaper-mcp",
-    "display_name": "reaper-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "safari-mcp",
-    "display_name": "safari-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "searxng-mcp",
-    "display_name": "searxng-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "selenium-mcp",
-    "display_name": "selenium-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@stripe/mcp",
-    "display_name": "stripe / mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "registry-pending"
-  },
-  {
-    "server": "synergy-age-mcp",
-    "display_name": "synergy-age-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "tentra-mcp",
-    "display_name": "tentra-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "thiri-mcp",
-    "display_name": "thiri-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "video-editing-mcp",
-    "display_name": "video-editing-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "wardn-mcp",
-    "display_name": "wardn-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "windows-mcp",
-    "display_name": "windows-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "zen-mcp",
-    "display_name": "zen-mcp",
-    "version": "",
-    "aivss_score": 0.0,
-    "grade": "A",
-    "confidence": 1.0,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "unknown"
-  },
-  {
-    "server": "@modelcontextprotocol/server-everything",
-    "display_name": "modelcontextprotocol / server-everything",
-    "version": "",
-    "aivss_score": 3.8,
-    "grade": "C",
-    "confidence": 0.84,
-    "tools": 13,
-    "findings": 5,
-    "by_severity": {
-      "critical": 1,
-      "high": 0,
-      "medium": 4,
-      "low": 0
-    },
-    "findings_detail": [
-      {
-        "rule_id": "R109",
-        "severity": "medium",
-        "title": "Schema poisoning gostergesi",
-        "description": "input_schema: zorunlu alan yok; bos girdi kabul edilebilir"
-      },
-      {
-        "rule_id": "R109",
-        "severity": "medium",
-        "title": "Schema poisoning gostergesi",
-        "description": "input_schema: zorunlu alan yok; bos girdi kabul edilebilir"
-      },
-      {
-        "rule_id": "R106",
-        "severity": "critical",
-        "title": "Gizli kimlik bilgisi / token ifsasi",
-        "description": "'Generic base64-like (entropy check applied)' tespit edildi: input_schema alaninda"
-      },
-      {
-        "rule_id": "R109",
-        "severity": "medium",
-        "title": "Schema poisoning gostergesi",
-        "description": "input_schema: zorunlu alan yok; bos girdi kabul edilebilir"
-      },
-      {
-        "rule_id": "R109",
-        "severity": "medium",
-        "title": "Schema poisoning gostergesi",
-        "description": "input_schema: zorunlu alan yok; bos girdi kabul edilebilir"
-      }
-    ],
-    "tool_hash": "",
-    "last_scanned": "2026-06-23",
+    "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
     "status": "scanned"
   },
@@ -3016,69 +47,99 @@
     "server": "@playwright/mcp",
     "display_name": "playwright / mcp",
     "version": "",
-    "aivss_score": 4.2,
-    "grade": "C",
-    "confidence": 0.9,
-    "tools": 23,
-    "findings": 8,
+    "aivss_score": 0.9,
+    "grade": "A",
+    "confidence": 0.8,
+    "tools": 24,
+    "findings": 5,
+    "low_findings": 58,
     "by_severity": {
-      "critical": 4,
+      "critical": 0,
       "high": 0,
-      "medium": 4,
-      "low": 0
+      "medium": 5,
+      "low": 58
     },
     "findings_detail": [
       {
         "rule_id": "R109",
         "severity": "medium",
-        "title": "Schema poisoning gostergesi",
-        "description": "input_schema: zorunlu alan yok - bos girdi kabul edilebilir"
-      },
-      {
-        "rule_id": "R107",
-        "severity": "critical",
-        "title": "Tool parametrelerinde komut enjeksiyonu riski",
-        "description": "Shell metakarakteri: 'fields.items.value.description' = 'Value to fill in the field. If the field is a checkbox, the '"
-      },
-      {
-        "rule_id": "R107",
-        "severity": "critical",
-        "title": "Tool parametrelerinde komut enjeksiyonu riski",
-        "description": "Shell metakarakteri: 'key.description' = 'Name of the key to press or a character to generate, such as'"
-      },
-      {
-        "rule_id": "R107",
-        "severity": "critical",
-        "title": "Tool parametrelerinde komut enjeksiyonu riski",
-        "description": "Shell metakarakteri: 'code.description' = 'A JavaScript function containing Playwright code to execute.'"
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: no required fields; empty input acceptable"
       },
       {
         "rule_id": "R109",
         "severity": "medium",
-        "title": "Schema poisoning gostergesi",
-        "description": "input_schema: zorunlu alan yok - bos girdi kabul edilebilir"
-      },
-      {
-        "rule_id": "R107",
-        "severity": "critical",
-        "title": "Tool parametrelerinde komut enjeksiyonu riski",
-        "description": "Shell metakarakteri: 'filename.description' = 'File name to save the screenshot to. Defaults to `page-{time'"
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: no required fields; empty input acceptable"
       },
       {
         "rule_id": "R109",
         "severity": "medium",
-        "title": "Schema poisoning gostergesi",
-        "description": "input_schema: zorunlu alan yok - bos girdi kabul edilebilir"
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: no required fields; empty input acceptable"
       },
       {
         "rule_id": "R109",
         "severity": "medium",
-        "title": "Schema poisoning gostergesi",
-        "description": "input_schema: zorunlu alan yok - bos girdi kabul edilebilir"
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: no required fields; empty input acceptable"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: no required fields; empty input acceptable"
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-06-23",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "@modelcontextprotocol/server-everything",
+    "display_name": "modelcontextprotocol / server-everything",
+    "version": "",
+    "aivss_score": 1.9,
+    "grade": "B",
+    "confidence": 0.8,
+    "tools": 13,
+    "findings": 4,
+    "low_findings": 4,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 4,
+      "low": 4
+    },
+    "findings_detail": [
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: no required fields; empty input acceptable"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: no required fields; empty input acceptable"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: no required fields; empty input acceptable"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: no required fields; empty input acceptable"
+      }
+    ],
+    "tool_hash": "",
+    "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
     "status": "scanned"
   },
@@ -3086,16 +147,17 @@
     "server": "@modelcontextprotocol/server-filesystem",
     "display_name": "modelcontextprotocol / server-filesystem",
     "version": "",
-    "aivss_score": 10.0,
-    "grade": "F",
-    "confidence": 0.74,
+    "aivss_score": 2.6,
+    "grade": "B",
+    "confidence": 0.8,
     "tools": 14,
-    "findings": 45,
+    "findings": 5,
+    "low_findings": 38,
     "by_severity": {
       "critical": 0,
-      "high": 5,
-      "medium": 8,
-      "low": 32
+      "high": 0,
+      "medium": 5,
+      "low": 38
     },
     "findings_detail": [
       {
@@ -3105,16 +167,10 @@
         "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
       },
       {
-        "rule_id": "R114",
-        "severity": "low",
-        "title": "Unbounded input: no size/content constraints",
-        "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
-      },
-      {
-        "rule_id": "R114",
-        "severity": "low",
-        "title": "Unbounded input: no size/content constraints",
-        "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
+        "rule_id": "R113",
+        "severity": "medium",
+        "title": "Path traversal / directory traversal risk",
+        "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
       },
       {
         "rule_id": "R113",
@@ -3123,255 +179,2940 @@
         "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
       },
       {
-        "rule_id": "R114",
-        "severity": "low",
-        "title": "Unbounded input: no size/content constraints",
-        "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
-      },
-      {
-        "rule_id": "R114",
-        "severity": "low",
-        "title": "Unbounded input: no size/content constraints",
-        "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
-      },
-      {
         "rule_id": "R113",
         "severity": "medium",
-        "title": "Path traversal / directory traversal risk",
-        "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
-      },
-      {
-        "rule_id": "R114",
-        "severity": "low",
-        "title": "Unbounded input: no size/content constraints",
-        "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
-      },
-      {
-        "rule_id": "R114",
-        "severity": "low",
-        "title": "Unbounded input: no size/content constraints",
-        "description": "String parameter 'content.items.data' in output_schema has no validation constraints (no pattern, format, enum, or lengt"
-      },
-      {
-        "rule_id": "R114",
-        "severity": "low",
-        "title": "Unbounded input: no size/content constraints",
-        "description": "String parameter 'content.items.mimeType' in output_schema has no validation constraints (no pattern, format, enum, or l"
-      },
-      {
-        "rule_id": "R114",
-        "severity": "low",
-        "title": "Unbounded input: no size/content constraints",
-        "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
-      },
-      {
-        "rule_id": "R113",
-        "severity": "high",
-        "title": "Path traversal / directory traversal risk",
-        "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
-      },
-      {
-        "rule_id": "R114",
-        "severity": "low",
-        "title": "Unbounded input: no size/content constraints",
-        "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
-      },
-      {
-        "rule_id": "R114",
-        "severity": "low",
-        "title": "Unbounded input: no size/content constraints",
-        "description": "String parameter 'content' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
-      },
-      {
-        "rule_id": "R114",
-        "severity": "low",
-        "title": "Unbounded input: no size/content constraints",
-        "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
-      },
-      {
-        "rule_id": "R113",
-        "severity": "high",
-        "title": "Path traversal / directory traversal risk",
-        "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
-      },
-      {
-        "rule_id": "R114",
-        "severity": "low",
-        "title": "Unbounded input: no size/content constraints",
-        "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
-      },
-      {
-        "rule_id": "R114",
-        "severity": "low",
-        "title": "Unbounded input: no size/content constraints",
-        "description": "String parameter 'edits.items.oldText' in input_schema has no validation constraints (no pattern, format, enum, or lengt"
-      },
-      {
-        "rule_id": "R114",
-        "severity": "low",
-        "title": "Unbounded input: no size/content constraints",
-        "description": "String parameter 'edits.items.newText' in input_schema has no validation constraints (no pattern, format, enum, or lengt"
-      },
-      {
-        "rule_id": "R114",
-        "severity": "low",
-        "title": "Unbounded input: no size/content constraints",
-        "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
-      },
-      {
-        "rule_id": "R113",
-        "severity": "high",
-        "title": "Path traversal / directory traversal risk",
-        "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
-      },
-      {
-        "rule_id": "R114",
-        "severity": "low",
-        "title": "Unbounded input: no size/content constraints",
-        "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
-      },
-      {
-        "rule_id": "R114",
-        "severity": "low",
-        "title": "Unbounded input: no size/content constraints",
-        "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
-      },
-      {
-        "rule_id": "R113",
-        "severity": "medium",
-        "title": "Path traversal / directory traversal risk",
-        "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
-      },
-      {
-        "rule_id": "R114",
-        "severity": "low",
-        "title": "Unbounded input: no size/content constraints",
-        "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
-      },
-      {
-        "rule_id": "R114",
-        "severity": "low",
-        "title": "Unbounded input: no size/content constraints",
-        "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
-      },
-      {
-        "rule_id": "R113",
-        "severity": "medium",
-        "title": "Path traversal / directory traversal risk",
-        "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
-      },
-      {
-        "rule_id": "R114",
-        "severity": "low",
-        "title": "Unbounded input: no size/content constraints",
-        "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
-      },
-      {
-        "rule_id": "R114",
-        "severity": "low",
-        "title": "Unbounded input: no size/content constraints",
-        "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
-      },
-      {
-        "rule_id": "R113",
-        "severity": "medium",
-        "title": "Path traversal / directory traversal risk",
-        "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
-      },
-      {
-        "rule_id": "R114",
-        "severity": "low",
-        "title": "Unbounded input: no size/content constraints",
-        "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
-      },
-      {
-        "rule_id": "R114",
-        "severity": "low",
-        "title": "Unbounded input: no size/content constraints",
-        "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
-      },
-      {
-        "rule_id": "R113",
-        "severity": "high",
         "title": "Path traversal / directory traversal risk",
         "description": "Path parameter 'source' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
       },
       {
         "rule_id": "R113",
-        "severity": "high",
+        "severity": "medium",
         "title": "Path traversal / directory traversal risk",
         "description": "Path parameter 'destination' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
-      },
-      {
-        "rule_id": "R114",
-        "severity": "low",
-        "title": "Unbounded input: no size/content constraints",
-        "description": "String parameter 'source' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
-      },
-      {
-        "rule_id": "R114",
-        "severity": "low",
-        "title": "Unbounded input: no size/content constraints",
-        "description": "String parameter 'destination' in input_schema has no validation constraints (no pattern, format, enum, or length limits"
-      },
-      {
-        "rule_id": "R114",
-        "severity": "low",
-        "title": "Unbounded input: no size/content constraints",
-        "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
-      },
-      {
-        "rule_id": "R113",
-        "severity": "medium",
-        "title": "Path traversal / directory traversal risk",
-        "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
-      },
-      {
-        "rule_id": "R114",
-        "severity": "low",
-        "title": "Unbounded input: no size/content constraints",
-        "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
-      },
-      {
-        "rule_id": "R114",
-        "severity": "low",
-        "title": "Unbounded input: no size/content constraints",
-        "description": "String parameter 'pattern' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
-      },
-      {
-        "rule_id": "R114",
-        "severity": "low",
-        "title": "Unbounded input: no size/content constraints",
-        "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
-      },
-      {
-        "rule_id": "R113",
-        "severity": "medium",
-        "title": "Path traversal / directory traversal risk",
-        "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
-      },
-      {
-        "rule_id": "R114",
-        "severity": "low",
-        "title": "Unbounded input: no size/content constraints",
-        "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)"
-      },
-      {
-        "rule_id": "R114",
-        "severity": "low",
-        "title": "Unbounded input: no size/content constraints",
-        "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
-      },
-      {
-        "rule_id": "R114",
-        "severity": "low",
-        "title": "Unbounded input: no size/content constraints",
-        "description": "String parameter 'content' in output_schema has no validation constraints (no pattern, format, enum, or length limits)"
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-06-24",
+    "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
     "status": "scanned"
+  },
+  {
+    "server": "@anthropic/server-apple-shortcuts",
+    "display_name": "anthropic / server-apple-shortcuts",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-brave-search",
+    "display_name": "anthropic / server-brave-search",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-clickhouse",
+    "display_name": "anthropic / server-clickhouse",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-commands",
+    "display_name": "anthropic / server-commands",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-confluence",
+    "display_name": "anthropic / server-confluence",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-crypto-wallet",
+    "display_name": "anthropic / server-crypto-wallet",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-discord",
+    "display_name": "anthropic / server-discord",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-docker",
+    "display_name": "anthropic / server-docker",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-elasticsearch",
+    "display_name": "anthropic / server-elasticsearch",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-everart",
+    "display_name": "anthropic / server-everart",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-exa",
+    "display_name": "anthropic / server-exa",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-fetch",
+    "display_name": "anthropic / server-fetch",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-gitlab",
+    "display_name": "anthropic / server-gitlab",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-jira",
+    "display_name": "anthropic / server-jira",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-kubernetes",
+    "display_name": "anthropic / server-kubernetes",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-langchain",
+    "display_name": "anthropic / server-langchain",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-llamaindex",
+    "display_name": "anthropic / server-llamaindex",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-microsoft-teams",
+    "display_name": "anthropic / server-microsoft-teams",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-mysql",
+    "display_name": "anthropic / server-mysql",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-neo4j",
+    "display_name": "anthropic / server-neo4j",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-pandoc",
+    "display_name": "anthropic / server-pandoc",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-pinecone",
+    "display_name": "anthropic / server-pinecone",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-qdrant",
+    "display_name": "anthropic / server-qdrant",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-redis",
+    "display_name": "anthropic / server-redis",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-rss",
+    "display_name": "anthropic / server-rss",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-sendgrid",
+    "display_name": "anthropic / server-sendgrid",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-sequential-thinking",
+    "display_name": "anthropic / server-sequential-thinking",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-serper",
+    "display_name": "anthropic / server-serper",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-sqlite",
+    "display_name": "anthropic / server-sqlite",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-terminal",
+    "display_name": "anthropic / server-terminal",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-time",
+    "display_name": "anthropic / server-time",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@browsermcp/mcp",
+    "display_name": "browsermcp / mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@modelcontextprotocol/server-brave-search",
+    "display_name": "modelcontextprotocol / server-brave-search",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@modelcontextprotocol/server-everything",
+    "display_name": "modelcontextprotocol / server-everything",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@modelcontextprotocol/server-filesystem",
+    "display_name": "modelcontextprotocol / server-filesystem",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@modelcontextprotocol/server-git",
+    "display_name": "modelcontextprotocol / server-git",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@modelcontextprotocol/server-github",
+    "display_name": "modelcontextprotocol / server-github",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@modelcontextprotocol/server-memory",
+    "display_name": "modelcontextprotocol / server-memory",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@modelcontextprotocol/server-postgres",
+    "display_name": "modelcontextprotocol / server-postgres",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@modelcontextprotocol/server-puppeteer",
+    "display_name": "modelcontextprotocol / server-puppeteer",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@modelcontextprotocol/server-slack",
+    "display_name": "modelcontextprotocol / server-slack",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@stripe/mcp",
+    "display_name": "stripe / mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "adeu",
+    "display_name": "adeu",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "agent-scraper-mcp",
+    "display_name": "agent-scraper-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-apple-shortcuts",
+    "display_name": "anthropic / server-apple-shortcuts",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-brave-search",
+    "display_name": "anthropic / server-brave-search",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-clickhouse",
+    "display_name": "anthropic / server-clickhouse",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-commands",
+    "display_name": "anthropic / server-commands",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-confluence",
+    "display_name": "anthropic / server-confluence",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-crypto-wallet",
+    "display_name": "anthropic / server-crypto-wallet",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-discord",
+    "display_name": "anthropic / server-discord",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-docker",
+    "display_name": "anthropic / server-docker",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-elasticsearch",
+    "display_name": "anthropic / server-elasticsearch",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-everart",
+    "display_name": "anthropic / server-everart",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-exa",
+    "display_name": "anthropic / server-exa",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-fetch",
+    "display_name": "anthropic / server-fetch",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-gitlab",
+    "display_name": "anthropic / server-gitlab",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-jira",
+    "display_name": "anthropic / server-jira",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-kubernetes",
+    "display_name": "anthropic / server-kubernetes",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-langchain",
+    "display_name": "anthropic / server-langchain",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-llamaindex",
+    "display_name": "anthropic / server-llamaindex",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-microsoft-teams",
+    "display_name": "anthropic / server-microsoft-teams",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-mysql",
+    "display_name": "anthropic / server-mysql",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-neo4j",
+    "display_name": "anthropic / server-neo4j",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-pandoc",
+    "display_name": "anthropic / server-pandoc",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-pinecone",
+    "display_name": "anthropic / server-pinecone",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-qdrant",
+    "display_name": "anthropic / server-qdrant",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-redis",
+    "display_name": "anthropic / server-redis",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-rss",
+    "display_name": "anthropic / server-rss",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-sendgrid",
+    "display_name": "anthropic / server-sendgrid",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-serper",
+    "display_name": "anthropic / server-serper",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-sqlite",
+    "display_name": "anthropic / server-sqlite",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-terminal",
+    "display_name": "anthropic / server-terminal",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@anthropic/server-time",
+    "display_name": "anthropic / server-time",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "anyquery",
+    "display_name": "anyquery",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "aseprite-mcp",
+    "display_name": "aseprite-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "biothings-mcp",
+    "display_name": "biothings-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "blender-mcp",
+    "display_name": "blender-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@browsermcp/mcp",
+    "display_name": "browsermcp / mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "chrome-devtools-mcp",
+    "display_name": "chrome-devtools-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "cli-mcp",
+    "display_name": "cli-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "codemcp",
+    "display_name": "codemcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "comfy-pilot",
+    "display_name": "comfy-pilot",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "context7",
+    "display_name": "context7",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "cortex",
+    "display_name": "cortex",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "davinci-resolve-mcp",
+    "display_name": "davinci-resolve-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "db-mcp-server",
+    "display_name": "db-mcp-server",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "demo/malicious_server.py (baseline)",
+    "display_name": "demo / malicious_server.py (baseline)",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "depwire",
+    "display_name": "depwire",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "DesktopCommanderMCP",
+    "display_name": "DesktopCommanderMCP",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "dicom-hl7-mcp-server",
+    "display_name": "dicom-hl7-mcp-server",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "domcp",
+    "display_name": "domcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "dotmd-mcp",
+    "display_name": "dotmd-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "duckduckgo-mcp",
+    "display_name": "duckduckgo-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "eslint-mcp-server",
+    "display_name": "eslint-mcp-server",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "excalidraw-architect-mcp",
+    "display_name": "excalidraw-architect-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "firefox-devtools-mcp",
+    "display_name": "firefox-devtools-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "flstudio-mcp",
+    "display_name": "flstudio-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "forage",
+    "display_name": "forage",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "frigate-mcp",
+    "display_name": "frigate-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "genomic-agent-discovery",
+    "display_name": "genomic-agent-discovery",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "gget-mcp",
+    "display_name": "gget-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "ha-mcp",
+    "display_name": "ha-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "liquid",
+    "display_name": "liquid",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "lm-studio-mcp",
+    "display_name": "lm-studio-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "local-mcp",
+    "display_name": "local-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "manim-mcp-server",
+    "display_name": "manim-mcp-server",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "markdownify-mcp",
+    "display_name": "markdownify-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "mcp-gateway",
+    "display_name": "mcp-gateway",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "mcp-server-ollama-bridge",
+    "display_name": "mcp-server-ollama-bridge",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "mermaid-grammer-inspector-mcp",
+    "display_name": "mermaid-grammer-inspector-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@modelcontextprotocol/server-brave-search",
+    "display_name": "modelcontextprotocol / server-brave-search",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@modelcontextprotocol/server-git",
+    "display_name": "modelcontextprotocol / server-git",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@modelcontextprotocol/server-github",
+    "display_name": "modelcontextprotocol / server-github",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@modelcontextprotocol/server-postgres",
+    "display_name": "modelcontextprotocol / server-postgres",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@modelcontextprotocol/server-puppeteer",
+    "display_name": "modelcontextprotocol / server-puppeteer",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@modelcontextprotocol/server-slack",
+    "display_name": "modelcontextprotocol / server-slack",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "nakkas",
+    "display_name": "nakkas",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "ncp",
+    "display_name": "ncp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "ollama-mcp",
+    "display_name": "ollama-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "opengenes-mcp",
+    "display_name": "opengenes-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "pdf-reader-mcp",
+    "display_name": "pdf-reader-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "periscope-mcp",
+    "display_name": "periscope-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "plant-genomics-mcp",
+    "display_name": "plant-genomics-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "proposalcraft",
+    "display_name": "proposalcraft",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "pskill9/web-search",
+    "display_name": "pskill9 / web-search",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "pskill9/web-search",
+    "display_name": "pskill9 / web-search",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "reaper-mcp",
+    "display_name": "reaper-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "safari-mcp",
+    "display_name": "safari-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "searxng-mcp",
+    "display_name": "searxng-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "selenium-mcp",
+    "display_name": "selenium-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "@stripe/mcp",
+    "display_name": "stripe / mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "synergy-age-mcp",
+    "display_name": "synergy-age-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "tentra-mcp",
+    "display_name": "tentra-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "thiri-mcp",
+    "display_name": "thiri-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "video-editing-mcp",
+    "display_name": "video-editing-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "wardn-mcp",
+    "display_name": "wardn-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "windows-mcp",
+    "display_name": "windows-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
+  },
+  {
+    "server": "zen-mcp",
+    "display_name": "zen-mcp",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending"
   }
 ]

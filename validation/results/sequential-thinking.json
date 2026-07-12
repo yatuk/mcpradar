@@ -1,8 +1,8 @@
 {
-  "id": "4ba8f7bf99ea",
+  "id": "ef98bcbf9f31",
   "target": "npx -y @modelcontextprotocol/server-sequential-thinking",
   "transport": "stdio",
-  "scanned_at": "2026-06-23T20:00:25.208582+00:00",
+  "scanned_at": "2026-07-12T11:30:59.521484+00:00",
   "tools": [
     {
       "name": "sequentialthinking",
@@ -16,8 +16,8 @@
             "description": "Your current thinking step"
           },
           "nextThoughtNeeded": {
-            "type": "boolean",
-            "description": "Whether another thought step is needed"
+            "description": "Whether another thought step is needed",
+            "type": "boolean"
           },
           "thoughtNumber": {
             "type": "integer",
@@ -58,7 +58,6 @@
         },
         "required": [
           "thought",
-          "nextThoughtNeeded",
           "thoughtNumber",
           "totalThoughts"
         ]
@@ -100,17 +99,42 @@
   "prompts": [],
   "resources": [],
   "probe_results": [],
-  "findings": [],
+  "findings": [
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'thought' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "sequentialthinking",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "thought",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'branchId' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "sequentialthinking",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "branchId",
+        "schema": "input_schema"
+      }
+    }
+  ],
   "summary": {
     "total_tools": 1,
     "total_prompts": 0,
     "total_resources": 0,
-    "clean": 1,
-    "low": 0,
+    "clean": 0,
+    "low": 2,
     "medium": 0,
     "high": 0,
     "critical": 0
-  },
-  "name": "@anthropic/server-sequential-thinking",
-  "status": "scanned"
+  }
 }

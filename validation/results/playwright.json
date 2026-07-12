@@ -1,8 +1,8 @@
 {
-  "id": "88eb376f091c",
+  "id": "90f7e39f3648",
   "target": "npx -y @playwright/mcp",
   "transport": "stdio",
-  "scanned_at": "2026-06-23T19:38:57.923690+00:00",
+  "scanned_at": "2026-07-12T11:35:49.837256+00:00",
   "tools": [
     {
       "name": "browser_close",
@@ -182,6 +182,26 @@
         "required": [
           "target"
         ],
+        "additionalProperties": false
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "browser_find",
+      "description": "Search the accessibility snapshot of the current page for text or a regular expression. Returns matching snapshot nodes with a few lines of surrounding context (like search snippets), each shown under its path from the root of the tree, which is cheaper than capturing the whole snapshot when you only need to locate an element and its ref.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "text": {
+            "description": "Plain text to search for in the page snapshot (case-insensitive substring match). Provide either text or regex, not both.",
+            "type": "string"
+          },
+          "regex": {
+            "description": "Regular expression to search for in the page snapshot. Matching is case-sensitive by default; wrap the pattern in slashes to add flags, e.g. \"/error/i\" for case-insensitive. Provide either text or regex, not both.",
+            "type": "string"
+          }
+        },
         "additionalProperties": false
       },
       "output_schema": {}
@@ -443,10 +463,20 @@
           "fullPage": {
             "description": "When true, takes a screenshot of the full scrollable page, instead of the currently visible viewport. Cannot be used with element screenshots.",
             "type": "boolean"
+          },
+          "scale": {
+            "default": "css",
+            "description": "Image resolution scale. \"css\" produces a screenshot sized in CSS pixels (smaller, consistent across devices). \"device\" produces a high-resolution screenshot using device pixels (larger, accounts for the device pixel ratio). Default is css.",
+            "type": "string",
+            "enum": [
+              "css",
+              "device"
+            ]
           }
         },
         "required": [
-          "type"
+          "type",
+          "scale"
         ],
         "additionalProperties": false
       },
@@ -679,9 +709,135 @@
   "probe_results": [],
   "findings": [
     {
+      "rule_id": "R113",
+      "title": "Path traversal / directory traversal risk",
+      "description": "Path parameter 'filename' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22).",
+      "severity": "low",
+      "target": "browser_console_messages",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "filename",
+        "missing_constraints": [
+          "pattern",
+          "format"
+        ]
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'filename' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_console_messages",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "filename",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'promptText' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_handle_dialog",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "promptText",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R113",
+      "title": "Path traversal / directory traversal risk",
+      "description": "Path parameter 'target' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22).",
+      "severity": "low",
+      "target": "browser_evaluate",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "target",
+        "missing_constraints": [
+          "pattern",
+          "format"
+        ]
+      }
+    },
+    {
+      "rule_id": "R113",
+      "title": "Path traversal / directory traversal risk",
+      "description": "Path parameter 'filename' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22).",
+      "severity": "low",
+      "target": "browser_evaluate",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "filename",
+        "missing_constraints": [
+          "pattern",
+          "format"
+        ]
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'element' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_evaluate",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "element",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'target' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_evaluate",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "target",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'function' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_evaluate",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "function",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'filename' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_evaluate",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "filename",
+        "schema": "input_schema"
+      }
+    },
+    {
       "rule_id": "R109",
-      "title": "Schema poisoning gostergesi",
-      "description": "input_schema: zorunlu alan yok - bos girdi kabul edilebilir",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
       "severity": "medium",
       "target": "browser_file_upload",
       "location": "tool",
@@ -692,51 +848,310 @@
       }
     },
     {
-      "rule_id": "R107",
-      "title": "Tool parametrelerinde komut enjeksiyonu riski",
-      "description": "Shell metakarakteri: 'fields.items.value.description' = 'Value to fill in the field. If the field is a checkbox, the '",
-      "severity": "critical",
+      "rule_id": "R113",
+      "title": "Path traversal / directory traversal risk",
+      "description": "Path parameter 'target' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22).",
+      "severity": "low",
+      "target": "browser_drop",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "target",
+        "missing_constraints": [
+          "pattern",
+          "format"
+        ]
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'element' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_drop",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "element",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'target' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_drop",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "target",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R109",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
+      "severity": "medium",
+      "target": "browser_find",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "schema": "input_schema",
+        "issue": "no_required_fields"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'text' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_find",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "text",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'regex' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_find",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "regex",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R113",
+      "title": "Path traversal / directory traversal risk",
+      "description": "Path parameter 'fields.items.target' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22).",
+      "severity": "low",
+      "target": "browser_fill_form",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "fields.items.target",
+        "missing_constraints": [
+          "pattern",
+          "format"
+        ]
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'fields.items.element' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_fill_form",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "fields.items.element",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'fields.items.target' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_fill_form",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "fields.items.target",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'fields.items.name' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_fill_form",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "fields.items.name",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'fields.items.value' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
       "target": "browser_fill_form",
       "location": "tool",
       "evidence": "",
       "detail": {
         "property": "fields.items.value",
-        "field": "description",
-        "matched": "Value to fill in the field. If the field is a checkbox, the value should be `true` or `false`. If the field is a combobo"
+        "schema": "input_schema"
       }
     },
     {
-      "rule_id": "R107",
-      "title": "Tool parametrelerinde komut enjeksiyonu riski",
-      "description": "Shell metakarakteri: 'key.description' = 'Name of the key to press or a character to generate, such as'",
-      "severity": "critical",
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'key' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
       "target": "browser_press_key",
       "location": "tool",
       "evidence": "",
       "detail": {
         "property": "key",
-        "field": "description",
-        "matched": "Name of the key to press or a character to generate, such as `ArrowLeft` or `a`"
+        "schema": "input_schema"
       }
     },
     {
-      "rule_id": "R107",
-      "title": "Tool parametrelerinde komut enjeksiyonu riski",
-      "description": "Shell metakarakteri: 'code.description' = 'A JavaScript function containing Playwright code to execute.'",
-      "severity": "critical",
-      "target": "browser_run_code_unsafe",
+      "rule_id": "R113",
+      "title": "Path traversal / directory traversal risk",
+      "description": "Path parameter 'target' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22).",
+      "severity": "low",
+      "target": "browser_type",
       "location": "tool",
       "evidence": "",
       "detail": {
-        "property": "code",
-        "field": "description",
-        "matched": "A JavaScript function containing Playwright code to execute. It will be invoked with a single argument, page, which you "
+        "property": "target",
+        "missing_constraints": [
+          "pattern",
+          "format"
+        ]
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'element' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_type",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "element",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'target' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_type",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "target",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'text' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_type",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "text",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'url' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_navigate",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "url",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R113",
+      "title": "Path traversal / directory traversal risk",
+      "description": "Path parameter 'filename' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22).",
+      "severity": "low",
+      "target": "browser_network_requests",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "filename",
+        "missing_constraints": [
+          "pattern",
+          "format"
+        ]
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'filter' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_network_requests",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "filter",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'filename' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_network_requests",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "filename",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R113",
+      "title": "Path traversal / directory traversal risk",
+      "description": "Path parameter 'filename' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22).",
+      "severity": "low",
+      "target": "browser_network_request",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "filename",
+        "missing_constraints": [
+          "pattern",
+          "format"
+        ]
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'filename' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_network_request",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "filename",
+        "schema": "input_schema"
       }
     },
     {
       "rule_id": "R109",
-      "title": "Schema poisoning gostergesi",
-      "description": "input_schema: zorunlu alan yok - bos girdi kabul edilebilir",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
       "severity": "medium",
       "target": "browser_run_code_unsafe",
       "location": "tool",
@@ -747,23 +1162,122 @@
       }
     },
     {
-      "rule_id": "R107",
-      "title": "Tool parametrelerinde komut enjeksiyonu riski",
-      "description": "Shell metakarakteri: 'filename.description' = 'File name to save the screenshot to. Defaults to `page-{time'",
-      "severity": "critical",
+      "rule_id": "R113",
+      "title": "Path traversal / directory traversal risk",
+      "description": "Path parameter 'filename' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22).",
+      "severity": "low",
+      "target": "browser_run_code_unsafe",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "filename",
+        "missing_constraints": [
+          "pattern",
+          "format"
+        ]
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'code' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_run_code_unsafe",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "code",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'filename' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_run_code_unsafe",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "filename",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R113",
+      "title": "Path traversal / directory traversal risk",
+      "description": "Path parameter 'target' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22).",
+      "severity": "low",
+      "target": "browser_take_screenshot",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "target",
+        "missing_constraints": [
+          "pattern",
+          "format"
+        ]
+      }
+    },
+    {
+      "rule_id": "R113",
+      "title": "Path traversal / directory traversal risk",
+      "description": "Path parameter 'filename' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22).",
+      "severity": "low",
       "target": "browser_take_screenshot",
       "location": "tool",
       "evidence": "",
       "detail": {
         "property": "filename",
-        "field": "description",
-        "matched": "File name to save the screenshot to. Defaults to `page-{timestamp}.{png|jpeg}` if not specified. Prefer relative file na"
+        "missing_constraints": [
+          "pattern",
+          "format"
+        ]
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'element' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_take_screenshot",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "element",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'target' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_take_screenshot",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "target",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'filename' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_take_screenshot",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "filename",
+        "schema": "input_schema"
       }
     },
     {
       "rule_id": "R109",
-      "title": "Schema poisoning gostergesi",
-      "description": "input_schema: zorunlu alan yok - bos girdi kabul edilebilir",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
       "severity": "medium",
       "target": "browser_snapshot",
       "location": "tool",
@@ -774,9 +1288,258 @@
       }
     },
     {
+      "rule_id": "R113",
+      "title": "Path traversal / directory traversal risk",
+      "description": "Path parameter 'target' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22).",
+      "severity": "low",
+      "target": "browser_snapshot",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "target",
+        "missing_constraints": [
+          "pattern",
+          "format"
+        ]
+      }
+    },
+    {
+      "rule_id": "R113",
+      "title": "Path traversal / directory traversal risk",
+      "description": "Path parameter 'filename' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22).",
+      "severity": "low",
+      "target": "browser_snapshot",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "filename",
+        "missing_constraints": [
+          "pattern",
+          "format"
+        ]
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'target' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_snapshot",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "target",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'filename' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_snapshot",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "filename",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R113",
+      "title": "Path traversal / directory traversal risk",
+      "description": "Path parameter 'target' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22).",
+      "severity": "low",
+      "target": "browser_click",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "target",
+        "missing_constraints": [
+          "pattern",
+          "format"
+        ]
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'element' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_click",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "element",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'target' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_click",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "target",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'startElement' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_drag",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "startElement",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'startTarget' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_drag",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "startTarget",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'endElement' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_drag",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "endElement",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'endTarget' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_drag",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "endTarget",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R113",
+      "title": "Path traversal / directory traversal risk",
+      "description": "Path parameter 'target' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22).",
+      "severity": "low",
+      "target": "browser_hover",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "target",
+        "missing_constraints": [
+          "pattern",
+          "format"
+        ]
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'element' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_hover",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "element",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'target' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_hover",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "target",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R113",
+      "title": "Path traversal / directory traversal risk",
+      "description": "Path parameter 'target' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22).",
+      "severity": "low",
+      "target": "browser_select_option",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "target",
+        "missing_constraints": [
+          "pattern",
+          "format"
+        ]
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'element' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_select_option",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "element",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'target' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_select_option",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "target",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'url' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_tabs",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "url",
+        "schema": "input_schema"
+      }
+    },
+    {
       "rule_id": "R109",
-      "title": "Schema poisoning gostergesi",
-      "description": "input_schema: zorunlu alan yok - bos girdi kabul edilebilir",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
       "severity": "medium",
       "target": "browser_wait_for",
       "location": "tool",
@@ -785,18 +1548,42 @@
         "schema": "input_schema",
         "issue": "no_required_fields"
       }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'text' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_wait_for",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "text",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'textGone' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "browser_wait_for",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "textGone",
+        "schema": "input_schema"
+      }
     }
   ],
   "summary": {
-    "total_tools": 23,
+    "total_tools": 24,
     "total_prompts": 0,
     "total_resources": 0,
-    "clean": 16,
-    "low": 0,
-    "medium": 4,
+    "clean": 3,
+    "low": 58,
+    "medium": 5,
     "high": 0,
-    "critical": 4
-  },
-  "name": "@playwright/mcp",
-  "status": "scanned"
+    "critical": 0
+  }
 }

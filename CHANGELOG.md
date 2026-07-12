@@ -18,6 +18,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   New module `src/mcpradar/sandbox/`, 21 tests.
 
 ### Fixed
+- **Leaderboard honesty**: 139 of 144 catalog entries had never actually been
+  scanned yet were shown as clean grade-A passes. The generator now marks any
+  result without scan evidence (no tools, scan id, or timestamp) as `pending`
+  with no grade; the site renders these as "not scanned", sorts them to the
+  bottom, excludes them from averages, and adds a scanned/pending filter.
+- **Leaderboard grading** now scores on MEDIUM+ findings only (matching the
+  accuracy benchmark). LOW informational lint (e.g. R114) is surfaced as a
+  separate count but no longer drags clean reference servers toward a failing
+  grade — the official filesystem server went from a bogus grade F (45 findings)
+  to a defensible grade B (5 schema-laxity findings).
+- **R107 (command injection)** no longer scans property `description` fields for
+  shell metacharacters — those are prose/Markdown docs where backticks and
+  operators appear legitimately, which produced CRITICAL false positives on
+  well-documented servers (e.g. 4 on @playwright/mcp). It now scans only value
+  fields (`default`, `example`); payloads hidden in prose remain R102/R104's job.
 - **R107 (command injection)** had 0% recall on real servers: the
   dangerous-default check compared a lowercased value against a mixed-case set
   and used exact matching, so entries like `DROP TABLE` were unreachable and

@@ -1,6 +1,6 @@
 # MCPRadar Precision/Recall Benchmark
 
-**Generated:** 2026-07-05 11:50 UTC
+**Generated:** 2026-07-12 11:34 UTC
 **Scanner version:** 1.0.0-rc4
 
 ## Methodology
@@ -42,9 +42,9 @@ Metrics are computed on findings of **MEDIUM severity and above**. LOW findings 
 ## Per-Target Results
 
 | Target | Status | Tools | Findings | Low (info) | Expected Rules | Detected (medium+) |
-|--------|--------|-------|----------|-----------|---------------|--------------------|
+|--------|--------|-------|----------|-----------|---------------|-----------------|
 | @modelcontextprotocol/server-everything | ✅ | 13 | 8 | 4 | (clean) | R109 |
-| @modelcontextprotocol/server-filesystem | ✅ | 14 | 45 | 40 | (clean) | R113 |
+| @modelcontextprotocol/server-filesystem | ✅ | 14 | 43 | 38 | (clean) | R113 |
 | @modelcontextprotocol/server-memory | ✅ | 9 | 35 | 35 | (clean) | (none) |
 | appsecco/filesystem-workspace-actions | ✅ | 4 | 10 | 8 | R109, R113 | R109, R113 |
 | appsecco/indirect-prompt-injection | ✅ | 2 | 2 | 2 | (clean) | (none) |

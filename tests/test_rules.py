@@ -770,13 +770,31 @@ class TestCommandInjectionDetection:
                 "properties": {
                     "log": {
                         "type": "string",
-                        "description": "Output including $()",
+                        "default": "$(cat /etc/passwd)",
                     }
                 }
             },
         )
         findings = rule.check(tool)
         assert any(f.rule_id == "R107" for f in findings)
+
+    def test_prose_description_backticks_not_flagged(self) -> None:
+        """A property description is documentation, not a value. Markdown
+        backticks and prose metacharacters must not fire R107 (regression:
+        CRITICAL FPs on @playwright/mcp, e.g. 'value should be `true`')."""
+        rule = CommandInjectionDetection()
+        for desc in (
+            "Value to fill in the field. Should be `true` or `false`.",
+            "Name of the key to press, such as `ArrowLeft` or `a`.",
+            "Defaults to `page-{timestamp}.{png|jpeg}` if not specified.",
+            "Chain operations with && or redirect with > as needed.",
+        ):
+            tool = ToolInfo(
+                name="browser_action",
+                description="Browser tool",
+                input_schema={"properties": {"arg": {"type": "string", "description": desc}}},
+            )
+            assert rule.check(tool) == [], f"unexpected R107 for description={desc!r}"
 
 
 # ---------------------------------------------------------------------------

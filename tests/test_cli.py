@@ -128,6 +128,92 @@ class TestCLILeaderboard:
             data = json.loads(content)
             assert isinstance(data, list)  # empty when no results, but valid JSON
 
+    def _generate(self, results_dir: Path, files: dict[str, dict]) -> list[dict]:
+        for fname, payload in files.items():
+            (results_dir / fname).write_text(json.dumps(payload), encoding="utf-8")
+        out = results_dir / "data.json"
+        result = runner.invoke(
+            app,
+            ["leaderboard", "generate", "-o", str(out), "--results-dir", str(results_dir)],
+        )
+        assert result.exit_code == 0, result.output
+        return json.loads(out.read_text(encoding="utf-8"))
+
+    def test_unscanned_stub_is_pending_not_grade_a(self) -> None:
+        """A registry stub (no tools, no scan id) must render as pending with no
+        grade — never as a clean grade-A pass."""
+        with tempfile.TemporaryDirectory() as tmp:
+            data = self._generate(
+                Path(tmp),
+                {
+                    "stub.json": {
+                        "name": "@vendor/never-scanned",
+                        "status": "registry-pending",
+                        "findings": [],
+                        "tools": [],
+                        "summary": {"total_tools": 0},
+                    }
+                },
+            )
+            row = next(r for r in data if r["server"] == "@vendor/never-scanned")
+            assert row["status"] == "pending"
+            assert row["grade"] == "-"
+            assert row["aivss_score"] is None
+
+    def test_low_findings_excluded_from_grade(self) -> None:
+        """A scan whose only findings are LOW stays grade A: LOW is
+        informational lint and must not drive the grade."""
+        with tempfile.TemporaryDirectory() as tmp:
+            data = self._generate(
+                Path(tmp),
+                {
+                    "srv.json": {
+                        "id": "abc123",
+                        "target": "npx -y @vendor/clean",
+                        "scanned_at": "2026-07-10T00:00:00+00:00",
+                        "tools": [{"name": "t1"}, {"name": "t2"}],
+                        "summary": {"total_tools": 2},
+                        "findings": [
+                            {"rule_id": "R114", "severity": "low", "title": "lint"},
+                            {"rule_id": "R114", "severity": "low", "title": "lint"},
+                        ],
+                    }
+                },
+            )
+            row = next(r for r in data if r["server"] == "@vendor/clean")
+            assert row["status"] == "scanned"
+            assert row["grade"] == "A"
+            assert row["aivss_score"] == 0.0
+            assert row["findings"] == 0  # medium+ headline count
+            assert row["low_findings"] == 2
+
+    def test_medium_findings_drive_grade(self) -> None:
+        """MEDIUM+ findings produce a real non-A grade and are the headline
+        finding count."""
+        with tempfile.TemporaryDirectory() as tmp:
+            data = self._generate(
+                Path(tmp),
+                {
+                    "srv.json": {
+                        "id": "def456",
+                        "target": "npx -y @vendor/risky",
+                        "scanned_at": "2026-07-10T00:00:00+00:00",
+                        "tools": [{"name": "t1"}],
+                        "summary": {"total_tools": 1},
+                        "findings": [
+                            {"rule_id": "R109", "severity": "medium", "title": "schema"},
+                            {"rule_id": "R114", "severity": "low", "title": "lint"},
+                        ],
+                    }
+                },
+            )
+            row = next(r for r in data if r["server"] == "@vendor/risky")
+            assert row["status"] == "scanned"
+            assert row["grade"] != "A"
+            assert row["aivss_score"] > 0
+            assert row["findings"] == 1
+            assert row["low_findings"] == 1
+
 
 class TestCLIDiffFormat:
     def test_diff_with_output_flag(self) -> None:

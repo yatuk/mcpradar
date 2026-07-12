@@ -2088,8 +2088,33 @@ def leaderboard_generate(
             summary = data.get("summary", {})
             tools = summary.get("total_tools", len(data.get("tools", [])))
             findings_list = data.get("findings", [])
-            total_findings = len(findings_list)
             scan_id = data.get("scan_id", "") or data.get("id", "")
+
+            # A result file only counts as a real scan if it carries scan
+            # evidence: enumerated tools, a scan id, or a scan timestamp.
+            # Stub entries (registry placeholders with none of these) must NOT
+            # be presented as a clean grade-A pass — they are simply pending.
+            was_scanned = bool(tools or scan_id or data.get("scanned_at"))
+            if not was_scanned:
+                rows.append(
+                    {
+                        "server": name,
+                        "display_name": name.replace("@", "").replace("/", " / "),
+                        "version": data.get("version", ""),
+                        "aivss_score": None,
+                        "grade": "-",
+                        "confidence": None,
+                        "tools": tools,
+                        "findings": 0,
+                        "by_severity": {"critical": 0, "high": 0, "medium": 0, "low": 0},
+                        "findings_detail": [],
+                        "tool_hash": "",
+                        "last_scanned": "-",
+                        "scanner_version": __version__,
+                        "status": "pending",
+                    }
+                )
+                continue
 
             # Compute severity counts from findings array
             sev: dict[str, int] = {"critical": 0, "high": 0, "medium": 0, "low": 0}
@@ -2098,18 +2123,22 @@ def leaderboard_generate(
                 if s in sev:
                     sev[s] += 1
 
-            # Compute AIVSS score from severity counts
+            # The grade reflects MEDIUM+ findings only. LOW findings are
+            # informational lint (e.g. R114 "string has no length constraint")
+            # that fire on almost every server; counting them would push clean
+            # reference servers to a failing grade — the same MEDIUM+ scope the
+            # accuracy benchmark uses. The LOW count is still surfaced
+            # separately for transparency.
+            meaningful = sev["critical"] + sev["high"] + sev["medium"]
+            low_findings = sev["low"]
+
+            # Compute AIVSS score from MEDIUM+ severity counts
             tc = max(tools, 1)
-            weighted = (
-                sev.get("critical", 0) * 10
-                + sev.get("high", 0) * 7
-                + sev.get("medium", 0) * 4
-                + sev.get("low", 0) * 1
-            )
-            if total_findings == 0:
+            weighted = sev["critical"] * 10 + sev["high"] * 7 + sev["medium"] * 4
+            if meaningful == 0:
                 score, grade = 0.0, "A"
             else:
-                density = total_findings / tc
+                density = meaningful / tc
                 density_factor = max(0.5, min(2.0, density * 5))
                 raw = weighted / tc * density_factor
                 score = min(10.0, round(raw, 1))
@@ -2124,6 +2153,7 @@ def leaderboard_generate(
                 else:
                     grade = "F"
 
+            # Detail lists the MEDIUM+ findings that drive the grade.
             findings_detail = [
                 {
                     "rule_id": f.get("rule_id", "?"),
@@ -2132,6 +2162,7 @@ def leaderboard_generate(
                     "description": f.get("description", "")[:120],
                 }
                 for f in findings_list
+                if f.get("severity", "") in ("critical", "high", "medium")
             ]
 
             # Tool hash from store
@@ -2161,27 +2192,24 @@ def leaderboard_generate(
                     "aivss_score": score,
                     "grade": grade,
                     "confidence": 1.0
-                    if total_findings == 0
+                    if meaningful == 0
                     else round(
                         min(
                             1.0,
-                            (
-                                sev.get("critical", 0) * 0.3
-                                + sev.get("high", 0) * 0.2
-                                + sev.get("medium", 0) * 0.1
-                            )
-                            / max(total_findings, 1)
+                            (sev["critical"] * 0.3 + sev["high"] * 0.2 + sev["medium"] * 0.1)
+                            / max(meaningful, 1)
                             + 0.7,
                         ),
                         2,
                     ),
                     "tools": tools,
-                    "findings": total_findings,
+                    "findings": meaningful,
+                    "low_findings": low_findings,
                     "by_severity": {
-                        "critical": sev.get("critical", 0),
-                        "high": sev.get("high", 0),
-                        "medium": sev.get("medium", 0),
-                        "low": sev.get("low", 0),
+                        "critical": sev["critical"],
+                        "high": sev["high"],
+                        "medium": sev["medium"],
+                        "low": sev["low"],
                     },
                     "findings_detail": findings_detail,
                     "tool_hash": tool_hash,
@@ -2189,17 +2217,23 @@ def leaderboard_generate(
                     if data.get("scanned_at")
                     else "-",
                     "scanner_version": __version__,
-                    "status": data.get("status", "unknown"),
+                    "status": "scanned",
                 }
             )
 
-    rows.sort(key=lambda r: (r["aivss_score"], -r["tools"]))
+    # Scanned servers first (by ascending risk), pending servers last.
+    rows.sort(key=lambda r: (r["status"] == "pending", r["aivss_score"] or 0.0, -r["tools"]))
 
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(rows, indent=2, ensure_ascii=False), encoding="utf-8")
 
-    console.print(f"[green]Generated {output} with {len(rows)} entries[/]")
-    for r in rows:
+    scanned_rows = [r for r in rows if r["status"] != "pending"]
+    pending_rows = [r for r in rows if r["status"] == "pending"]
+    console.print(
+        f"[green]Generated {output}[/] — "
+        f"{len(scanned_rows)} scanned, {len(pending_rows)} pending, {len(rows)} total"
+    )
+    for r in scanned_rows:
         grade_color = {
             "A": "green",
             "B": "bright_green",
@@ -2208,6 +2242,8 @@ def leaderboard_generate(
             "F": "bold red",
         }.get(r["grade"], "")
         console.print(f"  [{grade_color}]{r['grade']}[/] | {r['aivss_score']:4.1f} | {r['server']}")
+    if pending_rows:
+        console.print(f"  [dim]+ {len(pending_rows)} pending (not yet scanned)[/]")
 
 
 # ---------------------------------------------------------------------------

@@ -1,8 +1,8 @@
 {
-  "id": "e4c4689d0a69",
+  "id": "b7e09694c263",
   "target": "npx -y @modelcontextprotocol/server-memory",
   "transport": "stdio",
-  "scanned_at": "2026-06-23T20:00:20.370261+00:00",
+  "scanned_at": "2026-07-12T11:30:56.860879+00:00",
   "tools": [
     {
       "name": "create_entities",
@@ -618,19 +618,479 @@
     }
   ],
   "prompts": [],
-  "resources": [],
+  "resources": [
+    {
+      "uri": "memory://knowledge-graph",
+      "name": "knowledge-graph",
+      "description": "The full knowledge graph with all entities and relations"
+    }
+  ],
   "probe_results": [],
-  "findings": [],
+  "findings": [
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'entities.items.name' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "create_entities",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "entities.items.name",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'entities.items.entityType' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "create_entities",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "entities.items.entityType",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'entities.items.name' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "create_entities",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "entities.items.name",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'entities.items.entityType' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "create_entities",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "entities.items.entityType",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'relations.items.from' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "create_relations",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "relations.items.from",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'relations.items.to' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "create_relations",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "relations.items.to",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'relations.items.relationType' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "create_relations",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "relations.items.relationType",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'relations.items.from' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "create_relations",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "relations.items.from",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'relations.items.to' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "create_relations",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "relations.items.to",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'relations.items.relationType' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "create_relations",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "relations.items.relationType",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'observations.items.entityName' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "add_observations",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "observations.items.entityName",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'results.items.entityName' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "add_observations",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "results.items.entityName",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'message' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "delete_entities",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "message",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'deletions.items.entityName' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "delete_observations",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "deletions.items.entityName",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'message' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "delete_observations",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "message",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'relations.items.from' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "delete_relations",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "relations.items.from",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'relations.items.to' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "delete_relations",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "relations.items.to",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'relations.items.relationType' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "delete_relations",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "relations.items.relationType",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'message' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "delete_relations",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "message",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'entities.items.name' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "read_graph",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "entities.items.name",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'entities.items.entityType' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "read_graph",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "entities.items.entityType",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'relations.items.from' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "read_graph",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "relations.items.from",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'relations.items.to' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "read_graph",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "relations.items.to",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'relations.items.relationType' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "read_graph",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "relations.items.relationType",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'query' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "search_nodes",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "query",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'entities.items.name' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "search_nodes",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "entities.items.name",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'entities.items.entityType' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "search_nodes",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "entities.items.entityType",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'relations.items.from' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "search_nodes",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "relations.items.from",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'relations.items.to' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "search_nodes",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "relations.items.to",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'relations.items.relationType' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "search_nodes",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "relations.items.relationType",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'entities.items.name' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "open_nodes",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "entities.items.name",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'entities.items.entityType' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "open_nodes",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "entities.items.entityType",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'relations.items.from' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "open_nodes",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "relations.items.from",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'relations.items.to' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "open_nodes",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "relations.items.to",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'relations.items.relationType' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "open_nodes",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "relations.items.relationType",
+        "schema": "output_schema"
+      }
+    }
+  ],
   "summary": {
     "total_tools": 9,
     "total_prompts": 0,
-    "total_resources": 0,
-    "clean": 9,
-    "low": 0,
+    "total_resources": 1,
+    "clean": 0,
+    "low": 35,
     "medium": 0,
     "high": 0,
     "critical": 0
-  },
-  "name": "@modelcontextprotocol/server-memory",
-  "status": "scanned"
+  }
 }

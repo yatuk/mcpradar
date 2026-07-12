@@ -551,11 +551,19 @@ class CommandInjectionDetection(Rule):
     title = "Command injection risk in tool parameters"
     severity = Severity.CRITICAL
 
+    # Only scan fields that hold an actual parameter *value* — a default or
+    # example that would be passed to the tool. A property `description` is
+    # prose/Markdown documentation where shell metacharacters appear
+    # legitimately (inline-code backticks, "chain with &&", "redirect with >"),
+    # so scanning it produced false-positive CRITICALs on well-documented
+    # servers. Injection payloads hidden in prose are R102/R104's domain.
+    _VALUE_FIELDS = ("example", "default")
+
     def check(self, tool: ToolInfo) -> list[Finding]:
         found: list[Finding] = []
         for prop_path, prop_schema in _walk_schema_props(tool.input_schema):
-            # Check shell metacharacters in text fields
-            for field in ("description", "example", "default"):
+            # Check shell metacharacters in value fields
+            for field in self._VALUE_FIELDS:
                 val = prop_schema.get(field)
                 if isinstance(val, str) and SHELL_METACHAR_RE.search(val):
                     found.append(
@@ -608,9 +616,9 @@ class CommandInjectionDetection(Rule):
                                 matched=val,
                             )
                         )
-        # Also scan output_schema
+        # Also scan output_schema value fields
         for prop_path, prop_schema in _walk_schema_props(tool.output_schema):
-            for field in ("description", "example", "default"):
+            for field in self._VALUE_FIELDS:
                 val = prop_schema.get(field)
                 if isinstance(val, str) and SHELL_METACHAR_RE.search(val):
                     found.append(

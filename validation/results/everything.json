@@ -1,13 +1,14 @@
 {
-  "id": "d7894a992fac",
+  "id": "5d37856b71f2",
   "target": "npx -y @modelcontextprotocol/server-everything",
   "transport": "stdio",
-  "scanned_at": "2026-06-23T20:00:13.882211+00:00",
+  "scanned_at": "2026-07-12T11:30:53.596840+00:00",
   "tools": [
     {
       "name": "echo",
       "description": "Echoes back the input string",
       "input_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
         "type": "object",
         "properties": {
           "message": {
@@ -17,9 +18,7 @@
         },
         "required": [
           "message"
-        ],
-        "additionalProperties": false,
-        "$schema": "http://json-schema.org/draft-07/schema#"
+        ]
       },
       "output_schema": {}
     },
@@ -27,6 +26,7 @@
       "name": "get-annotated-message",
       "description": "Demonstrates how annotations can be used to provide metadata about content.",
       "input_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
         "type": "object",
         "properties": {
           "messageType": {
@@ -39,16 +39,14 @@
             "description": "Type of message to demonstrate different annotation patterns"
           },
           "includeImage": {
-            "type": "boolean",
             "default": false,
-            "description": "Whether to include an example image"
+            "description": "Whether to include an example image",
+            "type": "boolean"
           }
         },
         "required": [
           "messageType"
-        ],
-        "additionalProperties": false,
-        "$schema": "http://json-schema.org/draft-07/schema#"
+        ]
       },
       "output_schema": {}
     },
@@ -66,18 +64,17 @@
       "name": "get-resource-links",
       "description": "Returns up to ten resource links that reference different types of resources",
       "input_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
         "type": "object",
         "properties": {
           "count": {
+            "default": 3,
+            "description": "Number of resource links to return (1-10)",
             "type": "number",
             "minimum": 1,
-            "maximum": 10,
-            "default": 3,
-            "description": "Number of resource links to return (1-10)"
+            "maximum": 10
           }
-        },
-        "additionalProperties": false,
-        "$schema": "http://json-schema.org/draft-07/schema#"
+        }
       },
       "output_schema": {}
     },
@@ -85,24 +82,23 @@
       "name": "get-resource-reference",
       "description": "Returns a resource reference that can be used by MCP clients",
       "input_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
         "type": "object",
         "properties": {
           "resourceType": {
+            "default": "Text",
             "type": "string",
             "enum": [
               "Text",
               "Blob"
-            ],
-            "default": "Text"
+            ]
           },
           "resourceId": {
-            "type": "number",
             "default": 1,
-            "description": "ID of the text resource to fetch"
+            "description": "ID of the text resource to fetch",
+            "type": "number"
           }
-        },
-        "additionalProperties": false,
-        "$schema": "http://json-schema.org/draft-07/schema#"
+        }
       },
       "output_schema": {}
     },
@@ -110,6 +106,7 @@
       "name": "get-structured-content",
       "description": "Returns structured content along with an output schema for client data validation",
       "input_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
         "type": "object",
         "properties": {
           "location": {
@@ -124,11 +121,10 @@
         },
         "required": [
           "location"
-        ],
-        "additionalProperties": false,
-        "$schema": "http://json-schema.org/draft-07/schema#"
+        ]
       },
       "output_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
         "type": "object",
         "properties": {
           "temperature": {
@@ -149,14 +145,14 @@
           "conditions",
           "humidity"
         ],
-        "additionalProperties": false,
-        "$schema": "http://json-schema.org/draft-07/schema#"
+        "additionalProperties": false
       }
     },
     {
       "name": "get-sum",
       "description": "Returns the sum of two numbers",
       "input_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
         "type": "object",
         "properties": {
           "a": {
@@ -171,9 +167,7 @@
         "required": [
           "a",
           "b"
-        ],
-        "additionalProperties": false,
-        "$schema": "http://json-schema.org/draft-07/schema#"
+        ]
       },
       "output_schema": {}
     },
@@ -191,31 +185,30 @@
       "name": "gzip-file-as-resource",
       "description": "Compresses a single file using gzip compression. Depending upon the selected output type, returns either the compressed data as a gzipped resource or a resource link, allowing it to be downloaded in a subsequent request during the current session.",
       "input_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
         "type": "object",
         "properties": {
           "name": {
+            "default": "README.md.gz",
             "type": "string",
-            "description": "Name of the output file",
-            "default": "README.md.gz"
+            "description": "Name of the output file"
           },
           "data": {
+            "default": "https://raw.githubusercontent.com/modelcontextprotocol/servers/refs/heads/main/README.md",
             "type": "string",
             "format": "uri",
-            "description": "URL or data URI of the file content to compress",
-            "default": "https://raw.githubusercontent.com/modelcontextprotocol/servers/refs/heads/main/README.md"
+            "description": "URL or data URI of the file content to compress"
           },
           "outputType": {
+            "default": "resourceLink",
+            "description": "How the resulting gzipped file should be returned. 'resourceLink' returns a link to a resource that can be read later, 'resource' returns a full resource object.",
             "type": "string",
             "enum": [
               "resourceLink",
               "resource"
-            ],
-            "default": "resourceLink",
-            "description": "How the resulting gzipped file should be returned. 'resourceLink' returns a link to a resource that can be read later, 'resource' returns a full resource object."
+            ]
           }
-        },
-        "additionalProperties": false,
-        "$schema": "http://json-schema.org/draft-07/schema#"
+        }
       },
       "output_schema": {}
     },
@@ -243,21 +236,20 @@
       "name": "trigger-long-running-operation",
       "description": "Demonstrates a long running operation with progress updates.",
       "input_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
         "type": "object",
         "properties": {
           "duration": {
-            "type": "number",
             "default": 10,
-            "description": "Duration of the operation in seconds"
+            "description": "Duration of the operation in seconds",
+            "type": "number"
           },
           "steps": {
-            "type": "number",
             "default": 5,
-            "description": "Number of steps in the operation"
+            "description": "Number of steps in the operation",
+            "type": "number"
           }
-        },
-        "additionalProperties": false,
-        "$schema": "http://json-schema.org/draft-07/schema#"
+        }
       },
       "output_schema": {}
     },
@@ -265,6 +257,7 @@
       "name": "simulate-research-query",
       "description": "Simulates a deep research operation that gathers, analyzes, and synthesizes information. Demonstrates MCP task-based operations with progress through multiple stages. If 'ambiguous' is true and client supports elicitation, sends an elicitation request for clarification.",
       "input_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
         "type": "object",
         "properties": {
           "topic": {
@@ -272,16 +265,14 @@
             "description": "The research topic to investigate"
           },
           "ambiguous": {
-            "type": "boolean",
             "default": false,
-            "description": "Simulate an ambiguous query that requires clarification (triggers input_required status)"
+            "description": "Simulate an ambiguous query that requires clarification (triggers input_required status)",
+            "type": "boolean"
           }
         },
         "required": [
           "topic"
-        ],
-        "additionalProperties": false,
-        "$schema": "http://json-schema.org/draft-07/schema#"
+        ]
       },
       "output_schema": {}
     }
@@ -303,7 +294,7 @@
         },
         {
           "name": "state",
-          "description": "Name of the state",
+          "description": null,
           "required": false
         }
       ]
@@ -381,9 +372,22 @@
   "probe_results": [],
   "findings": [
     {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'message' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "echo",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "message",
+        "schema": "input_schema"
+      }
+    },
+    {
       "rule_id": "R109",
-      "title": "Schema poisoning gostergesi",
-      "description": "input_schema: zorunlu alan yok; bos girdi kabul edilebilir",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
       "severity": "medium",
       "target": "get-resource-links",
       "location": "tool",
@@ -395,8 +399,8 @@
     },
     {
       "rule_id": "R109",
-      "title": "Schema poisoning gostergesi",
-      "description": "input_schema: zorunlu alan yok; bos girdi kabul edilebilir",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
       "severity": "medium",
       "target": "get-resource-reference",
       "location": "tool",
@@ -407,23 +411,22 @@
       }
     },
     {
-      "rule_id": "R106",
-      "title": "Gizli kimlik bilgisi / token ifsasi",
-      "description": "'Generic base64-like (entropy check applied)' tespit edildi: input_schema alaninda",
-      "severity": "critical",
-      "target": "gzip-file-as-resource",
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'conditions' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get-structured-content",
       "location": "tool",
       "evidence": "",
       "detail": {
-        "format": "Generic base64-like (entropy check applied)",
-        "source": "input_schema",
-        "matched": "com/modelcontextprotocol/servers/refs/heads/main/README"
+        "property": "conditions",
+        "schema": "output_schema"
       }
     },
     {
       "rule_id": "R109",
-      "title": "Schema poisoning gostergesi",
-      "description": "input_schema: zorunlu alan yok; bos girdi kabul edilebilir",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
       "severity": "medium",
       "target": "gzip-file-as-resource",
       "location": "tool",
@@ -434,9 +437,22 @@
       }
     },
     {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'name' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "gzip-file-as-resource",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "name",
+        "schema": "input_schema"
+      }
+    },
+    {
       "rule_id": "R109",
-      "title": "Schema poisoning gostergesi",
-      "description": "input_schema: zorunlu alan yok; bos girdi kabul edilebilir",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
       "severity": "medium",
       "target": "trigger-long-running-operation",
       "location": "tool",
@@ -445,18 +461,29 @@
         "schema": "input_schema",
         "issue": "no_required_fields"
       }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'topic' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "simulate-research-query",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "topic",
+        "schema": "input_schema"
+      }
     }
   ],
   "summary": {
     "total_tools": 13,
     "total_prompts": 4,
     "total_resources": 7,
-    "clean": 9,
-    "low": 0,
+    "clean": 6,
+    "low": 4,
     "medium": 4,
     "high": 0,
-    "critical": 1
-  },
-  "name": "@modelcontextprotocol/server-everything",
-  "status": "scanned"
+    "critical": 0
+  }
 }
