@@ -112,11 +112,12 @@ One command, no install, runs against any MCP server you can launch.
 - NVD CVE feed sync
 - AIVSS 0-10 scoring + A-F letter grades
 - Container sandbox (`--sandbox`) for isolating untrusted stdio servers during a scan
+- Source-code analysis (`mcpradar scan-source`): AST-based SSRF, unsafe deserialization, command/SQL injection, and Description-Code Inconsistency (S001-S007) — no server execution required
 - Public security leaderboard at https://yatuk.github.io/mcpradar
 
 ### Planned (v1.1+)
-- **Source scanning:** Scan GitHub repos, npm/pip packages without running the server
-- **AST + Semgrep:** Source-code static analysis (DCI, unsafe deserialization, SQLi)
+- **Package fetch:** Pull source from a GitHub URL / npm / pip package automatically before `scan-source` (currently takes a local path)
+- **Semgrep integration:** Complement the built-in AST rules with a Semgrep ruleset
 - **OSV/GitHub Advisory:** Dependency CVE checking beyond NVD
 - **Typosquatting detection:** Levenshtein distance against known top packages
 - **Runtime proxy:** Transparent MCP traffic inspection
@@ -138,13 +139,13 @@ graph LR
     F -->|AIVSS 0-10| G[Rich / JSON / SARIF]
     B -->|--sandbox| H[Disposable Container]
     H -->|isolated stdio| C
-    B -.->|planned v1.1| P[Package Scanner]
-    P -.->|planned v1.1| S[Source Analysis]
-    S -.->|planned v1.1| D2[Rule Engine]
-    D2 -.->|planned v1.1| E
+    A2[scan-source] --> S[AST Source Analysis]
+    S -->|S001-S007 findings| G
+    B -.->|planned v1.1| P[Package Fetch]
+    P -.->|planned v1.1| S
 ```
 
-*Source scanning is planned for v1.1. All other components, including the container sandbox, are production-ready.*
+*All components, including the container sandbox and AST source analysis (`scan-source`), are production-ready. Automatic package fetching (GitHub/npm/pip → source) is planned for v1.1; `scan-source` currently takes a local path.*
 
 MCPRadar connects to the MCP server, enumerates tools/prompts/resources,
 runs each tool schema through the rule engine, computes AIVSS scores,
@@ -168,9 +169,9 @@ See [Benchmarks](#benchmarks) for measured precision/recall data.
 | **Secret/token scan** | Yes | Yes | - | Yes | Yes | Yes | - |
 | **Command injection** | Yes | - | - | Yes | Yes | Yes | - |
 | **Supply chain risk** | Yes | - | - | - | - | Yes | - |
-| **DCI (desc vs code)** | Planned v1.1 | - | - | - | - | Partial | - |
+| **DCI (desc vs code)** | Yes (S007) | - | - | - | - | Partial | - |
 | **Cross-server analysis** | Yes (C001-C007) | - | - | - | - | - | - |
-| **Source scanning** | Planned v1.1 | - | - | - | - | Yes | - |
+| **Source scanning** | Yes (`scan-source`) | - | - | - | - | Yes | - |
 | **SBOM + dep. CVE** | Yes (CycloneDX + NVD) | - | - | - | - | - | - |
 | **Sandbox execution** | Yes (container isolation) | - | - | N/A (proxy) | - | - | - |
 | **AIVSS scoring** | Yes (0-10 + CWE) | LLM score | Yes | - | - | - | - |
@@ -257,6 +258,9 @@ Requires Python 3.11+. All transports (stdio, SSE, HTTP) work out of the box.
 ```bash
 # Scan a local stdio server
 mcpradar scan stdio -- npx -y @modelcontextprotocol/server-filesystem /tmp
+
+# Analyze source code without running the server (SSRF, injection, DCI)
+mcpradar scan-source ./path/to/mcp_server_src
 
 # Isolate an untrusted stdio server in a disposable container (egress locked)
 mcpradar scan "python ./suspicious_server.py" -t stdio --sandbox
