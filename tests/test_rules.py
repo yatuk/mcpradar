@@ -176,6 +176,20 @@ class TestPromptInjectionDetection:
 
         assert any("you must" in f.detail.get("pattern", "").lower() for f in findings)
 
+    def test_benign_you_must_not_flagged(self) -> None:
+        """Legitimate tool docs constantly say "you must <do normal thing>".
+        These must not fire R102 (regression: graded context7, mcp-pandoc F)."""
+        rule = PromptInjectionDetection()
+        for desc in (
+            "You must specify the output format (e.g. pdf, docx).",
+            "You must call resolve-library-id first to get the library ID.",
+            "You must provide either input_file or contents.",
+            "You are now connected to the database.",
+        ):
+            tool = ToolInfo(name="convert", description=desc)
+            r102 = [f for f in rule.check(tool) if f.rule_id == "R102"]
+            assert r102 == [], f"unexpected R102 for {desc!r}: {[f.detail for f in r102]}"
+
     def test_override_system_prompt(self) -> None:
         rule = PromptInjectionDetection()
         tool = ToolInfo(
@@ -577,15 +591,34 @@ class TestSecretExposureDetection:
 
     def test_high_entropy_string_triggers_finding(self) -> None:
         rule = SecretExposureDetection()
-        # Random-looking string that doesn't match known patterns but has high entropy
+        # High-entropy credential-charset token that matches no known format.
         tool = ToolInfo(
             name="api",
-            description="token: z7Kx9$mP2#qL4@vN6^wR8!tY3&uI5*oA1",
+            description="token: z7Kx9mP2qL4vN6wR8tY3uI5oA1bC0dE7fH2jK",
         )
         findings = rule.check(tool)
         # Should trigger entropy-based detection
         entropy_findings = [f for f in findings if "entropy" in f.description.lower()]
         assert len(entropy_findings) >= 1
+
+    def test_cjk_description_not_flagged_as_secret(self) -> None:
+        """CJK text has very high Shannon entropy but is natural language, not a
+        credential (regression: mcp-shrimp-task-manager's Chinese tool
+        descriptions were flagged 24x and graded F)."""
+        rule = SecretExposureDetection()
+        tool = ToolInfo(
+            name="plan_task",
+            description="完整詳細的任務問題描述，應包含任務目標、背景及預期成果",
+            input_schema={
+                "properties": {
+                    "summary": {
+                        "type": "string",
+                        "description": "結構化的任務摘要，包含任務目標、範圍與關鍵技術挑戰",
+                    }
+                }
+            },
+        )
+        assert [f for f in rule.check(tool) if f.rule_id == "R106"] == []
 
     def test_detects_in_input_schema(self) -> None:
         rule = SecretExposureDetection()

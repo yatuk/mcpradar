@@ -1,0 +1,238 @@
+{
+  "name": "mcp-server-airbnb",
+  "target": "npx -y @openbnb/mcp-server-airbnb",
+  "version": "",
+  "scanned_at": "2026-07-12T12:56:36.834289+00:00",
+  "tools": [
+    {
+      "name": "airbnb_search",
+      "description": "Search for Airbnb listings with various filters and pagination. Provide direct links to the user",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "type": "string",
+            "description": "Location to search for (city, state, etc.)"
+          },
+          "placeId": {
+            "type": "string",
+            "description": "Google Maps Place ID (overrides the location parameter)"
+          },
+          "checkin": {
+            "type": "string",
+            "description": "Check-in date (YYYY-MM-DD)"
+          },
+          "checkout": {
+            "type": "string",
+            "description": "Check-out date (YYYY-MM-DD)"
+          },
+          "adults": {
+            "type": "number",
+            "description": "Number of adults"
+          },
+          "children": {
+            "type": "number",
+            "description": "Number of children"
+          },
+          "infants": {
+            "type": "number",
+            "description": "Number of infants"
+          },
+          "pets": {
+            "type": "number",
+            "description": "Number of pets"
+          },
+          "minPrice": {
+            "type": "number",
+            "description": "Minimum price for the stay"
+          },
+          "maxPrice": {
+            "type": "number",
+            "description": "Maximum price for the stay"
+          },
+          "cursor": {
+            "type": "string",
+            "description": "Base64-encoded string used for Pagination"
+          },
+          "propertyType": {
+            "type": "string",
+            "enum": [
+              "entire_home",
+              "private_room",
+              "shared_room",
+              "hotel_room"
+            ],
+            "description": "Filter by property type: 'entire_home' (entire homes/apartments), 'private_room' (private rooms in shared homes), 'shared_room' (shared/dorm-style rooms), 'hotel_room' (hotel rooms)"
+          },
+          "ignoreRobotsText": {
+            "type": "boolean",
+            "description": "Ignore robots.txt rules for this request"
+          }
+        },
+        "required": [
+          "location"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "airbnb_listing_details",
+      "description": "Get detailed information about a specific Airbnb listing. Provide direct links to the user",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The Airbnb listing ID"
+          },
+          "checkin": {
+            "type": "string",
+            "description": "Check-in date (YYYY-MM-DD)"
+          },
+          "checkout": {
+            "type": "string",
+            "description": "Check-out date (YYYY-MM-DD)"
+          },
+          "adults": {
+            "type": "number",
+            "description": "Number of adults"
+          },
+          "children": {
+            "type": "number",
+            "description": "Number of children"
+          },
+          "infants": {
+            "type": "number",
+            "description": "Number of infants"
+          },
+          "pets": {
+            "type": "number",
+            "description": "Number of pets"
+          },
+          "ignoreRobotsText": {
+            "type": "boolean",
+            "description": "Ignore robots.txt rules for this request"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "output_schema": {}
+    }
+  ],
+  "findings": [
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'location' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "airbnb_search",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "location",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'placeId' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "airbnb_search",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "placeId",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'checkin' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "airbnb_search",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "checkin",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'checkout' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "airbnb_search",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "checkout",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'cursor' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "airbnb_search",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "cursor",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'id' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "airbnb_listing_details",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "id",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'checkin' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "airbnb_listing_details",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "checkin",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'checkout' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "airbnb_listing_details",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "checkout",
+        "schema": "input_schema"
+      }
+    }
+  ],
+  "summary": {
+    "total_tools": 2,
+    "clean": 0,
+    "low": 8,
+    "medium": 0,
+    "high": 0,
+    "critical": 0
+  }
+}

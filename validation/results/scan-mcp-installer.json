@@ -1,0 +1,135 @@
+{
+  "name": "mcp-installer",
+  "target": "npx -y @anaisbetts/mcp-installer",
+  "version": "",
+  "scanned_at": "2026-07-12T13:12:23.287537+00:00",
+  "tools": [
+    {
+      "name": "install_repo_mcp_server",
+      "description": "Install an MCP server via npx or uvx",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The package name of the MCP server"
+          },
+          "args": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The arguments to pass along"
+          },
+          "env": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The environment variables to set, delimited by ="
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "install_local_mcp_server",
+      "description": "Install an MCP server whose code is cloned locally on your computer",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "The path to the MCP server code cloned on your computer"
+          },
+          "args": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The arguments to pass along"
+          },
+          "env": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The environment variables to set, delimited by ="
+          }
+        },
+        "required": [
+          "path"
+        ]
+      },
+      "output_schema": {}
+    }
+  ],
+  "findings": [
+    {
+      "rule_id": "R108",
+      "title": "Supply chain risk indicator",
+      "description": "Supply chain risk: 'npx execution'",
+      "severity": "high",
+      "target": "install_repo_mcp_server",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "pattern": "npx execution",
+        "matched": "npx "
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'name' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "install_repo_mcp_server",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "name",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R113",
+      "title": "Path traversal / directory traversal risk",
+      "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22).",
+      "severity": "low",
+      "target": "install_local_mcp_server",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "path",
+        "missing_constraints": [
+          "pattern",
+          "format"
+        ]
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "install_local_mcp_server",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "path",
+        "schema": "input_schema"
+      }
+    }
+  ],
+  "summary": {
+    "total_tools": 2,
+    "clean": 0,
+    "low": 3,
+    "medium": 0,
+    "high": 1,
+    "critical": 0
+  }
+}

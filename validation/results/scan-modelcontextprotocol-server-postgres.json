@@ -1,0 +1,72 @@
+{
+  "name": "@modelcontextprotocol/server-postgres",
+  "target": "npx -y @modelcontextprotocol/server-postgres postgresql://localhost:5432/postgres",
+  "version": "",
+  "scanned_at": "2026-07-12T12:54:34.534854+00:00",
+  "tools": [
+    {
+      "name": "query",
+      "description": "Run a read-only SQL query",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "sql": {
+            "type": "string"
+          }
+        }
+      },
+      "output_schema": {}
+    }
+  ],
+  "findings": [
+    {
+      "rule_id": "R105",
+      "title": "Permission scope mismatch",
+      "description": "Tool name is in 'read-only' scope but description mentions 'write/exec' operations",
+      "severity": "medium",
+      "target": "query",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "name_scope": "read-only",
+        "description_scope": "write/exec",
+        "name_matched": "query",
+        "desc_matched": "Run"
+      }
+    },
+    {
+      "rule_id": "R109",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
+      "severity": "low",
+      "target": "query",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "schema": "input_schema",
+        "issue": "no_required_fields"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'sql' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "query",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "sql",
+        "schema": "input_schema"
+      }
+    }
+  ],
+  "summary": {
+    "total_tools": 1,
+    "clean": 0,
+    "low": 2,
+    "medium": 1,
+    "high": 0,
+    "critical": 0
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "name": "edgeone-pages-mcp",
+  "target": "npx -y edgeone-pages-mcp",
+  "version": "",
+  "scanned_at": "2026-07-12T13:13:31.807594+00:00",
+  "tools": [
+    {
+      "name": "deploy_html",
+      "description": "Deploy HTML content to EdgeOne Pages, return the public URL",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "Provide the full HTML markup you wish to publish.\nAfter deployment, the system will generate and return a public URL where your content can be accessed."
+          }
+        },
+        "required": [
+          "value"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "deploy_folder_or_zip",
+      "description": "Deploy a built frontend directory (or zip file) to EdgeOne Pages. Returns: the deployment URL and project metadata.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "builtFolderPath": {
+            "type": "string",
+            "description": "Provide the absolute path to the built frontend folder(or zip file) you wish to deploy."
+          }
+        },
+        "required": [
+          "builtFolderPath"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "output_schema": {}
+    }
+  ],
+  "findings": [
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'value' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "deploy_html",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "value",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'builtFolderPath' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "deploy_folder_or_zip",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "builtFolderPath",
+        "schema": "input_schema"
+      }
+    }
+  ],
+  "summary": {
+    "total_tools": 2,
+    "clean": 0,
+    "low": 2,
+    "medium": 0,
+    "high": 0,
+    "critical": 0
+  }
+}

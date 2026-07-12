@@ -1,0 +1,49 @@
+{
+  "name": "markitdown-mcp",
+  "target": "uvx markitdown-mcp",
+  "version": "",
+  "scanned_at": "2026-07-12T13:00:40.523351+00:00",
+  "tools": [
+    {
+      "name": "convert_to_markdown",
+      "description": "Convert a resource described by an http:, https:, file: or data: URI to markdown",
+      "input_schema": {
+        "properties": {
+          "uri": {
+            "title": "Uri",
+            "type": "string"
+          }
+        },
+        "required": [
+          "uri"
+        ],
+        "title": "convert_to_markdownArguments",
+        "type": "object"
+      },
+      "output_schema": {}
+    }
+  ],
+  "findings": [
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'uri' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "convert_to_markdown",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "uri",
+        "schema": "input_schema"
+      }
+    }
+  ],
+  "summary": {
+    "total_tools": 1,
+    "clean": 0,
+    "low": 1,
+    "medium": 0,
+    "high": 0,
+    "critical": 0
+  }
+}

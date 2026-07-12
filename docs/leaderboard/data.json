@@ -16,7 +16,51 @@
       "low": 45
     },
     "findings_detail": [],
-    "tool_hash": "",
+    "tool_hash": "e4a9ab21752edec5",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "@executeautomation/playwright-mcp-server",
+    "display_name": "executeautomation / playwright-mcp-server",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 33,
+    "findings": 0,
+    "low_findings": 62,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 62
+    },
+    "findings_detail": [],
+    "tool_hash": "717bb183967118cc",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "mcp-server-chart",
+    "display_name": "mcp-server-chart",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 27,
+    "findings": 0,
+    "low_findings": 127,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 127
+    },
+    "findings_detail": [],
+    "tool_hash": "1869cbc90d76d306",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
     "status": "scanned"
@@ -38,7 +82,139 @@
       "low": 63
     },
     "findings_detail": [],
-    "tool_hash": "",
+    "tool_hash": "64c419316a5d8e6d",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "@notionhq/notion-mcp-server",
+    "display_name": "notionhq / notion-mcp-server",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 24,
+    "findings": 0,
+    "low_findings": 40,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 40
+    },
+    "findings_detail": [],
+    "tool_hash": "fb89a6a995abd1dc",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "blender-mcp",
+    "display_name": "blender-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 22,
+    "findings": 0,
+    "low_findings": 71,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 71
+    },
+    "findings_detail": [],
+    "tool_hash": "bdab2d86acc3a9a3",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "wikipedia-mcp",
+    "display_name": "wikipedia-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 22,
+    "findings": 0,
+    "low_findings": 70,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 70
+    },
+    "findings_detail": [],
+    "tool_hash": "9aecc2f1033e0b0c",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "biothings-mcp",
+    "display_name": "biothings-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 19,
+    "findings": 0,
+    "low_findings": 23,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 23
+    },
+    "findings_detail": [],
+    "tool_hash": "2d2dbd16c1135614",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "mcp-shrimp-task-manager",
+    "display_name": "mcp-shrimp-task-manager",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 15,
+    "findings": 0,
+    "low_findings": 14,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 14
+    },
+    "findings_detail": [],
+    "tool_hash": "cf953fcd1307a0c5",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "@agentdeskai/browser-tools-mcp",
+    "display_name": "agentdeskai / browser-tools-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 14,
+    "findings": 0,
+    "low_findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "565952765ea33304",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
     "status": "scanned"
@@ -60,7 +236,29 @@
       "low": 8
     },
     "findings_detail": [],
-    "tool_hash": "",
+    "tool_hash": "3f4d3cd441fa0a80",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "@browsermcp/mcp",
+    "display_name": "browsermcp / mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 12,
+    "findings": 0,
+    "low_findings": 11,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 11
+    },
+    "findings_detail": [],
+    "tool_hash": "e2c04b8f3bbd2861",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
     "status": "scanned"
@@ -82,7 +280,51 @@
       "low": 19
     },
     "findings_detail": [],
-    "tool_hash": "",
+    "tool_hash": "a886c3366c5a8831",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "yfinance-mcp",
+    "display_name": "yfinance-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 11,
+    "findings": 0,
+    "low_findings": 21,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 21
+    },
+    "findings_detail": [],
+    "tool_hash": "0e0081ffa4de6c00",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "mcp-server-yfinance",
+    "display_name": "mcp-server-yfinance",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 10,
+    "findings": 0,
+    "low_findings": 18,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 18
+    },
+    "findings_detail": [],
+    "tool_hash": "00142d1aae518490",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
     "status": "scanned"
@@ -104,14 +346,344 @@
       "low": 35
     },
     "findings_detail": [],
-    "tool_hash": "",
+    "tool_hash": "4d709119e341da34",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
     "status": "scanned"
   },
   {
-    "server": "@anthropic/server-time",
-    "display_name": "anthropic / server-time",
+    "server": "@variflight-ai/variflight-mcp",
+    "display_name": "variflight-ai / variflight-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 9,
+    "findings": 0,
+    "low_findings": 3,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 3
+    },
+    "findings_detail": [],
+    "tool_hash": "ed8db337db25ab37",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "mcp-server-reddit",
+    "display_name": "mcp-server-reddit",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 8,
+    "findings": 0,
+    "low_findings": 8,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 8
+    },
+    "findings_detail": [],
+    "tool_hash": "a48d1e156b2aa1ea",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "@modelcontextprotocol/server-puppeteer",
+    "display_name": "modelcontextprotocol / server-puppeteer",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 7,
+    "findings": 0,
+    "low_findings": 10,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 10
+    },
+    "findings_detail": [],
+    "tool_hash": "10da201c43361eb8",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "mcp-code-executor",
+    "display_name": "mcp-code-executor",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 6,
+    "findings": 0,
+    "low_findings": 10,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 10
+    },
+    "findings_detail": [],
+    "tool_hash": "cc87e2fc3b49133e",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "mcp-server-sqlite",
+    "display_name": "mcp-server-sqlite",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 6,
+    "findings": 0,
+    "low_findings": 5,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 5
+    },
+    "findings_detail": [],
+    "tool_hash": "51015039cd19f301",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "tavily-mcp",
+    "display_name": "tavily-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 5,
+    "findings": 0,
+    "low_findings": 10,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 10
+    },
+    "findings_detail": [],
+    "tool_hash": "ef01aa97f11827ba",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "mcp-server-docker",
+    "display_name": "mcp-server-docker",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 4,
+    "findings": 0,
+    "low_findings": 5,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 5
+    },
+    "findings_detail": [],
+    "tool_hash": "64e2995053ca761c",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "mcp-hackernews",
+    "display_name": "mcp-hackernews",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 4,
+    "findings": 0,
+    "low_findings": 5,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 5
+    },
+    "findings_detail": [],
+    "tool_hash": "68e0b8883cf2eda8",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "mcp-clickhouse",
+    "display_name": "mcp-clickhouse",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 3,
+    "findings": 0,
+    "low_findings": 5,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 5
+    },
+    "findings_detail": [],
+    "tool_hash": "fa34a24ef0c791fd",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "mcp-neo4j-cypher",
+    "display_name": "mcp-neo4j-cypher",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 3,
+    "findings": 0,
+    "low_findings": 3,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 3
+    },
+    "findings_detail": [],
+    "tool_hash": "9674c1b523a5958d",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "opengenes-mcp",
+    "display_name": "opengenes-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 3,
+    "findings": 0,
+    "low_findings": 2,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 2
+    },
+    "findings_detail": [],
+    "tool_hash": "d06fa3aaf94699ae",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "pdf-reader-mcp",
+    "display_name": "pdf-reader-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 3,
+    "findings": 0,
+    "low_findings": 5,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 5
+    },
+    "findings_detail": [],
+    "tool_hash": "720340f95db71adc",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "iterm-mcp",
+    "display_name": "iterm-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 3,
+    "findings": 0,
+    "low_findings": 2,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 2
+    },
+    "findings_detail": [],
+    "tool_hash": "3713cb6bb708bffa",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "mcp-hfspace",
+    "display_name": "mcp-hfspace",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 3,
+    "findings": 0,
+    "low_findings": 3,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 3
+    },
+    "findings_detail": [],
+    "tool_hash": "e020a18efe14ab26",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "synergy-age-mcp",
+    "display_name": "synergy-age-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 3,
+    "findings": 0,
+    "low_findings": 2,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 2
+    },
+    "findings_detail": [],
+    "tool_hash": "37e801476938e92c",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "mcp-server-time",
+    "display_name": "mcp-server-time",
     "version": "",
     "aivss_score": 0.0,
     "grade": "A",
@@ -126,7 +698,29 @@
       "low": 4
     },
     "findings_detail": [],
-    "tool_hash": "",
+    "tool_hash": "8e9f1e6cfff18235",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "context7",
+    "display_name": "context7",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 2,
+    "findings": 0,
+    "low_findings": 4,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 4
+    },
+    "findings_detail": [],
+    "tool_hash": "0c303bbade84b2bb",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
     "status": "scanned"
@@ -148,14 +742,124 @@
       "low": 5
     },
     "findings_detail": [],
-    "tool_hash": "",
+    "tool_hash": "a5f87ffe2e13fa6b",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
     "status": "scanned"
   },
   {
-    "server": "@anthropic/server-fetch",
-    "display_name": "anthropic / server-fetch",
+    "server": "edgeone-pages-mcp",
+    "display_name": "edgeone-pages-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 2,
+    "findings": 0,
+    "low_findings": 2,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 2
+    },
+    "findings_detail": [],
+    "tool_hash": "c48d92bab689ab02",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "exa-mcp-server",
+    "display_name": "exa-mcp-server",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 2,
+    "findings": 0,
+    "low_findings": 1,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 1
+    },
+    "findings_detail": [],
+    "tool_hash": "dde94629ddb9926d",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "mcp-server-airbnb",
+    "display_name": "mcp-server-airbnb",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 2,
+    "findings": 0,
+    "low_findings": 8,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 8
+    },
+    "findings_detail": [],
+    "tool_hash": "6493a4115fd52980",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "mcp-server-weather",
+    "display_name": "mcp-server-weather",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 2,
+    "findings": 0,
+    "low_findings": 1,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 1
+    },
+    "findings_detail": [],
+    "tool_hash": "e05d859696fc0531",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "mcp-server-commands",
+    "display_name": "mcp-server-commands",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 1,
+    "findings": 0,
+    "low_findings": 4,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 4
+    },
+    "findings_detail": [],
+    "tool_hash": "faad75a511044025",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "mcp-server-fetch",
+    "display_name": "mcp-server-fetch",
     "version": "",
     "aivss_score": 0.0,
     "grade": "A",
@@ -170,7 +874,161 @@
       "low": 0
     },
     "findings_detail": [],
-    "tool_hash": "",
+    "tool_hash": "e7d3799ecc09f5cb",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "mcp-pandoc",
+    "display_name": "mcp-pandoc",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 1,
+    "findings": 0,
+    "low_findings": 6,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 6
+    },
+    "findings_detail": [],
+    "tool_hash": "7942daf03a875e04",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "markitdown-mcp",
+    "display_name": "markitdown-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 1,
+    "findings": 0,
+    "low_findings": 1,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 1
+    },
+    "findings_detail": [],
+    "tool_hash": "ddb208e84c8fc0a9",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "searxng-mcp",
+    "display_name": "searxng-mcp",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 1,
+    "findings": 0,
+    "low_findings": 1,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 1
+    },
+    "findings_detail": [],
+    "tool_hash": "2419329067823cab",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "mcp-server-calculator",
+    "display_name": "mcp-server-calculator",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 1,
+    "findings": 0,
+    "low_findings": 2,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 2
+    },
+    "findings_detail": [],
+    "tool_hash": "edca249d8d1f9a5b",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "mcp-shell",
+    "display_name": "mcp-shell",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 1,
+    "findings": 0,
+    "low_findings": 2,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 2
+    },
+    "findings_detail": [],
+    "tool_hash": "aeaf9a308c3a65df",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "mcp-youtube-transcript",
+    "display_name": "mcp-youtube-transcript",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 1,
+    "findings": 0,
+    "low_findings": 3,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 3
+    },
+    "findings_detail": [],
+    "tool_hash": "ecc707c586dd2a2d",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "@modelcontextprotocol/server-sentry",
+    "display_name": "modelcontextprotocol / server-sentry",
+    "version": "",
+    "aivss_score": 0.0,
+    "grade": "A",
+    "confidence": 1.0,
+    "tools": 1,
+    "findings": 0,
+    "low_findings": 1,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 1
+    },
+    "findings_detail": [],
+    "tool_hash": "0b54b9ef236e8415",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
     "status": "scanned"
@@ -192,7 +1050,135 @@
       "low": 2
     },
     "findings_detail": [],
-    "tool_hash": "",
+    "tool_hash": "9bbea416bf3d4e0c",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "@modelcontextprotocol/server-github",
+    "display_name": "modelcontextprotocol / server-github",
+    "version": "",
+    "aivss_score": 0.2,
+    "grade": "A",
+    "confidence": 0.8,
+    "tools": 26,
+    "findings": 1,
+    "low_findings": 82,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 1,
+      "low": 82
+    },
+    "findings_detail": [
+      {
+        "rule_id": "R113",
+        "severity": "medium",
+        "title": "Path traversal / directory traversal risk",
+        "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
+      }
+    ],
+    "tool_hash": "50715a0a2f55c601",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "arxiv-mcp-server",
+    "display_name": "arxiv-mcp-server",
+    "version": "",
+    "aivss_score": 0.4,
+    "grade": "A",
+    "confidence": 0.8,
+    "tools": 10,
+    "findings": 1,
+    "low_findings": 14,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 1,
+      "low": 14
+    },
+    "findings_detail": [
+      {
+        "rule_id": "R108",
+        "severity": "medium",
+        "title": "Supply chain risk indicator",
+        "description": "Supply chain risk: 'pip install'"
+      }
+    ],
+    "tool_hash": "0408f0d691105dad",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "mcp-server-kubernetes",
+    "display_name": "mcp-server-kubernetes",
+    "version": "",
+    "aivss_score": 0.5,
+    "grade": "A",
+    "confidence": 0.8,
+    "tools": 23,
+    "findings": 3,
+    "low_findings": 96,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 3,
+      "low": 96
+    },
+    "findings_detail": [
+      {
+        "rule_id": "R113",
+        "severity": "medium",
+        "title": "Path traversal / directory traversal risk",
+        "description": "Path parameter 'filename' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
+      },
+      {
+        "rule_id": "R113",
+        "severity": "medium",
+        "title": "Path traversal / directory traversal risk",
+        "description": "Path parameter 'output' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
+      },
+      {
+        "rule_id": "R113",
+        "severity": "medium",
+        "title": "Path traversal / directory traversal risk",
+        "description": "Path parameter 'filename' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
+      }
+    ],
+    "tool_hash": "fabc635d889df215",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "@modelcontextprotocol/server-postgres",
+    "display_name": "modelcontextprotocol / server-postgres",
+    "version": "",
+    "aivss_score": 1.3,
+    "grade": "B",
+    "confidence": 0.8,
+    "tools": 1,
+    "findings": 1,
+    "low_findings": 2,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 1,
+      "low": 2
+    },
+    "findings_detail": [
+      {
+        "rule_id": "R105",
+        "severity": "medium",
+        "title": "Permission scope mismatch",
+        "description": "Tool name is in 'read-only' scope but description mentions 'write/exec' operations"
+      }
+    ],
+    "tool_hash": "a8b771920b8319e4",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
     "status": "scanned"
@@ -201,7 +1187,7 @@
     "server": "@modelcontextprotocol/server-filesystem",
     "display_name": "modelcontextprotocol / server-filesystem",
     "version": "",
-    "aivss_score": 2.6,
+    "aivss_score": 1.4,
     "grade": "B",
     "confidence": 0.8,
     "tools": 14,
@@ -245,7 +1231,233 @@
         "description": "Path parameter 'destination' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
       }
     ],
-    "tool_hash": "",
+    "tool_hash": "44c35cf6ac86e32d",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "mcp-installer",
+    "display_name": "mcp-installer",
+    "version": "",
+    "aivss_score": 3.0,
+    "grade": "C",
+    "confidence": 0.9,
+    "tools": 2,
+    "findings": 1,
+    "low_findings": 3,
+    "by_severity": {
+      "critical": 0,
+      "high": 1,
+      "medium": 0,
+      "low": 3
+    },
+    "findings_detail": [
+      {
+        "rule_id": "R108",
+        "severity": "high",
+        "title": "Supply chain risk indicator",
+        "description": "Supply chain risk: 'npx execution'"
+      }
+    ],
+    "tool_hash": "3833814589108074",
+    "last_scanned": "2026-07-12",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned"
+  },
+  {
+    "server": "chrome-devtools-mcp",
+    "display_name": "chrome-devtools-mcp",
+    "version": "",
+    "aivss_score": 4.0,
+    "grade": "C",
+    "confidence": 0.8,
+    "tools": 29,
+    "findings": 29,
+    "low_findings": 54,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 29,
+      "low": 54
+    },
+    "findings_detail": [
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: additionalProperties: true; accepts arbitrary fields"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: additionalProperties: true; accepts arbitrary fields"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: additionalProperties: true; accepts arbitrary fields"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: additionalProperties: true; accepts arbitrary fields"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: additionalProperties: true; accepts arbitrary fields"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: additionalProperties: true; accepts arbitrary fields"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: additionalProperties: true; accepts arbitrary fields"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: additionalProperties: true; accepts arbitrary fields"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: additionalProperties: true; accepts arbitrary fields"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: additionalProperties: true; accepts arbitrary fields"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: additionalProperties: true; accepts arbitrary fields"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: additionalProperties: true; accepts arbitrary fields"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: additionalProperties: true; accepts arbitrary fields"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: additionalProperties: true; accepts arbitrary fields"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: additionalProperties: true; accepts arbitrary fields"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: additionalProperties: true; accepts arbitrary fields"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: additionalProperties: true; accepts arbitrary fields"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: additionalProperties: true; accepts arbitrary fields"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: additionalProperties: true; accepts arbitrary fields"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: additionalProperties: true; accepts arbitrary fields"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: additionalProperties: true; accepts arbitrary fields"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: additionalProperties: true; accepts arbitrary fields"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: additionalProperties: true; accepts arbitrary fields"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: additionalProperties: true; accepts arbitrary fields"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: additionalProperties: true; accepts arbitrary fields"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: additionalProperties: true; accepts arbitrary fields"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: additionalProperties: true; accepts arbitrary fields"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: additionalProperties: true; accepts arbitrary fields"
+      },
+      {
+        "rule_id": "R109",
+        "severity": "medium",
+        "title": "Schema poisoning indicator",
+        "description": "input_schema: additionalProperties: true; accepts arbitrary fields"
+      }
+    ],
+    "tool_hash": "7c5d1c8baa98ef43",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
     "status": "scanned"
@@ -274,48 +1486,6 @@
   {
     "server": "@anthropic/server-brave-search",
     "display_name": "anthropic / server-brave-search",
-    "version": "",
-    "aivss_score": null,
-    "grade": "-",
-    "confidence": null,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "pending"
-  },
-  {
-    "server": "@anthropic/server-clickhouse",
-    "display_name": "anthropic / server-clickhouse",
-    "version": "",
-    "aivss_score": null,
-    "grade": "-",
-    "confidence": null,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "pending"
-  },
-  {
-    "server": "@anthropic/server-commands",
-    "display_name": "anthropic / server-commands",
     "version": "",
     "aivss_score": null,
     "grade": "-",
@@ -379,27 +1549,6 @@
   {
     "server": "@anthropic/server-discord",
     "display_name": "anthropic / server-discord",
-    "version": "",
-    "aivss_score": null,
-    "grade": "-",
-    "confidence": null,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "pending"
-  },
-  {
-    "server": "@anthropic/server-docker",
-    "display_name": "anthropic / server-docker",
     "version": "",
     "aivss_score": null,
     "grade": "-",
@@ -629,48 +1778,6 @@
     "status": "pending"
   },
   {
-    "server": "@anthropic/server-neo4j",
-    "display_name": "anthropic / server-neo4j",
-    "version": "",
-    "aivss_score": null,
-    "grade": "-",
-    "confidence": null,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "pending"
-  },
-  {
-    "server": "@anthropic/server-pandoc",
-    "display_name": "anthropic / server-pandoc",
-    "version": "",
-    "aivss_score": null,
-    "grade": "-",
-    "confidence": null,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "pending"
-  },
-  {
     "server": "@anthropic/server-pinecone",
     "display_name": "anthropic / server-pinecone",
     "version": "",
@@ -860,92 +1967,8 @@
     "status": "pending"
   },
   {
-    "server": "@browsermcp/mcp",
-    "display_name": "browsermcp / mcp",
-    "version": "",
-    "aivss_score": null,
-    "grade": "-",
-    "confidence": null,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "pending"
-  },
-  {
     "server": "@modelcontextprotocol/server-brave-search",
     "display_name": "modelcontextprotocol / server-brave-search",
-    "version": "",
-    "aivss_score": null,
-    "grade": "-",
-    "confidence": null,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "pending"
-  },
-  {
-    "server": "@modelcontextprotocol/server-github",
-    "display_name": "modelcontextprotocol / server-github",
-    "version": "",
-    "aivss_score": null,
-    "grade": "-",
-    "confidence": null,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "pending"
-  },
-  {
-    "server": "@modelcontextprotocol/server-postgres",
-    "display_name": "modelcontextprotocol / server-postgres",
-    "version": "",
-    "aivss_score": null,
-    "grade": "-",
-    "confidence": null,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "pending"
-  },
-  {
-    "server": "@modelcontextprotocol/server-puppeteer",
-    "display_name": "modelcontextprotocol / server-puppeteer",
     "version": "",
     "aivss_score": null,
     "grade": "-",
@@ -1091,69 +2114,6 @@
     "status": "pending"
   },
   {
-    "server": "biothings-mcp",
-    "display_name": "biothings-mcp",
-    "version": "",
-    "aivss_score": null,
-    "grade": "-",
-    "confidence": null,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "pending"
-  },
-  {
-    "server": "blender-mcp",
-    "display_name": "blender-mcp",
-    "version": "",
-    "aivss_score": null,
-    "grade": "-",
-    "confidence": null,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "pending"
-  },
-  {
-    "server": "chrome-devtools-mcp",
-    "display_name": "chrome-devtools-mcp",
-    "version": "",
-    "aivss_score": null,
-    "grade": "-",
-    "confidence": null,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "pending"
-  },
-  {
     "server": "cli-mcp",
     "display_name": "cli-mcp",
     "version": "",
@@ -1198,27 +2158,6 @@
   {
     "server": "comfy-pilot",
     "display_name": "comfy-pilot",
-    "version": "",
-    "aivss_score": null,
-    "grade": "-",
-    "confidence": null,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "pending"
-  },
-  {
-    "server": "context7",
-    "display_name": "context7",
     "version": "",
     "aivss_score": null,
     "grade": "-",
@@ -1700,27 +2639,6 @@
     "status": "pending"
   },
   {
-    "server": "markdownify-mcp",
-    "display_name": "markdownify-mcp",
-    "version": "",
-    "aivss_score": null,
-    "grade": "-",
-    "confidence": null,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "pending"
-  },
-  {
     "server": "mcp-gateway",
     "display_name": "mcp-gateway",
     "version": "",
@@ -1828,48 +2746,6 @@
   {
     "server": "ollama-mcp",
     "display_name": "ollama-mcp",
-    "version": "",
-    "aivss_score": null,
-    "grade": "-",
-    "confidence": null,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "pending"
-  },
-  {
-    "server": "opengenes-mcp",
-    "display_name": "opengenes-mcp",
-    "version": "",
-    "aivss_score": null,
-    "grade": "-",
-    "confidence": null,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "pending"
-  },
-  {
-    "server": "pdf-reader-mcp",
-    "display_name": "pdf-reader-mcp",
     "version": "",
     "aivss_score": null,
     "grade": "-",
@@ -2015,50 +2891,8 @@
     "status": "pending"
   },
   {
-    "server": "searxng-mcp",
-    "display_name": "searxng-mcp",
-    "version": "",
-    "aivss_score": null,
-    "grade": "-",
-    "confidence": null,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "pending"
-  },
-  {
     "server": "selenium-mcp",
     "display_name": "selenium-mcp",
-    "version": "",
-    "aivss_score": null,
-    "grade": "-",
-    "confidence": null,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "pending"
-  },
-  {
-    "server": "synergy-age-mcp",
-    "display_name": "synergy-age-mcp",
     "version": "",
     "aivss_score": null,
     "grade": "-",

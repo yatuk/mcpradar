@@ -1,0 +1,74 @@
+{
+  "name": "mcp-server-calculator",
+  "target": "uvx mcp-server-calculator",
+  "version": "",
+  "scanned_at": "2026-07-12T13:05:29.016723+00:00",
+  "tools": [
+    {
+      "name": "calculate",
+      "description": "Calculates/evaluates the given expression.",
+      "input_schema": {
+        "properties": {
+          "expression": {
+            "title": "Expression",
+            "type": "string"
+          }
+        },
+        "required": [
+          "expression"
+        ],
+        "title": "calculateArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "calculateOutput",
+        "type": "object"
+      }
+    }
+  ],
+  "findings": [
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'expression' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "calculate",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "expression",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'result' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "calculate",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "result",
+        "schema": "output_schema"
+      }
+    }
+  ],
+  "summary": {
+    "total_tools": 1,
+    "clean": 0,
+    "low": 2,
+    "medium": 0,
+    "high": 0,
+    "critical": 0
+  }
+}

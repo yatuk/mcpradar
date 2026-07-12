@@ -1,0 +1,57 @@
+{
+  "name": "mcp-shell",
+  "target": "npx -y mcp-shell",
+  "version": "",
+  "scanned_at": "2026-07-12T13:14:58.439343+00:00",
+  "tools": [
+    {
+      "name": "run_command",
+      "description": "Run a shell command",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "command": {
+            "type": "string"
+          }
+        }
+      },
+      "output_schema": {}
+    }
+  ],
+  "findings": [
+    {
+      "rule_id": "R109",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
+      "severity": "low",
+      "target": "run_command",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "schema": "input_schema",
+        "issue": "no_required_fields"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'command' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "run_command",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "command",
+        "schema": "input_schema"
+      }
+    }
+  ],
+  "summary": {
+    "total_tools": 1,
+    "clean": 0,
+    "low": 2,
+    "medium": 0,
+    "high": 0,
+    "critical": 0
+  }
+}

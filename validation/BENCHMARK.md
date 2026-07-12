@@ -1,6 +1,6 @@
 # MCPRadar Precision/Recall Benchmark
 
-**Generated:** 2026-07-12 12:29 UTC
+**Generated:** 2026-07-12 16:18 UTC
 **Scanner version:** 1.0.0-rc4
 
 ## Methodology

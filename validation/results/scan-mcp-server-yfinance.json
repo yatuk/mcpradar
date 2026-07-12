@@ -1,0 +1,457 @@
+{
+  "name": "mcp-server-yfinance",
+  "target": "uvx mcp-yahoo-finance",
+  "version": "",
+  "scanned_at": "2026-07-12T13:15:15.957818+00:00",
+  "tools": [
+    {
+      "name": "get_current_stock_price",
+      "description": "Get the current stock price based on stock symbol.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "description": "Stock symbol in Yahoo Finance format."
+          }
+        },
+        "required": [
+          "symbol"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get_stock_price_by_date",
+      "description": "Get the stock price for a given stock symbol on a specific date.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "description": "Stock symbol in Yahoo Finance format."
+          },
+          "date": {
+            "type": "string",
+            "description": "The date in YYYY-MM-DD format."
+          }
+        },
+        "required": [
+          "symbol",
+          "date"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get_stock_price_date_range",
+      "description": "Get the stock prices for a given date range for a given stock symbol.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "description": "Stock symbol in Yahoo Finance format."
+          },
+          "start_date": {
+            "type": "string",
+            "description": "The start date in YYYY-MM-DD format."
+          },
+          "end_date": {
+            "type": "string",
+            "description": "The end date in YYYY-MM-DD format."
+          }
+        },
+        "required": [
+          "symbol",
+          "start_date",
+          "end_date"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get_historical_stock_prices",
+      "description": "Get historical stock prices for a given stock symbol.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "description": "Stock symbol in Yahoo Finance format."
+          },
+          "period": {
+            "type": "string",
+            "description": "The period for historical data. Defaults to \"1mo\". Valid periods: \"1d\", \"5d\", \"1mo\", \"3mo\", \"6mo\", \"1y\", \"2y\", \"5y\", \"10y\", \"ytd\", \"max\""
+          },
+          "interval": {
+            "type": "string",
+            "description": "The interval beween data points. Defaults to \"1d\". Valid intervals: \"1d\", \"5d\", \"1wk\", \"1mo\", \"3mo\""
+          }
+        },
+        "required": [
+          "symbol"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get_dividends",
+      "description": "Get dividends for a given stock symbol.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "description": "Stock symbol in Yahoo Finance format."
+          }
+        },
+        "required": [
+          "symbol"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get_income_statement",
+      "description": "Get income statement for a given stock symbol.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "description": "Stock symbol in Yahoo Finance format."
+          },
+          "freq": {
+            "type": "string",
+            "description": "At what frequency to get cashflow statements. Defaults to \"yearly\". Valid freqencies: \"yearly\", \"quarterly\", \"trainling\""
+          }
+        },
+        "required": [
+          "symbol"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get_cashflow",
+      "description": "Get cashflow for a given stock symbol.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "description": "Stock symbol in Yahoo Finance format."
+          },
+          "freq": {
+            "type": "string",
+            "description": "At what frequency to get cashflow statements. Defaults to \"yearly\". Valid freqencies: \"yearly\", \"quarterly\", \"trainling\""
+          }
+        },
+        "required": [
+          "symbol"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get_earning_dates",
+      "description": "Get earning dates.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "description": "Stock symbol in Yahoo Finance format."
+          },
+          "limit": {
+            "type": "string",
+            "description": "max amount of upcoming and recent earnings dates to return. Default value 12 should return next 4 quarters and last 8 quarters. Increase if more history is needed."
+          }
+        },
+        "required": [
+          "symbol"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get_news",
+      "description": "Get news for a given stock symbol.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "description": "Stock symbol in Yahoo Finance format."
+          }
+        },
+        "required": [
+          "symbol"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get_recommendations",
+      "description": "Get analyst recommendations for a given symbol.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "description": "Stock symbol in Yahoo Finance format."
+          }
+        },
+        "required": [
+          "symbol"
+        ]
+      },
+      "output_schema": {}
+    }
+  ],
+  "findings": [
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'symbol' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_current_stock_price",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "symbol",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'symbol' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_stock_price_by_date",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "symbol",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'date' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_stock_price_by_date",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "date",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'symbol' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_stock_price_date_range",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "symbol",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'start_date' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_stock_price_date_range",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "start_date",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'end_date' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_stock_price_date_range",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "end_date",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'symbol' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_historical_stock_prices",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "symbol",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'period' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_historical_stock_prices",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "period",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'interval' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_historical_stock_prices",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "interval",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'symbol' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_dividends",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "symbol",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'symbol' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_income_statement",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "symbol",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'freq' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_income_statement",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "freq",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'symbol' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_cashflow",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "symbol",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'freq' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_cashflow",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "freq",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'symbol' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_earning_dates",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "symbol",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'limit' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_earning_dates",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "limit",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'symbol' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_news",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "symbol",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'symbol' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_recommendations",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "symbol",
+        "schema": "input_schema"
+      }
+    }
+  ],
+  "summary": {
+    "total_tools": 10,
+    "clean": 0,
+    "low": 18,
+    "medium": 0,
+    "high": 0,
+    "critical": 0
+  }
+}

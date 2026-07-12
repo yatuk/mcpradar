@@ -1,0 +1,321 @@
+{
+  "name": "mcp-server-reddit",
+  "target": "uvx mcp-server-reddit",
+  "version": "",
+  "scanned_at": "2026-07-12T13:15:30.135904+00:00",
+  "tools": [
+    {
+      "name": "get_frontpage_posts",
+      "description": "Get hot posts from Reddit frontpage",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "description": "Number of posts to return (default: 10)",
+            "default": 10,
+            "minimum": 1,
+            "maximum": 100
+          }
+        }
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get_subreddit_info",
+      "description": "Get information about a subreddit",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "subreddit_name": {
+            "type": "string",
+            "description": "Name of the subreddit (e.g. 'Python', 'news')"
+          }
+        },
+        "required": [
+          "subreddit_name"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get_subreddit_hot_posts",
+      "description": "Get hot posts from a specific subreddit",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "subreddit_name": {
+            "type": "string",
+            "description": "Name of the subreddit (e.g. 'Python', 'news')"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Number of posts to return (default: 10)",
+            "default": 10,
+            "minimum": 1,
+            "maximum": 100
+          }
+        },
+        "required": [
+          "subreddit_name"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get_subreddit_new_posts",
+      "description": "Get new posts from a specific subreddit",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "subreddit_name": {
+            "type": "string",
+            "description": "Name of the subreddit (e.g. 'Python', 'news')"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Number of posts to return (default: 10)",
+            "default": 10,
+            "minimum": 1,
+            "maximum": 100
+          }
+        },
+        "required": [
+          "subreddit_name"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get_subreddit_top_posts",
+      "description": "Get top posts from a specific subreddit",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "subreddit_name": {
+            "type": "string",
+            "description": "Name of the subreddit (e.g. 'Python', 'news')"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Number of posts to return (default: 10)",
+            "default": 10,
+            "minimum": 1,
+            "maximum": 100
+          },
+          "time": {
+            "type": "string",
+            "description": "Time filter for top posts (e.g. 'hour', 'day', 'week', 'month', 'year', 'all')",
+            "default": "",
+            "enum": [
+              "",
+              "hour",
+              "day",
+              "week",
+              "month",
+              "year",
+              "all"
+            ]
+          }
+        },
+        "required": [
+          "subreddit_name"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get_subreddit_rising_posts",
+      "description": "Get rising posts from a specific subreddit",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "subreddit_name": {
+            "type": "string",
+            "description": "Name of the subreddit (e.g. 'Python', 'news')"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Number of posts to return (default: 10)",
+            "default": 10,
+            "minimum": 1,
+            "maximum": 100
+          }
+        },
+        "required": [
+          "subreddit_name"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get_post_content",
+      "description": "Get detailed content of a specific post",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "post_id": {
+            "type": "string",
+            "description": "ID of the post"
+          },
+          "comment_limit": {
+            "type": "integer",
+            "description": "Number of top-level comments to return (default: 10)",
+            "default": 10,
+            "minimum": 1,
+            "maximum": 100
+          },
+          "comment_depth": {
+            "type": "integer",
+            "description": "Maximum depth of comment tree (default: 3)",
+            "default": 3,
+            "minimum": 1,
+            "maximum": 10
+          }
+        },
+        "required": [
+          "post_id"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get_post_comments",
+      "description": "Get comments from a post",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "post_id": {
+            "type": "string",
+            "description": "ID of the post"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Number of comments to return (default: 10)",
+            "default": 10,
+            "minimum": 1,
+            "maximum": 100
+          }
+        },
+        "required": [
+          "post_id"
+        ]
+      },
+      "output_schema": {}
+    }
+  ],
+  "findings": [
+    {
+      "rule_id": "R109",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
+      "severity": "low",
+      "target": "get_frontpage_posts",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "schema": "input_schema",
+        "issue": "no_required_fields"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'subreddit_name' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_subreddit_info",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "subreddit_name",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'subreddit_name' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_subreddit_hot_posts",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "subreddit_name",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'subreddit_name' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_subreddit_new_posts",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "subreddit_name",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'subreddit_name' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_subreddit_top_posts",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "subreddit_name",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'subreddit_name' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_subreddit_rising_posts",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "subreddit_name",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'post_id' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_post_content",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "post_id",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'post_id' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_post_comments",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "post_id",
+        "schema": "input_schema"
+      }
+    }
+  ],
+  "summary": {
+    "total_tools": 8,
+    "clean": 0,
+    "low": 8,
+    "medium": 0,
+    "high": 0,
+    "critical": 0
+  }
+}

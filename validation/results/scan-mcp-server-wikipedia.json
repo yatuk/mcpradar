@@ -1,0 +1,2516 @@
+{
+  "name": "mcp-server-wikipedia",
+  "target": "uvx wikipedia-mcp",
+  "version": "",
+  "scanned_at": "2026-07-12T13:12:10.690251+00:00",
+  "tools": [
+    {
+      "name": "search_wikipedia",
+      "description": "Search Wikipedia for articles matching a query.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "The search term to look up on Wikipedia."
+          },
+          "limit": {
+            "default": 10,
+            "type": "integer",
+            "description": "Maximum number of results to return (1-500)."
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "properties": {
+          "query": {
+            "title": "Query",
+            "type": "string"
+          },
+          "results": {
+            "default": [],
+            "items": {
+              "additionalProperties": true,
+              "properties": {
+                "title": {
+                  "title": "Title",
+                  "type": "string"
+                },
+                "snippet": {
+                  "default": "",
+                  "title": "Snippet",
+                  "type": "string"
+                },
+                "pageid": {
+                  "default": 0,
+                  "title": "Pageid",
+                  "type": "integer"
+                },
+                "wordcount": {
+                  "default": 0,
+                  "title": "Wordcount",
+                  "type": "integer"
+                },
+                "timestamp": {
+                  "default": "",
+                  "title": "Timestamp",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "title"
+              ],
+              "title": "SearchResultItem",
+              "type": "object"
+            },
+            "title": "Results",
+            "type": "array"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Count"
+          },
+          "language": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Language"
+          },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Message"
+          }
+        },
+        "required": [
+          "query",
+          "status"
+        ],
+        "title": "SearchWikipediaResponse",
+        "type": "object"
+      }
+    },
+    {
+      "name": "wikipedia_search_wikipedia",
+      "description": "Search Wikipedia for articles matching a query.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "The search term to look up on Wikipedia."
+          },
+          "limit": {
+            "default": 10,
+            "type": "integer",
+            "description": "Maximum number of results to return (1-500)."
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "properties": {
+          "query": {
+            "title": "Query",
+            "type": "string"
+          },
+          "results": {
+            "default": [],
+            "items": {
+              "additionalProperties": true,
+              "properties": {
+                "title": {
+                  "title": "Title",
+                  "type": "string"
+                },
+                "snippet": {
+                  "default": "",
+                  "title": "Snippet",
+                  "type": "string"
+                },
+                "pageid": {
+                  "default": 0,
+                  "title": "Pageid",
+                  "type": "integer"
+                },
+                "wordcount": {
+                  "default": 0,
+                  "title": "Wordcount",
+                  "type": "integer"
+                },
+                "timestamp": {
+                  "default": "",
+                  "title": "Timestamp",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "title"
+              ],
+              "title": "SearchResultItem",
+              "type": "object"
+            },
+            "title": "Results",
+            "type": "array"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Count"
+          },
+          "language": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Language"
+          },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Message"
+          }
+        },
+        "required": [
+          "query",
+          "status"
+        ],
+        "title": "SearchWikipediaResponse",
+        "type": "object"
+      }
+    },
+    {
+      "name": "test_wikipedia_connectivity",
+      "description": "Provide diagnostics for Wikipedia API connectivity.\n\nReturns the base API URL, language, site information, and response\ntime in milliseconds. If connectivity fails, status will be 'failed'\nwith error details.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "properties": {
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "url": {
+            "title": "Url",
+            "type": "string"
+          },
+          "language": {
+            "title": "Language",
+            "type": "string"
+          },
+          "site_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Site Name"
+          },
+          "server": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Server"
+          },
+          "response_time_ms": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Response Time Ms"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Error"
+          },
+          "error_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Error Type"
+          }
+        },
+        "required": [
+          "status",
+          "url",
+          "language"
+        ],
+        "title": "ConnectivityResponse",
+        "type": "object"
+      }
+    },
+    {
+      "name": "wikipedia_test_wikipedia_connectivity",
+      "description": "Provide diagnostics for Wikipedia API connectivity.\n\nReturns the base API URL, language, site information, and response\ntime in milliseconds. If connectivity fails, status will be 'failed'\nwith error details.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "properties": {
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "url": {
+            "title": "Url",
+            "type": "string"
+          },
+          "language": {
+            "title": "Language",
+            "type": "string"
+          },
+          "site_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Site Name"
+          },
+          "server": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Server"
+          },
+          "response_time_ms": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Response Time Ms"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Error"
+          },
+          "error_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Error Type"
+          }
+        },
+        "required": [
+          "status",
+          "url",
+          "language"
+        ],
+        "title": "ConnectivityResponse",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_article",
+      "description": "Get the full content of a Wikipedia article.\n\nReturns a dictionary containing article details or an error message\nif retrieval fails.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "title"
+        ],
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "exists": {
+            "title": "Exists",
+            "type": "boolean"
+          },
+          "pageid": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Pageid"
+          },
+          "summary": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Summary"
+          },
+          "text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Text"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Url"
+          },
+          "sections": {
+            "default": [],
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Sections",
+            "type": "array"
+          },
+          "categories": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Categories",
+            "type": "array"
+          },
+          "links": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Links",
+            "type": "array"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Error"
+          }
+        },
+        "required": [
+          "title",
+          "exists"
+        ],
+        "title": "ArticleResponse",
+        "type": "object"
+      }
+    },
+    {
+      "name": "wikipedia_get_article",
+      "description": "Get the full content of a Wikipedia article.\n\nReturns a dictionary containing article details or an error message\nif retrieval fails.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "title"
+        ],
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "exists": {
+            "title": "Exists",
+            "type": "boolean"
+          },
+          "pageid": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Pageid"
+          },
+          "summary": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Summary"
+          },
+          "text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Text"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Url"
+          },
+          "sections": {
+            "default": [],
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Sections",
+            "type": "array"
+          },
+          "categories": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Categories",
+            "type": "array"
+          },
+          "links": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Links",
+            "type": "array"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Error"
+          }
+        },
+        "required": [
+          "title",
+          "exists"
+        ],
+        "title": "ArticleResponse",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_summary",
+      "description": "Get a summary of a Wikipedia article.\n\nReturns a dictionary with the title and summary string. On error,\nincludes an error message instead of a summary.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "title"
+        ],
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "summary": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Summary"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Error"
+          }
+        },
+        "required": [
+          "title"
+        ],
+        "title": "SummaryResponse",
+        "type": "object"
+      }
+    },
+    {
+      "name": "wikipedia_get_summary",
+      "description": "Get a summary of a Wikipedia article.\n\nReturns a dictionary with the title and summary string. On error,\nincludes an error message instead of a summary.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "title"
+        ],
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "summary": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Summary"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Error"
+          }
+        },
+        "required": [
+          "title"
+        ],
+        "title": "SummaryResponse",
+        "type": "object"
+      }
+    },
+    {
+      "name": "summarize_article_for_query",
+      "description": "Get a summary of a Wikipedia article tailored to a specific query.\n\nThe summary is a snippet around the query within the article text or\nsummary. The max_length parameter controls the length of the snippet.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "query": {
+            "type": "string"
+          },
+          "max_length": {
+            "default": 250,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "title",
+          "query"
+        ],
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "query": {
+            "title": "Query",
+            "type": "string"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "query",
+          "summary"
+        ],
+        "title": "QuerySummaryResponse",
+        "type": "object"
+      }
+    },
+    {
+      "name": "wikipedia_summarize_article_for_query",
+      "description": "Get a summary of a Wikipedia article tailored to a specific query.\n\nThe summary is a snippet around the query within the article text or\nsummary. The max_length parameter controls the length of the snippet.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "query": {
+            "type": "string"
+          },
+          "max_length": {
+            "default": 250,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "title",
+          "query"
+        ],
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "query": {
+            "title": "Query",
+            "type": "string"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "query",
+          "summary"
+        ],
+        "title": "QuerySummaryResponse",
+        "type": "object"
+      }
+    },
+    {
+      "name": "summarize_article_section",
+      "description": "Get a summary of a specific section of a Wikipedia article.\n\nReturns a dictionary containing the section summary or an error.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "section_title": {
+            "type": "string"
+          },
+          "max_length": {
+            "default": 150,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "title",
+          "section_title"
+        ],
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "section_title": {
+            "title": "Section Title",
+            "type": "string"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "section_title",
+          "summary"
+        ],
+        "title": "SectionSummaryResponse",
+        "type": "object"
+      }
+    },
+    {
+      "name": "wikipedia_summarize_article_section",
+      "description": "Get a summary of a specific section of a Wikipedia article.\n\nReturns a dictionary containing the section summary or an error.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "section_title": {
+            "type": "string"
+          },
+          "max_length": {
+            "default": 150,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "title",
+          "section_title"
+        ],
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "section_title": {
+            "title": "Section Title",
+            "type": "string"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "section_title",
+          "summary"
+        ],
+        "title": "SectionSummaryResponse",
+        "type": "object"
+      }
+    },
+    {
+      "name": "extract_key_facts",
+      "description": "Extract key facts from a Wikipedia article, optionally focused on a topic.\n\nReturns a dictionary containing a list of facts.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "topic_within_article": {
+            "default": "",
+            "type": "string"
+          },
+          "count": {
+            "default": 5,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "title"
+        ],
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "topic_within_article": {
+            "title": "Topic Within Article",
+            "type": "string"
+          },
+          "facts": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Facts",
+            "type": "array"
+          }
+        },
+        "required": [
+          "title",
+          "topic_within_article",
+          "facts"
+        ],
+        "title": "KeyFactsResponse",
+        "type": "object"
+      }
+    },
+    {
+      "name": "wikipedia_extract_key_facts",
+      "description": "Extract key facts from a Wikipedia article, optionally focused on a topic.\n\nReturns a dictionary containing a list of facts.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "topic_within_article": {
+            "default": "",
+            "type": "string"
+          },
+          "count": {
+            "default": 5,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "title"
+        ],
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "topic_within_article": {
+            "title": "Topic Within Article",
+            "type": "string"
+          },
+          "facts": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Facts",
+            "type": "array"
+          }
+        },
+        "required": [
+          "title",
+          "topic_within_article",
+          "facts"
+        ],
+        "title": "KeyFactsResponse",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_related_topics",
+      "description": "Get topics related to a Wikipedia article based on links and categories.\n\nReturns a list of related topics up to the specified limit.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "limit": {
+            "default": 10,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "title"
+        ],
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "related_topics": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Related Topics",
+            "type": "array"
+          }
+        },
+        "required": [
+          "title",
+          "related_topics"
+        ],
+        "title": "RelatedTopicsResponse",
+        "type": "object"
+      }
+    },
+    {
+      "name": "wikipedia_get_related_topics",
+      "description": "Get topics related to a Wikipedia article based on links and categories.\n\nReturns a list of related topics up to the specified limit.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "limit": {
+            "default": 10,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "title"
+        ],
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "related_topics": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Related Topics",
+            "type": "array"
+          }
+        },
+        "required": [
+          "title",
+          "related_topics"
+        ],
+        "title": "RelatedTopicsResponse",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_sections",
+      "description": "Get the sections of a Wikipedia article.\n\nReturns a dictionary with the article title and list of sections.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "title"
+        ],
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "sections": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Sections",
+            "type": "array"
+          }
+        },
+        "required": [
+          "title",
+          "sections"
+        ],
+        "title": "SectionsResponse",
+        "type": "object"
+      }
+    },
+    {
+      "name": "wikipedia_get_sections",
+      "description": "Get the sections of a Wikipedia article.\n\nReturns a dictionary with the article title and list of sections.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "title"
+        ],
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "sections": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Sections",
+            "type": "array"
+          }
+        },
+        "required": [
+          "title",
+          "sections"
+        ],
+        "title": "SectionsResponse",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_links",
+      "description": "Get the links contained within a Wikipedia article.\n\nReturns a dictionary with the article title and list of links.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "title"
+        ],
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "links": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Links",
+            "type": "array"
+          }
+        },
+        "required": [
+          "title",
+          "links"
+        ],
+        "title": "LinksResponse",
+        "type": "object"
+      }
+    },
+    {
+      "name": "wikipedia_get_links",
+      "description": "Get the links contained within a Wikipedia article.\n\nReturns a dictionary with the article title and list of links.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "title"
+        ],
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "links": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Links",
+            "type": "array"
+          }
+        },
+        "required": [
+          "title",
+          "links"
+        ],
+        "title": "LinksResponse",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_coordinates",
+      "description": "Get the coordinates of a Wikipedia article.\n\nReturns a dictionary containing coordinate information.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "title"
+        ],
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "exists": {
+            "title": "Exists",
+            "type": "boolean"
+          },
+          "pageid": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Pageid"
+          },
+          "coordinates": {
+            "anyOf": [
+              {
+                "items": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "latitude": {
+                      "anyOf": [
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null,
+                      "title": "Latitude"
+                    },
+                    "longitude": {
+                      "anyOf": [
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null,
+                      "title": "Longitude"
+                    },
+                    "primary": {
+                      "default": false,
+                      "title": "Primary",
+                      "type": "boolean"
+                    },
+                    "globe": {
+                      "default": "earth",
+                      "title": "Globe",
+                      "type": "string"
+                    },
+                    "type": {
+                      "default": "",
+                      "title": "Type",
+                      "type": "string"
+                    },
+                    "name": {
+                      "default": "",
+                      "title": "Name",
+                      "type": "string"
+                    },
+                    "region": {
+                      "default": "",
+                      "title": "Region",
+                      "type": "string"
+                    },
+                    "country": {
+                      "default": "",
+                      "title": "Country",
+                      "type": "string"
+                    }
+                  },
+                  "title": "CoordinateItem",
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Coordinates"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Error"
+          },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Message"
+          }
+        },
+        "required": [
+          "title",
+          "exists"
+        ],
+        "title": "CoordinatesResponse",
+        "type": "object"
+      }
+    },
+    {
+      "name": "wikipedia_get_coordinates",
+      "description": "Get the coordinates of a Wikipedia article.\n\nReturns a dictionary containing coordinate information.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "title"
+        ],
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "exists": {
+            "title": "Exists",
+            "type": "boolean"
+          },
+          "pageid": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Pageid"
+          },
+          "coordinates": {
+            "anyOf": [
+              {
+                "items": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "latitude": {
+                      "anyOf": [
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null,
+                      "title": "Latitude"
+                    },
+                    "longitude": {
+                      "anyOf": [
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null,
+                      "title": "Longitude"
+                    },
+                    "primary": {
+                      "default": false,
+                      "title": "Primary",
+                      "type": "boolean"
+                    },
+                    "globe": {
+                      "default": "earth",
+                      "title": "Globe",
+                      "type": "string"
+                    },
+                    "type": {
+                      "default": "",
+                      "title": "Type",
+                      "type": "string"
+                    },
+                    "name": {
+                      "default": "",
+                      "title": "Name",
+                      "type": "string"
+                    },
+                    "region": {
+                      "default": "",
+                      "title": "Region",
+                      "type": "string"
+                    },
+                    "country": {
+                      "default": "",
+                      "title": "Country",
+                      "type": "string"
+                    }
+                  },
+                  "title": "CoordinateItem",
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Coordinates"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Error"
+          },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Message"
+          }
+        },
+        "required": [
+          "title",
+          "exists"
+        ],
+        "title": "CoordinatesResponse",
+        "type": "object"
+      }
+    }
+  ],
+  "findings": [
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'query' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "search_wikipedia",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "query",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'query' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "search_wikipedia",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "query",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'results.items.title' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "search_wikipedia",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "results.items.title",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'results.items.snippet' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "search_wikipedia",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "results.items.snippet",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'results.items.timestamp' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "search_wikipedia",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "results.items.timestamp",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'status' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "search_wikipedia",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "status",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'query' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_search_wikipedia",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "query",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'query' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_search_wikipedia",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "query",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'results.items.title' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_search_wikipedia",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "results.items.title",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'results.items.snippet' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_search_wikipedia",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "results.items.snippet",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'results.items.timestamp' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_search_wikipedia",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "results.items.timestamp",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'status' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_search_wikipedia",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "status",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'status' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "test_wikipedia_connectivity",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "status",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'url' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "test_wikipedia_connectivity",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "url",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'language' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "test_wikipedia_connectivity",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "language",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'status' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_test_wikipedia_connectivity",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "status",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'url' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_test_wikipedia_connectivity",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "url",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'language' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_test_wikipedia_connectivity",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "language",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_article",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_article",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_get_article",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_get_article",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_summary",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_summary",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_get_summary",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_get_summary",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "summarize_article_for_query",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'query' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "summarize_article_for_query",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "query",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "summarize_article_for_query",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'query' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "summarize_article_for_query",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "query",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'summary' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "summarize_article_for_query",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "summary",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_summarize_article_for_query",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'query' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_summarize_article_for_query",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "query",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_summarize_article_for_query",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'query' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_summarize_article_for_query",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "query",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'summary' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_summarize_article_for_query",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "summary",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "summarize_article_section",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'section_title' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "summarize_article_section",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "section_title",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "summarize_article_section",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'section_title' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "summarize_article_section",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "section_title",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'summary' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "summarize_article_section",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "summary",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_summarize_article_section",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'section_title' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_summarize_article_section",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "section_title",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_summarize_article_section",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'section_title' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_summarize_article_section",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "section_title",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'summary' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_summarize_article_section",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "summary",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "extract_key_facts",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'topic_within_article' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "extract_key_facts",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "topic_within_article",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "extract_key_facts",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'topic_within_article' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "extract_key_facts",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "topic_within_article",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_extract_key_facts",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'topic_within_article' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_extract_key_facts",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "topic_within_article",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_extract_key_facts",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'topic_within_article' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_extract_key_facts",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "topic_within_article",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_related_topics",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_related_topics",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_get_related_topics",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_get_related_topics",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_sections",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_sections",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_get_sections",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_get_sections",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_links",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_links",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_get_links",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_get_links",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_coordinates",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_coordinates",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_get_coordinates",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "wikipedia_get_coordinates",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "output_schema"
+      }
+    }
+  ],
+  "summary": {
+    "total_tools": 22,
+    "clean": 0,
+    "low": 70,
+    "medium": 0,
+    "high": 0,
+    "critical": 0
+  }
+}

@@ -1,0 +1,301 @@
+{
+  "name": "@modelcontextprotocol/server-puppeteer",
+  "target": "npx -y @modelcontextprotocol/server-puppeteer",
+  "version": "",
+  "scanned_at": "2026-07-12T12:52:20.798728+00:00",
+  "tools": [
+    {
+      "name": "puppeteer_navigate",
+      "description": "Navigate to a URL",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "URL to navigate to"
+          },
+          "launchOptions": {
+            "type": "object",
+            "description": "PuppeteerJS LaunchOptions. Default null. If changed and not null, browser restarts. Example: { headless: true, args: ['--no-sandbox'] }"
+          },
+          "allowDangerous": {
+            "type": "boolean",
+            "description": "Allow dangerous LaunchOptions that reduce security. When false, dangerous args like --no-sandbox will throw errors. Default false."
+          }
+        },
+        "required": [
+          "url"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "puppeteer_screenshot",
+      "description": "Take a screenshot of the current page or a specific element",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name for the screenshot"
+          },
+          "selector": {
+            "type": "string",
+            "description": "CSS selector for element to screenshot"
+          },
+          "width": {
+            "type": "number",
+            "description": "Width in pixels (default: 800)"
+          },
+          "height": {
+            "type": "number",
+            "description": "Height in pixels (default: 600)"
+          },
+          "encoded": {
+            "type": "boolean",
+            "description": "If true, capture the screenshot as a base64-encoded data URI (as text) instead of binary image content. Default false."
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "puppeteer_click",
+      "description": "Click an element on the page",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "selector": {
+            "type": "string",
+            "description": "CSS selector for element to click"
+          }
+        },
+        "required": [
+          "selector"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "puppeteer_fill",
+      "description": "Fill out an input field",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "selector": {
+            "type": "string",
+            "description": "CSS selector for input field"
+          },
+          "value": {
+            "type": "string",
+            "description": "Value to fill"
+          }
+        },
+        "required": [
+          "selector",
+          "value"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "puppeteer_select",
+      "description": "Select an element on the page with Select tag",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "selector": {
+            "type": "string",
+            "description": "CSS selector for element to select"
+          },
+          "value": {
+            "type": "string",
+            "description": "Value to select"
+          }
+        },
+        "required": [
+          "selector",
+          "value"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "puppeteer_hover",
+      "description": "Hover an element on the page",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "selector": {
+            "type": "string",
+            "description": "CSS selector for element to hover"
+          }
+        },
+        "required": [
+          "selector"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "puppeteer_evaluate",
+      "description": "Execute JavaScript in the browser console",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "script": {
+            "type": "string",
+            "description": "JavaScript code to execute"
+          }
+        },
+        "required": [
+          "script"
+        ]
+      },
+      "output_schema": {}
+    }
+  ],
+  "findings": [
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'url' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "puppeteer_navigate",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "url",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'name' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "puppeteer_screenshot",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "name",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'selector' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "puppeteer_screenshot",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "selector",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'selector' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "puppeteer_click",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "selector",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'selector' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "puppeteer_fill",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "selector",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'value' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "puppeteer_fill",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "value",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'selector' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "puppeteer_select",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "selector",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'value' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "puppeteer_select",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "value",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'selector' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "puppeteer_hover",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "selector",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'script' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "puppeteer_evaluate",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "script",
+        "schema": "input_schema"
+      }
+    }
+  ],
+  "summary": {
+    "total_tools": 7,
+    "clean": 0,
+    "low": 10,
+    "medium": 0,
+    "high": 0,
+    "critical": 0
+  }
+}

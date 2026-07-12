@@ -1,0 +1,70 @@
+{
+  "name": "mcp-server-weather",
+  "target": "npx -y @h1deya/mcp-server-weather",
+  "version": "",
+  "scanned_at": "2026-07-12T13:14:42.059742+00:00",
+  "tools": [
+    {
+      "name": "get-alerts",
+      "description": "Get weather alerts for a US state",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "string",
+            "description": "Two-letter US state code (e.g. CA, NY)"
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get-forecast",
+      "description": "Get weather forecast for a location in the US",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "description": "Latitude of the location"
+          },
+          "longitude": {
+            "type": "number",
+            "description": "Longitude of the location"
+          }
+        },
+        "required": [
+          "latitude",
+          "longitude"
+        ]
+      },
+      "output_schema": {}
+    }
+  ],
+  "findings": [
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'state' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get-alerts",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "state",
+        "schema": "input_schema"
+      }
+    }
+  ],
+  "summary": {
+    "total_tools": 2,
+    "clean": 0,
+    "low": 1,
+    "medium": 0,
+    "high": 0,
+    "critical": 0
+  }
+}
