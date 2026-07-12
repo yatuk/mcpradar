@@ -195,6 +195,34 @@ class TestTrojanSource:
         assert any(x.rule_id == "S008" for x in SourceAnalyzer().analyze_file(f))
 
 
+class TestBindExposure:
+    def test_host_kwarg_flagged(self, tmp_path: Path) -> None:
+        f = _scan("import uvicorn\nuvicorn.run(app, host='0.0.0.0', port=8000)\n", tmp_path)
+        s009 = [x for x in f if x.rule_id == "S009"]
+        assert len(s009) == 1
+        assert s009[0].severity == Severity.HIGH
+
+    def test_socket_bind_flagged(self, tmp_path: Path) -> None:
+        f = _scan("import socket\ns = socket.socket()\ns.bind(('0.0.0.0', 9000))\n", tmp_path)
+        assert "S009" in _ids(f)
+
+    def test_host_assignment_flagged(self, tmp_path: Path) -> None:
+        f = _scan("mcp.settings.host = '0.0.0.0'\n", tmp_path)
+        assert "S009" in _ids(f)
+
+    def test_ipv6_all_interfaces_flagged(self, tmp_path: Path) -> None:
+        f = _scan("run(host='::')\n", tmp_path)
+        assert "S009" in _ids(f)
+
+    def test_loopback_not_flagged(self, tmp_path: Path) -> None:
+        f = _scan("import uvicorn\nuvicorn.run(app, host='127.0.0.1', port=8000)\n", tmp_path)
+        assert "S009" not in _ids(f)
+
+    def test_localhost_bind_not_flagged(self, tmp_path: Path) -> None:
+        f = _scan("import socket\nsocket.socket().bind(('localhost', 9000))\n", tmp_path)
+        assert "S009" not in _ids(f)
+
+
 class TestClean:
     def test_clean_source_no_findings(self, tmp_path: Path) -> None:
         f = _scan(

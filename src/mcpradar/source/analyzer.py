@@ -12,6 +12,7 @@ schema rules (``R``) and cross-server rules (``C``):
 - S007  Description-Code Inconsistency (read-only tool that writes / sends /
         executes) — the flagship differentiator
 - S008  Trojan Source: bidirectional / invisible unicode (CVE-2021-42574)
+- S009  Network exposure: server binds to all interfaces (0.0.0.0 / DNS rebinding)
 """
 
 from __future__ import annotations
@@ -157,6 +158,22 @@ def _is_constant_str(node: ast.AST | None) -> bool:
     return isinstance(node, ast.Constant) and isinstance(node.value, str)
 
 
+# Literal addresses that bind a server to every network interface.
+_ALL_INTERFACES = {"0.0.0.0", "::", "0000:0000:0000:0000:0000:0000:0000:0000"}
+
+
+def _is_all_interfaces(node: ast.AST | None) -> bool:
+    return (
+        isinstance(node, ast.Constant)
+        and isinstance(node.value, str)
+        and node.value.strip() in _ALL_INTERFACES
+    )
+
+
+def _const(node: ast.AST | None) -> object:
+    return node.value if isinstance(node, ast.Constant) else None
+
+
 def _url_host_is_dynamic(node: ast.AST | None) -> bool:
     """True only when the request URL's *host* could be attacker-controlled.
 
@@ -274,7 +291,69 @@ class SourceAnalyzer:
             return findings
         findings += self._scan_sinks(tree, rel)
         findings += self._scan_dci(tree, rel)
+        findings += self._scan_bind_exposure(tree, rel)
         return findings
+
+    # ------------------------------------------------------------------
+    # S009: network exposure — binding to 0.0.0.0 / all interfaces
+    # ------------------------------------------------------------------
+    def _scan_bind_exposure(self, tree: ast.AST, loc: str) -> list[Finding]:
+        found: list[Finding] = []
+        seen: set[int] = set()
+
+        def flag(lineno: int, how: str) -> None:
+            if lineno in seen:
+                return
+            seen.add(lineno)
+            found.append(
+                self._f(
+                    "S009",
+                    "Network exposure: server binds to all interfaces (0.0.0.0)",
+                    Severity.HIGH,
+                    loc,
+                    lineno,
+                    f"{how} exposes the MCP server on all network interfaces; a "
+                    "local-only server reachable over the network enables DNS "
+                    "rebinding and remote access (cf. CVE-2025-49596)",
+                    binding="0.0.0.0",
+                )
+            )
+
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.Call):
+                continue
+            # host="0.0.0.0" / bind_host="::" keyword on run()/serve()/FastMCP()
+            for kw in node.keywords:
+                if kw.arg in ("host", "bind_host", "listen_host") and _is_all_interfaces(kw.value):
+                    flag(node.lineno, f"host={_const(kw.value)!r}")
+            # socket .bind(("0.0.0.0", port)) or .bind(("", port))
+            if (
+                isinstance(node.func, ast.Attribute)
+                and node.func.attr == "bind"
+                and node.args
+                and isinstance(node.args[0], ast.Tuple)
+                and node.args[0].elts
+                and _is_all_interfaces(node.args[0].elts[0])
+            ):
+                flag(node.lineno, "socket bind")
+
+        # `X.host = "0.0.0.0"` (e.g. mcp.settings.host)
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Assign):
+                targets = node.targets
+            elif isinstance(node, ast.AnnAssign):
+                targets = [node.target]
+            else:
+                continue
+            for t in targets:
+                if (
+                    isinstance(t, ast.Attribute)
+                    and t.attr in ("host", "bind_host")
+                    and node.value is not None
+                    and _is_all_interfaces(node.value)
+                ):
+                    flag(node.lineno, "host assignment")
+        return found
 
     # ------------------------------------------------------------------
     # S008: Trojan Source (CVE-2021-42574) — bidi / invisible unicode

@@ -172,6 +172,14 @@ class ConfigScanner:
                 parts += [str(v) for v in env.values() if isinstance(v, str)]
             command = " ".join(parts)
             found += self._match_command(command, loc, f"mcpServers.{name}")
+            # Typosquat check on the launched package (npx/uvx <pkg>).
+            pkg = _launched_package(spec.get("command"), args)
+            if pkg:
+                from mcpradar.supply.typosquat import check_typosquat, typosquat_finding
+
+                hit = check_typosquat(pkg)
+                if hit:
+                    found.append(typosquat_finding(hit, f"{loc}:mcpServers.{name}"))
         return found
 
     # --- .claude/settings.json hooks ---
@@ -253,6 +261,32 @@ class ConfigScanner:
             location="config",
             detail={"where": where, **detail},
         )
+
+
+_RUNNERS = {"npx", "npm", "pnpm", "yarn", "bunx", "uvx", "pipx", "uv"}
+# npx flags that take no package name, to skip when finding the package token.
+_RUNNER_FLAGS = {"-y", "--yes", "-p", "--package", "exec", "run", "tool", "dlx", "-c", "--"}
+
+
+def _launched_package(command: object, args: object) -> str | None:
+    """Extract the package a runner (npx/uvx/…) launches, for typosquat checks."""
+    if not isinstance(command, str):
+        return None
+    runner = Path(command).name.lower().removesuffix(".exe")
+    if runner not in _RUNNERS:
+        return None
+    tokens = [a for a in args if isinstance(a, str)] if isinstance(args, list) else []
+    for tok in tokens:
+        if tok in _RUNNER_FLAGS or tok.startswith("-"):
+            continue
+        # first non-flag token is the package (strip an @version suffix)
+        base = tok
+        if base.startswith("@"):
+            scope, _, rest = base.partition("/")
+            rest = rest.split("@", 1)[0]
+            return f"{scope}/{rest}" if rest else scope
+        return base.split("@", 1)[0]
+    return None
 
 
 def _iter_hook_commands(entries: object) -> list[str]:

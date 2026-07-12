@@ -112,8 +112,8 @@ One command, no install, runs against any MCP server you can launch.
 - NVD CVE feed sync
 - AIVSS 0-10 scoring + A-F letter grades
 - Container sandbox (`--sandbox`) for isolating untrusted stdio servers during a scan
-- Source-code analysis (`mcpradar scan-source`): AST-based SSRF, unsafe deserialization, command/SQL injection, Description-Code Inconsistency, and Trojan Source / bidi unicode (S001-S008) — no server execution required
-- Config poisoning scan (`mcpradar scan-config`): inspects MCP/agent config files (`claude_desktop_config.json`, `.mcp.json`, `.cursor/mcp.json`, `.claude/settings.json`, …) for download-to-shell RCE, credential exfiltration, reverse shells, and over-broad permissions (M001-M007)
+- Source-code analysis (`mcpradar scan-source`): AST-based SSRF, unsafe deserialization, command/SQL injection, Description-Code Inconsistency, Trojan Source / bidi unicode, and `0.0.0.0` network exposure / DNS rebinding (S001-S009) — no server execution required
+- Config poisoning scan (`mcpradar scan-config`): inspects MCP/agent config files (`claude_desktop_config.json`, `.mcp.json`, `.cursor/mcp.json`, `.claude/settings.json`, …) for download-to-shell RCE, credential exfiltration, reverse shells, over-broad permissions (M001-M007), and typosquatted server packages (T001)
 - Dependency vulnerability scan (`mcpradar deps`): resolves a server's npm/pip manifests and checks every dependency against OSV.dev (GitHub Advisory / PyPA), with CVSS-derived severity (D001)
 - Public security leaderboard at https://yatuk.github.io/mcpradar
 
@@ -171,6 +171,7 @@ See [Benchmarks](#benchmarks) for measured precision/recall data.
 | **Command injection** | Yes | - | - | Yes | Yes | Yes | - |
 | **Supply chain risk** | Yes | - | - | - | - | Yes | - |
 | **DCI (desc vs code)** | Yes (S007) | - | - | - | - | Partial | - |
+| **Typosquatting** | Yes (T001) | - | - | - | - | - | - |
 | **Cross-server analysis** | Yes (C001-C007) | - | - | - | - | - | - |
 | **Source scanning** | Yes (`scan-source`) | - | - | - | - | Yes | - |
 | **SBOM + dep. CVE** | Yes (CycloneDX + NVD + OSV) | - | - | - | - | - | - |

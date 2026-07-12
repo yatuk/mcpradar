@@ -8,6 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
+- **S009 — network exposure (`0.0.0.0` bind / DNS rebinding)**: `scan-source`
+  now flags a server binding to all interfaces (`host="0.0.0.0"`/`"::"`,
+  `socket.bind(("0.0.0.0", …))`, `mcp.settings.host = "0.0.0.0"`). A local-only
+  MCP server reachable over the network enables DNS-rebinding RCE — the class
+  behind CVE-2025-49596 (MCP Inspector) and the "0.0.0.0-day" advisory
+  (~200k exposed instances). Loopback binds are not flagged.
+- **T001 — typosquatting detection**: `scan-config` resolves the package a
+  server launches (`npx -y <pkg>`, `uvx <pkg>`, …) and flags names that closely
+  resemble a curated list of popular MCP packages via bounded Levenshtein
+  distance (`twittter-mcp` → `twitter-mcp`, `@modlecontextprotocol/...` → the
+  official scope). Exact known names and unrelated names are not flagged. New
+  module `src/mcpradar/supply/typosquat.py`.
 - **Config poisoning scan (`mcpradar scan-config <path>`)**: inspects MCP /
   agent config files (`claude_desktop_config.json`, `.mcp.json`,
   `.cursor/mcp.json`, `.vscode/mcp.json`, `.claude/settings.json`, …) for the

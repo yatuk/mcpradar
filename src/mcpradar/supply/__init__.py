@@ -11,5 +11,17 @@ from mcpradar.supply.deps import (
     extract_dependencies,
     scan_dependencies,
 )
+from mcpradar.supply.typosquat import (
+    TyposquatHit,
+    check_typosquat,
+    typosquat_finding,
+)
 
-__all__ = ["Dependency", "extract_dependencies", "scan_dependencies"]
+__all__ = [
+    "Dependency",
+    "TyposquatHit",
+    "check_typosquat",
+    "extract_dependencies",
+    "scan_dependencies",
+    "typosquat_finding",
+]
