@@ -1,0 +1,128 @@
+{
+  "name": "synergy-age-mcp",
+  "target": "uvx synergy-age-mcp",
+  "version": "",
+  "scanned_at": "2026-07-12T13:05:01.562674+00:00",
+  "tools": [
+    {
+      "name": "synergyage_get_schema_info",
+      "description": "Get comprehensive information about the SynergyAge database schema including table structures, column descriptions, enumerations, and critical query guidelines for genetic synergy, epistasis, and aging research data.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "type": "object"
+      }
+    },
+    {
+      "name": "synergyage_example_queries",
+      "description": "Get comprehensive example SQL queries with patterns and best practices for the SynergyAge database, including gene searching, interaction analysis, synergistic/antagonistic relationships, and proper result ordering.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "output_schema": {
+        "properties": {
+          "result": {
+            "items": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "type": "object",
+        "x-fastmcp-wrap-result": true
+      }
+    },
+    {
+      "name": "synergyage_db_query",
+      "description": "Query the SynergyAge database that contains genetic synergy, epistasis, and aging research data with experimental lifespan effects from model organisms. Before calling this tool the first time, always check tools that provide schema information and example queries.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "sql": {
+            "type": "string",
+            "description": "The SQL query to execute (database enforces read-only access)"
+          }
+        },
+        "required": [
+          "sql"
+        ],
+        "type": "object"
+      },
+      "output_schema": {
+        "description": "Result from a database query.",
+        "properties": {
+          "rows": {
+            "description": "Query result rows",
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "count": {
+            "description": "Number of rows returned",
+            "type": "integer"
+          },
+          "query": {
+            "description": "The SQL query that was executed",
+            "type": "string"
+          }
+        },
+        "required": [
+          "rows",
+          "count",
+          "query"
+        ],
+        "type": "object"
+      }
+    }
+  ],
+  "findings": [
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'sql' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "synergyage_db_query",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "sql",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'query' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "synergyage_db_query",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "query",
+        "schema": "output_schema"
+      }
+    }
+  ],
+  "summary": {
+    "total_tools": 3,
+    "clean": 0,
+    "low": 2,
+    "medium": 0,
+    "high": 0,
+    "critical": 0
+  }
+}

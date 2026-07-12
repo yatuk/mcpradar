@@ -1,0 +1,104 @@
+{
+  "name": "mcp-server-commands-2",
+  "target": "npx -y mcp-server-commands",
+  "version": "",
+  "scanned_at": "2026-07-12T13:15:02.534518+00:00",
+  "tools": [
+    {
+      "name": "run_process",
+      "description": "Run a process on this win32 machine",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "command_line": {
+            "type": "string",
+            "description": "Shell mode: a shell command line executed via the system's default shell. Supports pipes, redirects, globbing. Cannot be combined with 'argv'."
+          },
+          "argv": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Executable mode: directly spawn a process. argv[0] is the executable, followed by arguments passed verbatim (no shell interpretation). Cannot be combined with 'command_line'."
+          },
+          "cwd": {
+            "type": "string",
+            "description": "Optional to set working directory"
+          },
+          "stdin_text": {
+            "type": "string",
+            "description": "Optional text written to STDIN (written fully, then closed). Useful for heredoc-style input or file contents."
+          },
+          "timeout_ms": {
+            "type": "number",
+            "description": "Optional timeout in milliseconds, defaults to 30,000ms"
+          }
+        }
+      },
+      "output_schema": {}
+    }
+  ],
+  "findings": [
+    {
+      "rule_id": "R109",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
+      "severity": "low",
+      "target": "run_process",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "schema": "input_schema",
+        "issue": "no_required_fields"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'command_line' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "run_process",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "command_line",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'cwd' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "run_process",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "cwd",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'stdin_text' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "run_process",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "stdin_text",
+        "schema": "input_schema"
+      }
+    }
+  ],
+  "summary": {
+    "total_tools": 1,
+    "clean": 0,
+    "low": 4,
+    "medium": 0,
+    "high": 0,
+    "critical": 0
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "name": "opengenes-mcp",
+  "target": "uvx opengenes-mcp",
+  "version": "",
+  "scanned_at": "2026-07-12T13:04:50.244309+00:00",
+  "tools": [
+    {
+      "name": "opengenes_get_schema_info",
+      "description": "Get information about the database schema",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "type": "object"
+      }
+    },
+    {
+      "name": "opengenes_example_queries",
+      "description": "Get a list of example SQL queries",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "output_schema": {
+        "properties": {
+          "result": {
+            "items": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "type": "object",
+        "x-fastmcp-wrap-result": true
+      }
+    },
+    {
+      "name": "opengenes_db_query",
+      "description": "Query the Opengenes database that contains data about genes involved in longevity, lifespan extension experiments on model organisms, and changes in human and other organisms with aging. Before caling this tool the first time, always check tools that provide schema information and example queries.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "sql": {
+            "type": "string",
+            "description": "The SQL query to execute (database enforces read-only access)"
+          }
+        },
+        "required": [
+          "sql"
+        ],
+        "type": "object"
+      },
+      "output_schema": {
+        "description": "Result from a database query.",
+        "properties": {
+          "rows": {
+            "description": "Query result rows",
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "count": {
+            "description": "Number of rows returned",
+            "type": "integer"
+          },
+          "query": {
+            "description": "The SQL query that was executed",
+            "type": "string"
+          }
+        },
+        "required": [
+          "rows",
+          "count",
+          "query"
+        ],
+        "type": "object"
+      }
+    }
+  ],
+  "findings": [
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'sql' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "opengenes_db_query",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "sql",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'query' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "opengenes_db_query",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "query",
+        "schema": "output_schema"
+      }
+    }
+  ],
+  "summary": {
+    "total_tools": 3,
+    "clean": 0,
+    "low": 2,
+    "medium": 0,
+    "high": 0,
+    "critical": 0
+  }
+}

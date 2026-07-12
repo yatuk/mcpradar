@@ -2132,15 +2132,24 @@ def leaderboard_generate(
             meaningful = sev["critical"] + sev["high"] + sev["medium"]
             low_findings = sev["low"]
 
-            # Compute AIVSS score from MEDIUM+ severity counts
-            tc = max(tools, 1)
+            # Compute AIVSS score from MEDIUM+ severity counts. Score is the
+            # severity-weighted finding total spread over the tool surface
+            # (floored at 3 so a 1-2 tool server with a single finding is not
+            # catapulted to F). The earlier density multiplier double-counted
+            # findings-per-tool and turned uniform schema-laxity into grade F on
+            # otherwise-clean servers (e.g. chrome-devtools-mcp).
             weighted = sev["critical"] * 10 + sev["high"] * 7 + sev["medium"] * 4
             if meaningful == 0:
                 score, grade = 0.0, "A"
             else:
-                density = meaningful / tc
-                density_factor = max(0.5, min(2.0, density * 5))
-                raw = weighted / tc * density_factor
+                raw = weighted / max(tools, 3)
+                # A genuine critical/high should never round down to a clean
+                # grade: floor the score so any high is at least C, any critical
+                # at least D.
+                if sev["critical"]:
+                    raw = max(raw, 5.0)
+                elif sev["high"]:
+                    raw = max(raw, 3.0)
                 score = min(10.0, round(raw, 1))
                 if score <= 0.9:
                     grade = "A"
@@ -2165,9 +2174,14 @@ def leaderboard_generate(
                 if f.get("severity", "") in ("critical", "high", "medium")
             ]
 
-            # Tool hash from store
+            # Tool hash: SHA-256 of the sorted tool names. Prefer computing it
+            # directly from the result file's tools; fall back to the store.
             tool_hash = ""
-            if scan_id:
+            tool_objs = data.get("tools", [])
+            if tool_objs:
+                names = sorted(t.get("name", "") for t in tool_objs if isinstance(t, dict))
+                tool_hash = hashlib.sha256(",".join(names).encode()).hexdigest()[:16]
+            elif scan_id:
                 try:
                     from mcpradar.storage.store import Store
 
@@ -2237,6 +2251,28 @@ def leaderboard_generate(
         if new_rank > cur_rank:
             by_name[key] = r
     rows = list(by_name.values())
+
+    # Deduplicate scanned servers by tool fingerprint: the same real server can
+    # be reached under several package aliases (e.g. "context7" and
+    # "@upstash/context7-mcp"), which produce identical tool sets. Collapse them
+    # to one row, preferring a canonical name (not an "@anthropic/*" catalog
+    # guess, then shorter). Pending stubs have no tools, so they are never
+    # collapsed here.
+    def _canonical_rank(r: dict[str, Any]) -> tuple[bool, int]:
+        name = r["server"]
+        return (name.startswith("@anthropic/"), len(name))
+
+    by_hash: dict[str, dict[str, Any]] = {}
+    passthrough: list[dict[str, Any]] = []
+    for r in rows:
+        h = r.get("tool_hash") or ""
+        if r["status"] == "pending" or not h:
+            passthrough.append(r)
+            continue
+        existing = by_hash.get(h)
+        if existing is None or _canonical_rank(r) < _canonical_rank(existing):
+            by_hash[h] = r
+    rows = list(by_hash.values()) + passthrough
 
     # Scanned servers first (by ascending risk), pending servers last.
     rows.sort(key=lambda r: (r["status"] == "pending", r["aivss_score"] or 0.0, -r["tools"]))

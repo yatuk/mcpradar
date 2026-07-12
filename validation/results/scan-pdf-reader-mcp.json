@@ -1,0 +1,213 @@
+{
+  "name": "pdf-reader-mcp",
+  "target": "uvx mcp-pdf-reader",
+  "version": "",
+  "scanned_at": "2026-07-12T13:05:11.937041+00:00",
+  "tools": [
+    {
+      "name": "read_pdf_text",
+      "description": "Output PDF text content per page in markdown format.\nArgs:\n    file_path: Path to the PDF file\n    start_page: Start page (1-based)\n    end_page: End page (inclusive)\nReturns:\n    Markdown formatted string",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "file_path": {
+            "type": "string"
+          },
+          "start_page": {
+            "default": 1,
+            "type": "integer"
+          },
+          "end_page": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          }
+        },
+        "required": [
+          "file_path"
+        ],
+        "type": "object"
+      },
+      "output_schema": {
+        "properties": {
+          "result": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "type": "object",
+        "x-fastmcp-wrap-result": true
+      }
+    },
+    {
+      "name": "read_by_ocr",
+      "description": "Read text from PDF file using OCR.\nArgs:\n    file_path: Path to the PDF file\n    start_page: Start page (1-based)\n    end_page: End page (inclusive)\n    language: OCR language code\n    dpi: OCR DPI\nReturns:\n    Dict with extracted text, page_count, extracted_pages",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "file_path": {
+            "type": "string"
+          },
+          "start_page": {
+            "default": 1,
+            "type": "integer"
+          },
+          "end_page": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "language": {
+            "default": "eng",
+            "type": "string"
+          },
+          "dpi": {
+            "default": 300,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "file_path"
+        ],
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": true,
+        "type": "object"
+      }
+    },
+    {
+      "name": "read_pdf_to_file",
+      "description": "Convert multiple PDF files to TXT files\nArgs:\n    file_paths: List of PDF file paths\n    use_ocr: Whether to use OCR, options are \"yes\" or \"no\"\n    language: OCR language code, only effective when use_ocr=\"yes\"\n    dpi: OCR DPI value, only effective when use_ocr=\"yes\"\nReturns:\n    Dictionary containing paths to the converted TXT files",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "file_paths": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "use_ocr": {
+            "default": "no",
+            "enum": [
+              "yes",
+              "no"
+            ],
+            "type": "string"
+          },
+          "language": {
+            "default": "eng",
+            "type": "string"
+          },
+          "dpi": {
+            "default": 300,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "file_paths"
+        ],
+        "type": "object"
+      },
+      "output_schema": {
+        "additionalProperties": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "type": "object"
+      }
+    }
+  ],
+  "findings": [
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'file_path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "read_pdf_text",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "file_path",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'result' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "read_pdf_text",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "result",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'file_path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "read_by_ocr",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "file_path",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'language' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "read_by_ocr",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "language",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'language' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "read_pdf_to_file",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "language",
+        "schema": "input_schema"
+      }
+    }
+  ],
+  "summary": {
+    "total_tools": 3,
+    "clean": 0,
+    "low": 5,
+    "medium": 0,
+    "high": 0,
+    "critical": 0
+  }
+}

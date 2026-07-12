@@ -1,0 +1,148 @@
+{
+  "name": "@agentdeskai/browser-tools-mcp",
+  "target": "npx -y @agentdeskai/browser-tools-mcp",
+  "version": "",
+  "scanned_at": "2026-07-12T12:56:30.109734+00:00",
+  "tools": [
+    {
+      "name": "getConsoleLogs",
+      "description": "Check our browser logs",
+      "input_schema": {
+        "type": "object",
+        "properties": {}
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "getConsoleErrors",
+      "description": "Check our browsers console errors",
+      "input_schema": {
+        "type": "object",
+        "properties": {}
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "getNetworkErrors",
+      "description": "Check our network ERROR logs",
+      "input_schema": {
+        "type": "object",
+        "properties": {}
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "getNetworkLogs",
+      "description": "Check ALL our network logs",
+      "input_schema": {
+        "type": "object",
+        "properties": {}
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "takeScreenshot",
+      "description": "Take a screenshot of the current browser tab",
+      "input_schema": {
+        "type": "object",
+        "properties": {}
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "getSelectedElement",
+      "description": "Get the selected element from the browser",
+      "input_schema": {
+        "type": "object",
+        "properties": {}
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "wipeLogs",
+      "description": "Wipe all browser logs from memory",
+      "input_schema": {
+        "type": "object",
+        "properties": {}
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "runAccessibilityAudit",
+      "description": "Run an accessibility audit on the current page",
+      "input_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {}
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "runPerformanceAudit",
+      "description": "Run a performance audit on the current page",
+      "input_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {}
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "runSEOAudit",
+      "description": "Run an SEO audit on the current page",
+      "input_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {}
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "runNextJSAudit",
+      "description": "",
+      "input_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {}
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "runDebuggerMode",
+      "description": "Run debugger mode to debug an issue in our application",
+      "input_schema": {
+        "type": "object",
+        "properties": {}
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "runAuditMode",
+      "description": "Run audit mode to optimize our application for SEO, accessibility and performance",
+      "input_schema": {
+        "type": "object",
+        "properties": {}
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "runBestPracticesAudit",
+      "description": "Run a best practices audit on the current page",
+      "input_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {}
+      },
+      "output_schema": {}
+    }
+  ],
+  "findings": [],
+  "summary": {
+    "total_tools": 14,
+    "clean": 0,
+    "low": 0,
+    "medium": 0,
+    "high": 0,
+    "critical": 0
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "mcp-searxng-2",
+  "target": "uvx mcp-searxng",
+  "version": "",
+  "scanned_at": "2026-07-12T13:14:40.170370+00:00",
+  "tools": [
+    {
+      "name": "search",
+      "description": "search the web using searXNG. This will aggregate the results from google, bing, brave, duckduckgo and many others. Use this to find information on the web. Even if you do not have access to the internet, you can still use this tool to search the web.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "output_schema": {}
+    }
+  ],
+  "findings": [
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'query' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "search",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "query",
+        "schema": "input_schema"
+      }
+    }
+  ],
+  "summary": {
+    "total_tools": 1,
+    "clean": 0,
+    "low": 1,
+    "medium": 0,
+    "high": 0,
+    "critical": 0
+  }
+}

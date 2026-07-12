@@ -1,0 +1,94 @@
+{
+  "name": "mcp-youtube-transcript",
+  "target": "uvx mcp-youtube-transcript",
+  "version": "",
+  "scanned_at": "2026-07-12T13:11:47.552211+00:00",
+  "tools": [
+    {
+      "name": "get_transcript",
+      "description": "Retrieves the transcript of a YouTube video.",
+      "input_schema": {
+        "properties": {
+          "url": {
+            "description": "The URL of the YouTube video",
+            "title": "Url",
+            "type": "string"
+          },
+          "lang": {
+            "default": "en",
+            "description": "The preferred language for the transcript",
+            "title": "Lang",
+            "type": "string"
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "title": "get_transcriptArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "get_transcriptOutput",
+        "type": "object"
+      }
+    }
+  ],
+  "findings": [
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'url' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_transcript",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "url",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'lang' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_transcript",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "lang",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'result' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_transcript",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "result",
+        "schema": "output_schema"
+      }
+    }
+  ],
+  "summary": {
+    "total_tools": 1,
+    "clean": 0,
+    "low": 3,
+    "medium": 0,
+    "high": 0,
+    "critical": 0
+  }
+}

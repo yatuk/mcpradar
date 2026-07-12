@@ -1,0 +1,261 @@
+{
+  "name": "mcp-code-executor",
+  "target": "npx -y mcp-code-executor",
+  "version": "",
+  "scanned_at": "2026-07-12T13:12:17.970303+00:00",
+  "tools": [
+    {
+      "name": "execute_code",
+      "description": "Execute Python code in the venv environment. For short code snippets only. For longer code, use initialize_code_file and append_to_code_file instead.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Python code to execute"
+          },
+          "filename": {
+            "type": "string",
+            "description": "Optional: Name of the file to save the code (default: generated UUID)"
+          }
+        },
+        "required": [
+          "code"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "initialize_code_file",
+      "description": "Create a new Python file with initial content. Use this as the first step for longer code that may exceed token limits. Follow with append_to_code_file for additional code.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "Initial content to write to the file"
+          },
+          "filename": {
+            "type": "string",
+            "description": "Optional: Name of the file (default: generated UUID)"
+          }
+        },
+        "required": [
+          "content"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "append_to_code_file",
+      "description": "Append content to an existing Python code file. Use this to add more code to a file created with initialize_code_file, allowing you to build up larger code bases in parts.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "file_path": {
+            "type": "string",
+            "description": "Full path to the file"
+          },
+          "content": {
+            "type": "string",
+            "description": "Content to append to the file"
+          }
+        },
+        "required": [
+          "file_path",
+          "content"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "execute_code_file",
+      "description": "Execute an existing Python file. Use this as the final step after building up code with initialize_code_file and append_to_code_file.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "file_path": {
+            "type": "string",
+            "description": "Full path to the Python file to execute"
+          }
+        },
+        "required": [
+          "file_path"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "read_code_file",
+      "description": "Read the content of an existing Python code file. Use this to verify the current state of a file before appending more content or executing it.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "file_path": {
+            "type": "string",
+            "description": "Full path to the file to read"
+          }
+        },
+        "required": [
+          "file_path"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "print_env",
+      "description": "Print all environment variables.",
+      "input_schema": {
+        "type": "object",
+        "properties": {}
+      },
+      "output_schema": {}
+    }
+  ],
+  "findings": [
+    {
+      "rule_id": "R113",
+      "title": "Path traversal / directory traversal risk",
+      "description": "Path parameter 'filename' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22).",
+      "severity": "low",
+      "target": "execute_code",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "filename",
+        "missing_constraints": [
+          "pattern",
+          "format"
+        ]
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'code' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "execute_code",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "code",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'filename' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "execute_code",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "filename",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R113",
+      "title": "Path traversal / directory traversal risk",
+      "description": "Path parameter 'filename' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22).",
+      "severity": "low",
+      "target": "initialize_code_file",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "filename",
+        "missing_constraints": [
+          "pattern",
+          "format"
+        ]
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'content' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "initialize_code_file",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "content",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'filename' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "initialize_code_file",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "filename",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'file_path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "append_to_code_file",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "file_path",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'content' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "append_to_code_file",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "content",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'file_path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "execute_code_file",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "file_path",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'file_path' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "read_code_file",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "file_path",
+        "schema": "input_schema"
+      }
+    }
+  ],
+  "summary": {
+    "total_tools": 6,
+    "clean": 0,
+    "low": 10,
+    "medium": 0,
+    "high": 0,
+    "critical": 0
+  }
+}

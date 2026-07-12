@@ -1,0 +1,1038 @@
+{
+  "name": "yfinance-mcp",
+  "target": "uvx yfmcp",
+  "version": "",
+  "scanned_at": "2026-07-12T13:06:03.170466+00:00",
+  "tools": [
+    {
+      "name": "yfinance_get_ticker_info",
+      "description": "Retrieve comprehensive stock data including company information, financials, trading metrics and governance.\n\nReturns JSON object with fields including:\n- Company: symbol, longName, sector, industry, longBusinessSummary, website, city, country\n- Price: currentPrice, previousClose, open, dayHigh, dayLow, fiftyTwoWeekHigh, fiftyTwoWeekLow\n- Valuation: marketCap, enterpriseValue, trailingPE, forwardPE, priceToBook, pegRatio\n- Trading: volume, averageVolume, averageVolume10days, bid, ask, bidSize, askSize\n- Dividends: dividendRate, dividendYield, exDividendDate, payoutRatio\n- Financials: totalRevenue, revenueGrowth, earningsGrowth, profitMargins, operatingMargins\n- Performance: beta, fiftyDayAverage, twoHundredDayAverage, trailingEps, forwardEps\n\nNote: Available fields vary by security type. Timestamps are converted to readable dates.\n",
+      "input_schema": {
+        "properties": {
+          "symbol": {
+            "description": "Stock ticker symbol (e.g., 'AAPL', 'GOOGL', 'MSFT')",
+            "title": "Symbol",
+            "type": "string"
+          }
+        },
+        "required": [
+          "symbol"
+        ],
+        "title": "get_ticker_infoArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "get_ticker_infoOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "yfinance_get_ticker_news",
+      "description": "Fetch recent news articles and press releases for a specific stock.\n\nReturns JSON array where each news item has:\n- id: Unique article identifier\n- content: Object containing:\n    - title: Article headline\n    - summary: Brief article summary\n    - pubDate: Publication date (ISO 8601 format)\n    - provider: Object with displayName (e.g., \"Yahoo Finance\") and url\n    - canonicalUrl: Object with article url, site, region, lang\n    - thumbnail: Object with image URLs and resolutions\n    - contentType: Type of content (e.g., \"STORY\", \"VIDEO\")\n\nUse this to track company announcements, market sentiment, and breaking news.\n",
+      "input_schema": {
+        "properties": {
+          "symbol": {
+            "description": "Stock ticker symbol (e.g., 'AAPL', 'GOOGL', 'MSFT')",
+            "title": "Symbol",
+            "type": "string"
+          }
+        },
+        "required": [
+          "symbol"
+        ],
+        "title": "get_ticker_newsArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "get_ticker_newsOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "yfinance_search",
+      "description": "Search Yahoo Finance for stocks, ETFs, and news articles.\n\nReturns JSON with search results based on search_type:\n\n- 'quotes': Array of securities with:\n    - symbol: Ticker symbol\n    - shortname/longname: Company name\n    - quoteType: Security type (EQUITY, ETF, MUTUALFUND, etc.)\n    - exchange: Exchange code\n    - sector: Business sector\n    - industry: Industry classification\n    - score: Search relevance score\n\n- 'news': Array of articles with:\n    - uuid: Article identifier\n    - title: Headline\n    - publisher: News source\n    - link: Article URL\n    - providerPublishTime: Unix timestamp\n    - relatedTickers: Array of related symbols\n    - thumbnail: Image URLs\n\n- 'all': Object with both 'quotes' and 'news' arrays\n\nUse this to find ticker symbols, discover related securities, or search financial news.\n",
+      "input_schema": {
+        "properties": {
+          "query": {
+            "description": "Search query - company name, ticker symbol, or keywords",
+            "title": "Query",
+            "type": "string"
+          },
+          "search_type": {
+            "description": "Filter results: 'all' (quotes + news), 'quotes' (stocks/ETFs only), or 'news' (articles only)",
+            "enum": [
+              "all",
+              "quotes",
+              "news"
+            ],
+            "title": "Search Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "query",
+          "search_type"
+        ],
+        "title": "searchArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "searchOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "yfinance_screen",
+      "description": "Run a Yahoo Finance screener query.\n\nSupports predefined Yahoo screener keys and custom equity or fund query trees.\n",
+      "input_schema": {
+        "properties": {
+          "query": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
+              }
+            ],
+            "description": "Screener query. For query_type='predefined': string key like 'day_gainers'. For query_type='equity' or 'fund': query tree object with {operator, operands} nodes.",
+            "title": "Query"
+          },
+          "query_type": {
+            "default": "predefined",
+            "description": "Query mode: 'predefined', 'equity', or 'fund'.",
+            "enum": [
+              "predefined",
+              "equity",
+              "fund"
+            ],
+            "title": "Query Type",
+            "type": "string"
+          },
+          "offset": {
+            "anyOf": [
+              {
+                "minimum": 0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Result offset.",
+            "title": "Offset"
+          },
+          "size": {
+            "anyOf": [
+              {
+                "maximum": 250,
+                "minimum": 1,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Rows to return for custom queries. Yahoo maximum is 250.",
+            "title": "Size"
+          },
+          "count": {
+            "anyOf": [
+              {
+                "maximum": 250,
+                "minimum": 1,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Rows to return for predefined queries. Yahoo maximum is 250.",
+            "title": "Count"
+          },
+          "sort_field": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Sort field, for example 'percentchange'.",
+            "title": "Sort Field"
+          },
+          "sort_asc": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Sort ascending if true, descending if false.",
+            "title": "Sort Asc"
+          },
+          "user_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Optional Yahoo user id.",
+            "title": "User Id"
+          },
+          "user_id_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Optional Yahoo user id type, commonly 'guid'.",
+            "title": "User Id Type"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "title": "screenArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "screenOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "yfinance_screen_gappers",
+      "description": "Run a custom equity screener tuned for opening-session stock gappers.",
+      "input_schema": {
+        "properties": {
+          "min_percent_change": {
+            "default": 3.0,
+            "description": "Minimum percent change from prior close, for example 3.0 for +3%.",
+            "minimum": 0,
+            "title": "Min Percent Change",
+            "type": "number"
+          },
+          "min_price": {
+            "default": 5.0,
+            "description": "Minimum current intraday price.",
+            "minimum": 0,
+            "title": "Min Price",
+            "type": "number"
+          },
+          "min_volume": {
+            "default": 500000,
+            "description": "Minimum intraday trading volume.",
+            "minimum": 0,
+            "title": "Min Volume",
+            "type": "integer"
+          },
+          "min_market_cap": {
+            "default": 2000000000,
+            "description": "Minimum intraday market cap in USD.",
+            "minimum": 0,
+            "title": "Min Market Cap",
+            "type": "integer"
+          },
+          "region": {
+            "default": "us",
+            "description": "Yahoo screener region code, for example 'us'.",
+            "title": "Region",
+            "type": "string"
+          },
+          "size": {
+            "default": 50,
+            "description": "Rows to return. Yahoo maximum is 250.",
+            "maximum": 250,
+            "minimum": 1,
+            "title": "Size",
+            "type": "integer"
+          },
+          "offset": {
+            "default": 0,
+            "description": "Result offset for pagination.",
+            "minimum": 0,
+            "title": "Offset",
+            "type": "integer"
+          },
+          "sort_asc": {
+            "default": false,
+            "description": "Sort by percentchange ascending if true, descending if false.",
+            "title": "Sort Asc",
+            "type": "boolean"
+          }
+        },
+        "title": "screen_gappersArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "screen_gappersOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "yfinance_get_top",
+      "description": "Get top-ranked financial entities within a sector.\n\nThis unified tool provides access to various rankings:\n- ETFs and mutual funds focused on the sector\n- Largest companies by market capitalization\n- Fastest-growing companies by revenue/earnings\n- Best-performing stocks by price appreciation\n\nReturns JSON data with relevant metrics for each entity type.\n",
+      "input_schema": {
+        "properties": {
+          "sector": {
+            "description": "Market sector (e.g., 'Technology', 'Healthcare', 'Financial Services')",
+            "enum": [
+              "Basic Materials",
+              "Communication Services",
+              "Consumer Cyclical",
+              "Consumer Defensive",
+              "Energy",
+              "Financial Services",
+              "Healthcare",
+              "Industrials",
+              "Real Estate",
+              "Technology",
+              "Utilities"
+            ],
+            "title": "Sector",
+            "type": "string"
+          },
+          "top_type": {
+            "description": "Type of entities to retrieve: 'top_etfs' (sector ETFs), 'top_mutual_funds' (sector mutual funds), 'top_companies' (largest by market cap), 'top_growth_companies' (fastest revenue/earnings growth), 'top_performing_companies' (best stock price performance)",
+            "enum": [
+              "top_etfs",
+              "top_mutual_funds",
+              "top_companies",
+              "top_growth_companies",
+              "top_performing_companies"
+            ],
+            "title": "Top Type",
+            "type": "string"
+          },
+          "top_n": {
+            "default": 10,
+            "description": "Number of top entities to retrieve per category/industry",
+            "maximum": 100,
+            "minimum": 1,
+            "title": "Top N",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "sector",
+          "top_type"
+        ],
+        "title": "get_topArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "get_topOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "yfinance_get_price_history",
+      "description": "Fetch historical price data and optionally generate technical analysis charts.\n\nWhen chart_type is None, returns Markdown table with columns:\n- Date: Trading date (index)\n- Open: Opening price\n- High: Highest price\n- Low: Lowest price\n- Close: Closing price\n- Volume: Trading volume\n- Dividends: Dividend payments (if any)\n- Stock Splits: Split events (if any)\n\nWhen chart_type is specified, returns a chart image:\n- 'price_volume': Candlestick chart with volume bars\n- 'vwap': Price with Volume Weighted Average Price overlay\n- 'volume_profile': Volume distribution by price level\n\nSet prepost=True to include pre-market and post-market data when available.\n\nNote: Not all period/interval combinations are valid. Minute intervals (1m, 5m, etc.)\nonly work with short periods (1d, 5d).\n",
+      "input_schema": {
+        "properties": {
+          "symbol": {
+            "description": "Stock ticker symbol (e.g., 'AAPL', 'GOOGL', 'MSFT')",
+            "title": "Symbol",
+            "type": "string"
+          },
+          "period": {
+            "default": "1mo",
+            "description": "Time range: '1d'/'5d' (days), '1mo'/'3mo'/'6mo' (months), '1y'/'2y'/'5y'/'10y' (years), 'ytd' (year-to-date), 'max' (all available data)",
+            "enum": [
+              "1d",
+              "5d",
+              "1mo",
+              "3mo",
+              "6mo",
+              "1y",
+              "2y",
+              "5y",
+              "10y",
+              "ytd",
+              "max"
+            ],
+            "title": "Period",
+            "type": "string"
+          },
+          "interval": {
+            "default": "1d",
+            "description": "Data granularity: '1m'/'5m'/'15m'/'30m' (minutes), '1h' (hour), '1d'/'5d' (days), '1wk' (week), '1mo'/'3mo' (months). Short intervals require short periods (e.g., '1m' interval only works with '1d'/'5d' period)",
+            "enum": [
+              "1m",
+              "2m",
+              "5m",
+              "15m",
+              "30m",
+              "60m",
+              "90m",
+              "1h",
+              "1d",
+              "5d",
+              "1wk",
+              "1mo",
+              "3mo"
+            ],
+            "title": "Interval",
+            "type": "string"
+          },
+          "chart_type": {
+            "anyOf": [
+              {
+                "enum": [
+                  "price_volume",
+                  "vwap",
+                  "volume_profile"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Optional visualization: 'price_volume' (candlestick chart with volume bars), 'vwap' (Volume Weighted Average Price overlay), 'volume_profile' (volume distribution by price level). Omit for tabular data",
+            "title": "Chart Type"
+          },
+          "prepost": {
+            "default": false,
+            "description": "Include pre-market and post-market data when available",
+            "title": "Prepost",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "symbol"
+        ],
+        "title": "get_price_historyArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "$defs": {
+          "Annotations": {
+            "additionalProperties": true,
+            "properties": {
+              "audience": {
+                "anyOf": [
+                  {
+                    "items": {
+                      "enum": [
+                        "user",
+                        "assistant"
+                      ],
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Audience"
+              },
+              "priority": {
+                "anyOf": [
+                  {
+                    "maximum": 1.0,
+                    "minimum": 0.0,
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Priority"
+              }
+            },
+            "title": "Annotations",
+            "type": "object"
+          },
+          "ImageContent": {
+            "additionalProperties": true,
+            "description": "Image content for a message.",
+            "properties": {
+              "type": {
+                "const": "image",
+                "title": "Type",
+                "type": "string"
+              },
+              "data": {
+                "title": "Data",
+                "type": "string"
+              },
+              "mimeType": {
+                "title": "Mimetype",
+                "type": "string"
+              },
+              "annotations": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/Annotations"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null
+              },
+              "_meta": {
+                "anyOf": [
+                  {
+                    "additionalProperties": true,
+                    "type": "object"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Meta"
+              }
+            },
+            "required": [
+              "type",
+              "data",
+              "mimeType"
+            ],
+            "title": "ImageContent",
+            "type": "object"
+          }
+        },
+        "properties": {
+          "result": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "$ref": "#/$defs/ImageContent"
+              }
+            ],
+            "title": "Result"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "get_price_historyOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "yfinance_get_financials",
+      "description": "Fetch financial statements (income statement, balance sheet, and cash flow) with historical data.\n\nReturns JSON with income statement, balance sheet, and cash flow data across reporting periods.\n\nUse the data to analyze trends, calculate ratios, or compare periods.\n",
+      "input_schema": {
+        "properties": {
+          "symbol": {
+            "description": "Stock ticker symbol (e.g., 'AAPL', 'GOOGL', 'MSFT')",
+            "title": "Symbol",
+            "type": "string"
+          },
+          "frequency": {
+            "default": "annual",
+            "description": "Reporting frequency: 'annual' for yearly, 'quarterly' for quarterly, or 'ttm' for trailing twelve months",
+            "title": "Frequency",
+            "type": "string"
+          }
+        },
+        "required": [
+          "symbol"
+        ],
+        "title": "get_financialsArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "get_financialsOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "yfinance_get_option_chain",
+      "description": "Fetch option chain data (calls and puts) for a stock with available strike prices.\n\nReturns JSON with calls and/or puts data for each expiration date.\n\nJSON fields include:\n- contractSymbol: Option contract identifier\n- strike: Strike price\n- lastPrice: Last traded price\n- bid/ask: Bid and ask prices\n- volume: Trading volume\n- openInterest: Open interest\n- impliedVolatility: Implied volatility (IV)\n- inTheMoney: Whether option is ITM\n- contractSize: Contract size (REGULAR)\n- currency: Currency (USD)\n\nUse this to analyze options pricing, IV surfaces, and strike levels.\n",
+      "input_schema": {
+        "properties": {
+          "symbol": {
+            "description": "Stock ticker symbol (e.g., 'AAPL', 'GOOGL', 'MSFT')",
+            "title": "Symbol",
+            "type": "string"
+          },
+          "expiration_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Option expiration date in YYYY-MM-DD format. Use the 'yfinance_get_option_dates' tool to find available dates, or omit to fetch all available expiration dates.",
+            "title": "Expiration Date"
+          },
+          "option_type": {
+            "default": "all",
+            "description": "Which options to return: 'calls', 'puts', or 'all' (both calls and puts).",
+            "enum": [
+              "calls",
+              "puts",
+              "all"
+            ],
+            "title": "Option Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "symbol"
+        ],
+        "title": "get_option_chainArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "get_option_chainOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "yfinance_get_option_dates",
+      "description": "Fetch available option expiration dates for a stock.\n\nReturns JSON array of expiration dates in YYYY-MM-DD format.\n\nUse these dates with the 'yfinance_get_option_chain' tool to fetch\nthe options chain for a specific date.\n",
+      "input_schema": {
+        "properties": {
+          "symbol": {
+            "description": "Stock ticker symbol (e.g., 'AAPL', 'GOOGL', 'MSFT')",
+            "title": "Symbol",
+            "type": "string"
+          }
+        },
+        "required": [
+          "symbol"
+        ],
+        "title": "get_option_datesArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "get_option_datesOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "yfinance_get_holders",
+      "description": "Fetch major holders, institutional holders, mutual fund holders, and insider data.\n\nReturns JSON with:\n- major_holders: Aggregated breakdown including insider % held, institutional % held,\n  institutional % float held, and institution count.\n- institutional_holders: List of institutional investors with shares held, date reported,\n  value, and % change.\n- mutualfund_holders: List of mutual fund holders with same fields.\n- insider_transactions: Recent insider transactions including shares, value, transaction\n  type, and date.\n- insider_purchases: Summary of insider buy/sell activity over the last 6 months.\n- insider_roster: List of known insiders by name and position.\n\nUse this to analyze ownership concentration, insider activity, and institutional interest.\n",
+      "input_schema": {
+        "properties": {
+          "symbol": {
+            "description": "Stock ticker symbol (e.g., 'AAPL', 'GOOGL', 'MSFT')",
+            "title": "Symbol",
+            "type": "string"
+          },
+          "max_rows": {
+            "default": 10,
+            "description": "Maximum rows returned per holder section. Use 0 to return all rows.",
+            "title": "Max Rows",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "symbol"
+        ],
+        "title": "get_holdersArguments",
+        "type": "object"
+      },
+      "output_schema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "get_holdersOutput",
+        "type": "object"
+      }
+    }
+  ],
+  "findings": [
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'symbol' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "yfinance_get_ticker_info",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "symbol",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'result' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "yfinance_get_ticker_info",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "result",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'symbol' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "yfinance_get_ticker_news",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "symbol",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'result' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "yfinance_get_ticker_news",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "result",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'query' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "yfinance_search",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "query",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'result' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "yfinance_search",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "result",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'result' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "yfinance_screen",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "result",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R109",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
+      "severity": "low",
+      "target": "yfinance_screen_gappers",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "schema": "input_schema",
+        "issue": "no_required_fields"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'region' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "yfinance_screen_gappers",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "region",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'result' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "yfinance_screen_gappers",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "result",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'result' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "yfinance_get_top",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "result",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'symbol' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "yfinance_get_price_history",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "symbol",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'symbol' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "yfinance_get_financials",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "symbol",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'frequency' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "yfinance_get_financials",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "frequency",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'result' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "yfinance_get_financials",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "result",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'symbol' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "yfinance_get_option_chain",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "symbol",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'result' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "yfinance_get_option_chain",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "result",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'symbol' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "yfinance_get_option_dates",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "symbol",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'result' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "yfinance_get_option_dates",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "result",
+        "schema": "output_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'symbol' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "yfinance_get_holders",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "symbol",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'result' in output_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "yfinance_get_holders",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "result",
+        "schema": "output_schema"
+      }
+    }
+  ],
+  "summary": {
+    "total_tools": 11,
+    "clean": 0,
+    "low": 21,
+    "medium": 0,
+    "high": 0,
+    "critical": 0
+  }
+}

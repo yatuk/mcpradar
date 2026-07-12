@@ -1,0 +1,118 @@
+{
+  "name": "mcp-neo4j-cypher",
+  "target": "uvx mcp-neo4j-cypher",
+  "version": "",
+  "scanned_at": "2026-07-12T13:08:08.850817+00:00",
+  "tools": [
+    {
+      "name": "get_neo4j_schema",
+      "description": "Returns nodes, their properties (with types and indexed flags), and relationships\nusing APOC's schema inspection.\n\nYou should only provide a `sample_size` value if requested by the user, or tuning the retrieval performance.\n\nPerformance Notes:\n    - If `sample_size` is not provided, uses the server's default sample setting defined in the server configuration.\n    - If retrieving the schema times out, try lowering the sample size, e.g. `sample_size=100`.\n    - To sample the entire graph use `sample_size=-1`.",
+      "input_schema": {
+        "properties": {
+          "sample_size": {
+            "default": null,
+            "description": "The sample size used to infer the graph schema. Larger samples are slower, but more accurate. Smaller samples are faster, but might miss information.",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "read_neo4j_cypher",
+      "description": "Execute a read Cypher query on the neo4j database.",
+      "input_schema": {
+        "properties": {
+          "query": {
+            "description": "The Cypher query to execute.",
+            "type": "string"
+          },
+          "params": {
+            "additionalProperties": true,
+            "default": {},
+            "description": "The parameters to pass to the Cypher query.",
+            "type": "object"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "type": "object"
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "write_neo4j_cypher",
+      "description": "Execute a write Cypher query on the neo4j database.",
+      "input_schema": {
+        "properties": {
+          "query": {
+            "description": "The Cypher query to execute.",
+            "type": "string"
+          },
+          "params": {
+            "additionalProperties": true,
+            "default": {},
+            "description": "The parameters to pass to the Cypher query.",
+            "type": "object"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "type": "object"
+      },
+      "output_schema": {}
+    }
+  ],
+  "findings": [
+    {
+      "rule_id": "R109",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
+      "severity": "low",
+      "target": "get_neo4j_schema",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "schema": "input_schema",
+        "issue": "no_required_fields"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'query' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "read_neo4j_cypher",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "query",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'query' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "write_neo4j_cypher",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "query",
+        "schema": "input_schema"
+      }
+    }
+  ],
+  "summary": {
+    "total_tools": 3,
+    "clean": 0,
+    "low": 3,
+    "medium": 0,
+    "high": 0,
+    "critical": 0
+  }
+}

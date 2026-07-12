@@ -1,0 +1,161 @@
+{
+  "name": "mcp-hackernews",
+  "target": "uvx mcp-hn",
+  "version": "",
+  "scanned_at": "2026-07-12T13:15:24.595012+00:00",
+  "tools": [
+    {
+      "name": "get_stories",
+      "description": "Get stories from Hacker News. The options are `top`, `new`, `ask_hn`, `show_hn` for types of stories. This doesn't include the comments. Use `get_story_info` to get the comments.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "story_type": {
+            "type": "string",
+            "description": "Type of stories to get, one of: `top`, `new`, `ask_hn`, `show_hn`"
+          },
+          "num_stories": {
+            "type": "integer",
+            "description": "Number of stories to get"
+          }
+        }
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get_user_info",
+      "description": "Get user info from Hacker News, including the stories they've submitted",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "user_name": {
+            "type": "string",
+            "description": "Username of the user"
+          },
+          "num_stories": {
+            "type": "integer",
+            "description": "Number of stories to get, defaults to 10"
+          }
+        },
+        "required": [
+          "user_name"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "search_stories",
+      "description": "Search stories from Hacker News. It is generally recommended to use simpler queries to get a broader set of results (less than 5 words). Very targetted queries may not return any results.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search query"
+          },
+          "search_by_date": {
+            "type": "boolean",
+            "description": "Search by date, defaults to False. If this is False, then we search by relevance, then points, then number of comments."
+          },
+          "num_results": {
+            "type": "integer",
+            "description": "Number of results to get, defaults to 10"
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get_story_info",
+      "description": "Get detailed story info from Hacker News, including the comments",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "story_id": {
+            "type": "integer",
+            "description": "Story ID"
+          }
+        }
+      },
+      "output_schema": {}
+    }
+  ],
+  "findings": [
+    {
+      "rule_id": "R109",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
+      "severity": "low",
+      "target": "get_stories",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "schema": "input_schema",
+        "issue": "no_required_fields"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'story_type' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_stories",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "story_type",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'user_name' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_user_info",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "user_name",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'query' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "search_stories",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "query",
+        "schema": "input_schema"
+      }
+    },
+    {
+      "rule_id": "R109",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
+      "severity": "low",
+      "target": "get_story_info",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "schema": "input_schema",
+        "issue": "no_required_fields"
+      }
+    }
+  ],
+  "summary": {
+    "total_tools": 4,
+    "clean": 0,
+    "low": 5,
+    "medium": 0,
+    "high": 0,
+    "critical": 0
+  }
+}

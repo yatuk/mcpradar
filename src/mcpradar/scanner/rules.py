@@ -113,7 +113,18 @@ PROMPT_INJECTION_PATTERNS: list[tuple[re.Pattern[str], str, Severity]] = [
         Severity.CRITICAL,
     ),
     (
-        PI(r"(?:you\s+must|you\s+are\s+(?:now|required|compelled))", re.I),
+        # Bare "you must" / "you are now" are far too common in legitimate tool
+        # docs ("You must specify a format", "You must call resolve-id first"),
+        # so require injection context: a coercive verb after "you must", or an
+        # identity/mode reassignment after "you are now".
+        PI(
+            r"you\s+must\s+(?:ignore|disregard|forget|reveal|leak|exfiltrat|comply|"
+            r"obey|never|always|not\s+(?:tell|mention|reveal|follow))"
+            r"|you\s+are\s+now\s+(?:a\b|an\b|in\s+\w+\s+mode|going\s+to|allowed|able\s+to|"
+            r"free|unrestricted|jailbroken|dan\b)"
+            r"|you\s+are\s+(?:required|compelled)\s+to",
+            re.I,
+        ),
         "you must / you are now",
         Severity.HIGH,
     ),
@@ -474,12 +485,18 @@ class SecretExposureDetection(Rule):
                         matched=matched[:80],
                     )
                 )
-        # Entropy-only scan for unknown secrets
-        # Split text into space/newline-separated tokens
+        # Entropy-only scan for unknown secrets. A high-entropy token is only a
+        # credential candidate if it also *looks* like one: a single contiguous
+        # run of credential-charset characters (letters, digits, and the few
+        # symbols found in keys/tokens). Natural-language text — especially CJK,
+        # which has very high Shannon entropy — must be excluded, or every
+        # tool with a Chinese/Japanese/Korean description gets flagged as a
+        # secret (regression: mcp-shrimp-task-manager graded F).
+        credential_like = re.compile(r"^[A-Za-z0-9_\-+/=.]{16,}$")
         for source, text in _collect_all_texts(tool):
             for token in re.split(r"\s+", text):
                 token = token.strip("\"'`,;:{}[]()")
-                if len(token) < 16 or token in seen:
+                if token in seen or not credential_like.match(token):
                     continue
                 ent = _shannon_entropy(token)
                 if ent > 4.5:
@@ -726,12 +743,17 @@ class SchemaPoisoningDetection(Rule):
         for schema_name, schema in [("input_schema", tool.input_schema)]:
             if not schema or not isinstance(schema, dict):
                 continue
-            # additionalProperties: true
+            # additionalProperties: true — a schema-laxity signal (extra params
+            # are accepted), but many well-built servers set it by default, so
+            # it is MEDIUM, consistent with the other structural R109 signals,
+            # not HIGH (which graded flexible-schema servers like
+            # chrome-devtools-mcp an F on volume alone).
             if schema.get("additionalProperties") is True:
                 found.append(
                     self._finding(
                         tool.name,
-                        f"{schema_name}: additionalProperties: true; open to arbitrary injection",
+                        f"{schema_name}: additionalProperties: true; accepts arbitrary fields",
+                        severity=Severity.MEDIUM,
                         schema=schema_name,
                         issue="additional_properties_true",
                     )
