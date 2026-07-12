@@ -2217,6 +2217,16 @@ def leaderboard_generate(
                         2,
                     ),
                     "tools": tools,
+                    "tools_detail": [
+                        {
+                            "name": t.get("name", ""),
+                            "description": (t.get("description", "") or "")[:400],
+                            "input_schema": t.get("input_schema", {}),
+                            "output_schema": t.get("output_schema", {}),
+                        }
+                        for t in tool_objs
+                        if isinstance(t, dict)
+                    ],
                     "findings": meaningful,
                     "low_findings": low_findings,
                     "by_severity": {
