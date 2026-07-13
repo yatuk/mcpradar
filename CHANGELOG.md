@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
+- **S010 — token passthrough / confused deputy**: `scan-source` flags a handler
+  that forwards the *incoming* request's Authorization token into an *outbound*
+  HTTP call (`requests`/`httpx` with `headers={"Authorization": request.headers[...]}`,
+  including via an intermediate variable or an `f"Bearer {tok}"` wrapper). Token
+  passthrough is forbidden by the MCP spec and is the confused-deputy root cause.
+  Light intra-function taint keeps it precise: the server using its **own**
+  credential (`os.getenv(...)`) or reading a non-auth header is not flagged.
 - **S009 — network exposure (`0.0.0.0` bind / DNS rebinding)**: `scan-source`
   now flags a server binding to all interfaces (`host="0.0.0.0"`/`"::"`,
   `socket.bind(("0.0.0.0", …))`, `mcp.settings.host = "0.0.0.0"`). A local-only

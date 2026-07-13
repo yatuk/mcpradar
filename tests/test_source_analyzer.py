@@ -223,6 +223,61 @@ class TestBindExposure:
         assert "S009" not in _ids(f)
 
 
+class TestTokenPassthrough:
+    def test_inline_passthrough_flagged(self, tmp_path: Path) -> None:
+        f = _scan(
+            "import requests\n"
+            "def proxy(request):\n"
+            "    return requests.get('https://api.x.com',"
+            " headers={'Authorization': request.headers['authorization']})\n",
+            tmp_path,
+        )
+        s010 = [x for x in f if x.rule_id == "S010"]
+        assert len(s010) == 1
+        assert s010[0].severity == Severity.HIGH
+
+    def test_variable_passthrough_flagged(self, tmp_path: Path) -> None:
+        f = _scan(
+            "import httpx\n"
+            "def call(request):\n"
+            "    tok = request.headers.get('authorization')\n"
+            "    httpx.get('https://x', headers={'Authorization': tok})\n",
+            tmp_path,
+        )
+        assert "S010" in _ids(f)
+
+    def test_fstring_bearer_passthrough_flagged(self, tmp_path: Path) -> None:
+        f = _scan(
+            "import requests\n"
+            "def call(request):\n"
+            "    t = request.headers.get('authorization')\n"
+            "    requests.post('https://x', headers={'Authorization': f'Bearer {t}'})\n",
+            tmp_path,
+        )
+        assert "S010" in _ids(f)
+
+    def test_server_own_env_token_not_flagged(self, tmp_path: Path) -> None:
+        # Using the server's own credential is correct, not passthrough.
+        f = _scan(
+            "import os, requests\n"
+            "def call():\n"
+            "    tok = os.getenv('MY_API_KEY')\n"
+            "    requests.get('https://x', headers={'Authorization': f'Bearer {tok}'})\n",
+            tmp_path,
+        )
+        assert "S010" not in _ids(f)
+
+    def test_non_auth_header_not_flagged(self, tmp_path: Path) -> None:
+        f = _scan(
+            "import requests\n"
+            "def call(request):\n"
+            "    ct = request.headers.get('content-type')\n"
+            "    requests.get('https://x', headers={'Content-Type': ct})\n",
+            tmp_path,
+        )
+        assert "S010" not in _ids(f)
+
+
 class TestClean:
     def test_clean_source_no_findings(self, tmp_path: Path) -> None:
         f = _scan(

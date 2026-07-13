@@ -112,7 +112,7 @@ One command, no install, runs against any MCP server you can launch.
 - NVD CVE feed sync
 - AIVSS 0-10 scoring + A-F letter grades
 - Container sandbox (`--sandbox`) for isolating untrusted stdio servers during a scan
-- Source-code analysis (`mcpradar scan-source`): AST-based SSRF, unsafe deserialization, command/SQL injection, Description-Code Inconsistency, Trojan Source / bidi unicode, and `0.0.0.0` network exposure / DNS rebinding (S001-S009) — no server execution required
+- Source-code analysis (`mcpradar scan-source`): AST-based SSRF, unsafe deserialization, command/SQL injection, Description-Code Inconsistency, Trojan Source / bidi unicode, `0.0.0.0` network exposure / DNS rebinding, and token passthrough / confused deputy (S001-S010) — no server execution required
 - Config poisoning scan (`mcpradar scan-config`): inspects MCP/agent config files (`claude_desktop_config.json`, `.mcp.json`, `.cursor/mcp.json`, `.claude/settings.json`, …) for download-to-shell RCE, credential exfiltration, reverse shells, over-broad permissions (M001-M007), and typosquatted server packages (T001)
 - Dependency vulnerability scan (`mcpradar deps`): resolves a server's npm/pip manifests and checks every dependency against OSV.dev (GitHub Advisory / PyPA), with CVSS-derived severity (D001)
 - Public security leaderboard at https://yatuk.github.io/mcpradar

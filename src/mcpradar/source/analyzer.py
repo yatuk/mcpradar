@@ -13,6 +13,7 @@ schema rules (``R``) and cross-server rules (``C``):
         executes) — the flagship differentiator
 - S008  Trojan Source: bidirectional / invisible unicode (CVE-2021-42574)
 - S009  Network exposure: server binds to all interfaces (0.0.0.0 / DNS rebinding)
+- S010  Token passthrough / confused deputy (forwards the caller's auth token)
 """
 
 from __future__ import annotations
@@ -174,6 +175,41 @@ def _const(node: ast.AST | None) -> object:
     return node.value if isinstance(node, ast.Constant) else None
 
 
+# Header names that carry an auth credential (lowercased).
+_AUTH_HEADER_KEYS = {
+    "authorization",
+    "proxy-authorization",
+    "x-api-key",
+    "api-key",
+    "x-auth-token",
+    "bearer",
+    "token",
+}
+
+
+def _key_is_auth_or_unknown(key: ast.AST | None) -> bool:
+    """An auth-ish constant key, or a non-constant key we can't rule out."""
+    if isinstance(key, ast.Constant) and isinstance(key.value, str):
+        return key.value.lower() in _AUTH_HEADER_KEYS
+    return key is not None  # variable key — can't tell, treat as possible
+
+
+def _is_incoming_header_read(node: ast.AST | None) -> bool:
+    """True if the expression reads an auth value from an incoming request's
+    headers: ``req.headers["Authorization"]`` or ``req.headers.get("...")``."""
+    if isinstance(node, ast.Subscript) and isinstance(node.value, ast.Attribute):
+        return node.value.attr == "headers" and _key_is_auth_or_unknown(node.slice)
+    if (
+        isinstance(node, ast.Call)
+        and isinstance(node.func, ast.Attribute)
+        and node.func.attr == "get"
+        and isinstance(node.func.value, ast.Attribute)
+        and node.func.value.attr == "headers"
+    ):
+        return _key_is_auth_or_unknown(node.args[0] if node.args else None)
+    return False
+
+
 def _url_host_is_dynamic(node: ast.AST | None) -> bool:
     """True only when the request URL's *host* could be attacker-controlled.
 
@@ -292,7 +328,84 @@ class SourceAnalyzer:
         findings += self._scan_sinks(tree, rel)
         findings += self._scan_dci(tree, rel)
         findings += self._scan_bind_exposure(tree, rel)
+        findings += self._scan_token_passthrough(tree, rel)
         return findings
+
+    # ------------------------------------------------------------------
+    # S010: token passthrough / confused deputy
+    # ------------------------------------------------------------------
+    def _scan_token_passthrough(self, tree: ast.AST, loc: str) -> list[Finding]:
+        found: list[Finding] = []
+        for fn in ast.walk(tree):
+            if not isinstance(fn, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                continue
+            # Variables tainted with a value read from the *incoming* request's
+            # headers (one-level propagation). The server's own os.getenv token
+            # is deliberately NOT tainted.
+            tainted: set[str] = set()
+            for node in ast.walk(fn):
+                if isinstance(node, ast.Assign) and len(node.targets) == 1:
+                    tgt = node.targets[0]
+                    if isinstance(tgt, ast.Name) and (
+                        _is_incoming_header_read(node.value)
+                        or (isinstance(node.value, ast.Name) and node.value.id in tainted)
+                    ):
+                        tainted.add(tgt.id)
+
+            for node in ast.walk(fn):
+                if not isinstance(node, ast.Call):
+                    continue
+                name = _dotted_name(node.func)
+                if name not in _NETWORK_SINKS and not name.endswith(".urlopen"):
+                    continue
+                if self._forwards_incoming_auth(node, tainted):
+                    found.append(
+                        self._f(
+                            "S010",
+                            "Token passthrough / confused deputy",
+                            Severity.HIGH,
+                            loc,
+                            node.lineno,
+                            f"'{fn.name}' forwards the incoming request's Authorization "
+                            "token into an outbound request; token passthrough is "
+                            "forbidden by the MCP spec (confused deputy — validate the "
+                            "audience and use the server's own credential instead)",
+                            tool=fn.name,
+                        )
+                    )
+        return found
+
+    @staticmethod
+    def _forwards_incoming_auth(call: ast.Call, tainted: set[str]) -> bool:
+        """True if an outbound call sets an auth header from an incoming token."""
+
+        def value_is_incoming(v: ast.AST) -> bool:
+            if isinstance(v, ast.Name) and v.id in tainted:
+                return True
+            if _is_incoming_header_read(v):
+                return True
+            if isinstance(v, ast.JoinedStr):  # f"Bearer {token}"
+                return any(
+                    isinstance(p, ast.FormattedValue) and value_is_incoming(p.value)
+                    for p in v.values
+                )
+            if isinstance(v, ast.BinOp):  # "Bearer " + token
+                return value_is_incoming(v.left) or value_is_incoming(v.right)
+            return False
+
+        for kw in call.keywords:
+            if kw.arg == "headers" and isinstance(kw.value, ast.Dict):
+                for k, v in zip(kw.value.keys, kw.value.values, strict=False):
+                    if (
+                        isinstance(k, ast.Constant)
+                        and isinstance(k.value, str)
+                        and k.value.lower() in _AUTH_HEADER_KEYS
+                        and value_is_incoming(v)
+                    ):
+                        return True
+            if kw.arg == "auth" and value_is_incoming(kw.value):
+                return True
+        return False
 
     # ------------------------------------------------------------------
     # S009: network exposure — binding to 0.0.0.0 / all interfaces
