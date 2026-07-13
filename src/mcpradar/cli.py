@@ -205,7 +205,7 @@ def scan(
 @app.command(name="scan-source")
 def scan_source(
     path: str = typer.Argument(  # noqa: B008
-        help="Path to an MCP server .py file or a directory of source to analyze"
+        help="Local .py file/directory, or a package ref: npm:<pkg>, pip:<pkg>, or a GitHub URL"
     ),
     severity: str = typer.Option(  # noqa: B008
         "low", "--severity", "-s", help="Minimum severity: low/medium/high/critical"
@@ -227,10 +227,7 @@ def scan_source(
     from mcpradar.scanner.report import ScanReport, Severity
     from mcpradar.source import analyze_path
 
-    src = Path(path)
-    if not src.exists():
-        console.print(f"[red]Path not found: {path}[/]")
-        raise typer.Exit(code=1)
+    src = _resolve_source_arg(path)
 
     sev = Severity.from_str(severity)
     with console.status(f"[bold blue]{path}[/] analyzing source..."):
@@ -267,7 +264,7 @@ def scan_source(
 @app.command(name="scan-config")
 def scan_config(
     path: str = typer.Argument(  # noqa: B008
-        help="Path to an MCP/agent config file or a project directory to scan"
+        help="Local config file/directory, or a package ref: npm:<pkg>, pip:<pkg>, or a GitHub URL"
     ),
     severity: str = typer.Option(  # noqa: B008
         "low", "--severity", "-s", help="Minimum severity: low/medium/high/critical"
@@ -290,10 +287,7 @@ def scan_config(
     from mcpradar.output.console import console
     from mcpradar.scanner.report import ScanReport, Severity
 
-    src = Path(path)
-    if not src.exists():
-        console.print(f"[red]Path not found: {path}[/]")
-        raise typer.Exit(code=1)
+    src = _resolve_source_arg(path)
 
     sev = Severity.from_str(severity)
     with console.status(f"[bold blue]{path}[/] scanning config..."):
@@ -539,6 +533,30 @@ def diff(
     delta = differ.compare(report_a, report_b)
     _output_diff(delta, json_only, output)
     store.close()
+
+
+def _resolve_source_arg(path: str) -> Path:
+    """Resolve a scan target that may be a local path or a package reference
+    (``npm:<pkg>`` / ``pip:<pkg>`` / a GitHub URL). References are downloaded and
+    extracted — never installed — so no package lifecycle script runs.
+    """
+    from mcpradar.fetch import FetchError, is_ref, resolve_source
+    from mcpradar.output.console import console
+
+    if is_ref(path):
+        try:
+            with console.status(f"[bold blue]{path}[/] fetching package..."):
+                src = resolve_source(path)
+        except FetchError as exc:
+            console.print(f"[red]Fetch failed: {exc}[/]")
+            raise typer.Exit(code=2) from None
+        console.print(f"[dim]Fetched {path} -> {src}[/]")
+        return src
+    src = Path(path)
+    if not src.exists():
+        console.print(f"[red]Path not found: {path}[/]")
+        raise typer.Exit(code=1)
+    return src
 
 
 def _save_output(report: Any, output: Path, fmt: str) -> None:
@@ -839,7 +857,7 @@ def sbom(
 @app.command()
 def deps(
     path: str = typer.Argument(  # noqa: B008
-        help="Path to an MCP server's source (dir or manifest) to check dependencies for"
+        help="Local source/manifest, or a package ref: npm:<pkg>, pip:<pkg>, or a GitHub URL"
     ),
     severity: str = typer.Option(  # noqa: B008
         "low", "--severity", "-s", help="Minimum severity: low/medium/high/critical"
@@ -864,10 +882,7 @@ def deps(
     from mcpradar.scanner.report import ScanReport, Severity
     from mcpradar.supply import extract_dependencies, scan_dependencies
 
-    src = Path(path)
-    if not src.exists():
-        console.print(f"[red]Path not found: {path}[/]")
-        raise typer.Exit(code=1)
+    src = _resolve_source_arg(path)
 
     if list_only:
         found = extract_dependencies(src)

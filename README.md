@@ -118,7 +118,6 @@ One command, no install, runs against any MCP server you can launch.
 - Public security leaderboard at https://yatuk.github.io/mcpradar
 
 ### Planned (v1.1+)
-- **Package fetch:** Pull source from a GitHub URL / npm / pip package automatically before `scan-source` / `deps` (currently take a local path)
 - **Semgrep integration:** Complement the built-in AST rules with a Semgrep ruleset
 - **Typosquatting detection:** Levenshtein distance against known top packages
 - **Runtime proxy:** Transparent MCP traffic inspection
@@ -269,6 +268,10 @@ mcpradar scan-config ./my-project
 
 # Check a server's dependencies against OSV.dev
 mcpradar deps ./path/to/mcp_server_src
+
+# Fetch + scan a published package (npm / pip / GitHub) — no install, no scripts run
+mcpradar deps npm:@modelcontextprotocol/server-filesystem
+mcpradar scan-source pip:itu-mcp
 
 # Isolate an untrusted stdio server in a disposable container (egress locked)
 mcpradar scan "python ./suspicious_server.py" -t stdio --sandbox

@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- **Package fetch** — `scan-source`, `scan-config`, and `deps` now accept a
+  package reference in place of a local path: `npm:<pkg>`, `pip:<pkg>`, or a
+  GitHub URL / `gh:owner/repo`. The distribution is downloaded and extracted
+  from the registry (npm tarball / PyPI sdist) or shallow-cloned — never
+  *installed* — so no `postinstall` / `setup.py` lifecycle script runs, and an
+  untrusted package can be scanned safely. Archive extraction is path-traversal
+  safe. Makes `mcpradar deps npm:@modelcontextprotocol/server-filesystem` work
+  end to end. New module `src/mcpradar/fetch/`.
+
 ### Changed
 - **Capability-aware AIVSS scoring** — the leaderboard could not discriminate
   (51 A / 2 B / 2 C across 55 servers, avg 0.20/10); an arbitrary-shell-execution
