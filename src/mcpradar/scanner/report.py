@@ -76,6 +76,11 @@ class ScanReport:
     resources: list[ResourceInfo] = field(default_factory=list)
     probe_results: list[ProbeResult] = field(default_factory=list)
     findings: list[Finding] = field(default_factory=list)
+    # True when tool enumeration did not complete (connection/parse error or a
+    # per-tool rule exception). An incomplete scan must not be scored as a clean
+    # grade A — the leaderboard renders it as a separate "scan incomplete" state.
+    incomplete: bool = False
+    incomplete_reason: str = ""
     summary: dict[str, int] = field(
         default_factory=lambda: {
             "total_tools": 0,
@@ -99,6 +104,8 @@ class ScanReport:
             "target": self.target,
             "transport": self.transport,
             "scanned_at": self.scanned_at,
+            "incomplete": self.incomplete,
+            "incomplete_reason": self.incomplete_reason,
             "tools": [
                 {
                     "name": t.name,

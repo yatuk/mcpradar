@@ -108,6 +108,33 @@ def compute_aivss(findings: list[Finding], tool_count: int) -> float:
 # ---------------------------------------------------------------------------
 
 
+def compute_aivss_capability(findings: list[Finding], tools: list[object]) -> float:
+    """Capability-aware AIVSS: ``max(base, ((base + AARS) / 2) × ThM)``.
+
+    ``base`` is the severity-weighted MEDIUM+ finding load over the tool surface
+    (critical → floor 5.0, high → 3.0); ``AARS`` is the agentic capability blast
+    radius of the server's tools; ``ThM`` is the environmental multiplier. The
+    ``max`` ensures capability can only raise risk, never discount a real
+    finding. See docs/scoring-model.md.
+    """
+    from mcpradar.scoring.capability import compute_aars
+
+    sev = {"critical": 0, "high": 0, "medium": 0}
+    for f in findings:
+        if f.severity.value in sev:
+            sev[f.severity.value] += 1
+    weighted = sev["critical"] * 10 + sev["high"] * 7 + sev["medium"] * 4
+    base = weighted / max(len(tools), 3)
+    if sev["critical"]:
+        base = max(base, 5.0)
+    elif sev["high"]:
+        base = max(base, 3.0)
+
+    aars = compute_aars(tools)
+    thm = 1.15 if any(f.rule_id == "R111" for f in findings) else 1.0
+    return min(10.0, round(max(base, (base + aars) / 2 * thm), 1))
+
+
 def compute_grade(score: float) -> str:
     """Convert an AIVSS score to a letter grade (A--F).
 
@@ -173,12 +200,17 @@ def compute_confidence(findings: list[Finding]) -> float:
 # ---------------------------------------------------------------------------
 
 
-def score_server(findings: list[Finding], tool_count: int) -> dict[str, object]:
+def score_server(
+    findings: list[Finding], tool_count: int, tools: list[object] | None = None
+) -> dict[str, object]:
     """Compute all AIVSS scores for a server in a single call.
 
     Args:
         findings: List of scan findings.
         tool_count: Number of tools exposed by the MCP server.
+        tools: The tool objects, if available. When provided, the score is
+            capability-aware (a powerful server is non-A even with no finding);
+            otherwise it falls back to the finding-only score.
 
     Returns:
         Dictionary with keys:
@@ -189,7 +221,11 @@ def score_server(findings: list[Finding], tool_count: int) -> dict[str, object]:
           - total_findings: int      — total number of findings
           - tools: int               — tool count passed in
     """
-    aivss = compute_aivss(findings, tool_count)
+    aivss = (
+        compute_aivss_capability(findings, tools)
+        if tools is not None
+        else compute_aivss(findings, tool_count)
+    )
     grade = compute_grade(aivss)
     confidence = compute_confidence(findings)
 

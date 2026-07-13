@@ -744,16 +744,17 @@ class SchemaPoisoningDetection(Rule):
             if not schema or not isinstance(schema, dict):
                 continue
             # additionalProperties: true — a schema-laxity signal (extra params
-            # are accepted), but many well-built servers set it by default, so
-            # it is MEDIUM, consistent with the other structural R109 signals,
-            # not HIGH (which graded flexible-schema servers like
-            # chrome-devtools-mcp an F on volume alone).
+            # accepted). Kept LOW/informational: many well-built servers set it
+            # by default and it fires on *every* tool, so as a MEDIUM it drowned
+            # the real signal (a flexible-schema server like chrome-devtools-mcp
+            # got 29 uniform MEDIUMs). The capability layer now scores the actual
+            # blast radius; this stays a note.
             if schema.get("additionalProperties") is True:
                 found.append(
                     self._finding(
                         tool.name,
                         f"{schema_name}: additionalProperties: true; accepts arbitrary fields",
-                        severity=Severity.MEDIUM,
+                        severity=Severity.LOW,
                         schema=schema_name,
                         issue="additional_properties_true",
                     )

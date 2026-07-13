@@ -27,6 +27,12 @@ jobs:
 
       - run: uv sync
 
+      # Scoring calibration gate — a broken scoring model (positive control not
+      # F, benign not A, exec server graded A) must block publishing. Offline;
+      # runs before any scan/generate step, so a red gate stops the deploy.
+      - name: Scoring calibration gate
+        run: uv run pytest tests/test_scoring_calibration.py tests/test_capability.py tests/test_enumeration.py -q
+
       - name: Fetch MCP Registry
         run: python -m mcpradar registry fetch --limit 100
 

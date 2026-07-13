@@ -215,18 +215,38 @@ class Scanner:
     # ------------------------------------------------------------------
 
     async def _collect_all(self, session: ClientSession, report: ScanReport) -> None:
-        # -- tools --
-        with contextlib.suppress(Exception):
-            tools_result = await session.list_tools()
-            for tool in tools_result.tools:
-                ti = self._make_tool_info(tool)
-                report.tools.append(ti)
-                findings = self.rule_engine.analyze(ti)
-                for f in findings:
-                    report.add_finding(f)
-                if not findings:
-                    report.summary["clean"] += 1
-            report.summary["total_tools"] = len(tools_result.tools)
+        # -- tools -- (cursor-paginated; a partial failure marks the scan
+        # incomplete rather than silently under-counting to a clean grade A)
+        cursor: str | None = None
+        try:
+            for _page in range(50):  # hard cap: never loop forever on a bad cursor
+                tools_result = (
+                    await session.list_tools(cursor) if cursor else await session.list_tools()
+                )
+                for tool in tools_result.tools:
+                    ti = self._make_tool_info(tool)
+                    report.tools.append(ti)
+                    try:
+                        findings = self.rule_engine.analyze(ti)
+                    except Exception as exc:  # a rule bug must not drop the tool
+                        findings = []
+                        report.incomplete = True
+                        report.incomplete_reason = f"rule error on tool '{ti.name}': {exc}"[:200]
+                    for f in findings:
+                        report.add_finding(f)
+                    if not findings:
+                        report.summary["clean"] += 1
+                # Only a genuine non-empty string cursor continues pagination;
+                # anything else (None, a mock, "") ends it.
+                nxt = getattr(tools_result, "nextCursor", None)
+                if not isinstance(nxt, str) or not nxt or nxt == cursor:
+                    break
+                cursor = nxt
+        except Exception as exc:
+            report.incomplete = True
+            if not report.incomplete_reason:
+                report.incomplete_reason = f"tool enumeration failed: {exc}"[:200]
+        report.summary["total_tools"] = len(report.tools)
 
         # -- prompts --
         with contextlib.suppress(Exception):

@@ -80,7 +80,7 @@ One command, no install, runs against any MCP server you can launch.
 
 ### CI/CD and Output
 - **SARIF v2.1.0:** Drops into GitHub Security tab via one Action
-- **AIVSS 0-10 scoring:** AI Vulnerability Severity Score with CWE mapping
+- **Capability-aware AIVSS scoring:** `((base + AARS) / 2) × ThM` — findings *plus* an agentic capability layer, so an exec / fs-write / browser-control server is non-A even with no CVE (see [docs/scoring-model.md](docs/scoring-model.md))
 - **Snapshot diff:** SQLite-backed history with cosmetic / behavioral / security classification
 - **Fast:** Pure Python, no daemons, runs in CI under 5 seconds
 

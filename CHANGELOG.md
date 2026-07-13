@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- **Capability-aware AIVSS scoring** — the leaderboard could not discriminate
+  (51 A / 2 B / 2 C across 55 servers, avg 0.20/10); an arbitrary-shell-execution
+  server scored the same grade A as a calculator because a tool's *capability*
+  was not an input. Scoring now follows the OWASP AIVSS structure
+  `((base + AARS) / 2) × ThM`: the finding-derived base is combined with an
+  agentic-capability layer (AARS) tagging each tool's blast radius
+  (`code_exec`/`browser_control`/`db_write`/`fs_write`/`secret_access`/
+  `net_egress`/`fs_read`/`pure_compute`), floored so capability can only raise
+  risk. Same 55 servers → **15 A / 21 B / 18 C / 1 D**, avg 2.00; `mcp-shell`
+  → C, `mcp-server-filesystem` → B (schema + fs-write, not a CVE),
+  `mcp-server-calculator` → A. New module `src/mcpradar/scoring/capability.py`;
+  model in `docs/scoring-model.md`, root cause in `docs/rootcause.md`.
+- **R109 `additionalProperties: true` downgraded to LOW** — it fired on every
+  tool of flexible-schema servers, drowning real signal; the capability layer
+  now carries the actual risk.
+
+### Fixed
+- **Enumeration robustness** — `tools/list` is now cursor-paginated with a hard
+  page cap, per-tool rule errors are isolated (a crashing rule no longer drops
+  the remaining tools), and a partial/failed enumeration is marked `incomplete`
+  instead of being scored a clean grade A ("scan incomplete" on the site).
+- **Positive/negative controls** — `demo/malicious_server.py` is scanned into
+  the leaderboard (grade F) and a `benign_server` fixture (grade A, 0 critical)
+  anchors the clean end. A scoring-calibration regression gate enforces both and
+  runs before the leaderboard is published in CI.
+
 ### Added
 - **S010 — token passthrough / confused deputy**: `scan-source` flags a handler
   that forwards the *incoming* request's Authorization token into an *outbound*

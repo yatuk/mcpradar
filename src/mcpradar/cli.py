@@ -2292,7 +2292,9 @@ def leaderboard_generate(
             # Stub entries (registry placeholders with none of these) must NOT
             # be presented as a clean grade-A pass — they are simply pending.
             was_scanned = bool(tools or scan_id or data.get("scanned_at"))
-            if not was_scanned:
+            # A never-scanned stub is pending; a scan that failed to enumerate
+            # is 'incomplete' — neither may be scored as a clean grade A.
+            if not was_scanned or data.get("incomplete"):
                 rows.append(
                     {
                         "server": name,
@@ -2308,7 +2310,7 @@ def leaderboard_generate(
                         "tool_hash": "",
                         "last_scanned": "-",
                         "scanner_version": __version__,
-                        "status": "pending",
+                        "status": "incomplete" if data.get("incomplete") else "pending",
                     }
                 )
                 continue
@@ -2329,35 +2331,37 @@ def leaderboard_generate(
             meaningful = sev["critical"] + sev["high"] + sev["medium"]
             low_findings = sev["low"]
 
-            # Compute AIVSS score from MEDIUM+ severity counts. Score is the
-            # severity-weighted finding total spread over the tool surface
-            # (floored at 3 so a 1-2 tool server with a single finding is not
-            # catapulted to F). The earlier density multiplier double-counted
-            # findings-per-tool and turned uniform schema-laxity into grade F on
-            # otherwise-clean servers (e.g. chrome-devtools-mcp).
+            # AIVSS = ((base + AARS) / 2) × ThM, floored by the finding base so
+            # capability can only *raise* risk, never discount a real finding
+            # (OWASP AIVSS; see docs/scoring-model.md).
+            #
+            # base — CVSS-like, severity-weighted MEDIUM+ findings over the tool
+            #   surface (floored at 3 tools). Critical/high get a grade floor.
+            # AARS — the agentic capability blast radius (code exec, fs write,
+            #   browser control, …) so a powerful server is non-A even clean.
+            # ThM — environmental threat multiplier (insecure transport).
+            from mcpradar.scoring.capability import compute_aars, dominant_capability
+
             weighted = sev["critical"] * 10 + sev["high"] * 7 + sev["medium"] * 4
-            if meaningful == 0:
-                score, grade = 0.0, "A"
+            base = weighted / max(tools, 3)
+            if sev["critical"]:
+                base = max(base, 5.0)
+            elif sev["high"]:
+                base = max(base, 3.0)
+
+            aars = compute_aars(data.get("tools", []))
+            thm = 1.15 if any(f.get("rule_id") == "R111" for f in findings_list) else 1.0
+            score = min(10.0, round(max(base, (base + aars) / 2 * thm), 1))
+            if score <= 0.9:
+                grade = "A"
+            elif score <= 2.9:
+                grade = "B"
+            elif score <= 4.9:
+                grade = "C"
+            elif score <= 6.9:
+                grade = "D"
             else:
-                raw = weighted / max(tools, 3)
-                # A genuine critical/high should never round down to a clean
-                # grade: floor the score so any high is at least C, any critical
-                # at least D.
-                if sev["critical"]:
-                    raw = max(raw, 5.0)
-                elif sev["high"]:
-                    raw = max(raw, 3.0)
-                score = min(10.0, round(raw, 1))
-                if score <= 0.9:
-                    grade = "A"
-                elif score <= 2.9:
-                    grade = "B"
-                elif score <= 4.9:
-                    grade = "C"
-                elif score <= 6.9:
-                    grade = "D"
-                else:
-                    grade = "F"
+                grade = "F"
 
             # Detail lists the MEDIUM+ findings that drive the grade.
             findings_detail = [
@@ -2402,6 +2406,8 @@ def leaderboard_generate(
                     "version": data.get("version", ""),
                     "aivss_score": score,
                     "grade": grade,
+                    "aars": round(aars, 1),
+                    "capability": dominant_capability(data.get("tools", [])),
                     "confidence": 1.0
                     if meaningful == 0
                     else round(

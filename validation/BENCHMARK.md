@@ -1,6 +1,6 @@
 # MCPRadar Precision/Recall Benchmark
 
-**Generated:** 2026-07-12 16:18 UTC
+**Generated:** 2026-07-13 11:15 UTC
 **Scanner version:** 1.0.0-rc4
 
 ## Methodology
@@ -53,7 +53,7 @@ Metrics are computed on findings of **MEDIUM severity and above**. LOW findings 
 | appsecco/namespace-typosquatting | ✅ | 2 | 2 | 2 | (clean) | (none) |
 | appsecco/outdated-packages | ✅ | 5 | 8 | 8 | (clean) | (none) |
 | appsecco/secrets-pii | ✅ | 3 | 2 | 2 | (clean) | (none) |
-| demo/malicious_server.py | ✅ | 9 | 46 | 20 | R001, R101, R102, R103, R104, R105, R106, R107, R108, R109 | R001, R101, R102, R103, R104, R105, R106, R107, R108, R109 |
+| demo/malicious_server.py | ✅ | 9 | 46 | 21 | R001, R101, R102, R103, R104, R105, R106, R107, R108, R109 | R001, R101, R102, R103, R104, R105, R106, R107, R108, R109 |
 
 ## Test Corpus
 

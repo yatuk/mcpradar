@@ -1110,7 +1110,7 @@ footer a:hover { text-decoration: underline; }
       html += '<td>' +
         '<a class="server-link" href="' + detailHref + '" aria-label="View detail for ' + esc(name) + '">' + esc(name) + '</a>' +
         (ver ? ' <span style="font-size:10px;color:var(--dim)">v' + esc(ver) + '</span>' : '') +
-        (pending ? ' <span style="font-size:9px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:0 5px;color:var(--dim)">not scanned</span>' : '') +
+        (pending ? ' <span style="font-size:9px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:0 5px;color:var(--dim)">' + (s.status==="incomplete"?"scan incomplete":"not scanned") + '</span>' : '') +
         '<br><span style="font-size:10px;color:var(--dim)">' +
         '<a href="https://registry.modelcontextprotocol.io/v0.1/servers/' + encodeURIComponent(registryName) + '/versions/latest" target="_blank" rel="noopener" style="color:inherit">registry ↗</a>' +
         '</span></td>';
@@ -1186,7 +1186,7 @@ footer a:hover { text-decoration: underline; }
       html += '<div class="card-head">';
       html += '<div><a class="card-name" href="' + detailHref + '">' + esc(name) + '</a>';
       if (ver) html += ' <span style="font-size:11px;color:var(--dim)">v' + esc(ver) + '</span>';
-      if (pending) html += ' <span style="font-size:9px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:0 5px;color:var(--dim)">not scanned</span>';
+      if (pending) html += ' <span style="font-size:9px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:0 5px;color:var(--dim)">' + (s.status === "incomplete" ? "scan incomplete" : "not scanned") + '</span>';
       html += '</div>';
       html += '<span class="card-grade ' + g + '" aria-label="Grade ' + (pending ? 'Pending' : g) + '">' + (pending ? '-' : g) + '</span>';
       html += '</div>';
