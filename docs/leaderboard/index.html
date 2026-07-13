@@ -524,10 +524,15 @@ footer a:hover { text-decoration: underline; }
   <p><strong>AIVSS</strong> (AI Vulnerability Scoring System) rates MCP server security
   on a <strong>0–10</strong> scale where <strong>0 = safe</strong> and
   <strong>10 = critical</strong>.</p><br>
-  <p>The score combines <strong>severity-weighted findings</strong> (critical×10,
-  high×7, medium×4) divided by tool count, multiplied by a
-  <strong>density factor</strong> (capped between 0.5× and 2.0×). The result is
-  clamped to 10.0 and mapped to a letter grade:</p><br>
+  <p>Following OWASP <strong>AIVSS</strong>, the score is
+  <code>((base + AARS) / 2) × ThM</code>. <strong>base</strong> is the
+  severity-weighted MEDIUM+ findings (critical×10, high×7, medium×4) over the tool
+  count. <strong>AARS</strong> is the <em>agentic capability</em> layer — a
+  tool's blast radius (arbitrary execution, browser control, file writes, network
+  egress, secret access) — so a powerful server is non-A even with no CVE and a
+  clean schema. <strong>ThM</strong> is an environmental multiplier (insecure
+  transport). Capability can only raise the score, never discount a real finding.
+  The result is clamped to 10.0 and mapped to a letter grade:</p><br>
   <p><strong>Low-severity findings</strong> (informational lint, such as a string
   parameter with no length constraint) are listed on a server's detail page but
   do <strong>not</strong> affect its grade — otherwise nearly every server would
@@ -1024,12 +1029,39 @@ footer a:hover { text-decoration: underline; }
   /* ------------------------------------------------------------------
      Render: Scope Tags
      ------------------------------------------------------------------ */
+  // Human-readable blast-radius label for a server's dominant capability.
+  var CAP_LABELS = {
+    code_exec: ["arbitrary command / code execution", "var(--red)"],
+    browser_control: ["drives a real browser (SSRF, web actions)", "var(--red)"],
+    db_write: ["mutates a database", "var(--orange)"],
+    fs_write: ["writes / deletes files", "var(--orange)"],
+    secret_access: ["handles credentials / tokens", "var(--yellow)"],
+    net_egress: ["sends data to the network", "var(--yellow)"],
+    fs_read: ["reads files", "var(--dim)"],
+    pure_compute: ["no side effects", "var(--green)"]
+  };
+  function capabilityHtml(s) {
+    if (isPending(s) || !s.capability) return "";
+    var info = CAP_LABELS[s.capability] || [s.capability, "var(--dim)"];
+    var aars = s.aars != null ? " · AARS " + s.aars.toFixed(1) : "";
+    return '<div class="item">Capability: <b style="color:' + info[1] + '">' +
+      esc(s.capability) + '</b> <span style="color:var(--dim)">— ' + esc(info[0]) + aars + '</span></div>';
+  }
+
   function renderScopeTags(s) {
     var scopes = inferScope(s);
     if (s.api_free) {
       scopes.push("local-first");
     }
     var html = '<span class="scope-tags">';
+    // Surface a high-blast-radius capability so a clean-looking C/D server
+    // explains itself in the table without opening the detail page.
+    if (!isPending(s) && CAP_LABELS[s.capability] && s.capability !== "pure_compute" &&
+        s.capability !== "fs_read" && s.capability !== "net_egress") {
+      var info = CAP_LABELS[s.capability];
+      html += '<span class="scope-tag" title="' + esc(info[0]) + '" style="border-color:' +
+        info[1] + ';color:' + info[1] + '">' + esc(s.capability) + '</span>';
+    }
     for (var i = 0; i < scopes.length; i++) {
       var cls = scopes[i] === "local-first" ? 'scope-tag local-first' : 'scope-tag';
       html += '<span class="' + cls + '">' + esc(scopes[i]) + '</span>';
@@ -1381,6 +1413,7 @@ footer a:hover { text-decoration: underline; }
     html += '<div class="item">Confidence: <b>' + (s.confidence != null ? (s.confidence * 100).toFixed(0) + '%' : '-') + '</b></div>';
     html += '<div class="item">Tools: <b>' + (s.tools || 0) + '</b></div>';
     html += '<div class="item">Findings: <b>' + (s.findings || 0) + '</b></div>';
+    html += capabilityHtml(s);
     html += '<div class="item">Full hash: <b class="mono">' + esc(s.tool_hash || "-") + '</b></div>';
     html += '</div>';
 
