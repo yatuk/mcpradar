@@ -99,6 +99,10 @@ class ScanReport:
         self.summary[finding.severity.value] += 1
 
     def to_dict(self) -> dict[str, Any]:
+        # Local import: mcpradar.scoring imports Finding from this module, so a
+        # top-level import here would be circular.
+        from mcpradar.scoring.confidence import confidence_for
+
         return {
             "id": self.id,
             "target": self.target,
@@ -133,6 +137,7 @@ class ScanReport:
                     "location": f.location,
                     "evidence": f.evidence,
                     "detail": f.detail,
+                    "confidence": confidence_for(f.rule_id),
                 }
                 for f in self.findings
             ],

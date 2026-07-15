@@ -147,7 +147,7 @@ class TestComputeConfidence:
         findings = _findings(
             ("R001", "critical"),  # 0.9
             ("R109", "medium"),  # 0.7
-            ("R114", "low"),  # unknown → 0.5
+            ("R999", "low"),  # unknown → 0.5
         )
         conf = compute_confidence(findings)
         # (0.9 + 0.7 + 0.5) / 3 = 0.7
@@ -157,6 +157,44 @@ class TestComputeConfidence:
         findings = _findings(("R999", "low"))
         conf = compute_confidence(findings)
         assert conf == 0.5
+
+
+class TestPerFindingConfidence:
+    """confidence_for + per-finding confidence surfaced in serialization."""
+
+    def test_confidence_for_covers_all_families(self) -> None:
+        from mcpradar.scoring.confidence import confidence_for
+
+        # A representative rule from each family is mapped (not the default).
+        for rid in ("R001", "S003", "D001", "M001", "T001", "C001"):
+            assert confidence_for(rid) in (0.5, 0.7, 0.9)
+
+    def test_ast_precise_rules_are_high(self) -> None:
+        from mcpradar.scoring.confidence import confidence_for
+
+        assert confidence_for("S003") == 0.9  # eval/exec AST node
+        assert confidence_for("D001") == 0.9  # authoritative CVE lookup
+
+    def test_inferential_rules_are_low(self) -> None:
+        from mcpradar.scoring.confidence import confidence_for
+
+        assert confidence_for("S007") == 0.5  # description-code inconsistency
+        assert confidence_for("S011") == 0.5  # response injection
+
+    def test_unknown_rule_defaults_to_half(self) -> None:
+        from mcpradar.scoring.confidence import confidence_for
+
+        assert confidence_for("Z999") == 0.5
+
+    def test_report_to_dict_carries_confidence(self) -> None:
+        from mcpradar.scanner.report import ScanReport
+
+        report = ScanReport(target="t")
+        report.add_finding(_f("S003", "high"))
+        report.add_finding(_f("S007", "medium"))
+        findings = report.to_dict()["findings"]
+        assert findings[0]["confidence"] == 0.9
+        assert findings[1]["confidence"] == 0.5
 
     def test_all_confidence_values_in_range(self) -> None:
         # Every rule in the confidence map should have value in [0.0, 1.0]

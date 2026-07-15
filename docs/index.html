@@ -381,6 +381,13 @@ tbody tr:hover td { background: rgba(255,255,255,0.025); }
 .sev-tag.high { color: var(--orange); }
 .sev-tag.medium { color: var(--yellow); }
 .sev-tag.low { color: var(--dim); }
+.conf-tag {
+  font-size: 9px; font-weight: 700; padding: 1px 4px; border-radius: 3px;
+  border: 1px solid currentColor; opacity: 0.85; white-space: nowrap;
+}
+.conf-tag.conf-high { color: var(--green, #3fb950); }
+.conf-tag.conf-med { color: var(--yellow); }
+.conf-tag.conf-low { color: var(--dim); }
 .finding-desc { color: var(--dim); grid-column: 4; }
 
 .tool-mini-list { font-size: 12px; }
@@ -1446,6 +1453,11 @@ footer a:hover { text-decoration: underline; }
           html += '<div class="finding-row ' + sev + '">';
           html += '<span>' + esc(ff.rule_id || "-") + '</span>';
           html += '<span class="sev-tag ' + sev + '">' + esc(ff.severity || "") + '</span>';
+          if (ff.confidence != null) {
+            var cpct = Math.round(ff.confidence * 100);
+            var clab = ff.confidence >= 0.9 ? "high" : (ff.confidence >= 0.7 ? "med" : "low");
+            html += '<span class="conf-tag conf-' + clab + '" title="Detection confidence — how likely a true positive">' + cpct + '%</span>';
+          }
           html += '<span class="rule-cell">' + esc(ff.target || "-") + '</span>';
           html += '<span style="color:var(--text)">' + esc(ff.title || "-") + '</span>';
           if (ff.description) {

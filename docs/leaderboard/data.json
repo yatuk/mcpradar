@@ -125,7 +125,7 @@
     "grade": "A",
     "aars": 0.0,
     "capability": "pure_compute",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 9,
     "vulnerable_deps": 1,
     "tools_detail": [
@@ -426,7 +426,8 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "@modelcontextprotocol/sdk@1.8.0 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerabi"
+        "description": "@modelcontextprotocol/sdk@1.8.0 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerabi",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "ed8db337db25ab37",
@@ -442,7 +443,7 @@
     "grade": "A",
     "aars": 0.0,
     "capability": "pure_compute",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 2,
     "vulnerable_deps": 1,
     "tools_detail": [
@@ -576,7 +577,8 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "@modelcontextprotocol/sdk@1.0.1 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerabi"
+        "description": "@modelcontextprotocol/sdk@1.0.1 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerabi",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "6493a4115fd52980",
@@ -592,7 +594,7 @@
     "grade": "A",
     "aars": 0.0,
     "capability": "pure_compute",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 2,
     "vulnerable_deps": 1,
     "tools_detail": [
@@ -649,7 +651,8 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "@modelcontextprotocol/sdk@1.0.3 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerabi"
+        "description": "@modelcontextprotocol/sdk@1.0.3 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerabi",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "e05d859696fc0531",
@@ -665,7 +668,7 @@
     "grade": "A",
     "aars": 0.0,
     "capability": "pure_compute",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 1,
     "vulnerable_deps": 1,
     "tools_detail": [
@@ -717,7 +720,8 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "@modelcontextprotocol/sdk@1.9.0 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerabi"
+        "description": "@modelcontextprotocol/sdk@1.9.0 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerabi",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "faad75a511044025",
@@ -733,7 +737,7 @@
     "grade": "A",
     "aars": 0.0,
     "capability": "pure_compute",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 12,
     "vulnerable_deps": 2,
     "tools_detail": [
@@ -1091,13 +1095,15 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "click@8.1.7 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132"
+        "description": "click@8.1.7 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "pydantic-settings@2.12.0 (PyPI) is affected by CVE-2026-58203: pydantic-settings: NestedSecretsSettingsSource follows sy"
+        "description": "pydantic-settings@2.12.0 (PyPI) is affected by CVE-2026-58203: pydantic-settings: NestedSecretsSettingsSource follows sy",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "a886c3366c5a8831",
@@ -1113,7 +1119,7 @@
     "grade": "A",
     "aars": 0.0,
     "capability": "pure_compute",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 2,
     "vulnerable_deps": 2,
     "tools_detail": [
@@ -1175,13 +1181,15 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "click@8.1.7 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132"
+        "description": "click@8.1.7 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "pydantic-settings@2.12.0 (PyPI) is affected by CVE-2026-58203: pydantic-settings: NestedSecretsSettingsSource follows sy"
+        "description": "pydantic-settings@2.12.0 (PyPI) is affected by CVE-2026-58203: pydantic-settings: NestedSecretsSettingsSource follows sy",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "8e9f1e6cfff18235",
@@ -1971,7 +1979,7 @@
     "grade": "B",
     "aars": 2.0,
     "capability": "net_egress",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 5,
     "vulnerable_deps": 1,
     "tools_detail": [
@@ -2319,7 +2327,8 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "axios@1.6.7 (npm) is affected by CVE-2026-44494: axios Vulnerable to Full Man-in-the-Middle via Prototype Pollution Gadg"
+        "description": "axios@1.6.7 (npm) is affected by CVE-2026-44494: axios Vulnerable to Full Man-in-the-Middle via Prototype Pollution Gadg",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "ef01aa97f11827ba",
@@ -2335,7 +2344,7 @@
     "grade": "B",
     "aars": 2.0,
     "capability": "net_egress",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 2,
     "vulnerable_deps": 2,
     "tools_detail": [
@@ -2399,7 +2408,8 @@
         "rule_id": "D001",
         "severity": "critical",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "vitest@4.0.13 (npm) is affected by CVE-2026-47429: When Vitest UI server is listening, arbitrary file can be read and ex"
+        "description": "vitest@4.0.13 (npm) is affected by CVE-2026-47429: When Vitest UI server is listening, arbitrary file can be read and ex",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "0c303bbade84b2bb",
@@ -2415,7 +2425,7 @@
     "grade": "B",
     "aars": 2.0,
     "capability": "net_egress",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 2,
     "vulnerable_deps": 1,
     "tools_detail": [
@@ -2471,7 +2481,8 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "@modelcontextprotocol/sdk@1.7.0 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerabi"
+        "description": "@modelcontextprotocol/sdk@1.7.0 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerabi",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "c48d92bab689ab02",
@@ -2487,7 +2498,7 @@
     "grade": "B",
     "aars": 2.0,
     "capability": "net_egress",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 1,
     "vulnerable_deps": 1,
     "tools_detail": [
@@ -2523,7 +2534,8 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "mcp@1.8.0 (PyPI) is affected by CVE-2025-53366: MCP Python SDK vulnerability in the FastMCP Server causes validation err"
+        "description": "mcp@1.8.0 (PyPI) is affected by CVE-2025-53366: MCP Python SDK vulnerability in the FastMCP Server causes validation err",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "ddb208e84c8fc0a9",
@@ -2539,7 +2551,7 @@
     "grade": "B",
     "aars": 2.0,
     "capability": "net_egress",
-    "confidence": 0.8,
+    "confidence": 0.9,
     "tools": 22,
     "vulnerable_deps": 3,
     "tools_detail": [
@@ -4145,25 +4157,29 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "fastmcp@2.3.0 (PyPI) is affected by CVE-2025-69196: FastMCP OAuth Proxy token reuse across MCP servers"
+        "description": "fastmcp@2.3.0 (PyPI) is affected by CVE-2025-69196: FastMCP OAuth Proxy token reuse across MCP servers",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "requests@2.31.0 (PyPI) is affected by CVE-2024-47081: Requests vulnerable to .netrc credentials leak via malicious URLs"
+        "description": "requests@2.31.0 (PyPI) is affected by CVE-2024-47081: Requests vulnerable to .netrc credentials leak via malicious URLs",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "python-dotenv@1.0.0 (PyPI) is affected by CVE-2026-28684: python-dotenv: Symlink following in set_key allows arbitrary f"
+        "description": "python-dotenv@1.0.0 (PyPI) is affected by CVE-2026-28684: python-dotenv: Symlink following in set_key allows arbitrary f",
+        "confidence": 0.9
       },
       {
         "rule_id": "S002",
         "severity": "medium",
         "title": "Outbound request to a non-constant URL (SSRF risk)",
-        "description": "requests.get(...) called with a dynamic URL; validate against an allowlist"
+        "description": "requests.get(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "9aecc2f1033e0b0c",
@@ -4179,7 +4195,7 @@
     "grade": "B",
     "aars": 2.0,
     "capability": "net_egress",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 2,
     "vulnerable_deps": 3,
     "tools_detail": [
@@ -4249,19 +4265,22 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "@modelcontextprotocol/sdk@1.12.1 (npm) is affected by CVE-2026-25536: @modelcontextprotocol/sdk has cross-client data le"
+        "description": "@modelcontextprotocol/sdk@1.12.1 (npm) is affected by CVE-2026-25536: @modelcontextprotocol/sdk has cross-client data le",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "axios@1.13.6 (npm) is affected by CVE-2026-44494: axios Vulnerable to Full Man-in-the-Middle via Prototype Pollution Gad"
+        "description": "axios@1.13.6 (npm) is affected by CVE-2026-44494: axios Vulnerable to Full Man-in-the-Middle via Prototype Pollution Gad",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "mcp-handler@1.0.4 (npm) is affected by GHSA-w2fm-25vw-vh7f: mcp-handler has a tool response leak across concurrent clien"
+        "description": "mcp-handler@1.0.4 (npm) is affected by GHSA-w2fm-25vw-vh7f: mcp-handler has a tool response leak across concurrent clien",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "dde94629ddb9926d",
@@ -4277,7 +4296,7 @@
     "grade": "B",
     "aars": 2.0,
     "capability": "net_egress",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 3,
     "vulnerable_deps": 2,
     "tools_detail": [
@@ -4375,13 +4394,15 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "@modelcontextprotocol/sdk@1.9.0 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerabi"
+        "description": "@modelcontextprotocol/sdk@1.9.0 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerabi",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "critical",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "vitest@3.1.1 (npm) is affected by CVE-2026-47429: When Vitest UI server is listening, arbitrary file can be read and exe"
+        "description": "vitest@3.1.1 (npm) is affected by CVE-2026-47429: When Vitest UI server is listening, arbitrary file can be read and exe",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "e020a18efe14ab26",
@@ -4397,7 +4418,7 @@
     "grade": "B",
     "aars": 0.0,
     "capability": "pure_compute",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 27,
     "vulnerable_deps": 3,
     "tools_detail": [
@@ -7057,19 +7078,22 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "@modelcontextprotocol/sdk@1.25.2 (npm) is affected by CVE-2026-25536: @modelcontextprotocol/sdk has cross-client data le"
+        "description": "@modelcontextprotocol/sdk@1.25.2 (npm) is affected by CVE-2026-25536: @modelcontextprotocol/sdk has cross-client data le",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "axios@1.11.0 (npm) is affected by CVE-2026-44494: axios Vulnerable to Full Man-in-the-Middle via Prototype Pollution Gad"
+        "description": "axios@1.11.0 (npm) is affected by CVE-2026-44494: axios Vulnerable to Full Man-in-the-Middle via Prototype Pollution Gad",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "critical",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "vitest@3.1.4 (npm) is affected by CVE-2026-47429: When Vitest UI server is listening, arbitrary file can be read and exe"
+        "description": "vitest@3.1.4 (npm) is affected by CVE-2026-47429: When Vitest UI server is listening, arbitrary file can be read and exe",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "1869cbc90d76d306",
@@ -7724,7 +7748,7 @@
     "grade": "B",
     "aars": 4.0,
     "capability": "fs_write",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 3,
     "vulnerable_deps": 1,
     "tools_detail": [
@@ -7793,7 +7817,8 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "@modelcontextprotocol/sdk@0.6.0 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerabi"
+        "description": "@modelcontextprotocol/sdk@0.6.0 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerabi",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "3713cb6bb708bffa",
@@ -7809,7 +7834,7 @@
     "grade": "B",
     "aars": 0.0,
     "capability": "pure_compute",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 8,
     "vulnerable_deps": 6,
     "tools_detail": [
@@ -8026,37 +8051,43 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "click@8.1.8 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132"
+        "description": "click@8.1.8 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "critical",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "h11@0.14.0 (PyPI) is affected by CVE-2025-43859: h11 accepts some malformed Chunked-Encoding bodies"
+        "description": "h11@0.14.0 (PyPI) is affected by CVE-2025-43859: h11 accepts some malformed Chunked-Encoding bodies",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "idna@3.10 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted"
+        "description": "idna@3.10 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "mcp@1.2.1 (PyPI) is affected by CVE-2025-53366: MCP Python SDK vulnerability in the FastMCP Server causes validation err"
+        "description": "mcp@1.2.1 (PyPI) is affected by CVE-2025-53366: MCP Python SDK vulnerability in the FastMCP Server causes validation err",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "python-dotenv@1.0.1 (PyPI) is affected by CVE-2026-28684: python-dotenv: Symlink following in set_key allows arbitrary f"
+        "description": "python-dotenv@1.0.1 (PyPI) is affected by CVE-2026-28684: python-dotenv: Symlink following in set_key allows arbitrary f",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "starlette@0.45.3 (PyPI) is affected by CVE-2025-54121: Starlette has possible denial-of-service vector when parsing larg"
+        "description": "starlette@0.45.3 (PyPI) is affected by CVE-2025-54121: Starlette has possible denial-of-service vector when parsing larg",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "a48d1e156b2aa1ea",
@@ -8072,7 +8103,7 @@
     "grade": "B",
     "aars": 0.0,
     "capability": "pure_compute",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 4,
     "vulnerable_deps": 6,
     "tools_detail": [
@@ -8166,37 +8197,43 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "click@8.1.7 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132"
+        "description": "click@8.1.7 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "critical",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "h11@0.14.0 (PyPI) is affected by CVE-2025-43859: h11 accepts some malformed Chunked-Encoding bodies"
+        "description": "h11@0.14.0 (PyPI) is affected by CVE-2025-43859: h11 accepts some malformed Chunked-Encoding bodies",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "idna@3.10 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted"
+        "description": "idna@3.10 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "mcp@1.0.0 (PyPI) is affected by CVE-2025-53366: MCP Python SDK vulnerability in the FastMCP Server causes validation err"
+        "description": "mcp@1.0.0 (PyPI) is affected by CVE-2025-53366: MCP Python SDK vulnerability in the FastMCP Server causes validation err",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "python-dotenv@1.0.1 (PyPI) is affected by CVE-2026-28684: python-dotenv: Symlink following in set_key allows arbitrary f"
+        "description": "python-dotenv@1.0.1 (PyPI) is affected by CVE-2026-28684: python-dotenv: Symlink following in set_key allows arbitrary f",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "starlette@0.41.3 (PyPI) is affected by CVE-2025-54121: Starlette has possible denial-of-service vector when parsing larg"
+        "description": "starlette@0.41.3 (PyPI) is affected by CVE-2025-54121: Starlette has possible denial-of-service vector when parsing larg",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "64e2995053ca761c",
@@ -8212,7 +8249,7 @@
     "grade": "B",
     "aars": 0.0,
     "capability": "pure_compute",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 1,
     "vulnerable_deps": 6,
     "tools_detail": [
@@ -8246,37 +8283,43 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "click@8.1.8 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132"
+        "description": "click@8.1.8 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "critical",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "h11@0.14.0 (PyPI) is affected by CVE-2025-43859: h11 accepts some malformed Chunked-Encoding bodies"
+        "description": "h11@0.14.0 (PyPI) is affected by CVE-2025-43859: h11 accepts some malformed Chunked-Encoding bodies",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "idna@3.10 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted"
+        "description": "idna@3.10 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "mcp@1.2.0 (PyPI) is affected by CVE-2025-53366: MCP Python SDK vulnerability in the FastMCP Server causes validation err"
+        "description": "mcp@1.2.0 (PyPI) is affected by CVE-2025-53366: MCP Python SDK vulnerability in the FastMCP Server causes validation err",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "python-dotenv@1.0.1 (PyPI) is affected by CVE-2026-28684: python-dotenv: Symlink following in set_key allows arbitrary f"
+        "description": "python-dotenv@1.0.1 (PyPI) is affected by CVE-2026-28684: python-dotenv: Symlink following in set_key allows arbitrary f",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "starlette@0.45.2 (PyPI) is affected by CVE-2025-54121: Starlette has possible denial-of-service vector when parsing larg"
+        "description": "starlette@0.45.2 (PyPI) is affected by CVE-2025-54121: Starlette has possible denial-of-service vector when parsing larg",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "2419329067823cab",
@@ -8292,7 +8335,7 @@
     "grade": "B",
     "aars": 0.0,
     "capability": "pure_compute",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 1,
     "vulnerable_deps": 6,
     "tools_detail": [
@@ -8340,37 +8383,43 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "click@8.1.8 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132"
+        "description": "click@8.1.8 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "critical",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "h11@0.14.0 (PyPI) is affected by CVE-2025-43859: h11 accepts some malformed Chunked-Encoding bodies"
+        "description": "h11@0.14.0 (PyPI) is affected by CVE-2025-43859: h11 accepts some malformed Chunked-Encoding bodies",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "idna@3.10 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted"
+        "description": "idna@3.10 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "mcp@1.4.1 (PyPI) is affected by CVE-2025-53366: MCP Python SDK vulnerability in the FastMCP Server causes validation err"
+        "description": "mcp@1.4.1 (PyPI) is affected by CVE-2025-53366: MCP Python SDK vulnerability in the FastMCP Server causes validation err",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "python-dotenv@1.0.1 (PyPI) is affected by CVE-2026-28684: python-dotenv: Symlink following in set_key allows arbitrary f"
+        "description": "python-dotenv@1.0.1 (PyPI) is affected by CVE-2026-28684: python-dotenv: Symlink following in set_key allows arbitrary f",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "starlette@0.46.1 (PyPI) is affected by CVE-2025-54121: Starlette has possible denial-of-service vector when parsing larg"
+        "description": "starlette@0.46.1 (PyPI) is affected by CVE-2025-54121: Starlette has possible denial-of-service vector when parsing larg",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "edca249d8d1f9a5b",
@@ -8386,7 +8435,7 @@
     "grade": "B",
     "aars": 2.0,
     "capability": "net_egress",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 1,
     "vulnerable_deps": 6,
     "tools_detail": [
@@ -8421,37 +8470,43 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "click@8.1.7 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132"
+        "description": "click@8.1.7 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "critical",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "h11@0.14.0 (PyPI) is affected by CVE-2025-43859: h11 accepts some malformed Chunked-Encoding bodies"
+        "description": "h11@0.14.0 (PyPI) is affected by CVE-2025-43859: h11 accepts some malformed Chunked-Encoding bodies",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "idna@3.10 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted"
+        "description": "idna@3.10 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "mcp@1.0.0 (PyPI) is affected by CVE-2025-53366: MCP Python SDK vulnerability in the FastMCP Server causes validation err"
+        "description": "mcp@1.0.0 (PyPI) is affected by CVE-2025-53366: MCP Python SDK vulnerability in the FastMCP Server causes validation err",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "pytest@8.3.3 (PyPI) is affected by CVE-2025-71176: pytest has vulnerable tmpdir handling"
+        "description": "pytest@8.3.3 (PyPI) is affected by CVE-2025-71176: pytest has vulnerable tmpdir handling",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "starlette@0.41.3 (PyPI) is affected by CVE-2025-54121: Starlette has possible denial-of-service vector when parsing larg"
+        "description": "starlette@0.41.3 (PyPI) is affected by CVE-2025-54121: Starlette has possible denial-of-service vector when parsing larg",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "0b54b9ef236e8415",
@@ -8467,7 +8522,7 @@
     "grade": "B",
     "aars": 4.0,
     "capability": "fs_write",
-    "confidence": 0.8,
+    "confidence": 0.9,
     "tools": 14,
     "vulnerable_deps": 1,
     "tools_detail": [
@@ -9027,37 +9082,43 @@
         "rule_id": "R113",
         "severity": "medium",
         "title": "Path traversal / directory traversal risk",
-        "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
+        "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22).",
+        "confidence": 0.9
       },
       {
         "rule_id": "R113",
         "severity": "medium",
         "title": "Path traversal / directory traversal risk",
-        "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
+        "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22).",
+        "confidence": 0.9
       },
       {
         "rule_id": "R113",
         "severity": "medium",
         "title": "Path traversal / directory traversal risk",
-        "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
+        "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22).",
+        "confidence": 0.9
       },
       {
         "rule_id": "R113",
         "severity": "medium",
         "title": "Path traversal / directory traversal risk",
-        "description": "Path parameter 'source' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
+        "description": "Path parameter 'source' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22).",
+        "confidence": 0.9
       },
       {
         "rule_id": "R113",
         "severity": "medium",
         "title": "Path traversal / directory traversal risk",
-        "description": "Path parameter 'destination' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
+        "description": "Path parameter 'destination' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22).",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "minimatch@10.0.1 (npm) is affected by CVE-2026-27904: minimatch ReDoS: nested *() extglobs generate catastrophically bac"
+        "description": "minimatch@10.0.1 (npm) is affected by CVE-2026-27904: minimatch ReDoS: nested *() extglobs generate catastrophically bac",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "44c35cf6ac86e32d",
@@ -9073,7 +9134,7 @@
     "grade": "B",
     "aars": 2.0,
     "capability": "net_egress",
-    "confidence": 0.8,
+    "confidence": 0.9,
     "tools": 1,
     "vulnerable_deps": 2,
     "tools_detail": [
@@ -9134,25 +9195,29 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "click@8.1.7 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132"
+        "description": "click@8.1.7 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "soupsieve@2.6 (PyPI) is affected by CVE-2026-49476: Soup Sieve has Memory Exhaustion via Large Comma-Separated Selector "
+        "description": "soupsieve@2.6 (PyPI) is affected by CVE-2026-49476: Soup Sieve has Memory Exhaustion via Large Comma-Separated Selector ",
+        "confidence": 0.9
       },
       {
         "rule_id": "S002",
         "severity": "medium",
         "title": "Outbound request to a non-constant URL (SSRF risk)",
-        "description": "client.get(...) called with a dynamic URL; validate against an allowlist"
+        "description": "client.get(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.9
       },
       {
         "rule_id": "S002",
         "severity": "medium",
         "title": "Outbound request to a non-constant URL (SSRF risk)",
-        "description": "client.get(...) called with a dynamic URL; validate against an allowlist"
+        "description": "client.get(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "e7d3799ecc09f5cb",
@@ -9168,7 +9233,7 @@
     "grade": "B",
     "aars": 5.5,
     "capability": "db_write",
-    "confidence": 0.8,
+    "confidence": 0.9,
     "tools": 26,
     "vulnerable_deps": 1,
     "tools_detail": [
@@ -10256,13 +10321,15 @@
         "rule_id": "R113",
         "severity": "medium",
         "title": "Path traversal / directory traversal risk",
-        "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
+        "description": "Path parameter 'path' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22).",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "@modelcontextprotocol/sdk@1.0.1 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerabi"
+        "description": "@modelcontextprotocol/sdk@1.0.1 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerabi",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "50715a0a2f55c601",
@@ -10577,7 +10644,7 @@
     "grade": "B",
     "aars": 4.5,
     "capability": "fs_write",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 1,
     "vulnerable_deps": 9,
     "tools_detail": [
@@ -10667,49 +10734,57 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "click@8.1.7 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132"
+        "description": "click@8.1.7 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "critical",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "h11@0.14.0 (PyPI) is affected by CVE-2025-43859: h11 accepts some malformed Chunked-Encoding bodies"
+        "description": "h11@0.14.0 (PyPI) is affected by CVE-2025-43859: h11 accepts some malformed Chunked-Encoding bodies",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "idna@3.10 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted"
+        "description": "idna@3.10 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "mcp@1.13.1 (PyPI) is affected by CVE-2025-66416: Model Context Protocol (MCP) Python SDK does not enable DNS rebinding p"
+        "description": "mcp@1.13.1 (PyPI) is affected by CVE-2025-66416: Model Context Protocol (MCP) Python SDK does not enable DNS rebinding p",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "pytest@8.4.1 (PyPI) is affected by CVE-2025-71176: pytest has vulnerable tmpdir handling"
+        "description": "pytest@8.4.1 (PyPI) is affected by CVE-2025-71176: pytest has vulnerable tmpdir handling",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "python-dotenv@1.1.1 (PyPI) is affected by CVE-2026-28684: python-dotenv: Symlink following in set_key allows arbitrary f"
+        "description": "python-dotenv@1.1.1 (PyPI) is affected by CVE-2026-28684: python-dotenv: Symlink following in set_key allows arbitrary f",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "python-multipart@0.0.20 (PyPI) is affected by CVE-2026-53539: python-multipart: Quadratic-time querystring parsing with "
+        "description": "python-multipart@0.0.20 (PyPI) is affected by CVE-2026-53539: python-multipart: Quadratic-time querystring parsing with ",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "starlette@0.41.3 (PyPI) is affected by CVE-2025-54121: Starlette has possible denial-of-service vector when parsing larg"
+        "description": "starlette@0.41.3 (PyPI) is affected by CVE-2025-54121: Starlette has possible denial-of-service vector when parsing larg",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "7942daf03a875e04",
@@ -10725,7 +10800,7 @@
     "grade": "C",
     "aars": 6.0,
     "capability": "browser_control",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 14,
     "vulnerable_deps": 2,
     "tools_detail": [
@@ -10874,13 +10949,15 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "@modelcontextprotocol/sdk@1.4.1 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerabi"
+        "description": "@modelcontextprotocol/sdk@1.4.1 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerabi",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "ws@8.18.0 (npm) is affected by CVE-2026-45736: ws: Uninitialized memory disclosure; fixed in 8.20.1"
+        "description": "ws@8.18.0 (npm) is affected by CVE-2026-45736: ws: Uninitialized memory disclosure; fixed in 8.20.1",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "565952765ea33304",
@@ -10896,7 +10973,7 @@
     "grade": "C",
     "aars": 0.0,
     "capability": "pure_compute",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 10,
     "vulnerable_deps": 12,
     "tools_detail": [
@@ -11119,73 +11196,85 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "click@8.2.0 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132"
+        "description": "click@8.2.0 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "filelock@3.18.0 (PyPI) is affected by CVE-2026-22701: filelock Time-of-Check-Time-of-Use (TOCTOU) Symlink Vulnerability "
+        "description": "filelock@3.18.0 (PyPI) is affected by CVE-2026-22701: filelock Time-of-Check-Time-of-Use (TOCTOU) Symlink Vulnerability ",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "idna@3.10 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted"
+        "description": "idna@3.10 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "mcp@1.9.0 (PyPI) is affected by CVE-2025-53366: MCP Python SDK vulnerability in the FastMCP Server causes validation err"
+        "description": "mcp@1.9.0 (PyPI) is affected by CVE-2025-53366: MCP Python SDK vulnerability in the FastMCP Server causes validation err",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "pytest@8.3.5 (PyPI) is affected by CVE-2025-71176: pytest has vulnerable tmpdir handling"
+        "description": "pytest@8.3.5 (PyPI) is affected by CVE-2025-71176: pytest has vulnerable tmpdir handling",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "python-dotenv@1.1.0 (PyPI) is affected by CVE-2026-28684: python-dotenv: Symlink following in set_key allows arbitrary f"
+        "description": "python-dotenv@1.1.0 (PyPI) is affected by CVE-2026-28684: python-dotenv: Symlink following in set_key allows arbitrary f",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "python-multipart@0.0.20 (PyPI) is affected by CVE-2026-53539: python-multipart: Quadratic-time querystring parsing with "
+        "description": "python-multipart@0.0.20 (PyPI) is affected by CVE-2026-53539: python-multipart: Quadratic-time querystring parsing with ",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "requests@2.32.3 (PyPI) is affected by CVE-2024-47081: Requests vulnerable to .netrc credentials leak via malicious URLs"
+        "description": "requests@2.32.3 (PyPI) is affected by CVE-2024-47081: Requests vulnerable to .netrc credentials leak via malicious URLs",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "soupsieve@2.7 (PyPI) is affected by CVE-2026-49476: Soup Sieve has Memory Exhaustion via Large Comma-Separated Selector "
+        "description": "soupsieve@2.7 (PyPI) is affected by CVE-2026-49476: Soup Sieve has Memory Exhaustion via Large Comma-Separated Selector ",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "starlette@0.46.2 (PyPI) is affected by CVE-2025-54121: Starlette has possible denial-of-service vector when parsing larg"
+        "description": "starlette@0.46.2 (PyPI) is affected by CVE-2025-54121: Starlette has possible denial-of-service vector when parsing larg",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "urllib3@2.4.0 (PyPI) is affected by CVE-2025-66471: urllib3 streaming API improperly handles highly compressed data"
+        "description": "urllib3@2.4.0 (PyPI) is affected by CVE-2025-66471: urllib3 streaming API improperly handles highly compressed data",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "virtualenv@20.31.2 (PyPI) is affected by CVE-2026-22702: virtualenv Has TOCTOU Vulnerabilities in Directory Creation"
+        "description": "virtualenv@20.31.2 (PyPI) is affected by CVE-2026-22702: virtualenv Has TOCTOU Vulnerabilities in Directory Creation",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "00142d1aae518490",
@@ -11201,7 +11290,7 @@
     "grade": "C",
     "aars": 0.0,
     "capability": "pure_compute",
-    "confidence": 0.9,
+    "confidence": 0.7,
     "tools": 3,
     "vulnerable_deps": 1,
     "tools_detail": [
@@ -11349,13 +11438,15 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "fastmcp@2.10.5 (PyPI) is affected by CVE-2025-69196: FastMCP OAuth Proxy token reuse across MCP servers"
+        "description": "fastmcp@2.10.5 (PyPI) is affected by CVE-2025-69196: FastMCP OAuth Proxy token reuse across MCP servers",
+        "confidence": 0.9
       },
       {
         "rule_id": "S007",
         "severity": "high",
         "title": "Description-Code Inconsistency (read-only tool with side effects)",
-        "description": "Tool 'read_pdf_to_file' presents as read-only but its handler writes to the filesystem"
+        "description": "Tool 'read_pdf_to_file' presents as read-only but its handler writes to the filesystem",
+        "confidence": 0.5
       }
     ],
     "tool_hash": "720340f95db71adc",
@@ -11371,7 +11462,7 @@
     "grade": "C",
     "aars": 0.0,
     "capability": "pure_compute",
-    "confidence": 0.9,
+    "confidence": 0.8,
     "tools": 2,
     "vulnerable_deps": 1,
     "tools_detail": [
@@ -11451,13 +11542,15 @@
         "rule_id": "R108",
         "severity": "high",
         "title": "Supply chain risk indicator",
-        "description": "Supply chain risk: 'npx execution'"
+        "description": "Supply chain risk: 'npx execution'",
+        "confidence": 0.7
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "@modelcontextprotocol/sdk@1.0.1 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerabi"
+        "description": "@modelcontextprotocol/sdk@1.0.1 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerabi",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "3833814589108074",
@@ -13130,7 +13223,7 @@
     "grade": "C",
     "aars": 6.0,
     "capability": "db_write",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 24,
     "vulnerable_deps": 5,
     "tools_detail": [
@@ -19486,31 +19579,36 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "@modelcontextprotocol/sdk@1.25.1 (npm) is affected by CVE-2026-25536: @modelcontextprotocol/sdk has cross-client data le"
+        "description": "@modelcontextprotocol/sdk@1.25.1 (npm) is affected by CVE-2026-25536: @modelcontextprotocol/sdk has cross-client data le",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "axios@1.8.4 (npm) is affected by CVE-2026-44494: axios Vulnerable to Full Man-in-the-Middle via Prototype Pollution Gadg"
+        "description": "axios@1.8.4 (npm) is affected by CVE-2026-44494: axios Vulnerable to Full Man-in-the-Middle via Prototype Pollution Gadg",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "critical",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "form-data@4.0.1 (npm) is affected by CVE-2025-7783: form-data uses unsafe random function in form-data for choosing boun"
+        "description": "form-data@4.0.1 (npm) is affected by CVE-2025-7783: form-data uses unsafe random function in form-data for choosing boun",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "multer@1.4.5-lts.1 (npm) is affected by CVE-2025-47935: Multer vulnerable to Denial of Service via memory leaks from unc"
+        "description": "multer@1.4.5-lts.1 (npm) is affected by CVE-2025-47935: Multer vulnerable to Denial of Service via memory leaks from unc",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "critical",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "vitest@4.0.18 (npm) is affected by CVE-2026-47429: When Vitest UI server is listening, arbitrary file can be read and ex"
+        "description": "vitest@4.0.18 (npm) is affected by CVE-2026-47429: When Vitest UI server is listening, arbitrary file can be read and ex",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "fb89a6a995abd1dc",
@@ -19526,7 +19624,7 @@
     "grade": "C",
     "aars": 6.5,
     "capability": "browser_control",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 12,
     "vulnerable_deps": 2,
     "tools_detail": [
@@ -19770,13 +19868,15 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "@modelcontextprotocol/sdk@1.8.0 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerabi"
+        "description": "@modelcontextprotocol/sdk@1.8.0 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerabi",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "ws@8.18.1 (npm) is affected by CVE-2026-45736: ws: Uninitialized memory disclosure; fixed in 8.20.1"
+        "description": "ws@8.18.1 (npm) is affected by CVE-2026-45736: ws: Uninitialized memory disclosure; fixed in 8.20.1",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "e2c04b8f3bbd2861",
@@ -19792,7 +19892,7 @@
     "grade": "C",
     "aars": 5.0,
     "capability": "db_write",
-    "confidence": 0.8,
+    "confidence": 0.7,
     "tools": 1,
     "vulnerable_deps": 1,
     "tools_detail": [
@@ -19823,13 +19923,15 @@
         "rule_id": "R105",
         "severity": "medium",
         "title": "Permission scope mismatch",
-        "description": "Tool name is in 'read-only' scope but description mentions 'write/exec' operations"
+        "description": "Tool name is in 'read-only' scope but description mentions 'write/exec' operations",
+        "confidence": 0.5
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "@modelcontextprotocol/sdk@1.0.1 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerabi"
+        "description": "@modelcontextprotocol/sdk@1.0.1 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerabi",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "a8b771920b8319e4",
@@ -19845,7 +19947,7 @@
     "grade": "C",
     "aars": 2.0,
     "capability": "net_egress",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 1,
     "vulnerable_deps": 14,
     "tools_detail": [
@@ -19900,79 +20002,92 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "click@8.2.1 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132"
+        "description": "click@8.2.1 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "filelock@3.18.0 (PyPI) is affected by CVE-2026-22701: filelock Time-of-Check-Time-of-Use (TOCTOU) Symlink Vulnerability "
+        "description": "filelock@3.18.0 (PyPI) is affected by CVE-2026-22701: filelock Time-of-Check-Time-of-Use (TOCTOU) Symlink Vulnerability ",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "idna@3.10 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted"
+        "description": "idna@3.10 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "mcp@1.9.3 (PyPI) is affected by CVE-2025-53366: MCP Python SDK vulnerability in the FastMCP Server causes validation err"
+        "description": "mcp@1.9.3 (PyPI) is affected by CVE-2025-53366: MCP Python SDK vulnerability in the FastMCP Server causes validation err",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "pytest@8.4.0 (PyPI) is affected by CVE-2025-71176: pytest has vulnerable tmpdir handling"
+        "description": "pytest@8.4.0 (PyPI) is affected by CVE-2025-71176: pytest has vulnerable tmpdir handling",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "python-dotenv@1.1.0 (PyPI) is affected by CVE-2026-28684: python-dotenv: Symlink following in set_key allows arbitrary f"
+        "description": "python-dotenv@1.1.0 (PyPI) is affected by CVE-2026-28684: python-dotenv: Symlink following in set_key allows arbitrary f",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "python-multipart@0.0.20 (PyPI) is affected by CVE-2026-53539: python-multipart: Quadratic-time querystring parsing with "
+        "description": "python-multipart@0.0.20 (PyPI) is affected by CVE-2026-53539: python-multipart: Quadratic-time querystring parsing with ",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "requests@2.32.4 (PyPI) is affected by CVE-2026-25645: Requests has Insecure Temp File Reuse in its extract_zipped_paths("
+        "description": "requests@2.32.4 (PyPI) is affected by CVE-2026-25645: Requests has Insecure Temp File Reuse in its extract_zipped_paths(",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "soupsieve@2.7 (PyPI) is affected by CVE-2026-49476: Soup Sieve has Memory Exhaustion via Large Comma-Separated Selector "
+        "description": "soupsieve@2.7 (PyPI) is affected by CVE-2026-49476: Soup Sieve has Memory Exhaustion via Large Comma-Separated Selector ",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "starlette@0.47.0 (PyPI) is affected by CVE-2025-54121: Starlette has possible denial-of-service vector when parsing larg"
+        "description": "starlette@0.47.0 (PyPI) is affected by CVE-2025-54121: Starlette has possible denial-of-service vector when parsing larg",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "urllib3@2.4.0 (PyPI) is affected by CVE-2025-66471: urllib3 streaming API improperly handles highly compressed data"
+        "description": "urllib3@2.4.0 (PyPI) is affected by CVE-2025-66471: urllib3 streaming API improperly handles highly compressed data",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "uv@0.7.12 (PyPI) is affected by GHSA-4gg8-gxpx-9rph: uv is vulnerable to arbitrary file write through entry point names;"
+        "description": "uv@0.7.12 (PyPI) is affected by GHSA-4gg8-gxpx-9rph: uv is vulnerable to arbitrary file write through entry point names;",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "virtualenv@20.31.2 (PyPI) is affected by CVE-2026-22702: virtualenv Has TOCTOU Vulnerabilities in Directory Creation"
+        "description": "virtualenv@20.31.2 (PyPI) is affected by CVE-2026-22702: virtualenv Has TOCTOU Vulnerabilities in Directory Creation",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "ecc707c586dd2a2d",
@@ -20870,7 +20985,7 @@
     "grade": "C",
     "aars": 5.5,
     "capability": "db_write",
-    "confidence": 0.8,
+    "confidence": 0.89,
     "tools": 10,
     "vulnerable_deps": 16,
     "tools_detail": [
@@ -21101,103 +21216,120 @@
         "rule_id": "R108",
         "severity": "medium",
         "title": "Supply chain risk indicator",
-        "description": "Supply chain risk: 'pip install'"
+        "description": "Supply chain risk: 'pip install'",
+        "confidence": 0.7
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "black@26.1.0 (PyPI) is affected by CVE-2026-32274: Black: Arbitrary file writes from unsanitized user input in cache fil"
+        "description": "black@26.1.0 (PyPI) is affected by CVE-2026-32274: Black: Arbitrary file writes from unsanitized user input in cache fil",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "click@8.3.1 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132"
+        "description": "click@8.3.1 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "cryptography@46.0.3 (PyPI) is affected by GHSA-537c-gmf6-5ccf: Vulnerable OpenSSL included in cryptography wheels"
+        "description": "cryptography@46.0.3 (PyPI) is affected by GHSA-537c-gmf6-5ccf: Vulnerable OpenSSL included in cryptography wheels",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "idna@3.11 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted"
+        "description": "idna@3.11 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "pydantic-settings@2.12.0 (PyPI) is affected by CVE-2026-58203: pydantic-settings: NestedSecretsSettingsSource follows sy"
+        "description": "pydantic-settings@2.12.0 (PyPI) is affected by CVE-2026-58203: pydantic-settings: NestedSecretsSettingsSource follows sy",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "pyjwt@2.10.1 (PyPI) is affected by CVE-2026-32597: PyJWT accepts unknown `crit` header extensions"
+        "description": "pyjwt@2.10.1 (PyPI) is affected by CVE-2026-32597: PyJWT accepts unknown `crit` header extensions",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "pytest@9.0.2 (PyPI) is affected by CVE-2025-71176: pytest has vulnerable tmpdir handling"
+        "description": "pytest@9.0.2 (PyPI) is affected by CVE-2025-71176: pytest has vulnerable tmpdir handling",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "python-dotenv@1.2.1 (PyPI) is affected by CVE-2026-28684: python-dotenv: Symlink following in set_key allows arbitrary f"
+        "description": "python-dotenv@1.2.1 (PyPI) is affected by CVE-2026-28684: python-dotenv: Symlink following in set_key allows arbitrary f",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "python-multipart@0.0.22 (PyPI) is affected by CVE-2026-53539: python-multipart: Quadratic-time querystring parsing with "
+        "description": "python-multipart@0.0.22 (PyPI) is affected by CVE-2026-53539: python-multipart: Quadratic-time querystring parsing with ",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "requests@2.32.5 (PyPI) is affected by CVE-2026-25645: Requests has Insecure Temp File Reuse in its extract_zipped_paths("
+        "description": "requests@2.32.5 (PyPI) is affected by CVE-2026-25645: Requests has Insecure Temp File Reuse in its extract_zipped_paths(",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "starlette@0.52.1 (PyPI) is affected by CVE-2026-54283: Starlette: request.form() limits silently ignored for application"
+        "description": "starlette@0.52.1 (PyPI) is affected by CVE-2026-54283: Starlette: request.form() limits silently ignored for application",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "transformers@5.1.0 (PyPI) is affected by CVE-2026-4372: HuggingFace transformers vulnerable to remote code execution"
+        "description": "transformers@5.1.0 (PyPI) is affected by CVE-2026-4372: HuggingFace transformers vulnerable to remote code execution",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "urllib3@2.6.3 (PyPI) is affected by CVE-2026-44432: urllib3: Decompression-bomb safeguards bypassed in parts of the stre"
+        "description": "urllib3@2.6.3 (PyPI) is affected by CVE-2026-44432: urllib3: Decompression-bomb safeguards bypassed in parts of the stre",
+        "confidence": 0.9
       },
       {
         "rule_id": "S002",
         "severity": "medium",
         "title": "Outbound request to a non-constant URL (SSRF risk)",
-        "description": "client.get(...) called with a dynamic URL; validate against an allowlist"
+        "description": "client.get(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.9
       },
       {
         "rule_id": "S002",
         "severity": "medium",
         "title": "Outbound request to a non-constant URL (SSRF risk)",
-        "description": "httpx.get(...) called with a dynamic URL; validate against an allowlist"
+        "description": "httpx.get(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.9
       },
       {
         "rule_id": "S002",
         "severity": "medium",
         "title": "Outbound request to a non-constant URL (SSRF risk)",
-        "description": "client.get(...) called with a dynamic URL; validate against an allowlist"
+        "description": "client.get(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "0408f0d691105dad",
@@ -21213,7 +21345,7 @@
     "grade": "C",
     "aars": 8.0,
     "capability": "code_exec",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 6,
     "vulnerable_deps": 2,
     "tools_detail": [
@@ -21338,13 +21470,15 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "@modelcontextprotocol/sdk@0.6.0 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerabi"
+        "description": "@modelcontextprotocol/sdk@0.6.0 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerabi",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "mcp-framework@0.1.12 (npm) is affected by CVE-2026-39313: MCP-Framework: Unbounded memory allocation in readRequestBody "
+        "description": "mcp-framework@0.1.12 (npm) is affected by CVE-2026-39313: MCP-Framework: Unbounded memory allocation in readRequestBody ",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "cc87e2fc3b49133e",
@@ -21360,7 +21494,7 @@
     "grade": "C",
     "aars": 8.0,
     "capability": "code_exec",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 1,
     "vulnerable_deps": 1,
     "tools_detail": [
@@ -21391,7 +21525,8 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "@modelcontextprotocol/sdk@0.6.0 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerabi"
+        "description": "@modelcontextprotocol/sdk@0.6.0 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerabi",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "aeaf9a308c3a65df",
@@ -21407,7 +21542,7 @@
     "grade": "C",
     "aars": 9.0,
     "capability": "code_exec",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 7,
     "vulnerable_deps": 1,
     "tools_detail": [
@@ -21578,7 +21713,8 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "@modelcontextprotocol/sdk@1.0.1 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerabi"
+        "description": "@modelcontextprotocol/sdk@1.0.1 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerabi",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "10da201c43361eb8",
@@ -21594,7 +21730,7 @@
     "grade": "C",
     "aars": 9.0,
     "capability": "code_exec",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 6,
     "vulnerable_deps": 7,
     "tools_detail": [
@@ -21706,37 +21842,43 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "click@8.1.8 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132"
+        "description": "click@8.1.8 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "critical",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "h11@0.14.0 (PyPI) is affected by CVE-2025-43859: h11 accepts some malformed Chunked-Encoding bodies"
+        "description": "h11@0.14.0 (PyPI) is affected by CVE-2025-43859: h11 accepts some malformed Chunked-Encoding bodies",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "idna@3.10 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted"
+        "description": "idna@3.10 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "mcp@1.6.0 (PyPI) is affected by CVE-2025-53366: MCP Python SDK vulnerability in the FastMCP Server causes validation err"
+        "description": "mcp@1.6.0 (PyPI) is affected by CVE-2025-53366: MCP Python SDK vulnerability in the FastMCP Server causes validation err",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "python-dotenv@1.1.0 (PyPI) is affected by CVE-2026-28684: python-dotenv: Symlink following in set_key allows arbitrary f"
+        "description": "python-dotenv@1.1.0 (PyPI) is affected by CVE-2026-28684: python-dotenv: Symlink following in set_key allows arbitrary f",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "starlette@0.46.2 (PyPI) is affected by CVE-2025-54121: Starlette has possible denial-of-service vector when parsing larg"
+        "description": "starlette@0.46.2 (PyPI) is affected by CVE-2025-54121: Starlette has possible denial-of-service vector when parsing larg",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "51015039cd19f301",
@@ -21752,7 +21894,7 @@
     "grade": "C",
     "aars": 9.0,
     "capability": "code_exec",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 3,
     "vulnerable_deps": 11,
     "tools_detail": [
@@ -21888,67 +22030,78 @@
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "authlib@1.6.10 (PyPI) is affected by CVE-2026-41425: Authlib: Cross-site request forging when using cache"
+        "description": "authlib@1.6.10 (PyPI) is affected by CVE-2026-41425: Authlib: Cross-site request forging when using cache",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "click@8.3.2 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132"
+        "description": "click@8.3.2 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "cryptography@46.0.7 (PyPI) is affected by GHSA-537c-gmf6-5ccf: Vulnerable OpenSSL included in cryptography wheels"
+        "description": "cryptography@46.0.7 (PyPI) is affected by GHSA-537c-gmf6-5ccf: Vulnerable OpenSSL included in cryptography wheels",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "diskcache@5.6.3 (PyPI) is affected by CVE-2025-69872: DiskCache has unsafe pickle deserialization"
+        "description": "diskcache@5.6.3 (PyPI) is affected by CVE-2025-69872: DiskCache has unsafe pickle deserialization",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "fastmcp@2.14.7 (PyPI) is affected by CVE-2025-64340: FastMCP has a Command Injection vulnerability - Gemini CLI"
+        "description": "fastmcp@2.14.7 (PyPI) is affected by CVE-2025-64340: FastMCP has a Command Injection vulnerability - Gemini CLI",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "idna@3.11 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted"
+        "description": "idna@3.11 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "pydantic-settings@2.13.1 (PyPI) is affected by CVE-2026-58203: pydantic-settings: NestedSecretsSettingsSource follows sy"
+        "description": "pydantic-settings@2.13.1 (PyPI) is affected by CVE-2026-58203: pydantic-settings: NestedSecretsSettingsSource follows sy",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "pyjwt@2.12.1 (PyPI) is affected by CVE-2026-48522: PyJWKClient: missing scheme allowlist enables CVE-2024-21643-class SS"
+        "description": "pyjwt@2.12.1 (PyPI) is affected by CVE-2026-48522: PyJWKClient: missing scheme allowlist enables CVE-2024-21643-class SS",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "python-multipart@0.0.26 (PyPI) is affected by CVE-2026-53539: python-multipart: Quadratic-time querystring parsing with "
+        "description": "python-multipart@0.0.26 (PyPI) is affected by CVE-2026-53539: python-multipart: Quadratic-time querystring parsing with ",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "starlette@1.0.0 (PyPI) is affected by CVE-2026-54283: Starlette: request.form() limits silently ignored for application/"
+        "description": "starlette@1.0.0 (PyPI) is affected by CVE-2026-54283: Starlette: request.form() limits silently ignored for application/",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "urllib3@2.6.3 (PyPI) is affected by CVE-2026-44432: urllib3: Decompression-bomb safeguards bypassed in parts of the stre"
+        "description": "urllib3@2.6.3 (PyPI) is affected by CVE-2026-44432: urllib3: Decompression-bomb safeguards bypassed in parts of the stre",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "fa34a24ef0c791fd",
@@ -21964,7 +22117,7 @@
     "grade": "C",
     "aars": 9.5,
     "capability": "code_exec",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 33,
     "vulnerable_deps": 2,
     "tools_detail": [
@@ -22796,13 +22949,15 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "@modelcontextprotocol/sdk@1.24.3 (npm) is affected by CVE-2026-25536: @modelcontextprotocol/sdk has cross-client data le"
+        "description": "@modelcontextprotocol/sdk@1.24.3 (npm) is affected by CVE-2026-25536: @modelcontextprotocol/sdk has cross-client data le",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "uuid@11.1.0 (npm) is affected by CVE-2026-41907: uuid: Missing buffer bounds check in v3/v5/v6 when buf is provided; fix"
+        "description": "uuid@11.1.0 (npm) is affected by CVE-2026-41907: uuid: Missing buffer bounds check in v3/v5/v6 when buf is provided; fix",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "717bb183967118cc",
@@ -22818,7 +22973,7 @@
     "grade": "C",
     "aars": 9.5,
     "capability": "code_exec",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 24,
     "vulnerable_deps": 1,
     "tools_detail": [
@@ -23535,7 +23690,8 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "@modelcontextprotocol/sdk@1.25.2 (npm) is affected by CVE-2026-25536: @modelcontextprotocol/sdk has cross-client data le"
+        "description": "@modelcontextprotocol/sdk@1.25.2 (npm) is affected by CVE-2026-25536: @modelcontextprotocol/sdk has cross-client data le",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "64c419316a5d8e6d",
@@ -23551,7 +23707,7 @@
     "grade": "C",
     "aars": 9.5,
     "capability": "code_exec",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 15,
     "vulnerable_deps": 2,
     "tools_detail": [
@@ -24065,13 +24221,15 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "@modelcontextprotocol/sdk@1.0.0 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerabi"
+        "description": "@modelcontextprotocol/sdk@1.0.0 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerabi",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "uuid@9.0.1 (npm) is affected by CVE-2026-41907: uuid: Missing buffer bounds check in v3/v5/v6 when buf is provided; fixe"
+        "description": "uuid@9.0.1 (npm) is affected by CVE-2026-41907: uuid: Missing buffer bounds check in v3/v5/v6 when buf is provided; fixe",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "cf953fcd1307a0c5",
@@ -24087,7 +24245,7 @@
     "grade": "C",
     "aars": 9.5,
     "capability": "code_exec",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 3,
     "vulnerable_deps": 13,
     "tools_detail": [
@@ -24166,73 +24324,85 @@
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "authlib@1.6.9 (PyPI) is affected by CVE-2026-41425: Authlib: Cross-site request forging when using cache"
+        "description": "authlib@1.6.9 (PyPI) is affected by CVE-2026-41425: Authlib: Cross-site request forging when using cache",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "click@8.3.2 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132"
+        "description": "click@8.3.2 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "cryptography@46.0.7 (PyPI) is affected by GHSA-537c-gmf6-5ccf: Vulnerable OpenSSL included in cryptography wheels"
+        "description": "cryptography@46.0.7 (PyPI) is affected by GHSA-537c-gmf6-5ccf: Vulnerable OpenSSL included in cryptography wheels",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "diskcache@5.6.3 (PyPI) is affected by CVE-2025-69872: DiskCache has unsafe pickle deserialization"
+        "description": "diskcache@5.6.3 (PyPI) is affected by CVE-2025-69872: DiskCache has unsafe pickle deserialization",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "fastmcp@2.13.3 (PyPI) is affected by CVE-2025-69196: FastMCP OAuth Proxy token reuse across MCP servers"
+        "description": "fastmcp@2.13.3 (PyPI) is affected by CVE-2025-69196: FastMCP OAuth Proxy token reuse across MCP servers",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "idna@3.11 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted"
+        "description": "idna@3.11 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "mcp@1.22.0 (PyPI) is affected by CVE-2025-66416: Model Context Protocol (MCP) Python SDK does not enable DNS rebinding p"
+        "description": "mcp@1.22.0 (PyPI) is affected by CVE-2025-66416: Model Context Protocol (MCP) Python SDK does not enable DNS rebinding p",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "pydantic-settings@2.13.1 (PyPI) is affected by CVE-2026-58203: pydantic-settings: NestedSecretsSettingsSource follows sy"
+        "description": "pydantic-settings@2.13.1 (PyPI) is affected by CVE-2026-58203: pydantic-settings: NestedSecretsSettingsSource follows sy",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "pyjwt@2.12.1 (PyPI) is affected by CVE-2026-48522: PyJWKClient: missing scheme allowlist enables CVE-2024-21643-class SS"
+        "description": "pyjwt@2.12.1 (PyPI) is affected by CVE-2026-48522: PyJWKClient: missing scheme allowlist enables CVE-2024-21643-class SS",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "python-multipart@0.0.26 (PyPI) is affected by CVE-2026-53539: python-multipart: Quadratic-time querystring parsing with "
+        "description": "python-multipart@0.0.26 (PyPI) is affected by CVE-2026-53539: python-multipart: Quadratic-time querystring parsing with ",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "starlette@1.0.0 (PyPI) is affected by CVE-2026-54283: Starlette: request.form() limits silently ignored for application/"
+        "description": "starlette@1.0.0 (PyPI) is affected by CVE-2026-54283: Starlette: request.form() limits silently ignored for application/",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "urllib3@2.6.3 (PyPI) is affected by CVE-2026-44432: urllib3: Decompression-bomb safeguards bypassed in parts of the stre"
+        "description": "urllib3@2.6.3 (PyPI) is affected by CVE-2026-44432: urllib3: Decompression-bomb safeguards bypassed in parts of the stre",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "9674c1b523a5958d",
@@ -24248,7 +24418,7 @@
     "grade": "C",
     "aars": 5.5,
     "capability": "db_write",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 19,
     "vulnerable_deps": 21,
     "tools_detail": [
@@ -35734,121 +35904,141 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "authlib@1.6.5 (PyPI) is affected by CVE-2026-28490: Authlib Vulnerable to JWE RSA1_5 Bleichenbacher Padding Oracle"
+        "description": "authlib@1.6.5 (PyPI) is affected by CVE-2026-28490: Authlib Vulnerable to JWE RSA1_5 Bleichenbacher Padding Oracle",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "biopython@1.86 (PyPI) is affected by CVE-2025-68463: Biopython is vulnerable to doctype XML external entity (XXE) inject"
+        "description": "biopython@1.86 (PyPI) is affected by CVE-2025-68463: Biopython is vulnerable to doctype XML external entity (XXE) inject",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "click@8.3.0 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132"
+        "description": "click@8.3.0 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "cryptography@46.0.3 (PyPI) is affected by GHSA-537c-gmf6-5ccf: Vulnerable OpenSSL included in cryptography wheels"
+        "description": "cryptography@46.0.3 (PyPI) is affected by GHSA-537c-gmf6-5ccf: Vulnerable OpenSSL included in cryptography wheels",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "diskcache@5.6.3 (PyPI) is affected by CVE-2025-69872: DiskCache has unsafe pickle deserialization"
+        "description": "diskcache@5.6.3 (PyPI) is affected by CVE-2025-69872: DiskCache has unsafe pickle deserialization",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "fastmcp@2.13.0.2 (PyPI) is affected by CVE-2025-69196: FastMCP OAuth Proxy token reuse across MCP servers"
+        "description": "fastmcp@2.13.0.2 (PyPI) is affected by CVE-2025-69196: FastMCP OAuth Proxy token reuse across MCP servers",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "filelock@3.20.0 (PyPI) is affected by CVE-2026-22701: filelock Time-of-Check-Time-of-Use (TOCTOU) Symlink Vulnerability "
+        "description": "filelock@3.20.0 (PyPI) is affected by CVE-2026-22701: filelock Time-of-Check-Time-of-Use (TOCTOU) Symlink Vulnerability ",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "idna@3.11 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted"
+        "description": "idna@3.11 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "jaraco-context@6.0.1 (PyPI) is affected by CVE-2026-23949: jaraco.context Has a Path Traversal Vulnerability"
+        "description": "jaraco-context@6.0.1 (PyPI) is affected by CVE-2026-23949: jaraco.context Has a Path Traversal Vulnerability",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "lxml@6.0.2 (PyPI) is affected by CVE-2026-41066: lxml: Default configuration of iterparse() and ETCompatXMLParser() allo"
+        "description": "lxml@6.0.2 (PyPI) is affected by CVE-2026-41066: lxml: Default configuration of iterparse() and ETCompatXMLParser() allo",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "mcp@1.20.0 (PyPI) is affected by CVE-2025-66416: Model Context Protocol (MCP) Python SDK does not enable DNS rebinding p"
+        "description": "mcp@1.20.0 (PyPI) is affected by CVE-2025-66416: Model Context Protocol (MCP) Python SDK does not enable DNS rebinding p",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "msgpack@1.1.2 (PyPI) is affected by CVE-2026-57585: MessagePack for Python: Out-of-bounds read / crash on Unpacker reuse"
+        "description": "msgpack@1.1.2 (PyPI) is affected by CVE-2026-57585: MessagePack for Python: Out-of-bounds read / crash on Unpacker reuse",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "orjson@3.11.4 (PyPI) is affected by CVE-2025-67221: orjson does not limit recursion for deeply nested JSON documents"
+        "description": "orjson@3.11.4 (PyPI) is affected by CVE-2025-67221: orjson does not limit recursion for deeply nested JSON documents",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "pyjwt@2.10.1 (PyPI) is affected by CVE-2026-32597: PyJWT accepts unknown `crit` header extensions"
+        "description": "pyjwt@2.10.1 (PyPI) is affected by CVE-2026-32597: PyJWT accepts unknown `crit` header extensions",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "pytest@8.4.2 (PyPI) is affected by CVE-2025-71176: pytest has vulnerable tmpdir handling"
+        "description": "pytest@8.4.2 (PyPI) is affected by CVE-2025-71176: pytest has vulnerable tmpdir handling",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "python-dotenv@1.2.1 (PyPI) is affected by CVE-2026-28684: python-dotenv: Symlink following in set_key allows arbitrary f"
+        "description": "python-dotenv@1.2.1 (PyPI) is affected by CVE-2026-28684: python-dotenv: Symlink following in set_key allows arbitrary f",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "python-multipart@0.0.20 (PyPI) is affected by CVE-2026-53539: python-multipart: Quadratic-time querystring parsing with "
+        "description": "python-multipart@0.0.20 (PyPI) is affected by CVE-2026-53539: python-multipart: Quadratic-time querystring parsing with ",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "requests@2.32.5 (PyPI) is affected by CVE-2026-25645: Requests has Insecure Temp File Reuse in its extract_zipped_paths("
+        "description": "requests@2.32.5 (PyPI) is affected by CVE-2026-25645: Requests has Insecure Temp File Reuse in its extract_zipped_paths(",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "starlette@0.50.0 (PyPI) is affected by CVE-2026-54283: Starlette: request.form() limits silently ignored for application"
+        "description": "starlette@0.50.0 (PyPI) is affected by CVE-2026-54283: Starlette: request.form() limits silently ignored for application",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "urllib3@2.5.0 (PyPI) is affected by CVE-2025-66471: urllib3 streaming API improperly handles highly compressed data"
+        "description": "urllib3@2.5.0 (PyPI) is affected by CVE-2025-66471: urllib3 streaming API improperly handles highly compressed data",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "2d2dbd16c1135614",
@@ -35864,7 +36054,7 @@
     "grade": "C",
     "aars": 5.0,
     "capability": "db_write",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 3,
     "vulnerable_deps": 18,
     "tools_detail": [
@@ -35966,97 +36156,113 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "authlib@1.6.5 (PyPI) is affected by CVE-2026-28490: Authlib Vulnerable to JWE RSA1_5 Bleichenbacher Padding Oracle"
+        "description": "authlib@1.6.5 (PyPI) is affected by CVE-2026-28490: Authlib Vulnerable to JWE RSA1_5 Bleichenbacher Padding Oracle",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "click@8.3.0 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132"
+        "description": "click@8.3.0 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "cryptography@46.0.2 (PyPI) is affected by GHSA-537c-gmf6-5ccf: Vulnerable OpenSSL included in cryptography wheels"
+        "description": "cryptography@46.0.2 (PyPI) is affected by GHSA-537c-gmf6-5ccf: Vulnerable OpenSSL included in cryptography wheels",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "fastmcp@2.12.4 (PyPI) is affected by CVE-2025-69196: FastMCP OAuth Proxy token reuse across MCP servers"
+        "description": "fastmcp@2.12.4 (PyPI) is affected by CVE-2025-69196: FastMCP OAuth Proxy token reuse across MCP servers",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "filelock@3.20.0 (PyPI) is affected by CVE-2026-22701: filelock Time-of-Check-Time-of-Use (TOCTOU) Symlink Vulnerability "
+        "description": "filelock@3.20.0 (PyPI) is affected by CVE-2026-22701: filelock Time-of-Check-Time-of-Use (TOCTOU) Symlink Vulnerability ",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "idna@3.11 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted"
+        "description": "idna@3.11 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "critical",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "litellm@1.78.0 (PyPI) is affected by CVE-2026-49468: LiteLLM: Authentication Bypass via Host Header Injection"
+        "description": "litellm@1.78.0 (PyPI) is affected by CVE-2026-49468: LiteLLM: Authentication Bypass via Host Header Injection",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "mcp@1.17.0 (PyPI) is affected by CVE-2025-66416: Model Context Protocol (MCP) Python SDK does not enable DNS rebinding p"
+        "description": "mcp@1.17.0 (PyPI) is affected by CVE-2025-66416: Model Context Protocol (MCP) Python SDK does not enable DNS rebinding p",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "orjson@3.11.3 (PyPI) is affected by CVE-2025-67221: orjson does not limit recursion for deeply nested JSON documents"
+        "description": "orjson@3.11.3 (PyPI) is affected by CVE-2025-67221: orjson does not limit recursion for deeply nested JSON documents",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "pytest@8.4.2 (PyPI) is affected by CVE-2025-71176: pytest has vulnerable tmpdir handling"
+        "description": "pytest@8.4.2 (PyPI) is affected by CVE-2025-71176: pytest has vulnerable tmpdir handling",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "python-dotenv@1.1.1 (PyPI) is affected by CVE-2026-28684: python-dotenv: Symlink following in set_key allows arbitrary f"
+        "description": "python-dotenv@1.1.1 (PyPI) is affected by CVE-2026-28684: python-dotenv: Symlink following in set_key allows arbitrary f",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "python-multipart@0.0.20 (PyPI) is affected by CVE-2026-53539: python-multipart: Quadratic-time querystring parsing with "
+        "description": "python-multipart@0.0.20 (PyPI) is affected by CVE-2026-53539: python-multipart: Quadratic-time querystring parsing with ",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "requests@2.32.5 (PyPI) is affected by CVE-2026-25645: Requests has Insecure Temp File Reuse in its extract_zipped_paths("
+        "description": "requests@2.32.5 (PyPI) is affected by CVE-2026-25645: Requests has Insecure Temp File Reuse in its extract_zipped_paths(",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "starlette@0.48.0 (PyPI) is affected by CVE-2025-62727: Starlette vulnerable to O(n^2) DoS via Range header merging in ``"
+        "description": "starlette@0.48.0 (PyPI) is affected by CVE-2025-62727: Starlette vulnerable to O(n^2) DoS via Range header merging in ``",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "urllib3@2.5.0 (PyPI) is affected by CVE-2025-66471: urllib3 streaming API improperly handles highly compressed data"
+        "description": "urllib3@2.5.0 (PyPI) is affected by CVE-2025-66471: urllib3 streaming API improperly handles highly compressed data",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "werkzeug@3.1.1 (PyPI) is affected by CVE-2026-27199:  Werkzeug safe_join() allows Windows special device names"
+        "description": "werkzeug@3.1.1 (PyPI) is affected by CVE-2026-27199:  Werkzeug safe_join() allows Windows special device names",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "d06fa3aaf94699ae",
@@ -36072,7 +36278,7 @@
     "grade": "C",
     "aars": 5.0,
     "capability": "db_write",
-    "confidence": 1.0,
+    "confidence": 0.9,
     "tools": 3,
     "vulnerable_deps": 19,
     "tools_detail": [
@@ -36174,103 +36380,120 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "authlib@1.6.0 (PyPI) is affected by CVE-2026-28490: Authlib Vulnerable to JWE RSA1_5 Bleichenbacher Padding Oracle"
+        "description": "authlib@1.6.0 (PyPI) is affected by CVE-2026-28490: Authlib Vulnerable to JWE RSA1_5 Bleichenbacher Padding Oracle",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "black@25.1.0 (PyPI) is affected by CVE-2026-32274: Black: Arbitrary file writes from unsanitized user input in cache fil"
+        "description": "black@25.1.0 (PyPI) is affected by CVE-2026-32274: Black: Arbitrary file writes from unsanitized user input in cache fil",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "click@8.2.1 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132"
+        "description": "click@8.2.1 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "cryptography@45.0.3 (PyPI) is affected by GHSA-537c-gmf6-5ccf: Vulnerable OpenSSL included in cryptography wheels"
+        "description": "cryptography@45.0.3 (PyPI) is affected by GHSA-537c-gmf6-5ccf: Vulnerable OpenSSL included in cryptography wheels",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "fastmcp@2.7.0 (PyPI) is affected by CVE-2025-69196: FastMCP OAuth Proxy token reuse across MCP servers"
+        "description": "fastmcp@2.7.0 (PyPI) is affected by CVE-2025-69196: FastMCP OAuth Proxy token reuse across MCP servers",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "filelock@3.18.0 (PyPI) is affected by CVE-2026-22701: filelock Time-of-Check-Time-of-Use (TOCTOU) Symlink Vulnerability "
+        "description": "filelock@3.18.0 (PyPI) is affected by CVE-2026-22701: filelock Time-of-Check-Time-of-Use (TOCTOU) Symlink Vulnerability ",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "idna@3.10 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted"
+        "description": "idna@3.10 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "critical",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "litellm@1.71.1 (PyPI) is affected by CVE-2026-49468: LiteLLM: Authentication Bypass via Host Header Injection"
+        "description": "litellm@1.71.1 (PyPI) is affected by CVE-2026-49468: LiteLLM: Authentication Bypass via Host Header Injection",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "mcp@1.9.3 (PyPI) is affected by CVE-2025-53366: MCP Python SDK vulnerability in the FastMCP Server causes validation err"
+        "description": "mcp@1.9.3 (PyPI) is affected by CVE-2025-53366: MCP Python SDK vulnerability in the FastMCP Server causes validation err",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "orjson@3.10.18 (PyPI) is affected by CVE-2025-67221: orjson does not limit recursion for deeply nested JSON documents"
+        "description": "orjson@3.10.18 (PyPI) is affected by CVE-2025-67221: orjson does not limit recursion for deeply nested JSON documents",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "pytest@8.4.0 (PyPI) is affected by CVE-2025-71176: pytest has vulnerable tmpdir handling"
+        "description": "pytest@8.4.0 (PyPI) is affected by CVE-2025-71176: pytest has vulnerable tmpdir handling",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "python-dotenv@1.1.0 (PyPI) is affected by CVE-2026-28684: python-dotenv: Symlink following in set_key allows arbitrary f"
+        "description": "python-dotenv@1.1.0 (PyPI) is affected by CVE-2026-28684: python-dotenv: Symlink following in set_key allows arbitrary f",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "python-multipart@0.0.20 (PyPI) is affected by CVE-2026-53539: python-multipart: Quadratic-time querystring parsing with "
+        "description": "python-multipart@0.0.20 (PyPI) is affected by CVE-2026-53539: python-multipart: Quadratic-time querystring parsing with ",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "requests@2.32.3 (PyPI) is affected by CVE-2024-47081: Requests vulnerable to .netrc credentials leak via malicious URLs"
+        "description": "requests@2.32.3 (PyPI) is affected by CVE-2024-47081: Requests vulnerable to .netrc credentials leak via malicious URLs",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "starlette@0.47.0 (PyPI) is affected by CVE-2025-54121: Starlette has possible denial-of-service vector when parsing larg"
+        "description": "starlette@0.47.0 (PyPI) is affected by CVE-2025-54121: Starlette has possible denial-of-service vector when parsing larg",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "urllib3@2.4.0 (PyPI) is affected by CVE-2025-66471: urllib3 streaming API improperly handles highly compressed data"
+        "description": "urllib3@2.4.0 (PyPI) is affected by CVE-2025-66471: urllib3 streaming API improperly handles highly compressed data",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "virtualenv@20.31.2 (PyPI) is affected by CVE-2026-22702: virtualenv Has TOCTOU Vulnerabilities in Directory Creation"
+        "description": "virtualenv@20.31.2 (PyPI) is affected by CVE-2026-22702: virtualenv Has TOCTOU Vulnerabilities in Directory Creation",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "37e801476938e92c",
@@ -36286,7 +36509,7 @@
     "grade": "D",
     "aars": 9.5,
     "capability": "code_exec",
-    "confidence": 0.8,
+    "confidence": 0.9,
     "tools": 23,
     "vulnerable_deps": 2,
     "tools_detail": [
@@ -37381,31 +37604,36 @@
         "rule_id": "R113",
         "severity": "medium",
         "title": "Path traversal / directory traversal risk",
-        "description": "Path parameter 'filename' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
+        "description": "Path parameter 'filename' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22).",
+        "confidence": 0.9
       },
       {
         "rule_id": "R113",
         "severity": "medium",
         "title": "Path traversal / directory traversal risk",
-        "description": "Path parameter 'output' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
+        "description": "Path parameter 'output' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22).",
+        "confidence": 0.9
       },
       {
         "rule_id": "R113",
         "severity": "medium",
         "title": "Path traversal / directory traversal risk",
-        "description": "Path parameter 'filename' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22)."
+        "description": "Path parameter 'filename' (string) lacks validation constraints: pattern, format. Path traversal risk (CWE-22).",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "js-yaml@4.1.1 (npm) is affected by CVE-2026-53550: JS-YAML: Quadratic-complexity DoS in merge key handling via repeated "
+        "description": "js-yaml@4.1.1 (npm) is affected by CVE-2026-53550: JS-YAML: Quadratic-complexity DoS in merge key handling via repeated ",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "critical",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "vitest@2.1.9 (npm) is affected by CVE-2026-47429: When Vitest UI server is listening, arbitrary file can be read and exe"
+        "description": "vitest@2.1.9 (npm) is affected by CVE-2026-47429: When Vitest UI server is listening, arbitrary file can be read and exe",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "fabc635d889df215",
@@ -37421,7 +37649,7 @@
     "grade": "D",
     "aars": 0.0,
     "capability": "pure_compute",
-    "confidence": 0.8,
+    "confidence": 0.9,
     "tools": 4,
     "vulnerable_deps": 6,
     "tools_detail": [
@@ -37517,67 +37745,78 @@
         "rule_id": "D001",
         "severity": "critical",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "h11@0.14.0 (PyPI) is affected by CVE-2025-43859: h11 accepts some malformed Chunked-Encoding bodies"
+        "description": "h11@0.14.0 (PyPI) is affected by CVE-2025-43859: h11 accepts some malformed Chunked-Encoding bodies",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "medium",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "idna@3.10 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted"
-      },
-      {
-        "rule_id": "D001",
-        "severity": "high",
-        "title": "Known-vulnerable dependency (OSV)",
-        "description": "mcp@1.1.2 (PyPI) is affected by CVE-2025-53366: MCP Python SDK vulnerability in the FastMCP Server causes validation err"
-      },
-      {
-        "rule_id": "D001",
-        "severity": "medium",
-        "title": "Known-vulnerable dependency (OSV)",
-        "description": "requests@2.32.3 (PyPI) is affected by CVE-2024-47081: Requests vulnerable to .netrc credentials leak via malicious URLs"
-      },
-      {
-        "rule_id": "D001",
-        "severity": "medium",
-        "title": "Known-vulnerable dependency (OSV)",
-        "description": "starlette@0.44.0 (PyPI) is affected by CVE-2025-54121: Starlette has possible denial-of-service vector when parsing larg"
+        "description": "idna@3.10 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted",
+        "confidence": 0.9
       },
       {
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "urllib3@2.3.0 (PyPI) is affected by CVE-2025-66471: urllib3 streaming API improperly handles highly compressed data"
+        "description": "mcp@1.1.2 (PyPI) is affected by CVE-2025-53366: MCP Python SDK vulnerability in the FastMCP Server causes validation err",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "D001",
+        "severity": "medium",
+        "title": "Known-vulnerable dependency (OSV)",
+        "description": "requests@2.32.3 (PyPI) is affected by CVE-2024-47081: Requests vulnerable to .netrc credentials leak via malicious URLs",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "D001",
+        "severity": "medium",
+        "title": "Known-vulnerable dependency (OSV)",
+        "description": "starlette@0.44.0 (PyPI) is affected by CVE-2025-54121: Starlette has possible denial-of-service vector when parsing larg",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "D001",
+        "severity": "high",
+        "title": "Known-vulnerable dependency (OSV)",
+        "description": "urllib3@2.3.0 (PyPI) is affected by CVE-2025-66471: urllib3 streaming API improperly handles highly compressed data",
+        "confidence": 0.9
       },
       {
         "rule_id": "S002",
         "severity": "medium",
         "title": "Outbound request to a non-constant URL (SSRF risk)",
-        "description": "requests.get(...) called with a dynamic URL; validate against an allowlist"
+        "description": "requests.get(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.9
       },
       {
         "rule_id": "S002",
         "severity": "medium",
         "title": "Outbound request to a non-constant URL (SSRF risk)",
-        "description": "requests.get(...) called with a dynamic URL; validate against an allowlist"
+        "description": "requests.get(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.9
       },
       {
         "rule_id": "S002",
         "severity": "medium",
         "title": "Outbound request to a non-constant URL (SSRF risk)",
-        "description": "requests.get(...) called with a dynamic URL; validate against an allowlist"
+        "description": "requests.get(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.9
       },
       {
         "rule_id": "S002",
         "severity": "medium",
         "title": "Outbound request to a non-constant URL (SSRF risk)",
-        "description": "requests.get(...) called with a dynamic URL; validate against an allowlist"
+        "description": "requests.get(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.9
       },
       {
         "rule_id": "S002",
         "severity": "medium",
         "title": "Outbound request to a non-constant URL (SSRF risk)",
-        "description": "requests.get(...) called with a dynamic URL; validate against an allowlist"
+        "description": "requests.get(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "68e0b8883cf2eda8",
@@ -37593,7 +37832,7 @@
     "grade": "D",
     "aars": 9.0,
     "capability": "code_exec",
-    "confidence": 0.83,
+    "confidence": 0.8,
     "tools": 22,
     "vulnerable_deps": 1,
     "tools_detail": [
@@ -38339,25 +38578,29 @@
         "rule_id": "D001",
         "severity": "high",
         "title": "Known-vulnerable dependency (OSV)",
-        "description": "mcp@1.3.0 (PyPI) is affected by CVE-2025-53366: MCP Python SDK vulnerability in the FastMCP Server causes validation err"
+        "description": "mcp@1.3.0 (PyPI) is affected by CVE-2025-53366: MCP Python SDK vulnerability in the FastMCP Server causes validation err",
+        "confidence": 0.9
       },
       {
         "rule_id": "S007",
         "severity": "high",
         "title": "Description-Code Inconsistency (read-only tool with side effects)",
-        "description": "Tool 'get_viewport_screenshot' presents as read-only but its handler writes to the filesystem"
+        "description": "Tool 'get_viewport_screenshot' presents as read-only but its handler writes to the filesystem",
+        "confidence": 0.5
       },
       {
         "rule_id": "S002",
         "severity": "medium",
         "title": "Outbound request to a non-constant URL (SSRF risk)",
-        "description": "httpx.post(...) called with a dynamic URL; validate against an allowlist"
+        "description": "httpx.post(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.9
       },
       {
         "rule_id": "S002",
         "severity": "medium",
         "title": "Outbound request to a non-constant URL (SSRF risk)",
-        "description": "httpx.post(...) called with a dynamic URL; validate against an allowlist"
+        "description": "httpx.post(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "bdab2d86acc3a9a3",
@@ -38373,7 +38616,7 @@
     "grade": "F",
     "aars": 9.0,
     "capability": "code_exec",
-    "confidence": 0.92,
+    "confidence": 0.75,
     "tools": 9,
     "vulnerable_deps": 0,
     "tools_detail": [
@@ -38535,151 +38778,176 @@
         "rule_id": "R001",
         "severity": "critical",
         "title": "Dangerous tool name",
-        "description": "'exec' matches a potentially dangerous system command"
+        "description": "'exec' matches a potentially dangerous system command",
+        "confidence": 0.9
       },
       {
         "rule_id": "R101",
         "severity": "critical",
         "title": "Zero-width Unicode character detection",
-        "description": "Hidden Unicode in 'name' field: ZERO WIDTH SPACE (U+200B)"
+        "description": "Hidden Unicode in 'name' field: ZERO WIDTH SPACE (U+200B)",
+        "confidence": 0.9
       },
       {
         "rule_id": "R101",
         "severity": "high",
         "title": "Zero-width Unicode character detection",
-        "description": "Hidden Unicode in 'description' field: ZERO WIDTH SPACE (U+200B)"
+        "description": "Hidden Unicode in 'description' field: ZERO WIDTH SPACE (U+200B)",
+        "confidence": 0.9
       },
       {
         "rule_id": "R102",
         "severity": "critical",
         "title": "Prompt injection pattern detection",
-        "description": "Prompt injection pattern: 'ignore previous instructions'"
+        "description": "Prompt injection pattern: 'ignore previous instructions'",
+        "confidence": 0.7
       },
       {
         "rule_id": "R102",
         "severity": "high",
         "title": "Prompt injection pattern detection",
-        "description": "Prompt injection pattern: 'you must / you are now'"
+        "description": "Prompt injection pattern: 'you must / you are now'",
+        "confidence": 0.7
       },
       {
         "rule_id": "R102",
         "severity": "critical",
         "title": "Prompt injection pattern detection",
-        "description": "Prompt injection pattern: 'system: directive injection'"
+        "description": "Prompt injection pattern: 'system: directive injection'",
+        "confidence": 0.7
       },
       {
         "rule_id": "R104",
         "severity": "high",
         "title": "Hidden HTML / Markdown content detection",
-        "description": "CSS-hidden HTML element detected"
+        "description": "CSS-hidden HTML element detected",
+        "confidence": 0.7
       },
       {
         "rule_id": "R101",
         "severity": "critical",
         "title": "Zero-width Unicode character detection",
-        "description": "Hidden Unicode in 'name' field: LEFT-TO-RIGHT MARK (U+200E)"
+        "description": "Hidden Unicode in 'name' field: LEFT-TO-RIGHT MARK (U+200E)",
+        "confidence": 0.9
       },
       {
         "rule_id": "R102",
         "severity": "high",
         "title": "Prompt injection pattern detection",
-        "description": "Prompt injection pattern: 'you must / you are now'"
+        "description": "Prompt injection pattern: 'you must / you are now'",
+        "confidence": 0.7
       },
       {
         "rule_id": "R102",
         "severity": "high",
         "title": "Prompt injection pattern detection",
-        "description": "Prompt injection pattern: 'you must / you are now'"
+        "description": "Prompt injection pattern: 'you must / you are now'",
+        "confidence": 0.7
       },
       {
         "rule_id": "R102",
         "severity": "critical",
         "title": "Prompt injection pattern detection",
-        "description": "Prompt injection pattern: 'IM start/end delimiter injection'"
+        "description": "Prompt injection pattern: 'IM start/end delimiter injection'",
+        "confidence": 0.7
       },
       {
         "rule_id": "R102",
         "severity": "critical",
         "title": "Prompt injection pattern detection",
-        "description": "Prompt injection pattern: 'IM start/end delimiter injection'"
+        "description": "Prompt injection pattern: 'IM start/end delimiter injection'",
+        "confidence": 0.7
       },
       {
         "rule_id": "R102",
         "severity": "critical",
         "title": "Prompt injection pattern detection",
-        "description": "Prompt injection pattern: 'disregard safety guidelines'"
+        "description": "Prompt injection pattern: 'disregard safety guidelines'",
+        "confidence": 0.7
       },
       {
         "rule_id": "R103",
         "severity": "high",
         "title": "Base64 / hex blob detection",
-        "description": "Base64 blob in description (76 chars)"
+        "description": "Base64 blob in description (76 chars)",
+        "confidence": 0.5
       },
       {
         "rule_id": "R106",
         "severity": "high",
         "title": "Secret credential / token exposure",
-        "description": "'Generic base64-like (entropy check applied)' detected in description field"
+        "description": "'Generic base64-like (entropy check applied)' detected in description field",
+        "confidence": 0.9
       },
       {
         "rule_id": "R105",
         "severity": "medium",
         "title": "Permission scope mismatch",
-        "description": "Tool name is in 'file' scope but description mentions 'network' operations"
+        "description": "Tool name is in 'file' scope but description mentions 'network' operations",
+        "confidence": 0.5
       },
       {
         "rule_id": "R106",
         "severity": "critical",
         "title": "Secret credential / token exposure",
-        "description": "'OpenAI project key' detected in description field"
+        "description": "'OpenAI project key' detected in description field",
+        "confidence": 0.9
       },
       {
         "rule_id": "R106",
         "severity": "critical",
         "title": "Secret credential / token exposure",
-        "description": "'Generic API key prefix' detected in input_schema field"
+        "description": "'Generic API key prefix' detected in input_schema field",
+        "confidence": 0.9
       },
       {
         "rule_id": "R107",
         "severity": "critical",
         "title": "Command injection risk in tool parameters",
-        "description": "Dangerous default value: 'command.default' = 'rm -rf /tmp/cache'"
+        "description": "Dangerous default value: 'command.default' = 'rm -rf /tmp/cache'",
+        "confidence": 0.9
       },
       {
         "rule_id": "R108",
         "severity": "high",
         "title": "Supply chain risk indicator",
-        "description": "Supply chain risk: 'curl-to-shell pipe'"
+        "description": "Supply chain risk: 'curl-to-shell pipe'",
+        "confidence": 0.7
       },
       {
         "rule_id": "R108",
         "severity": "medium",
         "title": "Supply chain risk indicator",
-        "description": "Supply chain risk: 'pip install'"
+        "description": "Supply chain risk: 'pip install'",
+        "confidence": 0.7
       },
       {
         "rule_id": "R109",
         "severity": "medium",
         "title": "Schema poisoning indicator",
-        "description": "input_schema.items: missing type constraint"
+        "description": "input_schema.items: missing type constraint",
+        "confidence": 0.7
       },
       {
         "rule_id": "R109",
         "severity": "medium",
         "title": "Schema poisoning indicator",
-        "description": "input_schema.untyped_field: missing type constraint"
+        "description": "input_schema.untyped_field: missing type constraint",
+        "confidence": 0.7
       },
       {
         "rule_id": "R109",
         "severity": "medium",
         "title": "Schema poisoning indicator",
-        "description": "input_schema.payload: excessive maxLength = 5000000 (buffer overflow risk)"
+        "description": "input_schema.payload: excessive maxLength = 5000000 (buffer overflow risk)",
+        "confidence": 0.7
       },
       {
         "rule_id": "R109",
         "severity": "medium",
         "title": "Schema poisoning indicator",
-        "description": "input_schema.items: excessive maxItems = 500000 (buffer overflow risk)"
+        "description": "input_schema.items: excessive maxItems = 500000 (buffer overflow risk)",
+        "confidence": 0.7
       }
     ],
     "tool_hash": "9fd28cf53fb1cb93",

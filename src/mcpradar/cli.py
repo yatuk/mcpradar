@@ -2447,17 +2447,30 @@ def leaderboard_generate(
             else:
                 grade = "F"
 
-            # Detail lists the MEDIUM+ findings that drive the grade.
+            # Detail lists the MEDIUM+ findings that drive the grade, each with
+            # its detection confidence (how likely a true positive — separate
+            # from severity; see mcpradar.scoring.confidence).
+            from mcpradar.scoring.confidence import confidence_for
+
             findings_detail = [
                 {
                     "rule_id": f.get("rule_id", "?"),
                     "severity": f.get("severity", "?"),
                     "title": f.get("title", "")[:80],
                     "description": f.get("description", "")[:120],
+                    "confidence": f.get("confidence", confidence_for(f.get("rule_id", ""))),
                 }
                 for f in findings_list
                 if f.get("severity", "") in ("critical", "high", "medium")
             ]
+
+            # Row confidence = mean detection confidence across the MEDIUM+
+            # findings that drive the grade (1.0 when there is nothing to doubt).
+            row_confidence = (
+                round(sum(d["confidence"] for d in findings_detail) / len(findings_detail), 2)
+                if findings_detail
+                else 1.0
+            )
 
             # Tool hash: SHA-256 of the sorted tool names. Prefer computing it
             # directly from the result file's tools; fall back to the store.
@@ -2492,17 +2505,7 @@ def leaderboard_generate(
                     "grade": grade,
                     "aars": round(aars, 1),
                     "capability": dominant_capability(data.get("tools", [])),
-                    "confidence": 1.0
-                    if meaningful == 0
-                    else round(
-                        min(
-                            1.0,
-                            (sev["critical"] * 0.3 + sev["high"] * 0.2 + sev["medium"] * 0.1)
-                            / max(meaningful, 1)
-                            + 0.7,
-                        ),
-                        2,
-                    ),
+                    "confidence": row_confidence,
                     "tools": tools,
                     "vulnerable_deps": dep_sev["critical"]
                     + dep_sev["high"]

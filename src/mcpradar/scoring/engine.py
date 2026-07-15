@@ -7,38 +7,14 @@ findings, along with a letter grade and confidence rating.
 from __future__ import annotations
 
 from mcpradar.scanner.report import Finding
+from mcpradar.scoring.confidence import CONFIDENCE_MAP, confidence_for
 
-# ---------------------------------------------------------------------------
-# Confidence map — per-rule confidence based on detection specificity
-# ---------------------------------------------------------------------------
-
-CONFIDENCE_MAP: dict[str, float] = {
-    # High confidence (0.9) — exact pattern or entropy-based detection
-    "R001": 0.9,
-    "R101": 0.9,
-    "R106": 0.9,
-    "R107": 0.9,
-    # Medium confidence (0.7) — heuristic / keyword-based detection
-    "R102": 0.7,
-    "R104": 0.7,
-    "R108": 0.7,
-    "R109": 0.7,
-    "R111": 0.7,
-    "C001": 0.7,
-    "C003": 0.7,
-    "C006": 0.7,
-    "C007": 0.7,
-    # Lower confidence (0.5) — requires context / fingerprint comparison
-    "R103": 0.5,
-    "R105": 0.5,
-    "R110": 0.5,
-    "C002": 0.5,
-    "C004": 0.5,
-    "C005": 0.5,
-}
-
-# Default confidence for rule IDs not explicitly listed
+# Confidence lives in mcpradar.scoring.confidence (single source of truth,
+# low-level so the scanner report can read it too). Re-exported here for
+# backward compatibility.
 _DEFAULT_CONFIDENCE = 0.5
+
+__all__ = ["CONFIDENCE_MAP", "confidence_for"]
 
 # Severity weights for AIVSS weighted sum
 _SEVERITY_WEIGHTS: dict[str, int] = {

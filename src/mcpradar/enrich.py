@@ -118,6 +118,8 @@ def _run_source(src: Path) -> list[dict[str, Any]]:
 
 
 def _finding_dict(f: Any) -> dict[str, Any]:
+    from mcpradar.scoring.confidence import confidence_for
+
     return {
         "rule_id": f.rule_id,
         "title": f.title,
@@ -127,4 +129,5 @@ def _finding_dict(f: Any) -> dict[str, Any]:
         "location": f.location,
         "evidence": f.evidence,
         "detail": f.detail,
+        "confidence": confidence_for(f.rule_id),
     }
