@@ -392,6 +392,22 @@ tbody tr:hover td { background: rgba(255,255,255,0.025); }
   font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 8px;
   background: var(--orange-dim); color: var(--orange); white-space: nowrap;
 }
+.pagination {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 10px; margin-top: 14px; font-size: 13px;
+}
+.pagination:empty { display: none; }
+.pagination .page-info { color: var(--dim); }
+.pagination .page-btns { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.page-btn {
+  min-width: 30px; padding: 5px 9px; border: 1px solid var(--border);
+  background: var(--card); color: var(--text); border-radius: 6px;
+  font-size: 12px; font-weight: 600; cursor: pointer; line-height: 1;
+}
+.page-btn:hover:not(:disabled):not(.on) { border-color: var(--dim); }
+.page-btn.on { background: var(--blue); border-color: var(--blue); color: #fff; cursor: default; }
+.page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.page-ellipsis { padding: 0 2px; color: var(--dim); }
 .finding-desc { color: var(--dim); grid-column: 4; }
 
 .tool-mini-list { font-size: 12px; }
@@ -707,6 +723,9 @@ footer a:hover { text-decoration: underline; }
 
   <!-- Mobile cards -->
   <div class="card-grid" id="cardGrid"></div>
+
+  <!-- Pagination -->
+  <nav class="pagination" id="pagination" aria-label="Leaderboard pages"></nav>
 </div>
 
 <!-- ===== DETAIL VIEW (hash-routed, hidden by default) ===== -->
@@ -766,6 +785,8 @@ footer a:hover { text-decoration: underline; }
   var activeVulnType = "";
   var activeApiFree = "";
   var activeScanStatus = "";
+  var currentPage = 1;
+  var pageSize = 25;
 
   // A server is "pending" when it has never actually been scanned. Older data
   // used several markers for this ("registry-pending", "unknown", empty, or a
@@ -784,6 +805,7 @@ footer a:hover { text-decoration: underline; }
      ------------------------------------------------------------------ */
   var $ = document.querySelector.bind(document);
   var tbody = $("#tbody");
+  var pager = $("#pagination");
   var cardGrid = $("#cardGrid");
   var tableWrap = $("#tableWrap");
   var detailView = $("#detailView");
@@ -1097,13 +1119,88 @@ footer a:hover { text-decoration: underline; }
   /* ------------------------------------------------------------------
      Render: Table (Desktop)
      ------------------------------------------------------------------ */
+  /* ------------------------------------------------------------------
+     Pagination — the leaderboard is one long list, so the table and the
+     mobile cards share a page window over the *filtered* result set.
+     ------------------------------------------------------------------ */
+  function pageCount(total) {
+    return Math.max(1, Math.ceil(total / pageSize));
+  }
+
+  // Clamp the current page into range (filters can shrink the result set) and
+  // return the [start, end) slice bounds for the active page.
+  function pageBounds(total) {
+    var pages = pageCount(total);
+    if (currentPage > pages) currentPage = pages;
+    if (currentPage < 1) currentPage = 1;
+    var start = (currentPage - 1) * pageSize;
+    return { start: start, end: Math.min(start + pageSize, total) };
+  }
+
+  function goToPage(n) {
+    currentPage = n;
+    updateLayout();
+    // Keep the user oriented: jump back to the top of the list on page change.
+    if (tableWrap && tableWrap.scrollIntoView) {
+      tableWrap.scrollIntoView({ block: "start", behavior: "smooth" });
+    }
+  }
+
+  function renderPagination(total) {
+    if (!pager) return;
+    if (isLoading || loadError || total <= pageSize) {
+      pager.innerHTML = "";
+      return;
+    }
+    var pages = pageCount(total);
+    var b = pageBounds(total);
+    var html = '<div class="page-info">Showing <b>' + (b.start + 1) + '</b>–<b>' +
+      b.end + '</b> of <b>' + total + '</b></div>';
+    html += '<div class="page-btns">';
+    html += '<button class="page-btn" data-page="' + (currentPage - 1) + '"' +
+      (currentPage === 1 ? ' disabled' : '') + ' aria-label="Previous page">‹ Prev</button>';
+
+    // Windowed page numbers with ellipses: 1 … 4 5 [6] 7 8 … 12
+    var win = [];
+    for (var p = 1; p <= pages; p++) {
+      if (p === 1 || p === pages || (p >= currentPage - 2 && p <= currentPage + 2)) {
+        win.push(p);
+      } else if (win[win.length - 1] !== "…") {
+        win.push("…");
+      }
+    }
+    for (var w = 0; w < win.length; w++) {
+      if (win[w] === "…") {
+        html += '<span class="page-ellipsis">…</span>';
+      } else {
+        html += '<button class="page-btn' + (win[w] === currentPage ? ' on' : '') +
+          '" data-page="' + win[w] + '"' +
+          (win[w] === currentPage ? ' aria-current="page"' : '') + '>' + win[w] + '</button>';
+      }
+    }
+    html += '<button class="page-btn" data-page="' + (currentPage + 1) + '"' +
+      (currentPage === pages ? ' disabled' : '') + ' aria-label="Next page">Next ›</button>';
+    html += '</div>';
+    pager.innerHTML = html;
+
+    var btns = pager.querySelectorAll(".page-btn[data-page]");
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener("click", function () {
+        var n = parseInt(this.getAttribute("data-page"), 10);
+        if (!isNaN(n) && n >= 1 && n <= pages && n !== currentPage) goToPage(n);
+      });
+    }
+  }
+
   function renderTable() {
     var filtered = filteredServers();
     if (isLoading) {
+      if (pager) pager.innerHTML = "";
       renderSkeleton();
       return;
     }
     if (loadError) {
+      if (pager) pager.innerHTML = "";
       tbody.innerHTML = '<tr><td colspan="10" class="state-msg">' +
         '<p>Data unavailable. Check back soon.</p>' +
         '<p><a onclick="location.reload()">Retry</a></p>' +
@@ -1111,6 +1208,7 @@ footer a:hover { text-decoration: underline; }
       return;
     }
     if (filtered.length === 0) {
+      if (pager) pager.innerHTML = "";
       if (allServers.length === 0) {
         tbody.innerHTML = '<tr><td colspan="10" class="state-msg">' +
           '<p class="icon">&#9729;</p>' +
@@ -1125,8 +1223,9 @@ footer a:hover { text-decoration: underline; }
       return;
     }
 
+    var b = pageBounds(filtered.length);
     var html = "";
-    for (var i = 0; i < filtered.length; i++) {
+    for (var i = b.start; i < b.end; i++) {
       var s = filtered[i];
       var sc = s.aivss_score != null ? s.aivss_score : 0;
       var g = s.grade || "-";
@@ -1177,6 +1276,7 @@ footer a:hover { text-decoration: underline; }
       html += '</tr>';
     }
     tbody.innerHTML = html;
+    renderPagination(filtered.length);
   }
 
   /* ------------------------------------------------------------------
@@ -1204,14 +1304,16 @@ footer a:hover { text-decoration: underline; }
      ------------------------------------------------------------------ */
   function renderCards() {
     var filtered = filteredServers();
-    if (isLoading) return;
+    if (isLoading) { if (pager) pager.innerHTML = ""; return; }
     if (loadError || filtered.length === 0) {
       cardGrid.innerHTML = "";
+      if (pager) pager.innerHTML = "";
       return;
     }
 
+    var b = pageBounds(filtered.length);
     var html = "";
-    for (var i = 0; i < filtered.length; i++) {
+    for (var i = b.start; i < b.end; i++) {
       var s = filtered[i];
       var sc = s.aivss_score != null ? s.aivss_score : 0;
       var g = s.grade || "-";
@@ -1251,6 +1353,7 @@ footer a:hover { text-decoration: underline; }
       html += '</div>';
     }
     cardGrid.innerHTML = html;
+    renderPagination(filtered.length);
   }
 
   /* ------------------------------------------------------------------
@@ -1556,6 +1659,8 @@ footer a:hover { text-decoration: underline; }
      Full Render
      ------------------------------------------------------------------ */
   function fullRender() {
+    // A filter/search/sort change alters the result set, so restart at page 1.
+    currentPage = 1;
     updateSortIndicators();
     updateLayout();
     renderStats();
