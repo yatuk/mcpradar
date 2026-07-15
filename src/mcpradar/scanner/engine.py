@@ -97,12 +97,28 @@ class Scanner:
             session_id: The session ID if one was negotiated (Mcp-Session-Id header),
                 None if the server uses stateless transports.
         """
+        has_iss: bool | None = None
+        has_pkce: bool | None = None
+        # OAuth discovery only applies to network transports; stdio has no
+        # authorization server. Best-effort — never fails the scan.
+        if report.transport in ("http", "sse"):
+            try:
+                from mcpradar.probe.oauth import probe_oauth_metadata
+
+                meta = probe_oauth_metadata(report.target)
+                if meta is not None and meta.uses_oauth:
+                    has_iss = meta.has_iss
+                    has_pkce = meta.has_pkce_s256
+            except Exception:
+                pass
+
         findings = check_server_auth(
             target=report.target,
             transport=report.transport,
-            has_iss=None,  # OAuth discovery requires separate endpoint probing
-            has_app_type=None,  # DCR metadata requires separate endpoint probing
+            has_iss=has_iss,
+            has_app_type=None,  # application_type is client-side, not observable
             uses_session_id=bool(session_id),
+            has_pkce_s256=has_pkce,
         )
         for f in findings:
             if f.severity >= self.min_severity:

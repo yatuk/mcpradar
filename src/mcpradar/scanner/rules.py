@@ -902,6 +902,7 @@ def check_server_auth(
     has_iss: bool | None = None,
     has_app_type: bool | None = None,
     uses_session_id: bool = False,
+    has_pkce_s256: bool | None = None,
 ) -> list[Finding]:
     """Generate R112 findings from server authorization metadata.
 
@@ -917,8 +918,31 @@ def check_server_auth(
             ``application_type``. None means not checked.
         uses_session_id: Whether the server still returns ``Mcp-Session-Id``
             header (deprecated in 2026-07-28 spec).
+        has_pkce_s256: Whether the authorization server advertises the ``S256``
+            PKCE code-challenge method. None means not checked.
     """
     findings: list[Finding] = []
+
+    # R112-4: PKCE S256 not advertised (OAuth 2.1 requires PKCE)
+    if has_pkce_s256 is False:
+        findings.append(
+            Finding(
+                rule_id="R112",
+                title="Authorization server does not advertise PKCE (S256)",
+                description=(
+                    "OAuth 2.1 — which the MCP authorization spec mandates — "
+                    "requires PKCE with the ``S256`` code-challenge method on "
+                    "every authorization request. The authorization server's "
+                    "metadata does not list ``S256`` in "
+                    "``code_challenge_methods_supported``, leaving the flow open "
+                    "to authorization-code interception."
+                ),
+                severity=Severity.HIGH,
+                target=target,
+                location="auth",
+                detail={"requirement": "OAuth 2.1 / RFC 7636", "spec": "2026-07-28"},
+            )
+        )
 
     # R112-1: Missing iss parameter (RFC 9207 requirement)
     if has_iss is False:
