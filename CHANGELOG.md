@@ -8,6 +8,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
+- **Leaderboard site overhaul — from data dump to product.** The point is no
+  longer to *show* a score but to *defend* it:
+  - **"Why this score" breakdown** on every detail page — the AIVSS is decomposed
+    into its three candidate terms (findings base, capability layer with AARS,
+    dependency risk) with the driving term highlighted, so a grade is explained,
+    not asserted. `leaderboard generate` now emits a `breakdown` per row and
+    per-tool `capabilities` (blast-radius tags).
+  - **Methodology & limitations** section — capability-weight table with
+    rationale, detection-confidence tiers, an explicit *Limitations* list
+    (heuristic, false positives/negatives, static-only, deps capped at C), and a
+    copy-paste command to reproduce any row.
+  - **Responsible framing** — every detail page states it is "an automated risk
+    signal, not a vulnerability claim", notes that high capability ≠ malice,
+    labels the `demo/malicious_server.py` positive control as a calibration
+    fixture, and links a false-positive dispute path.
+  - **Pending hidden by default** (56 scanned surface first, not 132 rows of
+    backlog); average risk is labelled "over N scanned".
+  - **Clickable grade-distribution histogram** (filters the table), a
+    **highest-risk top-5** list, per-finding **confidence badges**, table header
+    tooltips, zebra striping, a grade/🔥-trending legend, **pagination** (25/page),
+    per-server **JSON download**, a **CC-BY** data-license note, and removal of
+    the premature "Enterprise integration" panel.
 - **Daily trending scan** — a scheduled job ranks the most popular MCP servers
   and folds them into the leaderboard automatically. Popularity is not in the
   MCP registry (which has no ranking and is far too large to score daily), so

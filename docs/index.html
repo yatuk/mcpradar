@@ -224,7 +224,34 @@ thead th[aria-sort="descending"]::after { content: "▼"; opacity: 1; color: var
 thead th[aria-sort="none"]::after { content: "⇅"; }
 tbody td { padding: 9px 10px; border-bottom: 1px solid var(--border); white-space: nowrap; }
 tbody tr:last-child td { border-bottom: none; }
-tbody tr:hover td { background: rgba(255,255,255,0.025); }
+tbody tr:nth-child(even) td { background: rgba(128,128,128,0.04); }
+tbody tr:hover td { background: rgba(255,255,255,0.05); }
+.legend {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  font-size: 11px; color: var(--dim); margin-bottom: 8px;
+}
+.legend .grade-badge { cursor: default; }
+.legend-sep { margin-right: 12px; }
+.method-table {
+  display: grid; grid-template-columns: max-content max-content 1fr; gap: 3px 12px;
+  font-size: 12px; margin-top: 6px; align-items: baseline;
+}
+.method-table span:nth-child(3n+1) { font-family: ui-monospace, monospace; color: var(--text); }
+.method-table span:nth-child(3n+2) { font-weight: 700; text-align: right; }
+.method-table span:nth-child(3n) { color: var(--dim); }
+.method-list { margin: 6px 0 0 18px; font-size: 12px; line-height: 1.6; }
+.method-list li { margin-bottom: 3px; }
+.method-repro {
+  background: var(--bg); border: 1px solid var(--border); border-radius: 4px;
+  padding: 8px 10px; font-size: 12px; overflow-x: auto; margin-top: 4px; color: var(--text);
+}
+.top-risky-row {
+  display: flex; align-items: center; gap: 8px; padding: 3px 4px; border-radius: 4px;
+  text-decoration: none; color: var(--text); font-size: 12px;
+}
+.top-risky-row:hover { background: var(--card); }
+.top-risky-row .tr-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.top-risky-row .tr-score { color: var(--dim); font-weight: 700; }
 .server-link { color: var(--blue); text-decoration: none; }
 .server-link:hover { text-decoration: underline; }
 .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 11px; color: var(--dim); }
@@ -408,6 +435,42 @@ tbody tr:hover td { background: rgba(255,255,255,0.025); }
 .page-btn.on { background: var(--blue); border-color: var(--blue); color: #fff; cursor: default; }
 .page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 .page-ellipsis { padding: 0 2px; color: var(--dim); }
+.cap-tag {
+  font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 3px;
+  border: 1px solid currentColor; white-space: nowrap; margin-left: 3px; opacity: 0.9;
+}
+.decomp-intro { color: var(--dim); font-size: 12px; margin-bottom: 10px; }
+.decomp-row {
+  display: grid; grid-template-columns: 160px 1fr 42px; grid-template-areas: "label bar val" "note note note";
+  gap: 2px 10px; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--border);
+}
+.decomp-row:last-child { border-bottom: none; }
+.decomp-label { grid-area: label; font-weight: 600; font-size: 12px; }
+.decomp-drives { font-size: 9px; font-weight: 700; color: var(--blue); }
+.decomp-bar { grid-area: bar; height: 8px; background: var(--card); border-radius: 4px; overflow: hidden; }
+.decomp-fill { height: 100%; background: var(--dim); border-radius: 4px; opacity: 0.5; }
+.decomp-fill.on { background: var(--blue); opacity: 1; }
+.decomp-val { grid-area: val; text-align: right; font-weight: 700; font-size: 13px; }
+.decomp-row.on .decomp-val { color: var(--blue); }
+.decomp-note { grid-area: note; font-size: 11px; color: var(--dim); }
+.disclaimer {
+  margin-top: 14px; padding: 10px 14px; background: var(--card);
+  border: 1px solid var(--border); border-left: 3px solid var(--yellow); border-radius: 6px;
+  font-size: 12px; color: var(--dim); line-height: 1.5;
+}
+.disclaimer p { margin: 4px 0; }
+.disclaimer b { color: var(--text); }
+.disclaimer a { color: var(--blue); }
+.grade-seg {
+  border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 700; color: #000; padding: 0;
+}
+.grade-seg:hover { filter: brightness(1.15); }
+.grade-seg-legend {
+  background: none; border: none; cursor: pointer; color: var(--dim); font-size: 10px;
+  padding: 1px 3px; border-radius: 3px;
+}
+.grade-seg-legend:hover { background: var(--card); }
 .finding-desc { color: var(--dim); grid-column: 4; }
 
 .tool-mini-list { font-size: 12px; }
@@ -546,7 +609,7 @@ footer a:hover { text-decoration: underline; }
 
 <!-- ===== METHODOLOGY PANEL ===== -->
 <details class="methodology" id="methodologyPanel">
-<summary>How scores work ▾</summary>
+<summary>How scores work · methodology &amp; limitations ▾</summary>
 <div class="body">
   <p><strong>AIVSS</strong> (AI Vulnerability Scoring System) rates MCP server security
   on a <strong>0–10</strong> scale where <strong>0 = safe</strong> and
@@ -574,7 +637,50 @@ footer a:hover { text-decoration: underline; }
   used to detect tool-list changes across scans (drift detection).</p><br>
   <p><strong>Scope</strong>: <i>schema</i> = tool schemas analyzed,
   <i>fingerprint</i> = tool signature comparison, <i>cve</i> = known-vulnerability
-  matching against OSV/GitHub Advisory.</p>
+  matching against OSV/GitHub Advisory.</p><br>
+
+  <p><strong>Capability weights (AARS)</strong> — each tool is tagged by blast
+  radius; the server's AARS is the highest present plus a small breadth bonus:</p>
+  <div class="method-table">
+    <span>code_exec</span><span>8.0</span><span>arbitrary command / code execution</span>
+    <span>browser_control</span><span>6.0</span><span>drives a real browser (SSRF, web actions)</span>
+    <span>db_write</span><span>5.0</span><span>mutates a database</span>
+    <span>fs_write</span><span>4.0</span><span>creates / edits / deletes files</span>
+    <span>secret_access</span><span>3.0</span><span>handles credentials / tokens</span>
+    <span>net_egress</span><span>2.0</span><span>sends data to the network</span>
+    <span>fs_read</span><span>1.0</span><span>reads files</span>
+    <span>pure_compute</span><span>0.0</span><span>no side effect</span>
+  </div>
+  <p style="margin-top:6px">Weights are ordinal (exec &gt; browser &gt; db-write &gt;
+  fs-write &gt; secrets &gt; egress &gt; read &gt; none), matching the OWASP AIVSS
+  principle that autonomy and tool-use amplify a baseline. Full justification:
+  <a href="https://github.com/yatuk/mcpradar/blob/main/docs/scoring-model.md" style="color:var(--blue)">scoring-model.md</a>.</p><br>
+
+  <p><strong>Detection confidence</strong> — every finding carries a separate
+  true-positive likelihood: <b>0.9</b> exact/AST/CVE, <b>0.7</b> heuristic,
+  <b>0.5</b> inferential. Shown per finding on each detail page.</p><br>
+
+  <p><strong>Limitations — read this.</strong></p>
+  <ul class="method-list">
+    <li>Every rule is <em>opinionated</em>. The checks are heuristics: they
+      produce <b>both false positives and false negatives</b>. A grade is a
+      signal, not a verdict.</li>
+    <li>This is <b>not a one-size-fits-all</b> measure of security. A high-capability
+      server (shell, browser) is <em>designed</em> to be powerful — a low grade
+      reflects blast radius, not bad code.</li>
+    <li>Most findings are <b>static</b> (schema + source + dependencies). We do
+      not execute tools, so runtime-only behaviour is out of scope.</li>
+    <li>Dependency CVEs are reachability-<em>unknown</em> and shared across the
+      ecosystem, so they are capped at grade C and never fail a server alone.</li>
+    <li>A server that could not be launched or fetched is marked
+      <b>incomplete</b>, never graded a clean A.</li>
+  </ul>
+  <p style="margin-top:6px">Found a false positive? <a href="https://github.com/yatuk/mcpradar/issues/new" style="color:var(--blue)">Open an issue</a> — every finding is disputable.</p><br>
+
+  <p><strong>Reproduce any row</strong> — the scan is deterministic and open source:</p>
+  <pre class="method-repro">uvx mcpradar scan "npx -y &lt;package&gt;" -t stdio --json</pre>
+  <p style="margin-top:4px">or scan straight from a package with no local checkout:
+  <code>uvx mcpradar deps npm:&lt;package&gt;</code>.</p>
   <span class="cal-badge" id="calBadge" style="display:none"></span>
 </div>
 </details>
@@ -603,21 +709,6 @@ footer a:hover { text-decoration: underline; }
 </div>
 </details>
 
-<!-- ===== ENTERPRISE PANEL ===== -->
-<details class="methodology" id="enterprisePanel">
-<summary>Enterprise Integration ▾</summary>
-<div class="body">
-  <p><strong>SOC/SIEM ingestion:</strong> Export findings as SARIF v2.1.0 via the Download button
-  on each server detail page. Ingest into <strong>Splunk</strong> (SARIF add-on),
-  <strong>Elastic Security</strong> (via sarif-to-elastic pipeline), or
-  <strong>Microsoft Sentinel</strong> (Logic Apps SARIF connector).</p><br>
-  <p><strong>Automated monitoring:</strong> Poll <code>data.json</code> weekly and diff
-  tool hashes to detect silent additions. Use <code>mcpradar audit diff</code> to
-  compare snapshots programmatically.</p><br>
-  <p>Detailed guides: <a href="https://github.com/yatuk/mcpradar/blob/main/docs/enterprise.md" style="color:var(--blue)">Enterprise Integration docs</a></p>
-</div>
-</details>
-
 <!-- ===== STATS BAR ===== -->
 <div class="stats-bar" id="statsBar" aria-live="polite">Loading…</div>
 
@@ -633,6 +724,10 @@ footer a:hover { text-decoration: underline; }
     <div style="flex:1;min-width:280px">
       <strong style="color:var(--text)">Top Vulnerabilities</strong>
       <div id="vulnDist" style="margin-top:6px"></div>
+    </div>
+    <div style="flex:1;min-width:220px">
+      <strong style="color:var(--text)">Highest risk</strong>
+      <div id="topRisky" style="margin-top:6px"></div>
     </div>
   </div>
 </div>
@@ -655,9 +750,9 @@ footer a:hover { text-decoration: underline; }
 </div>
 <div class="extra-filters">
   <select id="scanStatusFilter" aria-label="Filter by scan status">
+    <option value="scanned" selected>Scanned only</option>
     <option value="">All (scanned + pending)</option>
-    <option value="scanned">Scanned only</option>
-    <option value="pending">Pending only</option>
+    <option value="pending">Pending queue</option>
   </select>
   <select id="apiFreeFilter" aria-label="Filter by API-free status">
     <option value="">All Servers</option>
@@ -700,21 +795,26 @@ footer a:hover { text-decoration: underline; }
 
 <!-- ===== MAIN VIEW ===== -->
 <div id="mainView">
+  <div class="legend" aria-hidden="true">
+    <span class="grade-badge A">A</span><span class="grade-badge B">B</span><span class="grade-badge C">C</span><span class="grade-badge D">D</span><span class="grade-badge F">F</span>
+    <span class="legend-sep">lower risk → higher risk</span>
+    <span class="trending-tag">🔥 trending</span> auto-scanned popular server
+  </div>
   <!-- Desktop table -->
   <div class="table-wrap" id="tableWrap">
     <table>
       <thead>
         <tr>
-          <th data-sort="rank" scope="col" aria-sort="ascending">Rank</th>
-          <th data-sort="server" scope="col" aria-sort="none">Server</th>
-          <th data-sort="risk" scope="col" aria-sort="none">Risk <span style="font-weight:400;font-size:10px;text-transform:none;letter-spacing:0">0→10</span></th>
-          <th data-sort="grade" scope="col" aria-sort="none">Grade</th>
-          <th scope="col">Trend</th>
-          <th scope="col">Scope</th>
-          <th data-sort="tools" scope="col" aria-sort="none">Tools</th>
-          <th data-sort="findings" scope="col" aria-sort="none">Findings</th>
-          <th data-sort="last_scanned" scope="col" aria-sort="none">Scanned</th>
-          <th data-sort="hash" scope="col" aria-sort="none">Hash</th>
+          <th data-sort="rank" scope="col" aria-sort="ascending" title="Position by ascending risk">Rank</th>
+          <th data-sort="server" scope="col" aria-sort="none" title="MCP server name (click to sort A–Z)">Server</th>
+          <th data-sort="risk" scope="col" aria-sort="none" title="AIVSS risk score, 0 (safe) to 10 (critical)">Risk <span style="font-weight:400;font-size:10px;text-transform:none;letter-spacing:0">0→10</span></th>
+          <th data-sort="grade" scope="col" aria-sort="none" title="Letter grade A–F derived from the risk score">Grade</th>
+          <th scope="col" title="Risk score trend across past scans">Trend</th>
+          <th scope="col" title="Analysis scope and the server's dominant capability (blast radius)">Scope</th>
+          <th data-sort="tools" scope="col" aria-sort="none" title="Number of tools the server exposes">Tools</th>
+          <th data-sort="findings" scope="col" aria-sort="none" title="MEDIUM+ rules triggered in this scan (click to see them)">Findings</th>
+          <th data-sort="last_scanned" scope="col" aria-sort="none" title="Date of the most recent scan">Scanned</th>
+          <th data-sort="hash" scope="col" aria-sort="none" title="SHA-256 of the sorted tool names — changes when tools change (drift detection)">Hash</th>
         </tr>
       </thead>
       <tbody id="tbody"></tbody>
@@ -733,9 +833,21 @@ footer a:hover { text-decoration: underline; }
 
 <!-- ===== FOOTER ===== -->
 <footer>
-  Scores computed by <strong>MCPRadar AIVSS engine</strong>.
-  Updated weekly via GitHub Actions. &nbsp;|&nbsp;
-  <a href="https://github.com/yatuk/mcpradar">GitHub</a>
+  <div>
+    Scores computed by <strong>MCPRadar AIVSS engine</strong>.
+    Updated daily via GitHub Actions.
+  </div>
+  <div style="margin-top:6px">
+    <b>Data:</b>
+    <a href="data.json" download>data.json</a> &middot;
+    <a href="https://github.com/yatuk/mcpradar">GitHub</a> &middot;
+    per-server JSON &amp; SARIF on each detail page
+  </div>
+  <div style="margin-top:6px;color:var(--dim);font-size:11px">
+    Scan data is released under
+    <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC-BY 4.0</a> —
+    reuse it, cite MCPRadar. These are automated risk signals, not vulnerability claims.
+  </div>
 </footer>
 
 <!-- ========================================================================
@@ -784,7 +896,7 @@ footer a:hover { text-decoration: underline; }
   var activeCategory = "";
   var activeVulnType = "";
   var activeApiFree = "";
-  var activeScanStatus = "";
+  var activeScanStatus = "scanned";  // default: hide the pending backlog
   var currentPage = 1;
   var pageSize = 25;
 
@@ -990,7 +1102,7 @@ footer a:hover { text-decoration: underline; }
     statsBar.innerHTML =
       '<span><strong>' + scanned + '</strong> scanned' + previewHtml + '</span>' +
       (pending > 0 ? '<span><strong>' + pending + '</strong> pending</span>' : '') +
-      (scanned >= 5 ? '<span>Avg risk <strong>' + avg + '</strong></span>' : '') +
+      (scanned >= 5 ? '<span>Avg risk <strong>' + avg + '</strong> <span style="color:var(--dim);font-weight:400">over ' + scanned + ' scanned</span></span>' : '') +
       (latest ? '<span>Updated <strong>' + latest + '</strong></span>' : '');
 
     // Calibration badge: describe the real scanned coverage, not the full
@@ -1019,19 +1131,39 @@ footer a:hover { text-decoration: underline; }
       var g = (allServers[i].grade || "").toUpperCase();
       if (gradeCounts[g] !== undefined) gradeCounts[g]++;
     }
-    var ghtml = '<div style="display:flex;height:20px;border-radius:3px;overflow:hidden;gap:2px;margin-bottom:4px">';
+    // Distribution is over *scanned* servers only (pending carry no grade).
+    var scannedTotal = gradeCounts.A + gradeCounts.B + gradeCounts.C + gradeCounts.D + gradeCounts.F;
+    var ghtml = '<div style="display:flex;height:20px;border-radius:3px;overflow:hidden;gap:2px;margin-bottom:4px" title="Click a grade to filter">';
     for (var j = 0; j < grades.length; j++) {
       var gc = grades[j];
-      var pct = total > 0 ? (gradeCounts[gc] / total * 100).toFixed(1) : 0;
-      ghtml += '<div style="width:' + pct + '%;background:' + gradeColors[gc] + ';display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;color:#000;min-width:' + (gradeCounts[gc] > 0 ? '24px' : '0') + '" title="' + gc + ': ' + gradeCounts[gc] + ' servers">' + (gradeCounts[gc] > 0 ? gradeCounts[gc] : '') + '</div>';
+      var pct = scannedTotal > 0 ? (gradeCounts[gc] / scannedTotal * 100).toFixed(1) : 0;
+      ghtml += '<button class="grade-seg" data-grade-bar="' + gc + '" style="width:' + pct + '%;background:' + gradeColors[gc] + ';min-width:' + (gradeCounts[gc] > 0 ? '24px' : '0') + '" title="' + gc + ': ' + gradeCounts[gc] + ' scanned — click to filter">' + (gradeCounts[gc] > 0 ? gradeCounts[gc] : '') + '</button>';
     }
     ghtml += '</div>';
-    ghtml += '<div style="font-size:10px;color:var(--dim);display:flex;gap:10px">';
+    ghtml += '<div style="font-size:10px;color:var(--dim);display:flex;gap:8px;flex-wrap:wrap">';
     for (var k = 0; k < grades.length; k++) {
-      ghtml += '<span><span style="color:' + gradeColors[grades[k]] + '">' + grades[k] + '</span>: ' + gradeCounts[grades[k]] + '</span>';
+      ghtml += '<button class="grade-seg-legend" data-grade-bar="' + grades[k] + '"><span style="color:' + gradeColors[grades[k]] + '">' + grades[k] + '</span>: ' + gradeCounts[grades[k]] + '</button>';
     }
+    ghtml += '<span style="margin-left:auto">' + scannedTotal + ' scanned</span>';
     ghtml += '</div>';
-    document.getElementById("gradeDist").innerHTML = ghtml;
+    var gd = document.getElementById("gradeDist");
+    gd.innerHTML = ghtml;
+    // Clicking a grade segment/chip narrows the table to that grade.
+    var segs = gd.querySelectorAll("[data-grade-bar]");
+    for (var gi = 0; gi < segs.length; gi++) {
+      segs[gi].addEventListener("click", function () {
+        var g = this.getAttribute("data-grade-bar");
+        activeGrades = { A: false, B: false, C: false, D: false, F: false };
+        activeGrades[g] = true;
+        syncGradeButtons();
+        activeScanStatus = "scanned";
+        var ssf = document.getElementById("scanStatusFilter");
+        if (ssf) ssf.value = "scanned";
+        fullRender();
+        var tw = document.getElementById("tableWrap");
+        if (tw && tw.scrollIntoView) tw.scrollIntoView({ block: "start", behavior: "smooth" });
+      });
+    }
 
     // Vulnerability type distribution (top 8)
     var vulnCounts = {};
@@ -1057,6 +1189,21 @@ footer a:hover { text-decoration: underline; }
       }
     }
     document.getElementById("vulnDist").innerHTML = vhtml;
+
+    // Highest-risk scanned servers — the 5 worst grades, most visible.
+    var scannedOnly = allServers.filter(function (s) { return !isPending(s); });
+    scannedOnly.sort(function (a, b) { return (b.aivss_score || 0) - (a.aivss_score || 0); });
+    var thtml = "";
+    for (var ri = 0; ri < Math.min(5, scannedOnly.length); ri++) {
+      var rs = scannedOnly[ri];
+      var rg = rs.grade || "-";
+      thtml += '<a class="top-risky-row" href="#server=' + encodeServer(rs.server || "") + '">' +
+        '<span class="grade-badge ' + rg + '">' + rg + '</span>' +
+        '<span class="tr-name">' + esc(rs.display_name || rs.server || "-") + '</span>' +
+        '<span class="tr-score">' + (rs.aivss_score != null ? rs.aivss_score.toFixed(1) : "-") + '</span></a>';
+    }
+    document.getElementById("topRisky").innerHTML = thtml ||
+      '<span style="color:var(--dim);font-size:11px">No scans yet.</span>';
   }
 
   /* ------------------------------------------------------------------
@@ -1079,6 +1226,77 @@ footer a:hover { text-decoration: underline; }
     var aars = s.aars != null ? " · AARS " + s.aars.toFixed(1) : "";
     return '<div class="item">Capability: <b style="color:' + info[1] + '">' +
       esc(s.capability) + '</b> <span style="color:var(--dim)">— ' + esc(info[0]) + aars + '</span></div>';
+  }
+
+  // Per-tool capability chips (blast-radius classes).
+  function capTagsHtml(caps) {
+    if (!caps || !caps.length) return "";
+    var html = "";
+    for (var i = 0; i < caps.length; i++) {
+      var info = CAP_LABELS[caps[i]] || [caps[i], "var(--dim)"];
+      html += '<span class="cap-tag" title="' + esc(info[0]) + '" style="border-color:' +
+        info[1] + ';color:' + info[1] + '">' + esc(caps[i]) + '</span>';
+    }
+    return html;
+  }
+
+  // Decompose the AIVSS into its three candidate terms; the score is their max.
+  function scoreDecompositionHtml(s) {
+    if (isPending(s) || !s.breakdown) return "";
+    var b = s.breakdown;
+    var score = s.aivss_score != null ? s.aivss_score : 0;
+    function row(key, label, val, note) {
+      var on = key === b.driver;
+      var pct = Math.min(100, Math.max(2, (val / 10) * 100));
+      return '<div class="decomp-row' + (on ? ' on' : '') + '">' +
+        '<div class="decomp-label">' + label +
+        (on ? ' <span class="decomp-drives">drives the grade</span>' : '') + '</div>' +
+        '<div class="decomp-bar"><div class="decomp-fill' + (on ? ' on' : '') +
+        '" style="width:' + pct + '%"></div></div>' +
+        '<div class="decomp-val">' + val.toFixed(2) + '</div>' +
+        '<div class="decomp-note">' + note + '</div></div>';
+    }
+    var html = '<div class="detail-section"><h3>Why this score — AIVSS ' + score.toFixed(1) +
+      ' (' + esc(s.grade || "-") + ')</h3>';
+    html += '<p class="decomp-intro">The score is the <b>highest</b> of three independent ' +
+      'terms — capability can only <em>raise</em> risk, never discount a finding.</p>';
+    html += '<div class="decomp">';
+    html += row("findings", "Findings base", b.base,
+      b.weighted_findings ? ("severity-weighted MEDIUM+ findings (" + b.weighted_findings +
+      " pts) over " + (s.tools || 0) + " tools") : "no MEDIUM+ schema/source findings");
+    html += row("capability", "Capability layer", b.capability_term,
+      "AARS " + b.aars.toFixed(1) + " blast radius · ((base + AARS) / 2)" +
+      (b.thm !== 1 ? " × ThM " + b.thm + " (insecure transport)" : " × 1.0"));
+    html += row("dependencies", "Dependency risk", b.dep_risk,
+      b.dep_risk > 0 ? "vulnerable transitive dependencies (capped at grade C)"
+        : "no vulnerable dependencies found");
+    html += '</div></div>';
+    return html;
+  }
+
+  // Responsible-use framing shown on every detail page.
+  function disclaimerHtml(s) {
+    var id = (s.server || "") + " " + (s.display_name || "");
+    var isFixture = /malicious|demo\//i.test(id);
+    var html = '<div class="disclaimer">';
+    if (isFixture) {
+      html += '<p><b>⚠ Calibration fixture — not a real server.</b> This is MCPRadar\'s ' +
+        'intentionally-vulnerable positive control, used to prove the scoring floor reaches ' +
+        'F. It is not published as a usable server.</p>';
+    }
+    html += '<p>This is an <b>automated risk signal, not a vulnerability claim.</b> ' +
+      'Scores come from heuristic rules that can false-positive and false-negative. ' +
+      'A high grade is not a safety certificate; a low grade is not proof of a flaw.</p>';
+    if (s.capability && s.capability !== "pure_compute" && !isFixture) {
+      html += '<p><b>High capability ≠ malice.</b> A server can score low simply because it ' +
+        'is designed to run commands or write files — a large blast radius, not bad code. ' +
+        'Judge it against what it is meant to do.</p>';
+    }
+    html += '<p><a href="https://github.com/yatuk/mcpradar/issues/new?title=' +
+      encodeURIComponent("False positive: " + (s.server || "")) +
+      '" target="_blank" rel="noopener">Dispute a finding →</a></p>';
+    html += '</div>';
+    return html;
   }
 
   function renderScopeTags(s) {
@@ -1541,7 +1759,15 @@ footer a:hover { text-decoration: underline; }
     html += '<div class="item">Scope: ' + renderScopeTags(s) + '</div>';
     html += '</div>';
     html += '<button class="sarif-btn" id="sarifBtn" title="Download SARIF v2.1.0 report">Download SARIF</button>';
+    html += '<button class="sarif-btn" id="jsonBtn" title="Download this server\'s raw result as JSON" style="margin-left:6px">Download JSON</button>';
     html += '</div>';
+
+    // "Why this score" — decompose the AIVSS into its three candidate terms so
+    // the grade is defensible, not just asserted.
+    html += scoreDecompositionHtml(s);
+
+    // Responsible-use disclaimer.
+    html += disclaimerHtml(s);
 
     // Findings section with accordion groups
     html += '<div class="detail-section">';
@@ -1591,7 +1817,7 @@ footer a:hover { text-decoration: underline; }
       for (var tx = 0; tx < tools.length; tx++) {
         var t = tools[tx];
         html += '<div class="tool-mini">';
-        html += '<span class="tn">' + esc(t.name || "-") + '</span>';
+        html += '<span class="tn">' + esc(t.name || "-") + ' ' + capTagsHtml(t.capabilities) + '</span>';
         html += '<span class="td">' + esc((t.description || "-").substring(0, 140)) + '</span>';
         if (t.input_schema) {
           var schemaId = 'schema-in-' + tx;
@@ -1614,6 +1840,18 @@ footer a:hover { text-decoration: underline; }
     var btn = document.getElementById("sarifBtn");
     if (btn) {
       btn.onclick = function () { downloadSarif(decoded, s); };
+    }
+    var jbtn = document.getElementById("jsonBtn");
+    if (jbtn) {
+      jbtn.onclick = function () {
+        var blob = new Blob([JSON.stringify(s, null, 2)], { type: "application/json" });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement("a");
+        a.href = url;
+        a.download = (s.server || "server").replace(/[^A-Za-z0-9_.-]+/g, "_") + ".json";
+        a.click();
+        URL.revokeObjectURL(url);
+      };
     }
     window.scrollTo(0, 0);
   }
@@ -1658,6 +1896,18 @@ footer a:hover { text-decoration: underline; }
   /* ------------------------------------------------------------------
      Full Render
      ------------------------------------------------------------------ */
+  // Reflect the activeGrades state onto the grade filter buttons (used when a
+  // grade is chosen from the distribution histogram, not the buttons).
+  function syncGradeButtons() {
+    var btns = document.querySelectorAll(".grade-btn");
+    var allOn = activeGrades.A && activeGrades.B && activeGrades.C && activeGrades.D && activeGrades.F;
+    for (var i = 0; i < btns.length; i++) {
+      var g = btns[i].getAttribute("data-grade");
+      var on = g === "all" ? allOn : !!activeGrades[g];
+      btns[i].classList.toggle("on", on);
+    }
+  }
+
   function fullRender() {
     // A filter/search/sort change alters the result set, so restart at page 1.
     currentPage = 1;

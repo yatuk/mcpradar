@@ -2515,7 +2515,11 @@ def leaderboard_generate(
             # AARS — the agentic capability blast radius (code exec, fs write,
             #   browser control, …) so a powerful server is non-A even clean.
             # ThM — environmental threat multiplier (insecure transport).
-            from mcpradar.scoring.capability import compute_aars, dominant_capability
+            from mcpradar.scoring.capability import (
+                compute_aars,
+                dominant_capability,
+                tag_tool,
+            )
 
             weighted = sev["critical"] * 10 + sev["high"] * 7 + sev["medium"] * 4
             base = weighted / max(tools, 3)
@@ -2538,7 +2542,8 @@ def leaderboard_generate(
             )
             dep_risk = min(4.9, dep_weighted)
 
-            score = min(10.0, round(max(base, (base + aars) / 2 * thm, dep_risk), 1))
+            capability_term = round((base + aars) / 2 * thm, 2)
+            score = min(10.0, round(max(base, capability_term, dep_risk), 1))
             if score <= 0.9:
                 grade = "A"
             elif score <= 2.9:
@@ -2549,6 +2554,24 @@ def leaderboard_generate(
                 grade = "D"
             else:
                 grade = "F"
+
+            # Score decomposition so the detail page can show *why* a server got
+            # its grade, not just the number. The final score is the max of three
+            # terms; `driver` names which one set it.
+            _terms = {
+                "findings": round(base, 2),
+                "capability": capability_term,
+                "dependencies": round(dep_risk, 2),
+            }
+            breakdown = {
+                "base": round(base, 2),
+                "aars": round(aars, 2),
+                "capability_term": capability_term,
+                "thm": thm,
+                "dep_risk": round(dep_risk, 2),
+                "weighted_findings": weighted,
+                "driver": max(_terms, key=lambda k: _terms[k]),
+            }
 
             # Detail lists the MEDIUM+ findings that drive the grade, each with
             # its detection confidence (how likely a true positive — separate
@@ -2620,6 +2643,7 @@ def leaderboard_generate(
                             "description": (t.get("description", "") or "")[:400],
                             "input_schema": t.get("input_schema", {}),
                             "output_schema": t.get("output_schema", {}),
+                            "capabilities": sorted(tag_tool(t)),
                         }
                         for t in tool_objs
                         if isinstance(t, dict)
@@ -2641,6 +2665,7 @@ def leaderboard_generate(
                     "status": "scanned",
                     "trending": bool(data.get("trending")),
                     "popularity": data.get("popularity"),
+                    "breakdown": breakdown,
                 }
             )
 
