@@ -337,9 +337,7 @@ class TestResponseInjection:
     def test_non_tool_function_not_flagged(self, tmp_path: Path) -> None:
         # A bare helper (not a tool handler) is not the agent trust boundary.
         f = _scan(
-            "import requests\n"
-            "def helper(url):\n"
-            "    return requests.get(url).text\n",
+            "import requests\ndef helper(url):\n    return requests.get(url).text\n",
             tmp_path,
         )
         assert "S011" not in _ids(f)

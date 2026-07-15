@@ -45,9 +45,7 @@ class TestCheckServerAuth:
         assert check_server_auth("https://x/mcp", "http") == []
 
     def test_healthy_oauth_no_findings(self) -> None:
-        findings = check_server_auth(
-            "https://x/mcp", "http", has_iss=True, has_pkce_s256=True
-        )
+        findings = check_server_auth("https://x/mcp", "http", has_iss=True, has_pkce_s256=True)
         assert findings == []
 
 
@@ -96,9 +94,7 @@ class TestProbeOAuthMetadata:
                     200, json={"authorization_servers": ["https://as.example.com"]}
                 )
             if req.url.path.endswith("oauth-authorization-server"):
-                return httpx.Response(
-                    200, json={"code_challenge_methods_supported": ["plain"]}
-                )
+                return httpx.Response(200, json={"code_challenge_methods_supported": ["plain"]})
             return httpx.Response(404)
 
         _mock_httpx(monkeypatch, handler)
