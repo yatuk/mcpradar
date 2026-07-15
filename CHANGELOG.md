@@ -8,6 +8,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
+- **Per-finding detection confidence** — every finding now carries a confidence
+  in [0.0, 1.0] answering "how likely a true positive" (a separate axis from
+  severity, "how bad if true"), derived from *how* the rule detects: 0.9 for
+  exact/deterministic detectors (regex+entropy secret, AST node, OSV CVE
+  lookup), 0.7 for heuristics (keyword/config smell, or a precise match whose
+  reachability is unproven), 0.5 for inferential signals (cross-signal,
+  description-code inconsistency). The map lives in one low-level module
+  `src/mcpradar/scoring/confidence.py` covering every rule family
+  (R/S/D/C/M/T); the scan report, enrichment, and leaderboard emit it, and the
+  leaderboard UI shows a colored confidence badge per finding.
+- **R112 OAuth metadata probing** — the authorization-hardening rule now
+  actually observes a server's OAuth posture instead of skipping it. New
+  `src/mcpradar/probe/oauth.py` does read-only discovery per the MCP auth spec
+  (RFC 9728 protected-resource metadata → RFC 8414 authorization-server
+  metadata) and reads the `iss` (RFC 9207) and PKCE `S256` signals. Runs for
+  http/sse transports only, best-effort. New R112-4 finding (HIGH): the
+  authorization server does not advertise PKCE `S256`, which OAuth 2.1 (mandated
+  by the MCP spec) requires.
+- **S011 tool-output / response injection** — a new source rule flagging a tool
+  handler that fetches a *caller-controlled* URL and returns the raw body
+  straight to the agent, a textbook indirect-prompt-injection channel. Gated on
+  a dynamic URL host so pinned-host API clients (the common benign case) are not
+  flagged; only tool handlers (the agent trust boundary) are scanned. MEDIUM.
 - **Leaderboard enrichment** (`mcpradar leaderboard enrich`) — connects the
   source/dependency scanners to the leaderboard. For each scanned server it
   derives the published package from the launch command (`npx`/`uvx`), fetches
