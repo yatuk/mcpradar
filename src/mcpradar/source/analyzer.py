@@ -14,6 +14,8 @@ schema rules (``R``) and cross-server rules (``C``):
 - S008  Trojan Source: bidirectional / invisible unicode (CVE-2021-42574)
 - S009  Network exposure: server binds to all interfaces (0.0.0.0 / DNS rebinding)
 - S010  Token passthrough / confused deputy (forwards the caller's auth token)
+- S011  Tool-output / response injection (returns raw content fetched from a
+        caller-controlled URL straight to the agent — indirect prompt injection)
 """
 
 from __future__ import annotations
@@ -153,6 +155,22 @@ def _dotted_name(node: ast.AST) -> str:
     if isinstance(cur, ast.Name):
         parts.append(cur.id)
     return ".".join(reversed(parts))
+
+
+def _root_name(node: ast.AST | None) -> str | None:
+    """The base identifier of an attribute/subscript/call chain.
+
+    ``resp.json()`` → ``resp``; ``r.headers["x"]`` → ``r``; ``x`` → ``x``.
+    """
+    cur = node
+    while True:
+        if isinstance(cur, (ast.Attribute, ast.Subscript, ast.Await)):
+            cur = cur.value
+        elif isinstance(cur, ast.Call):
+            cur = cur.func
+        else:
+            break
+    return cur.id if isinstance(cur, ast.Name) else None
 
 
 def _is_constant_str(node: ast.AST | None) -> bool:
@@ -329,6 +347,7 @@ class SourceAnalyzer:
         findings += self._scan_dci(tree, rel)
         findings += self._scan_bind_exposure(tree, rel)
         findings += self._scan_token_passthrough(tree, rel)
+        findings += self._scan_response_injection(tree, rel)
         return findings
 
     # ------------------------------------------------------------------
@@ -405,6 +424,120 @@ class SourceAnalyzer:
                         return True
             if kw.arg == "auth" and value_is_incoming(kw.value):
                 return True
+        return False
+
+    # ------------------------------------------------------------------
+    # S011: tool-output / response injection
+    # ------------------------------------------------------------------
+    def _scan_response_injection(self, tree: ast.AST, loc: str) -> list[Finding]:
+        """Flag a tool handler that returns content fetched from a
+        *caller-controlled* URL straight back to the agent.
+
+        Tool output is a trust boundary: whatever a tool returns is read by the
+        LLM as instructions-eligible text. A handler that fetches an arbitrary
+        user-supplied URL and hands back the raw body is a textbook indirect
+        prompt-injection channel — the attacker controls both the destination
+        and the returned content.
+
+        FP guard: we only look at fetches whose URL *host* is dynamic
+        (``_url_host_is_dynamic``). A pinned API client (``get_weather`` calling
+        a fixed endpoint and returning JSON) is the common benign case and is
+        deliberately not flagged.
+        """
+        found: list[Finding] = []
+        for fn in self._tool_functions(tree):
+            # Pre-filter: the handler must contain at least one dynamic-host
+            # fetch, otherwise there is nothing untrusted to return.
+            if not any(
+                isinstance(n, ast.Call) and self._is_dynamic_fetch(n) for n in ast.walk(fn.node)
+            ):
+                continue
+
+            # Response objects from a dynamic-host fetch: ``resp = httpx.get(u)``.
+            resp_vars: set[str] = set()
+            for node in ast.walk(fn.node):
+                if isinstance(node, ast.Assign) and len(node.targets) == 1:
+                    tgt = node.targets[0]
+                    val = node.value.value if isinstance(node.value, ast.Await) else node.value
+                    if (
+                        isinstance(tgt, ast.Name)
+                        and isinstance(val, ast.Call)
+                        and self._is_dynamic_fetch(val)
+                    ):
+                        resp_vars.add(tgt.id)
+
+            # Body vars derived from a response (one level): ``body = resp.text``,
+            # ``data = resp.json()``, or a plain alias ``out = resp``.
+            body_vars: set[str] = set()
+            for node in ast.walk(fn.node):
+                if isinstance(node, ast.Assign) and len(node.targets) == 1:
+                    tgt = node.targets[0]
+                    val = node.value.value if isinstance(node.value, ast.Await) else node.value
+                    if isinstance(tgt, ast.Name) and _root_name(val) in resp_vars:
+                        body_vars.add(tgt.id)
+
+            for node in ast.walk(fn.node):
+                if not isinstance(node, ast.Return) or node.value is None:
+                    continue
+                if self._returns_external(node.value, resp_vars, body_vars):
+                    found.append(
+                        self._f(
+                            "S011",
+                            "Tool-output / response injection",
+                            Severity.MEDIUM,
+                            loc,
+                            node.lineno,
+                            f"Tool '{fn.name}' returns content fetched from a "
+                            "caller-controlled URL directly to the agent without "
+                            "sanitization; the raw response can carry embedded "
+                            "instructions (indirect prompt injection)",
+                            tool=fn.name,
+                        )
+                    )
+                    break  # one finding per tool
+        return found
+
+    @staticmethod
+    def _fetch_url_arg(call: ast.Call) -> ast.AST | None:
+        for kw in call.keywords:
+            if kw.arg == "url":
+                return kw.value
+        return call.args[0] if call.args else None
+
+    def _is_dynamic_fetch(self, call: ast.Call) -> bool:
+        """A network fetch whose URL host could be attacker-controlled."""
+        name = _dotted_name(call.func)
+        if name not in _NETWORK_SINKS and not name.endswith(".urlopen"):
+            return False
+        return _url_host_is_dynamic(self._fetch_url_arg(call))
+
+    def _returns_external(self, v: ast.AST, resp_vars: set[str], body_vars: set[str]) -> bool:
+        """True if a returned expression derives from an untrusted response."""
+        if isinstance(v, ast.Await):
+            v = v.value
+        # Inline fetch: ``return httpx.get(user_url).text``.
+        for sub in ast.walk(v):
+            if isinstance(sub, ast.Call) and self._is_dynamic_fetch(sub):
+                return True
+        if isinstance(v, ast.Name):
+            return v.id in resp_vars or v.id in body_vars
+        if isinstance(v, (ast.Attribute, ast.Subscript)):
+            return _root_name(v) in resp_vars or _root_name(v) in body_vars
+        if isinstance(v, ast.Call):
+            root = _root_name(v.func)
+            if root in resp_vars or root in body_vars:
+                return True
+            return any(self._returns_external(a, resp_vars, body_vars) for a in v.args)
+        if isinstance(v, ast.JoinedStr):
+            return any(
+                isinstance(p, ast.FormattedValue)
+                and self._returns_external(p.value, resp_vars, body_vars)
+                for p in v.values
+            )
+        if isinstance(v, ast.BinOp):
+            return self._returns_external(v.left, resp_vars, body_vars) or self._returns_external(
+                v.right, resp_vars, body_vars
+            )
         return False
 
     # ------------------------------------------------------------------

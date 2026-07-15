@@ -278,6 +278,73 @@ class TestTokenPassthrough:
         assert "S010" not in _ids(f)
 
 
+class TestResponseInjection:
+    _HEADER = "from mcp.server.fastmcp import FastMCP\nimport requests\nmcp = FastMCP('x')\n"
+
+    def test_assigned_body_returned_flagged(self, tmp_path: Path) -> None:
+        f = _scan(
+            self._HEADER + "@mcp.tool(description='Fetch a URL')\n"
+            "def fetch(url: str) -> str:\n"
+            "    resp = requests.get(url)\n"
+            "    return resp.text\n",
+            tmp_path,
+        )
+        s011 = [x for x in f if x.rule_id == "S011"]
+        assert len(s011) == 1
+        assert s011[0].severity == Severity.MEDIUM
+
+    def test_inline_fetch_returned_flagged(self, tmp_path: Path) -> None:
+        f = _scan(
+            self._HEADER + "@mcp.tool()\n"
+            "def fetch(url: str) -> str:\n"
+            "    return requests.get(url).text\n",
+            tmp_path,
+        )
+        assert "S011" in _ids(f)
+
+    def test_body_in_fstring_returned_flagged(self, tmp_path: Path) -> None:
+        f = _scan(
+            self._HEADER + "@mcp.tool()\n"
+            "def fetch(url: str) -> str:\n"
+            "    resp = requests.get(url)\n"
+            "    body = resp.json()\n"
+            "    return f'Result: {body}'\n",
+            tmp_path,
+        )
+        assert "S011" in _ids(f)
+
+    def test_pinned_host_body_not_flagged(self, tmp_path: Path) -> None:
+        # Fixed host; only the path varies -> trusted source, not injection.
+        f = _scan(
+            self._HEADER + "@mcp.tool()\n"
+            "def title(page: str) -> str:\n"
+            "    r = requests.get(f'https://en.wikipedia.org/wiki/{page}')\n"
+            "    return r.text[:100]\n",
+            tmp_path,
+        )
+        assert "S011" not in _ids(f)
+
+    def test_dynamic_fetch_but_returns_constant_not_flagged(self, tmp_path: Path) -> None:
+        f = _scan(
+            self._HEADER + "@mcp.tool()\n"
+            "def fetch(url: str) -> str:\n"
+            "    resp = requests.get(url)\n"
+            "    return 'ok'\n",
+            tmp_path,
+        )
+        assert "S011" not in _ids(f)
+
+    def test_non_tool_function_not_flagged(self, tmp_path: Path) -> None:
+        # A bare helper (not a tool handler) is not the agent trust boundary.
+        f = _scan(
+            "import requests\n"
+            "def helper(url):\n"
+            "    return requests.get(url).text\n",
+            tmp_path,
+        )
+        assert "S011" not in _ids(f)
+
+
 class TestClean:
     def test_clean_source_no_findings(self, tmp_path: Path) -> None:
         f = _scan(
