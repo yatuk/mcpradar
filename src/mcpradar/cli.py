@@ -2753,7 +2753,9 @@ def leaderboard_generate(
         (badges_dir / f"{slug}.svg").write_text(svg, encoding="utf-8")
         badge_count += 1
 
-    scanned_rows = [r for r in rows if r["status"] == "scanned" and r.get("aivss_score") is not None]
+    scanned_rows = [
+        r for r in rows if r["status"] == "scanned" and r.get("aivss_score") is not None
+    ]
     pending_rows = [r for r in rows if r["status"] != "scanned" or r.get("aivss_score") is None]
     console.print(
         f"[green]Generated {output}[/] — "
