@@ -105,6 +105,344 @@
         "property": "query",
         "schema": "input_schema"
       }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "aiohttp@3.13.5 (PyPI) is affected by CVE-2026-54279: aiohttp: Host-Only Cookies Become Domain Cookies After CookieJar Persistence",
+      "severity": "low",
+      "target": "aiohttp@3.13.5",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "aiohttp",
+        "version": "3.13.5",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-2fqr-mr3j-6wp8",
+        "cve": "CVE-2026-54279",
+        "cvss": 2.0,
+        "cwe_ids": [
+          "CWE-665"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/aio-libs/aiohttp/security/advisories/GHSA-2fqr-mr3j-6wp8",
+          "https://github.com/aio-libs/aiohttp"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "authlib@1.6.9 (PyPI) is affected by CVE-2026-41425: Authlib: Cross-site request forging when using cache",
+      "severity": "medium",
+      "target": "authlib@1.6.9",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "authlib",
+        "version": "1.6.9",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-jj8c-mmj3-mmgv",
+        "cve": "CVE-2026-41425",
+        "cvss": 5.4,
+        "cwe_ids": [
+          "CWE-352"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/authlib/authlib/security/advisories/GHSA-jj8c-mmj3-mmgv",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-41425",
+          "https://github.com/authlib/authlib"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "click@8.3.2 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132",
+      "severity": "high",
+      "target": "click@8.3.2",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "click",
+        "version": "8.3.2",
+        "ecosystem": "PyPI",
+        "osv_id": "PYSEC-2026-2132",
+        "cve": "CVE-2026-7246",
+        "cvss": 7.2,
+        "cwe_ids": [],
+        "fixed_version": null,
+        "references": [
+          "https://access.redhat.com/security/cve/CVE-2026-7246",
+          "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-7246.json",
+          "https://access.redhat.com/errata/RHSA-2026:24761"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "cryptography@46.0.7 (PyPI) is affected by GHSA-537c-gmf6-5ccf: Vulnerable OpenSSL included in cryptography wheels",
+      "severity": "high",
+      "target": "cryptography@46.0.7",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "cryptography",
+        "version": "46.0.7",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-537c-gmf6-5ccf",
+        "cve": "GHSA-537c-gmf6-5ccf",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-125",
+          "CWE-1395"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/pyca/cryptography/security/advisories/GHSA-537c-gmf6-5ccf",
+          "https://github.com/pyca/cryptography",
+          "https://openssl-library.org/news/secadv/20260609.txt"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "diskcache@5.6.3 (PyPI) is affected by CVE-2025-69872: DiskCache has unsafe pickle deserialization",
+      "severity": "medium",
+      "target": "diskcache@5.6.3",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "diskcache",
+        "version": "5.6.3",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-w8v5-vhqr-4h9v",
+        "cve": "CVE-2025-69872",
+        "cvss": 5.0,
+        "cwe_ids": [
+          "CWE-502"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://nvd.nist.gov/vuln/detail/CVE-2025-69872",
+          "https://github.com/EthanKim88/ethan-cve-disclosures/blob/main/CVE-2025-69872-DiskCache-Pickle-Deserialization.md",
+          "https://github.com/grantjenks/python-diskcache"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "fastmcp@2.13.3 (PyPI) is affected by CVE-2025-69196: FastMCP OAuth Proxy token reuse across MCP servers",
+      "severity": "high",
+      "target": "fastmcp@2.13.3",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "fastmcp",
+        "version": "2.13.3",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-5h2m-4q8j-pqpj",
+        "cve": "CVE-2025-69196",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-863"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/PrefectHQ/fastmcp/security/advisories/GHSA-5h2m-4q8j-pqpj",
+          "https://nvd.nist.gov/vuln/detail/CVE-2025-69196",
+          "https://github.com/PrefectHQ/fastmcp"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "idna@3.11 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted inputs to idna.encode() can bypass CVE-2024-3651 fix",
+      "severity": "medium",
+      "target": "idna@3.11",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "idna",
+        "version": "3.11",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-65pc-fj4g-8rjx",
+        "cve": "CVE-2026-45409",
+        "cvss": 5.0,
+        "cwe_ids": [
+          "CWE-1333"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/kjd/idna/security/advisories/GHSA-65pc-fj4g-8rjx",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-45409",
+          "https://github.com/kjd/idna"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "mcp@1.22.0 (PyPI) is affected by CVE-2025-66416: Model Context Protocol (MCP) Python SDK does not enable DNS rebinding protection by default",
+      "severity": "high",
+      "target": "mcp@1.22.0",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "mcp",
+        "version": "1.22.0",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-9h52-p55h-vw2f",
+        "cve": "CVE-2025-66416",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-1188",
+          "CWE-350"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/modelcontextprotocol/python-sdk/security/advisories/GHSA-9h52-p55h-vw2f",
+          "https://nvd.nist.gov/vuln/detail/CVE-2025-66416",
+          "https://github.com/modelcontextprotocol/python-sdk/commit/d3a184119e4479ea6a63590bc41f01dc06e3fa99"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "pydantic-settings@2.13.1 (PyPI) is affected by CVE-2026-58203: pydantic-settings: NestedSecretsSettingsSource follows symlinks outside secrets_dir, enabling local file read and bypassing secrets_dir_max_size",
+      "severity": "medium",
+      "target": "pydantic-settings@2.13.1",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "pydantic-settings",
+        "version": "2.13.1",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-4xgf-cpjx-pc3j",
+        "cve": "CVE-2026-58203",
+        "cvss": 5.3,
+        "cwe_ids": [
+          "CWE-22",
+          "CWE-400",
+          "CWE-59"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/pydantic/pydantic-settings/security/advisories/GHSA-4xgf-cpjx-pc3j",
+          "https://github.com/pydantic/pydantic-settings"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "pyjwt@2.12.1 (PyPI) is affected by CVE-2026-48522: PyJWKClient: missing scheme allowlist enables CVE-2024-21643-class SSRF + token forgery via file://, ftp://, data: schemes",
+      "severity": "medium",
+      "target": "pyjwt@2.12.1",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "pyjwt",
+        "version": "2.12.1",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-993g-76c3-p5m4",
+        "cve": "CVE-2026-48522",
+        "cvss": 4.2,
+        "cwe_ids": [
+          "CWE-441",
+          "CWE-918"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/jpadilla/pyjwt/security/advisories/GHSA-993g-76c3-p5m4",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-48522",
+          "https://github.com/jpadilla/pyjwt"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "python-multipart@0.0.26 (PyPI) is affected by CVE-2026-53539: python-multipart: Quadratic-time querystring parsing with semicolon separators causes CPU denial of service",
+      "severity": "high",
+      "target": "python-multipart@0.0.26",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "python-multipart",
+        "version": "0.0.26",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-5rvq-cxj2-64vf",
+        "cve": "CVE-2026-53539",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-400",
+          "CWE-407"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/Kludex/python-multipart/security/advisories/GHSA-5rvq-cxj2-64vf",
+          "https://github.com/Kludex/python-multipart"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "starlette@1.0.0 (PyPI) is affected by CVE-2026-54283: Starlette: request.form() limits silently ignored for application/x-www-form-urlencoded enable DoS",
+      "severity": "high",
+      "target": "starlette@1.0.0",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "starlette",
+        "version": "1.0.0",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-82w8-qh3p-5jfq",
+        "cve": "CVE-2026-54283",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-770"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/Kludex/starlette/security/advisories/GHSA-82w8-qh3p-5jfq",
+          "https://github.com/Kludex/starlette"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "urllib3@2.6.3 (PyPI) is affected by CVE-2026-44432: urllib3: Decompression-bomb safeguards bypassed in parts of the streaming API",
+      "severity": "high",
+      "target": "urllib3@2.6.3",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "urllib3",
+        "version": "2.6.3",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-mf9v-mfxr-j63j",
+        "cve": "CVE-2026-44432",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-409"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/urllib3/urllib3/security/advisories/GHSA-mf9v-mfxr-j63j",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-44432",
+          "https://github.com/pypa/advisory-database/tree/main/vulns/urllib3/PYSEC-2026-142.yaml"
+        ]
+      }
     }
   ],
   "summary": {
@@ -114,5 +452,7 @@
     "medium": 0,
     "high": 0,
     "critical": 0
-  }
+  },
+  "enriched": true,
+  "enriched_ref": "pip:mcp-neo4j-cypher"
 }

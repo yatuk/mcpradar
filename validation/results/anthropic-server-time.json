@@ -57,6 +57,57 @@
         "property": "target_timezone",
         "schema": "input_schema"
       }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "click@8.1.7 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132",
+      "severity": "high",
+      "target": "click@8.1.7",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "click",
+        "version": "8.1.7",
+        "ecosystem": "PyPI",
+        "osv_id": "PYSEC-2026-2132",
+        "cve": "CVE-2026-7246",
+        "cvss": 7.2,
+        "cwe_ids": [],
+        "fixed_version": null,
+        "references": [
+          "https://access.redhat.com/security/cve/CVE-2026-7246",
+          "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-7246.json",
+          "https://access.redhat.com/errata/RHSA-2026:24761"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "pydantic-settings@2.12.0 (PyPI) is affected by CVE-2026-58203: pydantic-settings: NestedSecretsSettingsSource follows symlinks outside secrets_dir, enabling local file read and bypassing secrets_dir_max_size",
+      "severity": "medium",
+      "target": "pydantic-settings@2.12.0",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "pydantic-settings",
+        "version": "2.12.0",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-4xgf-cpjx-pc3j",
+        "cve": "CVE-2026-58203",
+        "cvss": 5.3,
+        "cwe_ids": [
+          "CWE-22",
+          "CWE-400",
+          "CWE-59"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/pydantic/pydantic-settings/security/advisories/GHSA-4xgf-cpjx-pc3j",
+          "https://github.com/pydantic/pydantic-settings"
+        ]
+      }
     }
   ],
   "tools": [
@@ -112,5 +163,7 @@
     "medium": 0,
     "high": 0,
     "critical": 0
-  }
+  },
+  "enriched": true,
+  "enriched_ref": "pip:mcp-server-time"
 }

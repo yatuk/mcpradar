@@ -35,6 +35,160 @@
         "property": "issue_id_or_url",
         "schema": "input_schema"
       }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "click@8.1.7 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132",
+      "severity": "high",
+      "target": "click@8.1.7",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "click",
+        "version": "8.1.7",
+        "ecosystem": "PyPI",
+        "osv_id": "PYSEC-2026-2132",
+        "cve": "CVE-2026-7246",
+        "cvss": 7.2,
+        "cwe_ids": [],
+        "fixed_version": null,
+        "references": [
+          "https://access.redhat.com/security/cve/CVE-2026-7246",
+          "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-7246.json",
+          "https://access.redhat.com/errata/RHSA-2026:24761"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "h11@0.14.0 (PyPI) is affected by CVE-2025-43859: h11 accepts some malformed Chunked-Encoding bodies",
+      "severity": "critical",
+      "target": "h11@0.14.0",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "h11",
+        "version": "0.14.0",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-vqfr-h8mv-ghfj",
+        "cve": "CVE-2025-43859",
+        "cvss": 9.1,
+        "cwe_ids": [
+          "CWE-444"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/python-hyper/h11/security/advisories/GHSA-vqfr-h8mv-ghfj",
+          "https://nvd.nist.gov/vuln/detail/CVE-2025-43859",
+          "https://github.com/python-hyper/h11/commit/114803a29ce50116dc47951c690ad4892b1a36ed"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "idna@3.10 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted inputs to idna.encode() can bypass CVE-2024-3651 fix",
+      "severity": "medium",
+      "target": "idna@3.10",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "idna",
+        "version": "3.10",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-65pc-fj4g-8rjx",
+        "cve": "CVE-2026-45409",
+        "cvss": 5.0,
+        "cwe_ids": [
+          "CWE-1333"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/kjd/idna/security/advisories/GHSA-65pc-fj4g-8rjx",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-45409",
+          "https://github.com/kjd/idna"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "mcp@1.0.0 (PyPI) is affected by CVE-2025-53366: MCP Python SDK vulnerability in the FastMCP Server causes validation error, leading to DoS",
+      "severity": "high",
+      "target": "mcp@1.0.0",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "mcp",
+        "version": "1.0.0",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-3qhf-m339-9g5v",
+        "cve": "CVE-2025-53366",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-248"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/modelcontextprotocol/python-sdk/security/advisories/GHSA-3qhf-m339-9g5v",
+          "https://nvd.nist.gov/vuln/detail/CVE-2025-53366",
+          "https://github.com/modelcontextprotocol/python-sdk/pull/822"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "pytest@8.3.3 (PyPI) is affected by CVE-2025-71176: pytest has vulnerable tmpdir handling",
+      "severity": "medium",
+      "target": "pytest@8.3.3",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "pytest",
+        "version": "8.3.3",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-6w46-j5rx-g56g",
+        "cve": "CVE-2025-71176",
+        "cvss": 6.8,
+        "cwe_ids": [
+          "CWE-379"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://nvd.nist.gov/vuln/detail/CVE-2025-71176",
+          "https://github.com/pytest-dev/pytest/issues/13669",
+          "https://github.com/pytest-dev/pytest/pull/14343"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "starlette@0.41.3 (PyPI) is affected by CVE-2025-54121: Starlette has possible denial-of-service vector when parsing large files in multipart forms",
+      "severity": "medium",
+      "target": "starlette@0.41.3",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "starlette",
+        "version": "0.41.3",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-2c2j-9gv5-cj73",
+        "cve": "CVE-2025-54121",
+        "cvss": 5.3,
+        "cwe_ids": [
+          "CWE-770"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/encode/starlette/security/advisories/GHSA-2c2j-9gv5-cj73",
+          "https://nvd.nist.gov/vuln/detail/CVE-2025-54121",
+          "https://github.com/encode/starlette/commit/9f7ec2eb512fcc3fe90b43cb9dd9e1d08696bec1"
+        ]
+      }
     }
   ],
   "summary": {
@@ -44,5 +198,7 @@
     "medium": 0,
     "high": 0,
     "critical": 0
-  }
+  },
+  "enriched": true,
+  "enriched_ref": "pip:mcp-server-sentry"
 }

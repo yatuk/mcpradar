@@ -148,6 +148,227 @@
         "schema": "input_schema",
         "issue": "no_required_fields"
       }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "h11@0.14.0 (PyPI) is affected by CVE-2025-43859: h11 accepts some malformed Chunked-Encoding bodies",
+      "severity": "critical",
+      "target": "h11@0.14.0",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "h11",
+        "version": "0.14.0",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-vqfr-h8mv-ghfj",
+        "cve": "CVE-2025-43859",
+        "cvss": 9.1,
+        "cwe_ids": [
+          "CWE-444"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/python-hyper/h11/security/advisories/GHSA-vqfr-h8mv-ghfj",
+          "https://nvd.nist.gov/vuln/detail/CVE-2025-43859",
+          "https://github.com/python-hyper/h11/commit/114803a29ce50116dc47951c690ad4892b1a36ed"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "idna@3.10 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted inputs to idna.encode() can bypass CVE-2024-3651 fix",
+      "severity": "medium",
+      "target": "idna@3.10",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "idna",
+        "version": "3.10",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-65pc-fj4g-8rjx",
+        "cve": "CVE-2026-45409",
+        "cvss": 5.0,
+        "cwe_ids": [
+          "CWE-1333"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/kjd/idna/security/advisories/GHSA-65pc-fj4g-8rjx",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-45409",
+          "https://github.com/kjd/idna"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "mcp@1.1.2 (PyPI) is affected by CVE-2025-53366: MCP Python SDK vulnerability in the FastMCP Server causes validation error, leading to DoS",
+      "severity": "high",
+      "target": "mcp@1.1.2",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "mcp",
+        "version": "1.1.2",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-3qhf-m339-9g5v",
+        "cve": "CVE-2025-53366",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-248"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/modelcontextprotocol/python-sdk/security/advisories/GHSA-3qhf-m339-9g5v",
+          "https://nvd.nist.gov/vuln/detail/CVE-2025-53366",
+          "https://github.com/modelcontextprotocol/python-sdk/pull/822"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "requests@2.32.3 (PyPI) is affected by CVE-2024-47081: Requests vulnerable to .netrc credentials leak via malicious URLs",
+      "severity": "medium",
+      "target": "requests@2.32.3",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "requests",
+        "version": "2.32.3",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-9hjg-9r4m-mvj7",
+        "cve": "CVE-2024-47081",
+        "cvss": 5.3,
+        "cwe_ids": [
+          "CWE-522"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/psf/requests/security/advisories/GHSA-9hjg-9r4m-mvj7",
+          "https://nvd.nist.gov/vuln/detail/CVE-2024-47081",
+          "https://github.com/psf/requests/pull/6965"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "starlette@0.44.0 (PyPI) is affected by CVE-2025-54121: Starlette has possible denial-of-service vector when parsing large files in multipart forms",
+      "severity": "medium",
+      "target": "starlette@0.44.0",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "starlette",
+        "version": "0.44.0",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-2c2j-9gv5-cj73",
+        "cve": "CVE-2025-54121",
+        "cvss": 5.3,
+        "cwe_ids": [
+          "CWE-770"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/encode/starlette/security/advisories/GHSA-2c2j-9gv5-cj73",
+          "https://nvd.nist.gov/vuln/detail/CVE-2025-54121",
+          "https://github.com/encode/starlette/commit/9f7ec2eb512fcc3fe90b43cb9dd9e1d08696bec1"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "urllib3@2.3.0 (PyPI) is affected by CVE-2025-66471: urllib3 streaming API improperly handles highly compressed data",
+      "severity": "high",
+      "target": "urllib3@2.3.0",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "urllib3",
+        "version": "2.3.0",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-2xpw-w6gg-jr37",
+        "cve": "CVE-2025-66471",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-409"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/urllib3/urllib3/security/advisories/GHSA-2xpw-w6gg-jr37",
+          "https://nvd.nist.gov/vuln/detail/CVE-2025-66471",
+          "https://github.com/urllib3/urllib3/commit/c19571de34c47de3a766541b041637ba5f716ed7"
+        ]
+      }
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "requests.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "hn.py:39",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 39,
+        "sink": "requests.get"
+      }
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "requests.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "hn.py:155",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 155,
+        "sink": "requests.get"
+      }
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "requests.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "hn.py:186",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 186,
+        "sink": "requests.get"
+      }
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "requests.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "hn.py:229",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 229,
+        "sink": "requests.get"
+      }
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "requests.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "hn.py:255",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 255,
+        "sink": "requests.get"
+      }
     }
   ],
   "summary": {
@@ -157,5 +378,7 @@
     "medium": 0,
     "high": 0,
     "critical": 0
-  }
+  },
+  "enriched": true,
+  "enriched_ref": "pip:mcp-hn"
 }

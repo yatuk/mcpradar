@@ -200,6 +200,48 @@
         "property": "language",
         "schema": "input_schema"
       }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "fastmcp@2.10.5 (PyPI) is affected by CVE-2025-69196: FastMCP OAuth Proxy token reuse across MCP servers",
+      "severity": "high",
+      "target": "fastmcp@2.10.5",
+      "location": "pyproject.toml",
+      "evidence": "",
+      "detail": {
+        "package": "fastmcp",
+        "version": "2.10.5",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-5h2m-4q8j-pqpj",
+        "cve": "CVE-2025-69196",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-863"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/PrefectHQ/fastmcp/security/advisories/GHSA-5h2m-4q8j-pqpj",
+          "https://nvd.nist.gov/vuln/detail/CVE-2025-69196",
+          "https://github.com/PrefectHQ/fastmcp"
+        ]
+      }
+    },
+    {
+      "rule_id": "S007",
+      "title": "Description-Code Inconsistency (read-only tool with side effects)",
+      "description": "Tool 'read_pdf_to_file' presents as read-only but its handler writes to the filesystem",
+      "severity": "high",
+      "target": "pdf_server.py:104",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 104,
+        "tool": "read_pdf_to_file",
+        "capabilities": [
+          "writes to the filesystem"
+        ]
+      }
     }
   ],
   "summary": {
@@ -209,5 +251,7 @@
     "medium": 0,
     "high": 0,
     "critical": 0
-  }
+  },
+  "enriched": true,
+  "enriched_ref": "pip:mcp-pdf-reader"
 }

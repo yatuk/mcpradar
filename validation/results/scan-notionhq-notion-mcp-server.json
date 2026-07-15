@@ -6863,6 +6863,137 @@
         "property": "replace_content_range[0].content_range",
         "schema": "input_schema"
       }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "@modelcontextprotocol/sdk@1.25.1 (npm) is affected by CVE-2026-25536: @modelcontextprotocol/sdk has cross-client data leak via shared server/transport instance reuse; fixed in 1.26.0",
+      "severity": "high",
+      "target": "@modelcontextprotocol/sdk@1.25.1",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "@modelcontextprotocol/sdk",
+        "version": "1.25.1",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-345p-7cg4-v4c7",
+        "cve": "CVE-2026-25536",
+        "cvss": 7.1,
+        "cwe_ids": [
+          "CWE-362"
+        ],
+        "fixed_version": "1.26.0",
+        "references": [
+          "https://github.com/modelcontextprotocol/typescript-sdk/security/advisories/GHSA-345p-7cg4-v4c7",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-25536",
+          "https://github.com/modelcontextprotocol/typescript-sdk/issues/204"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "axios@1.8.4 (npm) is affected by CVE-2026-44494: axios Vulnerable to Full Man-in-the-Middle via Prototype Pollution Gadget in `config.proxy`; fixed in 1.16.0",
+      "severity": "high",
+      "target": "axios@1.8.4",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "axios",
+        "version": "1.8.4",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-35jp-ww65-95wh",
+        "cve": "CVE-2026-44494",
+        "cvss": 8.7,
+        "cwe_ids": [
+          "CWE-1321",
+          "CWE-441"
+        ],
+        "fixed_version": "1.16.0",
+        "references": [
+          "https://github.com/axios/axios/security/advisories/GHSA-35jp-ww65-95wh",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-44494",
+          "https://github.com/advisories/GHSA-fvcv-3m26-pcqx"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "form-data@4.0.1 (npm) is affected by CVE-2025-7783: form-data uses unsafe random function in form-data for choosing boundary; fixed in 4.0.4",
+      "severity": "critical",
+      "target": "form-data@4.0.1",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "form-data",
+        "version": "4.0.1",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-fjxv-7rqg-78g4",
+        "cve": "CVE-2025-7783",
+        "cvss": 9.5,
+        "cwe_ids": [
+          "CWE-330"
+        ],
+        "fixed_version": "4.0.4",
+        "references": [
+          "https://github.com/form-data/form-data/security/advisories/GHSA-fjxv-7rqg-78g4",
+          "https://nvd.nist.gov/vuln/detail/CVE-2025-7783",
+          "https://github.com/form-data/form-data/commit/3d1723080e6577a66f17f163ecd345a21d8d0fd0"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "multer@1.4.5-lts.1 (npm) is affected by CVE-2025-47935: Multer vulnerable to Denial of Service via memory leaks from unclosed streams; fixed in 2.0.0",
+      "severity": "high",
+      "target": "multer@1.4.5-lts.1",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "multer",
+        "version": "1.4.5-lts.1",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-44fp-w29j-9vj5",
+        "cve": "CVE-2025-47935",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-401"
+        ],
+        "fixed_version": "2.0.0",
+        "references": [
+          "https://github.com/expressjs/multer/security/advisories/GHSA-44fp-w29j-9vj5",
+          "https://nvd.nist.gov/vuln/detail/CVE-2025-47935",
+          "https://github.com/expressjs/multer/pull/1120"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "vitest@4.0.18 (npm) is affected by CVE-2026-47429: When Vitest UI server is listening, arbitrary file can be read and executed; fixed in 3.2.6",
+      "severity": "critical",
+      "target": "vitest@4.0.18",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "vitest",
+        "version": "4.0.18",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-5xrq-8626-4rwp",
+        "cve": "CVE-2026-47429",
+        "cvss": 9.8,
+        "cwe_ids": [
+          "CWE-862"
+        ],
+        "fixed_version": "3.2.6",
+        "references": [
+          "https://github.com/vitest-dev/vitest/security/advisories/GHSA-5xrq-8626-4rwp",
+          "https://github.com/vitest-dev/vitest",
+          "https://github.com/vitest-dev/vitest/blob/eb1abf08573032a532015b999ad3501c5e89e3bb/packages/browser/src/node/commands/fs.ts#L10-L11"
+        ]
+      }
     }
   ],
   "summary": {
@@ -6872,5 +7003,7 @@
     "medium": 0,
     "high": 0,
     "critical": 0
-  }
+  },
+  "enriched": true,
+  "enriched_ref": "npm:@notionhq/notion-mcp-server"
 }

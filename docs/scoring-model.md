@@ -67,6 +67,29 @@ the AIVSS principle that autonomy and tool-use amplify a baseline. They are kept
 in one place (`CAPABILITY_WEIGHTS`) and are not otherwise hardcoded into the
 pipeline.
 
+## Dependency risk (supply chain)
+
+When a result is enriched (`leaderboard enrich`), the server's published package
+is fetched and its dependencies checked against OSV; each vulnerable dependency
+is a **D001** finding. These are scored *separately* from the server's own
+findings:
+
+```
+dep_risk = min(4.9, critical×1.0 + high×0.4 + medium×0.15)
+score    = min(10, max(base, ((base + AARS)/2) × ThM, dep_risk))
+```
+
+Rationale: almost every Python MCP server bundles the same vulnerable transitive
+dependencies (a CVE in the `mcp` SDK itself, `h11`, `click`, …), so treating a
+transitive CVE like the server's own vulnerability would push every server —
+even a calculator — to a failing grade. The weights are gentle and the term is
+**capped at 4.9 (grade C)**: vulnerable dependencies can nudge a grade and
+surface genuinely-outdated servers (e.g. one with 18 vulnerable deps → C), but a
+worse-than-C grade must come from the server's *own* code or schema, never from
+transitive dependencies alone. Reachability is unknown, so the signal is
+deliberately secondary. The vulnerable-dependency count is surfaced separately
+(`vulnerable_deps`).
+
 ## ThM — environmental threat multiplier
 
 `ThM = 1.15` when the scan found an insecure transport (R111), else `1.0`

@@ -2258,6 +2258,59 @@ leaderboard_app = typer.Typer(help="Security leaderboard generation", no_args_is
 app.add_typer(leaderboard_app, name="leaderboard")
 
 
+@leaderboard_app.command(name="enrich")
+def leaderboard_enrich(
+    results_dir: Path | None = typer.Option(  # noqa: B008
+        None, "--results-dir", help="Validation results directory (default: validation/results)"
+    ),
+    limit: int = typer.Option(0, "--limit", help="Max servers to enrich (0 = all)"),  # noqa: B008
+    force: bool = typer.Option(  # noqa: B008
+        False, "--force", help="Re-enrich servers already marked enriched"
+    ),
+) -> None:
+    """Enrich scanned results with dependency-CVE (D001) and source (S-rule)
+    findings by fetching each server's published package.
+
+    Reads the launch command in each result, derives its npm/pip package, fetches
+    it (no install), and merges the extra findings so a server's vulnerable
+    dependencies or Description-Code Inconsistency affect its grade. Run before
+    `leaderboard generate`. Network-heavy; failures are skipped, not fatal.
+    """
+    import json
+
+    from mcpradar.enrich import enrich_result, package_ref_from_target
+    from mcpradar.output.console import console
+
+    results = results_dir or Path("validation/results")
+    files = sorted(results.glob("*.json")) if results.exists() else []
+    done = 0
+    for fpath in files:
+        if fpath.name == "data.json":
+            continue
+        try:
+            data = json.loads(fpath.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            continue
+        if not data.get("tools"):
+            continue  # pending / unscanned stub
+        if data.get("enriched") and not force:
+            continue
+        if not package_ref_from_target(str(data.get("target", ""))):
+            continue
+        if limit and done >= limit:
+            break
+        ok, note = enrich_result(data)
+        if ok:
+            fpath.write_text(
+                json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8"
+            )
+            console.print(f"  [green]enriched[/] {data.get('name', fpath.stem)}: {note}")
+            done += 1
+        else:
+            console.print(f"  [dim]skip {data.get('name', fpath.stem)}: {note}[/]")
+    console.print(f"[green]Enriched {done} server(s).[/] Run 'leaderboard generate' next.")
+
+
 @leaderboard_app.command(name="generate")
 def leaderboard_generate(
     output_path: Path | None = typer.Option(  # noqa: B008
@@ -2330,12 +2383,18 @@ def leaderboard_generate(
                 )
                 continue
 
-            # Compute severity counts from findings array
+            # Severity counts. Dependency-CVE findings (D001) are counted
+            # separately: a transitive dependency with a known CVE is a real but
+            # weaker, reachability-unknown signal, so it must not be weighted like
+            # the server's own code/schema issues (otherwise every server with a
+            # couple of vulnerable transitive deps — even a calculator — grades F).
             sev: dict[str, int] = {"critical": 0, "high": 0, "medium": 0, "low": 0}
+            dep_sev: dict[str, int] = {"critical": 0, "high": 0, "medium": 0, "low": 0}
             for f in findings_list:
                 s = f.get("severity", "")
-                if s in sev:
-                    sev[s] += 1
+                bucket = dep_sev if f.get("rule_id") == "D001" else sev
+                if s in bucket:
+                    bucket[s] += 1
 
             # The grade reflects MEDIUM+ findings only. LOW findings are
             # informational lint (e.g. R114 "string has no length constraint")
@@ -2366,7 +2425,19 @@ def leaderboard_generate(
 
             aars = compute_aars(data.get("tools", []))
             thm = 1.15 if any(f.get("rule_id") == "R111" for f in findings_list) else 1.0
-            score = min(10.0, round(max(base, (base + aars) / 2 * thm), 1))
+
+            # Supply-chain term from vulnerable dependencies (D001). Weighted
+            # gently and capped at 4.9 (grade C): almost every Python MCP server
+            # bundles the same vulnerable transitive deps (the mcp SDK CVE, h11,
+            # click …), so this is a shared, reachability-unknown signal — it
+            # should nudge, not dominate. A worse-than-C grade must come from the
+            # server's *own* code/schema, never from transitive deps alone.
+            dep_weighted = (
+                dep_sev["critical"] * 1.0 + dep_sev["high"] * 0.4 + dep_sev["medium"] * 0.15
+            )
+            dep_risk = min(4.9, dep_weighted)
+
+            score = min(10.0, round(max(base, (base + aars) / 2 * thm, dep_risk), 1))
             if score <= 0.9:
                 grade = "A"
             elif score <= 2.9:
@@ -2435,6 +2506,10 @@ def leaderboard_generate(
                         2,
                     ),
                     "tools": tools,
+                    "vulnerable_deps": dep_sev["critical"]
+                    + dep_sev["high"]
+                    + dep_sev["medium"]
+                    + dep_sev["low"],
                     "tools_detail": [
                         {
                             "name": t.get("name", ""),

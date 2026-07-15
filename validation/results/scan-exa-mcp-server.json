@@ -70,6 +70,86 @@
         "property": "query",
         "schema": "input_schema"
       }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "@modelcontextprotocol/sdk@1.12.1 (npm) is affected by CVE-2026-25536: @modelcontextprotocol/sdk has cross-client data leak via shared server/transport instance reuse; fixed in 1.26.0",
+      "severity": "high",
+      "target": "@modelcontextprotocol/sdk@1.12.1",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "@modelcontextprotocol/sdk",
+        "version": "1.12.1",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-345p-7cg4-v4c7",
+        "cve": "CVE-2026-25536",
+        "cvss": 7.1,
+        "cwe_ids": [
+          "CWE-362"
+        ],
+        "fixed_version": "1.26.0",
+        "references": [
+          "https://github.com/modelcontextprotocol/typescript-sdk/security/advisories/GHSA-345p-7cg4-v4c7",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-25536",
+          "https://github.com/modelcontextprotocol/typescript-sdk/issues/204"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "axios@1.13.6 (npm) is affected by CVE-2026-44494: axios Vulnerable to Full Man-in-the-Middle via Prototype Pollution Gadget in `config.proxy`; fixed in 1.16.0",
+      "severity": "high",
+      "target": "axios@1.13.6",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "axios",
+        "version": "1.13.6",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-35jp-ww65-95wh",
+        "cve": "CVE-2026-44494",
+        "cvss": 8.7,
+        "cwe_ids": [
+          "CWE-1321",
+          "CWE-441"
+        ],
+        "fixed_version": "1.16.0",
+        "references": [
+          "https://github.com/axios/axios/security/advisories/GHSA-35jp-ww65-95wh",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-44494",
+          "https://github.com/advisories/GHSA-fvcv-3m26-pcqx"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "mcp-handler@1.0.4 (npm) is affected by GHSA-w2fm-25vw-vh7f: mcp-handler has a tool response leak across concurrent client sessions ('Race Condition'); fixed in 1.1.0",
+      "severity": "high",
+      "target": "mcp-handler@1.0.4",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "mcp-handler",
+        "version": "1.0.4",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-w2fm-25vw-vh7f",
+        "cve": "GHSA-w2fm-25vw-vh7f",
+        "cvss": 7.1,
+        "cwe_ids": [
+          "CWE-1395",
+          "CWE-362"
+        ],
+        "fixed_version": "1.1.0",
+        "references": [
+          "https://github.com/vercel/mcp-handler/security/advisories/GHSA-w2fm-25vw-vh7f",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-25536",
+          "https://github.com/advisories/GHSA-345p-7cg4-v4c7"
+        ]
+      }
     }
   ],
   "summary": {
@@ -79,5 +159,7 @@
     "medium": 0,
     "high": 0,
     "critical": 0
-  }
+  },
+  "enriched": true,
+  "enriched_ref": "npm:exa-mcp-server"
 }

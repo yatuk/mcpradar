@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
+- **Leaderboard enrichment** (`mcpradar leaderboard enrich`) — connects the
+  source/dependency scanners to the leaderboard. For each scanned server it
+  derives the published package from the launch command (`npx`/`uvx`), fetches
+  it, runs the dependency-CVE (D001) and source (S-rule) scanners, and merges
+  those findings into the result so a server's **vulnerable dependencies** or
+  Description-Code Inconsistency affect its grade — not just its tool schemas.
+  Runs before `generate` in CI. New module `src/mcpradar/enrich.py`.
 - **Package fetch** — `scan-source`, `scan-config`, and `deps` now accept a
   package reference in place of a local path: `npm:<pkg>`, `pip:<pkg>`, or a
   GitHub URL / `gh:owner/repo`. The distribution is downloaded and extracted

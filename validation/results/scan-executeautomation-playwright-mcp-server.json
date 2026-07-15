@@ -1631,6 +1631,59 @@
         "property": "selector",
         "schema": "input_schema"
       }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "@modelcontextprotocol/sdk@1.24.3 (npm) is affected by CVE-2026-25536: @modelcontextprotocol/sdk has cross-client data leak via shared server/transport instance reuse; fixed in 1.26.0",
+      "severity": "high",
+      "target": "@modelcontextprotocol/sdk@1.24.3",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "@modelcontextprotocol/sdk",
+        "version": "1.24.3",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-345p-7cg4-v4c7",
+        "cve": "CVE-2026-25536",
+        "cvss": 7.1,
+        "cwe_ids": [
+          "CWE-362"
+        ],
+        "fixed_version": "1.26.0",
+        "references": [
+          "https://github.com/modelcontextprotocol/typescript-sdk/security/advisories/GHSA-345p-7cg4-v4c7",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-25536",
+          "https://github.com/modelcontextprotocol/typescript-sdk/issues/204"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "uuid@11.1.0 (npm) is affected by CVE-2026-41907: uuid: Missing buffer bounds check in v3/v5/v6 when buf is provided; fixed in 13.0.1",
+      "severity": "medium",
+      "target": "uuid@11.1.0",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "uuid",
+        "version": "11.1.0",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-w5hq-g745-h8pq",
+        "cve": "CVE-2026-41907",
+        "cvss": 5.0,
+        "cwe_ids": [
+          "CWE-1285",
+          "CWE-787"
+        ],
+        "fixed_version": "13.0.1",
+        "references": [
+          "https://github.com/uuidjs/uuid/security/advisories/GHSA-w5hq-g745-h8pq",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-41907",
+          "https://github.com/uuidjs/uuid/commit/32389c887c9e75f90442ee4cc95bbab0c4e8346e"
+        ]
+      }
     }
   ],
   "summary": {
@@ -1640,5 +1693,7 @@
     "medium": 0,
     "high": 0,
     "critical": 0
-  }
+  },
+  "enriched": true,
+  "enriched_ref": "npm:@executeautomation/playwright-mcp-server"
 }

@@ -136,7 +136,60 @@
       "output_schema": {}
     }
   ],
-  "findings": [],
+  "findings": [
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "@modelcontextprotocol/sdk@1.4.1 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerability; fixed in 1.25.2",
+      "severity": "high",
+      "target": "@modelcontextprotocol/sdk@1.4.1",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "@modelcontextprotocol/sdk",
+        "version": "1.4.1",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-8r9q-7v3j-jr4g",
+        "cve": "CVE-2026-0621",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-1333"
+        ],
+        "fixed_version": "1.25.2",
+        "references": [
+          "https://github.com/modelcontextprotocol/typescript-sdk/security/advisories/GHSA-cqwc-fm46-7fff",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-0621",
+          "https://github.com/modelcontextprotocol/typescript-sdk/issues/965"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "ws@8.18.0 (npm) is affected by CVE-2026-45736: ws: Uninitialized memory disclosure; fixed in 8.20.1",
+      "severity": "medium",
+      "target": "ws@8.18.0",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "ws",
+        "version": "8.18.0",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-58qx-3vcg-4xpx",
+        "cve": "CVE-2026-45736",
+        "cvss": 4.4,
+        "cwe_ids": [
+          "CWE-908"
+        ],
+        "fixed_version": "8.20.1",
+        "references": [
+          "https://github.com/websockets/ws/security/advisories/GHSA-58qx-3vcg-4xpx",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-45736",
+          "https://github.com/websockets/ws/commit/c0327ec15a54d701eb6ccefaa8bef328cfc03086"
+        ]
+      }
+    }
+  ],
   "summary": {
     "total_tools": 14,
     "clean": 0,
@@ -144,5 +197,7 @@
     "medium": 0,
     "high": 0,
     "critical": 0
-  }
+  },
+  "enriched": true,
+  "enriched_ref": "npm:@agentdeskai/browser-tools-mcp"
 }

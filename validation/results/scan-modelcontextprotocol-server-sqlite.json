@@ -164,6 +164,188 @@
         "property": "insight",
         "schema": "input_schema"
       }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "click@8.1.8 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132",
+      "severity": "high",
+      "target": "click@8.1.8",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "click",
+        "version": "8.1.8",
+        "ecosystem": "PyPI",
+        "osv_id": "PYSEC-2026-2132",
+        "cve": "CVE-2026-7246",
+        "cvss": 7.2,
+        "cwe_ids": [],
+        "fixed_version": null,
+        "references": [
+          "https://access.redhat.com/security/cve/CVE-2026-7246",
+          "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-7246.json",
+          "https://access.redhat.com/errata/RHSA-2026:24761"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "h11@0.14.0 (PyPI) is affected by CVE-2025-43859: h11 accepts some malformed Chunked-Encoding bodies",
+      "severity": "critical",
+      "target": "h11@0.14.0",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "h11",
+        "version": "0.14.0",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-vqfr-h8mv-ghfj",
+        "cve": "CVE-2025-43859",
+        "cvss": 9.1,
+        "cwe_ids": [
+          "CWE-444"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/python-hyper/h11/security/advisories/GHSA-vqfr-h8mv-ghfj",
+          "https://nvd.nist.gov/vuln/detail/CVE-2025-43859",
+          "https://github.com/python-hyper/h11/commit/114803a29ce50116dc47951c690ad4892b1a36ed"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "idna@3.10 (PyPI) is affected by CVE-2026-45409: Internationalized Domain Names in Applications (IDNA): Specially crafted inputs to idna.encode() can bypass CVE-2024-3651 fix",
+      "severity": "medium",
+      "target": "idna@3.10",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "idna",
+        "version": "3.10",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-65pc-fj4g-8rjx",
+        "cve": "CVE-2026-45409",
+        "cvss": 5.0,
+        "cwe_ids": [
+          "CWE-1333"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/kjd/idna/security/advisories/GHSA-65pc-fj4g-8rjx",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-45409",
+          "https://github.com/kjd/idna"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "mcp@1.6.0 (PyPI) is affected by CVE-2025-53366: MCP Python SDK vulnerability in the FastMCP Server causes validation error, leading to DoS",
+      "severity": "high",
+      "target": "mcp@1.6.0",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "mcp",
+        "version": "1.6.0",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-3qhf-m339-9g5v",
+        "cve": "CVE-2025-53366",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-248"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/modelcontextprotocol/python-sdk/security/advisories/GHSA-3qhf-m339-9g5v",
+          "https://nvd.nist.gov/vuln/detail/CVE-2025-53366",
+          "https://github.com/modelcontextprotocol/python-sdk/pull/822"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "pygments@2.19.1 (PyPI) is affected by CVE-2026-4539: Pygments has Regular Expression Denial of Service (ReDoS) due to Inefficient Regex for GUID Matching",
+      "severity": "low",
+      "target": "pygments@2.19.1",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "pygments",
+        "version": "2.19.1",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-5239-wwwm-4pmq",
+        "cve": "CVE-2026-4539",
+        "cvss": 2.0,
+        "cwe_ids": [
+          "CWE-1333",
+          "CWE-400"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-4539",
+          "https://github.com/pygments/pygments/issues/3058",
+          "https://github.com/pygments/pygments/pull/3064"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "python-dotenv@1.1.0 (PyPI) is affected by CVE-2026-28684: python-dotenv: Symlink following in set_key allows arbitrary file overwrite via cross-device rename fallback",
+      "severity": "medium",
+      "target": "python-dotenv@1.1.0",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "python-dotenv",
+        "version": "1.1.0",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-mf9w-mj56-hr94",
+        "cve": "CVE-2026-28684",
+        "cvss": 6.6,
+        "cwe_ids": [
+          "CWE-59",
+          "CWE-61"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/theskumar/python-dotenv/security/advisories/GHSA-mf9w-mj56-hr94",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-28684",
+          "https://github.com/theskumar/python-dotenv/commit/790c5c02991100aa1bf41ee5330aca75edc51311"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "starlette@0.46.2 (PyPI) is affected by CVE-2025-54121: Starlette has possible denial-of-service vector when parsing large files in multipart forms",
+      "severity": "medium",
+      "target": "starlette@0.46.2",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "starlette",
+        "version": "0.46.2",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-2c2j-9gv5-cj73",
+        "cve": "CVE-2025-54121",
+        "cvss": 5.3,
+        "cwe_ids": [
+          "CWE-770"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/encode/starlette/security/advisories/GHSA-2c2j-9gv5-cj73",
+          "https://nvd.nist.gov/vuln/detail/CVE-2025-54121",
+          "https://github.com/encode/starlette/commit/9f7ec2eb512fcc3fe90b43cb9dd9e1d08696bec1"
+        ]
+      }
     }
   ],
   "summary": {
@@ -173,5 +355,7 @@
     "medium": 0,
     "high": 0,
     "critical": 0
-  }
+  },
+  "enriched": true,
+  "enriched_ref": "pip:mcp-server-sqlite"
 }

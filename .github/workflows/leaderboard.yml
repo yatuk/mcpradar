@@ -40,6 +40,10 @@ jobs:
         run: python validation/run_validation.py --timeout 300
         continue-on-error: true
 
+      - name: Enrich with dependency CVEs + source findings
+        run: python -m mcpradar leaderboard enrich
+        continue-on-error: true
+
       - name: Generate leaderboard data
         run: python -m mcpradar leaderboard generate
 

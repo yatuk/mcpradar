@@ -1148,6 +1148,32 @@
         "property": "content",
         "schema": "output_schema"
       }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "minimatch@10.0.1 (npm) is affected by CVE-2026-27904: minimatch ReDoS: nested *() extglobs generate catastrophically backtracking regular expressions; fixed in 3.1.4",
+      "severity": "high",
+      "target": "minimatch@10.0.1",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "minimatch",
+        "version": "10.0.1",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-23c5-xmqv-rm74",
+        "cve": "CVE-2026-27904",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-1333"
+        ],
+        "fixed_version": "3.1.4",
+        "references": [
+          "https://github.com/isaacs/minimatch/security/advisories/GHSA-23c5-xmqv-rm74",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-27904",
+          "https://github.com/isaacs/minimatch/commit/11d0df6165d15a955462316b26d52e5efae06fce"
+        ]
+      }
     }
   ],
   "summary": {
@@ -1157,5 +1183,7 @@
     "medium": 5,
     "high": 0,
     "critical": 0
-  }
+  },
+  "enriched": true,
+  "enriched_ref": "npm:@modelcontextprotocol/server-filesystem"
 }

@@ -1656,6 +1656,74 @@
         "property": "zip_file_url",
         "schema": "input_schema"
       }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "mcp@1.3.0 (PyPI) is affected by CVE-2025-53366: MCP Python SDK vulnerability in the FastMCP Server causes validation error, leading to DoS",
+      "severity": "high",
+      "target": "mcp@1.3.0",
+      "location": "pyproject.toml",
+      "evidence": "",
+      "detail": {
+        "package": "mcp",
+        "version": "1.3.0",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-3qhf-m339-9g5v",
+        "cve": "CVE-2025-53366",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-248"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/modelcontextprotocol/python-sdk/security/advisories/GHSA-3qhf-m339-9g5v",
+          "https://nvd.nist.gov/vuln/detail/CVE-2025-53366",
+          "https://github.com/modelcontextprotocol/python-sdk/pull/822"
+        ]
+      }
+    },
+    {
+      "rule_id": "S007",
+      "title": "Description-Code Inconsistency (read-only tool with side effects)",
+      "description": "Tool 'get_viewport_screenshot' presents as read-only but its handler writes to the filesystem",
+      "severity": "high",
+      "target": "server.py:294",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 294,
+        "tool": "get_viewport_screenshot",
+        "capabilities": [
+          "writes to the filesystem"
+        ]
+      }
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "httpx.post(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "telemetry.py:260",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 260,
+        "sink": "httpx.post"
+      }
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "httpx.post(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "telemetry.py:296",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 296,
+        "sink": "httpx.post"
+      }
     }
   ],
   "summary": {
@@ -1665,5 +1733,7 @@
     "medium": 0,
     "high": 0,
     "critical": 0
-  }
+  },
+  "enriched": true,
+  "enriched_ref": "pip:blender-mcp"
 }

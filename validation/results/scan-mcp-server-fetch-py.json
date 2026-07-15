@@ -48,7 +48,84 @@
       "output_schema": {}
     }
   ],
-  "findings": [],
+  "findings": [
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "click@8.1.7 (PyPI) is affected by CVE-2026-7246: PYSEC-2026-2132",
+      "severity": "high",
+      "target": "click@8.1.7",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "click",
+        "version": "8.1.7",
+        "ecosystem": "PyPI",
+        "osv_id": "PYSEC-2026-2132",
+        "cve": "CVE-2026-7246",
+        "cvss": 7.2,
+        "cwe_ids": [],
+        "fixed_version": null,
+        "references": [
+          "https://access.redhat.com/security/cve/CVE-2026-7246",
+          "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-7246.json",
+          "https://access.redhat.com/errata/RHSA-2026:24761"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "soupsieve@2.6 (PyPI) is affected by CVE-2026-49476: Soup Sieve has Memory Exhaustion via Large Comma-Separated Selector Lists",
+      "severity": "high",
+      "target": "soupsieve@2.6",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "soupsieve",
+        "version": "2.6",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-2wc2-fm75-p42x",
+        "cve": "CVE-2026-49476",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-400",
+          "CWE-770"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/facelessuser/soupsieve/security/advisories/GHSA-2wc2-fm75-p42x",
+          "https://github.com/facelessuser/soupsieve"
+        ]
+      }
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "client.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "server.py:77",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 77,
+        "sink": "client.get"
+      }
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "client.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "server.py:121",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 121,
+        "sink": "client.get"
+      }
+    }
+  ],
   "summary": {
     "total_tools": 1,
     "clean": 0,
@@ -56,5 +133,7 @@
     "medium": 0,
     "high": 0,
     "critical": 0
-  }
+  },
+  "enriched": true,
+  "enriched_ref": "pip:mcp-server-fetch"
 }

@@ -288,6 +288,32 @@
         "property": "script",
         "schema": "input_schema"
       }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "@modelcontextprotocol/sdk@1.0.1 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerability; fixed in 1.25.2",
+      "severity": "high",
+      "target": "@modelcontextprotocol/sdk@1.0.1",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "@modelcontextprotocol/sdk",
+        "version": "1.0.1",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-8r9q-7v3j-jr4g",
+        "cve": "CVE-2026-0621",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-1333"
+        ],
+        "fixed_version": "1.25.2",
+        "references": [
+          "https://github.com/modelcontextprotocol/typescript-sdk/security/advisories/GHSA-cqwc-fm46-7fff",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-0621",
+          "https://github.com/modelcontextprotocol/typescript-sdk/issues/965"
+        ]
+      }
     }
   ],
   "summary": {
@@ -297,5 +323,7 @@
     "medium": 0,
     "high": 0,
     "critical": 0
-  }
+  },
+  "enriched": true,
+  "enriched_ref": "npm:@modelcontextprotocol/server-puppeteer"
 }

@@ -2503,6 +2503,98 @@
         "property": "title",
         "schema": "output_schema"
       }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "fastmcp@2.3.0 (PyPI) is affected by CVE-2025-69196: FastMCP OAuth Proxy token reuse across MCP servers",
+      "severity": "high",
+      "target": "fastmcp@2.3.0",
+      "location": "pyproject.toml",
+      "evidence": "",
+      "detail": {
+        "package": "fastmcp",
+        "version": "2.3.0",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-5h2m-4q8j-pqpj",
+        "cve": "CVE-2025-69196",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-863"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/PrefectHQ/fastmcp/security/advisories/GHSA-5h2m-4q8j-pqpj",
+          "https://nvd.nist.gov/vuln/detail/CVE-2025-69196",
+          "https://github.com/PrefectHQ/fastmcp"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "requests@2.31.0 (PyPI) is affected by CVE-2024-47081: Requests vulnerable to .netrc credentials leak via malicious URLs",
+      "severity": "medium",
+      "target": "requests@2.31.0",
+      "location": "pyproject.toml",
+      "evidence": "",
+      "detail": {
+        "package": "requests",
+        "version": "2.31.0",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-9hjg-9r4m-mvj7",
+        "cve": "CVE-2024-47081",
+        "cvss": 5.3,
+        "cwe_ids": [
+          "CWE-522"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/psf/requests/security/advisories/GHSA-9hjg-9r4m-mvj7",
+          "https://nvd.nist.gov/vuln/detail/CVE-2024-47081",
+          "https://github.com/psf/requests/pull/6965"
+        ]
+      }
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "python-dotenv@1.0.0 (PyPI) is affected by CVE-2026-28684: python-dotenv: Symlink following in set_key allows arbitrary file overwrite via cross-device rename fallback",
+      "severity": "medium",
+      "target": "python-dotenv@1.0.0",
+      "location": "pyproject.toml",
+      "evidence": "",
+      "detail": {
+        "package": "python-dotenv",
+        "version": "1.0.0",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-mf9w-mj56-hr94",
+        "cve": "CVE-2026-28684",
+        "cvss": 6.6,
+        "cwe_ids": [
+          "CWE-59",
+          "CWE-61"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/theskumar/python-dotenv/security/advisories/GHSA-mf9w-mj56-hr94",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-28684",
+          "https://github.com/theskumar/python-dotenv/commit/790c5c02991100aa1bf41ee5330aca75edc51311"
+        ]
+      }
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "requests.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "wikipedia_client.py:440",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 440,
+        "sink": "requests.get"
+      }
     }
   ],
   "summary": {
@@ -2512,5 +2604,7 @@
     "medium": 0,
     "high": 0,
     "critical": 0
-  }
+  },
+  "enriched": true,
+  "enriched_ref": "pip:wikipedia-mcp"
 }
