@@ -2301,9 +2301,7 @@ def leaderboard_enrich(
             break
         ok, note = enrich_result(data)
         if ok:
-            fpath.write_text(
-                json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8"
-            )
+            fpath.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
             console.print(f"  [green]enriched[/] {data.get('name', fpath.stem)}: {note}")
             done += 1
         else:
