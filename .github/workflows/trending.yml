@@ -1,0 +1,79 @@
+name: Daily Trending Scan
+
+# Every day: rank the registry by popularity, scan the top 10, fold them into
+# the leaderboard alongside the curated corpus, and redeploy the site.
+on:
+  schedule:
+    - cron: "0 6 * * *"  # daily at 06:00 UTC
+  workflow_dispatch:
+    inputs:
+      top:
+        description: "How many popular servers to scan"
+        default: "10"
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: leaderboard-deploy
+  cancel-in-progress: false
+
+jobs:
+  trending:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.11"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - run: uv sync
+
+      # Scoring calibration gate — a broken scoring model must not publish.
+      - name: Scoring calibration gate
+        run: uv run pytest tests/test_scoring_calibration.py tests/test_capability.py -q
+
+      # Rank the whole registry by popularity (npm + PyPI downloads + GitHub
+      # stars) and scan the top N. GITHUB_TOKEN lifts the star-lookup rate limit.
+      # Live scans are best-effort; each server is always enriched from its
+      # package so it gets a dependency/source grade even if it can't launch.
+      - name: Scan today's most popular servers
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: uv run python validation/run_trending.py --top "${{ github.event.inputs.top || '10' }}" --timeout 120
+        continue-on-error: true
+
+      - name: Generate leaderboard data
+        run: uv run python -m mcpradar leaderboard generate
+
+      - name: Sync to docs root
+        run: |
+          cp docs/leaderboard/index.html docs/index.html
+          cp docs/leaderboard/data.json docs/data.json
+          cp docs/leaderboard/servers.json docs/servers.json 2>/dev/null || true
+          mkdir -p docs/badges
+          cp -r docs/leaderboard/badges/* docs/badges/ 2>/dev/null || true
+
+      - name: Commit updates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add validation/results/ docs/leaderboard/data.json docs/data.json docs/index.html docs/servers.json docs/badges/ 2>/dev/null || true
+          git diff --staged --quiet || git commit -m "chore: daily trending scan [skip ci]"
+          git push
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/leaderboard
+          destination_dir: .
+          keep_files: true

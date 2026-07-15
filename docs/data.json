@@ -115,7 +115,37 @@
     "tool_hash": "9bbea416bf3d4e0c",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
+  },
+  {
+    "server": "mcporter",
+    "display_name": "mcporter",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "incomplete",
+    "trending": true,
+    "popularity": {
+      "score": 8.9326,
+      "npm_downloads": 178869,
+      "pypi_downloads": null,
+      "github_stars": 4786
+    }
   },
   {
     "server": "@variflight-ai/variflight-mcp",
@@ -433,7 +463,9 @@
     "tool_hash": "ed8db337db25ab37",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "mcp-server-airbnb",
@@ -584,7 +616,9 @@
     "tool_hash": "6493a4115fd52980",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "mcp-server-weather",
@@ -658,7 +692,9 @@
     "tool_hash": "e05d859696fc0531",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "mcp-server-commands",
@@ -727,7 +763,50 @@
     "tool_hash": "faad75a511044025",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
+  },
+  {
+    "server": "korean-law-mcp",
+    "display_name": "korean-law-mcp",
+    "version": "",
+    "aivss_score": 0.4,
+    "grade": "A",
+    "aars": 0.0,
+    "capability": "pure_compute",
+    "confidence": 0.9,
+    "tools": 0,
+    "vulnerable_deps": 1,
+    "tools_detail": [],
+    "findings": 0,
+    "low_findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [
+      {
+        "rule_id": "D001",
+        "severity": "high",
+        "title": "Known-vulnerable dependency (OSV)",
+        "description": "@xmldom/xmldom@0.9.8 (npm) is affected by CVE-2026-41673: xmldom: Uncontrolled recursion in XML serialization leads to D",
+        "confidence": 0.9
+      }
+    ],
+    "tool_hash": "",
+    "last_scanned": "2026-07-15",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned",
+    "trending": true,
+    "popularity": {
+      "score": 9.1721,
+      "npm_downloads": 5205,
+      "pypi_downloads": 128,
+      "github_stars": 2212
+    }
   },
   {
     "server": "@modelcontextprotocol/server-git",
@@ -1109,7 +1188,9 @@
     "tool_hash": "a886c3366c5a8831",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "mcp-server-time",
@@ -1195,7 +1276,9 @@
     "tool_hash": "8e9f1e6cfff18235",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "yfinance-mcp",
@@ -1969,7 +2052,9 @@
     "tool_hash": "0e0081ffa4de6c00",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "tavily-mcp",
@@ -2334,7 +2419,9 @@
     "tool_hash": "ef01aa97f11827ba",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "context7",
@@ -2415,7 +2502,14 @@
     "tool_hash": "0c303bbade84b2bb",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": true,
+    "popularity": {
+      "score": 10.5562,
+      "npm_downloads": 608578,
+      "pypi_downloads": null,
+      "github_stars": 59146
+    }
   },
   {
     "server": "edgeone-pages-mcp",
@@ -2488,7 +2582,9 @@
     "tool_hash": "c48d92bab689ab02",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "markitdown-mcp",
@@ -2541,7 +2637,9 @@
     "tool_hash": "ddb208e84c8fc0a9",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "wikipedia-mcp",
@@ -4185,7 +4283,9 @@
     "tool_hash": "9aecc2f1033e0b0c",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "exa-mcp-server",
@@ -4286,7 +4386,9 @@
     "tool_hash": "dde94629ddb9926d",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "mcp-hfspace",
@@ -4408,7 +4510,9 @@
     "tool_hash": "e020a18efe14ab26",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "mcp-server-chart",
@@ -7099,7 +7203,9 @@
     "tool_hash": "1869cbc90d76d306",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@modelcontextprotocol/server-memory",
@@ -7738,7 +7844,9 @@
     "tool_hash": "4d709119e341da34",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "iterm-mcp",
@@ -7824,7 +7932,9 @@
     "tool_hash": "3713cb6bb708bffa",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "mcp-server-reddit",
@@ -8093,7 +8203,9 @@
     "tool_hash": "a48d1e156b2aa1ea",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "mcp-server-docker",
@@ -8239,7 +8351,9 @@
     "tool_hash": "64e2995053ca761c",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "searxng-mcp",
@@ -8325,7 +8439,9 @@
     "tool_hash": "2419329067823cab",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "mcp-server-calculator",
@@ -8425,7 +8541,9 @@
     "tool_hash": "edca249d8d1f9a5b",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@modelcontextprotocol/server-sentry",
@@ -8512,7 +8630,9 @@
     "tool_hash": "0b54b9ef236e8415",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@modelcontextprotocol/server-filesystem",
@@ -9124,7 +9244,9 @@
     "tool_hash": "44c35cf6ac86e32d",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "mcp-server-fetch",
@@ -9223,7 +9345,9 @@
     "tool_hash": "e7d3799ecc09f5cb",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@modelcontextprotocol/server-github",
@@ -10335,7 +10459,9 @@
     "tool_hash": "50715a0a2f55c601",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@modelcontextprotocol/server-everything",
@@ -10634,7 +10760,9 @@
     "tool_hash": "3f4d3cd441fa0a80",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "mcp-pandoc",
@@ -10790,7 +10918,9 @@
     "tool_hash": "7942daf03a875e04",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@agentdeskai/browser-tools-mcp",
@@ -10963,7 +11093,9 @@
     "tool_hash": "565952765ea33304",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "mcp-server-yfinance",
@@ -11280,7 +11412,9 @@
     "tool_hash": "00142d1aae518490",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "pdf-reader-mcp",
@@ -11452,7 +11586,9 @@
     "tool_hash": "720340f95db71adc",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "mcp-installer",
@@ -11556,7 +11692,9 @@
     "tool_hash": "3833814589108074",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "itu-mcp",
@@ -13213,7 +13351,9 @@
     "tool_hash": "e4a9ab21752edec5",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@notionhq/notion-mcp-server",
@@ -19614,7 +19754,9 @@
     "tool_hash": "fb89a6a995abd1dc",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@browsermcp/mcp",
@@ -19882,7 +20024,9 @@
     "tool_hash": "e2c04b8f3bbd2861",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@modelcontextprotocol/server-postgres",
@@ -19937,7 +20081,9 @@
     "tool_hash": "a8b771920b8319e4",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "mcp-youtube-transcript",
@@ -20093,7 +20239,9 @@
     "tool_hash": "ecc707c586dd2a2d",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "chrome-devtools-mcp",
@@ -20975,7 +21123,9 @@
     "tool_hash": "7c5d1c8baa98ef43",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "arxiv-mcp-server",
@@ -21335,7 +21485,9 @@
     "tool_hash": "0408f0d691105dad",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "mcp-code-executor",
@@ -21484,7 +21636,9 @@
     "tool_hash": "cc87e2fc3b49133e",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "mcp-shell",
@@ -21532,7 +21686,9 @@
     "tool_hash": "aeaf9a308c3a65df",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@modelcontextprotocol/server-puppeteer",
@@ -21720,7 +21876,9 @@
     "tool_hash": "10da201c43361eb8",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "mcp-server-sqlite",
@@ -21884,7 +22042,9 @@
     "tool_hash": "51015039cd19f301",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "mcp-clickhouse",
@@ -22107,7 +22267,9 @@
     "tool_hash": "fa34a24ef0c791fd",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@executeautomation/playwright-mcp-server",
@@ -22963,7 +23125,9 @@
     "tool_hash": "717bb183967118cc",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@playwright/mcp",
@@ -23697,7 +23861,9 @@
     "tool_hash": "64c419316a5d8e6d",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "mcp-shrimp-task-manager",
@@ -24235,7 +24401,9 @@
     "tool_hash": "cf953fcd1307a0c5",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "mcp-neo4j-cypher",
@@ -24408,7 +24576,9 @@
     "tool_hash": "9674c1b523a5958d",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "biothings-mcp",
@@ -36044,7 +36214,9 @@
     "tool_hash": "2d2dbd16c1135614",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "opengenes-mcp",
@@ -36268,7 +36440,9 @@
     "tool_hash": "d06fa3aaf94699ae",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "synergy-age-mcp",
@@ -36499,7 +36673,9 @@
     "tool_hash": "37e801476938e92c",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "mcp-server-kubernetes",
@@ -37639,7 +37815,9 @@
     "tool_hash": "fabc635d889df215",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "mcp-hackernews",
@@ -37822,7 +38000,9 @@
     "tool_hash": "68e0b8883cf2eda8",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "blender-mcp",
@@ -38606,7 +38786,9 @@
     "tool_hash": "bdab2d86acc3a9a3",
     "last_scanned": "2026-07-12",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "demo/malicious_server.py",
@@ -38953,7 +39135,9 @@
     "tool_hash": "9fd28cf53fb1cb93",
     "last_scanned": "2026-07-13",
     "scanner_version": "1.0.0-rc4",
-    "status": "scanned"
+    "status": "scanned",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@anthropic/server-apple-shortcuts",
@@ -38974,7 +39158,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@anthropic/server-brave-search",
@@ -38995,7 +39181,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@anthropic/server-confluence",
@@ -39016,7 +39204,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@anthropic/server-crypto-wallet",
@@ -39037,7 +39227,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@anthropic/server-discord",
@@ -39058,7 +39250,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@anthropic/server-elasticsearch",
@@ -39079,7 +39273,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@anthropic/server-everart",
@@ -39100,7 +39296,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@anthropic/server-exa",
@@ -39121,7 +39319,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@anthropic/server-gitlab",
@@ -39142,7 +39342,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@anthropic/server-jira",
@@ -39163,7 +39365,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@anthropic/server-kubernetes",
@@ -39184,7 +39388,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@anthropic/server-langchain",
@@ -39205,7 +39411,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@anthropic/server-llamaindex",
@@ -39226,7 +39434,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@anthropic/server-microsoft-teams",
@@ -39247,7 +39457,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@anthropic/server-mysql",
@@ -39268,7 +39480,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@anthropic/server-pinecone",
@@ -39289,7 +39503,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@anthropic/server-qdrant",
@@ -39310,7 +39526,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@anthropic/server-redis",
@@ -39331,7 +39549,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@anthropic/server-rss",
@@ -39352,7 +39572,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@anthropic/server-sendgrid",
@@ -39373,7 +39595,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@anthropic/server-sequential-thinking",
@@ -39394,7 +39618,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@anthropic/server-serper",
@@ -39415,7 +39641,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@anthropic/server-sqlite",
@@ -39436,7 +39664,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@anthropic/server-terminal",
@@ -39457,7 +39687,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@modelcontextprotocol/server-brave-search",
@@ -39478,7 +39710,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@modelcontextprotocol/server-slack",
@@ -39499,7 +39733,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "@stripe/mcp",
@@ -39520,7 +39756,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "adeu",
@@ -39541,7 +39779,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "agent-scraper-mcp",
@@ -39562,7 +39802,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "anyquery",
@@ -39583,7 +39825,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "aseprite-mcp",
@@ -39604,7 +39848,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "cli-mcp",
@@ -39625,7 +39871,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "codemcp",
@@ -39646,7 +39894,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "comfy-pilot",
@@ -39667,7 +39917,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "cortex",
@@ -39688,7 +39940,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "davinci-resolve-mcp",
@@ -39709,7 +39963,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "db-mcp-server",
@@ -39730,7 +39986,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "depwire",
@@ -39751,7 +40009,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "DesktopCommanderMCP",
@@ -39772,7 +40032,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "dicom-hl7-mcp-server",
@@ -39793,7 +40055,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "domcp",
@@ -39814,7 +40078,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "dotmd-mcp",
@@ -39835,7 +40101,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "duckduckgo-mcp",
@@ -39856,7 +40124,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "eslint-mcp-server",
@@ -39877,7 +40147,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "excalidraw-architect-mcp",
@@ -39898,7 +40170,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "firefox-devtools-mcp",
@@ -39919,7 +40193,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "flstudio-mcp",
@@ -39940,7 +40216,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "forage",
@@ -39961,7 +40239,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "frigate-mcp",
@@ -39982,7 +40262,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "genomic-agent-discovery",
@@ -40003,7 +40285,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "gget-mcp",
@@ -40024,7 +40308,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "ha-mcp",
@@ -40045,7 +40331,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "liquid",
@@ -40066,7 +40354,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "lm-studio-mcp",
@@ -40087,7 +40377,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "local-mcp",
@@ -40108,7 +40400,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "manim-mcp-server",
@@ -40129,7 +40423,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "mcp-gateway",
@@ -40150,7 +40446,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "mcp-server-ollama-bridge",
@@ -40171,7 +40469,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "mermaid-grammer-inspector-mcp",
@@ -40192,7 +40492,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "nakkas",
@@ -40213,7 +40515,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "ncp",
@@ -40234,7 +40538,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "ollama-mcp",
@@ -40255,7 +40561,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "periscope-mcp",
@@ -40276,7 +40584,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "plant-genomics-mcp",
@@ -40297,7 +40607,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "proposalcraft",
@@ -40318,7 +40630,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "pskill9/web-search",
@@ -40339,7 +40653,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "reaper-mcp",
@@ -40360,7 +40676,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "safari-mcp",
@@ -40381,7 +40699,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "selenium-mcp",
@@ -40402,7 +40722,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "tentra-mcp",
@@ -40423,7 +40745,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "thiri-mcp",
@@ -40444,7 +40768,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "video-editing-mcp",
@@ -40465,7 +40791,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "wardn-mcp",
@@ -40486,7 +40814,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "windows-mcp",
@@ -40507,7 +40837,9 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   },
   {
     "server": "zen-mcp",
@@ -40528,6 +40860,8 @@
     "tool_hash": "",
     "last_scanned": "-",
     "scanner_version": "1.0.0-rc4",
-    "status": "pending"
+    "status": "pending",
+    "trending": false,
+    "popularity": null
   }
 ]

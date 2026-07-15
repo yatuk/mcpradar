@@ -2250,6 +2250,107 @@ def registry_list(
     console.print(table)
 
 
+def _scan_command_for(registry_type: str, identifier: str) -> str | None:
+    """Build a launch command for a package ref, mirroring targets.yaml."""
+    rtype = (registry_type or "").lower()
+    if rtype == "npm":
+        return f"npx -y {identifier}"
+    if rtype in ("pypi", "pip"):
+        return f"uvx {identifier}"
+    return None
+
+
+@registry_app.command(name="rank")
+def registry_rank(
+    top: int = typer.Option(10, "--top", "-n", help="How many top servers to return"),  # noqa: B008
+    search_size: int = typer.Option(  # noqa: B008
+        80, "--search-size", help="npm search candidates to score"
+    ),
+    emit_targets: Path | None = typer.Option(  # noqa: B008
+        None, "--emit-targets", help="Write a targets.yaml the validation runner can scan"
+    ),
+    json_only: bool = typer.Option(False, "--json", help="Output as JSON"),  # noqa: B008
+) -> None:
+    """Rank the most popular MCP servers by combined popularity (npm + PyPI + GitHub).
+
+    Popularity is not in the MCP registry (and it is far too large to score
+    daily), so candidates are discovered via npm's popularity-aware search and
+    then scored on real usage signals combined on a log scale
+    (see mcpradar.registry.popularity).
+    """
+    import yaml
+
+    from mcpradar.output.console import console
+    from mcpradar.registry.popularity import discover_popular_servers
+
+    console.print("[dim]Discovering the most popular MCP servers…[/]")
+    ranked = discover_popular_servers(top_n=top, search_size=search_size)
+
+    if emit_targets is not None:
+        servers: list[dict[str, Any]] = []
+        for r in ranked:
+            pkg = next(
+                (p for p in r.entry.packages if _scan_command_for(p.registry_type, p.identifier)),
+                None,
+            )
+            if pkg is None:
+                continue
+            cmd = _scan_command_for(pkg.registry_type, pkg.identifier)
+            servers.append(
+                {
+                    "name": r.entry.name,
+                    "scan": cmd,
+                    "transport": "stdio",
+                    "expected_rules": [],
+                    "notes": f"Auto-ranked trending (score {r.score}).",
+                }
+            )
+        emit_targets.write_text(
+            yaml.safe_dump({"servers": servers}, sort_keys=False, allow_unicode=True),
+            encoding="utf-8",
+        )
+        console.print(f"[green]Wrote {len(servers)} targets → {emit_targets}[/]")
+
+    if json_only:
+        console.print(
+            json.dumps(
+                [
+                    {
+                        "name": r.entry.name,
+                        "score": r.score,
+                        "npm_downloads": r.signals.npm_downloads,
+                        "pypi_downloads": r.signals.pypi_downloads,
+                        "github_stars": r.signals.github_stars,
+                    }
+                    for r in ranked
+                ],
+                indent=2,
+                ensure_ascii=False,
+            )
+        )
+        return
+
+    from rich.table import Table
+
+    table = Table(title=f"Top {len(ranked)} MCP servers by popularity", header_style="bold")
+    table.add_column("#", width=3)
+    table.add_column("Name", width=38)
+    table.add_column("Score", justify="right", width=7)
+    table.add_column("npm/wk", justify="right", width=10)
+    table.add_column("PyPI/wk", justify="right", width=10)
+    table.add_column("★", justify="right", width=8)
+    for i, r in enumerate(ranked, 1):
+        table.add_row(
+            str(i),
+            r.entry.name[:38],
+            f"{r.score:.2f}",
+            f"{r.signals.npm_downloads:,}" if r.signals.npm_downloads else "-",
+            f"{r.signals.pypi_downloads:,}" if r.signals.pypi_downloads else "-",
+            f"{r.signals.github_stars:,}" if r.signals.github_stars else "-",
+        )
+    console.print(table)
+
+
 # ---------------------------------------------------------------------------
 # leaderboard
 # ---------------------------------------------------------------------------
@@ -2377,6 +2478,8 @@ def leaderboard_generate(
                         "last_scanned": "-",
                         "scanner_version": __version__,
                         "status": "incomplete" if data.get("incomplete") else "pending",
+                        "trending": bool(data.get("trending")),
+                        "popularity": data.get("popularity"),
                     }
                 )
                 continue
@@ -2536,6 +2639,8 @@ def leaderboard_generate(
                     else "-",
                     "scanner_version": __version__,
                     "status": "scanned",
+                    "trending": bool(data.get("trending")),
+                    "popularity": data.get("popularity"),
                 }
             )
 
@@ -2550,10 +2655,16 @@ def leaderboard_generate(
         if existing is None:
             by_name[key] = r
             continue
+        # The 🔥 trending signal must survive dedup even when the curated
+        # (better-scanned) copy wins — OR it onto whichever row we keep.
+        trending = bool(existing.get("trending") or r.get("trending"))
+        popularity = existing.get("popularity") or r.get("popularity")
         cur_rank = (existing["status"] != "pending", existing["tools"])
         new_rank = (r["status"] != "pending", r["tools"])
-        if new_rank > cur_rank:
-            by_name[key] = r
+        winner = r if new_rank > cur_rank else existing
+        winner["trending"] = trending
+        winner["popularity"] = popularity
+        by_name[key] = winner
     rows = list(by_name.values())
 
     # Deduplicate scanned servers by tool fingerprint: the same real server can
@@ -2574,8 +2685,12 @@ def leaderboard_generate(
             passthrough.append(r)
             continue
         existing = by_hash.get(h)
+        trending = bool(r.get("trending") or (existing and existing.get("trending")))
+        popularity = r.get("popularity") or (existing.get("popularity") if existing else None)
         if existing is None or _canonical_rank(r) < _canonical_rank(existing):
             by_hash[h] = r
+        by_hash[h]["trending"] = trending
+        by_hash[h]["popularity"] = popularity
     rows = list(by_hash.values()) + passthrough
 
     # Scanned servers first (by ascending risk), pending servers last.
@@ -2606,15 +2721,18 @@ def leaderboard_generate(
         slug = r["server"].replace("@", "").replace("/", "-")
         if not slug:
             continue
-        if r["status"] == "pending":
-            color, right, aria = "#8b949e", "not scanned", "not scanned"
+        # Pending stubs and incomplete scans have no score to show.
+        unscored = r["status"] != "scanned" or r.get("aivss_score") is None
+        if unscored:
+            label = "incomplete" if r["status"] == "incomplete" else "not scanned"
+            color, right, aria = "#8b949e", label, label
         else:
             g = r["grade"]
             color = _grade_color.get(g, "#8b949e")
             right = f"{g} · {r['aivss_score']:.1f}"
             aria = f"{g} - {r['aivss_score']:.1f}/10"
-        # Right panel widens for the longer "not scanned" label.
-        right_w = 96 if r["status"] == "pending" else 72
+        # Right panel widens for the longer text label.
+        right_w = 96 if unscored else 72
         total_w = 68 + right_w
         svg = (
             f'<svg xmlns="http://www.w3.org/2000/svg" width="{total_w}" height="20" '
@@ -2635,8 +2753,8 @@ def leaderboard_generate(
         (badges_dir / f"{slug}.svg").write_text(svg, encoding="utf-8")
         badge_count += 1
 
-    scanned_rows = [r for r in rows if r["status"] != "pending"]
-    pending_rows = [r for r in rows if r["status"] == "pending"]
+    scanned_rows = [r for r in rows if r["status"] == "scanned" and r.get("aivss_score") is not None]
+    pending_rows = [r for r in rows if r["status"] != "scanned" or r.get("aivss_score") is None]
     console.print(
         f"[green]Generated {output}[/] — "
         f"{len(scanned_rows)} scanned, {len(pending_rows)} pending, {len(rows)} total; "

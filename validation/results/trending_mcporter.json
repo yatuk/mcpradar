@@ -1,0 +1,20 @@
+{
+  "name": "mcporter",
+  "target": "npx -y mcporter",
+  "transport": "stdio",
+  "version": "",
+  "tools": [],
+  "findings": [],
+  "scanned_at": "2026-07-15T15:09:14.597479+00:00",
+  "popularity": {
+    "score": 8.9326,
+    "npm_downloads": 178869,
+    "pypi_downloads": null,
+    "github_stars": 4786
+  },
+  "trending": true,
+  "enriched": true,
+  "enriched_ref": "npm:mcporter",
+  "incomplete": true,
+  "incomplete_reason": "could not launch headless; no package findings"
+}

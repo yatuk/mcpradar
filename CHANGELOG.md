@@ -8,6 +8,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
+- **Daily trending scan** — a scheduled job ranks the most popular MCP servers
+  and folds them into the leaderboard automatically. Popularity is not in the
+  MCP registry (which has no ranking and is far too large to score daily), so
+  candidates are discovered via npm's popularity-aware search (`keywords:mcp-server`,
+  filtered to servers rather than SDKs/adapters) and then scored on real usage
+  signals — npm + PyPI weekly downloads and GitHub stars — combined on a log
+  scale so no single signal dominates. Each top server is live-scanned
+  (best-effort) and always enriched from its package, so it gets a
+  dependency/source grade even when it can't be launched headless. New
+  `mcpradar registry rank` command, `src/mcpradar/registry/popularity.py`,
+  `validation/run_trending.py`, and a daily `.github/workflows/trending.yml`;
+  trending rows carry a 🔥 badge and their popularity signals on the leaderboard.
+  Known limitation: discovery is npm-based, so a PyPI-only server that publishes
+  no npm package is not auto-discovered (it is still covered by the curated corpus).
 - **Per-finding detection confidence** — every finding now carries a confidence
   in [0.0, 1.0] answering "how likely a true positive" (a separate axis from
   severity, "how bad if true"), derived from *how* the rule detects: 0.9 for

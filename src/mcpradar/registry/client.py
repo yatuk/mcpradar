@@ -60,13 +60,20 @@ class RegistryClient:
 
     # -- Public API -------------------------------------------------------
 
-    def list_servers(self, limit: int = 100, latest_only: bool = True) -> list[RegistryEntry]:
-        """Fetch all servers from the registry, walking all pagination pages.
+    def list_servers(
+        self, limit: int = 100, latest_only: bool = True, max_pages: int | None = None
+    ) -> list[RegistryEntry]:
+        """Fetch servers from the registry, walking pagination pages.
 
         Args:
             limit: Page size for each HTTP request.
             latest_only: When True, only return entries whose ``_meta``
                 ``isLatest`` flag is true.
+            max_pages: Stop after this many pages instead of walking the whole
+                registry. The registry now holds thousands of alphabetically
+                paginated servers, so an unbounded walk (with the 1s/page rate
+                limit) takes minutes — callers that only need a sample should
+                bound it.
 
         Returns:
             Parsed RegistryEntry objects. On network failure, falls back
@@ -74,16 +81,18 @@ class RegistryClient:
         """
         all_raw_servers: list[dict[str, Any]] = []
         cursor: str | None = None
+        pages = 0
 
         try:
             while True:
                 page = self.fetch_page(limit=limit, cursor=cursor)
                 servers = page.get("servers", [])
                 all_raw_servers.extend(servers)
+                pages += 1
 
                 metadata = page.get("metadata", {})
                 cursor = metadata.get("nextCursor")
-                if cursor is None:
+                if cursor is None or (max_pages is not None and pages >= max_pages):
                     break
 
                 # Rate limiting: 1 request per second between pages

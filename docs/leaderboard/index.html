@@ -388,6 +388,10 @@ tbody tr:hover td { background: rgba(255,255,255,0.025); }
 .conf-tag.conf-high { color: var(--green, #3fb950); }
 .conf-tag.conf-med { color: var(--yellow); }
 .conf-tag.conf-low { color: var(--dim); }
+.trending-tag {
+  font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 8px;
+  background: var(--orange-dim); color: var(--orange); white-space: nowrap;
+}
 .finding-desc { color: var(--dim); grid-column: 4; }
 
 .tool-mini-list { font-size: 12px; }
@@ -1148,6 +1152,7 @@ footer a:hover { text-decoration: underline; }
       html += '<td style="color:var(--dim)">' + (pending ? "—" : (i + 1)) + '</td>';
       html += '<td>' +
         '<a class="server-link" href="' + detailHref + '" aria-label="View detail for ' + esc(name) + '">' + esc(name) + '</a>' +
+        (s.trending ? ' <span class="trending-tag" title="Auto-scanned as one of the day\'s most popular MCP servers">🔥 trending</span>' : '') +
         (ver ? ' <span style="font-size:10px;color:var(--dim)">v' + esc(ver) + '</span>' : '') +
         (pending ? ' <span style="font-size:9px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:0 5px;color:var(--dim)">' + (s.status==="incomplete"?"scan incomplete":"not scanned") + '</span>' : '') +
         '<br><span style="font-size:10px;color:var(--dim)">' +

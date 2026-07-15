@@ -1,0 +1,73 @@
+{
+  "name": "@upstash/context7-mcp",
+  "target": "npx -y @upstash/context7-mcp",
+  "transport": "stdio",
+  "version": "",
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "undici@6.26.0 (npm) is affected by CVE-2026-6733: undici vulnerable to HTTP response queue poisoning via keep-alive socket reuse; fixed in 8.5.0",
+      "severity": "low",
+      "target": "undici@6.26.0",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "undici",
+        "version": "6.26.0",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-35p6-xmwp-9g52",
+        "cve": "CVE-2026-6733",
+        "cvss": 3.7,
+        "cwe_ids": [
+          "CWE-367"
+        ],
+        "fixed_version": "8.5.0",
+        "references": [
+          "https://github.com/nodejs/undici/security/advisories/GHSA-35p6-xmwp-9g52",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-6733",
+          "https://hackerone.com/reports/3582376"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "vitest@4.0.13 (npm) is affected by CVE-2026-47429: When Vitest UI server is listening, arbitrary file can be read and executed; fixed in 3.2.6",
+      "severity": "critical",
+      "target": "vitest@4.0.13",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "vitest",
+        "version": "4.0.13",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-5xrq-8626-4rwp",
+        "cve": "CVE-2026-47429",
+        "cvss": 9.8,
+        "cwe_ids": [
+          "CWE-862"
+        ],
+        "fixed_version": "3.2.6",
+        "references": [
+          "https://github.com/vitest-dev/vitest/security/advisories/GHSA-5xrq-8626-4rwp",
+          "https://github.com/vitest-dev/vitest",
+          "https://github.com/vitest-dev/vitest/blob/eb1abf08573032a532015b999ad3501c5e89e3bb/packages/browser/src/node/commands/fs.ts#L10-L11"
+        ]
+      },
+      "confidence": 0.9
+    }
+  ],
+  "scanned_at": "2026-07-15T15:08:33.980926+00:00",
+  "popularity": {
+    "score": 10.5562,
+    "npm_downloads": 608578,
+    "pypi_downloads": null,
+    "github_stars": 59146
+  },
+  "trending": true,
+  "enriched": true,
+  "enriched_ref": "npm:@upstash/context7-mcp"
+}

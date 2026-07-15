@@ -1,0 +1,46 @@
+{
+  "name": "korean-law-mcp",
+  "target": "npx -y korean-law-mcp",
+  "transport": "stdio",
+  "version": "",
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "@xmldom/xmldom@0.9.8 (npm) is affected by CVE-2026-41673: xmldom: Uncontrolled recursion in XML serialization leads to DoS; fixed in 0.9.10",
+      "severity": "high",
+      "target": "@xmldom/xmldom@0.9.8",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "@xmldom/xmldom",
+        "version": "0.9.8",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-2v35-w6hq-6mfw",
+        "cve": "CVE-2026-41673",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-674"
+        ],
+        "fixed_version": "0.9.10",
+        "references": [
+          "https://github.com/xmldom/xmldom/security/advisories/GHSA-2v35-w6hq-6mfw",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-41673",
+          "https://github.com/xmldom/xmldom/commit/17678a2a73ecbd1a2da90f3d47dc23da9cef81aa"
+        ]
+      },
+      "confidence": 0.9
+    }
+  ],
+  "scanned_at": "2026-07-15T15:09:02.115775+00:00",
+  "popularity": {
+    "score": 9.1721,
+    "npm_downloads": 5205,
+    "pypi_downloads": 128,
+    "github_stars": 2212
+  },
+  "trending": true,
+  "enriched": true,
+  "enriched_ref": "npm:korean-law-mcp"
+}
