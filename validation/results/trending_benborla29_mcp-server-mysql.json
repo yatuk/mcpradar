@@ -1,0 +1,73 @@
+{
+  "name": "@benborla29/mcp-server-mysql",
+  "target": "npx -y @benborla29/mcp-server-mysql",
+  "transport": "stdio",
+  "version": "",
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "@modelcontextprotocol/sdk@1.15.1 (npm) is affected by CVE-2026-25536: @modelcontextprotocol/sdk has cross-client data leak via shared server/transport instance reuse; fixed in 1.26.0",
+      "severity": "high",
+      "target": "@modelcontextprotocol/sdk@1.15.1",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "@modelcontextprotocol/sdk",
+        "version": "1.15.1",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-345p-7cg4-v4c7",
+        "cve": "CVE-2026-25536",
+        "cvss": 7.1,
+        "cwe_ids": [
+          "CWE-362"
+        ],
+        "fixed_version": "1.26.0",
+        "references": [
+          "https://github.com/modelcontextprotocol/typescript-sdk/security/advisories/GHSA-345p-7cg4-v4c7",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-25536",
+          "https://github.com/modelcontextprotocol/typescript-sdk/issues/204"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "vitest@1.6.1 (npm) is affected by CVE-2026-47429: When Vitest UI server is listening, arbitrary file can be read and executed; fixed in 3.2.6",
+      "severity": "critical",
+      "target": "vitest@1.6.1",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "vitest",
+        "version": "1.6.1",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-5xrq-8626-4rwp",
+        "cve": "CVE-2026-47429",
+        "cvss": 9.8,
+        "cwe_ids": [
+          "CWE-862"
+        ],
+        "fixed_version": "3.2.6",
+        "references": [
+          "https://github.com/vitest-dev/vitest/security/advisories/GHSA-5xrq-8626-4rwp",
+          "https://github.com/vitest-dev/vitest",
+          "https://github.com/vitest-dev/vitest/blob/eb1abf08573032a532015b999ad3501c5e89e3bb/packages/browser/src/node/commands/fs.ts#L10-L11"
+        ]
+      },
+      "confidence": 0.9
+    }
+  ],
+  "scanned_at": "2026-07-16T08:04:49.423101+00:00",
+  "popularity": {
+    "score": 7.2914,
+    "npm_downloads": 10031,
+    "pypi_downloads": null,
+    "github_stars": 1949
+  },
+  "trending": true,
+  "enriched": true,
+  "enriched_ref": "npm:@benborla29/mcp-server-mysql"
+}

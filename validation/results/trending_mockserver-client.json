@@ -1,0 +1,20 @@
+{
+  "name": "mockserver-client",
+  "target": "npx -y mockserver-client",
+  "transport": "stdio",
+  "version": "",
+  "tools": [],
+  "findings": [],
+  "scanned_at": "2026-07-16T08:04:51.375023+00:00",
+  "popularity": {
+    "score": 7.1191,
+    "npm_downloads": null,
+    "pypi_downloads": 2675,
+    "github_stars": 4915
+  },
+  "trending": true,
+  "enriched": true,
+  "enriched_ref": "npm:mockserver-client",
+  "incomplete": true,
+  "incomplete_reason": "could not launch headless; no package findings"
+}

@@ -1,0 +1,20 @@
+{
+  "name": "obsidian-mcp-server",
+  "target": "npx -y obsidian-mcp-server",
+  "transport": "stdio",
+  "version": "",
+  "tools": [],
+  "findings": [],
+  "scanned_at": "2026-07-16T08:04:24.561633+00:00",
+  "popularity": {
+    "score": 8.0711,
+    "npm_downloads": 2336,
+    "pypi_downloads": 79,
+    "github_stars": 629
+  },
+  "trending": true,
+  "enriched": true,
+  "enriched_ref": "npm:obsidian-mcp-server",
+  "incomplete": true,
+  "incomplete_reason": "could not launch headless; no package findings"
+}

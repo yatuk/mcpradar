@@ -1,0 +1,20 @@
+{
+  "name": "yahoo-finance2",
+  "target": "npx -y yahoo-finance2",
+  "transport": "stdio",
+  "version": "",
+  "tools": [],
+  "findings": [],
+  "scanned_at": "2026-07-16T08:04:28.696422+00:00",
+  "popularity": {
+    "score": 8.0672,
+    "npm_downloads": 152187,
+    "pypi_downloads": null,
+    "github_stars": 766
+  },
+  "trending": true,
+  "enriched": true,
+  "enriched_ref": "npm:yahoo-finance2",
+  "incomplete": true,
+  "incomplete_reason": "could not launch headless; no package findings"
+}

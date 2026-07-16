@@ -1,0 +1,46 @@
+{
+  "name": "neo.mjs",
+  "target": "npx -y neo.mjs",
+  "transport": "stdio",
+  "version": "",
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "webpack-dev-server@5.2.3 (npm) is affected by CVE-2026-6402: webpack-dev-server vulnerable to cross-origin source code exposure on non-HTTPS origins; fixed in 5.2.4",
+      "severity": "medium",
+      "target": "webpack-dev-server@5.2.3",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "webpack-dev-server",
+        "version": "5.2.3",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-79cf-xcqc-c78w",
+        "cve": "CVE-2026-6402",
+        "cvss": 5.3,
+        "cwe_ids": [
+          "CWE-749"
+        ],
+        "fixed_version": "5.2.4",
+        "references": [
+          "https://github.com/webpack/webpack-dev-server/security/advisories/GHSA-4v9v-hfq4-rm2v",
+          "https://github.com/webpack/webpack-dev-server/security/advisories/GHSA-79cf-xcqc-c78w",
+          "https://github.com/webpack/webpack-dev-server/security/advisories/GHSA-9jgg-88mc-972h"
+        ]
+      },
+      "confidence": 0.9
+    }
+  ],
+  "scanned_at": "2026-07-16T08:04:40.347611+00:00",
+  "popularity": {
+    "score": 7.3295,
+    "npm_downloads": 6600,
+    "pypi_downloads": null,
+    "github_stars": 3234
+  },
+  "trending": true,
+  "enriched": true,
+  "enriched_ref": "npm:neo.mjs"
+}

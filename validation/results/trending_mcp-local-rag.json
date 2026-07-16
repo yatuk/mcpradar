@@ -1,0 +1,20 @@
+{
+  "name": "mcp-local-rag",
+  "target": "npx -y mcp-local-rag",
+  "transport": "stdio",
+  "version": "",
+  "tools": [],
+  "findings": [],
+  "scanned_at": "2026-07-16T08:04:17.936730+00:00",
+  "popularity": {
+    "score": 8.1831,
+    "npm_downloads": 2356,
+    "pypi_downloads": 187,
+    "github_stars": 343
+  },
+  "trending": true,
+  "enriched": true,
+  "enriched_ref": "npm:mcp-local-rag",
+  "incomplete": true,
+  "incomplete_reason": "could not launch headless; no package findings"
+}

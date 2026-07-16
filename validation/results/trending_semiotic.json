@@ -1,0 +1,20 @@
+{
+  "name": "semiotic",
+  "target": "npx -y semiotic",
+  "transport": "stdio",
+  "version": "",
+  "tools": [],
+  "findings": [],
+  "scanned_at": "2026-07-16T08:04:35.641635+00:00",
+  "popularity": {
+    "score": 7.4731,
+    "npm_downloads": 11064,
+    "pypi_downloads": null,
+    "github_stars": 2685
+  },
+  "trending": true,
+  "enriched": true,
+  "enriched_ref": "npm:semiotic",
+  "incomplete": true,
+  "incomplete_reason": "could not launch headless; no package findings"
+}

@@ -132,6 +132,62 @@
     }
   },
   {
+    "server": "agent-device",
+    "display_name": "agent-device",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "incomplete",
+    "trending": true,
+    "popularity": {
+      "score": 8.5534,
+      "npm_downloads": 105182,
+      "pypi_downloads": null,
+      "github_stars": 3399
+    }
+  },
+  {
+    "server": "mcp-local-rag",
+    "display_name": "mcp-local-rag",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "incomplete",
+    "trending": true,
+    "popularity": {
+      "score": 8.1831,
+      "npm_downloads": 2356,
+      "pypi_downloads": 187,
+      "github_stars": 343
+    }
+  },
+  {
     "server": "mcporter",
     "display_name": "mcporter",
     "version": "",
@@ -157,6 +213,168 @@
       "npm_downloads": 178869,
       "pypi_downloads": null,
       "github_stars": 4786
+    }
+  },
+  {
+    "server": "mockserver-client",
+    "display_name": "mockserver-client",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "incomplete",
+    "trending": true,
+    "popularity": {
+      "score": 7.1191,
+      "npm_downloads": null,
+      "pypi_downloads": 2675,
+      "github_stars": 4915
+    }
+  },
+  {
+    "server": "obsidian-mcp-server",
+    "display_name": "obsidian-mcp-server",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "incomplete",
+    "trending": true,
+    "popularity": {
+      "score": 8.0711,
+      "npm_downloads": 2336,
+      "pypi_downloads": 79,
+      "github_stars": 629
+    }
+  },
+  {
+    "server": "semiotic",
+    "display_name": "semiotic",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "incomplete",
+    "trending": true,
+    "popularity": {
+      "score": 7.4731,
+      "npm_downloads": 11064,
+      "pypi_downloads": null,
+      "github_stars": 2685
+    }
+  },
+  {
+    "server": "yahoo-finance2",
+    "display_name": "yahoo-finance2",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "incomplete",
+    "trending": true,
+    "popularity": {
+      "score": 8.0672,
+      "npm_downloads": 152187,
+      "pypi_downloads": null,
+      "github_stars": 766
+    }
+  },
+  {
+    "server": "neo.mjs",
+    "display_name": "neo.mjs",
+    "version": "",
+    "aivss_score": 0.1,
+    "grade": "A",
+    "aars": 0.0,
+    "capability": "pure_compute",
+    "confidence": 0.9,
+    "tools": 0,
+    "vulnerable_deps": 1,
+    "tools_detail": [],
+    "findings": 0,
+    "low_findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [
+      {
+        "rule_id": "D001",
+        "severity": "medium",
+        "title": "Known-vulnerable dependency (OSV)",
+        "description": "webpack-dev-server@5.2.3 (npm) is affected by CVE-2026-6402: webpack-dev-server vulnerable to cross-origin source code e",
+        "confidence": 0.9
+      }
+    ],
+    "tool_hash": "",
+    "last_scanned": "2026-07-16",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned",
+    "trending": true,
+    "popularity": {
+      "score": 7.3295,
+      "npm_downloads": 6600,
+      "pypi_downloads": null,
+      "github_stars": 3234
+    },
+    "breakdown": {
+      "base": 0.0,
+      "aars": 0.0,
+      "capability_term": 0.0,
+      "thm": 1.0,
+      "dep_risk": 0.15,
+      "weighted_findings": 0,
+      "driver": "dependencies"
     }
   },
   {
@@ -847,6 +1065,56 @@
     "status": "scanned",
     "trending": false,
     "popularity": null,
+    "breakdown": {
+      "base": 0.0,
+      "aars": 0.0,
+      "capability_term": 0.0,
+      "thm": 1.0,
+      "dep_risk": 0.4,
+      "weighted_findings": 0,
+      "driver": "dependencies"
+    }
+  },
+  {
+    "server": "comfyui-mcp",
+    "display_name": "comfyui-mcp",
+    "version": "",
+    "aivss_score": 0.4,
+    "grade": "A",
+    "aars": 0.0,
+    "capability": "pure_compute",
+    "confidence": 0.9,
+    "tools": 0,
+    "vulnerable_deps": 1,
+    "tools_detail": [],
+    "findings": 0,
+    "low_findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [
+      {
+        "rule_id": "D001",
+        "severity": "high",
+        "title": "Known-vulnerable dependency (OSV)",
+        "description": "@modelcontextprotocol/sdk@1.12.1 (npm) is affected by CVE-2026-25536: @modelcontextprotocol/sdk has cross-client data le",
+        "confidence": 0.9
+      }
+    ],
+    "tool_hash": "",
+    "last_scanned": "2026-07-16",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned",
+    "trending": true,
+    "popularity": {
+      "score": 9.0873,
+      "npm_downloads": 22033,
+      "pypi_downloads": 142,
+      "github_stars": 387
+    },
     "breakdown": {
       "base": 0.0,
       "aars": 0.0,
@@ -2909,6 +3177,56 @@
     }
   },
   {
+    "server": "@zereight/mcp-gitlab",
+    "display_name": "zereight / mcp-gitlab",
+    "version": "",
+    "aivss_score": 1.0,
+    "grade": "B",
+    "aars": 0.0,
+    "capability": "pure_compute",
+    "confidence": 0.9,
+    "tools": 0,
+    "vulnerable_deps": 1,
+    "tools_detail": [],
+    "findings": 0,
+    "low_findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [
+      {
+        "rule_id": "D001",
+        "severity": "critical",
+        "title": "Known-vulnerable dependency (OSV)",
+        "description": "form-data@4.0.0 (npm) is affected by CVE-2025-7783: form-data uses unsafe random function in form-data for choosing boun",
+        "confidence": 0.9
+      }
+    ],
+    "tool_hash": "",
+    "last_scanned": "2026-07-16",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned",
+    "trending": true,
+    "popularity": {
+      "score": 8.0641,
+      "npm_downloads": 64074,
+      "pypi_downloads": null,
+      "github_stars": 1808
+    },
+    "breakdown": {
+      "base": 0.0,
+      "aars": 0.0,
+      "capability_term": 0.0,
+      "thm": 1.0,
+      "dep_risk": 1.0,
+      "weighted_findings": 0,
+      "driver": "dependencies"
+    }
+  },
+  {
     "server": "wikipedia-mcp",
     "display_name": "wikipedia-mcp",
     "version": "",
@@ -4883,6 +5201,63 @@
       "base": 0.0,
       "aars": 2.0,
       "capability_term": 1.0,
+      "thm": 1.0,
+      "dep_risk": 1.4,
+      "weighted_findings": 0,
+      "driver": "dependencies"
+    }
+  },
+  {
+    "server": "@benborla29/mcp-server-mysql",
+    "display_name": "benborla29 / mcp-server-mysql",
+    "version": "",
+    "aivss_score": 1.4,
+    "grade": "B",
+    "aars": 0.0,
+    "capability": "pure_compute",
+    "confidence": 0.9,
+    "tools": 0,
+    "vulnerable_deps": 2,
+    "tools_detail": [],
+    "findings": 0,
+    "low_findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [
+      {
+        "rule_id": "D001",
+        "severity": "high",
+        "title": "Known-vulnerable dependency (OSV)",
+        "description": "@modelcontextprotocol/sdk@1.15.1 (npm) is affected by CVE-2026-25536: @modelcontextprotocol/sdk has cross-client data le",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "D001",
+        "severity": "critical",
+        "title": "Known-vulnerable dependency (OSV)",
+        "description": "vitest@1.6.1 (npm) is affected by CVE-2026-47429: When Vitest UI server is listening, arbitrary file can be read and exe",
+        "confidence": 0.9
+      }
+    ],
+    "tool_hash": "",
+    "last_scanned": "2026-07-16",
+    "scanner_version": "1.0.0-rc4",
+    "status": "scanned",
+    "trending": true,
+    "popularity": {
+      "score": 7.2914,
+      "npm_downloads": 10031,
+      "pypi_downloads": null,
+      "github_stars": 1949
+    },
+    "breakdown": {
+      "base": 0.0,
+      "aars": 0.0,
+      "capability_term": 0.0,
       "thm": 1.0,
       "dep_risk": 1.4,
       "weighted_findings": 0,
@@ -41894,6 +42269,29 @@
     "popularity": null
   },
   {
+    "server": "DesktopCommanderMCP",
+    "display_name": "DesktopCommanderMCP",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "pending",
+    "trending": false,
+    "popularity": null
+  },
+  {
     "server": "adeu",
     "display_name": "adeu",
     "version": "",
@@ -42126,29 +42524,6 @@
   {
     "server": "depwire",
     "display_name": "depwire",
-    "version": "",
-    "aivss_score": null,
-    "grade": "-",
-    "confidence": null,
-    "tools": 0,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "scanner_version": "1.0.0-rc4",
-    "status": "pending",
-    "trending": false,
-    "popularity": null
-  },
-  {
-    "server": "DesktopCommanderMCP",
-    "display_name": "DesktopCommanderMCP",
     "version": "",
     "aivss_score": null,
     "grade": "-",
