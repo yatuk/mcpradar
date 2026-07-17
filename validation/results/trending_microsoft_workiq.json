@@ -1,20 +1,18 @@
 {
-  "name": "semiotic",
-  "target": "npx -y semiotic",
+  "name": "@microsoft/workiq",
+  "target": "npx -y @microsoft/workiq",
   "transport": "stdio",
   "version": "",
   "tools": [],
   "findings": [],
-  "scanned_at": "2026-07-17T08:01:24.262018+00:00",
+  "scanned_at": "2026-07-17T08:01:55.841043+00:00",
   "popularity": {
-    "score": 7.3879,
-    "npm_downloads": 9093,
+    "score": 7.0029,
+    "npm_downloads": 10709,
     "pypi_downloads": null,
-    "github_stars": 2685
+    "github_stars": 939
   },
   "trending": true,
-  "enriched": true,
-  "enriched_ref": "npm:semiotic",
   "incomplete": true,
   "incomplete_reason": "could not launch headless; no package findings"
 }

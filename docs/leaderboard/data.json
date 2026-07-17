@@ -153,10 +153,10 @@
     "status": "incomplete",
     "trending": true,
     "popularity": {
-      "score": 8.5534,
-      "npm_downloads": 105182,
+      "score": 8.5583,
+      "npm_downloads": 104987,
       "pypi_downloads": null,
-      "github_stars": 3399
+      "github_stars": 3444
     }
   },
   {
@@ -181,10 +181,10 @@
     "status": "incomplete",
     "trending": true,
     "popularity": {
-      "score": 8.1831,
-      "npm_downloads": 2356,
-      "pypi_downloads": 187,
-      "github_stars": 343
+      "score": 8.1905,
+      "npm_downloads": 2316,
+      "pypi_downloads": 193,
+      "github_stars": 344
     }
   },
   {
@@ -213,6 +213,34 @@
       "npm_downloads": 178869,
       "pypi_downloads": null,
       "github_stars": 4786
+    }
+  },
+  {
+    "server": "@microsoft/workiq",
+    "display_name": "microsoft / workiq",
+    "version": "",
+    "aivss_score": null,
+    "grade": "-",
+    "confidence": null,
+    "tools": 0,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "scanner_version": "1.0.0-rc4",
+    "status": "incomplete",
+    "trending": true,
+    "popularity": {
+      "score": 7.0029,
+      "npm_downloads": 10709,
+      "pypi_downloads": null,
+      "github_stars": 939
     }
   },
   {
@@ -293,8 +321,8 @@
     "status": "incomplete",
     "trending": true,
     "popularity": {
-      "score": 7.4731,
-      "npm_downloads": 11064,
+      "score": 7.3879,
+      "npm_downloads": 9093,
       "pypi_downloads": null,
       "github_stars": 2685
     }
@@ -321,10 +349,10 @@
     "status": "incomplete",
     "trending": true,
     "popularity": {
-      "score": 8.0672,
-      "npm_downloads": 152187,
+      "score": 8.0741,
+      "npm_downloads": 154435,
       "pypi_downloads": null,
-      "github_stars": 766
+      "github_stars": 767
     }
   },
   {
@@ -357,15 +385,15 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-07-16",
+    "last_scanned": "2026-07-17",
     "scanner_version": "1.0.0-rc4",
     "status": "scanned",
     "trending": true,
     "popularity": {
-      "score": 7.3295,
-      "npm_downloads": 6600,
+      "score": 7.4325,
+      "npm_downloads": 8362,
       "pypi_downloads": null,
-      "github_stars": 3234
+      "github_stars": 3236
     },
     "breakdown": {
       "base": 0.0,
@@ -1105,15 +1133,15 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-07-16",
+    "last_scanned": "2026-07-17",
     "scanner_version": "1.0.0-rc4",
     "status": "scanned",
     "trending": true,
     "popularity": {
-      "score": 9.0873,
-      "npm_downloads": 22033,
-      "pypi_downloads": 142,
-      "github_stars": 387
+      "score": 6.9277,
+      "npm_downloads": 21650,
+      "pypi_downloads": null,
+      "github_stars": 390
     },
     "breakdown": {
       "base": 0.0,
@@ -1155,15 +1183,15 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-07-15",
+    "last_scanned": "2026-07-17",
     "scanner_version": "1.0.0-rc4",
     "status": "scanned",
     "trending": true,
     "popularity": {
-      "score": 9.1721,
-      "npm_downloads": 5205,
-      "pypi_downloads": 128,
-      "github_stars": 2212
+      "score": 7.0495,
+      "npm_downloads": 5023,
+      "pypi_downloads": null,
+      "github_stars": 2230
     },
     "breakdown": {
       "base": 0.0,
@@ -3206,15 +3234,15 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-07-16",
+    "last_scanned": "2026-07-17",
     "scanner_version": "1.0.0-rc4",
     "status": "scanned",
     "trending": true,
     "popularity": {
-      "score": 8.0641,
-      "npm_downloads": 64074,
+      "score": 8.0901,
+      "npm_downloads": 67645,
       "pypi_downloads": null,
-      "github_stars": 1808
+      "github_stars": 1818
     },
     "breakdown": {
       "base": 0.0,
@@ -5244,15 +5272,15 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-07-16",
+    "last_scanned": "2026-07-17",
     "scanner_version": "1.0.0-rc4",
     "status": "scanned",
     "trending": true,
     "popularity": {
-      "score": 7.2914,
-      "npm_downloads": 10031,
+      "score": 7.2964,
+      "npm_downloads": 10120,
       "pypi_downloads": null,
-      "github_stars": 1949
+      "github_stars": 1954
     },
     "breakdown": {
       "base": 0.0,
