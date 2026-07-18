@@ -1,9 +1,123 @@
 {
-  "name": "db-mcp-server",
-  "command": "",
   "transport": "stdio",
-  "expected_rules": [],
-  "error": "list index out of range",
-  "tools_count": 0,
-  "findings": []
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "@modelcontextprotocol/sdk@0.6.0 (npm) is affected by CVE-2025-66414: Model Context Protocol (MCP) TypeScript SDK does not enable DNS rebinding protection by default; fixed in 1.24.0",
+      "severity": "high",
+      "target": "@modelcontextprotocol/sdk@0.6.0",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "@modelcontextprotocol/sdk",
+        "version": "0.6.0",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-w48q-cv73-mx4w",
+        "cve": "CVE-2025-66414",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-1188",
+          "CWE-350"
+        ],
+        "fixed_version": "1.24.0",
+        "references": [
+          "https://github.com/modelcontextprotocol/typescript-sdk/security/advisories/GHSA-w48q-cv73-mx4w",
+          "https://nvd.nist.gov/vuln/detail/CVE-2025-66414",
+          "https://github.com/modelcontextprotocol/typescript-sdk/pull/1205"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "mysql2@3.9.0 (npm) is affected by CVE-2024-21509: mysql2 vulnerable to Prototype Poisoning; fixed in 3.9.4",
+      "severity": "medium",
+      "target": "mysql2@3.9.0",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "mysql2",
+        "version": "3.9.0",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-49j4-86m8-q2jw",
+        "cve": "CVE-2024-21509",
+        "cvss": 5.0,
+        "cwe_ids": [
+          "CWE-1321"
+        ],
+        "fixed_version": "3.9.4",
+        "references": [
+          "https://nvd.nist.gov/vuln/detail/CVE-2024-21509",
+          "https://github.com/sidorares/node-mysql2/pull/2574",
+          "https://github.com/sidorares/node-mysql2/commit/4a964a3910a4b8de008696c554ab1b492e9b4691"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "zod@3.22.0 (npm) is affected by CVE-2023-4316: Zod denial of service vulnerability; fixed in 3.22.3",
+      "severity": "medium",
+      "target": "zod@3.22.0",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "zod",
+        "version": "3.22.0",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-m95q-7qp3-xv42",
+        "cve": "CVE-2023-4316",
+        "cvss": 5.3,
+        "cwe_ids": [
+          "CWE-1333"
+        ],
+        "fixed_version": "3.22.3",
+        "references": [
+          "https://nvd.nist.gov/vuln/detail/CVE-2023-4316",
+          "https://github.com/colinhacks/zod/issues/2609",
+          "https://github.com/colinhacks/zod/pull/2824"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S005",
+      "title": "SQL query built from template interpolation",
+      "description": "SQL query built from template interpolation detected in JavaScript/TypeScript source",
+      "severity": "high",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-zf_on9qp\\package\\build\\adapters\\MysqlAdapter.js:56",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 56,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    }
+  ],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "db-mcp-server",
+  "target": "npx -y db-mcp-server",
+  "version": "",
+  "scanned_at": "2026-07-18T20:13:35.828850+00:00",
+  "last_attempted_at": "2026-07-18T20:13:35.828850+00:00",
+  "trending": false,
+  "live_scan": {
+    "ok": false,
+    "error": "ONRPCError): │ │ │ │ │ │ > 306 │ │ │ │ raise McpError(response_or_error.error) │ │ │ │ │ │ 307 │ │ │ else: │ │ │ │ │ │ 308 │ │ │ │ return │ │ │ │ │ │ result_type.model_validate(response_or_error.result) │ │ │ │ │ │ 309 │ │ │ │ │ └─────────────────────────────────────────────────────────────────────┘ │ │ │ │ McpError: Connection closed │ │ │ └─────────────────────────────────────────────────────────────────────────┘ │ └─────────────────────────────────────────────────────────────────────────────┘"
+  },
+  "enriched": true,
+  "enriched_ref": "npm:db-mcp-server",
+  "package_scan": {
+    "ok": true,
+    "note": "+4 findings from npm:db-mcp-server"
+  },
+  "status": "scanned",
+  "scan_coverage": "package-only"
 }

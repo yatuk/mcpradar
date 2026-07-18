@@ -218,12 +218,35 @@ class RadarConsole:
                 self._console.print(f"  [green]- {f}[/]")
             self._console.print()
 
-        # Prompts / Resources
+        # Prompts / Resources / Templates
         if delta.prompt_added or delta.prompt_removed:
             self._print_resource_changes("Prompts", delta.prompt_added, delta.prompt_removed)
 
         if delta.resource_added or delta.resource_removed:
             self._print_resource_changes("Resources", delta.resource_added, delta.resource_removed)
+
+        if delta.resource_template_added or delta.resource_template_removed:
+            self._print_resource_changes(
+                "Resource templates",
+                delta.resource_template_added,
+                delta.resource_template_removed,
+            )
+
+        if delta.surface_changes:
+            self._console.print("[yellow]Surface metadata changes:[/]")
+            for change in delta.surface_changes:
+                severity = change.severity.value
+                color = CHANGE_COLORS.get(severity, "yellow")
+                old = str(change.old).replace("\n", " ")[:100]
+                new = str(change.new).replace("\n", " ")[:100]
+                self._console.print(f"  [{color}]~ {change.field} ({severity})[/]: {old} → {new}")
+            self._console.print()
+
+        if delta.fingerprint_changes:
+            self._console.print("[yellow]Fingerprint changes:[/]")
+            for change in delta.fingerprint_changes:
+                self._console.print(f"  [yellow]~ {change}[/]")
+            self._console.print()
 
         self._console.print()
 

@@ -1,9 +1,124 @@
 {
-  "name": "forage",
-  "command": "",
   "transport": "stdio",
-  "expected_rules": [],
-  "error": "list index out of range",
-  "tools_count": 0,
-  "findings": []
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "@modelcontextprotocol/sdk@1.12.1 (npm) is affected by CVE-2026-25536: @modelcontextprotocol/sdk has cross-client data leak via shared server/transport instance reuse; fixed in 1.26.0",
+      "severity": "high",
+      "target": "@modelcontextprotocol/sdk@1.12.1",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "@modelcontextprotocol/sdk",
+        "version": "1.12.1",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-345p-7cg4-v4c7",
+        "cve": "CVE-2026-25536",
+        "cvss": 7.1,
+        "cwe_ids": [
+          "CWE-362"
+        ],
+        "fixed_version": "1.26.0",
+        "references": [
+          "https://github.com/modelcontextprotocol/typescript-sdk/security/advisories/GHSA-345p-7cg4-v4c7",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-25536",
+          "https://github.com/modelcontextprotocol/typescript-sdk/issues/204"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-6x1w3hau\\package\\dist\\registries\\npm.js:7",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 7,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-6x1w3hau\\package\\dist\\registries\\npm.js:41",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 41,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-6x1w3hau\\package\\dist\\registries\\official.js:5",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 5,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-6x1w3hau\\package\\dist\\registries\\official.js:41",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 41,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-6x1w3hau\\package\\dist\\registries\\smithery.js:5",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 5,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    }
+  ],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "forage",
+  "target": "npx -y forage-mcp",
+  "version": "",
+  "scanned_at": "2026-07-18T20:15:50.332380+00:00",
+  "last_attempted_at": "2026-07-18T20:15:50.332380+00:00",
+  "trending": false,
+  "live_scan": {
+    "ok": false,
+    "error": "scanner returned no JSON result"
+  },
+  "enriched": true,
+  "enriched_ref": "npm:forage-mcp",
+  "package_scan": {
+    "ok": true,
+    "note": "+6 findings from npm:forage-mcp"
+  },
+  "status": "scanned",
+  "scan_coverage": "package-only"
 }

@@ -53,9 +53,10 @@ Consequence, verified from the live data:
   scanner that rates an arbitrary-command server the same as a calculator is not
   discriminating on the dimension that matters most.
 
-This is the OWASP **AIVSS** insight: a CVSS-style base score must be combined
-with an *agentic capability* layer (AARS) that captures how much the tool's
-design amplifies risk. MCPRadar computes only the base and drops the AARS term.
+The missing dimension is agentic capability: a finding base must be combined
+with a blast-radius layer that captures how much the tool's design amplifies
+risk. The historical implementation computed only the base and dropped that
+capability term.
 See `docs/scoring-model.md` for the fix.
 
 ## Anomaly 3 — schema findings DO reach the score, but design risk is under-weighted
@@ -85,8 +86,8 @@ scale reaches F. Fix: scan it into the leaderboard as the calibration ceiling.
 
 1. **Enumeration:** cursor pagination + per-tool error isolation + an
    `incomplete` scan state (a partial scan is never scored A).
-2. **Capability-aware AIVSS scoring:** tag every tool with capability classes and
-   add the AARS layer — `AIVSS = ((base + AARS) / 2) × ThM` — so an exec /
+2. **Capability-aware MRS scoring:** tag every tool with capability classes and
+   add the AARS layer — `MRS = ((base + AARS) / 2) × ThM` — so an exec /
    fs-write / browser-control server is non-A even with no CVE and a clean schema.
 3. **Calibration controls:** `demo/malicious_server.py` (positive, F) and a
    `benign_server` fixture (negative, 0 critical) wired into a regression gate.

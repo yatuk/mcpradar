@@ -1,9 +1,236 @@
 {
-  "name": "thiri-mcp",
-  "command": "",
   "transport": "stdio",
-  "expected_rules": [],
-  "error": "list index out of range",
-  "tools_count": 0,
-  "findings": []
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "@modelcontextprotocol/sdk@1.12.1 (npm) is affected by CVE-2026-25536: @modelcontextprotocol/sdk has cross-client data leak via shared server/transport instance reuse; fixed in 1.26.0",
+      "severity": "high",
+      "target": "@modelcontextprotocol/sdk@1.12.1",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "@modelcontextprotocol/sdk",
+        "version": "1.12.1",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-345p-7cg4-v4c7",
+        "cve": "CVE-2026-25536",
+        "cvss": 7.1,
+        "cwe_ids": [
+          "CWE-362"
+        ],
+        "fixed_version": "1.26.0",
+        "references": [
+          "https://github.com/modelcontextprotocol/typescript-sdk/security/advisories/GHSA-345p-7cg4-v4c7",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-25536",
+          "https://github.com/modelcontextprotocol/typescript-sdk/issues/204"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-fuvb9hg0\\package\\vendor\\thiri-composition-engine\\composition.mjs:42",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 42,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-fuvb9hg0\\package\\vendor\\thiri-composition-engine\\composition.mjs:277",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 277,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-fuvb9hg0\\package\\vendor\\thiri-composition-engine\\conduct-nl.mjs:14",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 14,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-fuvb9hg0\\package\\vendor\\thiri-composition-engine\\conduct-nl.mjs:34",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 34,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-fuvb9hg0\\package\\vendor\\thiri-composition-engine\\grid-core.mjs:16",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 16,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-fuvb9hg0\\package\\vendor\\thiri-composition-engine\\grid-core.mjs:53",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 53,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-fuvb9hg0\\package\\vendor\\thiri-composition-engine\\grid-core.mjs:88",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 88,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-fuvb9hg0\\package\\vendor\\thiri-composition-engine\\grid-core.mjs:161",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 161,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-fuvb9hg0\\package\\vendor\\thiri-composition-engine\\grid-core.mjs:266",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 266,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-fuvb9hg0\\package\\vendor\\thiri-composition-engine\\playback.mjs:70",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 70,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-fuvb9hg0\\package\\vendor\\thiri-composition-engine\\playback.mjs:82",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 82,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-fuvb9hg0\\package\\vendor\\thiri-csound-core\\csoundRender.mjs:55",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 55,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-fuvb9hg0\\package\\vendor\\thiri-csound-core\\csoundRender.mjs:77",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 77,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    }
+  ],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "thiri-mcp",
+  "target": "npx -y @bluesprincemedia/thiri-mcp",
+  "version": "",
+  "scanned_at": "2026-07-18T20:21:49.748574+00:00",
+  "last_attempted_at": "2026-07-18T20:21:49.748574+00:00",
+  "trending": false,
+  "live_scan": {
+    "ok": false,
+    "error": "scanner returned no JSON result"
+  },
+  "enriched": true,
+  "enriched_ref": "npm:@bluesprincemedia/thiri-mcp",
+  "package_scan": {
+    "ok": true,
+    "note": "+14 findings from npm:@bluesprincemedia/thiri-mcp"
+  },
+  "status": "scanned",
+  "scan_coverage": "package-only"
 }

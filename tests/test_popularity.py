@@ -11,6 +11,7 @@ from mcpradar.registry.client import PackageRef, RegistryEntry
 from mcpradar.registry.popularity import (
     Signals,
     _is_server_package,
+    discover_popular_registry_servers,
     discover_popular_servers,
     github_stars,
     npm_weekly_downloads,
@@ -151,3 +152,39 @@ class TestDiscoverPopular:
         assert "@foo/sdk" not in names
         # entry carries a scannable npm package ref
         assert ranked[0].entry.packages[0].identifier == "big-mcp-server"
+
+    def test_registry_discovery_excludes_unpublished_packages(
+        self, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        search_objs = {
+            "objects": [
+                {"package": {"name": "registry-mcp", "keywords": ["mcp-server"]}},
+                {"package": {"name": "rogue-mcp", "keywords": ["mcp-server"]}},
+            ]
+        }
+
+        def handler(url: str) -> httpx.Response:
+            if "/-/v1/search" in url:
+                return httpx.Response(200, json=search_objs)
+            if "registry-mcp" in url:
+                return httpx.Response(200, json={"downloads": 1234})
+            if "rogue-mcp" in url:
+                return httpx.Response(200, json={"downloads": 999999})
+            return httpx.Response(404)
+
+        class FakeClient:
+            def search_servers(self, query, **kwargs):  # noqa: ANN001, ANN003, ANN201
+                return (
+                    [_entry("io.example/registry", npm="registry-mcp")]
+                    if query == "registry-mcp"
+                    else []
+                )
+
+        _mock_httpx(monkeypatch, handler)
+        ranked = discover_popular_registry_servers(
+            top_n=10,
+            search_size=20,
+            client=FakeClient(),  # type: ignore[arg-type]
+        )
+        assert [item.entry.name for item in ranked] == ["io.example/registry"]
+        assert ranked[0].entry.packages[0].identifier == "registry-mcp"

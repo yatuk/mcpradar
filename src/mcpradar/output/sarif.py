@@ -1,25 +1,15 @@
-"""ScanReport → SARIF v2.1.0 converter."""
+"""Standards-compliant SARIF 2.1.0 output."""
 
 from __future__ import annotations
 
+import re
+from pathlib import Path
 from typing import Any
 
-import sarif_om as sarif
-
 from mcpradar import __version__
-from mcpradar.scanner.report import ScanReport, Severity
-
-
-def _to_dict(obj: Any) -> Any:
-    if isinstance(obj, (str, int, float, bool, type(None))):
-        return obj
-    if isinstance(obj, list):
-        return [_to_dict(i) for i in obj]
-    if isinstance(obj, dict):
-        return {str(k): _to_dict(v) for k, v in obj.items()}
-    # sarif-om object
-    return {k: _to_dict(v) for k, v in obj.__dict__.items() if not k.startswith("_")}
-
+from mcpradar.rules.catalog import RULE_CATALOG, RuleDescriptor
+from mcpradar.scanner.report import Finding, ScanReport, Severity
+from mcpradar.scoring.confidence import confidence_for
 
 SARIF_SEVERITY: dict[Severity, str] = {
     Severity.LOW: "note",
@@ -28,87 +18,111 @@ SARIF_SEVERITY: dict[Severity, str] = {
     Severity.CRITICAL: "error",
 }
 
-RULE_HELP: dict[str, str] = {
-    "R001": "Tool name matches a dangerous system command (eval, exec, rm, etc.)",
-    "R101": "Zero-width Unicode character detected — potential hidden text injection",
-    "R102": "Prompt injection pattern found in tool description or schema",
-    "R103": "Base64 or hex-encoded blob found in tool description",
-    "R104": "Hidden HTML/Markdown content (display:none, font-size:0, etc.)",
-    "R105": "Permission scope mismatch — tool name scope differs from description",
-    "R106": "Secret or token exposed in tool metadata — API keys, JWTs, connection strings",
-    "R107": "Command injection risk via tool parameter defaults, patterns, or enum values",
-    "R108": "Supply chain risk — pip/npm install, curl-to-bash, dynamic code loading",
-    "R109": "Schema poisoning — additionalProps:true, missing types, buffer overflow risk",
-    "R110": "Version anomaly — rollback attack, unexpected major upgrade, tool list change",
-    "R111": "Insecure transport — plain HTTP, old TLS, self-signed certificates",
-    "C006": "Cross-server attack path chain — schema type matching reveals chained attacks",
-    "C007": "Cross-server privilege escalation — read-only tool output feeds write/exec input",
-}
-
 
 def to_sarif(report: ScanReport) -> dict[str, Any]:
-    driver = sarif.ToolComponent(
-        name="MCPRadar",
-        full_name="MCPRadar — MCP Server Security Scanner",
-        information_uri="https://github.com/yatuk/mcpradar",
-        semantic_version=__version__,  # SARIF tool version — matches scanner version
-        rules=[
-            sarif.ReportingDescriptor(
-                id=rid,
-                name=rid,
-                short_description=sarif.MultiformatMessageString(text=desc),
-                help_uri=f"https://github.com/yatuk/mcpradar/blob/main/docs/detection-rules.md#{rid.lower()}",
-            )
-            for rid, desc in sorted(RULE_HELP.items())
-        ],
-    )
-
-    results: list[sarif.Result] = []
-    for f in report.findings:
-        loc = sarif.Location(
-            physical_location=sarif.PhysicalLocation(
-                artifact_location=sarif.ArtifactLocation(
-                    uri=f.target,
-                    uri_base_id=report.target,
-                ),
-                region=sarif.Region(
-                    snippet=sarif.ArtifactContent(text=f.evidence),
-                ),
-            ),
-        )
-
-        results.append(
-            sarif.Result(
-                rule_id=f.rule_id,
-                message=sarif.Message(text=f.description),
-                level=SARIF_SEVERITY.get(f.severity, "warning"),
-                locations=[loc],
-                properties={
-                    "severity": f.severity.value,
-                    "title": f.title,
-                    "detail": f.detail,
+    """Convert a scan report to SARIF 2.1.0 JSON."""
+    rules = [_sarif_rule(descriptor) for descriptor in RULE_CATALOG.values()]
+    results = [_sarif_result(finding) for finding in report.findings]
+    run: dict[str, Any] = {
+        "tool": {
+            "driver": {
+                "name": "MCPRadar",
+                "fullName": "MCPRadar — MCP Server Security Scanner",
+                "informationUri": "https://github.com/yatuk/mcpradar",
+                "semanticVersion": __version__,
+                "rules": rules,
+            }
+        },
+        "automationDetails": {"id": report.id},
+        "results": results,
+        "invocations": [
+            {
+                "executionSuccessful": not report.incomplete,
+                "endTimeUtc": report.scanned_at,
+                "properties": {
+                    "incomplete": report.incomplete,
+                    "incompleteReason": report.incomplete_reason,
                 },
-            )
-        )
-
-    run = sarif.Run(
-        tool=sarif.Tool(driver=driver),
-        results=results,
-        invocations=[
-            sarif.Invocation(
-                execution_successful=True,
-                end_time_utc=report.scanned_at,
-            )
+            }
         ],
-        properties={
+        "properties": {
             "target": report.target,
             "transport": report.transport,
-            "tools_scanned": len(report.tools),
-            "prompts_scanned": len(report.prompts),
-            "resources_scanned": len(report.resources),
+            "protocolVersion": report.protocol_version,
+            "toolsScanned": len(report.tools),
+            "promptsScanned": len(report.prompts),
+            "resourcesScanned": len(report.resources),
+            "resourceTemplatesScanned": len(report.resource_templates),
+            "surfaceStatus": {
+                name: status.to_dict() for name, status in report.surface_status.items()
+            },
         },
-    )
+    }
+    return {
+        "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+        "version": "2.1.0",
+        "runs": [run],
+    }
 
-    log = sarif.SarifLog(version="2.1.0", runs=[run])
-    result: dict[str, Any] = _to_dict(log)
-    return result
+
+def _sarif_rule(descriptor: RuleDescriptor) -> dict[str, Any]:
+    return {
+        "id": descriptor.id,
+        "name": re.sub(r"[^A-Za-z0-9]+", "", descriptor.title),
+        "shortDescription": {"text": descriptor.title},
+        "fullDescription": {"text": descriptor.help},
+        "helpUri": descriptor.help_uri,
+        "defaultConfiguration": {"level": SARIF_SEVERITY[Severity.from_str(descriptor.severity)]},
+        "properties": {
+            "severity": descriptor.severity,
+            "confidence": descriptor.confidence,
+            "cwe": list(descriptor.cwe),
+            "owasp": list(descriptor.owasp),
+            "surfaces": list(descriptor.surfaces),
+            "status": descriptor.status,
+            "protocolProfiles": list(descriptor.protocol_profiles),
+            "tags": [*descriptor.cwe, *descriptor.owasp, *descriptor.surfaces],
+        },
+    }
+
+
+def _sarif_result(finding: Finding) -> dict[str, Any]:
+    location = _location(finding)
+    return {
+        "ruleId": finding.rule_id,
+        "level": SARIF_SEVERITY.get(finding.severity, "warning"),
+        "message": {"text": finding.description},
+        "locations": [location],
+        "properties": {
+            "severity": finding.severity.value,
+            "confidence": confidence_for(finding.rule_id),
+            "title": finding.title,
+            "detail": finding.detail,
+        },
+    }
+
+
+def _location(finding: Finding) -> dict[str, Any]:
+    line = finding.detail.get("line")
+    artifact = finding.target
+    match = re.match(r"^(.*):(\d+)$", finding.target)
+    if match:
+        artifact, raw_line = match.groups()
+        if not isinstance(line, int):
+            line = int(raw_line)
+    if finding.location in {"source", "config"} or isinstance(line, int):
+        physical: dict[str, Any] = {"artifactLocation": {"uri": Path(artifact).as_posix()}}
+        if isinstance(line, int) and line > 0:
+            physical["region"] = {"startLine": line}
+            if finding.evidence:
+                physical["region"]["snippet"] = {"text": finding.evidence}
+        return {"physicalLocation": physical}
+    return {
+        "logicalLocations": [
+            {
+                "name": finding.target or "server",
+                "kind": finding.location or "mcp-server",
+                "fullyQualifiedName": f"{finding.location or 'server'}::{finding.target}",
+            }
+        ]
+    }

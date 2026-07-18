@@ -1,9 +1,709 @@
 {
-  "name": "DesktopCommanderMCP",
-  "command": "",
   "transport": "stdio",
-  "expected_rules": [],
-  "error": "list index out of range",
-  "tools_count": 0,
-  "findings": []
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "@modelcontextprotocol/sdk@1.9.0 (npm) is affected by CVE-2026-0621: Anthropic's MCP TypeScript SDK has a ReDoS vulnerability; fixed in 1.25.2",
+      "severity": "high",
+      "target": "@modelcontextprotocol/sdk@1.9.0",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "@modelcontextprotocol/sdk",
+        "version": "1.9.0",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-8r9q-7v3j-jr4g",
+        "cve": "CVE-2026-0621",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-1333"
+        ],
+        "fixed_version": "1.25.2",
+        "references": [
+          "https://github.com/modelcontextprotocol/typescript-sdk/security/advisories/GHSA-cqwc-fm46-7fff",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-0621",
+          "https://github.com/modelcontextprotocol/typescript-sdk/issues/965"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "file-type@21.1.1 (npm) is affected by CVE-2026-31808: file-type affected by infinite loop in ASF parser on malformed input with zero-size sub-header; fixed in 21.3.1",
+      "severity": "medium",
+      "target": "file-type@21.1.1",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "file-type",
+        "version": "21.1.1",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-5v7r-6r5c-r473",
+        "cve": "CVE-2026-31808",
+        "cvss": 5.3,
+        "cwe_ids": [
+          "CWE-835"
+        ],
+        "fixed_version": "21.3.1",
+        "references": [
+          "https://github.com/sindresorhus/file-type/security/advisories/GHSA-5v7r-6r5c-r473",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-31808",
+          "https://github.com/sindresorhus/file-type/commit/319abf871b50ba2fa221b4a7050059f1ae096f4f"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "glob@10.3.10 (npm) is affected by CVE-2025-64756: glob CLI: Command injection via -c/--cmd executes matches with shell:true; fixed in 10.5.0",
+      "severity": "high",
+      "target": "glob@10.3.10",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "glob",
+        "version": "10.3.10",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-5j98-mcp5-4vw2",
+        "cve": "CVE-2025-64756",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-78"
+        ],
+        "fixed_version": "10.5.0",
+        "references": [
+          "https://github.com/isaacs/node-glob/security/advisories/GHSA-5j98-mcp5-4vw2",
+          "https://nvd.nist.gov/vuln/detail/CVE-2025-64756",
+          "https://github.com/isaacs/node-glob/commit/1e4e297342a09f2aa0ced87fcd4a70ddc325d75f"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "markdown-it@14.1.0 (npm) is affected by CVE-2026-2327: markdown-it is has a Regular Expression Denial of Service (ReDoS); fixed in 14.1.1",
+      "severity": "medium",
+      "target": "markdown-it@14.1.0",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "markdown-it",
+        "version": "14.1.0",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-38c4-r59v-3vqw",
+        "cve": "CVE-2026-2327",
+        "cvss": 5.0,
+        "cwe_ids": [
+          "CWE-1333"
+        ],
+        "fixed_version": "14.1.1",
+        "references": [
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-2327",
+          "https://github.com/markdown-it/markdown-it/commit/4b4bbcae5e0990a5b172378e507b33a59012ed26",
+          "https://gist.github.com/ltduc147/c9abecae1b291ede4f692f2ab988c917"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\remote-device\\desktop-commander-integration.js:85",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 85,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\search-manager.js:36",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 36,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\search-manager.js:428",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 428,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\setup-claude-server.js:369",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 369,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\setup-claude-server.js:544",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 544,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\terminal-manager.js:204",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 204,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\tools\\filesystem.js:319",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 319,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\tools\\improved-process-tools.js:28",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 28,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\tools\\pdf\\markdown.js:227",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 227,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\track-installation.js:333",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 333,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S004",
+      "title": "Dynamic JavaScript execution",
+      "description": "Dynamic JavaScript execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\ui\\config-editor\\config-editor-runtime.js:26",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 26,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S004",
+      "title": "Dynamic JavaScript execution",
+      "description": "Dynamic JavaScript execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\ui\\file-preview\\preview-runtime.js:28",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 28,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\ui\\file-preview\\preview-runtime.js:1",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 1,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\ui\\file-preview\\preview-runtime.js:2",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 2,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\ui\\file-preview\\preview-runtime.js:3",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 3,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\ui\\file-preview\\preview-runtime.js:93",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 93,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\ui\\file-preview\\preview-runtime.js:95",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 95,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\ui\\file-preview\\preview-runtime.js:97",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 97,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\ui\\file-preview\\preview-runtime.js:98",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 98,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\ui\\file-preview\\preview-runtime.js:101",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 101,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\ui\\file-preview\\preview-runtime.js:103",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 103,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\ui\\file-preview\\preview-runtime.js:176",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 176,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\ui\\file-preview\\preview-runtime.js:182",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 182,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\ui\\file-preview\\preview-runtime.js:233",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 233,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\ui\\file-preview\\preview-runtime.js:238",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 238,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\ui\\file-preview\\preview-runtime.js:251",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 251,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\ui\\file-preview\\preview-runtime.js:252",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 252,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\ui\\file-preview\\preview-runtime.js:256",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 256,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\ui\\file-preview\\preview-runtime.js:257",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 257,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\ui\\file-preview\\preview-runtime.js:261",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 261,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\ui\\file-preview\\preview-runtime.js:341",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 341,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\ui\\file-preview\\src\\markdown\\editor.js:1235",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 1235,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\uninstall-claude-server.js:283",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 283,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\uninstall-claude-server.js:422",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 422,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\utils\\capture.js:248",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 248,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\utils\\capture.js:425",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 425,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\utils\\feature-flags.js:37",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 37,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\utils\\feature-flags.js:43",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 43,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\utils\\feature-flags.js:156",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 156,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\utils\\files\\docx.js:208",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 208,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-t69_1uhd\\package\\dist\\utils\\files\\docx.js:219",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 219,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    }
+  ],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "DesktopCommanderMCP",
+  "target": "npx -y @wonderwhy-er/desktop-commander",
+  "version": "",
+  "scanned_at": "2026-07-18T20:13:59.037386+00:00",
+  "last_attempted_at": "2026-07-18T20:13:59.037386+00:00",
+  "trending": false,
+  "live_scan": {
+    "ok": false,
+    "error": "timeout after 90s"
+  },
+  "enriched": true,
+  "enriched_ref": "npm:@wonderwhy-er/desktop-commander",
+  "package_scan": {
+    "ok": true,
+    "note": "+45 findings from npm:@wonderwhy-er/desktop-commander"
+  },
+  "status": "scanned",
+  "scan_coverage": "package-only"
 }

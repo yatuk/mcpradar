@@ -1,9 +1,111 @@
 {
-  "name": "@modelcontextprotocol/server-brave-search",
-  "command": "",
   "transport": "stdio",
-  "expected_rules": [],
-  "error": "list index out of range",
-  "tools_count": 0,
-  "findings": []
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "@modelcontextprotocol/sdk@1.0.1 (npm) is affected by CVE-2025-66414: Model Context Protocol (MCP) TypeScript SDK does not enable DNS rebinding protection by default; fixed in 1.24.0",
+      "severity": "high",
+      "target": "@modelcontextprotocol/sdk@1.0.1",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "@modelcontextprotocol/sdk",
+        "version": "1.0.1",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-w48q-cv73-mx4w",
+        "cve": "CVE-2025-66414",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-1188",
+          "CWE-350"
+        ],
+        "fixed_version": "1.24.0",
+        "references": [
+          "https://github.com/modelcontextprotocol/typescript-sdk/security/advisories/GHSA-w48q-cv73-mx4w",
+          "https://nvd.nist.gov/vuln/detail/CVE-2025-66414",
+          "https://github.com/modelcontextprotocol/typescript-sdk/pull/1205"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-onoimg7w\\package\\dist\\index.js:113",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 113,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-onoimg7w\\package\\dist\\index.js:140",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 140,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-onoimg7w\\package\\dist\\index.js:166",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 166,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-onoimg7w\\package\\dist\\index.js:183",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 183,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    }
+  ],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "@modelcontextprotocol/server-brave-search",
+  "target": "npx -y @modelcontextprotocol/server-brave-search",
+  "version": "",
+  "scanned_at": "2026-07-18T20:12:37.032308+00:00",
+  "last_attempted_at": "2026-07-18T20:12:37.032308+00:00",
+  "trending": false,
+  "live_scan": {
+    "ok": false,
+    "error": "ONRPCError): │ │ │ │ │ │ > 306 │ │ │ │ raise McpError(response_or_error.error) │ │ │ │ │ │ 307 │ │ │ else: │ │ │ │ │ │ 308 │ │ │ │ return │ │ │ │ │ │ result_type.model_validate(response_or_error.result) │ │ │ │ │ │ 309 │ │ │ │ │ └─────────────────────────────────────────────────────────────────────┘ │ │ │ │ McpError: Connection closed │ │ │ └─────────────────────────────────────────────────────────────────────────┘ │ └─────────────────────────────────────────────────────────────────────────────┘"
+  },
+  "enriched": true,
+  "enriched_ref": "npm:@modelcontextprotocol/server-brave-search",
+  "package_scan": {
+    "ok": true,
+    "note": "+5 findings from npm:@modelcontextprotocol/server-brave-search"
+  },
+  "status": "scanned",
+  "scan_coverage": "package-only"
 }

@@ -23,7 +23,7 @@ concurrency:
 jobs:
   trending:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
 
@@ -35,30 +35,52 @@ jobs:
         with:
           node-version: "22"
 
+      - name: Restore MCP Registry snapshot
+        uses: actions/cache@v4
+        with:
+          path: ~/.local/share/mcpradar
+          key: mcp-registry-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            mcp-registry-${{ runner.os }}-
+
       - run: uv sync
 
       # Scoring calibration gate — a broken scoring model must not publish.
       - name: Scoring calibration gate
         run: uv run pytest tests/test_scoring_calibration.py tests/test_capability.py -q
 
-      # Rank the whole registry by popularity (npm + PyPI downloads + GitHub
-      # stars) and scan the top N. GITHUB_TOKEN lifts the star-lookup rate limit.
-      # Live scans are best-effort; each server is always enriched from its
-      # package so it gets a dependency/source grade even if it can't launch.
-      - name: Scan today's most popular servers
+      # Pull first so MCPRadar can resolve immutable RepoDigests before it starts
+      # an untrusted package. Packages run non-root in disposable, read-only
+      # containers. Bridge egress exists only inside those containers and is
+      # needed by npx/uvx to download the exact Registry-published package.
+      - name: Prepare scan sandboxes
+        run: |
+          docker pull node:22-slim
+          docker pull ghcr.io/astral-sh/uv:python3.12-bookworm-slim
+
+      # Retry unresolved rows (with a seven-day cooldown after a failed attempt),
+      # then rank npm-popular candidates that are present in the official MCP
+      # Registry. Download counts and GitHub stars choose the final top N.
+      - name: Scan pending rows and today's Registry top 10
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: uv run python validation/run_trending.py --top "${{ github.event.inputs.top || '10' }}" --timeout 120
-        continue-on-error: true
+        run: >-
+          uv run python validation/run_trending.py
+          --pending
+          --pending-limit 0
+          --retry-incomplete-days 7
+          --top "${{ github.event.inputs.top || '10' }}"
+          --search-size 250
+          --timeout 120
+          --workers 3
+          --sandbox
 
       - name: Generate leaderboard data
-        run: uv run python -m mcpradar leaderboard generate
+        run: uv run python docs/leaderboard/generate.py
 
       - name: Sync to docs root
         run: |
           cp docs/leaderboard/index.html docs/index.html
-          cp docs/leaderboard/data.json docs/data.json
-          cp docs/leaderboard/servers.json docs/servers.json 2>/dev/null || true
           mkdir -p docs/badges
           cp -r docs/leaderboard/badges/* docs/badges/ 2>/dev/null || true
 
@@ -66,7 +88,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add validation/results/ docs/leaderboard/data.json docs/data.json docs/index.html docs/servers.json docs/badges/ 2>/dev/null || true
+          git add validation/results/ docs/leaderboard/data.json docs/leaderboard/servers.json docs/leaderboard/badges/ docs/data.json docs/index.html docs/servers.json docs/badges/ 2>/dev/null || true
           git diff --staged --quiet || git commit -m "chore: daily trending scan [skip ci]"
           git push
 

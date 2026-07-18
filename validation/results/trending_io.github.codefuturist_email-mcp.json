@@ -1,0 +1,408 @@
+{
+  "transport": "stdio",
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "nodemailer@8.0.1 (npm) is affected by GHSA-268h-hp4c-crq3: Nodemailer: CRLF injection in Nodemailer List-* header comments allows arbitrary message header injection; fixed in 8.0.9",
+      "severity": "medium",
+      "target": "nodemailer@8.0.1",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "nodemailer",
+        "version": "8.0.1",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-268h-hp4c-crq3",
+        "cve": "GHSA-268h-hp4c-crq3",
+        "cvss": 5.4,
+        "cwe_ids": [
+          "CWE-93"
+        ],
+        "fixed_version": "8.0.9",
+        "references": [
+          "https://github.com/nodemailer/nodemailer/security/advisories/GHSA-268h-hp4c-crq3",
+          "https://github.com/nodemailer/nodemailer"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "smol-toml@1.6.0 (npm) is affected by GHSA-v3rj-xjv7-4jmq: smol-toml: Denial of Service via TOML documents containing thousands of consecutive commented lines; fixed in 1.6.1",
+      "severity": "medium",
+      "target": "smol-toml@1.6.0",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "smol-toml",
+        "version": "1.6.0",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-v3rj-xjv7-4jmq",
+        "cve": "GHSA-v3rj-xjv7-4jmq",
+        "cvss": 5.3,
+        "cwe_ids": [
+          "CWE-674"
+        ],
+        "fixed_version": "1.6.1",
+        "references": [
+          "https://github.com/squirrelchat/smol-toml/security/advisories/GHSA-v3rj-xjv7-4jmq",
+          "https://github.com/squirrelchat/smol-toml",
+          "https://github.com/squirrelchat/smol-toml/releases/tag/v1.6.1"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "vitest@4.0.18 (npm) is affected by CVE-2026-47429: When Vitest UI server is listening, arbitrary file can be read and executed; fixed in 3.2.6",
+      "severity": "critical",
+      "target": "vitest@4.0.18",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "vitest",
+        "version": "4.0.18",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-5xrq-8626-4rwp",
+        "cve": "CVE-2026-47429",
+        "cvss": 9.8,
+        "cwe_ids": [
+          "CWE-862"
+        ],
+        "fixed_version": "3.2.6",
+        "references": [
+          "https://github.com/vitest-dev/vitest/security/advisories/GHSA-5xrq-8626-4rwp",
+          "https://github.com/vitest-dev/vitest",
+          "https://github.com/vitest-dev/vitest/blob/eb1abf08573032a532015b999ad3501c5e89e3bb/packages/browser/src/node/commands/fs.ts#L10-L11"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-b7ufctwx\\package\\dist\\cli\\scheduler.js:190",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 190,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-b7ufctwx\\package\\dist\\safety\\validation.js:54",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 54,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-b7ufctwx\\package\\dist\\services\\imap.service.js:266",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 266,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-b7ufctwx\\package\\dist\\services\\imap.service.js:300",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 300,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-b7ufctwx\\package\\dist\\services\\imap.service.js:426",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 426,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-b7ufctwx\\package\\dist\\services\\imap.service.js:460",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 460,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-b7ufctwx\\package\\dist\\services\\imap.service.js:1075",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 1075,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-b7ufctwx\\package\\dist\\services\\imap.service.js:1131",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 1131,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-b7ufctwx\\package\\dist\\services\\imap.service.js:1221",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 1221,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-b7ufctwx\\package\\dist\\services\\imap.service.js:1330",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 1330,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-b7ufctwx\\package\\dist\\services\\imap.service.js:1335",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 1335,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-b7ufctwx\\package\\dist\\services\\imap.service.js:538",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 538,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-b7ufctwx\\package\\dist\\services\\imap.service.js:1006",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 1006,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-b7ufctwx\\package\\dist\\services\\notifier.service.js:298",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 298,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-b7ufctwx\\package\\dist\\services\\oauth.service.d.ts:5",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 5,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-b7ufctwx\\package\\dist\\services\\oauth.service.js:5",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 5,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-b7ufctwx\\package\\dist\\services\\oauth.service.js:61",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 61,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-b7ufctwx\\package\\dist\\services\\oauth.service.js:123",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 123,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-b7ufctwx\\package\\dist\\services\\watcher.service.js:183",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 183,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-b7ufctwx\\package\\dist\\tools\\calendar.tool.js:478",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 478,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-b7ufctwx\\package\\dist\\tools\\emails.tool.js:233",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 233,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    }
+  ],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "io.github.codefuturist/email-mcp",
+  "target": "npx -y @codefuturist/email-mcp@0.2.3",
+  "version": "0.2.3",
+  "scanned_at": "2026-07-18T20:24:05.155715+00:00",
+  "last_attempted_at": "2026-07-18T20:24:05.155715+00:00",
+  "trending": true,
+  "popularity": {
+    "method": "registry-packages/npm-pypi-github",
+    "score": 4.0796,
+    "npm_downloads": 12011,
+    "pypi_downloads": null,
+    "github_stars": null
+  },
+  "live_scan": {
+    "ok": false,
+    "error": "ONRPCError): │ │ │ │ │ │ > 306 │ │ │ │ raise McpError(response_or_error.error) │ │ │ │ │ │ 307 │ │ │ else: │ │ │ │ │ │ 308 │ │ │ │ return │ │ │ │ │ │ result_type.model_validate(response_or_error.result) │ │ │ │ │ │ 309 │ │ │ │ │ └─────────────────────────────────────────────────────────────────────┘ │ │ │ │ McpError: Connection closed │ │ │ └─────────────────────────────────────────────────────────────────────────┘ │ └─────────────────────────────────────────────────────────────────────────────┘"
+  },
+  "enriched": true,
+  "enriched_ref": "npm:@codefuturist/email-mcp",
+  "package_scan": {
+    "ok": true,
+    "note": "+24 findings from npm:@codefuturist/email-mcp"
+  },
+  "status": "scanned",
+  "scan_coverage": "package-only"
+}

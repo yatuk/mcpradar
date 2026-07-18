@@ -7,10 +7,48 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.1.0-rc1] - 2026-07-18
+
 ### Added
+- **MCP 2026 transition:** opt-in stateless HTTP `2026-07-28` adapter with
+  `server/discover`, per-request metadata and method/name headers; v1 remains
+  pinned to the maintained `<2` SDK line, and migration readiness is reported
+  separately from security findings.
+- **Complete MCP surface inventory:** cursor pagination and explicit
+  complete/partial/failed/unsupported state for tools, prompts, resources, and
+  resource templates, plus server-instruction analysis.
+- **Secure-by-default execution and fetching:** stdio host execution requires
+  `--allow-host-exec`; sandbox containers use digest-resolved images, non-root,
+  read-only filesystems, no default workspace mount, and explicit bridge-egress
+  consent. npm/PyPI/GitHub fetches require registry integrity or a full commit
+  pin and enforce archive size/path/link/ratio limits.
+- **Policy and provenance:** strict YAML policy gates with owned, justified,
+  expiring suppressions; Ed25519-signed snapshot envelopes; target-specific
+  CycloneDX 1.7 SBOMs with hashes, licenses, dependency graph, and provenance.
+- **Static analysis expansion:** JavaScript/TypeScript built-in rules with an
+  optional Semgrep backend, JSON Schema 2020-12 bounded traversal, and lockfile
+  parsing for npm, pnpm, Yarn, uv, Poetry, and PDM.
+- **Quality gates:** instance-level/per-surface benchmark metrics with explicit
+  corpus gaps, Hypothesis fuzzing, 80% overall and 90% critical-module coverage,
+  performance budgets, official MCP conformance scenarios, wheel smoke tests,
+  and GitHub artifact/SBOM attestations.
+
+### Changed
+- Public scoring output is now named **MRS-v1** (`risk_score`,
+  `scoring_model: mrs-v1`) rather than claiming OWASP AIVSS conformance.
+- Rule metadata is centralized in a 42-rule `RuleDescriptor` catalog that drives
+  confidence, SARIF 2.1.0 descriptors, and generated documentation.
+- SQLite storage uses transactional, backed-up, versioned migrations and stores
+  complete report/surface state. Report schema is now `1.1`.
+- Drift reports compare resource templates, server instructions, surface
+  completeness, and metadata descriptions in addition to tools, prompts,
+  resources, findings, and fingerprints; degraded visibility is security-impact.
+- Community plugins require explicit enablement, exact version + SHA-256 wheel
+  installation, and bounded isolated worker execution.
+
 - **Leaderboard site overhaul — from data dump to product.** The point is no
   longer to *show* a score but to *defend* it:
-  - **"Why this score" breakdown** on every detail page — the AIVSS is decomposed
+  - **"Why this score" breakdown** on every detail page — the risk score is decomposed
     into its three candidate terms (findings base, capability layer with AARS,
     dependency risk) with the driving term highlighted, so a grade is explained,
     not asserted. `leaderboard generate` now emits a `breakdown` per row and
@@ -30,15 +68,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     tooltips, zebra striping, a grade/🔥-trending legend, **pagination** (25/page),
     per-server **JSON download**, a **CC-BY** data-license note, and removal of
     the premature "Enterprise integration" panel.
-- **Daily trending scan** — a scheduled job ranks the most popular MCP servers
-  and folds them into the leaderboard automatically. Popularity is not in the
-  MCP registry (which has no ranking and is far too large to score daily), so
-  candidates are discovered via npm's popularity-aware search (`keywords:mcp-server`,
-  filtered to servers rather than SDKs/adapters) and then scored on real usage
-  signals — npm + PyPI weekly downloads and GitHub stars — combined on a log
-  scale so no single signal dominates. Each top server is live-scanned
-  (best-effort) and always enriched from its package, so it gets a
-  dependency/source grade even when it can't be launched headless. New
+- **Daily pending + Registry trending scan** — a scheduled job first retries
+  unresolved leaderboard rows, then folds the official Registry's package-backed
+  popularity top ten into the leaderboard. The Registry deliberately has no
+  popularity order, so npm's popularity-aware MCP search supplies a bounded
+  candidate set which is intersected with official Registry package identifiers
+  before npm/PyPI weekly downloads and GitHub stars are scored on a log scale.
+  Untrusted stdio packages run non-root inside disposable, read-only containers;
+  failures are recorded as incomplete rather than clean. Package dependency/source
+  findings are retained when a headless MCP handshake needs credentials. New
   `mcpradar registry rank` command, `src/mcpradar/registry/popularity.py`,
   `validation/run_trending.py`, and a daily `.github/workflows/trending.yml`;
   trending rows carry a 🔥 badge and their popularity signals on the leaderboard.

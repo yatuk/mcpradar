@@ -1,9 +1,25 @@
 {
-  "name": "anyquery",
-  "command": "",
   "transport": "stdio",
-  "expected_rules": [],
-  "error": "list index out of range",
-  "tools_count": 0,
-  "findings": []
+  "tools": [],
+  "findings": [],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "anyquery",
+  "target": "anyquery",
+  "version": "",
+  "scanned_at": "2026-07-18T20:13:02.707387+00:00",
+  "last_attempted_at": "2026-07-18T20:13:02.707387+00:00",
+  "trending": false,
+  "live_scan": {
+    "ok": false,
+    "error": "\u001b[31mCannot auto-pick a container image for launcher \u001b[0m\u001b[31m'anyquery'\u001b[0m\u001b[31m. Pass --sandbox-image\u001b[0m \u001b[31mexplicitly.\u001b[0m"
+  },
+  "package_scan": {
+    "ok": false,
+    "note": "no package ref"
+  },
+  "status": "incomplete",
+  "incomplete": true,
+  "incomplete_reason": "\u001b[31mCannot auto-pick a container image for launcher \u001b[0m\u001b[31m'anyquery'\u001b[0m\u001b[31m. Pass --sandbox-image\u001b[0m \u001b[31mexplicitly.\u001b[0m; no package ref"
 }

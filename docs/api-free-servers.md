@@ -264,7 +264,7 @@ Anthropic reference implementation for structured reasoning. Not a data tool —
 ## Integration with MCPRadar
 
 These servers are listed in the [MCPRadar Security Leaderboard](https://yatuk.github.io/mcpradar/) with:
-- **AIVSS security scores** computed from static + behavioral analysis
+- **MRS security scores** computed from static + behavioral analysis
 - **Scope tags** including `local-first` for API-free servers
 - **Category filters** for Desktop Automation, Knowledge/RAG, Browser/DevTools, IoT/Smart Home, Security
 - **Vulnerability type filters** (Command Injection, Path Traversal, Schema Poisoning, etc.)

@@ -1,9 +1,153 @@
 {
-  "name": "ha-mcp",
-  "command": "",
   "transport": "stdio",
-  "expected_rules": [],
-  "error": "list index out of range",
-  "tools_count": 0,
-  "findings": []
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "cryptography@48.0.0 (PyPI) is affected by GHSA-537c-gmf6-5ccf: Vulnerable OpenSSL included in cryptography wheels",
+      "severity": "high",
+      "target": "cryptography@48.0.0",
+      "location": "pyproject.toml",
+      "evidence": "",
+      "detail": {
+        "package": "cryptography",
+        "version": "48.0.0",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-537c-gmf6-5ccf",
+        "cve": "GHSA-537c-gmf6-5ccf",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-125",
+          "CWE-1395"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/pyca/cryptography/security/advisories/GHSA-537c-gmf6-5ccf",
+          "https://github.com/pyca/cryptography",
+          "https://openssl-library.org/news/secadv/20260609.txt"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "client.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "rest_client.py:754",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 754,
+        "sink": "client.get"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "client.post(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "_handlers_server.py:180",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 180,
+        "sink": "client.post"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-erwphtpb\\ha_mcp-7.13.0\\src\\ha_mcp\\settings_ui\\settings.js:80",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 80,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-erwphtpb\\ha_mcp-7.13.0\\src\\ha_mcp\\settings_ui\\settings.js:3119",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 3119,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "httpx.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "update_check.py:101",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 101,
+        "sink": "httpx.get"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "httpx.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "update_check.py:125",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 125,
+        "sink": "httpx.get"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S004",
+      "title": "Dynamic code execution",
+      "description": "exec(...) on a non-literal argument executes attacker-controlled code",
+      "severity": "critical",
+      "target": "python_sandbox.py:386",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 386,
+        "sink": "exec"
+      },
+      "confidence": 0.9
+    }
+  ],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "ha-mcp",
+  "target": "uvx ha-mcp",
+  "version": "",
+  "scanned_at": "2026-07-18T20:16:30.745556+00:00",
+  "last_attempted_at": "2026-07-18T20:16:30.745556+00:00",
+  "trending": false,
+  "live_scan": {
+    "ok": false,
+    "error": "ONRPCError): │ │ │ │ │ │ > 306 │ │ │ │ raise McpError(response_or_error.error) │ │ │ │ │ │ 307 │ │ │ else: │ │ │ │ │ │ 308 │ │ │ │ return │ │ │ │ │ │ result_type.model_validate(response_or_error.result) │ │ │ │ │ │ 309 │ │ │ │ │ └─────────────────────────────────────────────────────────────────────┘ │ │ │ │ McpError: Connection closed │ │ │ └─────────────────────────────────────────────────────────────────────────┘ │ └─────────────────────────────────────────────────────────────────────────────┘"
+  },
+  "enriched": true,
+  "enriched_ref": "pip:ha-mcp",
+  "package_scan": {
+    "ok": true,
+    "note": "+8 findings from pip:ha-mcp"
+  },
+  "status": "scanned",
+  "scan_coverage": "package-only"
 }

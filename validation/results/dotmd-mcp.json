@@ -1,9 +1,152 @@
 {
-  "name": "dotmd-mcp",
-  "command": "",
   "transport": "stdio",
-  "expected_rules": [],
-  "error": "list index out of range",
-  "tools_count": 0,
-  "findings": []
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "requests@2.31.0 (PyPI) is affected by CVE-2024-47081: Requests vulnerable to .netrc credentials leak via malicious URLs",
+      "severity": "medium",
+      "target": "requests@2.31.0",
+      "location": "pyproject.toml",
+      "evidence": "",
+      "detail": {
+        "package": "requests",
+        "version": "2.31.0",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-9hjg-9r4m-mvj7",
+        "cve": "CVE-2024-47081",
+        "cvss": 5.3,
+        "cwe_ids": [
+          "CWE-522"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/psf/requests/security/advisories/GHSA-9hjg-9r4m-mvj7",
+          "https://nvd.nist.gov/vuln/detail/CVE-2024-47081",
+          "https://github.com/psf/requests/pull/6965"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "requests.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "api.py:133",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 133,
+        "sink": "requests.get"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "requests.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "api.py:200",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 200,
+        "sink": "requests.get"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "requests.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "api.py:141",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 141,
+        "sink": "requests.get"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "requests.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "api.py:233",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 233,
+        "sink": "requests.get"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "requests.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "api.py:205",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 205,
+        "sink": "requests.get"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "requests.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "api.py:221",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 221,
+        "sink": "requests.get"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "requests.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "api.py:250",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 250,
+        "sink": "requests.get"
+      },
+      "confidence": 0.7
+    }
+  ],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "dotmd-mcp",
+  "target": "uvx dotmd",
+  "version": "",
+  "scanned_at": "2026-07-18T20:14:49.815219+00:00",
+  "last_attempted_at": "2026-07-18T20:14:49.815219+00:00",
+  "trending": false,
+  "live_scan": {
+    "ok": false,
+    "error": "ONRPCError): │ │ │ │ │ │ > 306 │ │ │ │ raise McpError(response_or_error.error) │ │ │ │ │ │ 307 │ │ │ else: │ │ │ │ │ │ 308 │ │ │ │ return │ │ │ │ │ │ result_type.model_validate(response_or_error.result) │ │ │ │ │ │ 309 │ │ │ │ │ └─────────────────────────────────────────────────────────────────────┘ │ │ │ │ McpError: Connection closed │ │ │ └─────────────────────────────────────────────────────────────────────────┘ │ └─────────────────────────────────────────────────────────────────────────────┘"
+  },
+  "enriched": true,
+  "enriched_ref": "pip:dotmd",
+  "package_scan": {
+    "ok": true,
+    "note": "+8 findings from pip:dotmd"
+  },
+  "status": "scanned",
+  "scan_coverage": "package-only"
 }

@@ -276,37 +276,4 @@ class TransportChecker:
                     )
                 )
 
-            # 2026-07-28 spec: check for Mcp-Method and Mcp-Name headers
-            if transport in ("http", "sse") and target.startswith("http"):
-                try:
-                    import httpx
-
-                    head_response = httpx.head(target, timeout=self._timeout, follow_redirects=True)
-                    has_method = "mcp-method" in head_response.headers
-                    has_name = "mcp-name" in head_response.headers
-                    if not has_method or not has_name:
-                        findings.append(
-                            Finding(
-                                rule_id="R111",
-                                title="Missing Mcp-Method/Mcp-Name headers",
-                                description=(
-                                    "The 2026-07-28 MCP spec requires "
-                                    "``Mcp-Method`` and ``Mcp-Name`` headers "
-                                    "on Streamable HTTP responses for routing "
-                                    "and caching. Missing headers indicate the "
-                                    "server targets an older spec version."
-                                ),
-                                severity=Severity.MEDIUM,
-                                target=target,
-                                location="transport",
-                                detail={
-                                    "has_mcp_method": has_method,
-                                    "has_mcp_name": has_name,
-                                    "spec": "2026-07-28",
-                                },
-                            )
-                        )
-                except Exception:
-                    pass  # best-effort header check
-
         return findings

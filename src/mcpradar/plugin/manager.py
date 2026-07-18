@@ -1,18 +1,32 @@
-"""Plugin manager — install, uninstall, list community plugins via pip."""
+"""Pinned, isolated community plugin lifecycle management."""
 
 from __future__ import annotations
 
+import hashlib
+import json
+import re
+import shutil
 import subprocess
 import sys
+import tempfile
 from dataclasses import dataclass, field
-from typing import Any
+from pathlib import Path
 
-from mcpradar._compat import get_entry_points
+from platformdirs import user_data_dir
+
+from mcpradar.plugin.runtime import (
+    IsolatedPluginRule,
+    PluginRuntimeError,
+    discover_descriptors,
+)
+
+_PINNED_PACKAGE = re.compile(r"^([A-Za-z0-9][A-Za-z0-9_.-]*)==([^\s=]+)$")
+_SHA256 = re.compile(r"^[0-9a-fA-F]{64}$")
 
 
 @dataclass
 class PluginInfo:
-    """Metadata about an installed community plugin."""
+    """Metadata about an installed isolated plugin."""
 
     name: str
     version: str = "?"
@@ -23,115 +37,148 @@ class PluginInfo:
 
 
 class PluginManager:
-    """Manages community plugin lifecycle via pip + importlib.metadata."""
+    """Install wheel-only plugins into a dedicated, non-imported directory."""
 
-    def install(self, package: str) -> tuple[bool, str]:
-        """pip install + validate. Returns (success, message)."""
-        result = subprocess.run(
-            [sys.executable, "-m", "pip", "install", package],
-            capture_output=True,
-            text=True,
-        )
-        if result.returncode != 0:
-            error_msg = result.stderr.strip().split("\n")[-1] if result.stderr else "Unknown error"
-            return False, f"Install failed: {error_msg}"
+    def __init__(self, root: Path | None = None) -> None:
+        self.root = root or Path(user_data_dir("mcpradar")) / "plugins"
+        self.manifest_path = self.root / "manifest.json"
 
-        # Validate by discovering plugins
-        from mcpradar.scanner.rules import _discover_plugins
+    def install(self, package: str, sha256: str | None = None) -> tuple[bool, str]:
+        """Install an exact-version wheel after caller-provided hash verification."""
+        match = _PINNED_PACKAGE.fullmatch(package)
+        if match is None:
+            return False, "Plugin packages must be pinned exactly (name==version)"
+        if sha256 is None or _SHA256.fullmatch(sha256) is None:
+            return False, "Plugin installation requires a 64-character --sha256 wheel digest"
+        name, version = match.groups()
+        self.root.mkdir(parents=True, exist_ok=True)
 
-        discovered = _discover_plugins()
-        package_rules = [
-            r for r in discovered if type(r).__module__.startswith(package.replace("-", "_"))
-        ]
-        if package_rules:
-            rule_ids = ", ".join(r.rule_id for r in package_rules)
-            msg = (
-                f"Plugin '{package}' installed and validated "
-                f"({len(package_rules)} rules: {rule_ids})"
+        with tempfile.TemporaryDirectory(prefix="mcpradar-plugin-") as temp:
+            download = subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "pip",
+                    "download",
+                    "--no-deps",
+                    "--only-binary=:all:",
+                    "--dest",
+                    temp,
+                    package,
+                ],
+                capture_output=True,
+                text=True,
+                timeout=120,
             )
-            return (True, msg)
-        return True, f"Plugin '{package}' installed (no rules found — check entry_point)"
+            if download.returncode != 0:
+                detail = download.stderr.strip().splitlines()[-1] if download.stderr else "unknown"
+                return False, f"Download failed: {detail}"
+            wheels = list(Path(temp).glob("*.whl"))
+            if len(wheels) != 1:
+                return False, "Plugin download did not produce exactly one wheel"
+            wheel = wheels[0]
+            actual = hashlib.sha256(wheel.read_bytes()).hexdigest()
+            if actual.lower() != sha256.lower():
+                return False, "Plugin wheel digest does not match --sha256"
+
+            target = self.root / "packages" / f"{name.lower().replace('-', '_')}-{version}"
+            if target.exists():
+                return False, f"Plugin '{package}' is already installed"
+            target.mkdir(parents=True)
+            install = subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "pip",
+                    "install",
+                    "--no-deps",
+                    "--target",
+                    str(target),
+                    str(wheel),
+                ],
+                capture_output=True,
+                text=True,
+                timeout=120,
+            )
+            if install.returncode != 0:
+                shutil.rmtree(target, ignore_errors=True)
+                detail = install.stderr.strip().splitlines()[-1] if install.stderr else "unknown"
+                return False, f"Install failed: {detail}"
+
+        try:
+            descriptors = discover_descriptors(target, name)
+        except PluginRuntimeError as exc:
+            shutil.rmtree(target, ignore_errors=True)
+            return False, f"Plugin validation failed: {exc}"
+        if not descriptors:
+            shutil.rmtree(target, ignore_errors=True)
+            return False, "Plugin contains no mcpradar.rules entry points"
+
+        manifest = self._load_manifest()
+        manifest[name] = {
+            "name": name,
+            "version": version,
+            "path": str(target),
+            "sha256": sha256.lower(),
+        }
+        self._save_manifest(manifest)
+        rule_ids = ", ".join(descriptor.rule_id for descriptor in descriptors)
+        return True, f"Plugin '{package}' installed in isolation ({rule_ids})"
 
     def uninstall(self, package: str) -> tuple[bool, str]:
-        """pip uninstall. Returns (success, message)."""
-        result = subprocess.run(
-            [sys.executable, "-m", "pip", "uninstall", "-y", package],
-            capture_output=True,
-            text=True,
-        )
-        if result.returncode != 0:
-            error_msg = result.stderr.strip().split("\n")[-1] if result.stderr else "Unknown error"
-            return False, f"Uninstall failed: {error_msg}"
-        return True, f"Plugin '{package}' uninstalled"
+        """Remove a plugin directory recorded in the managed manifest."""
+        name = package.split("==", 1)[0]
+        manifest = self._load_manifest()
+        item = manifest.get(name)
+        if item is None:
+            return False, f"Plugin '{name}' is not installed"
+        target = Path(str(item.get("path", ""))).resolve()
+        packages_root = (self.root / "packages").resolve()
+        if not target.is_relative_to(packages_root):
+            return False, "Refusing to remove a plugin outside the managed plugin directory"
+        shutil.rmtree(target, ignore_errors=True)
+        del manifest[name]
+        self._save_manifest(manifest)
+        return True, f"Plugin '{name}' uninstalled"
 
     def list_plugins(self) -> list[PluginInfo]:
-        """List all installed community plugins with metadata."""
-        from importlib.metadata import PackageNotFoundError, metadata
-
-        eps = list(get_entry_points("mcpradar.rules"))
-
-        # Group entry points by package
-        by_package: dict[str, list[Any]] = {}
-        for ep in eps:
-            # Get package name: prefer ep.dist.name, fallback to module path
-            pkg_name = self._get_package_name(ep)
-            by_package.setdefault(pkg_name, []).append(ep)
-
         plugins: list[PluginInfo] = []
-        for pkg_name, eps_list in by_package.items():
+        for name, item in self._load_manifest().items():
             try:
-                # Skip built-in package (mcpradar itself)
-                if pkg_name == "mcpradar":
-                    continue
-
-                meta = metadata(pkg_name)
-                rule_ids = self._resolve_rule_ids(eps_list)
-
-                plugins.append(
-                    PluginInfo(
-                        name=pkg_name,
-                        version=self._meta_get(meta, "Version", "?"),
-                        author=self._meta_get(
-                            meta, "Author", self._meta_get(meta, "Author-email", "?")
-                        ),
-                        description=self._meta_get(meta, "Summary", ""),
-                        rule_ids=rule_ids,
-                        entry_points=[ep.name for ep in eps_list],
-                    )
+                descriptors = discover_descriptors(Path(str(item["path"])), name)
+            except (KeyError, PluginRuntimeError):
+                descriptors = []
+            plugins.append(
+                PluginInfo(
+                    name=name,
+                    version=str(item.get("version", "?")),
+                    rule_ids=[descriptor.rule_id for descriptor in descriptors],
+                    entry_points=[descriptor.entry_point for descriptor in descriptors],
                 )
-            except PackageNotFoundError:
-                continue
-
+            )
         return plugins
 
-    @staticmethod
-    def _get_package_name(ep: Any) -> str:
-        """Extract package name from an EntryPoint object."""
-        # Python 3.12+: ep.dist.name is available
-        if hasattr(ep, "dist") and ep.dist is not None:
-            return str(ep.dist.name)
-        # Fallback: extract from ep.value (e.g. "mcpradar_rule_example.rule:ExampleRule")
-        value = ep.value if hasattr(ep, "value") else str(ep)
-        module_part = value.split(":")[0]
-        return module_part.split(".")[0]
-
-    @staticmethod
-    def _meta_get(meta: Any, key: str, default: str) -> str:
-        """Safely read a metadata field with a fallback."""
-        try:
-            return str(meta[key])
-        except (KeyError, TypeError):
-            return default
-
-    @staticmethod
-    def _resolve_rule_ids(eps_list: list[Any]) -> list[str]:
-        """Try to instantiate each entry point and extract rule_id."""
-        rule_ids: list[str] = []
-        for ep in eps_list:
+    def load_rules(self, allowlist: set[str]) -> list[IsolatedPluginRule]:
+        rules: list[IsolatedPluginRule] = []
+        for name, item in self._load_manifest().items():
+            if name not in allowlist:
+                continue
             try:
-                cls = ep.load()
-                instance = cls()
-                rule_ids.append(instance.rule_id)
-            except Exception:
-                rule_ids.append("?")
-        return rule_ids
+                descriptors = discover_descriptors(Path(str(item["path"])), name)
+            except (KeyError, PluginRuntimeError):
+                continue
+            rules.extend(IsolatedPluginRule(descriptor) for descriptor in descriptors)
+        return rules
+
+    def _load_manifest(self) -> dict[str, dict[str, str]]:
+        try:
+            payload = json.loads(self.manifest_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            return {}
+        return payload if isinstance(payload, dict) else {}
+
+    def _save_manifest(self, manifest: dict[str, dict[str, str]]) -> None:
+        self.root.mkdir(parents=True, exist_ok=True)
+        self.manifest_path.write_text(
+            json.dumps(manifest, indent=2, sort_keys=True), encoding="utf-8"
+        )

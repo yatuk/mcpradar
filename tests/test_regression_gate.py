@@ -45,6 +45,7 @@ def scan_server(command: str, transport: str, timeout: int = 120) -> dict:
                 "-s",
                 "low",
                 "--no-save",
+                "--allow-host-exec",
                 "-o",
                 tmp_path,
             ],

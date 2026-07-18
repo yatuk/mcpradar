@@ -86,7 +86,16 @@ class TestPluginList:
 
 class TestPluginInstall:
     def test_install_nonexistent_package_fails(self) -> None:
-        result = runner.invoke(app, ["plugin", "install", "nonexistent-pkg-xyz-99999"])
+        result = runner.invoke(
+            app,
+            [
+                "plugin",
+                "install",
+                "nonexistent-pkg-xyz-99999",
+                "--sha256",
+                "0" * 64,
+            ],
+        )
         assert result.exit_code == 1
 
 

@@ -1,6 +1,6 @@
-"""Agentic capability layer for AIVSS scoring.
+"""Agentic capability layer for MCPRadar Risk Score v1.
 
-OWASP AIVSS composes a security score as ``((CVSS_base + AARS) / 2) × ThM``,
+MRS-v1 composes a scanner-specific score from finding load, AARS and ThM;
 where AARS (the Agentic AI Risk Score) captures how much the agent's *design*
 amplifies risk — its autonomy, tool use, and blast radius — independent of any
 known vulnerability. MCPRadar previously computed only the finding-derived base

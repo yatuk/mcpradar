@@ -1,4 +1,5 @@
 {
+  "schema_version": "2.0",
   "_description": "Ground-truth labels for MCPRadar benchmark. expected_rules lists rule IDs that SHOULD fire at MEDIUM+ severity. LOW/informational findings are reported but excluded from precision/recall metrics. Appsecco corpus requires: python validation/setup_corpus.py, then npm install in each node server directory.",
   "targets": {
     "demo/malicious_server.py": {
@@ -12,18 +13,24 @@
     "@modelcontextprotocol/server-filesystem": {
       "command": "npx -y @modelcontextprotocol/server-filesystem .",
       "transport": "stdio",
+      "negative_control": true,
+      "surfaces": ["tool", "server"],
       "expected_rules": [],
       "notes": "Official reference server. Negative control: any MEDIUM+ finding is a false positive. Known noise source: R113 on write-capable path tools (schema-level heuristic cannot see the server's internal path validation)."
     },
     "@modelcontextprotocol/server-everything": {
       "command": "npx -y @modelcontextprotocol/server-everything",
       "transport": "stdio",
+      "negative_control": true,
+      "surfaces": ["tool", "prompt", "resource", "resource-template", "server"],
       "expected_rules": [],
       "notes": "Official reference server. Negative control. Known noise source: R109 (no required fields) on demo tools that legitimately accept empty input."
     },
     "@modelcontextprotocol/server-memory": {
       "command": "npx -y @modelcontextprotocol/server-memory",
       "transport": "stdio",
+      "negative_control": true,
+      "surfaces": ["tool", "server"],
       "expected_rules": [],
       "notes": "Official reference server. Negative control. Produces many R114 LOW informational findings (unconstrained strings), which are excluded from metrics by design."
     },
@@ -43,7 +50,7 @@
       "command": "node validation/corpus/appsecco/vulnerable-mcp-server-malicious-code-exec/index.js",
       "transport": "stdio",
       "expected_rules": [],
-      "notes": "KNOWN LIMITATION: the eval()-based RCE is in the server implementation, invisible to schema-level scanning. Only R114 LOW schema-laxity lint fires. Source scanning (planned v1.1) is the intended detection path."
+      "notes": "PROTOCOL-SCAN LIMITATION: the eval()-based RCE is in the server implementation, invisible to schema metadata. The separate scan-source JavaScript/TypeScript analyzer is the intended detection path."
     },
     "appsecco/malicious-tools": {
       "command": "node validation/corpus/appsecco/vulnerable-mcp-server-malicious-tools/index.js",
@@ -55,19 +62,19 @@
       "command": "node validation/corpus/appsecco/vulnerable-mcp-server-namespace-typosquatting/index.js",
       "transport": "stdio",
       "expected_rules": [],
-      "notes": "KNOWN LIMITATION: typosquatting ('twittter-mcp') is a supply-chain identity problem, not a schema property. Typosquatting detection (Levenshtein vs known packages) is planned for v1.1."
+      "notes": "PROTOCOL-SCAN LIMITATION: typosquatting ('twittter-mcp') is a supply-chain identity problem, not a schema property. The separate config/package analysis path implements T001."
     },
     "appsecco/outdated-packages": {
       "command": "node validation/corpus/appsecco/vulnerable-mcp-server-outdated-pacakges/index.js",
       "transport": "stdio",
       "expected_rules": [],
-      "notes": "KNOWN LIMITATION: vulnerable dependencies (package.json) are invisible to schema-level scanning. Dependency CVE checking via OSV/GitHub Advisory is planned. Read-only path tools produce R113/R114 LOW findings only."
+      "notes": "PROTOCOL-SCAN LIMITATION: vulnerable dependencies are invisible to schema metadata. The separate target SBOM and deps commands resolve lockfiles and check OSV as D001. Read-only path tools produce schema-level R113/R114 findings only."
     },
     "appsecco/secrets-pii": {
       "command": "node validation/corpus/appsecco/vulnerable-mcp-server-secrets-pii/index.js",
       "transport": "stdio",
       "expected_rules": [],
-      "notes": "KNOWN LIMITATION: credentials are obfuscated in a string table in source and leak via runtime logs/output, not via tool schemas. R106 cannot fire statically; runtime probing re-runs R106 on responses and is the intended detection path."
+      "notes": "PROTOCOL-SCAN LIMITATION: credentials are obfuscated in source and leak via runtime output, not tool schemas. Source analysis and bounded runtime probing are the intended detection paths."
     }
   }
 }

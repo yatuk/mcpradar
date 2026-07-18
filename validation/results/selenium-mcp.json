@@ -1,9 +1,27 @@
 {
-  "name": "selenium-mcp",
-  "command": "",
   "transport": "stdio",
-  "expected_rules": [],
-  "error": "list index out of range",
-  "tools_count": 0,
-  "findings": []
+  "tools": [],
+  "findings": [],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "selenium-mcp",
+  "target": "uvx selenium-mcp",
+  "version": "",
+  "scanned_at": "2026-07-18T20:21:20.891441+00:00",
+  "last_attempted_at": "2026-07-18T20:21:20.891441+00:00",
+  "trending": false,
+  "live_scan": {
+    "ok": false,
+    "error": "scanner returned no JSON result"
+  },
+  "enriched": true,
+  "enriched_ref": "pip:selenium-mcp",
+  "package_scan": {
+    "ok": true,
+    "note": "+0 findings from pip:selenium-mcp"
+  },
+  "status": "incomplete",
+  "incomplete": true,
+  "incomplete_reason": "scanner returned no JSON result; +0 findings from pip:selenium-mcp"
 }

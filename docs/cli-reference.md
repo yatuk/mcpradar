@@ -24,26 +24,30 @@ Scan a single MCP server.
 | `--sandbox` | FLAG | — | Run stdio servers in a disposable container (egress locked, ephemeral FS) and validate probe arguments |
 | `--sandbox-image` | TEXT | auto | Container image for `--sandbox` (default auto-picked: `python:3.12-slim` / `node:22-slim`) |
 | `--sandbox-network` | TEXT | `none` | Container network for `--sandbox`: `none` (egress lock) or `bridge` (needed for npx/uvx package download) |
+| `--allow-host-exec` | FLAG | false | Explicitly trust and execute a stdio command on the host |
+| `--allow-unrestricted-egress` | FLAG | false | Acknowledge unrestricted egress when sandbox network is `bridge` |
+| `--protocol` | TEXT | `auto` | `auto`, `v1`, or opt-in stateless HTTP `2026-07-28` |
+| `--enable-plugin` | TEXT | — | Explicitly enable an installed plugin; repeatable |
 
 **Examples:**
 ```bash
 mcpradar scan http://localhost:8080
-mcpradar scan stdio -- npx -y @modelcontextprotocol/server-filesystem /tmp
+mcpradar scan "npx -y @modelcontextprotocol/server-filesystem /tmp" -t stdio --allow-host-exec
 mcpradar scan http://x -s critical -f json
 
 # Isolate an untrusted stdio server in a disposable container
 mcpradar scan "python ./suspicious_server.py" -t stdio --sandbox
 
 # Allow network for launchers that download the package at startup
-mcpradar scan "npx -y @scope/server" -t stdio --sandbox --sandbox-network bridge
+mcpradar scan "npx -y @scope/server" -t stdio --sandbox --sandbox-network bridge --allow-unrestricted-egress
 ```
 
 The container sandbox requires a running Docker or Podman daemon. Docker is
 preferred when both are present. Isolation applied per scan: `--rm` (ephemeral
-container + filesystem), `--network none` by default (egress lock),
+container + read-only root filesystem), `--network none` by default (egress lock),
 `--cap-drop ALL`, `--security-opt no-new-privileges`, and bounded
-pids/memory/cpu. The current directory is mounted read-only at `/workspace` so
-relative script paths resolve. `--sandbox` only wraps `stdio` scans; for
+pids/memory/cpu. The current directory is not mounted unless explicitly requested by
+the container policy. `--sandbox` only wraps `stdio` scans; for
 `http`/`sse` targets it just enables probe-argument validation.
 
 ### `mcpradar scan-all`
@@ -59,10 +63,11 @@ Scan all servers defined in `mcpradar.toml`.
 
 ### `mcpradar sbom`
 
-Generate CycloneDX 1.5 SBOM.
+Generate a target-specific CycloneDX 1.7 SBOM.
 
-| Flag | Type | Default | Description |
+| Argument/Flag | Type | Default | Description |
 |---|---|---|---|
+| `target` | PATH | `.` | Project/package source tree to describe |
 | `--output`, `-o` | PATH | — | Output file path |
 
 ### `mcpradar probe`
@@ -164,9 +169,51 @@ Plugin lifecycle management.
 mcpradar plugin init <name>            # Scaffold new plugin
 mcpradar plugin validate <dir>         # Validate plugin
 mcpradar plugin list                   # List installed plugins
-mcpradar plugin install <pkg>          # Install plugin
+mcpradar plugin install <name==version> --sha256 <digest>  # Hash-pinned wheel install
 mcpradar plugin uninstall <pkg>        # Remove plugin
 ```
+
+Plugins never auto-load. A scan must name each trusted plugin with
+`--enable-plugin NAME`; execution occurs in a bounded worker subprocess.
+
+### `mcpradar policy`
+
+Evaluate a strict YAML policy against an exported report or stored snapshot.
+
+```bash
+mcpradar policy check mcpradar-policy.yml --report scan.json
+mcpradar policy check mcpradar-policy.yml --scan-id <id>
+```
+
+Policy failures return exit code 1; malformed input returns 2. Suppressions must
+include `rule_id`, target glob, owner, justification, and an ISO expiry date.
+
+### `mcpradar snapshot`
+
+Create and verify Ed25519-signed snapshot envelopes.
+
+```bash
+mcpradar snapshot keygen --private-key signer.pem --public-key signer.pub.pem
+mcpradar snapshot sign --private-key signer.pem --report scan.json -o scan.signed.json
+mcpradar snapshot verify scan.signed.json --public-key signer.pub.pem --extract verified.json
+```
+
+### `mcpradar registry`
+
+Consume the official MCP Registry and rank Registry-published packages using
+external popularity signals. The Registry itself intentionally provides no
+popularity order.
+
+```bash
+mcpradar registry fetch --limit 100
+mcpradar registry list
+mcpradar registry rank --top 10 --search-size 250
+mcpradar registry rank --top 10 --emit-targets popular.yaml
+```
+
+`registry rank` first intersects npm's popularity-aware MCP candidates with the
+official Registry. It then combines npm/PyPI weekly downloads and GitHub stars;
+an npm package that is not published in the Registry is excluded.
 
 ### Data Management Commands
 

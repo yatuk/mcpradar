@@ -1,9 +1,54 @@
 {
-  "name": "@stripe/mcp",
-  "command": "",
   "transport": "stdio",
-  "expected_rules": [],
-  "error": "list index out of range",
-  "tools_count": 0,
-  "findings": []
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "@modelcontextprotocol/sdk@1.17.1 (npm) is affected by CVE-2026-25536: @modelcontextprotocol/sdk has cross-client data leak via shared server/transport instance reuse; fixed in 1.26.0",
+      "severity": "high",
+      "target": "@modelcontextprotocol/sdk@1.17.1",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "@modelcontextprotocol/sdk",
+        "version": "1.17.1",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-345p-7cg4-v4c7",
+        "cve": "CVE-2026-25536",
+        "cvss": 7.1,
+        "cwe_ids": [
+          "CWE-362"
+        ],
+        "fixed_version": "1.26.0",
+        "references": [
+          "https://github.com/modelcontextprotocol/typescript-sdk/security/advisories/GHSA-345p-7cg4-v4c7",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-25536",
+          "https://github.com/modelcontextprotocol/typescript-sdk/issues/204"
+        ]
+      },
+      "confidence": 0.9
+    }
+  ],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "@stripe/mcp",
+  "target": "npx -y @stripe/mcp",
+  "version": "",
+  "scanned_at": "2026-07-18T20:12:51.827779+00:00",
+  "last_attempted_at": "2026-07-18T20:12:51.827779+00:00",
+  "trending": false,
+  "live_scan": {
+    "ok": false,
+    "error": "ONRPCError): │ │ │ │ │ │ > 306 │ │ │ │ raise McpError(response_or_error.error) │ │ │ │ │ │ 307 │ │ │ else: │ │ │ │ │ │ 308 │ │ │ │ return │ │ │ │ │ │ result_type.model_validate(response_or_error.result) │ │ │ │ │ │ 309 │ │ │ │ │ └─────────────────────────────────────────────────────────────────────┘ │ │ │ │ McpError: Connection closed │ │ │ └─────────────────────────────────────────────────────────────────────────┘ │ └─────────────────────────────────────────────────────────────────────────────┘"
+  },
+  "enriched": true,
+  "enriched_ref": "npm:@stripe/mcp",
+  "package_scan": {
+    "ok": true,
+    "note": "+1 findings from npm:@stripe/mcp"
+  },
+  "status": "scanned",
+  "scan_coverage": "package-only"
 }

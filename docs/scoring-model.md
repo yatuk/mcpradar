@@ -1,8 +1,9 @@
-# MCPRadar scoring model (capability-aware AIVSS)
+# MCPRadar Risk Score (MRS-v1)
 
-MCPRadar's leaderboard score follows the OWASP **AIVSS** structure — a
-CVSS-style base combined with an agentic capability layer and an environmental
-multiplier — rather than scoring findings alone.
+MRS-v1 is MCPRadar's own versioned 0–10 risk signal. It combines a
+severity-weighted finding base, an agentic capability layer, an environmental
+multiplier, and a separately capped dependency term. It is not CVSS and is not
+published as OWASP AIVSS.
 
 ## Why the old model failed
 
@@ -12,14 +13,14 @@ The previous score was purely finding-driven:
 score = weighted(critical*10 + high*7 + medium*4) / max(tool_count, 3)
 ```
 
-A tool's **capability — what it can actually do** was not an input. The result
-(measured on 55 real servers): **51 A / 2 B / 2 C, average 0.20/10**. A server
-exposing arbitrary shell execution (`mcp-shell`) scored 0.0 / grade A, identical
-to a calculator. See [`rootcause.md`](rootcause.md).
+A tool's **capability — what it can actually do** was not an input. In the
+historical 55-server snapshot, this produced **51 A / 2 B / 2 C, average
+0.20/10**. A server exposing arbitrary shell execution (`mcp-shell`) scored 0.0
+/ grade A, identical to a calculator. See [`rootcause.md`](rootcause.md).
 
 ## The model
 
-Following OWASP AIVSS (`AIVSS = ((CVSS_base + AARS) / 2) × ThM`):
+MRS-v1 uses this formula:
 
 ```
 base  = severity-weighted MEDIUM+ findings / max(tool_count, 3)
@@ -40,7 +41,7 @@ Each tool is tagged with capability classes from its name, description, and inpu
 schema (`src/mcpradar/scoring/capability.py`). Per-class AARS weight, ordered by
 blast radius:
 
-| Capability | Weight | Rationale (AIVSS "tool use" / autonomy amplification) |
+| Capability | Weight | Rationale |
 |---|---:|---|
 | `code_exec` | 8.0 | Arbitrary command/code execution — the maximum agentic blast radius; a prompt-injected agent gets an RCE primitive. |
 | `browser_control` | 6.0 | Drives a real browser (navigate/click/screenshot/run-JS) — SSRF, credential theft, arbitrary web actions. |
@@ -63,7 +64,7 @@ riskier than one that only executes code.
 
 These eight weights are the model's only tunable coefficients. They are ordinal
 (exec > browser > db-write > fs-write > secrets > egress > read > none), matching
-the AIVSS principle that autonomy and tool-use amplify a baseline. They are kept
+the model principle that autonomy and tool-use amplify a baseline. They are kept
 in one place (`CAPABILITY_WEIGHTS`) and are not otherwise hardcoded into the
 pipeline.
 
@@ -92,9 +93,8 @@ deliberately secondary. The vulnerable-dependency count is surfaced separately
 
 ## ThM — environmental threat multiplier
 
-`ThM = 1.15` when the scan found an insecure transport (R111), else `1.0`
-(capped at 1.25). A network-reachable server amplifies every capability, per the
-AIVSS environmental context.
+`ThM = 1.15` when the scan found an insecure transport (R111), else `1.0`.
+A network-reachable server amplifies every capability.
 
 ## Grade bands
 
@@ -110,14 +110,19 @@ Enforced by the regression gate (`tests/test_scoring_calibration.py`):
 - **Intermediate** — an exec-only server with no CVE and a clean schema: **not
   grade A** (capability floor engages).
 
-## Effect (same 55 servers)
+## Current public corpus snapshot
 
-| | A | B | C | D | F | avg |
-|---|---:|---:|---:|---:|---:|---:|
-| **Before** | 51 | 2 | 2 | 0 | 0 | 0.20 |
-| **After** | 15 | 21 | 18 | 1 | 0* | 2.00 |
+The generated 2026-07-18 public dataset contains 56 completed scans. Recomputing
+their risk rows with MRS-v1 yields:
+
+| A | B | C | D | F | Average |
+|---:|---:|---:|---:|---:|---:|
+| 8 | 21 | 23 | 3 | 1 | 2.85 |
+
+This distribution is descriptive operational data, not a precision/recall
+benchmark. The labeled benchmark publishes its evidence gaps separately.
 
 `mcp-shell` (arbitrary exec) → C; `mcp-server-calculator` → A;
 `@modelcontextprotocol/server-filesystem` → **B** (schema R113 + fs-write
-capability, not a CVE). *The F ceiling is proven by the `demo/malicious_server.py`
-positive control once it is added to the corpus.
+capability, not a CVE). The F ceiling is represented by the
+`demo/malicious_server.py` positive control in the corpus.

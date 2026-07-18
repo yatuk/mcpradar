@@ -13,7 +13,7 @@ permissions:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
 
@@ -25,6 +25,14 @@ jobs:
         with:
           node-version: "22"
 
+      - name: Restore MCP Registry snapshot
+        uses: actions/cache@v4
+        with:
+          path: ~/.local/share/mcpradar
+          key: mcp-registry-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            mcp-registry-${{ runner.os }}-
+
       - run: uv sync
 
       # Scoring calibration gate — a broken scoring model (positive control not
@@ -34,24 +42,37 @@ jobs:
         run: uv run pytest tests/test_scoring_calibration.py tests/test_capability.py tests/test_enumeration.py -q
 
       - name: Fetch MCP Registry
-        run: python -m mcpradar registry fetch --limit 100
+        run: uv run python -m mcpradar registry fetch --limit 100
 
-      - name: Run validation scans
-        run: python validation/run_validation.py --timeout 300
-        continue-on-error: true
+      - name: Prepare scan sandboxes
+        run: |
+          docker pull node:22-slim
+          docker pull ghcr.io/astral-sh/uv:python3.12-bookworm-slim
+
+      # Use the same pending-row engine as the daily job. The former validation
+      # runner read an obsolete empty `command` key and produced false pending
+      # rows instead of launching the YAML `scan` recipes.
+      - name: Retry unresolved leaderboard rows
+        run: >-
+          uv run python validation/run_trending.py
+          --pending
+          --pending-limit 0
+          --retry-incomplete-days 7
+          --top 0
+          --timeout 120
+          --workers 3
+          --sandbox
 
       - name: Enrich with dependency CVEs + source findings
-        run: python -m mcpradar leaderboard enrich
+        run: uv run python -m mcpradar leaderboard enrich
         continue-on-error: true
 
       - name: Generate leaderboard data
-        run: python -m mcpradar leaderboard generate
+        run: uv run python docs/leaderboard/generate.py
 
       - name: Sync to docs root
         run: |
           cp docs/leaderboard/index.html docs/index.html
-          cp docs/leaderboard/data.json docs/data.json
-          cp docs/leaderboard/servers.json docs/servers.json
           mkdir -p docs/badges
           cp -r docs/leaderboard/badges/* docs/badges/
 
@@ -59,7 +80,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/leaderboard/data.json docs/data.json docs/index.html docs/servers.json validation/results/
+          git add docs/leaderboard/data.json docs/leaderboard/servers.json docs/leaderboard/badges/ docs/data.json docs/index.html docs/servers.json docs/badges/ validation/results/
           git diff --staged --quiet || git commit -m "chore: update leaderboard [skip ci]"
           git push
 

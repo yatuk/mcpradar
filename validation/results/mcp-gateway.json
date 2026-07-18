@@ -1,9 +1,151 @@
 {
-  "name": "mcp-gateway",
-  "command": "",
   "transport": "stdio",
-  "expected_rules": [],
-  "error": "list index out of range",
-  "tools_count": 0,
-  "findings": []
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "mcp@1.6.0 (PyPI) is affected by CVE-2025-53366: MCP Python SDK vulnerability in the FastMCP Server causes validation error, leading to DoS",
+      "severity": "high",
+      "target": "mcp@1.6.0",
+      "location": "pyproject.toml",
+      "evidence": "",
+      "detail": {
+        "package": "mcp",
+        "version": "1.6.0",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-3qhf-m339-9g5v",
+        "cve": "CVE-2025-53366",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-248"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/modelcontextprotocol/python-sdk/security/advisories/GHSA-3qhf-m339-9g5v",
+          "https://nvd.nist.gov/vuln/detail/CVE-2025-53366",
+          "https://github.com/modelcontextprotocol/python-sdk/pull/822"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "requests@2.32.3 (PyPI) is affected by CVE-2024-47081: Requests vulnerable to .netrc credentials leak via malicious URLs",
+      "severity": "medium",
+      "target": "requests@2.32.3",
+      "location": "pyproject.toml",
+      "evidence": "",
+      "detail": {
+        "package": "requests",
+        "version": "2.32.3",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-9hjg-9r4m-mvj7",
+        "cve": "CVE-2024-47081",
+        "cvss": 5.3,
+        "cwe_ids": [
+          "CWE-522"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/psf/requests/security/advisories/GHSA-9hjg-9r4m-mvj7",
+          "https://nvd.nist.gov/vuln/detail/CVE-2024-47081",
+          "https://github.com/psf/requests/pull/6965"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "requests.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "github_collector.py:86",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 86,
+        "sink": "requests.get"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "requests.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "github_collector.py:142",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 142,
+        "sink": "requests.get"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "requests.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "github_collector.py:148",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 148,
+        "sink": "requests.get"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "requests.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "npm_collector.py:108",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 108,
+        "sink": "requests.get"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "requests.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "smithery_collector.py:26",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 26,
+        "sink": "requests.get"
+      },
+      "confidence": 0.7
+    }
+  ],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "mcp-gateway",
+  "target": "uvx mcp-gateway",
+  "version": "",
+  "scanned_at": "2026-07-18T20:19:58.821656+00:00",
+  "last_attempted_at": "2026-07-18T20:19:58.821656+00:00",
+  "trending": false,
+  "live_scan": {
+    "ok": false,
+    "error": "ONRPCError): │ │ │ │ │ │ > 306 │ │ │ │ raise McpError(response_or_error.error) │ │ │ │ │ │ 307 │ │ │ else: │ │ │ │ │ │ 308 │ │ │ │ return │ │ │ │ │ │ result_type.model_validate(response_or_error.result) │ │ │ │ │ │ 309 │ │ │ │ │ └─────────────────────────────────────────────────────────────────────┘ │ │ │ │ McpError: Connection closed │ │ │ └─────────────────────────────────────────────────────────────────────────┘ │ └─────────────────────────────────────────────────────────────────────────────┘"
+  },
+  "enriched": true,
+  "enriched_ref": "pip:mcp-gateway",
+  "package_scan": {
+    "ok": true,
+    "note": "+7 findings from pip:mcp-gateway"
+  },
+  "status": "scanned",
+  "scan_coverage": "package-only"
 }

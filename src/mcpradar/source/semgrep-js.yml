@@ -1,0 +1,33 @@
+rules:
+  - id: S001
+    message: Cloud metadata SSRF endpoint
+    severity: ERROR
+    metadata:
+      mcpradar_severity: critical
+    languages: [javascript, typescript]
+    pattern-regex: '169\.254\.169\.254|metadata\.google\.internal'
+  - id: S004
+    message: Dynamic JavaScript execution
+    severity: ERROR
+    metadata:
+      mcpradar_severity: critical
+    languages: [javascript, typescript]
+    patterns:
+      - pattern-either:
+          - pattern: eval(...)
+          - pattern: new Function(...)
+  - id: S006
+    message: Dynamic shell command execution
+    severity: ERROR
+    metadata:
+      mcpradar_severity: critical
+    languages: [javascript, typescript]
+    patterns:
+      - pattern-either:
+          - pattern: child_process.exec($CMD, ...)
+          - pattern: exec($CMD, ...)
+      - metavariable-pattern:
+          metavariable: $CMD
+          patterns:
+            - pattern-not: '"..."'
+            - pattern-not: "'...'"

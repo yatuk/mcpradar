@@ -68,6 +68,15 @@ class TestCLIScan:
         result = runner.invoke(app, ["scan", "http://x", "-t", "invalid"])
         assert result.exit_code == 1
 
+    def test_scan_invalid_protocol_profile(self) -> None:
+        result = runner.invoke(app, ["scan", "http://x", "--protocol", "future"])
+        assert result.exit_code == 1
+
+    def test_stdio_requires_explicit_host_execution_consent(self) -> None:
+        result = runner.invoke(app, ["scan", "python untrusted.py", "-t", "stdio"])
+        assert result.exit_code == 2
+        assert "explicit consent" in result.stdout.lower()
+
     def test_scan_help_shows_options(self) -> None:
         result = runner.invoke(app, ["scan", "--help"])
         assert result.exit_code == 0
@@ -183,7 +192,8 @@ class TestCLILeaderboard:
             row = next(r for r in data if r["server"] == "@vendor/never-scanned")
             assert row["status"] == "pending"
             assert row["grade"] == "-"
-            assert row["aivss_score"] is None
+            assert row["risk_score"] is None
+            assert row["scoring_model"] == "mrs-v1"
 
     def test_low_findings_excluded_from_grade(self) -> None:
         """A scan whose only findings are LOW stays grade A: LOW is
@@ -208,7 +218,7 @@ class TestCLILeaderboard:
             row = next(r for r in data if r["server"] == "@vendor/clean")
             assert row["status"] == "scanned"
             assert row["grade"] == "A"
-            assert row["aivss_score"] == 0.0
+            assert row["risk_score"] == 0.0
             assert row["findings"] == 0  # medium+ headline count
             assert row["low_findings"] == 2
 
@@ -235,9 +245,36 @@ class TestCLILeaderboard:
             row = next(r for r in data if r["server"] == "@vendor/risky")
             assert row["status"] == "scanned"
             assert row["grade"] != "A"
-            assert row["aivss_score"] > 0
+            assert row["risk_score"] > 0
             assert row["findings"] == 1
             assert row["low_findings"] == 1
+
+    def test_site_metadata_and_badge_paths_are_safe(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            badges = root / "badges"
+            badges.mkdir()
+            unrelated = badges / "custom.svg"
+            unrelated.write_text("<svg>unrelated</svg>", encoding="utf-8")
+            rows = self._generate(
+                root,
+                {
+                    "malicious-name.json": {
+                        "name": "../filesystem/escape",
+                        "id": "scan-id",
+                        "tools": [{"name": "read_file"}],
+                        "findings": [{"rule_id": "R113", "severity": "medium", "title": "path"}],
+                    }
+                },
+            )
+            row = rows[0]
+            assert row["category"] == "File System"
+            assert row["vuln_types"] == ["Path Traversal"]
+            assert row["api_free"] is True
+            assert row["history"] == []
+            assert unrelated.exists()
+            assert (badges / "filesystem-escape.svg").exists()
+            assert not (root.parent / "escape.svg").exists()
 
 
 class TestCLIDiffFormat:

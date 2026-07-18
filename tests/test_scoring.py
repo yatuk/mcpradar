@@ -1,4 +1,4 @@
-"""Unit tests for scoring/engine.py — AIVSS score, grade, confidence."""
+"""Unit tests for MRS score, grade, and confidence."""
 
 from __future__ import annotations
 
@@ -10,6 +10,7 @@ from mcpradar.scoring.engine import (
     compute_aivss,
     compute_confidence,
     compute_grade,
+    compute_mrs,
     score_server,
 )
 
@@ -91,6 +92,10 @@ class TestComputeAivss:
         score_1_tool = compute_aivss(findings, tool_count=1)
         score_10_tools = compute_aivss(findings, tool_count=10)
         assert score_10_tools < score_1_tool
+
+    def test_public_mrs_name_matches_compatibility_alias(self) -> None:
+        findings = _findings(("R109", "medium"))
+        assert compute_mrs(findings, 2) == compute_aivss(findings, 2)
 
 
 # ---------------------------------------------------------------------------
@@ -211,7 +216,8 @@ class TestScoreServer:
     def test_returns_all_keys(self) -> None:
         result = score_server(_findings(("R107", "critical")), tool_count=1)
         expected_keys = {
-            "aivss_score",
+            "risk_score",
+            "scoring_model",
             "grade",
             "confidence",
             "findings_by_severity",
@@ -222,7 +228,8 @@ class TestScoreServer:
 
     def test_no_findings_grade_a(self) -> None:
         result = score_server([], tool_count=10)
-        assert result["aivss_score"] == 0.0
+        assert result["risk_score"] == 0.0
+        assert result["scoring_model"] == "mrs-v1"
         assert result["grade"] == "A"
         assert result["confidence"] == 1.0
         assert result["total_findings"] == 0

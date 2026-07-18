@@ -1,9 +1,25 @@
 {
-  "name": "liquid",
-  "command": "",
   "transport": "stdio",
-  "expected_rules": [],
-  "error": "list index out of range",
-  "tools_count": 0,
-  "findings": []
+  "tools": [],
+  "findings": [],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "liquid",
+  "target": "uvx --from liquid-api[mcp] liquid-mcp",
+  "version": "",
+  "scanned_at": "2026-07-18T20:19:25.266828+00:00",
+  "last_attempted_at": "2026-07-18T20:19:25.266828+00:00",
+  "trending": false,
+  "live_scan": {
+    "ok": false,
+    "error": "scanner returned no JSON result"
+  },
+  "package_scan": {
+    "ok": false,
+    "note": "fetch failed: PyPI metadata fetch failed for 'liquid-api[mcp]': Client error '404 Not Found' for url 'https://pypi.org/p"
+  },
+  "status": "incomplete",
+  "incomplete": true,
+  "incomplete_reason": "scanner returned no JSON result; fetch failed: PyPI metadata fetch failed for 'liquid-api[mcp]': Client error '404 Not Found' for url 'https://pypi.org/p"
 }

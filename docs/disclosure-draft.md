@@ -1,5 +1,8 @@
 # Responsible Disclosure: Real-World MCP Server Security Scan Results
 
+> **Archived pre-release draft.** This document records an rc3-era scan and is
+> retained for provenance; it is not a current benchmark or disclosure claim.
+
 **Scanner:** MCPRadar v1.0.0-rc3
 **Date:** 2026-06-23
 **Status:** Draft — findings being verified before disclosure
@@ -76,10 +79,10 @@ mcpradar scan "npx -y @modelcontextprotocol/server-filesystem /tmp" -t stdio --j
 
 ## About MCPRadar
 
-MCPRadar is an open-source security scanner for Model Context Protocol servers.
-It detects tool poisoning, prompt injection, secret exposure, command injection,
-supply chain risks, and schema poisoning across 19 detection rules. v1.0.0-rc3
-achieves 100% precision and 90% recall on a labeled benchmark corpus.
+At the time of this draft, MCPRadar covered 19 rules. The current scanner uses a
+larger generated rule catalog and reports instance-level benchmark evidence and
+calibration gaps; see the current rule catalog and benchmark methodology rather
+than treating these historical observations as current measurements.
 
 - GitHub: https://github.com/yatuk/mcpradar
 - Leaderboard: https://yatuk.github.io/mcpradar

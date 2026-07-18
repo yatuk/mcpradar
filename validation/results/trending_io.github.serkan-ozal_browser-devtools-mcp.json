@@ -1,0 +1,487 @@
+{
+  "transport": "stdio",
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "@grpc/grpc-js@1.14.3 (npm) is affected by CVE-2026-48068: @grpc/grpc-js: A malformed request can cause a server crash; fixed in 1.14.4",
+      "severity": "high",
+      "target": "@grpc/grpc-js@1.14.3",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "@grpc/grpc-js",
+        "version": "1.14.3",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-5375-pq7m-f5r2",
+        "cve": "CVE-2026-48068",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-248"
+        ],
+        "fixed_version": "1.14.4",
+        "references": [
+          "https://github.com/grpc/grpc-node/security/advisories/GHSA-5375-pq7m-f5r2",
+          "https://github.com/grpc/grpc-node",
+          "https://github.com/grpc/grpc-node/releases/tag/%40grpc%2Fgrpc-js%401.10.12"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "@hono/node-server@1.19.5 (npm) is affected by CVE-2026-39406: @hono/node-server: Middleware bypass via repeated slashes in serveStatic; fixed in 1.19.13",
+      "severity": "medium",
+      "target": "@hono/node-server@1.19.5",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "@hono/node-server",
+        "version": "1.19.5",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-92pp-h63x-v22m",
+        "cve": "CVE-2026-39406",
+        "cvss": 5.3,
+        "cwe_ids": [
+          "CWE-22"
+        ],
+        "fixed_version": "1.19.13",
+        "references": [
+          "https://github.com/honojs/node-server/security/advisories/GHSA-92pp-h63x-v22m",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-39406",
+          "https://github.com/honojs/node-server/commit/025c30f55d589ddbe6048b151d77e904f67a8cc2"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "@modelcontextprotocol/sdk@1.23.1 (npm) is affected by CVE-2026-25536: @modelcontextprotocol/sdk has cross-client data leak via shared server/transport instance reuse; fixed in 1.26.0",
+      "severity": "high",
+      "target": "@modelcontextprotocol/sdk@1.23.1",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "@modelcontextprotocol/sdk",
+        "version": "1.23.1",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-345p-7cg4-v4c7",
+        "cve": "CVE-2026-25536",
+        "cvss": 7.1,
+        "cwe_ids": [
+          "CWE-362"
+        ],
+        "fixed_version": "1.26.0",
+        "references": [
+          "https://github.com/modelcontextprotocol/typescript-sdk/security/advisories/GHSA-345p-7cg4-v4c7",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-25536",
+          "https://github.com/modelcontextprotocol/typescript-sdk/issues/204"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "@opentelemetry/core@2.6.0 (npm) is affected by CVE-2026-54285: OpenTelemetry Core: Unbounded memory allocation in W3C Baggage propagation; fixed in 2.8.0",
+      "severity": "medium",
+      "target": "@opentelemetry/core@2.6.0",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "@opentelemetry/core",
+        "version": "2.6.0",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-8988-4f7v-96qf",
+        "cve": "CVE-2026-54285",
+        "cvss": 5.3,
+        "cwe_ids": [
+          "CWE-770"
+        ],
+        "fixed_version": "2.8.0",
+        "references": [
+          "https://github.com/open-telemetry/opentelemetry-js/security/advisories/GHSA-8988-4f7v-96qf",
+          "https://github.com/open-telemetry/opentelemetry-js"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "hono@4.11.4 (npm) is affected by CVE-2026-56762: Hono missing validation of cookie name on write path in setCookie(); fixed in 4.12.12",
+      "severity": "medium",
+      "target": "hono@4.11.4",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "hono",
+        "version": "4.11.4",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-26pp-8wgv-hjvm",
+        "cve": "CVE-2026-56762",
+        "cvss": 5.3,
+        "cwe_ids": [
+          "CWE-113"
+        ],
+        "fixed_version": "4.12.12",
+        "references": [
+          "https://github.com/honojs/hono/security/advisories/GHSA-26pp-8wgv-hjvm",
+          "https://github.com/honojs/hono/commit/a586cd72e3f6122792e631ecf1817e5cabb803ec",
+          "https://github.com/honojs/hono"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "picomatch@4.0.3 (npm) is affected by CVE-2026-33672: Picomatch: Method Injection in POSIX Character Classes causes incorrect Glob Matching; fixed in 2.3.2",
+      "severity": "medium",
+      "target": "picomatch@4.0.3",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "picomatch",
+        "version": "4.0.3",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-3v7f-55p6-f55p",
+        "cve": "CVE-2026-33672",
+        "cvss": 5.3,
+        "cwe_ids": [
+          "CWE-1321"
+        ],
+        "fixed_version": "2.3.2",
+        "references": [
+          "https://github.com/micromatch/picomatch/security/advisories/GHSA-3v7f-55p6-f55p",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-33672",
+          "https://github.com/micromatch/picomatch/commit/4516eb521f13a46b2fe1a1d2c9ef6b20ddc0e903"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "undici@7.25.0 (npm) is affected by CVE-2026-6733: undici vulnerable to HTTP response queue poisoning via keep-alive socket reuse; fixed in 8.5.0",
+      "severity": "low",
+      "target": "undici@7.25.0",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "undici",
+        "version": "7.25.0",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-35p6-xmwp-9g52",
+        "cve": "CVE-2026-6733",
+        "cvss": 3.7,
+        "cwe_ids": [
+          "CWE-367"
+        ],
+        "fixed_version": "8.5.0",
+        "references": [
+          "https://github.com/nodejs/undici/security/advisories/GHSA-35p6-xmwp-9g52",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-6733",
+          "https://hackerone.com/reports/3582376"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "ws@8.19.0 (npm) is affected by CVE-2026-45736: ws: Uninitialized memory disclosure; fixed in 8.20.1",
+      "severity": "medium",
+      "target": "ws@8.19.0",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "ws",
+        "version": "8.19.0",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-58qx-3vcg-4xpx",
+        "cve": "CVE-2026-45736",
+        "cvss": 4.4,
+        "cwe_ids": [
+          "CWE-908"
+        ],
+        "fixed_version": "8.20.1",
+        "references": [
+          "https://github.com/websockets/ws/security/advisories/GHSA-58qx-3vcg-4xpx",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-45736",
+          "https://github.com/websockets/ws/commit/c0327ec15a54d701eb6ccefaa8bef328cfc03086"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-v8sn3f_e\\package\\dist\\cli\\runner.js:2",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 2,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-v8sn3f_e\\package\\dist\\core-ELMAUBJZ.js:2",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 2,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S004",
+      "title": "Dynamic JavaScript execution",
+      "description": "Dynamic JavaScript execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-v8sn3f_e\\package\\dist\\core-ELMAUBJZ.js:4",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 4,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-v8sn3f_e\\package\\dist\\core-MK77NQWN.js:602",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 602,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-v8sn3f_e\\package\\dist\\core-MK77NQWN.js:603",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 603,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-v8sn3f_e\\package\\dist\\core-MK77NQWN.js:1001",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 1001,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S004",
+      "title": "Dynamic JavaScript execution",
+      "description": "Dynamic JavaScript execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-v8sn3f_e\\package\\dist\\core-MK77NQWN.js:872",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 872,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S005",
+      "title": "SQL query built from template interpolation",
+      "description": "SQL query built from template interpolation detected in JavaScript/TypeScript source",
+      "severity": "high",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-v8sn3f_e\\package\\dist\\core-MK77NQWN.js:68",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 68,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S005",
+      "title": "SQL query built from template interpolation",
+      "description": "SQL query built from template interpolation detected in JavaScript/TypeScript source",
+      "severity": "high",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-v8sn3f_e\\package\\dist\\core-MK77NQWN.js:72",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 72,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S005",
+      "title": "SQL query built from template interpolation",
+      "description": "SQL query built from template interpolation detected in JavaScript/TypeScript source",
+      "severity": "high",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-v8sn3f_e\\package\\dist\\core-MK77NQWN.js:115",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 115,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-v8sn3f_e\\package\\dist\\core-MK77NQWN.js:21",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 21,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-v8sn3f_e\\package\\dist\\core-MK77NQWN.js:115",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 115,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-v8sn3f_e\\package\\dist\\core-MK77NQWN.js:291",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 291,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-v8sn3f_e\\package\\dist\\core-MK77NQWN.js:303",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 303,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-v8sn3f_e\\package\\dist\\core-MK77NQWN.js:304",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 304,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-v8sn3f_e\\package\\dist\\platform\\browser\\otel\\otel-initializer.bundle.js:1",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 1,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-v8sn3f_e\\package\\dist\\platform\\browser\\otel\\otel-initializer.bundle.js:1",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 1,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    }
+  ],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "io.github.serkan-ozal/browser-devtools-mcp",
+  "target": "npx -y browser-devtools-mcp@0.9.1",
+  "version": "0.9.1",
+  "scanned_at": "2026-07-18T20:25:01.555964+00:00",
+  "last_attempted_at": "2026-07-18T20:25:01.555964+00:00",
+  "trending": true,
+  "popularity": {
+    "method": "registry-packages/npm-pypi-github",
+    "score": 3.6488,
+    "npm_downloads": 4453,
+    "pypi_downloads": null,
+    "github_stars": null
+  },
+  "live_scan": {
+    "ok": false,
+    "error": "scanner returned no JSON result"
+  },
+  "enriched": true,
+  "enriched_ref": "npm:browser-devtools-mcp",
+  "package_scan": {
+    "ok": true,
+    "note": "+25 findings from npm:browser-devtools-mcp"
+  },
+  "status": "scanned",
+  "scan_coverage": "package-only"
+}

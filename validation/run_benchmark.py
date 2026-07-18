@@ -16,6 +16,8 @@ import time
 from datetime import UTC, datetime
 from pathlib import Path
 
+from mcpradar.validation.metrics import compute_benchmark_metrics, validate_labels
+
 VALIDATION_DIR = Path(__file__).parent
 
 
@@ -60,6 +62,8 @@ def scan_target(name: str, command: str, transport: str, timeout: int = 120) -> 
                 "--json",
                 "-s",
                 "low",
+                "--no-save",
+                "--allow-host-exec",
                 "-o",
                 tmp_path,
             ],
@@ -99,6 +103,7 @@ def scan_target(name: str, command: str, transport: str, timeout: int = 120) -> 
                     "severity": severity,
                     "title": f.get("title", ""),
                     "target": f.get("target", ""),
+                    "location": f.get("location", ""),
                 }
             )
         result["status"] = "success"
@@ -113,72 +118,8 @@ def scan_target(name: str, command: str, transport: str, timeout: int = 120) -> 
 
 
 def compute_metrics(targets: dict, results: dict) -> dict:
-    """Compute per-rule and overall precision/recall/F1."""
-    rule_stats: dict[str, dict] = {}  # rule_id -> {tp, fp, fn}
-
-    for name, target_info in targets.items():
-        if name not in results:
-            continue
-        result = results[name]
-        expected = set(target_info.get("expected_rules", []))
-        detected = result["detected_rules"]
-
-        for rule_id in expected | detected:
-            if rule_id not in rule_stats:
-                rule_stats[rule_id] = {"tp": 0, "fp": 0, "fn": 0}
-
-        # TP: detected AND expected
-        for rule_id in expected & detected:
-            rule_stats[rule_id]["tp"] += 1
-
-        # FP: detected but NOT expected
-        for rule_id in detected - expected:
-            rule_stats[rule_id]["fp"] += 1
-
-        # FN: expected but NOT detected
-        for rule_id in expected - detected:
-            rule_stats[rule_id]["fn"] += 1
-
-    # Per-rule metrics
-    per_rule = {}
-    total_tp = total_fp = total_fn = 0
-    for rule_id, stats in sorted(rule_stats.items()):
-        tp, fp, fn = stats["tp"], stats["fp"], stats["fn"]
-        precision = tp / (tp + fp) if (tp + fp) > 0 else 0.0
-        recall = tp / (tp + fn) if (tp + fn) > 0 else 0.0
-        f1 = 2 * precision * recall / (precision + recall) if (precision + recall) > 0 else 0.0
-        per_rule[rule_id] = {
-            "tp": tp,
-            "fp": fp,
-            "fn": fn,
-            "precision": round(precision, 3),
-            "recall": round(recall, 3),
-            "f1": round(f1, 3),
-        }
-        total_tp += tp
-        total_fp += fp
-        total_fn += fn
-
-    overall_precision = total_tp / (total_tp + total_fp) if (total_tp + total_fp) > 0 else 0.0
-    overall_recall = total_tp / (total_tp + total_fn) if (total_tp + total_fn) > 0 else 0.0
-    overall_f1 = (
-        2 * overall_precision * overall_recall / (overall_precision + overall_recall)
-        if (overall_precision + overall_recall) > 0
-        else 0.0
-    )
-
-    return {
-        "per_rule": per_rule,
-        "overall": {
-            "precision": round(overall_precision, 3),
-            "recall": round(overall_recall, 3),
-            "f1": round(overall_f1, 3),
-            "total_findings": total_tp + total_fp,
-            "total_expected": total_tp + total_fn,
-        },
-        "targets_scanned": len(results),
-        "targets_with_labels": len(targets),
-    }
+    """Backward-compatible wrapper for the instance-level metrics engine."""
+    return compute_benchmark_metrics(targets, results)
 
 
 def generate_report(targets: dict, results: dict, metrics: dict) -> str:
@@ -191,42 +132,74 @@ def generate_report(targets: dict, results: dict, metrics: dict) -> str:
         "",
         "## Methodology",
         "",
-        "Each target server has a ground-truth label in `validation/labels.json` "
-        "specifying which MCPRadar rules *should* fire (`expected_rules`). The scanner "
-        "runs against each target, and detected rules are compared to expected rules.",
+        "Each target has ground-truth finding instances in `validation/labels.json`. "
+        "Every detected finding can match at most one expected instance, so duplicate "
+        "alerts are counted instead of being collapsed to a set of rule IDs.",
         "",
         "- **True Positive (TP):** Rule fired AND was expected",
         "- **False Positive (FP):** Rule fired but was NOT expected",
         "- **False Negative (FN):** Rule was expected but did NOT fire",
         "",
-        "Metrics are computed on findings of **MEDIUM severity and above**. LOW "
-        "findings are informational lint (e.g. R114 unconstrained-string notes) and "
-        "are reported per target but excluded from precision/recall. Vulnerability "
-        "classes that are invisible to static schema scanning (runtime output "
-        "poisoning, implementation-level RCE, dependency CVEs, typosquatting) are "
-        "labeled `expected_rules: []` with a KNOWN LIMITATION note rather than "
-        "counted as detections — see the notes column in `labels.json`.",
+        "Metrics use MEDIUM+ findings. The complete catalog remains in the report: a "
+        "rule is calibrated only after at least three positive and three hard-negative "
+        "instances, and missing evidence is listed as a coverage gap.",
         "",
         "## Overall Results",
         "",
         "| Metric | Value |",
         "|---|---|",
-        f"| Precision | {metrics['overall']['precision']:.1%} |",
-        f"| Recall | {metrics['overall']['recall']:.1%} |",
-        f"| F1 Score | {metrics['overall']['f1']:.1%} |",
+        f"| Precision | {_pct(metrics['overall']['precision'])} |",
+        f"| Recall | {_pct(metrics['overall']['recall'])} |",
+        f"| F1 Score | {_pct(metrics['overall']['f1'])} |",
         f"| Targets scanned | {metrics['targets_scanned']} |",
         f"| Total findings | {metrics['overall']['total_findings']} |",
         "",
         "## Per-Rule Metrics",
         "",
-        "| Rule ID | TP | FP | FN | Precision | Recall | F1 |",
-        "|---|---|---|---|---|---|---|",
+        "| Rule | TP | FP | FN | Precision | Recall | F1 | Pos/Neg | Calibrated |",
+        "|---|---:|---:|---:|---:|---:|---:|---:|---|",
     ]
 
     for rule_id, m in metrics["per_rule"].items():
         lines.append(
             f"| {rule_id} | {m['tp']} | {m['fp']} | {m['fn']} | "
-            f"{m['precision']:.1%} | {m['recall']:.1%} | {m['f1']:.1%} |"
+            f"{_pct(m['precision'])} | {_pct(m['recall'])} | {_pct(m['f1'])} | "
+            f"{m['positive_instances']}/{m['hard_negative_instances']} | "
+            f"{'yes' if m['calibrated'] else 'no'} |"
+        )
+
+    lines.extend(
+        [
+            "",
+            "## Per-Surface Metrics",
+            "",
+            "| Surface | TP | FP | FN | Precision | Recall | F1 |",
+            "|---|---:|---:|---:|---:|---:|---:|",
+        ]
+    )
+    for surface, m in metrics["per_surface"].items():
+        lines.append(
+            f"| {surface} | {m['tp']} | {m['fp']} | {m['fn']} | "
+            f"{_pct(m['precision'])} | {_pct(m['recall'])} | {_pct(m['f1'])} |"
+        )
+
+    lines.extend(
+        [
+            "",
+            "## Corpus Coverage Gaps",
+            "",
+            f"Calibrated rules: {metrics['coverage']['calibrated_rules']}/"
+            f"{metrics['coverage']['catalog_rules']}.",
+            "",
+            "| Rule | Positives | Hard negatives | Still needed |",
+            "|---|---:|---:|---|",
+        ]
+    )
+    for gap in metrics["coverage"]["gaps"]:
+        lines.append(
+            f"| {gap['rule_id']} | {gap['positive_instances']} | "
+            f"{gap['hard_negative_instances']} | +{gap['needs_positive']} positive, "
+            f"+{gap['needs_hard_negative']} negative |"
         )
 
     lines.extend(
@@ -294,6 +267,10 @@ def _get_version() -> str:
         return "unknown"
 
 
+def _pct(value: float | None) -> str:
+    return "n/a" if value is None else f"{value:.1%}"
+
+
 def main() -> None:
     import argparse
 
@@ -303,6 +280,9 @@ def main() -> None:
     args = parser.parse_args()
 
     labels = load_labels()
+    label_errors = validate_labels(labels)
+    if label_errors:
+        raise SystemExit("Invalid benchmark labels:\n- " + "\n- ".join(label_errors))
     targets = labels.get("targets", {})
 
     if args.target:
@@ -331,9 +311,9 @@ def main() -> None:
     report_path = VALIDATION_DIR / "BENCHMARK.md"
     report_path.write_text(report, encoding="utf-8")
     print(f"\nBenchmark report: {report_path}")
-    print(f"Precision: {metrics['overall']['precision']:.1%}")
-    print(f"Recall: {metrics['overall']['recall']:.1%}")
-    print(f"F1: {metrics['overall']['f1']:.1%}")
+    print(f"Precision: {_pct(metrics['overall']['precision'])}")
+    print(f"Recall: {_pct(metrics['overall']['recall'])}")
+    print(f"F1: {_pct(metrics['overall']['f1'])}")
 
 
 if __name__ == "__main__":

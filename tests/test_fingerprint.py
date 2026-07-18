@@ -206,16 +206,7 @@ class TestTransportChecker:
             cert_valid=True,
             self_signed=False,
         )
-        # Mock HSTS check to return True
-        # Mock HEAD request to return Mcp-Method/Mcp-Name headers (2026-07-28 spec)
-        from unittest.mock import MagicMock
-
-        mock_head = MagicMock()
-        mock_head.headers = {"mcp-method": "tools/list", "mcp-name": "search"}
-        with (
-            patch.object(checker, "check_hsts", return_value=True),
-            patch("httpx.head", return_value=mock_head),
-        ):
+        with patch.object(checker, "check_hsts", return_value=True):
             findings = checker.generate_findings("https://example.com", "http", tls_info)
         assert len(findings) == 0
 

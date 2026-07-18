@@ -70,6 +70,42 @@ class TestExtraction:
         assert deps[0].version == "0.21.4"
         assert deps[0].source == "package-lock.json"
 
+    def test_pnpm_lock(self, tmp_path: Path) -> None:
+        (tmp_path / "pnpm-lock.yaml").write_text(
+            """
+lockfileVersion: '9.0'
+packages:
+  axios@1.7.9:
+    resolution:
+      integrity: sha512-YWJj
+""",
+            encoding="utf-8",
+        )
+        deps = extract_dependencies(tmp_path)
+        assert [(dep.name, dep.version, dep.source) for dep in deps] == [
+            ("axios", "1.7.9", "pnpm-lock.yaml")
+        ]
+
+    def test_yarn_lock(self, tmp_path: Path) -> None:
+        (tmp_path / "yarn.lock").write_text(
+            'axios@^1.7.0:\n  version "1.7.9"\n  integrity sha512-YWJj\n',
+            encoding="utf-8",
+        )
+        deps = extract_dependencies(tmp_path)
+        assert [(dep.name, dep.version, dep.source) for dep in deps] == [
+            ("axios", "1.7.9", "yarn.lock")
+        ]
+
+    def test_pdm_lock(self, tmp_path: Path) -> None:
+        (tmp_path / "pdm.lock").write_text(
+            '[[package]]\nname = "httpx"\nversion = "0.28.1"\n',
+            encoding="utf-8",
+        )
+        deps = extract_dependencies(tmp_path)
+        assert [(dep.name, dep.version, dep.source) for dep in deps] == [
+            ("httpx", "0.28.1", "pdm.lock")
+        ]
+
 
 class TestCvss:
     def test_known_critical_vector(self) -> None:

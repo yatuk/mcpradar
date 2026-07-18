@@ -15,6 +15,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
+import yaml
+
 from mcpradar.scanner.report import Finding, Severity
 
 if TYPE_CHECKING:
@@ -24,9 +26,12 @@ if TYPE_CHECKING:
 # (lockfiles first — they carry exact resolved versions).
 _MANIFESTS = (
     "package-lock.json",
+    "pnpm-lock.yaml",
+    "yarn.lock",
     "package.json",
     "uv.lock",
     "poetry.lock",
+    "pdm.lock",
     "pyproject.toml",
     "requirements.txt",
 )
@@ -40,6 +45,10 @@ class Dependency:
     name: str
     version: str
     source: str  # manifest filename the dep came from
+    direct: bool = True
+    integrity: str = ""
+    license: str = ""
+    dependencies: tuple[str, ...] = ()
 
 
 def _clean_version(spec: str) -> str | None:
@@ -66,7 +75,20 @@ def _parse_package_lock(data: dict[str, Any]) -> list[Dependency]:
             name = path.split("node_modules/")[-1]
             ver = info.get("version")
             if name and isinstance(ver, str):
-                out.append(Dependency("npm", name, ver, "package-lock.json"))
+                child_names = info.get("dependencies", {})
+                out.append(
+                    Dependency(
+                        "npm",
+                        name,
+                        ver,
+                        "package-lock.json",
+                        direct=path.startswith("node_modules/")
+                        and path.count("node_modules/") == 1,
+                        integrity=str(info.get("integrity", "")),
+                        license=str(info.get("license", "")),
+                        dependencies=tuple(child_names) if isinstance(child_names, dict) else (),
+                    )
+                )
         if out:
             return out
     # v1: "dependencies" maps name -> {version}
@@ -75,7 +97,18 @@ def _parse_package_lock(data: dict[str, Any]) -> list[Dependency]:
         for name, info in deps.items():
             ver = info.get("version") if isinstance(info, dict) else None
             if isinstance(ver, str):
-                out.append(Dependency("npm", name, ver, "package-lock.json"))
+                child_names = info.get("dependencies", {})
+                out.append(
+                    Dependency(
+                        "npm",
+                        name,
+                        ver,
+                        "package-lock.json",
+                        integrity=str(info.get("integrity", "")),
+                        license=str(info.get("license", "")),
+                        dependencies=tuple(child_names) if isinstance(child_names, dict) else (),
+                    )
+                )
     return out
 
 
@@ -91,6 +124,76 @@ def _parse_package_json(data: dict[str, Any]) -> list[Dependency]:
             ver = _clean_version(spec)
             if ver:
                 out.append(Dependency("npm", name, ver, "package.json"))
+    return out
+
+
+def _parse_pnpm_lock(data: dict[str, Any]) -> list[Dependency]:
+    out: list[Dependency] = []
+    packages = data.get("packages", {})
+    if not isinstance(packages, dict):
+        return out
+    for raw_key, info in packages.items():
+        if not isinstance(raw_key, str) or not isinstance(info, dict):
+            continue
+        key = raw_key.lstrip("/")
+        match = re.match(r"(?P<name>@[^/]+/[^@]+|[^@]+)@(?P<version>[^()]+)", key)
+        if not match:
+            continue
+        resolution = info.get("resolution", {})
+        integrity = str(resolution.get("integrity", "")) if isinstance(resolution, dict) else ""
+        child_names = info.get("dependencies", {})
+        out.append(
+            Dependency(
+                "npm",
+                match.group("name"),
+                match.group("version"),
+                "pnpm-lock.yaml",
+                direct=False,
+                integrity=integrity,
+                dependencies=tuple(child_names) if isinstance(child_names, dict) else (),
+            )
+        )
+    return out
+
+
+def _parse_yarn_lock(text: str) -> list[Dependency]:
+    out: list[Dependency] = []
+    current_name = ""
+    current_version = ""
+    current_integrity = ""
+    for raw_line in [*text.splitlines(), ""]:
+        if raw_line and not raw_line.startswith((" ", "\t", "#")) and raw_line.endswith(":"):
+            if current_name and current_version:
+                out.append(
+                    Dependency(
+                        "npm",
+                        current_name,
+                        current_version,
+                        "yarn.lock",
+                        direct=False,
+                        integrity=current_integrity,
+                    )
+                )
+            selector = raw_line.rstrip(":").strip('"')
+            current_name = selector.rsplit("@", 1)[0]
+            current_version = ""
+            current_integrity = ""
+        elif raw_line.strip().startswith("version "):
+            current_version = raw_line.strip().split(" ", 1)[1].strip('"')
+        elif raw_line.strip().startswith("integrity "):
+            current_integrity = raw_line.strip().split(" ", 1)[1]
+        elif not raw_line and current_name and current_version:
+            out.append(
+                Dependency(
+                    "npm",
+                    current_name,
+                    current_version,
+                    "yarn.lock",
+                    direct=False,
+                    integrity=current_integrity,
+                )
+            )
+            current_name = ""
     return out
 
 
@@ -139,13 +242,33 @@ def _parse_pyproject(data: dict[str, Any]) -> list[Dependency]:
     return out
 
 
-def _parse_uv_lock(data: dict[str, Any]) -> list[Dependency]:
+def _parse_uv_lock(data: dict[str, Any], source: str = "uv.lock") -> list[Dependency]:
     out: list[Dependency] = []
     for pkg in data.get("package", []) or []:
         name = pkg.get("name")
         ver = pkg.get("version")
         if isinstance(name, str) and isinstance(ver, str):
-            out.append(Dependency("PyPI", name, ver, "uv.lock"))
+            hashes: list[str] = []
+            for artifact_key in ("sdist", "wheels"):
+                artifacts = pkg.get(artifact_key, [])
+                if isinstance(artifacts, dict):
+                    artifacts = [artifacts]
+                if isinstance(artifacts, list):
+                    hashes.extend(
+                        str(item.get("hash", ""))
+                        for item in artifacts
+                        if isinstance(item, dict) and item.get("hash")
+                    )
+            out.append(
+                Dependency(
+                    "PyPI",
+                    name,
+                    ver,
+                    source,
+                    direct=False,
+                    integrity=hashes[0] if hashes else "",
+                )
+            )
     return out
 
 
@@ -187,17 +310,27 @@ def extract_dependencies(path: Path) -> list[Dependency]:
             if m.name == "package-lock.json":
                 npm = _parse_package_lock(json.loads(m.read_text(encoding="utf-8")))
                 npm_locked = True
+            elif m.name == "pnpm-lock.yaml":
+                parsed_yaml = yaml.safe_load(m.read_text(encoding="utf-8"))
+                npm = _parse_pnpm_lock(parsed_yaml if isinstance(parsed_yaml, dict) else {})
+                npm_locked = True
+            elif m.name == "yarn.lock":
+                npm = _parse_yarn_lock(m.read_text(encoding="utf-8"))
+                npm_locked = True
             elif m.name == "package.json" and not npm_locked:
                 npm += _parse_package_json(json.loads(m.read_text(encoding="utf-8")))
-            elif m.name in ("uv.lock", "poetry.lock"):
+            elif m.name in ("uv.lock", "poetry.lock", "pdm.lock"):
                 # Both are TOML with a top-level [[package]] name/version array.
-                pypi = _parse_uv_lock(tomllib.loads(m.read_text(encoding="utf-8")))
+                pypi = _parse_uv_lock(
+                    tomllib.loads(m.read_text(encoding="utf-8")),
+                    source=m.name,
+                )
                 pypi_locked = True
             elif m.name == "pyproject.toml" and not pypi_locked:
                 pypi += _parse_pyproject(tomllib.loads(m.read_text(encoding="utf-8")))
             elif m.name == "requirements.txt" and not pypi_locked:
                 pypi += _parse_requirements(m.read_text(encoding="utf-8"))
-        except (json.JSONDecodeError, tomllib.TOMLDecodeError, OSError, ValueError):
+        except (json.JSONDecodeError, tomllib.TOMLDecodeError, yaml.YAMLError, OSError, ValueError):
             continue
 
     return _dedupe(npm + pypi)

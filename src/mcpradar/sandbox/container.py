@@ -7,8 +7,8 @@ a disposable Docker/Podman container:
 - egress locked (``--network none`` by default)
 - ephemeral filesystem (``--rm`` + tmpfs, nothing survives the scan)
 - no capabilities, no privilege escalation, bounded pids/memory/cpu
-- current working directory mounted read-only at ``/workspace`` so relative
-  script paths keep working
+- optional source directory mounted read-only at ``/workspace``
+- executable package caches isolated in an ephemeral ``/sandbox`` tmpfs
 
 The MCP stdio session flows through the container runtime's ``-i`` stdin/stdout
 pipe, so the scanner needs no protocol changes.
@@ -47,7 +47,10 @@ class ContainerPolicy:
     memory: str = "512m"
     cpus: str = "1.0"
     pids_limit: int = 256
-    mount_cwd: bool = True
+    mount_cwd: bool = False
+    mount_path: Path | None = None
+    user: str = "65532:65532"
+    read_only: bool = True
     runtime: str | None = None  # "docker" | "podman"; auto-detected when None
 
 
@@ -102,6 +105,31 @@ def network_warning(command: str, policy: ContainerPolicy) -> str | None:
     return None
 
 
+def resolve_image_digest(runtime: str, image: str) -> str:
+    """Resolve a local image tag to an immutable repository digest."""
+    if "@sha256:" in image:
+        digest = image.rsplit("@sha256:", 1)[1]
+        if len(digest) == 64 and all(char in "0123456789abcdefABCDEF" for char in digest):
+            return image
+        raise SandboxUnavailableError("Invalid sha256 image digest")
+    try:
+        result = subprocess.run(
+            [runtime, "image", "inspect", "--format", "{{index .RepoDigests 0}}", image],
+            capture_output=True,
+            text=True,
+            timeout=15,
+        )
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        raise SandboxUnavailableError(f"Could not inspect sandbox image: {exc}") from None
+    resolved = result.stdout.strip() if result.returncode == 0 else ""
+    if "@sha256:" not in resolved:
+        raise SandboxUnavailableError(
+            f"Sandbox image '{image}' is not available with a repository digest. "
+            f"Pull it explicitly with '{runtime} pull {image}', then retry."
+        )
+    return resolved
+
+
 def wrap_stdio_command(command: str, policy: ContainerPolicy | None = None) -> str:
     """Wrap a stdio launch command in a disposable container invocation.
 
@@ -123,7 +151,7 @@ def wrap_stdio_command(command: str, policy: ContainerPolicy | None = None) -> s
             "untrusted servers)."
         )
 
-    image = policy.image or pick_image(command)
+    image = resolve_image_digest(runtime, policy.image or pick_image(command))
 
     args: list[str] = [
         runtime,
@@ -131,6 +159,8 @@ def wrap_stdio_command(command: str, policy: ContainerPolicy | None = None) -> s
         "--rm",  # ephemeral: container and its filesystem vanish after the scan
         "-i",  # MCP stdio session flows through stdin/stdout
         "--init",
+        "--user",
+        policy.user,
         "--network",
         policy.network,
         "--cap-drop",
@@ -143,16 +173,31 @@ def wrap_stdio_command(command: str, policy: ContainerPolicy | None = None) -> s
         policy.memory,
         "--cpus",
         policy.cpus,
-        # Writable scratch space; HOME points here so npm/pip caches work.
         "--tmpfs",
-        "/tmp:rw,exec,size=256m",
+        "/tmp:rw,noexec,nosuid,nodev,size=256m",
+        "--tmpfs",
+        "/sandbox:rw,exec,nosuid,nodev,size=384m,uid=65532,gid=65532,mode=0700",
         "-e",
-        "HOME=/tmp",
+        "HOME=/sandbox",
+        "-e",
+        "XDG_CACHE_HOME=/sandbox/.cache",
+        "-e",
+        "NPM_CONFIG_CACHE=/sandbox/.npm",
+        "-e",
+        "UV_CACHE_DIR=/sandbox/.cache/uv",
     ]
 
-    if policy.mount_cwd:
-        cwd = Path.cwd().as_posix()
-        args += ["-v", f"{cwd}:/workspace:ro", "-w", "/workspace"]
+    if policy.read_only:
+        args.append("--read-only")
+
+    mount_path = policy.mount_path
+    if mount_path is None and policy.mount_cwd:
+        mount_path = Path.cwd()
+    if mount_path is not None:
+        resolved_mount = mount_path.resolve()
+        args += ["-v", f"{resolved_mount.as_posix()}:/workspace:ro", "-w", "/workspace"]
+    else:
+        args += ["-w", "/sandbox"]
 
     args.append(image)
     args += shlex.split(command)

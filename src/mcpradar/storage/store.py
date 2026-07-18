@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-import contextlib
 import json
 import sqlite3
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
@@ -102,6 +102,8 @@ CREATE INDEX IF NOT EXISTS idx_audit_type ON audit_log(event_type);
 CREATE INDEX IF NOT EXISTS idx_audit_target ON audit_log(target);
 """
 
+LATEST_SCHEMA_VERSION = 3
+
 
 class Store:
     def __init__(self, db_path: Path | str | None = None) -> None:
@@ -111,35 +113,97 @@ class Store:
         else:
             path = Path(db_path)
         self.db_path = path
+        existed = path.exists() and path.stat().st_size > 0
         self._conn = sqlite3.connect(str(path))
         self._conn.execute("PRAGMA journal_mode=WAL")
         self._conn.execute("PRAGMA foreign_keys=ON")
         self._conn.executescript(SCHEMA)
         self._conn.commit()
+        self._migrate(create_backup=existed)
 
-        # Migrations for v0.4.0
-        with contextlib.suppress(Exception):
-            self._conn.execute(
-                "ALTER TABLE scans ADD COLUMN server_version TEXT NOT NULL DEFAULT ''"
-            )
-        with contextlib.suppress(Exception):
-            self._conn.execute(
-                "ALTER TABLE scans ADD COLUMN protocol_version TEXT NOT NULL DEFAULT ''"
-            )
-        with contextlib.suppress(Exception):
-            self._conn.execute(
-                "ALTER TABLE scans ADD COLUMN capabilities TEXT NOT NULL DEFAULT '{}'"
-            )
+    def _migrate(self, *, create_backup: bool) -> None:
+        current = int(self._conn.execute("PRAGMA user_version").fetchone()[0])
+        if current >= LATEST_SCHEMA_VERSION:
+            return
+        if create_backup:
+            backup_path = self.db_path.with_suffix(f"{self.db_path.suffix}.bak-v{current}")
+            if not backup_path.exists():
+                backup = sqlite3.connect(str(backup_path))
+                try:
+                    self._conn.backup(backup)
+                finally:
+                    backup.close()
+
+        migrations = {
+            1: self._migration_1_identity,
+            2: self._migration_2_report_state,
+            3: self._migration_3_resource_templates,
+        }
+        for version in range(current + 1, LATEST_SCHEMA_VERSION + 1):
+            with self._conn:
+                migrations[version]()
+                self._conn.execute(
+                    "CREATE TABLE IF NOT EXISTS schema_migrations ("
+                    "version INTEGER PRIMARY KEY, applied_at TEXT NOT NULL)"
+                )
+                self._conn.execute(
+                    "INSERT OR REPLACE INTO schema_migrations(version, applied_at) VALUES (?, ?)",
+                    (version, datetime.now(UTC).isoformat()),
+                )
+                self._conn.execute(f"PRAGMA user_version = {version}")
+
+    def _add_column(self, table: str, name: str, declaration: str) -> None:
+        columns = {str(row[1]) for row in self._conn.execute(f"PRAGMA table_info({table})")}
+        if name not in columns:
+            self._conn.execute(f"ALTER TABLE {table} ADD COLUMN {name} {declaration}")
+
+    def _migration_1_identity(self) -> None:
+        self._add_column("scans", "server_version", "TEXT NOT NULL DEFAULT ''")
+        self._add_column("scans", "protocol_version", "TEXT NOT NULL DEFAULT ''")
+        self._add_column("scans", "capabilities", "TEXT NOT NULL DEFAULT '{}'")
+
+    def _migration_2_report_state(self) -> None:
+        self._add_column("scans", "report_schema_version", "TEXT NOT NULL DEFAULT '1.0'")
+        self._add_column("scans", "incomplete", "INTEGER NOT NULL DEFAULT 0")
+        self._add_column("scans", "incomplete_reason", "TEXT NOT NULL DEFAULT ''")
+        self._add_column("scans", "server_instructions", "TEXT NOT NULL DEFAULT ''")
+        self._add_column("scans", "surface_status", "TEXT NOT NULL DEFAULT '{}'")
+        self._add_column("scans", "migration_readiness", "TEXT NOT NULL DEFAULT '[]'")
+        self._add_column("scans", "report_json", "TEXT NOT NULL DEFAULT '{}'")
+
+    def _migration_3_resource_templates(self) -> None:
+        self._conn.execute(
+            "CREATE TABLE IF NOT EXISTS resource_templates ("
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+            "scan_id TEXT NOT NULL REFERENCES scans(id) ON DELETE CASCADE, "
+            "uri_template TEXT NOT NULL, name TEXT NOT NULL DEFAULT '', "
+            "description TEXT NOT NULL DEFAULT '', mime_type TEXT NOT NULL DEFAULT '')"
+        )
+        self._conn.execute(
+            "CREATE INDEX IF NOT EXISTS idx_resource_templates_scan ON resource_templates(scan_id)"
+        )
+
+    def __enter__(self) -> Store:
+        return self
+
+    def __exit__(self, exc_type: object, exc: object, traceback: object) -> None:
+        self.close()
 
     # ------------------------------------------------------------------
     # Save
     # ------------------------------------------------------------------
 
     def save(self, report: ScanReport) -> str:
+        with self._conn:
+            return self._save_report(report)
+
+    def _save_report(self, report: ScanReport) -> str:
         self._conn.execute(
             "INSERT OR REPLACE INTO scans(id, target, transport, scanned_at, summary, "
-            "server_version, protocol_version, capabilities) "
-            "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+            "server_version, protocol_version, capabilities, report_schema_version, "
+            "incomplete, incomplete_reason, server_instructions, surface_status, "
+            "migration_readiness, report_json) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
             (
                 report.id,
                 report.target,
@@ -149,6 +213,19 @@ class Store:
                 report.server_version,
                 report.protocol_version,
                 json.dumps(report.capabilities, default=str, ensure_ascii=False),
+                report.report_schema_version,
+                int(report.incomplete),
+                report.incomplete_reason,
+                report.server_instructions,
+                json.dumps(
+                    {name: status.to_dict() for name, status in report.surface_status.items()},
+                    ensure_ascii=False,
+                ),
+                json.dumps(
+                    [issue.to_dict() for issue in report.migration_readiness],
+                    ensure_ascii=False,
+                ),
+                json.dumps(report.to_dict(), default=str, ensure_ascii=False),
             ),
         )
 
@@ -156,6 +233,7 @@ class Store:
         self._conn.execute("DELETE FROM tools WHERE scan_id = ?", (report.id,))
         self._conn.execute("DELETE FROM prompts WHERE scan_id = ?", (report.id,))
         self._conn.execute("DELETE FROM resources WHERE scan_id = ?", (report.id,))
+        self._conn.execute("DELETE FROM resource_templates WHERE scan_id = ?", (report.id,))
         self._conn.execute("DELETE FROM findings WHERE scan_id = ?", (report.id,))
 
         for t in report.tools:
@@ -189,6 +267,19 @@ class Store:
                 (report.id, r.uri, r.name, r.description, r.mime_type),
             )
 
+        for template in report.resource_templates:
+            self._conn.execute(
+                "INSERT INTO resource_templates("
+                "scan_id, uri_template, name, description, mime_type) VALUES (?,?,?,?,?)",
+                (
+                    report.id,
+                    template.uri_template,
+                    template.name,
+                    template.description,
+                    template.mime_type,
+                ),
+            )
+
         for f in report.findings:
             self._conn.execute(
                 "INSERT INTO findings(scan_id, rule_id, title, description, "
@@ -207,7 +298,6 @@ class Store:
                 ),
             )
 
-        self._conn.commit()
         return report.id
 
     # ------------------------------------------------------------------
@@ -215,18 +305,24 @@ class Store:
     # ------------------------------------------------------------------
 
     def load(self, scan_id: str) -> ScanReport:
+        from mcpradar.scanner.protocol import ReadinessIssue
         from mcpradar.scanner.report import (
             Finding,
             PromptInfo,
             ResourceInfo,
+            ResourceTemplateInfo,
             ScanReport,
             Severity,
+            SurfaceState,
+            SurfaceStatus,
             ToolInfo,
         )
 
         row = self._conn.execute(
             "SELECT id, target, transport, scanned_at, summary, "
-            "server_version, protocol_version, capabilities FROM scans WHERE id = ?",
+            "server_version, protocol_version, capabilities, report_schema_version, "
+            "incomplete, incomplete_reason, server_instructions, surface_status, "
+            "migration_readiness FROM scans WHERE id = ?",
             (scan_id,),
         ).fetchone()
 
@@ -243,6 +339,43 @@ class Store:
         report.server_version = row[5] or ""
         report.protocol_version = row[6] or ""
         report.capabilities = json.loads(row[7]) if row[7] else {}
+        report.report_schema_version = row[8] or "1.0"
+        report.incomplete = bool(row[9])
+        report.incomplete_reason = row[10] or ""
+        report.server_instructions = row[11] or ""
+        surface_payload = json.loads(row[12]) if row[12] else {}
+        if isinstance(surface_payload, dict):
+            for name, value in surface_payload.items():
+                if not isinstance(value, dict):
+                    continue
+                try:
+                    state = SurfaceState(str(value.get("state", "unsupported")))
+                except ValueError:
+                    state = SurfaceState.UNSUPPORTED
+                report.surface_status[str(name)] = SurfaceStatus(
+                    state=state,
+                    count=int(value.get("count", 0)),
+                    pages=int(value.get("pages", 0)),
+                    error=str(value.get("error", "")),
+                    ttl_ms=value.get("ttl_ms") if isinstance(value.get("ttl_ms"), int) else None,
+                    cache_scope=str(value.get("cache_scope", "")),
+                )
+        readiness_payload = json.loads(row[13]) if row[13] else []
+        if isinstance(readiness_payload, list):
+            for value in readiness_payload:
+                if not isinstance(value, dict):
+                    continue
+                report.migration_readiness.append(
+                    ReadinessIssue(
+                        code=str(value.get("code", "")),
+                        title=str(value.get("title", "")),
+                        description=str(value.get("description", "")),
+                        target_profile=str(value.get("target_profile", "2026-07-28")),
+                        detail=value.get("detail", {})
+                        if isinstance(value.get("detail"), dict)
+                        else {},
+                    )
+                )
 
         for trow in self._conn.execute(
             "SELECT name, description, input_schema, output_schema "
@@ -280,6 +413,20 @@ class Store:
                     name=rrow[1],
                     description=rrow[2],
                     mime_type=rrow[3],
+                )
+            )
+
+        for template_row in self._conn.execute(
+            "SELECT uri_template, name, description, mime_type "
+            "FROM resource_templates WHERE scan_id = ? ORDER BY id",
+            (scan_id,),
+        ):
+            report.resource_templates.append(
+                ResourceTemplateInfo(
+                    uri_template=template_row[0],
+                    name=template_row[1],
+                    description=template_row[2],
+                    mime_type=template_row[3],
                 )
             )
 

@@ -61,7 +61,12 @@ class RegistryClient:
     # -- Public API -------------------------------------------------------
 
     def list_servers(
-        self, limit: int = 100, latest_only: bool = True, max_pages: int | None = None
+        self,
+        limit: int = 100,
+        latest_only: bool = True,
+        max_pages: int | None = None,
+        *,
+        force_refresh: bool = False,
     ) -> list[RegistryEntry]:
         """Fetch servers from the registry, walking pagination pages.
 
@@ -79,8 +84,14 @@ class RegistryClient:
             Parsed RegistryEntry objects. On network failure, falls back
             to cached data; returns an empty list if no cache is available.
         """
+        if not force_refresh and max_pages is None:
+            cached = self._load_cache()
+            if cached is not None:
+                return self._parse_servers(cached.get("servers", []), latest_only=latest_only)
+
         all_raw_servers: list[dict[str, Any]] = []
         cursor: str | None = None
+        seen_cursors: set[str] = set()
         pages = 0
 
         try:
@@ -92,8 +103,13 @@ class RegistryClient:
 
                 metadata = page.get("metadata", {})
                 cursor = metadata.get("nextCursor")
-                if cursor is None or (max_pages is not None and pages >= max_pages):
+                # The API may use either null or an empty string for the final
+                # page. An empty cursor restarts at page one if sent again.
+                if not cursor or (max_pages is not None and pages >= max_pages):
                     break
+                if cursor in seen_cursors:
+                    raise RuntimeError("Registry returned a repeated pagination cursor")
+                seen_cursors.add(cursor)
 
                 # Rate limiting: 1 request per second between pages
                 time.sleep(1)
@@ -106,10 +122,34 @@ class RegistryClient:
                 return []
 
         # Persist raw data so it is available on the next failure
-        with contextlib.suppress(Exception):
-            self._save_cache({"servers": all_raw_servers})
+        if max_pages is None:
+            with contextlib.suppress(Exception):
+                self._save_cache({"servers": all_raw_servers})
 
         return self._parse_servers(all_raw_servers, latest_only=latest_only)
+
+    def search_servers(
+        self,
+        query: str,
+        *,
+        limit: int = 100,
+        latest_only: bool = True,
+    ) -> list[RegistryEntry]:
+        """Search server names without walking the entire Registry.
+
+        The official API's search is a server-name substring match. Callers
+        that need to verify a package must still compare package identifiers
+        exactly in the returned metadata.
+        """
+        response = httpx.get(
+            self.BASE_URL,
+            params={"limit": str(limit), "search": query, "version": "latest"},
+            timeout=30.0,
+        )
+        response.raise_for_status()
+        payload = response.json()
+        servers = payload.get("servers", []) if isinstance(payload, dict) else []
+        return self._parse_servers(servers, latest_only=latest_only)
 
     def fetch_page(self, limit: int = 100, cursor: str | None = None) -> dict[str, Any]:
         """Fetch a single raw page from the registry API.

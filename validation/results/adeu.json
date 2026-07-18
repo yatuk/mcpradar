@@ -1,9 +1,170 @@
 {
-  "name": "adeu",
-  "command": "",
   "transport": "stdio",
-  "expected_rules": [],
-  "error": "list index out of range",
-  "tools_count": 0,
-  "findings": []
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "login_staging.py:78",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 78,
+        "sink": "urllib.request.urlopen"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-gud8xp8r\\adeu-1.23.0\\src\\adeu\\assets\\marked.min.js:15",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 15,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-gud8xp8r\\adeu-1.23.0\\src\\adeu\\assets\\marked.min.js:16",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 16,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-gud8xp8r\\adeu-1.23.0\\src\\adeu\\assets\\marked.min.js:17",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 17,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-gud8xp8r\\adeu-1.23.0\\src\\adeu\\assets\\marked.min.js:28",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 28,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-gud8xp8r\\adeu-1.23.0\\src\\adeu\\assets\\marked.min.js:35",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 35,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-gud8xp8r\\adeu-1.23.0\\src\\adeu\\assets\\marked.min.js:36",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 36,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-gud8xp8r\\adeu-1.23.0\\src\\adeu\\assets\\marked.min.js:37",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 37,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-gud8xp8r\\adeu-1.23.0\\src\\adeu\\assets\\marked.min.js:47",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 47,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S007",
+      "title": "Description-Code Inconsistency (read-only tool with side effects)",
+      "description": "Tool 'debug_xml_diff' presents as read-only but its handler writes to the filesystem",
+      "severity": "high",
+      "target": "document.py:861",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 861,
+        "tool": "debug_xml_diff",
+        "capabilities": [
+          "writes to the filesystem"
+        ]
+      },
+      "confidence": 0.5
+    }
+  ],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "adeu",
+  "target": "uvx adeu",
+  "version": "",
+  "scanned_at": "2026-07-18T20:12:55.468711+00:00",
+  "last_attempted_at": "2026-07-18T20:12:55.468711+00:00",
+  "trending": false,
+  "live_scan": {
+    "ok": false,
+    "error": "ONRPCError): │ │ │ │ │ │ > 306 │ │ │ │ raise McpError(response_or_error.error) │ │ │ │ │ │ 307 │ │ │ else: │ │ │ │ │ │ 308 │ │ │ │ return │ │ │ │ │ │ result_type.model_validate(response_or_error.result) │ │ │ │ │ │ 309 │ │ │ │ │ └─────────────────────────────────────────────────────────────────────┘ │ │ │ │ McpError: Connection closed │ │ │ └─────────────────────────────────────────────────────────────────────────┘ │ └─────────────────────────────────────────────────────────────────────────────┘"
+  },
+  "enriched": true,
+  "enriched_ref": "pip:adeu",
+  "package_scan": {
+    "ok": true,
+    "note": "+10 findings from pip:adeu"
+  },
+  "status": "scanned",
+  "scan_coverage": "package-only"
 }

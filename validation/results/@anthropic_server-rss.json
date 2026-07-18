@@ -1,9 +1,25 @@
 {
-  "name": "@anthropic/server-rss",
-  "command": "",
   "transport": "stdio",
-  "expected_rules": [],
-  "error": "list index out of range",
-  "tools_count": 0,
-  "findings": []
+  "tools": [],
+  "findings": [],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "@anthropic/server-rss",
+  "target": "npx -y @anthropic/server-rss",
+  "version": "",
+  "scanned_at": "2026-07-18T20:12:22.134155+00:00",
+  "last_attempted_at": "2026-07-18T20:12:22.134155+00:00",
+  "trending": false,
+  "live_scan": {
+    "ok": false,
+    "error": "ONRPCError): │ │ │ │ │ │ > 306 │ │ │ │ raise McpError(response_or_error.error) │ │ │ │ │ │ 307 │ │ │ else: │ │ │ │ │ │ 308 │ │ │ │ return │ │ │ │ │ │ result_type.model_validate(response_or_error.result) │ │ │ │ │ │ 309 │ │ │ │ │ └─────────────────────────────────────────────────────────────────────┘ │ │ │ │ McpError: Connection closed │ │ │ └─────────────────────────────────────────────────────────────────────────┘ │ └─────────────────────────────────────────────────────────────────────────────┘"
+  },
+  "package_scan": {
+    "ok": false,
+    "note": "fetch failed: npm metadata fetch failed for '@anthropic/server-rss': Client error '404 Not Found' for url 'https://regis"
+  },
+  "status": "incomplete",
+  "incomplete": true,
+  "incomplete_reason": "ONRPCError): │ │ │ │ │ │ > 306 │ │ │ │ raise McpError(response_or_error.error) │ │ │ │ │ │ 307 │ │ │ else: │ │ │ │ │ │ 308 │ │ │ │ return │ │ │ │ │ │ result_type.model_validate(response_or_error.result) │ │ │ │ │ │ 309 │ │ │ │ │ └─────────────────────────────────────────────────────────────────────┘ │ │ │ │ McpError: Connection closed │ │ │ └─────────────────────────────────────────────────────────────────────────┘ │ └─────────────────────────────────────────────────────────────────────────────┘"
 }

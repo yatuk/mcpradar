@@ -10,6 +10,7 @@ import string
 from collections.abc import Iterator
 from typing import Any
 
+from mcpradar.rules.catalog import descriptor_for
 from mcpradar.scanner.report import Finding, Severity, ToolInfo
 
 # ---------------------------------------------------------------------------
@@ -310,35 +311,12 @@ def _decompose_name(name: str) -> set[str]:
 def _walk_schema_props(
     schema: dict[str, Any], path: str = "", depth: int = 0
 ) -> Iterator[tuple[str, dict[str, Any]]]:
-    """Recursively walk JSON Schema properties.
+    """Compatibility wrapper around the bounded JSON Schema 2020-12 walker."""
+    from mcpradar.schema.walker import iter_schema_properties
 
-    Yields (path, prop_schema) for each property found.
-    Also recurses into nested properties, items.properties, and anyOf/oneOf arrays.
-    Max depth: 10.
-    """
-    if depth > 10 or not isinstance(schema, dict):
-        return
-    props = schema.get("properties")
-    if not isinstance(props, dict):
-        return
-    for prop_name, prop_schema in props.items():
-        if not isinstance(prop_schema, dict):
-            continue
-        full_path = f"{path}.{prop_name}" if path else prop_name
-        yield (full_path, prop_schema)
-        # Recurse into nested properties of this property
-        yield from _walk_schema_props(prop_schema, full_path, depth + 1)
-        # Handle items.properties for array-type properties
-        items = prop_schema.get("items")
-        if isinstance(items, dict):
-            yield from _walk_schema_props(items, f"{full_path}.items", depth + 1)
-        # Handle anyOf/oneOf sub-schemas
-        for key in ("anyOf", "oneOf"):
-            sub_schemas = prop_schema.get(key)
-            if isinstance(sub_schemas, list):
-                for idx, sub in enumerate(sub_schemas):
-                    if isinstance(sub, dict):
-                        yield from _walk_schema_props(sub, f"{full_path}[{idx}]", depth + 1)
+    prefix = path + "." if path else ""
+    for property_path, property_schema in iter_schema_properties(schema):
+        yield prefix + property_path, property_schema
 
 
 def _collect_all_texts(tool: ToolInfo) -> list[tuple[str, str]]:
@@ -903,6 +881,7 @@ def check_server_auth(
     has_app_type: bool | None = None,
     uses_session_id: bool = False,
     has_pkce_s256: bool | None = None,
+    protocol_version: str = "",
 ) -> list[Finding]:
     """Generate R112 findings from server authorization metadata.
 
@@ -916,10 +895,11 @@ def check_server_auth(
             None means not checked (e.g. server doesn't use OAuth).
         has_app_type: Whether Dynamic Client Registration declares
             ``application_type``. None means not checked.
-        uses_session_id: Whether the server still returns ``Mcp-Session-Id``
-            header (deprecated in 2026-07-28 spec).
+        uses_session_id: Whether the server returns ``Mcp-Session-Id``.
         has_pkce_s256: Whether the authorization server advertises the ``S256``
             PKCE code-challenge method. None means not checked.
+        protocol_version: Negotiated MCP profile. Session state is only a
+            compliance finding for the stateless 2026 profile.
     """
     findings: list[Finding] = []
 
@@ -982,22 +962,28 @@ def check_server_auth(
             )
         )
 
-    # R112-3: Session ID usage (deprecated protocol)
-    if uses_session_id:
+    # A session ID is valid in v1. It is only a finding if it contradicts a
+    # negotiated stateless v2 profile; v1 migration is reported separately.
+    from mcpradar.scanner.protocol import is_v2_profile
+
+    if uses_session_id and is_v2_profile(protocol_version):
         findings.append(
             Finding(
                 rule_id="R112",
-                title="Server uses deprecated Mcp-Session-Id header",
+                title="Mcp-Session-Id contradicts negotiated stateless profile",
                 description=(
-                    "The 2026-07-28 MCP spec removes the ``Mcp-Session-Id`` "
-                    "header and protocol-level sessions. This server still "
-                    "uses the deprecated session-based protocol. Sessions "
-                    "force sticky routing and prevent horizontal scaling."
+                    "The server negotiated the 2026-07-28 stateless MCP profile "
+                    "but still returned ``Mcp-Session-Id``. The response is not "
+                    "compliant with the negotiated protocol."
                 ),
                 severity=Severity.MEDIUM,
                 target=target,
                 location="transport",
-                detail={"deprecated": "Mcp-Session-Id", "spec": "2026-07-28"},
+                detail={
+                    "header": "Mcp-Session-Id",
+                    "negotiated_profile": protocol_version,
+                    "spec": "2026-07-28",
+                },
             )
         )
 
@@ -1404,33 +1390,13 @@ class DangerousNameDetection(Rule):
 # ---------------------------------------------------------------------------
 
 
-def _discover_plugins() -> list[Rule]:
-    """Discover community rules via entry_points(group='mcpradar.rules')."""
-    import logging
-
-    try:
-        from mcpradar._compat import get_entry_points
-    except ImportError:
+def _discover_plugins(allowlist: set[str] | None = None) -> list[Rule]:
+    """Load explicitly allowed plugins through isolated worker proxies."""
+    if not allowlist:
         return []
+    from mcpradar.plugin.manager import PluginManager
 
-    logger = logging.getLogger("mcpradar.plugins")
-    discovered: list[Rule] = []
-
-    eps = list(get_entry_points("mcpradar.rules"))
-
-    for ep in eps:
-        try:
-            rule_cls = ep.load()
-            instance = rule_cls()
-            if not isinstance(instance, Rule):
-                logger.warning("Plugin %s does not inherit from Rule, skipping", ep.name)
-                continue
-            discovered.append(instance)
-            logger.debug("Loaded plugin: %s → %s", ep.name, instance.rule_id)
-        except Exception as exc:
-            logger.warning("Failed to load plugin %s: %s", ep.name, exc)
-
-    return discovered
+    return list(PluginManager().load_rules(allowlist))
 
 
 class RuleEngine:
@@ -1438,6 +1404,7 @@ class RuleEngine:
         self,
         min_severity: Severity = Severity.MEDIUM,
         disabled_rules: list[str] | None = None,
+        enabled_plugins: list[str] | None = None,
     ) -> None:
         self.min_severity = min_severity
         self._disabled: set[str] = set(disabled_rules or [])
@@ -1463,7 +1430,7 @@ class RuleEngine:
         self._rules = [r for r in builtins if r.rule_id not in self._disabled]
 
         # Discover community plugins
-        for plugin in _discover_plugins():
+        for plugin in _discover_plugins(set(enabled_plugins or [])):
             if not isinstance(plugin, Rule):
                 continue
             if plugin.rule_id not in self._disabled:
@@ -1472,36 +1439,21 @@ class RuleEngine:
     @property
     def loaded_rules(self) -> list[dict[str, str]]:
         """Return metadata for all loaded rules."""
-        return [
-            {
-                "rule_id": r.rule_id,
-                "title": r.title,
-                "severity": r.severity.value,
-                "source": "built-in"
-                if isinstance(
-                    r,
-                    (
-                        DangerousNameDetection,
-                        ZeroWidthDetection,
-                        PromptInjectionDetection,
-                        EncodedBlobDetection,
-                        HiddenContentDetection,
-                        PermissionScopeMismatch,
-                        SecretExposureDetection,
-                        CommandInjectionDetection,
-                        SupplyChainRiskDetection,
-                        SchemaPoisoningDetection,
-                        VersionAnomalyDetection,
-                        InsecureTransportDetection,
-                        AuthorizationHardeningDetection,
-                        PathTraversalDetection,
-                        UnboundedInputDetection,
-                    ),
-                )
-                else "plugin",
-            }
-            for r in self._rules
-        ]
+        output: list[dict[str, str]] = []
+        for rule in self._rules:
+            descriptor = descriptor_for(rule.rule_id)
+            output.append(
+                {
+                    "rule_id": rule.rule_id,
+                    "title": descriptor.title if descriptor else rule.title,
+                    "severity": descriptor.severity if descriptor else rule.severity.value,
+                    "confidence": f"{descriptor.confidence:.1f}" if descriptor else "unknown",
+                    "status": descriptor.status if descriptor else "plugin",
+                    "surfaces": ", ".join(descriptor.surfaces) if descriptor else "plugin",
+                    "source": "built-in" if descriptor else "plugin",
+                }
+            )
+        return output
 
     def register(self, rule: Rule) -> None:
         self._rules.append(rule)

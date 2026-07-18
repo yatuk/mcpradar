@@ -19,6 +19,11 @@ app = typer.Typer(
     no_args_is_help=True,
 )
 
+policy_app = typer.Typer(help="Evaluate policy-as-code against scan reports", no_args_is_help=True)
+app.add_typer(policy_app, name="policy")
+snapshot_app = typer.Typer(help="Sign and verify scan snapshots", no_args_is_help=True)
+app.add_typer(snapshot_app, name="snapshot")
+
 
 def version_callback(value: bool) -> None:
     if value:
@@ -38,6 +43,120 @@ def main(
     ),
 ) -> None:
     pass
+
+
+@policy_app.command(name="check")
+def policy_check(
+    policy_path: Path = typer.Argument(help="YAML policy file"),  # noqa: B008
+    report_path: Path | None = typer.Option(  # noqa: B008
+        None, "--report", help="Exported JSON scan report"
+    ),
+    scan_id: str | None = typer.Option(  # noqa: B008
+        None, "--scan-id", help="Stored snapshot ID"
+    ),
+) -> None:
+    """Fail with exit code 1 when a report violates policy."""
+    from mcpradar.policy import PolicyError, evaluate_policy, load_policy, report_from_dict
+
+    if (report_path is None) == (scan_id is None):
+        raise typer.BadParameter("provide exactly one of --report or --scan-id")
+    try:
+        policy = load_policy(policy_path)
+        if report_path is not None:
+            raw = json.loads(report_path.read_text(encoding="utf-8"))
+            if not isinstance(raw, dict):
+                raise PolicyError("report root must be an object")
+            report = report_from_dict(raw)
+        else:
+            with Store() as store:
+                report = store.load(scan_id or "")
+        decision = evaluate_policy(report, policy)
+    except (OSError, json.JSONDecodeError, LookupError, PolicyError) as exc:
+        typer.echo(json.dumps({"passed": False, "error": str(exc)}, indent=2))
+        raise typer.Exit(code=2) from None
+    typer.echo(json.dumps(decision.to_dict(), indent=2, ensure_ascii=False))
+    if not decision.passed:
+        raise typer.Exit(code=1)
+
+
+@snapshot_app.command(name="keygen")
+def snapshot_keygen(
+    private_key: Path = typer.Option(  # noqa: B008
+        ..., "--private-key", help="New private PEM path"
+    ),
+    public_key: Path = typer.Option(  # noqa: B008
+        ..., "--public-key", help="New public PEM path"
+    ),
+) -> None:
+    """Generate an Ed25519 signing keypair."""
+    from mcpradar.snapshot import SnapshotSignatureError, generate_keypair
+
+    try:
+        generate_keypair(private_key, public_key)
+    except SnapshotSignatureError as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(code=2) from None
+    typer.echo(f"Private key: {private_key}\nPublic key: {public_key}")
+
+
+@snapshot_app.command(name="sign")
+def snapshot_sign(
+    private_key: Path = typer.Option(  # noqa: B008
+        ..., "--private-key", help="Ed25519 private PEM"
+    ),
+    output: Path = typer.Option(..., "--output", "-o", help="Signed envelope JSON"),  # noqa: B008
+    report_path: Path | None = typer.Option(  # noqa: B008
+        None, "--report", help="Exported JSON scan report"
+    ),
+    scan_id: str | None = typer.Option(  # noqa: B008
+        None, "--scan-id", help="Stored snapshot ID"
+    ),
+) -> None:
+    """Sign an exported or stored snapshot with Ed25519."""
+    from mcpradar.snapshot import SnapshotSignatureError, sign_snapshot
+
+    if (report_path is None) == (scan_id is None):
+        raise typer.BadParameter("provide exactly one of --report or --scan-id")
+    try:
+        if report_path is not None:
+            payload = json.loads(report_path.read_text(encoding="utf-8"))
+            if not isinstance(payload, dict):
+                raise SnapshotSignatureError("report root must be an object")
+        else:
+            with Store() as store:
+                payload = store.load(scan_id or "").to_dict()
+        envelope = sign_snapshot(payload, private_key)
+        output.write_text(json.dumps(envelope, indent=2, ensure_ascii=False), encoding="utf-8")
+    except (OSError, json.JSONDecodeError, LookupError, SnapshotSignatureError) as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(code=2) from None
+    typer.echo(f"Signed snapshot: {output}")
+
+
+@snapshot_app.command(name="verify")
+def snapshot_verify(
+    envelope_path: Path = typer.Argument(help="Signed snapshot envelope"),  # noqa: B008
+    public_key: Path | None = typer.Option(  # noqa: B008
+        None, "--public-key", help="Require this Ed25519 signer"
+    ),
+    extract: Path | None = typer.Option(  # noqa: B008
+        None, "--extract", help="Write verified payload JSON"
+    ),
+) -> None:
+    """Verify snapshot provenance, digest, signer identity, and signature."""
+    from mcpradar.snapshot import SnapshotSignatureError, verify_snapshot
+
+    try:
+        envelope = json.loads(envelope_path.read_text(encoding="utf-8"))
+        if not isinstance(envelope, dict):
+            raise SnapshotSignatureError("snapshot envelope root must be an object")
+        payload = verify_snapshot(envelope, public_key)
+        if extract is not None:
+            extract.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
+    except (OSError, json.JSONDecodeError, SnapshotSignatureError) as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(code=1) from None
+    typer.echo("Snapshot signature valid")
 
 
 # ---------------------------------------------------------------------------
@@ -100,6 +219,26 @@ def scan(
         help="Container network for --sandbox: 'none' (egress lock, default) "
         "or 'bridge' (needed for npx/uvx package download)",
     ),
+    allow_host_exec: bool = typer.Option(  # noqa: B008
+        False,
+        "--allow-host-exec",
+        help="Explicitly allow a stdio server command to execute on the host",
+    ),
+    allow_unrestricted_egress: bool = typer.Option(  # noqa: B008
+        False,
+        "--allow-unrestricted-egress",
+        help="Acknowledge that sandbox bridge networking has unrestricted egress",
+    ),
+    enable_plugin: list[str] | None = typer.Option(  # noqa: B008
+        None,
+        "--enable-plugin",
+        help="Explicitly enable an installed isolated plugin package (repeatable)",
+    ),
+    protocol_profile: str = typer.Option(  # noqa: B008
+        "auto",
+        "--protocol",
+        help="MCP protocol profile: auto, v1, or 2026-07-28",
+    ),
 ) -> None:
     """Scan an MCP server for security issues and save to SQLite."""
     import warnings
@@ -120,8 +259,21 @@ def scan(
     if transport not in valid_transports:
         console.print(f"[red]Invalid transport: {transport}. Valid: {valid_transports}[/]")
         raise typer.Exit(code=1)
+    if protocol_profile not in {"auto", "v1", "2026-07-28"}:
+        console.print("[red]Invalid --protocol. Valid: auto, v1, 2026-07-28[/]")
+        raise typer.Exit(code=1)
+    if protocol_profile == "2026-07-28" and transport != "http":
+        console.print("[red]MCP 2026-07-28 is currently available over HTTP only.[/]")
+        raise typer.Exit(code=1)
 
     sev = Severity.from_str(severity)
+
+    if transport == "stdio" and not sandbox and not allow_host_exec:
+        console.print(
+            "[red]Refusing to execute a stdio command on the host without explicit consent.[/]"
+        )
+        console.print("[dim]Use --sandbox, or pass --allow-host-exec for a trusted command.[/]")
+        raise typer.Exit(code=2)
 
     # When --sandbox is enabled, wire SandboxValidator into the prober
     prober = None
@@ -146,6 +298,12 @@ def scan(
                 f"[red]Invalid --sandbox-network: {sandbox_network}. Valid: none, bridge[/]"
             )
             raise typer.Exit(code=1)
+        if sandbox_network == "bridge" and not allow_unrestricted_egress:
+            console.print(
+                "[red]Bridge mode provides unrestricted egress. "
+                "Pass --allow-unrestricted-egress to acknowledge this risk.[/]"
+            )
+            raise typer.Exit(code=2)
         policy = ContainerPolicy(image=sandbox_image, network=sandbox_network)
         try:
             launch_command = wrap_stdio_command(target, policy)
@@ -164,6 +322,8 @@ def scan(
         prober=prober,
         probe_safe_only=True,
         launch_command=launch_command,
+        enabled_plugins=enable_plugin,
+        protocol_profile=protocol_profile,
     )
 
     with console.status(f"[bold blue]{target}[/] scanning..."):
@@ -833,16 +993,19 @@ def _parse_duration(s: str) -> str:
 
 @app.command()
 def sbom(
+    target: Path = typer.Argument(  # noqa: B008
+        Path("."), help="Source directory whose dependencies should be inventoried"
+    ),
     output_path: Path | None = typer.Option(  # noqa: B008
         None, "--output", "-o", help="Output file path (prints to stdout if omitted)"
     ),
 ) -> None:
-    """Generate CycloneDX 1.5 SBOM in JSON format."""
+    """Generate a target-specific CycloneDX 1.7 SBOM in JSON format."""
     from mcpradar.output.console import console
     from mcpradar.output.sbom import export_sbom
 
     path_str = str(output_path) if output_path else None
-    result = export_sbom(path_str)
+    result = export_sbom(target, path_str)
     if not output_path:
         console.print(result)
     else:
@@ -1300,6 +1463,8 @@ def rules_list() -> None:
     table.add_column("Rule ID", width=8)
     table.add_column("Title", width=36)
     table.add_column("Severity", width=10)
+    table.add_column("Confidence", width=10)
+    table.add_column("Status", width=10)
     table.add_column("Source", width=12)
 
     for r in engine.loaded_rules:
@@ -1314,6 +1479,8 @@ def rules_list() -> None:
             f"[{color}]{r['rule_id']}[/]",
             r["title"],
             sev.upper(),
+            r["confidence"],
+            r["status"],
             r["source"],
         )
 
@@ -1326,16 +1493,19 @@ def rules_info(
 ) -> None:
     """Show detailed info for a specific rule."""
     from mcpradar.output.console import console
-    from mcpradar.scanner.report import Severity
-    from mcpradar.scanner.rules import RuleEngine
+    from mcpradar.rules.catalog import descriptor_for
 
-    engine = RuleEngine(min_severity=Severity("low"))
-    for r in engine._rules:
-        if r.rule_id == rule_id.upper():
-            console.print(f"[bold]{r.rule_id}[/] - {r.title}")
-            console.print(f"  Severity: {r.severity.value}")
-            console.print(f"  Class: {type(r).__module__}.{type(r).__name__}")
-            return
+    descriptor = descriptor_for(rule_id.upper())
+    if descriptor:
+        console.print(f"[bold]{descriptor.id}[/] - {descriptor.title}")
+        console.print(f"  Severity: {descriptor.severity}")
+        console.print(f"  Confidence: {descriptor.confidence:.1f}")
+        console.print(f"  Status: {descriptor.status}")
+        console.print(f"  Surfaces: {', '.join(descriptor.surfaces)}")
+        console.print(f"  CWE: {', '.join(descriptor.cwe) or '-'}")
+        console.print(f"  OWASP MCP: {', '.join(descriptor.owasp) or '-'}")
+        console.print(f"  Help: {descriptor.help}")
+        return
     console.print(f"[red]Rule '{rule_id}' not found.[/]")
 
 
@@ -1484,14 +1654,19 @@ def plugin_list() -> None:
 @plugin_app.command(name="install")
 def plugin_install(
     package: str = typer.Argument(help="Package name (example: mcpradar-rule-sqli)"),
+    sha256: str = typer.Option(  # noqa: B008
+        ...,
+        "--sha256",
+        help="Expected SHA-256 digest of the plugin wheel",
+    ),
 ) -> None:
-    """Install and validate a community plugin via pip."""
+    """Install a pinned, hash-verified plugin into an isolated directory."""
     from mcpradar.output.console import console
     from mcpradar.plugin.manager import PluginManager
 
     manager = PluginManager()
     console.print(f"[dim]Installing {package}...[/]")
-    success, message = manager.install(package)
+    success, message = manager.install(package, sha256=sha256)
 
     if success:
         console.print(f"[green]OK[/] {message}")
@@ -2126,7 +2301,11 @@ def registry_fetch(
 
     console.print("[bold]Fetching MCP Registry...[/]")
     client = RegistryClient()
-    entries = client.list_servers(limit=limit, latest_only=not all_versions)
+    entries = client.list_servers(
+        limit=limit,
+        latest_only=not all_versions,
+        force_refresh=True,
+    )
 
     scannable = sum(1 for e in entries if e.packages)
     remote_only = len(entries) - scannable
@@ -2264,7 +2443,7 @@ def _scan_command_for(registry_type: str, identifier: str) -> str | None:
 def registry_rank(
     top: int = typer.Option(10, "--top", "-n", help="How many top servers to return"),  # noqa: B008
     search_size: int = typer.Option(  # noqa: B008
-        80, "--search-size", help="npm search candidates to score"
+        250, "--search-size", help="npm candidates to intersect with the official Registry"
     ),
     emit_targets: Path | None = typer.Option(  # noqa: B008
         None, "--emit-targets", help="Write a targets.yaml the validation runner can scan"
@@ -2273,18 +2452,18 @@ def registry_rank(
 ) -> None:
     """Rank the most popular MCP servers by combined popularity (npm + PyPI + GitHub).
 
-    Popularity is not in the MCP registry (and it is far too large to score
-    daily), so candidates are discovered via npm's popularity-aware search and
-    then scored on real usage signals combined on a log scale
-    (see mcpradar.registry.popularity).
+    The Registry intentionally has no popularity order, so candidates are
+    discovered via npm's popularity-aware search, restricted to packages that
+    are present in the official MCP Registry, and scored on usage signals
+    combined on a log scale (see mcpradar.registry.popularity).
     """
     import yaml
 
     from mcpradar.output.console import console
-    from mcpradar.registry.popularity import discover_popular_servers
+    from mcpradar.registry.popularity import discover_popular_registry_servers
 
     console.print("[dim]Discovering the most popular MCP servers…[/]")
-    ranked = discover_popular_servers(top_n=top, search_size=search_size)
+    ranked = discover_popular_registry_servers(top_n=top, search_size=search_size)
 
     if emit_targets is not None:
         servers: list[dict[str, Any]] = []
@@ -2419,388 +2598,35 @@ def leaderboard_generate(
         None, "--results-dir", help="Validation results directory (default: validation/results)"
     ),
 ) -> None:
-    """Generate leaderboard data.json with AIVSS scores from scan results."""
-    import hashlib
-    import json
-
-    from mcpradar import __version__
+    """Generate leaderboard data.json with versioned MCPRadar Risk Scores."""
+    from mcpradar.leaderboard import generate_leaderboard
     from mcpradar.output.console import console
 
-    results = results_dir or Path("validation/results")
     output = output_path or Path("docs/leaderboard/data.json")
-
-    rows: list[dict[str, Any]] = []
-
-    if results.exists():
-        for fpath in sorted(results.glob("*.json")):
-            try:
-                data = json.loads(fpath.read_text(encoding="utf-8"))
-            except (json.JSONDecodeError, OSError):
-                continue
-
-            name = data.get("name") or ""
-            if not name:
-                target = data.get("target", "")
-                for token in target.split():
-                    if token.startswith("@"):
-                        name = token
-                        break
-                if not name:
-                    name = fpath.stem
-
-            # Handle both raw to_dict() format and processed validation format
-            summary = data.get("summary", {})
-            tools = summary.get("total_tools", len(data.get("tools", [])))
-            findings_list = data.get("findings", [])
-            scan_id = data.get("scan_id", "") or data.get("id", "")
-
-            # A result file only counts as a real scan if it carries scan
-            # evidence: enumerated tools, a scan id, or a scan timestamp.
-            # Stub entries (registry placeholders with none of these) must NOT
-            # be presented as a clean grade-A pass — they are simply pending.
-            was_scanned = bool(tools or scan_id or data.get("scanned_at"))
-            # A never-scanned stub is pending; a scan that failed to enumerate
-            # is 'incomplete' — neither may be scored as a clean grade A.
-            if not was_scanned or data.get("incomplete"):
-                rows.append(
-                    {
-                        "server": name,
-                        "display_name": name.replace("@", "").replace("/", " / "),
-                        "version": data.get("version", ""),
-                        "aivss_score": None,
-                        "grade": "-",
-                        "confidence": None,
-                        "tools": tools,
-                        "findings": 0,
-                        "by_severity": {"critical": 0, "high": 0, "medium": 0, "low": 0},
-                        "findings_detail": [],
-                        "tool_hash": "",
-                        "last_scanned": "-",
-                        "scanner_version": __version__,
-                        "status": "incomplete" if data.get("incomplete") else "pending",
-                        "trending": bool(data.get("trending")),
-                        "popularity": data.get("popularity"),
-                    }
-                )
-                continue
-
-            # Severity counts. Dependency-CVE findings (D001) are counted
-            # separately: a transitive dependency with a known CVE is a real but
-            # weaker, reachability-unknown signal, so it must not be weighted like
-            # the server's own code/schema issues (otherwise every server with a
-            # couple of vulnerable transitive deps — even a calculator — grades F).
-            sev: dict[str, int] = {"critical": 0, "high": 0, "medium": 0, "low": 0}
-            dep_sev: dict[str, int] = {"critical": 0, "high": 0, "medium": 0, "low": 0}
-            for f in findings_list:
-                s = f.get("severity", "")
-                bucket = dep_sev if f.get("rule_id") == "D001" else sev
-                if s in bucket:
-                    bucket[s] += 1
-
-            # The grade reflects MEDIUM+ findings only. LOW findings are
-            # informational lint (e.g. R114 "string has no length constraint")
-            # that fire on almost every server; counting them would push clean
-            # reference servers to a failing grade — the same MEDIUM+ scope the
-            # accuracy benchmark uses. The LOW count is still surfaced
-            # separately for transparency.
-            meaningful = sev["critical"] + sev["high"] + sev["medium"]
-            low_findings = sev["low"]
-
-            # AIVSS = ((base + AARS) / 2) × ThM, floored by the finding base so
-            # capability can only *raise* risk, never discount a real finding
-            # (OWASP AIVSS; see docs/scoring-model.md).
-            #
-            # base — CVSS-like, severity-weighted MEDIUM+ findings over the tool
-            #   surface (floored at 3 tools). Critical/high get a grade floor.
-            # AARS — the agentic capability blast radius (code exec, fs write,
-            #   browser control, …) so a powerful server is non-A even clean.
-            # ThM — environmental threat multiplier (insecure transport).
-            from mcpradar.scoring.capability import (
-                compute_aars,
-                dominant_capability,
-                tag_tool,
-            )
-
-            weighted = sev["critical"] * 10 + sev["high"] * 7 + sev["medium"] * 4
-            base = weighted / max(tools, 3)
-            if sev["critical"]:
-                base = max(base, 5.0)
-            elif sev["high"]:
-                base = max(base, 3.0)
-
-            aars = compute_aars(data.get("tools", []))
-            thm = 1.15 if any(f.get("rule_id") == "R111" for f in findings_list) else 1.0
-
-            # Supply-chain term from vulnerable dependencies (D001). Weighted
-            # gently and capped at 4.9 (grade C): almost every Python MCP server
-            # bundles the same vulnerable transitive deps (the mcp SDK CVE, h11,
-            # click …), so this is a shared, reachability-unknown signal — it
-            # should nudge, not dominate. A worse-than-C grade must come from the
-            # server's *own* code/schema, never from transitive deps alone.
-            dep_weighted = (
-                dep_sev["critical"] * 1.0 + dep_sev["high"] * 0.4 + dep_sev["medium"] * 0.15
-            )
-            dep_risk = min(4.9, dep_weighted)
-
-            capability_term = round((base + aars) / 2 * thm, 2)
-            score = min(10.0, round(max(base, capability_term, dep_risk), 1))
-            if score <= 0.9:
-                grade = "A"
-            elif score <= 2.9:
-                grade = "B"
-            elif score <= 4.9:
-                grade = "C"
-            elif score <= 6.9:
-                grade = "D"
-            else:
-                grade = "F"
-
-            # Score decomposition so the detail page can show *why* a server got
-            # its grade, not just the number. The final score is the max of three
-            # terms; `driver` names which one set it.
-            _terms = {
-                "findings": round(base, 2),
-                "capability": capability_term,
-                "dependencies": round(dep_risk, 2),
-            }
-            breakdown = {
-                "base": round(base, 2),
-                "aars": round(aars, 2),
-                "capability_term": capability_term,
-                "thm": thm,
-                "dep_risk": round(dep_risk, 2),
-                "weighted_findings": weighted,
-                "driver": max(_terms, key=lambda k: _terms[k]),
-            }
-
-            # Detail lists the MEDIUM+ findings that drive the grade, each with
-            # its detection confidence (how likely a true positive — separate
-            # from severity; see mcpradar.scoring.confidence).
-            from mcpradar.scoring.confidence import confidence_for
-
-            findings_detail = [
-                {
-                    "rule_id": f.get("rule_id", "?"),
-                    "severity": f.get("severity", "?"),
-                    "title": f.get("title", "")[:80],
-                    "description": f.get("description", "")[:120],
-                    "confidence": f.get("confidence", confidence_for(f.get("rule_id", ""))),
-                }
-                for f in findings_list
-                if f.get("severity", "") in ("critical", "high", "medium")
-            ]
-
-            # Row confidence = mean detection confidence across the MEDIUM+
-            # findings that drive the grade (1.0 when there is nothing to doubt).
-            row_confidence = (
-                round(sum(d["confidence"] for d in findings_detail) / len(findings_detail), 2)
-                if findings_detail
-                else 1.0
-            )
-
-            # Tool hash: SHA-256 of the sorted tool names. Prefer computing it
-            # directly from the result file's tools; fall back to the store.
-            tool_hash = ""
-            tool_objs = data.get("tools", [])
-            if tool_objs:
-                names = sorted(t.get("name", "") for t in tool_objs if isinstance(t, dict))
-                tool_hash = hashlib.sha256(",".join(names).encode()).hexdigest()[:16]
-            elif scan_id:
-                try:
-                    from mcpradar.storage.store import Store
-
-                    store = Store()
-                    report = store.load(scan_id)
-                    store.close()
-                    if report.tools:
-                        names = sorted(t.name for t in report.tools)
-                        tool_hash = hashlib.sha256(",".join(names).encode()).hexdigest()[:16]
-                except Exception as exc:
-                    import logging
-
-                    logging.getLogger("mcpradar").warning(
-                        "Failed to compute tool hash for %s: %s", scan_id, exc
-                    )
-
-            rows.append(
-                {
-                    "server": name,
-                    "display_name": name.replace("@", "").replace("/", " / "),
-                    "version": data.get("version", ""),
-                    "aivss_score": score,
-                    "grade": grade,
-                    "aars": round(aars, 1),
-                    "capability": dominant_capability(data.get("tools", [])),
-                    "confidence": row_confidence,
-                    "tools": tools,
-                    "vulnerable_deps": dep_sev["critical"]
-                    + dep_sev["high"]
-                    + dep_sev["medium"]
-                    + dep_sev["low"],
-                    "tools_detail": [
-                        {
-                            "name": t.get("name", ""),
-                            "description": (t.get("description", "") or "")[:400],
-                            "input_schema": t.get("input_schema", {}),
-                            "output_schema": t.get("output_schema", {}),
-                            "capabilities": sorted(tag_tool(t)),
-                        }
-                        for t in tool_objs
-                        if isinstance(t, dict)
-                    ],
-                    "findings": meaningful,
-                    "low_findings": low_findings,
-                    "by_severity": {
-                        "critical": sev["critical"],
-                        "high": sev["high"],
-                        "medium": sev["medium"],
-                        "low": sev["low"],
-                    },
-                    "findings_detail": findings_detail,
-                    "tool_hash": tool_hash,
-                    "last_scanned": data.get("scanned_at", "")[:10]
-                    if data.get("scanned_at")
-                    else "-",
-                    "scanner_version": __version__,
-                    "status": "scanned",
-                    "trending": bool(data.get("trending")),
-                    "popularity": data.get("popularity"),
-                    "breakdown": breakdown,
-                }
-            )
-
-    # Deduplicate by server name. The catalog carries the same server under two
-    # filename conventions (e.g. "@anthropic_server-time.json" and
-    # "anthropic-server-time.json"), which otherwise renders as duplicate rows.
-    # Keep the most-informative copy: scanned over pending, then more tools.
-    by_name: dict[str, dict[str, Any]] = {}
-    for r in rows:
-        key = r["server"]
-        existing = by_name.get(key)
-        if existing is None:
-            by_name[key] = r
-            continue
-        # The 🔥 trending signal must survive dedup even when the curated
-        # (better-scanned) copy wins — OR it onto whichever row we keep.
-        trending = bool(existing.get("trending") or r.get("trending"))
-        popularity = existing.get("popularity") or r.get("popularity")
-        cur_rank = (existing["status"] != "pending", existing["tools"])
-        new_rank = (r["status"] != "pending", r["tools"])
-        winner = r if new_rank > cur_rank else existing
-        winner["trending"] = trending
-        winner["popularity"] = popularity
-        by_name[key] = winner
-    rows = list(by_name.values())
-
-    # Deduplicate scanned servers by tool fingerprint: the same real server can
-    # be reached under several package aliases (e.g. "context7" and
-    # "@upstash/context7-mcp"), which produce identical tool sets. Collapse them
-    # to one row, preferring a canonical name (not an "@anthropic/*" catalog
-    # guess, then shorter). Pending stubs have no tools, so they are never
-    # collapsed here.
-    def _canonical_rank(r: dict[str, Any]) -> tuple[bool, int]:
-        name = r["server"]
-        return (name.startswith("@anthropic/"), len(name))
-
-    by_hash: dict[str, dict[str, Any]] = {}
-    passthrough: list[dict[str, Any]] = []
-    for r in rows:
-        h = r.get("tool_hash") or ""
-        if r["status"] == "pending" or not h:
-            passthrough.append(r)
-            continue
-        existing = by_hash.get(h)
-        trending = bool(r.get("trending") or (existing and existing.get("trending")))
-        popularity = r.get("popularity") or (existing.get("popularity") if existing else None)
-        if existing is None or _canonical_rank(r) < _canonical_rank(existing):
-            by_hash[h] = r
-        by_hash[h]["trending"] = trending
-        by_hash[h]["popularity"] = popularity
-    rows = list(by_hash.values()) + passthrough
-
-    # Scanned servers first (by ascending risk), pending servers last.
-    rows.sort(key=lambda r: (r["status"] == "pending", r["aivss_score"] or 0.0, -r["tools"]))
-
-    output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(json.dumps(rows, indent=2, ensure_ascii=False), encoding="utf-8")
-
-    # Regenerate the README badges from the current data so an embedded badge
-    # always reflects the server's real grade (they used to be static files
-    # that drifted out of sync). Filename matches the detail page's derivation:
-    # strip "@", turn "/" into "-".
-    _grade_color = {
-        "A": "#3fb950",
-        "B": "#56d364",
-        "C": "#d29922",
-        "D": "#db6d28",
-        "F": "#f85149",
-    }
-    badges_dir = output.parent / "badges"
-    badges_dir.mkdir(parents=True, exist_ok=True)
-    # Clear stale badges (dropped aliases, renamed servers) — they are fully
-    # derived from the current data, so a clean rebuild keeps them in sync.
-    for old in badges_dir.glob("*.svg"):
-        old.unlink()
-    badge_count = 0
-    for r in rows:
-        slug = r["server"].replace("@", "").replace("/", "-")
-        if not slug:
-            continue
-        # Pending stubs and incomplete scans have no score to show.
-        unscored = r["status"] != "scanned" or r.get("aivss_score") is None
-        if unscored:
-            label = "incomplete" if r["status"] == "incomplete" else "not scanned"
-            color, right, aria = "#8b949e", label, label
-        else:
-            g = r["grade"]
-            color = _grade_color.get(g, "#8b949e")
-            right = f"{g} · {r['aivss_score']:.1f}"
-            aria = f"{g} - {r['aivss_score']:.1f}/10"
-        # Right panel widens for the longer text label.
-        right_w = 96 if unscored else 72
-        total_w = 68 + right_w
-        svg = (
-            f'<svg xmlns="http://www.w3.org/2000/svg" width="{total_w}" height="20" '
-            f'role="img" aria-label="MCPRadar Security: {aria}">\n'
-            f"  <title>MCPRadar Security Score: {aria}</title>\n"
-            '  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="0">\n'
-            '    <stop offset="0%" stop-color="#444"/>\n'
-            '    <stop offset="100%" stop-color="#333"/>\n'
-            "  </linearGradient>\n"
-            f'  <rect width="{total_w}" height="20" rx="3" fill="url(#bg)"/>\n'
-            f'  <rect x="68" width="{right_w}" height="20" fill="{color}" fill-opacity="0.15"/>\n'
-            '  <text x="34" y="14" fill="#c9d1d9" font-size="10" font-family="sans-serif" '
-            'text-anchor="middle" font-weight="600">MCPRadar</text>\n'
-            f'  <text x="{68 + right_w // 2}" y="14" fill="{color}" font-size="10" '
-            f'font-family="sans-serif" text-anchor="middle" font-weight="600">{right}</text>\n'
-            "</svg>\n"
-        )
-        (badges_dir / f"{slug}.svg").write_text(svg, encoding="utf-8")
-        badge_count += 1
-
-    scanned_rows = [
-        r for r in rows if r["status"] == "scanned" and r.get("aivss_score") is not None
-    ]
-    pending_rows = [r for r in rows if r["status"] != "scanned" or r.get("aivss_score") is None]
+    summary = generate_leaderboard(
+        results_dir or Path("validation/results"),
+        output,
+        scanner_version=__version__,
+    )
     console.print(
         f"[green]Generated {output}[/] — "
-        f"{len(scanned_rows)} scanned, {len(pending_rows)} pending, {len(rows)} total; "
-        f"{badge_count} badges"
+        f"{len(summary.scanned)} scanned, {len(summary.pending)} pending, "
+        f"{len(summary.rows)} total; {summary.badge_count} badges"
     )
-    for r in scanned_rows:
-        grade_color = {
-            "A": "green",
-            "B": "bright_green",
-            "C": "yellow",
-            "D": "orange1",
-            "F": "bold red",
-        }.get(r["grade"], "")
-        console.print(f"  [{grade_color}]{r['grade']}[/] | {r['aivss_score']:4.1f} | {r['server']}")
-    if pending_rows:
-        console.print(f"  [dim]+ {len(pending_rows)} pending (not yet scanned)[/]")
+    grade_colors = {
+        "A": "green",
+        "B": "bright_green",
+        "C": "yellow",
+        "D": "orange1",
+        "F": "bold red",
+    }
+    for row in summary.scanned:
+        color = grade_colors.get(row["grade"], "")
+        console.print(f"  [{color}]{row['grade']}[/] | {row['risk_score']:4.1f} | {row['server']}")
+    if summary.pending:
+        console.print(f"  [dim]+ {len(summary.pending)} pending (not yet scanned)[/]")
 
 
-# ---------------------------------------------------------------------------
 # feed
 # ---------------------------------------------------------------------------
 

@@ -1,6 +1,6 @@
 """Scoring calibration gate — positive, negative, and intermediate controls.
 
-Runs the real leaderboard scoring pipeline (capability-aware AIVSS) on crafted
+Runs the real leaderboard scoring pipeline (MRS-v1) on crafted
 result files and on the committed fixtures, asserting the scale is anchored:
 malicious → F, benign → A, and a powerful-but-clean server is never A. This gate
 must stay green before the leaderboard is published. Offline — no server launch,
@@ -95,7 +95,7 @@ class TestCalibrationGate:
             "shelly",
         )
         assert row["grade"] != "A"
-        assert row["aivss_score"] > 0.9
+        assert row["risk_score"] > 0.9
 
     def test_capability_cannot_lower_a_real_finding(self, tmp_path: Path) -> None:
         """A critical on a pure-compute server keeps its base floor (not halved)."""
@@ -110,7 +110,7 @@ class TestCalibrationGate:
             },
             "calc",
         )
-        assert row["aivss_score"] >= 5.0  # critical floor survives
+        assert row["risk_score"] >= 5.0  # critical floor survives
 
 
 class TestBenignFixture:

@@ -94,6 +94,26 @@ class TestRadarConsole:
         output = buf.getvalue()
         assert "No changes" in output or "no change" in output.lower()
 
+    def test_print_diff_includes_surface_and_fingerprint_changes(self) -> None:
+        from mcpradar.diff.differ import Differ
+        from mcpradar.scanner.report import SurfaceState, SurfaceStatus
+
+        buf = StringIO()
+        rc = RadarConsole()
+        rc._console = Console(file=buf, force_terminal=True, legacy_windows=False)
+        a = ScanReport(id="a", target="srv", server_instructions="normal")
+        b = ScanReport(id="b", target="srv", server_instructions="changed")
+        a.surface_status["tools"] = SurfaceStatus(state=SurfaceState.COMPLETE)
+        b.surface_status["tools"] = SurfaceStatus(state=SurfaceState.FAILED)
+        a.protocol_version = "old"
+        b.protocol_version = "new"
+
+        rc.print_diff(Differ().compare(a, b))
+        output = buf.getvalue()
+        assert "server_instructions" in output
+        assert "surface_status.tools" in output
+        assert "protocol_version" in output
+
     def test_print_method(self) -> None:
         rc = RadarConsole()
         # print method should not raise

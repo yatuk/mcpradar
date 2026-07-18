@@ -67,6 +67,8 @@ def scan_server(target: dict[str, Any], timeout: int = 60) -> dict[str, Any]:
                 "--json",
                 "-s",
                 "low",
+                "--no-save",
+                "--allow-host-exec",
             ],
             capture_output=True,
             text=True,
@@ -327,71 +329,26 @@ class ValidationRunner:
                 self.results.append(json.load(f))
 
     def compute_metrics(self) -> dict:
-        """Compute precision and recall metrics per rule.
+        """Compute instance-level metrics with the shared benchmark engine."""
+        from mcpradar.validation.metrics import compute_benchmark_metrics
 
-        Precision = TP / (TP + FP)
-        Recall = TP / (TP + FN)
-        """
-        rule_stats: dict[str, dict] = {}
-
-        for result in self.results:
-            expected = set(result.get("expected_rules", []))
-            detected = {f["rule_id"] for f in result.get("findings", [])}
-
-            for rule_id in expected | detected:
-                if rule_id not in rule_stats:
-                    rule_stats[rule_id] = {"tp": 0, "fp": 0, "fn": 0}
-
-            # True positives: detected AND expected
-            for rule_id in expected & detected:
-                rule_stats[rule_id]["tp"] += 1
-
-            # False positives: detected but NOT expected
-            for rule_id in detected - expected:
-                rule_stats[rule_id]["fp"] += 1
-
-            # False negatives: expected but NOT detected
-            for rule_id in expected - detected:
-                rule_stats[rule_id]["fn"] += 1
-
-        # Compute per-rule and overall metrics
-        total_tp = total_fp = total_fn = 0
-        rule_metrics = {}
-        for rule_id, stats in sorted(rule_stats.items()):
-            tp, fp, fn = stats["tp"], stats["fp"], stats["fn"]
-            precision = tp / (tp + fp) if (tp + fp) > 0 else 0.0
-            recall = tp / (tp + fn) if (tp + fn) > 0 else 0.0
-            f1 = 2 * precision * recall / (precision + recall) if (precision + recall) > 0 else 0.0
-            rule_metrics[rule_id] = {
-                "tp": tp,
-                "fp": fp,
-                "fn": fn,
-                "precision": round(precision, 3),
-                "recall": round(recall, 3),
-                "f1": round(f1, 3),
+        targets = {
+            server.get("name", f"server-{index}"): {
+                "expected_rules": server.get("expected_rules", []),
+                "hard_negative_rules": server.get("hard_negative_rules", []),
+                "negative_control": server.get("negative_control", False),
+                "surfaces": server.get("surfaces", []),
             }
-            total_tp += tp
-            total_fp += fp
-            total_fn += fn
-
-        overall_precision = total_tp / (total_tp + total_fp) if (total_tp + total_fp) > 0 else 0.0
-        overall_recall = total_tp / (total_tp + total_fn) if (total_tp + total_fn) > 0 else 0.0
-        overall_f1 = (
-            2 * overall_precision * overall_recall / (overall_precision + overall_recall)
-            if (overall_precision + overall_recall) > 0
-            else 0.0
-        )
-
-        return {
-            "per_rule": rule_metrics,
-            "overall": {
-                "precision": round(overall_precision, 3),
-                "recall": round(overall_recall, 3),
-                "f1": round(overall_f1, 3),
-                "total_findings": total_tp + total_fp,
-                "total_expected": total_tp + total_fn,
-            },
+            for index, server in enumerate(self.servers)
         }
+        results = {
+            result.get("name", f"result-{index}"): {
+                **result,
+                "status": "error" if result.get("error") else "success",
+            }
+            for index, result in enumerate(self.results)
+        }
+        return compute_benchmark_metrics(targets, results)
 
     def generate_report(self) -> str:
         """Generate a Markdown validation report."""
@@ -407,9 +364,9 @@ class ValidationRunner:
             "",
             "| Metric | Value |",
             "|---|---|",
-            f"| Precision | {metrics['overall']['precision']:.1%} |",
-            f"| Recall | {metrics['overall']['recall']:.1%} |",
-            f"| F1 Score | {metrics['overall']['f1']:.1%} |",
+            f"| Precision | {_format_metric(metrics['overall']['precision'])} |",
+            f"| Recall | {_format_metric(metrics['overall']['recall'])} |",
+            f"| F1 Score | {_format_metric(metrics['overall']['f1'])} |",
             "",
             "## Per-Rule Metrics",
             "",
@@ -420,7 +377,8 @@ class ValidationRunner:
         for rule_id, m in metrics["per_rule"].items():
             lines.append(
                 f"| {rule_id} | {m['tp']} | {m['fp']} | {m['fn']} | "
-                f"{m['precision']:.1%} | {m['recall']:.1%} | {m['f1']:.1%} |"
+                f"{_format_metric(m['precision'])} | {_format_metric(m['recall'])} | "
+                f"{_format_metric(m['f1'])} |"
             )
 
         lines.extend(
@@ -485,9 +443,13 @@ def main() -> None:
 
     # Print summary
     metrics = runner.compute_metrics()
-    print(f"\nPrecision: {metrics['overall']['precision']:.1%}")
-    print(f"Recall: {metrics['overall']['recall']:.1%}")
-    print(f"F1: {metrics['overall']['f1']:.1%}")
+    print(f"\nPrecision: {_format_metric(metrics['overall']['precision'])}")
+    print(f"Recall: {_format_metric(metrics['overall']['recall'])}")
+    print(f"F1: {_format_metric(metrics['overall']['f1'])}")
+
+
+def _format_metric(value: float | None) -> str:
+    return "n/a" if value is None else f"{value:.1%}"
 
 
 if __name__ == "__main__":

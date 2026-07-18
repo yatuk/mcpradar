@@ -27,7 +27,7 @@ from typing import TYPE_CHECKING
 from urllib.parse import quote, urlparse
 
 if TYPE_CHECKING:
-    from mcpradar.registry.client import RegistryEntry
+    from mcpradar.registry.client import RegistryClient, RegistryEntry
 
 _NPM_DOWNLOADS = "https://api.npmjs.org/downloads/point/last-week/"
 _NPM_SEARCH = "https://registry.npmjs.org/-/v1/search"
@@ -199,6 +199,29 @@ def _npm_search(query: str, size: int, timeout: float) -> list[dict[str, object]
     return objs if isinstance(objs, list) else []
 
 
+def _discover_npm_candidates(search_size: int, timeout: float) -> list[tuple[str, str]]:
+    """Return popularity-ordered ``(package, repository)`` npm candidates."""
+    seen: set[str] = set()
+    candidates: list[tuple[str, str]] = []
+    for query in ("keywords:mcp-server", "keywords:mcp"):
+        for obj in _npm_search(query, search_size, timeout):
+            pkg = obj.get("package") if isinstance(obj, dict) else None
+            if not isinstance(pkg, dict):
+                continue
+            name = str(pkg.get("name", ""))
+            keywords = pkg.get("keywords") or []
+            if not name or name in seen or not isinstance(keywords, list):
+                continue
+            if not _is_server_package(name, keywords):
+                continue
+            seen.add(name)
+            links = pkg.get("links") if isinstance(pkg.get("links"), dict) else {}
+            repo = str(links.get("repository", "")) if links else ""
+            repo = repo.replace("git+", "").replace("git://", "https://").removesuffix(".git")
+            candidates.append((name, repo))
+    return candidates
+
+
 def discover_popular_servers(
     top_n: int = 10,
     search_size: int = 80,
@@ -221,24 +244,7 @@ def discover_popular_servers(
 
     from mcpradar.registry.client import PackageRef, RegistryEntry
 
-    seen: set[str] = set()
-    candidates: list[tuple[str, str]] = []  # (npm name, repo url)
-    for query in ("keywords:mcp-server", "keywords:mcp"):
-        for obj in _npm_search(query, search_size, timeout):
-            pkg = obj.get("package") if isinstance(obj, dict) else None
-            if not isinstance(pkg, dict):
-                continue
-            name = str(pkg.get("name", ""))
-            keywords = pkg.get("keywords") or []
-            if not name or name in seen or not isinstance(keywords, list):
-                continue
-            if not _is_server_package(name, keywords):
-                continue
-            seen.add(name)
-            links = pkg.get("links") if isinstance(pkg.get("links"), dict) else {}
-            repo = str(links.get("repository", "")) if links else ""
-            repo = repo.replace("git+", "").replace("git://", "https://").removesuffix(".git")
-            candidates.append((name, repo))
+    candidates = _discover_npm_candidates(search_size, timeout)
 
     def _score(nr: tuple[str, str]) -> Signals:
         name, repo = nr
@@ -269,6 +275,76 @@ def discover_popular_servers(
         ranked.append(RankedServer(entry=entry, signals=sig, score=sig.score))
     ranked.sort(key=lambda r: r.score, reverse=True)
     return ranked[:top_n]
+
+
+def discover_popular_registry_servers(
+    top_n: int = 10,
+    search_size: int = 250,
+    timeout: float = 10.0,
+    max_workers: int = 12,
+    *,
+    client: RegistryClient | None = None,
+) -> list[RankedServer]:
+    """Rank popular packages that are actually published in the official registry.
+
+    The official MCP Registry intentionally carries unopinionated metadata and
+    exposes no popularity order. npm's popularity-aware search therefore gives
+    us a bounded candidate set; this function intersects that set with the
+    official registry before gathering download/star signals. A package that is
+    popular on npm but absent from the MCP Registry can never enter the result.
+
+    PyPI-only packages cannot be discovered this way because PyPI has no
+    popularity search API. They remain eligible when an npm-discovered registry
+    entry publishes both npm and PyPI package references.
+    """
+    from mcpradar.registry.client import RegistryClient
+
+    # A full cursor walk is deliberately rate-limited and expensive. Popularity
+    # signals still refresh every run; only Registry membership is cached.
+    registry_client = client or RegistryClient(cache_ttl=90_000)
+    npm_candidates = _discover_npm_candidates(search_size, timeout)
+
+    def _registry_match(candidate: tuple[str, str]) -> RegistryEntry | None:
+        identifier, repo_url = candidate
+        terms = [identifier.rsplit("/", 1)[-1]]
+        repo_path = urlparse(repo_url).path.strip("/")
+        if repo_path:
+            repo_name = repo_path.rsplit("/", 1)[-1].removesuffix(".git")
+            if repo_name and repo_name not in terms:
+                terms.append(repo_name)
+        for term in terms:
+            try:
+                entries = registry_client.search_servers(term, limit=100, latest_only=True)
+            except Exception:
+                continue
+            for entry in entries:
+                if any(
+                    (package.registry_type or "").lower() == "npm"
+                    and package.identifier == identifier
+                    for package in entry.packages
+                ):
+                    return entry
+        return None
+
+    from concurrent.futures import ThreadPoolExecutor
+
+    with ThreadPoolExecutor(max_workers=max_workers) as pool:
+        resolved = list(pool.map(_registry_match, npm_candidates))
+
+    matched: list[RegistryEntry] = []
+    seen_servers: set[str] = set()
+    for entry in resolved:
+        if entry is None or entry.name in seen_servers:
+            continue
+        seen_servers.add(entry.name)
+        matched.append(entry)
+
+    return rank_servers(
+        matched,
+        top_n=top_n,
+        timeout=timeout,
+        max_workers=max_workers,
+    )
 
 
 def _get_json(url: str, timeout: float, headers: dict[str, str] | None = None) -> object | None:

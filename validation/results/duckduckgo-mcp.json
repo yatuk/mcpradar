@@ -1,9 +1,41 @@
 {
-  "name": "duckduckgo-mcp",
-  "command": "",
   "transport": "stdio",
-  "expected_rules": [],
-  "error": "list index out of range",
-  "tools_count": 0,
-  "findings": []
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-g_i0nrza\\package\\out\\index.js:3",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 3,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    }
+  ],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "duckduckgo-mcp",
+  "target": "npx -y duckduckgo-mcp",
+  "version": "",
+  "scanned_at": "2026-07-18T20:14:53.134424+00:00",
+  "last_attempted_at": "2026-07-18T20:14:53.134424+00:00",
+  "trending": false,
+  "live_scan": {
+    "ok": false,
+    "error": "ONRPCError): │ │ │ │ │ │ > 306 │ │ │ │ raise McpError(response_or_error.error) │ │ │ │ │ │ 307 │ │ │ else: │ │ │ │ │ │ 308 │ │ │ │ return │ │ │ │ │ │ result_type.model_validate(response_or_error.result) │ │ │ │ │ │ 309 │ │ │ │ │ └─────────────────────────────────────────────────────────────────────┘ │ │ │ │ McpError: Connection closed │ │ │ └─────────────────────────────────────────────────────────────────────────┘ │ └─────────────────────────────────────────────────────────────────────────────┘"
+  },
+  "enriched": true,
+  "enriched_ref": "npm:duckduckgo-mcp",
+  "package_scan": {
+    "ok": true,
+    "note": "+1 findings from npm:duckduckgo-mcp"
+  },
+  "status": "scanned",
+  "scan_coverage": "package-only"
 }

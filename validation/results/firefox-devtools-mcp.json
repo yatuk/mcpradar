@@ -1,9 +1,221 @@
 {
-  "name": "firefox-devtools-mcp",
-  "command": "",
   "transport": "stdio",
-  "expected_rules": [],
-  "error": "list index out of range",
-  "tools_count": 0,
-  "findings": []
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "ws@8.18.3 (npm) is affected by CVE-2026-45736: ws: Uninitialized memory disclosure; fixed in 8.20.1",
+      "severity": "medium",
+      "target": "ws@8.18.3",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "ws",
+        "version": "8.18.3",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-58qx-3vcg-4xpx",
+        "cve": "CVE-2026-45736",
+        "cvss": 4.4,
+        "cwe_ids": [
+          "CWE-908"
+        ],
+        "fixed_version": "8.20.1",
+        "references": [
+          "https://github.com/websockets/ws/security/advisories/GHSA-58qx-3vcg-4xpx",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-45736",
+          "https://github.com/websockets/ws/commit/c0327ec15a54d701eb6ccefaa8bef328cfc03086"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "vitest@3.1.4 (npm) is affected by CVE-2026-47429: When Vitest UI server is listening, arbitrary file can be read and executed; fixed in 3.2.6",
+      "severity": "critical",
+      "target": "vitest@3.1.4",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "vitest",
+        "version": "3.1.4",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-5xrq-8626-4rwp",
+        "cve": "CVE-2026-47429",
+        "cvss": 9.8,
+        "cwe_ids": [
+          "CWE-862"
+        ],
+        "fixed_version": "3.2.6",
+        "references": [
+          "https://github.com/vitest-dev/vitest/security/advisories/GHSA-5xrq-8626-4rwp",
+          "https://github.com/vitest-dev/vitest",
+          "https://github.com/vitest-dev/vitest/blob/eb1abf08573032a532015b999ad3501c5e89e3bb/packages/browser/src/node/commands/fs.ts#L10-L11"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S004",
+      "title": "Dynamic JavaScript execution",
+      "description": "Dynamic JavaScript execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-clrupb1m\\package\\dist\\index.js:17459",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 17459,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S004",
+      "title": "Dynamic JavaScript execution",
+      "description": "Dynamic JavaScript execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-clrupb1m\\package\\dist\\index.js:24079",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 24079,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-clrupb1m\\package\\dist\\index.js:17310",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 17310,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-clrupb1m\\package\\dist\\index.js:21079",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 21079,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-clrupb1m\\package\\dist\\index.js:21099",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 21099,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-clrupb1m\\package\\dist\\index.js:21130",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 21130,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-clrupb1m\\package\\dist\\index.js:21131",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 21131,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-clrupb1m\\package\\dist\\index.js:23930",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 23930,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-clrupb1m\\package\\dist\\index.js:32592",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 32592,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S011",
+      "title": "Raw fetched content returned to the agent",
+      "description": "Raw fetched content returned to the agent detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-clrupb1m\\package\\dist\\index.js:30260",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 30260,
+        "language": "javascript"
+      },
+      "confidence": 0.5
+    }
+  ],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "firefox-devtools-mcp",
+  "target": "npx -y firefox-devtools-mcp",
+  "version": "",
+  "scanned_at": "2026-07-18T20:15:39.418838+00:00",
+  "last_attempted_at": "2026-07-18T20:15:39.418838+00:00",
+  "trending": false,
+  "live_scan": {
+    "ok": false,
+    "error": "scanner returned no JSON result"
+  },
+  "enriched": true,
+  "enriched_ref": "npm:firefox-devtools-mcp",
+  "package_scan": {
+    "ok": true,
+    "note": "+12 findings from npm:firefox-devtools-mcp"
+  },
+  "status": "scanned",
+  "scan_coverage": "package-only"
 }

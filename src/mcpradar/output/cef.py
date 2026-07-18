@@ -35,7 +35,7 @@ def _escape(value: str) -> str:
 
 
 def _compute_score(finding_count: int, tool_count: int) -> str:
-    """Compute approximate AIVSS score for CEF from findings/tools."""
+    """Compute the approximate MRS-v1 score for CEF from findings/tools."""
     if tool_count == 0:
         return "0.0"
     raw = min(10.0, finding_count / max(tool_count, 1) * 5)
@@ -56,7 +56,7 @@ def to_cef(report: ScanReport) -> str:
 
     tool_count = len(report.tools) if report.tools else 1
     finding_count = len(report.findings)
-    aivss = _compute_score(finding_count, tool_count)
+    risk_score = _compute_score(finding_count, tool_count)
     server_name = _escape(report.target or "unknown")
 
     lines: list[str] = []
@@ -74,7 +74,8 @@ def to_cef(report: ScanReport) -> str:
             f"cs1={server_name} "
             f"cs2=scanner "
             f"cs3={_escape(__version__)} "
-            f"cn1={aivss} "
+            f"cn1={risk_score} "
+            f"cn1Label=MRS-v1 "
             f"cs4={sev_str} "
             f"cs5={desc[:120]} "
             f"cs6={rule_id} "

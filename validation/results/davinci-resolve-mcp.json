@@ -1,9 +1,68 @@
 {
-  "name": "davinci-resolve-mcp",
-  "command": "",
   "transport": "stdio",
-  "expected_rules": [],
-  "error": "list index out of range",
-  "tools_count": 0,
-  "findings": []
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "mcp@1.3.0 (PyPI) is affected by CVE-2025-53366: MCP Python SDK vulnerability in the FastMCP Server causes validation error, leading to DoS",
+      "severity": "high",
+      "target": "mcp@1.3.0",
+      "location": "pyproject.toml",
+      "evidence": "",
+      "detail": {
+        "package": "mcp",
+        "version": "1.3.0",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-3qhf-m339-9g5v",
+        "cve": "CVE-2025-53366",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-248"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/modelcontextprotocol/python-sdk/security/advisories/GHSA-3qhf-m339-9g5v",
+          "https://nvd.nist.gov/vuln/detail/CVE-2025-53366",
+          "https://github.com/modelcontextprotocol/python-sdk/pull/822"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S004",
+      "title": "Dynamic code execution",
+      "description": "exec(...) on a non-literal argument executes attacker-controlled code",
+      "severity": "critical",
+      "target": "server.py:312",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 312,
+        "sink": "exec"
+      },
+      "confidence": 0.9
+    }
+  ],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "davinci-resolve-mcp",
+  "target": "uvx davinci-resolve-mcp",
+  "version": "",
+  "scanned_at": "2026-07-18T20:13:31.057151+00:00",
+  "last_attempted_at": "2026-07-18T20:13:31.057151+00:00",
+  "trending": false,
+  "live_scan": {
+    "ok": false,
+    "error": "ONRPCError): │ │ │ │ │ │ > 306 │ │ │ │ raise McpError(response_or_error.error) │ │ │ │ │ │ 307 │ │ │ else: │ │ │ │ │ │ 308 │ │ │ │ return │ │ │ │ │ │ result_type.model_validate(response_or_error.result) │ │ │ │ │ │ 309 │ │ │ │ │ └─────────────────────────────────────────────────────────────────────┘ │ │ │ │ McpError: Connection closed │ │ │ └─────────────────────────────────────────────────────────────────────────┘ │ └─────────────────────────────────────────────────────────────────────────────┘"
+  },
+  "enriched": true,
+  "enriched_ref": "pip:davinci-resolve-mcp",
+  "package_scan": {
+    "ok": true,
+    "note": "+2 findings from pip:davinci-resolve-mcp"
+  },
+  "status": "scanned",
+  "scan_coverage": "package-only"
 }

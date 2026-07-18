@@ -1,9 +1,55 @@
 {
-  "name": "@modelcontextprotocol/server-slack",
-  "command": "",
   "transport": "stdio",
-  "expected_rules": [],
-  "error": "list index out of range",
-  "tools_count": 0,
-  "findings": []
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "@modelcontextprotocol/sdk@1.0.1 (npm) is affected by CVE-2025-66414: Model Context Protocol (MCP) TypeScript SDK does not enable DNS rebinding protection by default; fixed in 1.24.0",
+      "severity": "high",
+      "target": "@modelcontextprotocol/sdk@1.0.1",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "@modelcontextprotocol/sdk",
+        "version": "1.0.1",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-w48q-cv73-mx4w",
+        "cve": "CVE-2025-66414",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-1188",
+          "CWE-350"
+        ],
+        "fixed_version": "1.24.0",
+        "references": [
+          "https://github.com/modelcontextprotocol/typescript-sdk/security/advisories/GHSA-w48q-cv73-mx4w",
+          "https://nvd.nist.gov/vuln/detail/CVE-2025-66414",
+          "https://github.com/modelcontextprotocol/typescript-sdk/pull/1205"
+        ]
+      },
+      "confidence": 0.9
+    }
+  ],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "@modelcontextprotocol/server-slack",
+  "target": "npx -y @modelcontextprotocol/server-slack",
+  "version": "",
+  "scanned_at": "2026-07-18T20:12:43.263546+00:00",
+  "last_attempted_at": "2026-07-18T20:12:43.263546+00:00",
+  "trending": false,
+  "live_scan": {
+    "ok": false,
+    "error": "ONRPCError): │ │ │ │ │ │ > 306 │ │ │ │ raise McpError(response_or_error.error) │ │ │ │ │ │ 307 │ │ │ else: │ │ │ │ │ │ 308 │ │ │ │ return │ │ │ │ │ │ result_type.model_validate(response_or_error.result) │ │ │ │ │ │ 309 │ │ │ │ │ └─────────────────────────────────────────────────────────────────────┘ │ │ │ │ McpError: Connection closed │ │ │ └─────────────────────────────────────────────────────────────────────────┘ │ └─────────────────────────────────────────────────────────────────────────────┘"
+  },
+  "enriched": true,
+  "enriched_ref": "npm:@modelcontextprotocol/server-slack",
+  "package_scan": {
+    "ok": true,
+    "note": "+1 findings from npm:@modelcontextprotocol/server-slack"
+  },
+  "status": "scanned",
+  "scan_coverage": "package-only"
 }

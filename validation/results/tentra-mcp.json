@@ -1,9 +1,276 @@
 {
-  "name": "tentra-mcp",
-  "command": "",
   "transport": "stdio",
-  "expected_rules": [],
-  "error": "list index out of range",
-  "tools_count": 0,
-  "findings": []
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "@modelcontextprotocol/sdk@1.10.2 (npm) is affected by CVE-2026-25536: @modelcontextprotocol/sdk has cross-client data leak via shared server/transport instance reuse; fixed in 1.26.0",
+      "severity": "high",
+      "target": "@modelcontextprotocol/sdk@1.10.2",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "@modelcontextprotocol/sdk",
+        "version": "1.10.2",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-345p-7cg4-v4c7",
+        "cve": "CVE-2026-25536",
+        "cvss": 7.1,
+        "cwe_ids": [
+          "CWE-362"
+        ],
+        "fixed_version": "1.26.0",
+        "references": [
+          "https://github.com/modelcontextprotocol/typescript-sdk/security/advisories/GHSA-345p-7cg4-v4c7",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-25536",
+          "https://github.com/modelcontextprotocol/typescript-sdk/issues/204"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "esbuild@0.24.0 (npm) is affected by GHSA-67mh-4wv8-2f99: esbuild enables any website to send any requests to the development server and read the response; fixed in 0.25.0",
+      "severity": "medium",
+      "target": "esbuild@0.24.0",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "esbuild",
+        "version": "0.24.0",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-67mh-4wv8-2f99",
+        "cve": "GHSA-67mh-4wv8-2f99",
+        "cvss": 5.3,
+        "cwe_ids": [
+          "CWE-346"
+        ],
+        "fixed_version": "0.25.0",
+        "references": [
+          "https://github.com/evanw/esbuild/security/advisories/GHSA-67mh-4wv8-2f99",
+          "https://github.com/evanw/esbuild/commit/de85afd65edec9ebc44a11e245fd9e9a2e99760d",
+          "https://github.com/evanw/esbuild"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "vitest@2.0.0 (npm) is affected by CVE-2026-47429: When Vitest UI server is listening, arbitrary file can be read and executed; fixed in 3.2.6",
+      "severity": "critical",
+      "target": "vitest@2.0.0",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "vitest",
+        "version": "2.0.0",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-5xrq-8626-4rwp",
+        "cve": "CVE-2026-47429",
+        "cvss": 9.8,
+        "cwe_ids": [
+          "CWE-862"
+        ],
+        "fixed_version": "3.2.6",
+        "references": [
+          "https://github.com/vitest-dev/vitest/security/advisories/GHSA-5xrq-8626-4rwp",
+          "https://github.com/vitest-dev/vitest",
+          "https://github.com/vitest-dev/vitest/blob/eb1abf08573032a532015b999ad3501c5e89e3bb/packages/browser/src/node/commands/fs.ts#L10-L11"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-h6zacpo2\\package\\dist\\analyzer\\detectors\\terraform.js:118",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 118,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-h6zacpo2\\package\\dist\\index.js:3056",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 3056,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-h6zacpo2\\package\\dist\\index.js:3193",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 3193,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S004",
+      "title": "Dynamic JavaScript execution",
+      "description": "Dynamic JavaScript execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-h6zacpo2\\package\\dist\\index.js:477",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 477,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-h6zacpo2\\package\\dist\\index.js:4230",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 4230,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-h6zacpo2\\package\\dist\\index.js:10211",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 10211,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-h6zacpo2\\package\\dist\\index.js:10218",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 10218,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-h6zacpo2\\package\\dist\\index.js:10232",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 10232,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-h6zacpo2\\package\\dist\\index.js:12883",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 12883,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-h6zacpo2\\package\\dist\\index.js:13268",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 13268,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-h6zacpo2\\package\\dist\\index.js:15415",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 15415,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S011",
+      "title": "Raw fetched content returned to the agent",
+      "description": "Raw fetched content returned to the agent detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "C:\\Users\\fatih\\AppData\\Local\\Temp\\mcpradar-enrich-h6zacpo2\\package\\dist\\index.js:1552",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 1552,
+        "language": "javascript"
+      },
+      "confidence": 0.5
+    }
+  ],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "tentra-mcp",
+  "target": "npx -y tentra-mcp --local init",
+  "version": "",
+  "scanned_at": "2026-07-18T20:21:36.267945+00:00",
+  "last_attempted_at": "2026-07-18T20:21:36.267945+00:00",
+  "trending": false,
+  "live_scan": {
+    "ok": false,
+    "error": "ONRPCError): │ │ │ │ │ │ > 306 │ │ │ │ raise McpError(response_or_error.error) │ │ │ │ │ │ 307 │ │ │ else: │ │ │ │ │ │ 308 │ │ │ │ return │ │ │ │ │ │ result_type.model_validate(response_or_error.result) │ │ │ │ │ │ 309 │ │ │ │ │ └─────────────────────────────────────────────────────────────────────┘ │ │ │ │ McpError: Connection closed │ │ │ └─────────────────────────────────────────────────────────────────────────┘ │ └─────────────────────────────────────────────────────────────────────────────┘"
+  },
+  "enriched": true,
+  "enriched_ref": "npm:tentra-mcp",
+  "package_scan": {
+    "ok": true,
+    "note": "+15 findings from npm:tentra-mcp"
+  },
+  "status": "scanned",
+  "scan_coverage": "package-only"
 }

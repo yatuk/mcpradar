@@ -1,9 +1,387 @@
 {
-  "name": "plant-genomics-mcp",
-  "command": "",
   "transport": "stdio",
-  "expected_rules": [],
-  "error": "list index out of range",
-  "tools_count": 0,
-  "findings": []
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "cryptography@48.0.0 (PyPI) is affected by GHSA-537c-gmf6-5ccf: Vulnerable OpenSSL included in cryptography wheels",
+      "severity": "high",
+      "target": "cryptography@48.0.0",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "cryptography",
+        "version": "48.0.0",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-537c-gmf6-5ccf",
+        "cve": "GHSA-537c-gmf6-5ccf",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-125",
+          "CWE-1395"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/pyca/cryptography/security/advisories/GHSA-537c-gmf6-5ccf",
+          "https://github.com/pyca/cryptography",
+          "https://openssl-library.org/news/secadv/20260609.txt"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "mcp@1.27.1 (PyPI) is affected by CVE-2026-52870: MCP Python SDK: Experimental task handlers allow any client to access and cancel other clients' tasks",
+      "severity": "high",
+      "target": "mcp@1.27.1",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "mcp",
+        "version": "1.27.1",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-hvrp-rf83-w775",
+        "cve": "CVE-2026-52870",
+        "cvss": 7.6,
+        "cwe_ids": [
+          "CWE-862"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/modelcontextprotocol/python-sdk/security/advisories/GHSA-hvrp-rf83-w775",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-52870",
+          "https://github.com/modelcontextprotocol/python-sdk/pull/2720"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "pydantic-settings@2.14.1 (PyPI) is affected by CVE-2026-58203: pydantic-settings: NestedSecretsSettingsSource follows symlinks outside secrets_dir, enabling local file read and bypassing secrets_dir_max_size",
+      "severity": "medium",
+      "target": "pydantic-settings@2.14.1",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "pydantic-settings",
+        "version": "2.14.1",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-4xgf-cpjx-pc3j",
+        "cve": "CVE-2026-58203",
+        "cvss": 5.3,
+        "cwe_ids": [
+          "CWE-22",
+          "CWE-400",
+          "CWE-59"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/pydantic/pydantic-settings/security/advisories/GHSA-4xgf-cpjx-pc3j",
+          "https://github.com/pydantic/pydantic-settings"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "pyjwt@2.12.1 (PyPI) is affected by CVE-2026-48522: PyJWKClient: missing scheme allowlist enables CVE-2024-21643-class SSRF + token forgery via file://, ftp://, data: schemes",
+      "severity": "medium",
+      "target": "pyjwt@2.12.1",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "pyjwt",
+        "version": "2.12.1",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-993g-76c3-p5m4",
+        "cve": "CVE-2026-48522",
+        "cvss": 4.2,
+        "cwe_ids": [
+          "CWE-441",
+          "CWE-918"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/jpadilla/pyjwt/security/advisories/GHSA-993g-76c3-p5m4",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-48522",
+          "https://github.com/jpadilla/pyjwt"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "python-multipart@0.0.29 (PyPI) is affected by CVE-2026-53539: python-multipart: Quadratic-time querystring parsing with semicolon separators causes CPU denial of service",
+      "severity": "high",
+      "target": "python-multipart@0.0.29",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "python-multipart",
+        "version": "0.0.29",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-5rvq-cxj2-64vf",
+        "cve": "CVE-2026-53539",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-400",
+          "CWE-407"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/Kludex/python-multipart/security/advisories/GHSA-5rvq-cxj2-64vf",
+          "https://github.com/Kludex/python-multipart"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "starlette@1.0.0 (PyPI) is affected by CVE-2026-54283: Starlette: request.form() limits silently ignored for application/x-www-form-urlencoded enable DoS",
+      "severity": "high",
+      "target": "starlette@1.0.0",
+      "location": "uv.lock",
+      "evidence": "",
+      "detail": {
+        "package": "starlette",
+        "version": "1.0.0",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-82w8-qh3p-5jfq",
+        "cve": "CVE-2026-54283",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-770"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/Kludex/starlette/security/advisories/GHSA-82w8-qh3p-5jfq",
+          "https://github.com/Kludex/starlette"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "client.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "probe_kegg_bridge_candidates.py:140",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 140,
+        "sink": "client.get"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "client.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "probe_kegg_bridge_candidates.py:168",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 168,
+        "sink": "client.get"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "client.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "probe_kegg_bridge_candidates.py:179",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 179,
+        "sink": "client.get"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "client.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "probe_kegg_bridge_candidates.py:192",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 192,
+        "sink": "client.get"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "client.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "probe_kegg_happy_path.py:90",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 90,
+        "sink": "client.get"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "client.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "probe_kegg_happy_path.py:103",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 103,
+        "sink": "client.get"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "client.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "probe_kegg_happy_path.py:113",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 113,
+        "sink": "client.get"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "client.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "verify_organisms.py:28",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 28,
+        "sink": "client.get"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "client.post(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "verify_organisms.py:38",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 38,
+        "sink": "client.post"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "client.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "verify_organisms.py:55",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 55,
+        "sink": "client.get"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "client.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "verify_organisms.py:95",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 95,
+        "sink": "client.get"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "client.post(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "blast.py:248",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 248,
+        "sink": "client.post"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "client.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "blast.py:269",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 269,
+        "sink": "client.get"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "client.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "blast.py:285",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 285,
+        "sink": "client.get"
+      },
+      "confidence": 0.7
+    }
+  ],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "plant-genomics-mcp",
+  "target": "uvx plant-genomics-mcp",
+  "version": "",
+  "scanned_at": "2026-07-18T20:20:48.245857+00:00",
+  "last_attempted_at": "2026-07-18T20:20:48.245857+00:00",
+  "trending": false,
+  "live_scan": {
+    "ok": false,
+    "error": "scanner returned no JSON result"
+  },
+  "enriched": true,
+  "enriched_ref": "pip:plant-genomics-mcp",
+  "package_scan": {
+    "ok": true,
+    "note": "+20 findings from pip:plant-genomics-mcp"
+  },
+  "status": "scanned",
+  "scan_coverage": "package-only"
 }

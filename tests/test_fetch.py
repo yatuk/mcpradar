@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
+import base64
+import hashlib
 import io
 import json
 import tarfile
+import zipfile
 from pathlib import Path
 
 import pytest
@@ -52,6 +55,11 @@ def _make_npm_tarball(files: dict[str, str]) -> bytes:
     return buf.getvalue()
 
 
+def _integrity(data: bytes, algorithm: str = "sha512") -> str:
+    digest = base64.b64encode(hashlib.new(algorithm, data).digest()).decode()
+    return f"{algorithm}-{digest}"
+
+
 class TestNpmFetch:
     def test_fetch_and_extract(self, tmp_path: Path, monkeypatch) -> None:
         tarball = _make_npm_tarball(
@@ -62,13 +70,21 @@ class TestNpmFetch:
             "_get_json",
             lambda url: {
                 "dist-tags": {"latest": "1.0.0"},
-                "versions": {"1.0.0": {"dist": {"tarball": "https://x/demo.tgz"}}},
+                "versions": {
+                    "1.0.0": {
+                        "dist": {
+                            "tarball": "https://x/demo.tgz",
+                            "integrity": _integrity(tarball),
+                        }
+                    }
+                },
             },
         )
-        monkeypatch.setattr(fx, "_download", lambda url: tarball)
+        monkeypatch.setattr(fx, "_download", lambda url, integrity: tarball)
         src = resolve_source("npm:demo", workdir=tmp_path)
         assert (src / "package.json").exists()
         assert src.name == "package"
+        assert (tmp_path / ".mcpradar-provenance.json").exists()
 
     def test_missing_version_errors(self, tmp_path: Path, monkeypatch) -> None:
         monkeypatch.setattr(
@@ -89,9 +105,18 @@ class TestPypiFetch:
         monkeypatch.setattr(
             fx,
             "_get_json",
-            lambda url: {"urls": [{"packagetype": "sdist", "url": "https://x/demo.tar.gz"}]},
+            lambda url: {
+                "info": {"version": "1.0.0"},
+                "urls": [
+                    {
+                        "packagetype": "sdist",
+                        "url": "https://x/demo.tar.gz",
+                        "digests": {"sha256": hashlib.sha256(buf.getvalue()).hexdigest()},
+                    }
+                ],
+            },
         )
-        monkeypatch.setattr(fx, "_download", lambda url: buf.getvalue())
+        monkeypatch.setattr(fx, "_download", lambda url, integrity: buf.getvalue())
         src = resolve_source("pip:demo", workdir=tmp_path)
         assert (src / "server.py").exists()
 
@@ -113,3 +138,23 @@ class TestSafeExtract:
         with pytest.raises(FetchError):
             fx._safe_extract_tar(buf.getvalue(), tmp_path)
         assert not (tmp_path.parent / "escape.txt").exists()
+
+    def test_zip_path_traversal_rejected(self, tmp_path: Path) -> None:
+        buf = io.BytesIO()
+        with zipfile.ZipFile(buf, "w") as archive:
+            archive.writestr("../sibling/escape.txt", "pwned")
+        with pytest.raises(FetchError, match="unsafe path"):
+            fx._safe_extract_zip(buf.getvalue(), tmp_path)
+
+    def test_integrity_mismatch_rejected(self) -> None:
+        with pytest.raises(FetchError, match="digest"):
+            fx._verify_integrity(b"actual", _integrity(b"different"))
+
+    def test_package_download_rejects_private_network_url(self) -> None:
+        with pytest.raises(FetchError, match="non-public"):
+            fx._download("https://127.0.0.1/archive.tgz", _integrity(b"unused"))
+
+    def test_unpinned_github_ref_rejected(self, tmp_path: Path, monkeypatch) -> None:
+        monkeypatch.setattr(fx.shutil, "which", lambda _name: "git")
+        with pytest.raises(FetchError, match="pinned"):
+            fx._fetch_github("https://github.com/owner/repo.git", tmp_path)

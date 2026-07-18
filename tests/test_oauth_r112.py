@@ -36,8 +36,22 @@ class TestCheckServerAuth:
         findings = check_server_auth("https://x/mcp", "http", has_iss=False)
         assert any("iss" in f.title.lower() for f in findings)
 
-    def test_session_id_flagged(self) -> None:
-        findings = check_server_auth("https://x/mcp", "http", uses_session_id=True)
+    def test_v1_session_id_is_not_a_vulnerability(self) -> None:
+        findings = check_server_auth(
+            "https://x/mcp",
+            "http",
+            uses_session_id=True,
+            protocol_version="2025-11-25",
+        )
+        assert findings == []
+
+    def test_v2_session_id_is_a_protocol_finding(self) -> None:
+        findings = check_server_auth(
+            "https://x/mcp",
+            "http",
+            uses_session_id=True,
+            protocol_version="2026-07-28",
+        )
         assert any("session" in f.title.lower() for f in findings)
 
     def test_none_means_not_checked_no_findings(self) -> None:
@@ -126,3 +140,41 @@ class TestProbeOAuthMetadata:
         # No AS reachable → hardening signals stay "unknown", not "absent".
         assert meta.has_iss is None
         assert meta.has_pkce_s256 is None
+
+    def test_private_authorization_server_is_not_fetched(
+        self, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        requested: list[str] = []
+
+        def handler(req: httpx.Request) -> httpx.Response:
+            requested.append(str(req.url))
+            if req.url.path.endswith("oauth-protected-resource"):
+                return httpx.Response(
+                    200,
+                    json={"authorization_servers": ["http://169.254.169.254/latest"]},
+                )
+            return httpx.Response(500)
+
+        _mock_httpx(monkeypatch, handler)
+        meta = probe_oauth_metadata("https://host/mcp")
+        assert meta is not None
+        assert meta.as_metadata_present is False
+        assert not any("169.254.169.254" in url for url in requested)
+
+    def test_redirect_to_private_address_is_not_followed(
+        self, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        requested: list[str] = []
+
+        def handler(req: httpx.Request) -> httpx.Response:
+            requested.append(str(req.url))
+            if req.url.host == "host" and req.url.path.endswith("oauth-protected-resource"):
+                return httpx.Response(
+                    302,
+                    headers={"Location": "http://127.0.0.1/admin"},
+                )
+            return httpx.Response(404)
+
+        _mock_httpx(monkeypatch, handler)
+        assert probe_oauth_metadata("https://host/mcp") is None
+        assert not any("127.0.0.1" in url for url in requested)

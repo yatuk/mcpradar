@@ -22,18 +22,18 @@ MCPRadar provides several machine-readable data formats:
    curl -s https://yatuk.github.io/mcpradar/data.json | \
      python -c "..." > /opt/splunk/var/lib/splunk/mcpradar/mcp_scan_results.sarif
    ```
-3. Create alerts on AIVSS score increases or new critical findings.
+3. Create alerts on MRS score increases or new critical findings.
 
 ### Elastic Security
 
 1. Use the SARIF-to-Elastic pipeline:
    ```bash
    curl -s https://yatuk.github.io/mcpradar/data.json | jq -r '
-     .[] | select(.aivss_score > 5) |
-     {server: .server, score: .aivss_score, grade: .grade}
+     .[] | select(.risk_score > 5) |
+     {server: .server, score: .risk_score, grade: .grade}
    ' | python sarif_to_elastic.py --index mcpradar-findings
    ```
-2. Create Kibana dashboards tracking AIVSS score trends per server.
+2. Create Kibana dashboards tracking MRS score trends per server.
 
 ### Microsoft Sentinel
 
@@ -61,11 +61,11 @@ jobs:
           python -c "
           import json
           data = json.load(open('data.json'))
-          risky = [s for s in data if s.get('aivss_score', 0) > 5]
+          risky = [s for s in data if s.get('risk_score', 0) > 5]
           if risky:
               print(f'WARNING: {len(risky)} servers scored D or F')
               for s in risky:
-                  print(f'  {s[\"server\"]}: {s[\"grade\"]} ({s[\"aivss_score\"]})')
+                  print(f'  {s[\"server\"]}: {s[\"grade\"]} ({s[\"risk_score\"]})')
           "
 ```
 

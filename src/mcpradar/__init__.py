@@ -11,7 +11,7 @@ from __future__ import annotations
 
 from typing import Any
 
-__version__ = "1.0.0-rc4"
+__version__ = "1.1.0-rc1"
 
 from mcpradar.probe.sandbox import SandboxPolicy, SandboxValidator  # noqa: E402, F401
 

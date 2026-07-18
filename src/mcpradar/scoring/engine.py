@@ -1,4 +1,4 @@
-"""AIVSS (AI Vulnerability Severity Score) scoring engine.
+"""MCPRadar Risk Score (MRS) engine.
 
 Computes a 0.0--10.0 security score for an MCP server based on its scan
 findings, along with a letter grade and confidence rating.
@@ -16,7 +16,7 @@ _DEFAULT_CONFIDENCE = 0.5
 
 __all__ = ["CONFIDENCE_MAP", "confidence_for"]
 
-# Severity weights for AIVSS weighted sum
+# Severity weights for the MRS weighted sum
 _SEVERITY_WEIGHTS: dict[str, int] = {
     "critical": 10,
     "high": 7,
@@ -26,12 +26,12 @@ _SEVERITY_WEIGHTS: dict[str, int] = {
 
 
 # ---------------------------------------------------------------------------
-# AIVSS score computation
+# MRS score computation
 # ---------------------------------------------------------------------------
 
 
-def compute_aivss(findings: list[Finding], tool_count: int) -> float:
-    """Compute AIVSS score (0.0--10.0) from scan findings and tool count.
+def compute_mrs(findings: list[Finding], tool_count: int) -> float:
+    """Compute MCPRadar Risk Score v1 (0.0--10.0).
 
     Algorithm:
       1. Count findings by severity.
@@ -48,7 +48,7 @@ def compute_aivss(findings: list[Finding], tool_count: int) -> float:
             If 0 but findings exist, falls back to 1 to avoid division by zero.
 
     Returns:
-        AIVSS score in the range [0.0, 10.0].
+        MRS-v1 score in the range [0.0, 10.0].
     """
     if not findings:
         return 0.0
@@ -84,8 +84,8 @@ def compute_aivss(findings: list[Finding], tool_count: int) -> float:
 # ---------------------------------------------------------------------------
 
 
-def compute_aivss_capability(findings: list[Finding], tools: list[object]) -> float:
-    """Capability-aware AIVSS: ``max(base, ((base + AARS) / 2) × ThM)``.
+def compute_mrs_capability(findings: list[Finding], tools: list[object]) -> float:
+    """Compute capability-aware MRS-v1.
 
     ``base`` is the severity-weighted MEDIUM+ finding load over the tool surface
     (critical → floor 5.0, high → 3.0); ``AARS`` is the agentic capability blast
@@ -112,7 +112,7 @@ def compute_aivss_capability(findings: list[Finding], tools: list[object]) -> fl
 
 
 def compute_grade(score: float) -> str:
-    """Convert an AIVSS score to a letter grade (A--F).
+    """Convert an MRS score to a letter grade (A--F).
 
     Mapping:
       - 0.0 -- 0.9  → A  Exceptional — no significant findings
@@ -122,7 +122,7 @@ def compute_grade(score: float) -> str:
       - 7.0 -- 10.0 → F  Critical — severe vulnerabilities
 
     Args:
-        score: AIVSS score in [0.0, 10.0].
+        score: MRS score in [0.0, 10.0].
 
     Returns:
         Single-character letter grade.
@@ -179,7 +179,7 @@ def compute_confidence(findings: list[Finding]) -> float:
 def score_server(
     findings: list[Finding], tool_count: int, tools: list[object] | None = None
 ) -> dict[str, object]:
-    """Compute all AIVSS scores for a server in a single call.
+    """Compute all MCPRadar Risk Score outputs for a server.
 
     Args:
         findings: List of scan findings.
@@ -190,19 +190,20 @@ def score_server(
 
     Returns:
         Dictionary with keys:
-          - aivss_score: float       — the AIVSS score (0.0--10.0)
+          - risk_score: float        — the MRS-v1 score (0.0--10.0)
+          - scoring_model: str       — stable score model identifier
           - grade: str               — letter grade (A--F)
           - confidence: float        — overall confidence (0.0--1.0)
           - findings_by_severity: dict — counts per severity level
           - total_findings: int      — total number of findings
           - tools: int               — tool count passed in
     """
-    aivss = (
-        compute_aivss_capability(findings, tools)
+    risk_score = (
+        compute_mrs_capability(findings, tools)
         if tools is not None
-        else compute_aivss(findings, tool_count)
+        else compute_mrs(findings, tool_count)
     )
-    grade = compute_grade(aivss)
+    grade = compute_grade(risk_score)
     confidence = compute_confidence(findings)
 
     severity_counts: dict[str, int] = {"critical": 0, "high": 0, "medium": 0, "low": 0}
@@ -212,10 +213,17 @@ def score_server(
             severity_counts[sev] += 1
 
     return {
-        "aivss_score": aivss,
+        "risk_score": risk_score,
+        "scoring_model": "mrs-v1",
         "grade": grade,
         "confidence": confidence,
         "findings_by_severity": severity_counts,
         "total_findings": len(findings),
         "tools": tool_count,
     }
+
+
+# Compatibility aliases for callers of pre-1.0 release candidates. They retain
+# behavior but no public output is labelled as OWASP AIVSS.
+compute_aivss = compute_mrs
+compute_aivss_capability = compute_mrs_capability

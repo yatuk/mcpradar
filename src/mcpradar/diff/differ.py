@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Mapping
 from dataclasses import dataclass, field
 from enum import StrEnum
 from typing import Any
@@ -58,6 +59,9 @@ class DiffDelta:
     prompt_removed: list[str] = field(default_factory=list)
     resource_added: list[str] = field(default_factory=list)
     resource_removed: list[str] = field(default_factory=list)
+    resource_template_added: list[str] = field(default_factory=list)
+    resource_template_removed: list[str] = field(default_factory=list)
+    surface_changes: list[SchemaChange] = field(default_factory=list)
 
     fingerprint_changes: list[str] = field(default_factory=list)
 
@@ -71,6 +75,9 @@ class DiffDelta:
             or self.prompt_removed
             or self.resource_added
             or self.resource_removed
+            or self.resource_template_added
+            or self.resource_template_removed
+            or self.surface_changes
             or self.fingerprint_changes
         )
 
@@ -84,6 +91,9 @@ class DiffDelta:
             else:
                 sev = td.max_severity.value
                 c[sev] = c.get(sev, 0) + 1
+        for change in self.surface_changes:
+            severity = change.severity.value
+            c[severity] = c.get(severity, 0) + 1
         return c
 
     def to_dict(self) -> dict[str, Any]:
@@ -125,6 +135,17 @@ class DiffDelta:
             "prompt_removed": self.prompt_removed,
             "resource_added": self.resource_added,
             "resource_removed": self.resource_removed,
+            "resource_template_added": self.resource_template_added,
+            "resource_template_removed": self.resource_template_removed,
+            "surface_changes": [
+                {
+                    "field": change.field,
+                    "old": change.old,
+                    "new": change.new,
+                    "severity": change.severity.value,
+                }
+                for change in self.surface_changes
+            ],
             "fingerprint_changes": self.fingerprint_changes,
         }
 
@@ -204,37 +225,46 @@ def _classify_description_change(old_desc: str, new_desc: str) -> ChangeSeverity
 
 
 def _classify_schema_diff(old: Any, new: Any) -> ChangeSeverity:
-    """Walk a JSON schema and classify the worst change found."""
-    worst = ChangeSeverity.COSMETIC
-    order = {"cosmetic": 0, "behavioral": 1, "security": 2}
+    """Classify a bounded JSON Schema 2020-12 change."""
+    from mcpradar.schema.walker import SchemaLimitError, iter_schema_properties
 
-    old_props = old.get("properties", {}) if isinstance(old, dict) else {}
-    new_props = new.get("properties", {}) if isinstance(new, dict) else {}
+    if not isinstance(old, dict) or not isinstance(new, dict):
+        return ChangeSeverity.BEHAVIORAL
+    try:
+        old_walked = dict(iter_schema_properties(old))
+        new_walked = dict(iter_schema_properties(new))
+    except SchemaLimitError:
+        return ChangeSeverity.SECURITY
+    worst_walked = ChangeSeverity.COSMETIC
+    walked_order = {"cosmetic": 0, "behavioral": 1, "security": 2}
+    for property_path in set(old_walked) | set(new_walked):
+        old_value = old_walked.get(property_path)
+        new_value = new_walked.get(property_path)
+        if _semantic_schema(old_value) == _semantic_schema(new_value):
+            continue
+        leaf = property_path.rsplit(".", 1)[-1].lower()
+        worst_walked = _worse(
+            worst_walked,
+            _security_or_behavioral(leaf),
+            walked_order,
+        )
+    if worst_walked is not ChangeSeverity.COSMETIC:
+        return worst_walked
+    return (
+        ChangeSeverity.BEHAVIORAL
+        if _semantic_schema(old) != _semantic_schema(new)
+        else ChangeSeverity.COSMETIC
+    )
 
-    all_keys = set(old_props) | set(new_props)
 
-    for key in all_keys:
-        ov = old_props.get(key)
-        nv = new_props.get(key)
-
-        if (ov is None and nv is not None) or (ov is not None and nv is None):
-            worst = _worse(worst, _security_or_behavioral(key), order)
-        elif ov != nv:
-            # Property changed — check what changed
-            if isinstance(ov, dict) and isinstance(nv, dict):
-                inner = _classify_schema_diff(ov, nv)
-                if order[inner] > order[worst]:
-                    worst = inner
-            else:
-                sev = (
-                    ChangeSeverity.SECURITY
-                    if key.lower() in SECURITY_SENSITIVE_KEYS
-                    else ChangeSeverity.BEHAVIORAL
-                )
-                if order[sev] > order[worst]:
-                    worst = sev
-
-    return worst
+def _semantic_schema(value: object) -> object:
+    """Remove presentation-only annotations before schema comparison."""
+    if isinstance(value, dict):
+        ignored = {"title", "description", "$comment", "examples"}
+        return {key: _semantic_schema(child) for key, child in value.items() if key not in ignored}
+    if isinstance(value, list):
+        return [_semantic_schema(child) for child in value]
+    return value
 
 
 # ---------------------------------------------------------------------------
@@ -328,16 +358,61 @@ class Differ:
         ]
 
         # Prompts
-        pa = {p.name for p in report_a.prompts}
-        pb = {p.name for p in report_b.prompts}
+        prompts_a = {prompt.name: prompt for prompt in report_a.prompts}
+        prompts_b = {prompt.name: prompt for prompt in report_b.prompts}
+        pa = set(prompts_a)
+        pb = set(prompts_b)
         delta.prompt_added = sorted(pb - pa)
         delta.prompt_removed = sorted(pa - pb)
+        _compare_descriptions(
+            delta,
+            "prompt",
+            prompts_a,
+            prompts_b,
+        )
 
         # Resources
-        ra = {r.uri for r in report_a.resources}
-        rb = {r.uri for r in report_b.resources}
+        resources_a = {resource.uri: resource for resource in report_a.resources}
+        resources_b = {resource.uri: resource for resource in report_b.resources}
+        ra = set(resources_a)
+        rb = set(resources_b)
         delta.resource_added = sorted(rb - ra)
         delta.resource_removed = sorted(ra - rb)
+        _compare_descriptions(
+            delta,
+            "resource",
+            resources_a,
+            resources_b,
+        )
+
+        # Resource templates
+        templates_a = {template.uri_template: template for template in report_a.resource_templates}
+        templates_b = {template.uri_template: template for template in report_b.resource_templates}
+        ta = set(templates_a)
+        tb = set(templates_b)
+        delta.resource_template_added = sorted(tb - ta)
+        delta.resource_template_removed = sorted(ta - tb)
+        _compare_descriptions(
+            delta,
+            "resource_template",
+            templates_a,
+            templates_b,
+        )
+
+        if report_a.server_instructions != report_b.server_instructions:
+            delta.surface_changes.append(
+                SchemaChange(
+                    "server_instructions",
+                    report_a.server_instructions,
+                    report_b.server_instructions,
+                    _classify_description_change(
+                        report_a.server_instructions,
+                        report_b.server_instructions,
+                    ),
+                )
+            )
+
+        _compare_surface_status(report_a, report_b, delta)
 
         # Fingerprint comparison
         if report_a.server_version != report_b.server_version:
@@ -356,3 +431,63 @@ class Differ:
             delta.fingerprint_changes.append(f"tool_count: {tool_count_a} → {tool_count_b}")
 
         return delta
+
+
+def _compare_descriptions(
+    delta: DiffDelta,
+    surface: str,
+    old_items: Mapping[str, object],
+    new_items: Mapping[str, object],
+) -> None:
+    for identity in sorted(set(old_items) & set(new_items)):
+        old_description = str(getattr(old_items[identity], "description", "") or "")
+        new_description = str(getattr(new_items[identity], "description", "") or "")
+        if old_description == new_description:
+            continue
+        delta.surface_changes.append(
+            SchemaChange(
+                f"{surface}.{identity}.description",
+                old_description,
+                new_description,
+                _classify_description_change(old_description, new_description),
+            )
+        )
+
+
+def _compare_surface_status(
+    old_report: ScanReport,
+    new_report: ScanReport,
+    delta: DiffDelta,
+) -> None:
+    from mcpradar.scanner.report import SurfaceState
+
+    for surface in sorted(set(old_report.surface_status) | set(new_report.surface_status)):
+        old_status = old_report.surface_status.get(surface)
+        new_status = new_report.surface_status.get(surface)
+        old_value = old_status.to_dict() if old_status else None
+        new_value = new_status.to_dict() if new_status else None
+        if old_value == new_value:
+            continue
+        degraded = (
+            old_status is not None
+            and old_status.state is SurfaceState.COMPLETE
+            and (new_status is None or new_status.state is not SurfaceState.COMPLETE)
+        )
+        delta.surface_changes.append(
+            SchemaChange(
+                f"surface_status.{surface}",
+                old_value,
+                new_value,
+                ChangeSeverity.SECURITY if degraded else ChangeSeverity.BEHAVIORAL,
+            )
+        )
+
+    if old_report.incomplete != new_report.incomplete:
+        delta.surface_changes.append(
+            SchemaChange(
+                "scan.incomplete",
+                old_report.incomplete,
+                new_report.incomplete,
+                ChangeSeverity.SECURITY if new_report.incomplete else ChangeSeverity.BEHAVIORAL,
+            )
+        )

@@ -28,7 +28,7 @@ class TestPluginDiscovery:
     @patch("mcpradar.scanner.rules._discover_plugins")
     def test_plugin_loaded_via_discovery(self, mock_discover) -> None:
         mock_discover.return_value = [_FakePlugin()]
-        engine = RuleEngine(min_severity=Severity("low"))
+        engine = RuleEngine(min_severity=Severity("low"), enabled_plugins=["demo"])
         rule_ids = {r["rule_id"] for r in engine.loaded_rules}
         assert "X999" in rule_ids
 
@@ -39,7 +39,7 @@ class TestPluginDiscovery:
             title = "Not a rule"
 
         mock_discover.return_value = [NotARule()]
-        engine = RuleEngine(min_severity=Severity("low"))
+        engine = RuleEngine(min_severity=Severity("low"), enabled_plugins=["demo"])
         rule_ids = {r["rule_id"] for r in engine.loaded_rules}
         assert "Y001" not in rule_ids
 

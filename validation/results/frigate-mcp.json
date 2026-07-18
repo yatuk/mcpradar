@@ -1,9 +1,25 @@
 {
-  "name": "frigate-mcp",
-  "command": "",
   "transport": "stdio",
-  "expected_rules": [],
-  "error": "list index out of range",
-  "tools_count": 0,
-  "findings": []
+  "tools": [],
+  "findings": [],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "frigate-mcp",
+  "target": "uvx frigate-mcp",
+  "version": "",
+  "scanned_at": "2026-07-18T20:16:08.606006+00:00",
+  "last_attempted_at": "2026-07-18T20:16:08.606006+00:00",
+  "trending": false,
+  "live_scan": {
+    "ok": false,
+    "error": "ONRPCError): │ │ │ │ │ │ > 306 │ │ │ │ raise McpError(response_or_error.error) │ │ │ │ │ │ 307 │ │ │ else: │ │ │ │ │ │ 308 │ │ │ │ return │ │ │ │ │ │ result_type.model_validate(response_or_error.result) │ │ │ │ │ │ 309 │ │ │ │ │ └─────────────────────────────────────────────────────────────────────┘ │ │ │ │ McpError: Connection closed │ │ │ └─────────────────────────────────────────────────────────────────────────┘ │ └─────────────────────────────────────────────────────────────────────────────┘"
+  },
+  "package_scan": {
+    "ok": false,
+    "note": "fetch failed: PyPI metadata fetch failed for 'frigate-mcp': Client error '404 Not Found' for url 'https://pypi.org/pypi/"
+  },
+  "status": "incomplete",
+  "incomplete": true,
+  "incomplete_reason": "ONRPCError): │ │ │ │ │ │ > 306 │ │ │ │ raise McpError(response_or_error.error) │ │ │ │ │ │ 307 │ │ │ else: │ │ │ │ │ │ 308 │ │ │ │ return │ │ │ │ │ │ result_type.model_validate(response_or_error.result) │ │ │ │ │ │ 309 │ │ │ │ │ └─────────────────────────────────────────────────────────────────────┘ │ │ │ │ McpError: Connection closed │ │ │ └─────────────────────────────────────────────────────────────────────────┘ │ └─────────────────────────────────────────────────────────────────────────────┘"
 }

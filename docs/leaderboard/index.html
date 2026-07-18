@@ -611,10 +611,10 @@ footer a:hover { text-decoration: underline; }
 <details class="methodology" id="methodologyPanel">
 <summary>How scores work · methodology &amp; limitations ▾</summary>
 <div class="body">
-  <p><strong>AIVSS</strong> (AI Vulnerability Scoring System) rates MCP server security
+  <p><strong>MRS</strong> (MCPRadar Risk Score) rates MCP server security
   on a <strong>0–10</strong> scale where <strong>0 = safe</strong> and
   <strong>10 = critical</strong>.</p><br>
-  <p>Following OWASP <strong>AIVSS</strong>, the score is
+  <p>MCPRadar's versioned <strong>MRS-v1</strong> score is
   <code>((base + AARS) / 2) × ThM</code>. <strong>base</strong> is the
   severity-weighted MEDIUM+ findings (critical×10, high×7, medium×4) over the tool
   count. <strong>AARS</strong> is the <em>agentic capability</em> layer — a
@@ -652,7 +652,7 @@ footer a:hover { text-decoration: underline; }
     <span>pure_compute</span><span>0.0</span><span>no side effect</span>
   </div>
   <p style="margin-top:6px">Weights are ordinal (exec &gt; browser &gt; db-write &gt;
-  fs-write &gt; secrets &gt; egress &gt; read &gt; none), matching the OWASP AIVSS
+  fs-write &gt; secrets &gt; egress &gt; read &gt; none), matching the MCPRadar MRS-v1
   principle that autonomy and tool-use amplify a baseline. Full justification:
   <a href="https://github.com/yatuk/mcpradar/blob/main/docs/scoring-model.md" style="color:var(--blue)">scoring-model.md</a>.</p><br>
 
@@ -807,7 +807,7 @@ footer a:hover { text-decoration: underline; }
         <tr>
           <th data-sort="rank" scope="col" aria-sort="ascending" title="Position by ascending risk">Rank</th>
           <th data-sort="server" scope="col" aria-sort="none" title="MCP server name (click to sort A–Z)">Server</th>
-          <th data-sort="risk" scope="col" aria-sort="none" title="AIVSS risk score, 0 (safe) to 10 (critical)">Risk <span style="font-weight:400;font-size:10px;text-transform:none;letter-spacing:0">0→10</span></th>
+          <th data-sort="risk" scope="col" aria-sort="none" title="MRS risk score, 0 (safe) to 10 (critical)">Risk <span style="font-weight:400;font-size:10px;text-transform:none;letter-spacing:0">0→10</span></th>
           <th data-sort="grade" scope="col" aria-sort="none" title="Letter grade A–F derived from the risk score">Grade</th>
           <th scope="col" title="Risk score trend across past scans">Trend</th>
           <th scope="col" title="Analysis scope and the server's dominant capability (blast radius)">Scope</th>
@@ -834,7 +834,7 @@ footer a:hover { text-decoration: underline; }
 <!-- ===== FOOTER ===== -->
 <footer>
   <div>
-    Scores computed by <strong>MCPRadar AIVSS engine</strong>.
+    Scores computed by <strong>MCPRadar MRS engine</strong>.
     Updated daily via GitHub Actions.
   </div>
   <div style="margin-top:6px">
@@ -907,7 +907,7 @@ footer a:hover { text-decoration: underline; }
   function isPending(s) {
     var st = s.status || "";
     return st === "registry-pending" || st === "pending" || st === "unknown" ||
-           st === "" || s.aivss_score === null || s.grade === "-";
+           st === "" || s.risk_score === null || s.grade === "-";
   }
   var isLoading = true;
   var loadError = false;
@@ -1006,8 +1006,8 @@ footer a:hover { text-decoration: underline; }
 
       var va, vb;
       if (sortKey === "rank" || sortKey === "risk") {
-        va = a.aivss_score || 0;
-        vb = b.aivss_score || 0;
+        va = a.risk_score || 0;
+        vb = b.risk_score || 0;
       } else if (sortKey === "server") {
         va = (a.display_name || a.server || "").toLowerCase();
         vb = (b.display_name || b.server || "").toLowerCase();
@@ -1027,8 +1027,8 @@ footer a:hover { text-decoration: underline; }
         va = (a.tool_hash || "").toLowerCase();
         vb = (b.tool_hash || "").toLowerCase();
       } else {
-        va = a.aivss_score || 0;
-        vb = b.aivss_score || 0;
+        va = a.risk_score || 0;
+        vb = b.risk_score || 0;
       }
       if (va < vb) return sortAsc ? -1 : 1;
       if (va > vb) return sortAsc ? 1 : -1;
@@ -1084,7 +1084,7 @@ footer a:hover { text-decoration: underline; }
       var s = allServers[i];
       if (!isPending(s)) {
         scanned++;
-        sum += s.aivss_score || 0;
+        sum += s.risk_score || 0;
       }
       if ((s.last_scanned || "") > latest) {
         latest = s.last_scanned;
@@ -1192,7 +1192,7 @@ footer a:hover { text-decoration: underline; }
 
     // Highest-risk scanned servers — the 5 worst grades, most visible.
     var scannedOnly = allServers.filter(function (s) { return !isPending(s); });
-    scannedOnly.sort(function (a, b) { return (b.aivss_score || 0) - (a.aivss_score || 0); });
+    scannedOnly.sort(function (a, b) { return (b.risk_score || 0) - (a.risk_score || 0); });
     var thtml = "";
     for (var ri = 0; ri < Math.min(5, scannedOnly.length); ri++) {
       var rs = scannedOnly[ri];
@@ -1200,7 +1200,7 @@ footer a:hover { text-decoration: underline; }
       thtml += '<a class="top-risky-row" href="#server=' + encodeServer(rs.server || "") + '">' +
         '<span class="grade-badge ' + rg + '">' + rg + '</span>' +
         '<span class="tr-name">' + esc(rs.display_name || rs.server || "-") + '</span>' +
-        '<span class="tr-score">' + (rs.aivss_score != null ? rs.aivss_score.toFixed(1) : "-") + '</span></a>';
+        '<span class="tr-score">' + (rs.risk_score != null ? rs.risk_score.toFixed(1) : "-") + '</span></a>';
     }
     document.getElementById("topRisky").innerHTML = thtml ||
       '<span style="color:var(--dim);font-size:11px">No scans yet.</span>';
@@ -1240,11 +1240,11 @@ footer a:hover { text-decoration: underline; }
     return html;
   }
 
-  // Decompose the AIVSS into its three candidate terms; the score is their max.
+  // Decompose the MRS into its three candidate terms; the score is their max.
   function scoreDecompositionHtml(s) {
     if (isPending(s) || !s.breakdown) return "";
     var b = s.breakdown;
-    var score = s.aivss_score != null ? s.aivss_score : 0;
+    var score = s.risk_score != null ? s.risk_score : 0;
     function row(key, label, val, note) {
       var on = key === b.driver;
       var pct = Math.min(100, Math.max(2, (val / 10) * 100));
@@ -1256,7 +1256,7 @@ footer a:hover { text-decoration: underline; }
         '<div class="decomp-val">' + val.toFixed(2) + '</div>' +
         '<div class="decomp-note">' + note + '</div></div>';
     }
-    var html = '<div class="detail-section"><h3>Why this score — AIVSS ' + score.toFixed(1) +
+    var html = '<div class="detail-section"><h3>Why this score — MRS ' + score.toFixed(1) +
       ' (' + esc(s.grade || "-") + ')</h3>';
     html += '<p class="decomp-intro">The score is the <b>highest</b> of three independent ' +
       'terms — capability can only <em>raise</em> risk, never discount a finding.</p>';
@@ -1445,7 +1445,7 @@ footer a:hover { text-decoration: underline; }
     var html = "";
     for (var i = b.start; i < b.end; i++) {
       var s = filtered[i];
-      var sc = s.aivss_score != null ? s.aivss_score : 0;
+      var sc = s.risk_score != null ? s.risk_score : 0;
       var g = s.grade || "-";
       var tools = s.tools != null ? s.tools : 0;
       var findings = s.findings != null ? s.findings : 0;
@@ -1533,7 +1533,7 @@ footer a:hover { text-decoration: underline; }
     var html = "";
     for (var i = b.start; i < b.end; i++) {
       var s = filtered[i];
-      var sc = s.aivss_score != null ? s.aivss_score : 0;
+      var sc = s.risk_score != null ? s.risk_score : 0;
       var g = s.grade || "-";
       var tools = s.tools != null ? s.tools : 0;
       var findings = s.findings != null ? s.findings : 0;
@@ -1609,7 +1609,7 @@ footer a:hover { text-decoration: underline; }
         "results": [],
         "properties": {
           "target": serverName,
-          "aivss_score": s.aivss_score,
+          "risk_score": s.risk_score,
           "grade": s.grade,
           "confidence": s.confidence
         }
@@ -1703,7 +1703,7 @@ footer a:hover { text-decoration: underline; }
     detailView.classList.add("active");
 
     var g = s.grade || "-";
-    var sc = s.aivss_score != null ? s.aivss_score : 0;
+    var sc = s.risk_score != null ? s.risk_score : 0;
     var name = s.display_name || s.server || "-";
     var findings = s.findings_detail || [];
     var tools = s.tools_detail || [];
@@ -1741,7 +1741,7 @@ footer a:hover { text-decoration: underline; }
 
     // Score breakdown
     html += '<div class="detail-score-breakdown">';
-    html += '<div class="item">AIVSS Risk: <b>' + sc.toFixed(1) + ' / 10</b></div>';
+    html += '<div class="item">MRS Risk: <b>' + sc.toFixed(1) + ' / 10</b></div>';
     html += '<div class="item">Grade: <b style="color:' + (g === "F" || g === "D" ? "var(--red)" : g === "A" || g === "B" ? "var(--green)" : "var(--yellow)") + '">' + g + '</b></div>';
     html += '<div class="item">Confidence: <b>' + (s.confidence != null ? (s.confidence * 100).toFixed(0) + '%' : '-') + '</b></div>';
     html += '<div class="item">Tools: <b>' + (s.tools || 0) + '</b></div>';
@@ -1762,7 +1762,7 @@ footer a:hover { text-decoration: underline; }
     html += '<button class="sarif-btn" id="jsonBtn" title="Download this server\'s raw result as JSON" style="margin-left:6px">Download JSON</button>';
     html += '</div>';
 
-    // "Why this score" — decompose the AIVSS into its three candidate terms so
+    // "Why this score" — decompose the MRS into its three candidate terms so
     // the grade is defensible, not just asserted.
     html += scoreDecompositionHtml(s);
 

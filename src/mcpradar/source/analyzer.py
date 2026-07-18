@@ -872,25 +872,37 @@ def _token_in(token: str, text: str) -> bool:
 @dataclass
 class SourceScanResult:
     files_scanned: int = 0
+    files_by_language: dict[str, int] = field(default_factory=dict)
     findings: list[Finding] = field(default_factory=list)
 
 
 def analyze_path(path: Path, max_files: int = 500) -> SourceScanResult:
-    """Analyze a single .py file or every .py file under a directory."""
+    """Analyze Python and JavaScript/TypeScript sources under a path."""
+    from mcpradar.source.javascript import JavaScriptAnalyzer
+
     analyzer = SourceAnalyzer()
+    javascript_analyzer = JavaScriptAnalyzer()
     result = SourceScanResult()
     if path.is_file():
-        files = [path] if path.suffix == ".py" else []
+        source_suffixes = {".py", ".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx"}
+        files = [path] if path.suffix.lower() in source_suffixes else []
     else:
         files = sorted(
             p
-            for p in path.rglob("*.py")
+            for p in path.rglob("*")
+            if p.is_file()
+            and p.suffix.lower() in {".py", ".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx"}
             if not any(
                 part in {".venv", "venv", "node_modules", ".git", "__pycache__", "test", "tests"}
                 for part in p.parts
             )
         )[:max_files]
     for f in files:
-        result.findings.extend(analyzer.analyze_file(f))
+        language = "python" if f.suffix.lower() == ".py" else "javascript"
+        if language == "python":
+            result.findings.extend(analyzer.analyze_file(f))
+        else:
+            result.findings.extend(javascript_analyzer.analyze_file(f))
         result.files_scanned += 1
+        result.files_by_language[language] = result.files_by_language.get(language, 0) + 1
     return result

@@ -1,14 +1,18 @@
 # Security Policy
 
-MCPRadar is currently at **v1.0.0-rc3 (Release Candidate)**. We recommend upgrading to the latest release for the most complete security coverage, including all 15 detection rules, 7 cross-server analysis checks, OSV.dev CVE feed integration, and full OWASP MCP Top 10 coverage.
+MCPRadar is currently at **v1.1.0-rc1 (Release Candidate)**. Upgrade to the
+latest release candidate for the current 42-rule catalog, safe execution and
+fetching defaults, protocol profiles, source/dependency analysis, policy gates,
+and signed snapshots. Rule mappings do not constitute a claim of complete
+OWASP coverage.
 
 ## Supported Versions
 
 | Version | Supported |
 |---|---|
-| 1.0.0-rc3 | ✅ |
-| 1.0.0-rc1–rc2 | ✅ |
-| < 1.0.0 | ⚠️ Pre-release |
+| 1.1.0-rc1 | ✅ Current |
+| 1.0.0 release candidates | ⚠️ Upgrade recommended |
+| < 1.0.0 | ❌ Unsupported |
 
 ## Reporting a Vulnerability
 
@@ -25,6 +29,7 @@ We aim to respond within 48 hours and resolve critical issues within 7 days.
 
 This policy covers:
 - MCPRadar CLI tool vulnerabilities
+- Network-fetch, sandbox, plugin-isolation, and snapshot-verification bypasses
 - Detection rule bypass methods
 - False negatives in security scanning
 

@@ -1,9 +1,81 @@
 {
-  "name": "excalidraw-architect-mcp",
-  "command": "",
   "transport": "stdio",
-  "expected_rules": [],
-  "error": "list index out of range",
-  "tools_count": 0,
-  "findings": []
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "fastmcp@2.0 (PyPI) is affected by CVE-2025-69196: FastMCP OAuth Proxy token reuse across MCP servers",
+      "severity": "high",
+      "target": "fastmcp@2.0",
+      "location": "pyproject.toml",
+      "evidence": "",
+      "detail": {
+        "package": "fastmcp",
+        "version": "2.0",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-5h2m-4q8j-pqpj",
+        "cve": "CVE-2025-69196",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-863"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/PrefectHQ/fastmcp/security/advisories/GHSA-5h2m-4q8j-pqpj",
+          "https://nvd.nist.gov/vuln/detail/CVE-2025-69196",
+          "https://github.com/PrefectHQ/fastmcp"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "pydantic@2.0 (PyPI) is affected by CVE-2024-3772: Pydantic regular expression denial of service",
+      "severity": "medium",
+      "target": "pydantic@2.0",
+      "location": "pyproject.toml",
+      "evidence": "",
+      "detail": {
+        "package": "pydantic",
+        "version": "2.0",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-mr82-8j83-vxmv",
+        "cve": "CVE-2024-3772",
+        "cvss": 5.9,
+        "cwe_ids": [
+          "CWE-1333"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://nvd.nist.gov/vuln/detail/CVE-2024-3772",
+          "https://github.com/pydantic/pydantic/pull/7360",
+          "https://github.com/pydantic/pydantic/commit/59d8f38fd6220e3917c53785dbc70317d6f8e631"
+        ]
+      },
+      "confidence": 0.9
+    }
+  ],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "excalidraw-architect-mcp",
+  "target": "uvx excalidraw-architect-mcp",
+  "version": "",
+  "scanned_at": "2026-07-18T20:15:20.872214+00:00",
+  "last_attempted_at": "2026-07-18T20:15:20.872214+00:00",
+  "trending": false,
+  "live_scan": {
+    "ok": false,
+    "error": "scanner returned no JSON result"
+  },
+  "enriched": true,
+  "enriched_ref": "pip:excalidraw-architect-mcp",
+  "package_scan": {
+    "ok": true,
+    "note": "+2 findings from pip:excalidraw-architect-mcp"
+  },
+  "status": "scanned",
+  "scan_coverage": "package-only"
 }

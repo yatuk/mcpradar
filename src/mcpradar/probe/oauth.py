@@ -26,6 +26,8 @@ from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 from urllib.parse import urlparse
 
+from mcpradar.network.safe_http import SafeUrlPolicy, safe_get
+
 if TYPE_CHECKING:
     import httpx
 
@@ -74,8 +76,9 @@ def probe_oauth_metadata(target: str, timeout: float = 5.0) -> OAuthMetadata | N
     except Exception:  # pragma: no cover - httpx is a hard dependency
         return None
 
-    with httpx.Client(timeout=timeout, follow_redirects=True) as client:
-        pr = _fetch_protected_resource(client, origin, resource_path, target)
+    policy = SafeUrlPolicy.for_target(origin)
+    with httpx.Client(timeout=timeout, follow_redirects=False) as client:
+        pr = _fetch_protected_resource(client, origin, resource_path, target, policy)
         if pr is None:
             return None  # no OAuth in play — leave R112 silent
 
@@ -86,7 +89,7 @@ def probe_oauth_metadata(target: str, timeout: float = 5.0) -> OAuthMetadata | N
 
         as_url = meta.authorization_servers[0] if meta.authorization_servers else None
         if as_url:
-            as_meta = _fetch_as_metadata(client, as_url)
+            as_meta = _fetch_as_metadata(client, as_url, policy)
             if as_meta is not None:
                 meta.as_metadata_present = True
                 iss = as_meta.get("authorization_response_iss_parameter_supported")
@@ -101,7 +104,11 @@ def probe_oauth_metadata(target: str, timeout: float = 5.0) -> OAuthMetadata | N
 
 
 def _fetch_protected_resource(
-    client: httpx.Client, origin: str, resource_path: str, target: str
+    client: httpx.Client,
+    origin: str,
+    resource_path: str,
+    target: str,
+    policy: SafeUrlPolicy,
 ) -> dict[str, object] | None:
     """Try RFC 9728 discovery: well-known paths, then a 401 challenge hint."""
     candidates = [origin + _WELL_KNOWN_PR]
@@ -110,14 +117,14 @@ def _fetch_protected_resource(
         candidates.append(origin + _WELL_KNOWN_PR + resource_path)
 
     for url in candidates:
-        doc = _get_json(client, url)
+        doc = _get_json(client, url, policy)
         if doc is not None:
             return doc
 
     # No metadata document — probe the resource itself. An OAuth-protected MCP
     # server answers an unauthenticated request with 401 + WWW-Authenticate.
     try:
-        resp = client.get(target)
+        resp = safe_get(client, target, policy)
     except Exception:
         return None
     if resp.status_code == 401 and "www-authenticate" in resp.headers:
@@ -129,18 +136,20 @@ def _fetch_protected_resource(
     return None
 
 
-def _fetch_as_metadata(client: httpx.Client, as_url: str) -> dict[str, object] | None:
+def _fetch_as_metadata(
+    client: httpx.Client, as_url: str, policy: SafeUrlPolicy
+) -> dict[str, object] | None:
     base = as_url.rstrip("/")
     for suffix in (_WELL_KNOWN_AS, _WELL_KNOWN_OIDC):
-        doc = _get_json(client, base + suffix)
+        doc = _get_json(client, base + suffix, policy)
         if doc is not None:
             return doc
     return None
 
 
-def _get_json(client: httpx.Client, url: str) -> dict[str, object] | None:
+def _get_json(client: httpx.Client, url: str, policy: SafeUrlPolicy) -> dict[str, object] | None:
     try:
-        resp = client.get(url)
+        resp = safe_get(client, url, policy)
     except Exception:
         return None
     if resp.status_code != 200:

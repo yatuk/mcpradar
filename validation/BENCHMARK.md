@@ -1,5 +1,10 @@
 # MCPRadar Precision/Recall Benchmark
 
+> **Historical rc4 result.** This retained report predates the v1.1
+> instance-level metric engine. Current runs enumerate the complete rule catalog,
+> per-surface metrics, and the minimum three-positive/three-hard-negative
+> calibration gaps; do not read this snapshot as a v1.1 quality claim.
+
 **Generated:** 2026-07-13 11:15 UTC
 **Scanner version:** 1.0.0-rc4
 

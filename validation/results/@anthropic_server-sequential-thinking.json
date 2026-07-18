@@ -1,9 +1,27 @@
 {
-  "name": "@anthropic/server-sequential-thinking",
-  "command": "",
   "transport": "stdio",
-  "expected_rules": [],
-  "error": "list index out of range",
-  "tools_count": 0,
-  "findings": []
+  "tools": [],
+  "findings": [],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "@anthropic/server-sequential-thinking",
+  "target": "npx -y @modelcontextprotocol/server-sequential-thinking",
+  "version": "",
+  "scanned_at": "2026-07-18T20:12:23.118110+00:00",
+  "last_attempted_at": "2026-07-18T20:12:23.118110+00:00",
+  "trending": false,
+  "live_scan": {
+    "ok": false,
+    "error": "scanner returned no JSON result"
+  },
+  "enriched": true,
+  "enriched_ref": "npm:@modelcontextprotocol/server-sequential-thinking",
+  "package_scan": {
+    "ok": true,
+    "note": "+0 findings from npm:@modelcontextprotocol/server-sequential-thinking"
+  },
+  "status": "incomplete",
+  "incomplete": true,
+  "incomplete_reason": "scanner returned no JSON result; +0 findings from npm:@modelcontextprotocol/server-sequential-thinking"
 }

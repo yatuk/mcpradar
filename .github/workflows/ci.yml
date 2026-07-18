@@ -51,6 +51,11 @@ jobs:
           --cov=src/mcpradar
           --cov-report=term-missing
           --cov-report=xml
+          --cov-report=json:coverage.json
+
+      - name: Enforce coverage gates
+        if: matrix.python == '3.12' && matrix.os == 'ubuntu-latest'
+        run: uv run python scripts/check_coverage.py coverage.json
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
@@ -71,6 +76,47 @@ jobs:
 
       - name: Build wheel
         run: uv build
+
+      - name: Install and smoke-test wheel
+        run: |
+          uv venv .wheel-venv
+          uv pip install --python .wheel-venv/bin/python dist/*.whl
+          .wheel-venv/bin/mcpradar --version
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: distributions
+          path: dist/*
+          if-no-files-found: error
+
+  conformance:
+    name: MCP Conformance (2025-11-25 / ${{ matrix.scenario }})
+    runs-on: ubuntu-latest
+    needs: [lint, test]
+    strategy:
+      fail-fast: false
+      matrix:
+        scenario: [initialize, tools_call]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - run: uv sync --group dev
+
+      - name: Run official MCP client conformance scenario
+        run: >
+          npx --yes @modelcontextprotocol/conformance@0.1.16 client
+          --command "uv run python validation/conformance_client.py"
+          --scenario "${{ matrix.scenario }}"
+          --spec-version "2025-11-25"
+          --timeout 30000
 
   regression-gate:
     name: Regression Gate (CVE Corpus)

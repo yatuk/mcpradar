@@ -29,7 +29,7 @@
   <a href="https://pypi.org/project/mcpradar/"><img src="https://img.shields.io/pypi/pyversions/mcpradar?color=blueviolet" alt="Python 3.11 3.12 3.13"/></a>
   <a href="https://pypi.org/project/mcpradar/"><img src="https://img.shields.io/badge/downloads-pypi-blue" alt="PyPI downloads"/></a>
   <a href="https://github.com/astral-sh/ruff"><img src="https://img.shields.io/badge/code%20style-ruff-261230" alt="Ruff"/></a>
-  <a href="https://owasp.org/www-project-mcp-top-10/"><img src="https://img.shields.io/badge/OWASP%20MCP%20Top%2010-10/10%20covered-brightgreen" alt="OWASP MCP Top 10"/></a>
+  <a href="https://owasp.org/www-project-mcp-top-10/"><img src="https://img.shields.io/badge/OWASP%20MCP-mapped-brightgreen" alt="Mapped to OWASP MCP guidance"/></a>
 </p>
 
 <p align="center">
@@ -64,7 +64,7 @@ after install. **MCPRadar does.**
 ## Quick Start
 
 ```bash
-uvx mcpradar scan "npx -y @modelcontextprotocol/server-filesystem /tmp" -t stdio
+uvx mcpradar scan "npx -y @modelcontextprotocol/server-filesystem /tmp" -t stdio --allow-host-exec
 ```
 
 One command, no install, runs against any MCP server you can launch.
@@ -73,19 +73,22 @@ One command, no install, runs against any MCP server you can launch.
 
 ## Features
 
-### Core Detection (all built, all tested)
-- **12 static rules (R001-R109):** Dangerous tool names, zero-width Unicode, prompt injection (10 patterns), base64/hex blobs, hidden HTML/Markdown, permission scope mismatch, secret/token exposure, command injection, supply chain risk, schema poisoning
+### Core Detection
+- **42 canonical rules (R/C/S/M/D/T):** MCP surface metadata, cross-server context, Python and JavaScript/TypeScript source, agent configuration, dependency CVEs, and package typosquatting
 - **7 cross-server rules (C001-C007):** Tool name collision, shadowing, exfiltration chains, capability overlap, permission gradient, attack path chains, privilege escalation
-- **2 runtime rules (R110-R111):** Version anomaly detection via fingerprint diff, insecure transport detection via TLS handshake + HSTS check
+- **All MCP surfaces:** cursor-paginated tools, prompts, resources, resource templates, and server instructions with explicit complete/partial/failed state
+- **Protocol profiles:** maintained v1 stateful MCP plus opt-in `2026-07-28` stateless HTTP discovery and per-request metadata
 
 ### CI/CD and Output
 - **SARIF v2.1.0:** Drops into GitHub Security tab via one Action
-- **Capability-aware AIVSS scoring:** `((base + AARS) / 2) × ThM` — findings *plus* an agentic capability layer, so an exec / fs-write / browser-control server is non-A even with no CVE (see [docs/scoring-model.md](docs/scoring-model.md))
+- **MRS-v1 scoring:** a versioned MCPRadar-owned 0–10 risk signal combining findings, capability blast radius, and environment; it is not presented as OWASP AIVSS (see [docs/scoring-model.md](docs/scoring-model.md))
 - **Snapshot diff:** SQLite-backed history with cosmetic / behavioral / security classification
-- **Fast:** Pure Python, no daemons, runs in CI under 5 seconds
+- **Policy-as-code:** strict YAML gates with severity/rule/MRS thresholds and owned, justified, expiring suppressions
+- **Signed snapshots:** deterministic Ed25519 envelopes with embedded provenance and optional trusted-key verification
+- **Bounded:** schema traversal, pagination, plugin execution, downloads, and analysis all have explicit resource limits
 
 ### Supply Chain
-- **CycloneDX 1.5 SBOM:** Export dependency bill of materials
+- **CycloneDX 1.7 SBOM:** Target-specific component identity, hashes, licenses, dependency graph, and fetch provenance
 - **Fingerprint-based change detection:** SHA-256 of tool names for rug pull detection across scans
 - **NVD CVE feed:** MCP-related CVE sync from NVD API 2.0 with multi-factor finding-to-CVE matching
 
@@ -94,23 +97,23 @@ One command, no install, runs against any MCP server you can launch.
 - **Argument sanitizer:** Validates and sanitizes tool arguments before probing
 - **Audit trail:** Structured event logging (scan_start, finding_created, diff_detected)
 - **Stats engine:** Per-server trend analysis, top rules, severity distribution
-- **Plugin system:** entry_points auto-discovery, `mcpradar plugin init/validate/install`
+- **Plugin system:** explicit allowlist, hash-pinned wheel installation, isolated subprocess execution, timeout and output limits
 
 ---
 
 ## What's Real vs Planned
 
-### Production-Ready Today (v1.0.0-rc3)
-- 19 detection rules (12 static + 7 cross-server), 407 tests passing
+### Release Candidate Today (v1.1.0-rc1)
+- 42 cataloged detection rules with generated docs and complete SARIF metadata
 - SQLite-backed scan history with diff engine
 - SARIF v2.1.0 output for GitHub Security tab
 - Watch mode (periodic scanning + webhook/command alerts)
 - Audit trail with structured event logging
 - Stats engine with per-server trend analysis
-- Plugin system with entry_points auto-discovery
-- CycloneDX SBOM export
+- Explicitly enabled, hash-pinned plugins running in a constrained worker process
+- CycloneDX 1.7 target SBOM export
 - NVD CVE feed sync
-- AIVSS 0-10 scoring + A-F letter grades
+- MRS-v1 0-10 scoring + A-F letter grades
 - Container sandbox (`--sandbox`) for isolating untrusted stdio servers during a scan
 - Source-code analysis (`mcpradar scan-source`): AST-based SSRF, unsafe deserialization, command/SQL injection, Description-Code Inconsistency, Trojan Source / bidi unicode, `0.0.0.0` network exposure / DNS rebinding, and token passthrough / confused deputy (S001-S010) — no server execution required
 - Config poisoning scan (`mcpradar scan-config`): inspects MCP/agent config files (`claude_desktop_config.json`, `.mcp.json`, `.cursor/mcp.json`, `.claude/settings.json`, …) for download-to-shell RCE, credential exfiltration, reverse shells, over-broad permissions (M001-M007), and typosquatted server packages (T001)
@@ -118,8 +121,6 @@ One command, no install, runs against any MCP server you can launch.
 - Public security leaderboard at https://yatuk.github.io/mcpradar
 
 ### Planned (v1.1+)
-- **Semgrep integration:** Complement the built-in AST rules with a Semgrep ruleset
-- **Typosquatting detection:** Levenshtein distance against known top packages
 - **Runtime proxy:** Transparent MCP traffic inspection
 
 See [ROADMAP.md](ROADMAP.md) for details and timeline.
@@ -136,19 +137,19 @@ graph LR
     B --> D[Rule Engine]
     D -->|findings| E[SQLite Snapshot]
     E --> F[Scoring Engine]
-    F -->|AIVSS 0-10| G[Rich / JSON / SARIF]
+    F -->|MRS-v1 0-10| G[Rich / JSON / SARIF / CEF]
     B -->|--sandbox| H[Disposable Container]
     H -->|isolated stdio| C
     A2[scan-source] --> S[AST Source Analysis]
-    S -->|S001-S007 findings| G
-    B -.->|planned v1.1| P[Package Fetch]
-    P -.->|planned v1.1| S
+    S -->|S001-S011 findings| G
+    B --> P[Hash-verified Package Fetch]
+    P --> S
 ```
 
-*All components, including the container sandbox and AST source analysis (`scan-source`), are production-ready. Automatic package fetching (GitHub/npm/pip → source) is planned for v1.1; `scan-source` currently takes a local path.*
+Stdio execution is denied unless the caller selects `--sandbox` or explicitly acknowledges a trusted command with `--allow-host-exec`. Package-reference source scans fetch and verify archives without executing package code.
 
 MCPRadar connects to the MCP server, enumerates tools/prompts/resources,
-runs each tool schema through the rule engine, computes AIVSS scores,
+runs every advertised MCP surface through the rule engine, computes MRS-v1 scores,
 stores the snapshot in SQLite, and outputs the report. Subsequent scans diff
 against history to catch silent changes.
 
@@ -175,7 +176,7 @@ See [Benchmarks](#benchmarks) for measured precision/recall data.
 | **Source scanning** | Yes (`scan-source`) | - | - | - | - | Yes | - |
 | **SBOM + dep. CVE** | Yes (CycloneDX + NVD + OSV) | - | - | - | - | - | - |
 | **Sandbox execution** | Yes (container isolation) | - | - | N/A (proxy) | - | - | - |
-| **AIVSS scoring** | Yes (0-10 + CWE) | LLM score | Yes | - | - | - | - |
+| **Versioned risk scoring** | MRS-v1 (0-10 + CWE) | LLM score | Yes | - | - | - | - |
 | **Snapshot diff** | Yes (3-level) | Not documented | Version compare | Yes | - | - | - |
 | **SARIF output** | Yes (v2.1.0) | Yes | - | - | Yes | - | - |
 | **stdio transport** | Yes | - | - | - | - | - | - |
@@ -197,15 +198,16 @@ in [`validation/BENCHMARK.md`](validation/BENCHMARK.md). The benchmark includes:
 - **Negative controls:** Official MCP reference servers (filesystem, memory, everything) — any MEDIUM+ finding counts as a false positive
 - **External corpus:** 7 stdio servers from the [Appsecco Vulnerable MCP Servers Lab](https://github.com/appsecco/vulnerable-mcp-servers-lab); vulnerability classes that are statically undetectable by design (runtime output poisoning, implementation-level RCE, dependency CVEs, typosquatting) are labeled as known limitations, not detections
 
-| Metric | Target | Measured (v1.0.0-rc4, 11 targets) |
+| Metric | Target | Last published legacy corpus result |
 |---|---|---|
 | Precision | >= 80% | 91.7% |
 | Recall | >= 85% | 100% |
 | F1 Score | >= 0.82 | 0.96 |
 
-Metrics are computed on MEDIUM+ severity findings; LOW informational findings are
-excluded. The one measured false positive (R113 on the official filesystem server's
-write tools) is documented in the report.
+The v1.1 benchmark runner now counts finding instances rather than collapsing rule IDs,
+publishes per-surface metrics, and lists every rule lacking three positive and three
+hard-negative fixtures as a coverage gap. Historical aggregate numbers above remain
+for comparison and are not represented as full-catalog calibration.
 
 Performance benchmarks (`tests/test_benchmark.py`): rule engine latency ~14 ms (100 tools),
 SARIF generation ~2 ms (100 findings), SQLite insert ~1.5 ms (batch).
@@ -327,7 +329,7 @@ Scanning @modelcontextprotocol/server-filesystem (stdio)...
   MEDIUM    R105  Scope Mismatch            3 tools with read-only names
             have description mentioning write/delete operations
 
-AIVSS Score: 6.8 / 10  Grade: C
+MRS Score: 6.8 / 10  Grade: C
   3 critical, 5 high, 2 medium, 0 low
   SHA-256: a1b2c3d4... (tool fingerprint saved)
 
@@ -389,7 +391,10 @@ Full docs: [docs/detection-rules.md](docs/detection-rules.md)
 
 ## Public Leaderboard
 
-Security scores for popular MCP servers, updated weekly:
+Security scores for MCP servers, updated daily. The automation retries unresolved
+catalog rows and scans the ten most popular installable packages that are actually
+published in the official MCP Registry. Because the Registry deliberately has no
+popularity order, the final top ten uses npm/PyPI weekly downloads and GitHub stars:
 
 <p align="center">
   <a href="https://yatuk.github.io/mcpradar"><b>yatuk.github.io/mcpradar</b></a>

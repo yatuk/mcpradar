@@ -13,6 +13,7 @@ jobs:
     permissions:
       id-token: write
       contents: write
+      attestations: write
     steps:
       - uses: actions/checkout@v4
 
@@ -20,8 +21,37 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Verify tag matches package version
+        shell: bash
+        run: |
+          VERSION=$(uv run python -c 'from mcpradar import __version__; print(__version__)')
+          test "${GITHUB_REF_NAME}" = "v${VERSION}"
+
       - name: Build
         run: uv build
+
+      - name: Verify wheel installation
+        shell: bash
+        run: |
+          uv venv .release-venv
+          uv pip install --python .release-venv/bin/python dist/*.whl
+          .release-venv/bin/mcpradar --version
+
+      - name: Generate release SBOM
+        run: uv run mcpradar sbom . --output dist/mcpradar.cdx.json
+
+      - name: Attest release artifacts
+        uses: actions/attest@v4
+        with:
+          subject-path: |
+            dist/*.whl
+            dist/*.tar.gz
+
+      - name: Attest wheel SBOM
+        uses: actions/attest@v4
+        with:
+          subject-path: dist/*.whl
+          sbom-path: dist/mcpradar.cdx.json
 
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
