@@ -687,25 +687,14 @@ footer a:hover { text-decoration: underline; }
 
 <!-- ===== SUBMIT SERVER PANEL ===== -->
 <details class="methodology" id="submitPanel">
-<summary>Submit a Server for Scanning ▾</summary>
+<summary>Request a Server Scan ▾</summary>
 <div class="body">
-  <form id="submitForm">
-    <input type="text" id="serverName" placeholder="Server name (e.g., @org/server-name)" required
-      style="width:100%;padding:7px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:13px;margin-bottom:8px;box-sizing:border-box">
-    <input type="url" id="serverUrl" placeholder="GitHub or npm URL (optional)"
-      style="width:100%;padding:7px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:13px;margin-bottom:8px;box-sizing:border-box">
-    <select id="serverCategory" style="width:100%;padding:7px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:13px;margin-bottom:8px;box-sizing:border-box">
-      <option value="">Category (optional)</option>
-      <option value="devops">DevOps & Cloud</option>
-      <option value="database">Database</option>
-      <option value="search">Search & Web</option>
-      <option value="communication">Communication</option>
-      <option value="vectordb">Vector DB / RAG</option>
-      <option value="other">Other</option>
-    </select>
-    <button type="submit" style="background:var(--blue-dim);color:var(--blue);border:1px solid var(--blue);border-radius:6px;padding:7px 20px;cursor:pointer;font-weight:600;font-size:12px">Submit for Scan</button>
-    <span id="submitMsg" style="display:none;margin-left:10px;font-size:12px;color:var(--green)"></span>
-  </form>
+  <p>Open a GitHub issue with the public source, package, and suggested launch command.
+    A maintainer reviews every request before running an isolated scan; submitting a request
+    never executes the server automatically.</p>
+  <a href="https://github.com/yatuk/mcpradar/issues/new?template=scan_request.yml"
+    target="_blank" rel="noopener"
+    style="display:inline-block;background:var(--blue-dim);color:var(--blue);border:1px solid var(--blue);border-radius:6px;padding:7px 20px;text-decoration:none;font-weight:600;font-size:12px">Open Scan Request Issue ↗</a>
 </div>
 </details>
 
@@ -2010,25 +1999,6 @@ footer a:hover { text-decoration: underline; }
   // Methodology panel: remember open/closed state
   methodologyPanel.addEventListener("toggle", function () {
     try { localStorage.setItem("mcpradar:methodology", methodologyPanel.open ? "1" : "0"); } catch (e) {}
-  });
-
-  // Submit server form
-  var submitForm = document.getElementById("submitForm");
-  submitForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-    var name = document.getElementById("serverName").value.trim();
-    var url = document.getElementById("serverUrl").value.trim();
-    var cat = document.getElementById("serverCategory").value;
-    if (!name) return;
-    var body = "Scan request for: `" + name + "`\nURL: " + (url || "N/A") + "\nCategory: " + (cat || "unspecified");
-    var issueUrl = "https://github.com/yatuk/mcpradar/issues/new?title=" + encodeURIComponent("Scan request: " + name) + "&body=" + encodeURIComponent(body) + "&labels=scan-request";
-    window.open(issueUrl, "_blank");
-    var btn = submitForm.querySelector("button");
-    var msg = document.getElementById("submitMsg");
-    btn.textContent = "Submitted!";
-    btn.disabled = true;
-    msg.style.display = "inline";
-    msg.textContent = "Opening issue in new tab...";
   });
 
   // Expose key functions for inline onclick handlers

@@ -1,0 +1,82 @@
+name: MCP Server Scan Request
+description: Request a manual security scan and leaderboard review for an MCP server
+title: "[Scan Request]: "
+labels: ["scan-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting an MCP server. This form creates a review request only.
+        Maintainers inspect the source and launch command before running an isolated scan.
+
+        **Do not include API keys, tokens, passwords, private URLs, or other secrets.**
+
+  - type: input
+    id: server_name
+    attributes:
+      label: MCP server name
+      description: Use the official Registry or package name when one exists.
+      placeholder: "@example/mcp-server"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: distribution
+    attributes:
+      label: Distribution
+      description: Where is the server published?
+      options:
+        - Official MCP Registry
+        - npm
+        - PyPI
+        - GitHub
+        - Docker image
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: source_url
+    attributes:
+      label: Public source or Registry URL
+      description: Link to the official Registry entry, source repository, or package page.
+      placeholder: "https://github.com/example/mcp-server"
+    validations:
+      required: true
+
+  - type: textarea
+    id: launch_command
+    attributes:
+      label: Suggested launch command
+      description: Provide the smallest command that starts the server. Never include credentials.
+      placeholder: "npx -y @example/mcp-server"
+      render: shell
+    validations:
+      required: true
+
+  - type: dropdown
+    id: authentication
+    attributes:
+      label: Does the server require authentication or external services?
+      options:
+        - "No"
+        - "Yes"
+        - Unknown
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Describe its purpose, required setup, or anything maintainers should know.
+
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Confirmation
+      options:
+        - label: I have not included credentials or private information in this request.
+          required: true
+        - label: I understand that maintainers review requests manually and publication is not guaranteed.
+          required: true

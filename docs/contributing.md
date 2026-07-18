@@ -1,5 +1,17 @@
 # Contributing
 
+## Requesting a Server Scan
+
+Use the
+[MCP Server Scan Request](https://github.com/yatuk/mcpradar/issues/new?template=scan_request.yml)
+form to suggest a server for the public leaderboard. Include its official
+Registry, source, or package URL and the smallest command that starts it. Never
+put credentials or private URLs in an issue.
+
+Opening an issue does not execute the submitted command. A maintainer reviews
+the request, performs an isolated scan, and decides whether to publish the
+result. Contributors do not need to edit generated leaderboard or result files.
+
 ## Setup
 
 ```bash
