@@ -1,0 +1,2046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MCPRadar Security Leaderboard</title>
+<style>
+/* ========================================================================
+   Design Tokens -- "Radar" Observability Theme
+   ======================================================================== */
+:root {
+  --bg: #0d1117;
+  --card: #161b22;
+  --border: #30363d;
+  --text: #c9d1d9;
+  --dim: #8b949e;
+  --bright: #f0f6fc;
+
+  --green: #3fb950;
+  --green-dim: #1a3a1a;
+  --light-green: #56d364;
+  --yellow: #d29922;
+  --yellow-dim: #3a2e1a;
+  --orange: #db6d28;
+  --orange-dim: #3a241a;
+  --red: #f85149;
+  --red-dim: #3a1a1a;
+  --blue: #58a6ff;
+  --blue-dim: #0c2d6b;
+}
+
+/* Reset */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px 32px;
+}
+
+/* ========================================================================
+   Header
+   ======================================================================== */
+header { margin-bottom: 20px; }
+h1 { font-size: 26px; margin-bottom: 4px; color: var(--bright); letter-spacing: -0.3px; }
+h1 span { color: var(--red); }
+.subtitle { color: var(--dim); font-size: 13px; }
+.subtitle a { color: var(--blue); text-decoration: none; }
+.subtitle a:hover { text-decoration: underline; }
+
+/* ========================================================================
+   Methodology Panel
+   ======================================================================== */
+.methodology {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+.methodology summary {
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dim);
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.methodology summary:hover { color: var(--text); }
+.methodology summary::marker { font-size: 10px; }
+.methodology .body {
+  padding: 0 16px 14px;
+  font-size: 13px;
+  color: var(--dim);
+  line-height: 1.7;
+}
+.methodology .body strong { color: var(--text); }
+.methodology .body code {
+  background: var(--bg);
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 12px;
+  color: var(--text);
+}
+.methodology .cal-badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  background: var(--green-dim);
+  color: var(--green);
+}
+
+/* ========================================================================
+   Stats Bar
+   ======================================================================== */
+.stats-bar {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-size: 13px;
+  color: var(--dim);
+  margin-bottom: 16px;
+}
+.stats-bar strong { color: var(--text); }
+.stats-bar .preview-tag {
+  padding: 1px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  background: var(--yellow-dim);
+  color: var(--yellow);
+}
+
+/* ========================================================================
+   Controls
+   ======================================================================== */
+.controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.search-wrap { position: relative; flex: 1; min-width: 180px; max-width: 340px; }
+.search-wrap input {
+  width: 100%;
+  padding: 7px 12px 7px 30px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 13px;
+  outline: none;
+}
+.search-wrap input:focus { border-color: var(--blue); }
+.search-icon {
+  position: absolute;
+  left: 9px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--dim);
+  font-size: 12px;
+  pointer-events: none;
+}
+/* Grade filter pills */
+.grade-filters { display: flex; gap: 5px; align-items: center; }
+.grade-filters .label { color: var(--dim); font-size: 12px; margin-right: 2px; }
+.grade-btn {
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--card);
+  color: var(--dim);
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  transition: all 0.12s;
+  user-select: none;
+}
+.grade-btn:hover { border-color: var(--dim); color: var(--text); }
+.grade-btn.on { color: var(--text); }
+.grade-btn[data-grade="A"].on { background: var(--green-dim); color: var(--green); border-color: var(--green); }
+.grade-btn[data-grade="B"].on { background: var(--green-dim); color: var(--light-green); border-color: var(--light-green); }
+.grade-btn[data-grade="C"].on { background: var(--yellow-dim); color: var(--yellow); border-color: var(--yellow); }
+.grade-btn[data-grade="D"].on { background: var(--orange-dim); color: var(--orange); border-color: var(--orange); }
+.grade-btn[data-grade="F"].on { background: var(--red-dim); color: var(--red); border-color: var(--red); }
+
+/* Extra filter dropdowns */
+.extra-filters {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+.extra-filters select {
+  padding: 4px 10px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 12px;
+  cursor: pointer;
+  max-width: 190px;
+}
+.extra-filters select:focus { outline: none; border-color: var(--blue); }
+
+/* ========================================================================
+   Table (Desktop)
+   ======================================================================== */
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--card);
+}
+table { width: 100%; border-collapse: collapse; min-width: 680px; }
+thead th {
+  position: sticky; top: 0; z-index: 2;
+  text-align: left; padding: 9px 10px;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  color: var(--dim);
+  font-weight: 600; font-size: 11px;
+  text-transform: uppercase; letter-spacing: 0.4px;
+  cursor: pointer; user-select: none; white-space: nowrap;
+}
+thead th:hover { color: var(--text); }
+thead th[aria-sort] { color: var(--text); }
+thead th[aria-sort]::after { margin-left: 3px; font-size: 9px; opacity: 0.5; }
+thead th[aria-sort="ascending"]::after { content: "▲"; opacity: 1; color: var(--blue); }
+thead th[aria-sort="descending"]::after { content: "▼"; opacity: 1; color: var(--blue); }
+thead th[aria-sort="none"]::after { content: "⇅"; }
+tbody td { padding: 9px 10px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:nth-child(even) td { background: rgba(128,128,128,0.04); }
+tbody tr:hover td { background: rgba(255,255,255,0.05); }
+.legend {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  font-size: 11px; color: var(--dim); margin-bottom: 8px;
+}
+.legend .grade-badge { cursor: default; }
+.legend-sep { margin-right: 12px; }
+.method-table {
+  display: grid; grid-template-columns: max-content max-content 1fr; gap: 3px 12px;
+  font-size: 12px; margin-top: 6px; align-items: baseline;
+}
+.method-table span:nth-child(3n+1) { font-family: ui-monospace, monospace; color: var(--text); }
+.method-table span:nth-child(3n+2) { font-weight: 700; text-align: right; }
+.method-table span:nth-child(3n) { color: var(--dim); }
+.method-list { margin: 6px 0 0 18px; font-size: 12px; line-height: 1.6; }
+.method-list li { margin-bottom: 3px; }
+.method-repro {
+  background: var(--bg); border: 1px solid var(--border); border-radius: 4px;
+  padding: 8px 10px; font-size: 12px; overflow-x: auto; margin-top: 4px; color: var(--text);
+}
+.top-risky-row {
+  display: flex; align-items: center; gap: 8px; padding: 3px 4px; border-radius: 4px;
+  text-decoration: none; color: var(--text); font-size: 12px;
+}
+.top-risky-row:hover { background: var(--card); }
+.top-risky-row .tr-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.top-risky-row .tr-score { color: var(--dim); font-weight: 700; }
+.server-link { color: var(--blue); text-decoration: none; }
+.server-link:hover { text-decoration: underline; }
+.mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 11px; color: var(--dim); }
+
+/* ========================================================================
+   Risk Bar
+   ======================================================================== */
+.risk-cell { min-width: 110px; }
+.risk-bar-wrap {
+  display: flex; align-items: center; gap: 8px;
+}
+.risk-bar-track {
+  flex: 1; max-width: 70px; height: 6px;
+  background: var(--border); border-radius: 3px;
+  overflow: hidden;
+}
+.risk-bar-fill {
+  height: 100%; border-radius: 3px;
+  transition: width 0.3s;
+}
+.risk-bar-fill.low    { background: var(--green); }
+.risk-bar-fill.med    { background: var(--yellow); }
+.risk-bar-fill.high   { background: var(--orange); }
+.risk-bar-fill.crit   { background: var(--red); }
+.risk-value { font-size: 12px; font-weight: 600; color: var(--text); width: 28px; text-align: right; }
+
+/* ========================================================================
+   Grade Badge
+   ======================================================================== */
+.grade-badge {
+  display: inline-block; padding: 2px 10px; border-radius: 10px;
+  font-size: 12px; font-weight: 700; text-align: center; min-width: 28px;
+}
+.grade-badge.A { background: var(--green-dim); color: var(--green); }
+.grade-badge.B { background: var(--green-dim); color: var(--light-green); }
+.grade-badge.C { background: var(--yellow-dim); color: var(--yellow); }
+.grade-badge.D { background: var(--orange-dim); color: var(--orange); }
+.grade-badge.F { background: var(--red-dim); color: var(--red); }
+
+/* ========================================================================
+   Scope Badges
+   ======================================================================== */
+.scope-tags { display: flex; gap: 4px; flex-wrap: wrap; }
+.scope-tag {
+  display: inline-block; padding: 1px 7px; border-radius: 10px;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.3px;
+  background: var(--card); border: 1px solid var(--border); color: var(--dim);
+}
+.scope-tag.local-first {
+  background: #0d2e2e; color: #3cc6c6; border-color: #1a5c5c;
+}
+
+/* ========================================================================
+   Findings Button
+   ======================================================================== */
+.findings-link {
+  font-weight: 600; color: var(--blue); cursor: pointer;
+  text-decoration: none; font-size: 13px;
+}
+.findings-link:hover { text-decoration: underline; }
+
+/* ========================================================================
+   Card Layout (Mobile)
+   ======================================================================== */
+.card-grid { display: none; gap: 12px; }
+.card-grid.active { display: grid; }
+.table-wrap.hidden { display: none; }
+
+.server-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 6px; padding: 14px;
+}
+.card-head {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  margin-bottom: 10px;
+}
+.card-name {
+  font-weight: 600; font-size: 15px; color: var(--blue);
+  text-decoration: none;
+}
+.card-name:hover { text-decoration: underline; }
+.card-grade {
+  font-size: 18px; font-weight: 800; min-width: 32px; text-align: center;
+}
+.card-grade.A { color: var(--green); }
+.card-grade.B { color: var(--light-green); }
+.card-grade.C { color: var(--yellow); }
+.card-grade.D { color: var(--orange); }
+.card-grade.F { color: var(--red); }
+.card-stats {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 8px 16px; font-size: 12px; color: var(--dim);
+}
+.card-stats strong { color: var(--text); }
+.card-risk-bar {
+  grid-column: 1 / -1;
+  display: flex; align-items: center; gap: 8px;
+  margin-top: 4px;
+}
+.card-scope { grid-column: 1 / -1; margin-top: 2px; }
+.card-link {
+  grid-column: 1 / -1; margin-top: 6px; text-align: right;
+}
+
+/* ========================================================================
+   Detail View (Server Detail Page)
+   ======================================================================== */
+.detail-view { display: none; }
+.detail-view.active { display: block; }
+.detail-back {
+  display: inline-flex; align-items: center; gap: 4px;
+  margin-bottom: 16px; padding: 5px 12px;
+  background: var(--card); border: 1px solid var(--border); border-radius: 6px;
+  color: var(--dim); cursor: pointer; font-size: 12px; font-weight: 600;
+}
+.detail-back:hover { color: var(--text); border-color: var(--dim); }
+.detail-header {
+  background: var(--card); border: 1px solid var(--border); border-radius: 6px;
+  padding: 16px 20px; margin-bottom: 16px;
+}
+.detail-header h2 { font-size: 20px; color: var(--bright); margin-bottom: 6px; }
+.detail-header .meta { font-size: 12px; color: var(--dim); }
+.detail-header .meta strong { color: var(--text); }
+.detail-score-breakdown {
+  display: flex; gap: 24px; flex-wrap: wrap;
+  margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border);
+}
+.detail-score-breakdown .item { font-size: 12px; color: var(--dim); }
+.detail-score-breakdown .item b { color: var(--text); }
+
+.detail-section {
+  background: var(--card); border: 1px solid var(--border); border-radius: 6px;
+  padding: 14px 18px; margin-bottom: 14px;
+}
+.detail-section h3 {
+  font-size: 14px; color: var(--bright); margin-bottom: 10px;
+  border-bottom: 1px solid var(--border); padding-bottom: 8px;
+}
+.finding-row {
+  display: grid;
+  grid-template-columns: 70px 50px 130px 1fr;
+  gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--border);
+  font-size: 12px; align-items: baseline;
+}
+.finding-row:last-child { border-bottom: none; }
+.finding-row.critical { border-left: 2px solid var(--red); padding-left: 8px; }
+.finding-row.high { border-left: 2px solid var(--orange); padding-left: 8px; }
+.finding-row.medium { border-left: 2px solid var(--yellow); padding-left: 8px; }
+.finding-row.low { border-left: 2px solid var(--dim); padding-left: 8px; }
+.sev-tag {
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px;
+}
+.sev-tag.critical { color: var(--red); }
+.sev-tag.high { color: var(--orange); }
+.sev-tag.medium { color: var(--yellow); }
+.sev-tag.low { color: var(--dim); }
+.conf-tag {
+  font-size: 9px; font-weight: 700; padding: 1px 4px; border-radius: 3px;
+  border: 1px solid currentColor; opacity: 0.85; white-space: nowrap;
+}
+.conf-tag.conf-high { color: var(--green, #3fb950); }
+.conf-tag.conf-med { color: var(--yellow); }
+.conf-tag.conf-low { color: var(--dim); }
+.trending-tag {
+  font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 8px;
+  background: var(--orange-dim); color: var(--orange); white-space: nowrap;
+}
+.pagination {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 10px; margin-top: 14px; font-size: 13px;
+}
+.pagination:empty { display: none; }
+.pagination .page-info { color: var(--dim); }
+.pagination .page-btns { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.page-btn {
+  min-width: 30px; padding: 5px 9px; border: 1px solid var(--border);
+  background: var(--card); color: var(--text); border-radius: 6px;
+  font-size: 12px; font-weight: 600; cursor: pointer; line-height: 1;
+}
+.page-btn:hover:not(:disabled):not(.on) { border-color: var(--dim); }
+.page-btn.on { background: var(--blue); border-color: var(--blue); color: #fff; cursor: default; }
+.page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.page-ellipsis { padding: 0 2px; color: var(--dim); }
+.cap-tag {
+  font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 3px;
+  border: 1px solid currentColor; white-space: nowrap; margin-left: 3px; opacity: 0.9;
+}
+.decomp-intro { color: var(--dim); font-size: 12px; margin-bottom: 10px; }
+.decomp-row {
+  display: grid; grid-template-columns: 160px 1fr 42px; grid-template-areas: "label bar val" "note note note";
+  gap: 2px 10px; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--border);
+}
+.decomp-row:last-child { border-bottom: none; }
+.decomp-label { grid-area: label; font-weight: 600; font-size: 12px; }
+.decomp-drives { font-size: 9px; font-weight: 700; color: var(--blue); }
+.decomp-bar { grid-area: bar; height: 8px; background: var(--card); border-radius: 4px; overflow: hidden; }
+.decomp-fill { height: 100%; background: var(--dim); border-radius: 4px; opacity: 0.5; }
+.decomp-fill.on { background: var(--blue); opacity: 1; }
+.decomp-val { grid-area: val; text-align: right; font-weight: 700; font-size: 13px; }
+.decomp-row.on .decomp-val { color: var(--blue); }
+.decomp-note { grid-area: note; font-size: 11px; color: var(--dim); }
+.disclaimer {
+  margin-top: 14px; padding: 10px 14px; background: var(--card);
+  border: 1px solid var(--border); border-left: 3px solid var(--yellow); border-radius: 6px;
+  font-size: 12px; color: var(--dim); line-height: 1.5;
+}
+.disclaimer p { margin: 4px 0; }
+.disclaimer b { color: var(--text); }
+.disclaimer a { color: var(--blue); }
+.grade-seg {
+  border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 700; color: #000; padding: 0;
+}
+.grade-seg:hover { filter: brightness(1.15); }
+.grade-seg-legend {
+  background: none; border: none; cursor: pointer; color: var(--dim); font-size: 10px;
+  padding: 1px 3px; border-radius: 3px;
+}
+.grade-seg-legend:hover { background: var(--card); }
+.finding-desc { color: var(--dim); grid-column: 4; }
+
+.tool-mini-list { font-size: 12px; }
+.tool-mini {
+  padding: 6px 0; border-bottom: 1px solid var(--border);
+  display: grid; grid-template-columns: 160px 1fr; gap: 8px;
+}
+.tool-mini:last-child { border-bottom: none; }
+.tool-mini .tn { font-weight: 600; color: var(--blue); }
+.tool-mini .td { color: var(--dim); }
+.tool-mini .ts {
+  grid-column: 1 / -1; margin-top: 4px;
+  font-size: 11px; color: var(--dim);
+}
+
+/* ========================================================================
+   State Screens
+   ======================================================================== */
+.state-msg {
+  text-align: center; padding: 56px 20px; color: var(--dim);
+}
+.state-msg p { margin-bottom: 6px; }
+.state-msg .icon { font-size: 28px; margin-bottom: 10px; opacity: 0.5; }
+.state-msg a { color: var(--blue); cursor: pointer; }
+
+/* Loading skeleton */
+.skeleton {
+  background: linear-gradient(90deg, var(--card) 25%, var(--border) 50%, var(--card) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.skeleton-row { display: flex; gap: 12px; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+.skeleton-row .sk { height: 16px; border-radius: 4px; }
+.skeleton-row .sk:nth-child(1) { width: 30px; }
+.skeleton-row .sk:nth-child(2) { width: 200px; }
+.skeleton-row .sk:nth-child(3) { width: 80px; }
+.skeleton-row .sk:nth-child(4) { width: 60px; }
+.skeleton-row .sk:nth-child(5) { width: 50px; }
+.skeleton-row .sk:nth-child(6) { width: 70px; }
+.skeleton-row .sk:nth-child(7) { width: 90px; }
+.skeleton-row .sk:nth-child(8) { width: 80px; }
+
+/* ========================================================================
+   Footer
+   ======================================================================== */
+footer {
+  margin-top: 28px; padding-top: 14px;
+  border-top: 1px solid var(--border);
+  color: var(--dim); font-size: 11px; text-align: center; line-height: 1.8;
+}
+footer a { color: var(--blue); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+
+/* ========================================================================
+   Responsive
+   ======================================================================== */
+@media (max-width: 700px) {
+  body { padding: 20px 10px 16px; }
+  h1 { font-size: 20px; }
+  .controls { flex-direction: column; align-items: stretch; }
+  .search-wrap { max-width: none; }
+  .grade-filters { flex-wrap: wrap; }
+  .stats-bar { gap: 14px; padding: 8px 12px; }
+
+  /* Switch to cards */
+  .table-wrap { display: none; }
+  .card-grid.active { display: grid; }
+
+  /* Detail view */
+  .finding-row {
+    grid-template-columns: 60px 45px 1fr;
+  }
+  .finding-row .rule-cell { grid-column: 3; }
+  .finding-desc { grid-column: 1 / -1; }
+  .detail-score-breakdown { flex-direction: column; gap: 8px; }
+}
+
+/* ========================================================================
+   Detail: Accordion, SARIF, Rule Help
+   ======================================================================== */
+.finding-group { margin-bottom: 8px; }
+.finding-group summary {
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 4px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  list-style: none;
+}
+.finding-group summary::-webkit-details-marker { display: none; }
+.finding-group summary:hover { border-color: var(--dim); }
+.finding-group summary .count { float: right; font-weight: 400; color: var(--dim); }
+
+/* Detail: SARIF button */
+.sarif-btn {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 6px 14px;
+  background: var(--blue-dim);
+  color: var(--blue);
+  border: 1px solid var(--blue);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.sarif-btn:hover { filter: brightness(1.2); }
+
+/* Detail: rule description tooltip */
+.rule-help {
+  font-size: 11px;
+  color: var(--dim);
+  display: block;
+  margin-top: 1px;
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+<h1><span>MCPRadar</span> Security Leaderboard</h1>
+<p class="subtitle">
+  Independent security scores for MCP servers, sourced from the
+  <a href="https://registry.modelcontextprotocol.io">official registry</a>
+</p>
+</header>
+
+<!-- ===== METHODOLOGY PANEL ===== -->
+<details class="methodology" id="methodologyPanel">
+<summary>How scores work · methodology &amp; limitations ▾</summary>
+<div class="body">
+  <p><strong>MRS</strong> (MCPRadar Risk Score) rates MCP server security
+  on a <strong>0–10</strong> scale where <strong>0 = safe</strong> and
+  <strong>10 = critical</strong>.</p><br>
+  <p>MCPRadar's versioned <strong>MRS-v1</strong> score is
+  <code>((base + AARS) / 2) × ThM</code>. <strong>base</strong> is the
+  severity-weighted MEDIUM+ findings (critical×10, high×7, medium×4) over the tool
+  count. <strong>AARS</strong> is the <em>agentic capability</em> layer — a
+  tool's blast radius (arbitrary execution, browser control, file writes, network
+  egress, secret access) — so a powerful server is non-A even with no CVE and a
+  clean schema. <strong>ThM</strong> is an environmental multiplier (insecure
+  transport). Capability can only raise the score, never discount a real finding.
+  The result is clamped to 10.0 and mapped to a letter grade:</p><br>
+  <p><strong>Low-severity findings</strong> (informational lint, such as a string
+  parameter with no length constraint) are listed on a server's detail page but
+  do <strong>not</strong> affect its grade — otherwise nearly every server would
+  fail on documentation-level noise.</p><br>
+  <p>Servers marked <strong>pending / not scanned</strong> carry no grade. They
+  appear at the bottom of the table and are excluded from the averages; a
+  never-scanned server is never shown as a clean pass.</p><br>
+  <p><code>A</code> 0.0–0.9 &nbsp; <code>B</code> 1.0–2.9 &nbsp;
+  <code>C</code> 3.0–4.9 &nbsp; <code>D</code> 5.0–6.9 &nbsp;
+  <code>F</code> 7.0–10.0</p><br>
+  <p><strong>Hash</strong>: SHA-256 of the alphabetically sorted tool names,
+  used to detect tool-list changes across scans (drift detection).</p><br>
+  <p><strong>Scope</strong>: <i>schema</i> = tool schemas analyzed,
+  <i>fingerprint</i> = tool signature comparison, <i>cve</i> = known-vulnerability
+  matching against OSV/GitHub Advisory.</p><br>
+
+  <p><strong>Capability weights (AARS)</strong> — each tool is tagged by blast
+  radius; the server's AARS is the highest present plus a small breadth bonus:</p>
+  <div class="method-table">
+    <span>code_exec</span><span>8.0</span><span>arbitrary command / code execution</span>
+    <span>browser_control</span><span>6.0</span><span>drives a real browser (SSRF, web actions)</span>
+    <span>db_write</span><span>5.0</span><span>mutates a database</span>
+    <span>fs_write</span><span>4.0</span><span>creates / edits / deletes files</span>
+    <span>secret_access</span><span>3.0</span><span>handles credentials / tokens</span>
+    <span>net_egress</span><span>2.0</span><span>sends data to the network</span>
+    <span>fs_read</span><span>1.0</span><span>reads files</span>
+    <span>pure_compute</span><span>0.0</span><span>no side effect</span>
+  </div>
+  <p style="margin-top:6px">Weights are ordinal (exec &gt; browser &gt; db-write &gt;
+  fs-write &gt; secrets &gt; egress &gt; read &gt; none), matching the MCPRadar MRS-v1
+  principle that autonomy and tool-use amplify a baseline. Full justification:
+  <a href="https://github.com/yatuk/mcpradar/blob/main/docs/scoring-model.md" style="color:var(--blue)">scoring-model.md</a>.</p><br>
+
+  <p><strong>Detection confidence</strong> — every finding carries a separate
+  true-positive likelihood: <b>0.9</b> exact/AST/CVE, <b>0.7</b> heuristic,
+  <b>0.5</b> inferential. Shown per finding on each detail page.</p><br>
+
+  <p><strong>Limitations — read this.</strong></p>
+  <ul class="method-list">
+    <li>Every rule is <em>opinionated</em>. The checks are heuristics: they
+      produce <b>both false positives and false negatives</b>. A grade is a
+      signal, not a verdict.</li>
+    <li>This is <b>not a one-size-fits-all</b> measure of security. A high-capability
+      server (shell, browser) is <em>designed</em> to be powerful — a low grade
+      reflects blast radius, not bad code.</li>
+    <li>Most findings are <b>static</b> (schema + source + dependencies). We do
+      not execute tools, so runtime-only behaviour is out of scope.</li>
+    <li>Dependency CVEs are reachability-<em>unknown</em> and shared across the
+      ecosystem, so they are capped at grade C and never fail a server alone.</li>
+    <li>A server that could not be launched or fetched is marked
+      <b>incomplete</b>, never graded a clean A.</li>
+  </ul>
+  <p style="margin-top:6px">Found a false positive? <a href="https://github.com/yatuk/mcpradar/issues/new" style="color:var(--blue)">Open an issue</a> — every finding is disputable.</p><br>
+
+  <p><strong>Reproduce any row</strong> — the scan is deterministic and open source:</p>
+  <pre class="method-repro">uvx mcpradar scan "npx -y &lt;package&gt;" -t stdio --json</pre>
+  <p style="margin-top:4px">or scan straight from a package with no local checkout:
+  <code>uvx mcpradar deps npm:&lt;package&gt;</code>.</p>
+  <span class="cal-badge" id="calBadge" style="display:none"></span>
+</div>
+</details>
+
+<!-- ===== SUBMIT SERVER PANEL ===== -->
+<details class="methodology" id="submitPanel">
+<summary>Request a Server Scan ▾</summary>
+<div class="body">
+  <p>Open a GitHub issue with the public source, package, and suggested launch command.
+    A maintainer reviews every request before running an isolated scan; submitting a request
+    never executes the server automatically.</p>
+  <a href="https://github.com/yatuk/mcpradar/issues/new?template=scan_request.yml"
+    target="_blank" rel="noopener"
+    style="display:inline-block;background:var(--blue-dim);color:var(--blue);border:1px solid var(--blue);border-radius:6px;padding:7px 20px;text-decoration:none;font-weight:600;font-size:12px">Open Scan Request Issue ↗</a>
+</div>
+</details>
+
+<!-- ===== STATS BAR ===== -->
+<div class="stats-bar" id="statsBar" aria-live="polite">Loading…</div>
+
+<!-- ===== THREAT LANDSCAPE ===== -->
+<details class="methodology" id="landscapePanel">
+<summary>Threat Landscape ▾</summary>
+<div class="body" id="landscapeBody">
+  <div id="landscapeContent" style="display:flex;flex-wrap:wrap;gap:24px">
+    <div style="flex:1;min-width:220px">
+      <strong style="color:var(--text)">Grade Distribution</strong>
+      <div id="gradeDist" style="margin-top:6px"></div>
+    </div>
+    <div style="flex:1;min-width:280px">
+      <strong style="color:var(--text)">Top Vulnerabilities</strong>
+      <div id="vulnDist" style="margin-top:6px"></div>
+    </div>
+    <div style="flex:1;min-width:220px">
+      <strong style="color:var(--text)">Highest risk</strong>
+      <div id="topRisky" style="margin-top:6px"></div>
+    </div>
+  </div>
+</div>
+</details>
+
+<!-- ===== CONTROLS ===== -->
+<div class="controls">
+<div class="search-wrap">
+  <span class="search-icon" aria-hidden="true">⌕</span>
+  <input type="text" id="searchInput" placeholder="Filter by server name…" autocomplete="off" aria-label="Search servers">
+</div>
+<div class="grade-filters" role="group" aria-label="Filter by grade">
+  <span class="label">Grade:</span>
+  <button class="grade-btn on" data-grade="all">All</button>
+  <button class="grade-btn on" data-grade="A">A</button>
+  <button class="grade-btn on" data-grade="B">B</button>
+  <button class="grade-btn on" data-grade="C">C</button>
+  <button class="grade-btn on" data-grade="D">D</button>
+  <button class="grade-btn on" data-grade="F">F</button>
+</div>
+<div class="extra-filters">
+  <select id="scanStatusFilter" aria-label="Filter by scan status">
+    <option value="scanned" selected>Scanned only</option>
+    <option value="">All (scanned + pending)</option>
+    <option value="pending">Pending queue</option>
+  </select>
+  <select id="apiFreeFilter" aria-label="Filter by API-free status">
+    <option value="">All Servers</option>
+    <option value="api-free">Local-First / API-Free</option>
+    <option value="api-based">API-Based</option>
+  </select>
+  <select id="categoryFilter" aria-label="Filter by category">
+    <option value="">All Categories</option>
+    <option value="AI/ML">AI/ML</option>
+    <option value="Browser">Browser</option>
+    <option value="Cloud">Cloud</option>
+    <option value="Communication">Communication</option>
+    <option value="Database">Database</option>
+    <option value="DevOps">DevOps</option>
+    <option value="File System">File System</option>
+    <option value="OSINT">OSINT</option>
+    <option value="Reference">Reference</option>
+    <option value="Vector DB">Vector DB</option>
+    <option value="Web Search">Web Search</option>
+    <option value="Other">Other</option>
+  </select>
+  <select id="vulnFilter" aria-label="Filter by vulnerability type">
+    <option value="">All Vulnerability Types</option>
+    <option value="Command Execution">Command Execution</option>
+    <option value="Command Injection">Command Injection</option>
+    <option value="Cross-Server Attack Path">Cross-Server Attack Path</option>
+    <option value="Cross-Server Exfiltration">Cross-Server Exfiltration</option>
+    <option value="Encoded Payload">Encoded Payload</option>
+    <option value="Hidden Content">Hidden Content</option>
+    <option value="Insecure Transport">Insecure Transport</option>
+    <option value="Path Traversal">Path Traversal</option>
+    <option value="Prompt Injection">Prompt Injection</option>
+    <option value="Schema Poisoning">Schema Poisoning</option>
+    <option value="Secret Exposure">Secret Exposure</option>
+    <option value="Supply Chain">Supply Chain</option>
+    <option value="Unbounded Input">Unbounded Input</option>
+  </select>
+</div>
+</div>
+
+<!-- ===== MAIN VIEW ===== -->
+<div id="mainView">
+  <div class="legend" aria-hidden="true">
+    <span class="grade-badge A">A</span><span class="grade-badge B">B</span><span class="grade-badge C">C</span><span class="grade-badge D">D</span><span class="grade-badge F">F</span>
+    <span class="legend-sep">lower risk → higher risk</span>
+    <span class="trending-tag">🔥 trending</span> auto-scanned popular server
+  </div>
+  <!-- Desktop table -->
+  <div class="table-wrap" id="tableWrap">
+    <table>
+      <thead>
+        <tr>
+          <th data-sort="rank" scope="col" aria-sort="ascending" title="Position by ascending risk">Rank</th>
+          <th data-sort="server" scope="col" aria-sort="none" title="MCP server name (click to sort A–Z)">Server</th>
+          <th data-sort="risk" scope="col" aria-sort="none" title="MRS risk score, 0 (safe) to 10 (critical)">Risk <span style="font-weight:400;font-size:10px;text-transform:none;letter-spacing:0">0→10</span></th>
+          <th data-sort="grade" scope="col" aria-sort="none" title="Letter grade A–F derived from the risk score">Grade</th>
+          <th scope="col" title="Risk score trend across past scans">Trend</th>
+          <th scope="col" title="Analysis scope and the server's dominant capability (blast radius)">Scope</th>
+          <th data-sort="tools" scope="col" aria-sort="none" title="Number of tools the server exposes">Tools</th>
+          <th data-sort="findings" scope="col" aria-sort="none" title="MEDIUM+ rules triggered in this scan (click to see them)">Findings</th>
+          <th data-sort="last_scanned" scope="col" aria-sort="none" title="Date of the most recent scan">Scanned</th>
+          <th data-sort="hash" scope="col" aria-sort="none" title="SHA-256 of the sorted tool names — changes when tools change (drift detection)">Hash</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+
+  <!-- Mobile cards -->
+  <div class="card-grid" id="cardGrid"></div>
+
+  <!-- Pagination -->
+  <nav class="pagination" id="pagination" aria-label="Leaderboard pages"></nav>
+</div>
+
+<!-- ===== DETAIL VIEW (hash-routed, hidden by default) ===== -->
+<div class="detail-view" id="detailView"></div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div>
+    Scores computed by <strong>MCPRadar MRS engine</strong>.
+    Updated daily via GitHub Actions.
+  </div>
+  <div style="margin-top:6px">
+    <b>Data:</b>
+    <a href="data.json" download>data.json</a> &middot;
+    <a href="https://github.com/yatuk/mcpradar">GitHub</a> &middot;
+    per-server JSON &amp; SARIF on each detail page
+  </div>
+  <div style="margin-top:6px;color:var(--dim);font-size:11px">
+    Scan data is released under
+    <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC-BY 4.0</a> —
+    reuse it, cite MCPRadar. These are automated risk signals, not vulnerability claims.
+  </div>
+</footer>
+
+<!-- ========================================================================
+     JavaScript -- Vanilla, no dependencies
+     ======================================================================== -->
+<script>
+(function () {
+  "use strict";
+
+  /* ------------------------------------------------------------------
+     Rule descriptions for detail view
+     ------------------------------------------------------------------ */
+  var RULE_HELP = {
+    "R001": "Dangerous tool name matching system commands like eval, exec, rm",
+    "R101": "Zero-width Unicode character hidden in tool name or description",
+    "R102": "Prompt injection pattern containing LLM jailbreak directives",
+    "R103": "Base64 or hex encoded blob possibly hiding malicious payloads",
+    "R104": "Hidden HTML or Markdown content invisible to users but visible to LLMs",
+    "R105": "Permission scope mismatch between tool name and description",
+    "R106": "Secret or credential exposure in tool description",
+    "R107": "Command injection risk via shell metacharacters or dangerous defaults (CWE-78)",
+    "R108": "Supply chain risk via install commands or dynamic imports in description",
+    "R109": "Schema poisoning via missing type constraints or excessive limits",
+    "R110": "Version or fingerprint anomaly indicating rollback or unexpected change",
+    "R111": "Insecure transport via plain HTTP, old TLS, or bad certificates",
+    "R112": "Missing authorization hardening per RFC 9207 or deprecated sessions",
+    "R113": "Path traversal risk from file params without validation (CWE-22)",
+    "R114": "Unbounded input with no size or content constraints on string params",
+    "C001": "Same tool name used in 2+ servers causing collision risk",
+    "C002": "Similar tool names across servers that may confuse the LLM",
+    "C003": "Cross-server data exfiltration chain between reader and sender tools",
+    "C004": "Capability overlap across 3+ servers expanding attack surface",
+    "C005": "Permission gradient where read-only and write-capable servers coexist",
+    "C006": "Attack path chain via schema type matching across servers",
+    "C007": "Privilege escalation path from read-only to write or exec tools"
+  };
+
+  /* ------------------------------------------------------------------
+     State
+     ------------------------------------------------------------------ */
+  var allServers = [];
+  var activeGrades = { A: true, B: true, C: true, D: true, F: true };
+  var sortKey = "risk";
+  var sortAsc = true;
+  var searchQuery = "";
+  var activeCategory = "";
+  var activeVulnType = "";
+  var activeApiFree = "";
+  var activeScanStatus = "scanned";  // default: hide the pending backlog
+  var currentPage = 1;
+  var pageSize = 25;
+
+  // A server is "pending" when it has never actually been scanned. Older data
+  // used several markers for this ("registry-pending", "unknown", empty, or a
+  // null score); treat them all as pending so unscanned servers are never
+  // shown as a clean grade-A pass.
+  function isPending(s) {
+    var st = s.status || "";
+    return st === "registry-pending" || st === "pending" || st === "unknown" ||
+           st === "" || s.risk_score === null || s.grade === "-";
+  }
+  var isLoading = true;
+  var loadError = false;
+
+  /* ------------------------------------------------------------------
+     DOM refs
+     ------------------------------------------------------------------ */
+  var $ = document.querySelector.bind(document);
+  var tbody = $("#tbody");
+  var pager = $("#pagination");
+  var cardGrid = $("#cardGrid");
+  var tableWrap = $("#tableWrap");
+  var detailView = $("#detailView");
+  var mainView = $("#mainView");
+  var statsBar = $("#statsBar");
+  var searchInput = $("#searchInput");
+  var calBadge = $("#calBadge");
+  var methodologyPanel = $("#methodologyPanel");
+
+  /* ------------------------------------------------------------------
+     Helpers
+     ------------------------------------------------------------------ */
+  function esc(str) {
+    var d = document.createElement("div");
+    d.appendChild(document.createTextNode(str));
+    return d.innerHTML;
+  }
+
+  function riskClass(val) {
+    if (val < 3) return "low";
+    if (val < 5) return "med";
+    if (val < 7) return "high";
+    return "crit";
+  }
+
+  function encodeServer(name) {
+    return encodeURIComponent(name);
+  }
+  function decodeServer(hash) {
+    return decodeURIComponent(hash);
+  }
+
+  function renderSparkline(history) {
+    if (!history || history.length < 2) return '-';
+    var scores = history.map(function (h) { return h.score; });
+    var min = Math.min.apply(null, scores);
+    var max = Math.max.apply(null, scores);
+    var range = max - min || 1;
+    var w = 64, h = 20, pad = 2;
+    var points = '';
+    for (var i = 0; i < scores.length; i++) {
+      var x = pad + (i / Math.max(scores.length - 1, 1)) * (w - 2 * pad);
+      var y = h - pad - ((scores[i] - min) / range) * (h - 2 * pad);
+      points += x.toFixed(1) + ',' + y.toFixed(1) + ' ';
+    }
+    var first = scores[0];
+    var last = scores[scores.length - 1];
+    var trend = last < first ? 'improving' : last > first ? 'worsening' : 'stable';
+    var color = trend === 'improving' ? 'var(--green)' : trend === 'worsening' ? 'var(--red)' : 'var(--dim)';
+    var lastPoint = points.trim().split(' ').pop().split(',');
+    return '<svg width="' + w + '" height="' + h + '" style="vertical-align:middle" aria-label="Score trend: ' + trend + '">' +
+      '<polyline points="' + points.trim() + '" fill="none" stroke="' + color + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<circle cx="' + lastPoint[0] + '" cy="' + lastPoint[1] + '" r="2.5" fill="' + color + '"/>' +
+      '</svg>';
+  }
+
+  function inferScope(s) {
+    if (isPending(s)) return ["pending"];
+    var scopes = [];
+    if (s.tools_detail && s.tools_detail.length > 0) {
+      scopes.push("schema");
+    }
+    if (s.tool_hash) {
+      scopes.push("fingerprint");
+    }
+    if (s.findings_detail && s.findings_detail.length > 0) {
+      var hasCve = s.findings_detail.some(function (f) {
+        return f.rule_id && (f.rule_id === "R107" || f.rule_id === "R108" || f.rule_id === "R113");
+      });
+      if (hasCve) scopes.push("cve");
+    }
+    return scopes.length ? scopes : ["schema"];
+  }
+
+  /* ------------------------------------------------------------------
+     Sort / Filter
+     ------------------------------------------------------------------ */
+  function sortedServers() {
+    var copy = allServers.slice();
+    copy.sort(function (a, b) {
+      // Pending servers always at the bottom
+      var pa = isPending(a);
+      var pb = isPending(b);
+      if (pa && !pb) return 1;
+      if (!pa && pb) return -1;
+
+      var va, vb;
+      if (sortKey === "rank" || sortKey === "risk") {
+        va = a.risk_score || 0;
+        vb = b.risk_score || 0;
+      } else if (sortKey === "server") {
+        va = (a.display_name || a.server || "").toLowerCase();
+        vb = (b.display_name || b.server || "").toLowerCase();
+      } else if (sortKey === "grade") {
+        va = a.grade || "";
+        vb = b.grade || "";
+      } else if (sortKey === "tools") {
+        va = a.tools || 0;
+        vb = b.tools || 0;
+      } else if (sortKey === "findings") {
+        va = a.findings || 0;
+        vb = b.findings || 0;
+      } else if (sortKey === "last_scanned") {
+        va = a.last_scanned || "";
+        vb = b.last_scanned || "";
+      } else if (sortKey === "hash") {
+        va = (a.tool_hash || "").toLowerCase();
+        vb = (b.tool_hash || "").toLowerCase();
+      } else {
+        va = a.risk_score || 0;
+        vb = b.risk_score || 0;
+      }
+      if (va < vb) return sortAsc ? -1 : 1;
+      if (va > vb) return sortAsc ? 1 : -1;
+      return 0;
+    });
+    return copy;
+  }
+
+  function filteredServers() {
+    var q = searchQuery.trim().toLowerCase();
+    return sortedServers().filter(function (s) {
+      var pending = isPending(s);
+      if (activeScanStatus === "scanned" && pending) return false;
+      if (activeScanStatus === "pending" && !pending) return false;
+      if (pending) {
+        // Pending servers have no letter grade. Show them by default, but hide
+        // them once the grade filter is narrowed to a subset (a user filtering
+        // for "F" doesn't want 139 unscanned rows) — unless they explicitly
+        // asked for pending via the scan-status filter.
+        var allGradesOn = activeGrades.A && activeGrades.B && activeGrades.C &&
+                          activeGrades.D && activeGrades.F;
+        if (!allGradesOn && activeScanStatus !== "pending") return false;
+      } else if (!activeGrades[(s.grade || "").toUpperCase()]) {
+        return false;
+      }
+      if (q) {
+        var name = (s.display_name || s.server || "").toLowerCase();
+        var id = (s.server || "").toLowerCase();
+        if (name.indexOf(q) === -1 && id.indexOf(q) === -1) return false;
+      }
+      if (activeCategory && (s.category || "Other") !== activeCategory) return false;
+      if (activeVulnType && (s.vuln_types || []).indexOf(activeVulnType) === -1) return false;
+      if (activeApiFree === "api-free" && !s.api_free) return false;
+      if (activeApiFree === "api-based" && s.api_free) return false;
+      return true;
+    });
+  }
+
+  /* ------------------------------------------------------------------
+     Render: Stats
+     ------------------------------------------------------------------ */
+  function renderStats() {
+    var total = allServers.length;
+    if (total === 0) {
+      statsBar.innerHTML = "No scan data available.";
+      calBadge.style.display = "none";
+      return;
+    }
+    var scanned = 0;
+    var sum = 0;
+    var latest = "";
+    for (var i = 0; i < allServers.length; i++) {
+      var s = allServers[i];
+      if (!isPending(s)) {
+        scanned++;
+        sum += s.risk_score || 0;
+      }
+      if ((s.last_scanned || "") > latest) {
+        latest = s.last_scanned;
+      }
+      if (s.version) {
+        // version is present
+      }
+    }
+    var pending = total - scanned;
+    var avg = scanned > 0 ? (sum / scanned).toFixed(1) : "-";
+    var previewHtml = scanned < 5
+      ? ' <span class="preview-tag">Preview: ' + scanned + ' servers scanned</span>'
+      : "";
+
+    statsBar.innerHTML =
+      '<span><strong>' + scanned + '</strong> scanned' + previewHtml + '</span>' +
+      (pending > 0 ? '<span><strong>' + pending + '</strong> pending</span>' : '') +
+      (scanned >= 5 ? '<span>Avg risk <strong>' + avg + '</strong> <span style="color:var(--dim);font-weight:400">over ' + scanned + ' scanned</span></span>' : '') +
+      (latest ? '<span>Updated <strong>' + latest + '</strong></span>' : '');
+
+    // Calibration badge: describe the real scanned coverage, not the full
+    // catalog (most of which is pending / never scanned).
+    var withFindings = allServers.filter(function (s) {
+      return !isPending(s) && (s.findings || 0) > 0;
+    }).length;
+    if (scanned > 0) {
+      calBadge.style.display = "inline-block";
+      calBadge.textContent = scanned + " servers scanned (" + withFindings +
+        " with findings), " + pending + " pending in catalog";
+    }
+  }
+
+  /* ------------------------------------------------------------------
+     Render: Threat Landscape
+     ------------------------------------------------------------------ */
+  function renderLandscape() {
+    if (allServers.length === 0 || isLoading) return;
+    var total = allServers.length;
+    // Grade distribution
+    var gradeCounts = {A:0, B:0, C:0, D:0, F:0};
+    var grades = ["A","B","C","D","F"];
+    var gradeColors = {"A":"var(--green)","B":"var(--light-green)","C":"var(--yellow)","D":"var(--orange)","F":"var(--red)"};
+    for (var i = 0; i < allServers.length; i++) {
+      var g = (allServers[i].grade || "").toUpperCase();
+      if (gradeCounts[g] !== undefined) gradeCounts[g]++;
+    }
+    // Distribution is over *scanned* servers only (pending carry no grade).
+    var scannedTotal = gradeCounts.A + gradeCounts.B + gradeCounts.C + gradeCounts.D + gradeCounts.F;
+    var ghtml = '<div style="display:flex;height:20px;border-radius:3px;overflow:hidden;gap:2px;margin-bottom:4px" title="Click a grade to filter">';
+    for (var j = 0; j < grades.length; j++) {
+      var gc = grades[j];
+      var pct = scannedTotal > 0 ? (gradeCounts[gc] / scannedTotal * 100).toFixed(1) : 0;
+      ghtml += '<button class="grade-seg" data-grade-bar="' + gc + '" style="width:' + pct + '%;background:' + gradeColors[gc] + ';min-width:' + (gradeCounts[gc] > 0 ? '24px' : '0') + '" title="' + gc + ': ' + gradeCounts[gc] + ' scanned — click to filter">' + (gradeCounts[gc] > 0 ? gradeCounts[gc] : '') + '</button>';
+    }
+    ghtml += '</div>';
+    ghtml += '<div style="font-size:10px;color:var(--dim);display:flex;gap:8px;flex-wrap:wrap">';
+    for (var k = 0; k < grades.length; k++) {
+      ghtml += '<button class="grade-seg-legend" data-grade-bar="' + grades[k] + '"><span style="color:' + gradeColors[grades[k]] + '">' + grades[k] + '</span>: ' + gradeCounts[grades[k]] + '</button>';
+    }
+    ghtml += '<span style="margin-left:auto">' + scannedTotal + ' scanned</span>';
+    ghtml += '</div>';
+    var gd = document.getElementById("gradeDist");
+    gd.innerHTML = ghtml;
+    // Clicking a grade segment/chip narrows the table to that grade.
+    var segs = gd.querySelectorAll("[data-grade-bar]");
+    for (var gi = 0; gi < segs.length; gi++) {
+      segs[gi].addEventListener("click", function () {
+        var g = this.getAttribute("data-grade-bar");
+        activeGrades = { A: false, B: false, C: false, D: false, F: false };
+        activeGrades[g] = true;
+        syncGradeButtons();
+        activeScanStatus = "scanned";
+        var ssf = document.getElementById("scanStatusFilter");
+        if (ssf) ssf.value = "scanned";
+        fullRender();
+        var tw = document.getElementById("tableWrap");
+        if (tw && tw.scrollIntoView) tw.scrollIntoView({ block: "start", behavior: "smooth" });
+      });
+    }
+
+    // Vulnerability type distribution (top 8)
+    var vulnCounts = {};
+    for (var vi = 0; vi < allServers.length; vi++) {
+      var vts = allServers[vi].vuln_types || [];
+      for (var vj = 0; vj < vts.length; vj++) {
+        vulnCounts[vts[vj]] = (vulnCounts[vts[vj]] || 0) + 1;
+      }
+    }
+    var sorted = Object.keys(vulnCounts).sort(function(a,b){ return vulnCounts[b] - vulnCounts[a]; }).slice(0, 8);
+    var vhtml = '';
+    if (sorted.length === 0) {
+      vhtml = '<p style="color:var(--dim);font-size:12px">No vulnerabilities detected across scanned servers.</p>';
+    } else {
+      for (var vi = 0; vi < sorted.length; vi++) {
+        var vn = sorted[vi];
+        var vc = vulnCounts[vn];
+        var vpct = total > 0 ? (vc / total * 100) : 0;
+        vhtml += '<div style="margin-bottom:4px">';
+        vhtml += '<div style="display:flex;justify-content:space-between;font-size:11px"><span>' + esc(vn) + '</span><span style="color:var(--dim)">' + vc + ' (' + vpct.toFixed(0) + '%)</span></div>';
+        vhtml += '<div style="height:4px;background:var(--card);border-radius:2px;overflow:hidden"><div style="height:100%;width:' + vpct + '%;background:var(--orange);border-radius:2px"></div></div>';
+        vhtml += '</div>';
+      }
+    }
+    document.getElementById("vulnDist").innerHTML = vhtml;
+
+    // Highest-risk scanned servers — the 5 worst grades, most visible.
+    var scannedOnly = allServers.filter(function (s) { return !isPending(s); });
+    scannedOnly.sort(function (a, b) { return (b.risk_score || 0) - (a.risk_score || 0); });
+    var thtml = "";
+    for (var ri = 0; ri < Math.min(5, scannedOnly.length); ri++) {
+      var rs = scannedOnly[ri];
+      var rg = rs.grade || "-";
+      thtml += '<a class="top-risky-row" href="#server=' + encodeServer(rs.server || "") + '">' +
+        '<span class="grade-badge ' + rg + '">' + rg + '</span>' +
+        '<span class="tr-name">' + esc(rs.display_name || rs.server || "-") + '</span>' +
+        '<span class="tr-score">' + (rs.risk_score != null ? rs.risk_score.toFixed(1) : "-") + '</span></a>';
+    }
+    document.getElementById("topRisky").innerHTML = thtml ||
+      '<span style="color:var(--dim);font-size:11px">No scans yet.</span>';
+  }
+
+  /* ------------------------------------------------------------------
+     Render: Scope Tags
+     ------------------------------------------------------------------ */
+  // Human-readable blast-radius label for a server's dominant capability.
+  var CAP_LABELS = {
+    code_exec: ["arbitrary command / code execution", "var(--red)"],
+    browser_control: ["drives a real browser (SSRF, web actions)", "var(--red)"],
+    db_write: ["mutates a database", "var(--orange)"],
+    fs_write: ["writes / deletes files", "var(--orange)"],
+    secret_access: ["handles credentials / tokens", "var(--yellow)"],
+    net_egress: ["sends data to the network", "var(--yellow)"],
+    fs_read: ["reads files", "var(--dim)"],
+    pure_compute: ["no side effects", "var(--green)"]
+  };
+  function capabilityHtml(s) {
+    if (isPending(s) || !s.capability) return "";
+    var info = CAP_LABELS[s.capability] || [s.capability, "var(--dim)"];
+    var aars = s.aars != null ? " · AARS " + s.aars.toFixed(1) : "";
+    return '<div class="item">Capability: <b style="color:' + info[1] + '">' +
+      esc(s.capability) + '</b> <span style="color:var(--dim)">— ' + esc(info[0]) + aars + '</span></div>';
+  }
+
+  // Per-tool capability chips (blast-radius classes).
+  function capTagsHtml(caps) {
+    if (!caps || !caps.length) return "";
+    var html = "";
+    for (var i = 0; i < caps.length; i++) {
+      var info = CAP_LABELS[caps[i]] || [caps[i], "var(--dim)"];
+      html += '<span class="cap-tag" title="' + esc(info[0]) + '" style="border-color:' +
+        info[1] + ';color:' + info[1] + '">' + esc(caps[i]) + '</span>';
+    }
+    return html;
+  }
+
+  // Decompose the MRS into its three candidate terms; the score is their max.
+  function scoreDecompositionHtml(s) {
+    if (isPending(s) || !s.breakdown) return "";
+    var b = s.breakdown;
+    var score = s.risk_score != null ? s.risk_score : 0;
+    function row(key, label, val, note) {
+      var on = key === b.driver;
+      var pct = Math.min(100, Math.max(2, (val / 10) * 100));
+      return '<div class="decomp-row' + (on ? ' on' : '') + '">' +
+        '<div class="decomp-label">' + label +
+        (on ? ' <span class="decomp-drives">drives the grade</span>' : '') + '</div>' +
+        '<div class="decomp-bar"><div class="decomp-fill' + (on ? ' on' : '') +
+        '" style="width:' + pct + '%"></div></div>' +
+        '<div class="decomp-val">' + val.toFixed(2) + '</div>' +
+        '<div class="decomp-note">' + note + '</div></div>';
+    }
+    var html = '<div class="detail-section"><h3>Why this score — MRS ' + score.toFixed(1) +
+      ' (' + esc(s.grade || "-") + ')</h3>';
+    html += '<p class="decomp-intro">The score is the <b>highest</b> of three independent ' +
+      'terms — capability can only <em>raise</em> risk, never discount a finding.</p>';
+    html += '<div class="decomp">';
+    html += row("findings", "Findings base", b.base,
+      b.weighted_findings ? ("severity-weighted MEDIUM+ findings (" + b.weighted_findings +
+      " pts) over " + (s.tools || 0) + " tools") : "no MEDIUM+ schema/source findings");
+    html += row("capability", "Capability layer", b.capability_term,
+      "AARS " + b.aars.toFixed(1) + " blast radius · ((base + AARS) / 2)" +
+      (b.thm !== 1 ? " × ThM " + b.thm + " (insecure transport)" : " × 1.0"));
+    html += row("dependencies", "Dependency risk", b.dep_risk,
+      b.dep_risk > 0 ? "vulnerable transitive dependencies (capped at grade C)"
+        : "no vulnerable dependencies found");
+    html += '</div></div>';
+    return html;
+  }
+
+  // Responsible-use framing shown on every detail page.
+  function disclaimerHtml(s) {
+    var id = (s.server || "") + " " + (s.display_name || "");
+    var isFixture = /malicious|demo\//i.test(id);
+    var html = '<div class="disclaimer">';
+    if (isFixture) {
+      html += '<p><b>⚠ Calibration fixture — not a real server.</b> This is MCPRadar\'s ' +
+        'intentionally-vulnerable positive control, used to prove the scoring floor reaches ' +
+        'F. It is not published as a usable server.</p>';
+    }
+    html += '<p>This is an <b>automated risk signal, not a vulnerability claim.</b> ' +
+      'Scores come from heuristic rules that can false-positive and false-negative. ' +
+      'A high grade is not a safety certificate; a low grade is not proof of a flaw.</p>';
+    if (s.capability && s.capability !== "pure_compute" && !isFixture) {
+      html += '<p><b>High capability ≠ malice.</b> A server can score low simply because it ' +
+        'is designed to run commands or write files — a large blast radius, not bad code. ' +
+        'Judge it against what it is meant to do.</p>';
+    }
+    html += '<p><a href="https://github.com/yatuk/mcpradar/issues/new?title=' +
+      encodeURIComponent("False positive: " + (s.server || "")) +
+      '" target="_blank" rel="noopener">Dispute a finding →</a></p>';
+    html += '</div>';
+    return html;
+  }
+
+  function renderScopeTags(s) {
+    var scopes = inferScope(s);
+    if (s.api_free) {
+      scopes.push("local-first");
+    }
+    var html = '<span class="scope-tags">';
+    // Surface a high-blast-radius capability so a clean-looking C/D server
+    // explains itself in the table without opening the detail page.
+    if (!isPending(s) && CAP_LABELS[s.capability] && s.capability !== "pure_compute" &&
+        s.capability !== "fs_read" && s.capability !== "net_egress") {
+      var info = CAP_LABELS[s.capability];
+      html += '<span class="scope-tag" title="' + esc(info[0]) + '" style="border-color:' +
+        info[1] + ';color:' + info[1] + '">' + esc(s.capability) + '</span>';
+    }
+    for (var i = 0; i < scopes.length; i++) {
+      var cls = scopes[i] === "local-first" ? 'scope-tag local-first' : 'scope-tag';
+      html += '<span class="' + cls + '">' + esc(scopes[i]) + '</span>';
+    }
+    html += '</span>';
+    return html;
+  }
+
+  /* ------------------------------------------------------------------
+     Render: Risk Bar
+     ------------------------------------------------------------------ */
+  function renderRiskBar(score) {
+    var val = score != null ? score : 0;
+    var pct = Math.min(100, Math.max(0, val * 10));
+    var cls = riskClass(val);
+    return '<div class="risk-bar-wrap">' +
+      '<div class="risk-bar-track" role="meter" aria-valuenow="' + val.toFixed(1) + '" aria-valuemin="0" aria-valuemax="10" aria-label="Risk score ' + val.toFixed(1) + ' out of 10">' +
+      '<div class="risk-bar-fill ' + cls + '" style="width:' + pct + '%"></div></div>' +
+      '<span class="risk-value">' + val.toFixed(1) + '</span></div>';
+  }
+
+  /* ------------------------------------------------------------------
+     Render: Table (Desktop)
+     ------------------------------------------------------------------ */
+  /* ------------------------------------------------------------------
+     Pagination — the leaderboard is one long list, so the table and the
+     mobile cards share a page window over the *filtered* result set.
+     ------------------------------------------------------------------ */
+  function pageCount(total) {
+    return Math.max(1, Math.ceil(total / pageSize));
+  }
+
+  // Clamp the current page into range (filters can shrink the result set) and
+  // return the [start, end) slice bounds for the active page.
+  function pageBounds(total) {
+    var pages = pageCount(total);
+    if (currentPage > pages) currentPage = pages;
+    if (currentPage < 1) currentPage = 1;
+    var start = (currentPage - 1) * pageSize;
+    return { start: start, end: Math.min(start + pageSize, total) };
+  }
+
+  function goToPage(n) {
+    currentPage = n;
+    updateLayout();
+    // Keep the user oriented: jump back to the top of the list on page change.
+    if (tableWrap && tableWrap.scrollIntoView) {
+      tableWrap.scrollIntoView({ block: "start", behavior: "smooth" });
+    }
+  }
+
+  function renderPagination(total) {
+    if (!pager) return;
+    if (isLoading || loadError || total <= pageSize) {
+      pager.innerHTML = "";
+      return;
+    }
+    var pages = pageCount(total);
+    var b = pageBounds(total);
+    var html = '<div class="page-info">Showing <b>' + (b.start + 1) + '</b>–<b>' +
+      b.end + '</b> of <b>' + total + '</b></div>';
+    html += '<div class="page-btns">';
+    html += '<button class="page-btn" data-page="' + (currentPage - 1) + '"' +
+      (currentPage === 1 ? ' disabled' : '') + ' aria-label="Previous page">‹ Prev</button>';
+
+    // Windowed page numbers with ellipses: 1 … 4 5 [6] 7 8 … 12
+    var win = [];
+    for (var p = 1; p <= pages; p++) {
+      if (p === 1 || p === pages || (p >= currentPage - 2 && p <= currentPage + 2)) {
+        win.push(p);
+      } else if (win[win.length - 1] !== "…") {
+        win.push("…");
+      }
+    }
+    for (var w = 0; w < win.length; w++) {
+      if (win[w] === "…") {
+        html += '<span class="page-ellipsis">…</span>';
+      } else {
+        html += '<button class="page-btn' + (win[w] === currentPage ? ' on' : '') +
+          '" data-page="' + win[w] + '"' +
+          (win[w] === currentPage ? ' aria-current="page"' : '') + '>' + win[w] + '</button>';
+      }
+    }
+    html += '<button class="page-btn" data-page="' + (currentPage + 1) + '"' +
+      (currentPage === pages ? ' disabled' : '') + ' aria-label="Next page">Next ›</button>';
+    html += '</div>';
+    pager.innerHTML = html;
+
+    var btns = pager.querySelectorAll(".page-btn[data-page]");
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener("click", function () {
+        var n = parseInt(this.getAttribute("data-page"), 10);
+        if (!isNaN(n) && n >= 1 && n <= pages && n !== currentPage) goToPage(n);
+      });
+    }
+  }
+
+  function renderTable() {
+    var filtered = filteredServers();
+    if (isLoading) {
+      if (pager) pager.innerHTML = "";
+      renderSkeleton();
+      return;
+    }
+    if (loadError) {
+      if (pager) pager.innerHTML = "";
+      tbody.innerHTML = '<tr><td colspan="10" class="state-msg">' +
+        '<p>Data unavailable. Check back soon.</p>' +
+        '<p><a onclick="location.reload()">Retry</a></p>' +
+        '</td></tr>';
+      return;
+    }
+    if (filtered.length === 0) {
+      if (pager) pager.innerHTML = "";
+      if (allServers.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="10" class="state-msg">' +
+          '<p class="icon">&#9729;</p>' +
+          '<p>No scan results yet.</p>' +
+          '<p>The leaderboard updates weekly via GitHub Actions. Check back soon!</p>' +
+          '</td></tr>';
+      } else {
+        tbody.innerHTML = '<tr><td colspan="10" class="state-msg">' +
+          '<p>No servers match your filters.</p>' +
+          '</td></tr>';
+      }
+      return;
+    }
+
+    var b = pageBounds(filtered.length);
+    var html = "";
+    for (var i = b.start; i < b.end; i++) {
+      var s = filtered[i];
+      var sc = s.risk_score != null ? s.risk_score : 0;
+      var g = s.grade || "-";
+      var tools = s.tools != null ? s.tools : 0;
+      var findings = s.findings != null ? s.findings : 0;
+      var ls = s.last_scanned || "-";
+      var hash = s.tool_hash ? s.tool_hash.substring(0, 8) : "-";
+      var name = s.display_name || s.server || "-";
+      var serverId = s.server || "";
+      var detailHref = "#server=" + encodeServer(serverId);
+      var registryName = serverId
+        .replace("@modelcontextprotocol/", "io.modelcontextprotocol/")
+        .replace("@anthropic/", "io.anthropic/")
+        .replace("@playwright/", "com.microsoft.playwright/")
+        .replace("@", "io.github.");
+
+      var pending = isPending(s);
+      var ver = s.version ? s.version : "";
+      var gDisplay = pending ? "-" : g;
+      var gradeLabel = pending ? "Pending" : g;
+
+      html += '<tr' + (pending ? ' style="opacity:0.6"' : '') + '>';
+      html += '<td style="color:var(--dim)">' + (pending ? "—" : (i + 1)) + '</td>';
+      html += '<td>' +
+        '<a class="server-link" href="' + detailHref + '" aria-label="View detail for ' + esc(name) + '">' + esc(name) + '</a>' +
+        (s.trending ? ' <span class="trending-tag" title="Auto-scanned as one of the day\'s most popular MCP servers">🔥 trending</span>' : '') +
+        (ver ? ' <span style="font-size:10px;color:var(--dim)">v' + esc(ver) + '</span>' : '') +
+        (pending ? ' <span style="font-size:9px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:0 5px;color:var(--dim)">' + (s.status==="incomplete"?"scan incomplete":"not scanned") + '</span>' : '') +
+        '<br><span style="font-size:10px;color:var(--dim)">' +
+        '<a href="https://registry.modelcontextprotocol.io/v0.1/servers/' + encodeURIComponent(registryName) + '/versions/latest" target="_blank" rel="noopener" style="color:inherit">registry ↗</a>' +
+        '</span></td>';
+      html += '<td class="risk-cell">' + renderRiskBar(sc) + '</td>';
+      html += '<td><span class="grade-badge ' + g + '" aria-label="Grade ' + gradeLabel + '">' + gDisplay + '</span></td>';
+      html += '<td style="text-align:center">' + renderSparkline(s.history) + '</td>';
+      html += '<td>' + renderScopeTags(s) + '</td>';
+      // Tools
+      html += '<td><span style="font-weight:600">' + (pending ? "—" : tools) + '</span></td>';
+      // Findings: clickable to detail
+      if (pending) {
+        html += '<td><span style="color:var(--dim)">—</span></td>';
+      } else if (findings > 0 && s.findings_detail && s.findings_detail.length > 0) {
+        html += '<td><a class="findings-link" href="' + detailHref + '">' + findings + '</a></td>';
+      } else {
+        html += '<td><span style="color:var(--dim)">' + findings + '</span></td>';
+      }
+      html += '<td style="color:var(--dim)">' + esc(ls) + '</td>';
+      html += '<td class="mono">' + esc(hash) + '</td>';
+      html += '</tr>';
+    }
+    tbody.innerHTML = html;
+    renderPagination(filtered.length);
+  }
+
+  /* ------------------------------------------------------------------
+     Render: Skeleton (loading)
+     ------------------------------------------------------------------ */
+  function renderSkeleton() {
+    var html = "";
+    for (var i = 0; i < 5; i++) {
+      html += '<tr><td colspan="10"><div class="skeleton-row">' +
+        '<div class="skeleton sk"></div>' +
+        '<div class="skeleton sk"></div>' +
+        '<div class="skeleton sk"></div>' +
+        '<div class="skeleton sk"></div>' +
+        '<div class="skeleton sk"></div>' +
+        '<div class="skeleton sk"></div>' +
+        '<div class="skeleton sk"></div>' +
+        '<div class="skeleton sk"></div>' +
+        '</div></td></tr>';
+    }
+    tbody.innerHTML = html;
+  }
+
+  /* ------------------------------------------------------------------
+     Render: Cards (Mobile)
+     ------------------------------------------------------------------ */
+  function renderCards() {
+    var filtered = filteredServers();
+    if (isLoading) { if (pager) pager.innerHTML = ""; return; }
+    if (loadError || filtered.length === 0) {
+      cardGrid.innerHTML = "";
+      if (pager) pager.innerHTML = "";
+      return;
+    }
+
+    var b = pageBounds(filtered.length);
+    var html = "";
+    for (var i = b.start; i < b.end; i++) {
+      var s = filtered[i];
+      var sc = s.risk_score != null ? s.risk_score : 0;
+      var g = s.grade || "-";
+      var tools = s.tools != null ? s.tools : 0;
+      var findings = s.findings != null ? s.findings : 0;
+      var ls = s.last_scanned || "-";
+      var hash = s.tool_hash ? s.tool_hash.substring(0, 8) : "-";
+      var name = s.display_name || s.server || "-";
+      var serverId = s.server || "";
+      var detailHref = "#server=" + encodeServer(serverId);
+
+      var pending = isPending(s);
+      var ver = s.version ? s.version : "";
+
+      html += '<div class="server-card"' + (pending ? ' style="opacity:0.55"' : '') + '>';
+      html += '<div class="card-head">';
+      html += '<div><a class="card-name" href="' + detailHref + '">' + esc(name) + '</a>';
+      if (ver) html += ' <span style="font-size:11px;color:var(--dim)">v' + esc(ver) + '</span>';
+      if (pending) html += ' <span style="font-size:9px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:0 5px;color:var(--dim)">' + (s.status === "incomplete" ? "scan incomplete" : "not scanned") + '</span>';
+      html += '</div>';
+      html += '<span class="card-grade ' + g + '" aria-label="Grade ' + (pending ? 'Pending' : g) + '">' + (pending ? '-' : g) + '</span>';
+      html += '</div>';
+      html += '<div class="card-stats">';
+      html += '<div>Risk</div><div>' + (pending ? '<span style="color:var(--dim)">not scanned</span>' : renderRiskBar(sc)) + '</div>';
+      html += '<div>Trend</div><div>' + (s.history && s.history.length > 1 ? (s.history[s.history.length - 1].score < s.history[0].score ? '<span style="color:var(--green)">improving</span>' : s.history[s.history.length - 1].score > s.history[0].score ? '<span style="color:var(--red)">worsening</span>' : '<span style="color:var(--dim)">stable</span>') : '-') + '</div>';
+      html += '<div>Tools</div><div><strong>' + (pending ? "—" : tools) + '</strong></div>';
+      html += '<div>Findings</div><div><strong>' + (pending ? "—" : findings) + '</strong></div>';
+      html += '<div>Scanned</div><div>' + esc(ls) + '</div>';
+      html += '<div>Hash</div><div class="mono">' + esc(hash) + '</div>';
+      html += '</div>';
+      html += '<div class="card-scope">' + renderScopeTags(s) + '</div>';
+      html += '<div class="card-link">';
+      if (findings > 0) {
+        html += '<a class="findings-link" href="' + detailHref + '">View detail →</a>';
+      }
+      html += '</div>';
+      html += '</div>';
+    }
+    cardGrid.innerHTML = html;
+    renderPagination(filtered.length);
+  }
+
+  /* ------------------------------------------------------------------
+     Layout: Table vs Cards
+     ------------------------------------------------------------------ */
+  function updateLayout() {
+    var mobile = window.innerWidth <= 700;
+    if (mobile) {
+      tableWrap.classList.add("hidden");
+      cardGrid.classList.add("active");
+      renderCards();
+    } else {
+      tableWrap.classList.remove("hidden");
+      cardGrid.classList.remove("active");
+      renderTable();
+    }
+  }
+
+  /* ------------------------------------------------------------------
+     SARIF Download
+     ------------------------------------------------------------------ */
+  function downloadSarif(serverName, s) {
+    var sarif = {
+      "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+      "version": "2.1.0",
+      "runs": [{
+        "tool": {
+          "driver": {
+            "name": "MCPRadar",
+            "informationUri": "https://github.com/yatuk/mcpradar",
+            "semanticVersion": (s.scanner_version || "unknown"),
+            "rules": []
+          }
+        },
+        "results": [],
+        "properties": {
+          "target": serverName,
+          "risk_score": s.risk_score,
+          "grade": s.grade,
+          "confidence": s.confidence
+        }
+      }]
+    };
+    var seenRules = {};
+    var findings = s.findings_detail || [];
+    var sevMap = { "low": "note", "medium": "warning", "high": "error", "critical": "error" };
+    for (var i = 0; i < findings.length; i++) {
+      var f = findings[i];
+      var rid = f.rule_id || "?";
+      if (!seenRules[rid]) {
+        seenRules[rid] = true;
+        sarif.runs[0].tool.driver.rules.push({
+          "id": rid,
+          "shortDescription": { "text": f.title || rid },
+          "helpUri": "https://github.com/yatuk/mcpradar/blob/main/docs/detection-rules.md"
+        });
+      }
+      sarif.runs[0].results.push({
+        "ruleId": rid,
+        "level": sevMap[(f.severity || "low").toLowerCase()] || "warning",
+        "message": { "text": f.description || f.title || "" },
+        "locations": [{
+          "physicalLocation": {
+            "artifactLocation": { "uri": f.target || serverName, "uriBaseId": serverName },
+            "region": { "snippet": { "text": f.evidence || "" } }
+          }
+        }],
+        "properties": { "severity": f.severity, "title": f.title }
+      });
+    }
+    var blob = new Blob([JSON.stringify(sarif, null, 2)], { type: "application/sarif+json" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = (serverName.replace(/[@/]/g, "_") || "scan") + ".sarif.json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(a.href);
+  }
+
+  /* ------------------------------------------------------------------
+     Detail View
+     ------------------------------------------------------------------ */
+  function showDetail(serverName) {
+    var decoded = decodeServer(serverName);
+    var s = null;
+
+    // Multi-strategy lookup for robust hash routing
+    var decodedLower = decoded.trim().toLowerCase();
+    for (var i = 0; i < allServers.length; i++) {
+      if (allServers[i].server === decoded) { s = allServers[i]; break; }
+    }
+    // Fallback 1: case-insensitive + trimmed
+    if (!s) {
+      for (var i = 0; i < allServers.length; i++) {
+        if ((allServers[i].server || "").trim().toLowerCase() === decodedLower) {
+          s = allServers[i]; break;
+        }
+      }
+    }
+    // Fallback 2: double-decode (browser may have partially decoded hash)
+    if (!s) {
+      try {
+        var doubleDecoded = decodeURIComponent(decoded);
+        if (doubleDecoded !== decoded) {
+          for (var i = 0; i < allServers.length; i++) {
+            if (allServers[i].server === doubleDecoded) { s = allServers[i]; break; }
+          }
+        }
+      } catch(e) {}
+    }
+    // Fallback 3: match by display_name (/ → @ conversion)
+    if (!s) {
+      for (var i = 0; i < allServers.length; i++) {
+        var dn = (allServers[i].display_name || "").replace(/\s+\/\s+/g, "/");
+        if (dn.trim().toLowerCase() === decodedLower ||
+            ("@" + dn.trim()).toLowerCase() === decodedLower) {
+          s = allServers[i]; break;
+        }
+      }
+    }
+
+    if (!s) {
+      showMain();
+      return;
+    }
+
+    mainView.style.display = "none";
+    detailView.classList.add("active");
+
+    var g = s.grade || "-";
+    var sc = s.risk_score != null ? s.risk_score : 0;
+    var name = s.display_name || s.server || "-";
+    var findings = s.findings_detail || [];
+    var tools = s.tools_detail || [];
+    var bySev = s.by_severity || {};
+
+    // Group findings by severity
+    var groups = { critical: [], high: [], medium: [], low: [] };
+    var sevOrder = ["critical", "high", "medium", "low"];
+    for (var j = 0; j < findings.length; j++) {
+      var f = findings[j];
+      var sev = (f.severity || "low").toLowerCase();
+      if (groups[sev]) groups[sev].push(f);
+      else groups.low.push(f);
+    }
+
+    // Build HTML
+    var html = "";
+    html += '<button class="detail-back" onclick="showMain()" aria-label="Back to leaderboard">&#8592; Back to leaderboard</button>';
+
+    // Header
+    html += '<div class="detail-header">';
+    html += '<h2>' + esc(name) + '</h2>';
+    html += '<div class="meta">';
+    html += '<span>Server ID: <strong>' + esc(s.server || "") + '</strong></span> &nbsp;|&nbsp; ';
+    html += '<span>Last scanned: <strong>' + esc(s.last_scanned || "-") + '</strong></span> &nbsp;|&nbsp; ';
+    html += '<span>Scanner: <strong>' + esc(s.scanner_version || "-") + '</strong></span>';
+    html += '</div>';
+
+    // Badge embed code
+    var badgename = (s.server || "").replace(/@/g, "").replace(/\//g, "-");
+    html += '<div style="margin-top:8px;padding:8px 10px;background:var(--card);border:1px solid var(--border);border-radius:6px;font-size:12px;color:var(--dim)">';
+    html += '<span style="color:var(--text);font-weight:600">README Badge:</span><br>';
+    html += '<code style="font-size:11px;word-break:break-all">[![MCPRadar Security](https://yatuk.github.io/mcpradar/badges/' + esc(badgename) + '.svg)](https://yatuk.github.io/mcpradar/)</code>';
+    html += '</div>';
+
+    // Score breakdown
+    html += '<div class="detail-score-breakdown">';
+    html += '<div class="item">MRS Risk: <b>' + sc.toFixed(1) + ' / 10</b></div>';
+    html += '<div class="item">Grade: <b style="color:' + (g === "F" || g === "D" ? "var(--red)" : g === "A" || g === "B" ? "var(--green)" : "var(--yellow)") + '">' + g + '</b></div>';
+    html += '<div class="item">Confidence: <b>' + (s.confidence != null ? (s.confidence * 100).toFixed(0) + '%' : '-') + '</b></div>';
+    html += '<div class="item">Tools: <b>' + (s.tools || 0) + '</b></div>';
+    html += '<div class="item">Findings: <b>' + (s.findings || 0) + '</b></div>';
+    html += capabilityHtml(s);
+    html += '<div class="item">Full hash: <b class="mono">' + esc(s.tool_hash || "-") + '</b></div>';
+    html += '</div>';
+
+    // Severity breakdown
+    html += '<div class="detail-score-breakdown" style="margin-top:8px;padding-top:8px;border-top-style:dashed">';
+    html += '<div class="item">Critical: <b style="color:var(--red)">' + (bySev.critical || 0) + '</b></div>';
+    html += '<div class="item">High: <b style="color:var(--orange)">' + (bySev.high || 0) + '</b></div>';
+    html += '<div class="item">Medium: <b style="color:var(--yellow)">' + (bySev.medium || 0) + '</b></div>';
+    html += '<div class="item">Low: <b style="color:var(--dim)">' + (bySev.low || 0) + '</b></div>';
+    html += '<div class="item">Scope: ' + renderScopeTags(s) + '</div>';
+    html += '</div>';
+    html += '<button class="sarif-btn" id="sarifBtn" title="Download SARIF v2.1.0 report">Download SARIF</button>';
+    html += '<button class="sarif-btn" id="jsonBtn" title="Download this server\'s raw result as JSON" style="margin-left:6px">Download JSON</button>';
+    html += '</div>';
+
+    // "Why this score" — decompose the MRS into its three candidate terms so
+    // the grade is defensible, not just asserted.
+    html += scoreDecompositionHtml(s);
+
+    // Responsible-use disclaimer.
+    html += disclaimerHtml(s);
+
+    // Findings section with accordion groups
+    html += '<div class="detail-section">';
+    html += '<h3>Findings (' + findings.length + ')</h3>';
+    if (findings.length === 0) {
+      html += '<p style="color:var(--dim)">No findings detected; server is clean.</p>';
+    } else {
+      for (var gx = 0; gx < sevOrder.length; gx++) {
+        var sev = sevOrder[gx];
+        var group = groups[sev];
+        if (!group || group.length === 0) continue;
+        html += '<details class="finding-group" open>';
+        html += '<summary><span class="sev-tag ' + sev + '">' + sev.toUpperCase() + '</span> <span class="count">' + group.length + ' finding' + (group.length !== 1 ? 's' : '') + '</span></summary>';
+        for (var fx = 0; fx < group.length; fx++) {
+          var ff = group[fx];
+          var ruleHelp = RULE_HELP[ff.rule_id] || "";
+          html += '<div class="finding-row ' + sev + '">';
+          html += '<span>' + esc(ff.rule_id || "-") + '</span>';
+          html += '<span class="sev-tag ' + sev + '">' + esc(ff.severity || "") + '</span>';
+          if (ff.confidence != null) {
+            var cpct = Math.round(ff.confidence * 100);
+            var clab = ff.confidence >= 0.9 ? "high" : (ff.confidence >= 0.7 ? "med" : "low");
+            html += '<span class="conf-tag conf-' + clab + '" title="Detection confidence — how likely a true positive">' + cpct + '%</span>';
+          }
+          html += '<span class="rule-cell">' + esc(ff.target || "-") + '</span>';
+          html += '<span style="color:var(--text)">' + esc(ff.title || "-") + '</span>';
+          if (ff.description) {
+            html += '<span class="finding-desc">' + esc(ff.description) + '</span>';
+          }
+          if (ruleHelp) {
+            html += '<span class="rule-help">' + esc(ruleHelp) + '</span>';
+          }
+          html += '</div>';
+        }
+        html += '</details>';
+      }
+    }
+    html += '</div>';
+
+    // Tools section
+    html += '<div class="detail-section">';
+    html += '<h3>Tools (' + tools.length + ')</h3>';
+    if (tools.length === 0) {
+      html += '<p style="color:var(--dim)">No tool schemas available.</p>';
+    } else {
+      html += '<div class="tool-mini-list">';
+      for (var tx = 0; tx < tools.length; tx++) {
+        var t = tools[tx];
+        html += '<div class="tool-mini">';
+        html += '<span class="tn">' + esc(t.name || "-") + ' ' + capTagsHtml(t.capabilities) + '</span>';
+        html += '<span class="td">' + esc((t.description || "-").substring(0, 140)) + '</span>';
+        if (t.input_schema) {
+          var schemaId = 'schema-in-' + tx;
+          html += '<div class="ts"><button class="schema-toggle" onclick="var el=document.getElementById(\'' + schemaId + '\');el.style.display=el.style.display===\'none\'?\'block\':\'none\'" style="background:var(--border);color:var(--dim);border:none;border-radius:3px;padding:1px 8px;cursor:pointer;font-size:10px;font-weight:600">Input Schema</button>';
+          html += '<pre id="' + schemaId + '" style="display:none;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:8px;margin:4px 0 0;max-height:200px;overflow:auto;font-size:10px;line-height:1.4;color:var(--dim);white-space:pre;grid-column:1/-1">' + esc(JSON.stringify(t.input_schema, null, 2)) + '</pre></div>';
+        }
+        if (t.output_schema) {
+          var outId = 'schema-out-' + tx;
+          html += '<div class="ts"><button class="schema-toggle" onclick="var el=document.getElementById(\'' + outId + '\');el.style.display=el.style.display===\'none\'?\'block\':\'none\'" style="background:var(--border);color:var(--dim);border:none;border-radius:3px;padding:1px 8px;cursor:pointer;font-size:10px;font-weight:600;margin-top:2px">Output Schema</button>';
+          html += '<pre id="' + outId + '" style="display:none;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:8px;margin:4px 0 0;max-height:200px;overflow:auto;font-size:10px;line-height:1.4;color:var(--dim);white-space:pre;grid-column:1/-1">' + esc(JSON.stringify(t.output_schema, null, 2)) + '</pre></div>';
+        }
+        html += '</div>';
+      }
+      html += '</div>';
+    }
+    html += '</div>';
+
+    detailView.innerHTML = html;
+    // Wire SARIF download button
+    var btn = document.getElementById("sarifBtn");
+    if (btn) {
+      btn.onclick = function () { downloadSarif(decoded, s); };
+    }
+    var jbtn = document.getElementById("jsonBtn");
+    if (jbtn) {
+      jbtn.onclick = function () {
+        var blob = new Blob([JSON.stringify(s, null, 2)], { type: "application/json" });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement("a");
+        a.href = url;
+        a.download = (s.server || "server").replace(/[^A-Za-z0-9_.-]+/g, "_") + ".json";
+        a.click();
+        URL.revokeObjectURL(url);
+      };
+    }
+    window.scrollTo(0, 0);
+  }
+
+  function showMain() {
+    mainView.style.display = "";
+    detailView.classList.remove("active");
+    detailView.innerHTML = "";
+    window.location.hash = "";
+    updateLayout();
+  }
+
+  /* ------------------------------------------------------------------
+     Hash Routing
+     ------------------------------------------------------------------ */
+  function handleHash() {
+    var hash = window.location.hash;
+    if (hash.indexOf("#server=") === 0) {
+      var name = hash.substring(8);
+      if (name) showDetail(name);
+    } else {
+      showMain();
+    }
+  }
+
+  /* ------------------------------------------------------------------
+     Sort Header
+     ------------------------------------------------------------------ */
+  function updateSortIndicators() {
+    var allTh = document.querySelectorAll("thead th[data-sort]");
+    for (var i = 0; i < allTh.length; i++) {
+      var th = allTh[i];
+      var key = th.getAttribute("data-sort");
+      if (key === sortKey) {
+        th.setAttribute("aria-sort", sortAsc ? "ascending" : "descending");
+      } else {
+        th.setAttribute("aria-sort", "none");
+      }
+    }
+  }
+
+  /* ------------------------------------------------------------------
+     Full Render
+     ------------------------------------------------------------------ */
+  // Reflect the activeGrades state onto the grade filter buttons (used when a
+  // grade is chosen from the distribution histogram, not the buttons).
+  function syncGradeButtons() {
+    var btns = document.querySelectorAll(".grade-btn");
+    var allOn = activeGrades.A && activeGrades.B && activeGrades.C && activeGrades.D && activeGrades.F;
+    for (var i = 0; i < btns.length; i++) {
+      var g = btns[i].getAttribute("data-grade");
+      var on = g === "all" ? allOn : !!activeGrades[g];
+      btns[i].classList.toggle("on", on);
+    }
+  }
+
+  function fullRender() {
+    // A filter/search/sort change alters the result set, so restart at page 1.
+    currentPage = 1;
+    updateSortIndicators();
+    updateLayout();
+    renderStats();
+    renderLandscape();
+  }
+
+  /* ------------------------------------------------------------------
+     Event Handlers
+     ------------------------------------------------------------------ */
+  searchInput.addEventListener("input", function () {
+    searchQuery = searchInput.value;
+    fullRender();
+  });
+
+  // Category + vuln type filter dropdowns
+  var catFilter = document.getElementById("categoryFilter");
+  var vulnFilter = document.getElementById("vulnFilter");
+  catFilter.addEventListener("change", function () {
+    activeCategory = catFilter.value;
+    fullRender();
+  });
+  vulnFilter.addEventListener("change", function () {
+    activeVulnType = vulnFilter.value;
+    fullRender();
+  });
+
+  // API-Free filter dropdown
+  var apiFreeFilter = document.getElementById("apiFreeFilter");
+  apiFreeFilter.addEventListener("change", function () {
+    activeApiFree = apiFreeFilter.value;
+    fullRender();
+  });
+
+  // Scan-status filter dropdown
+  var scanStatusFilter = document.getElementById("scanStatusFilter");
+  scanStatusFilter.addEventListener("change", function () {
+    activeScanStatus = scanStatusFilter.value;
+    fullRender();
+  });
+
+  // Grade filter buttons
+  var gradeBtns = document.querySelectorAll(".grade-btn");
+  for (var bi = 0; bi < gradeBtns.length; bi++) {
+    gradeBtns[bi].addEventListener("click", function () {
+      var grade = this.getAttribute("data-grade");
+      if (grade === "all") {
+        var becomingActive = !this.classList.contains("on");
+        this.classList.toggle("on");
+        for (var j = 0; j < gradeBtns.length; j++) {
+          var b = gradeBtns[j];
+          var g = b.getAttribute("data-grade");
+          if (g !== "all") {
+            if (becomingActive) { b.classList.add("on"); activeGrades[g] = true; }
+            else { b.classList.remove("on"); activeGrades[g] = false; }
+          }
+        }
+        if (!becomingActive) {
+          activeGrades.A = activeGrades.B = activeGrades.C = activeGrades.D = activeGrades.F = false;
+        }
+      } else {
+        this.classList.toggle("on");
+        activeGrades[grade] = this.classList.contains("on");
+        var allOn = activeGrades.A && activeGrades.B && activeGrades.C && activeGrades.D && activeGrades.F;
+        var allBtn = document.querySelector('.grade-btn[data-grade="all"]');
+        if (allOn) allBtn.classList.add("on");
+        else allBtn.classList.remove("on");
+      }
+      fullRender();
+    });
+  }
+
+  // Sort headers
+  var thList = document.querySelectorAll("thead th[data-sort]");
+  for (var ti = 0; ti < thList.length; ti++) {
+    thList[ti].addEventListener("click", function () {
+      var key = this.getAttribute("data-sort");
+      if (key === sortKey) {
+        sortAsc = !sortAsc;
+      } else {
+        sortKey = key;
+        sortAsc = key === "risk" || key === "rank";
+      }
+      fullRender();
+    });
+  }
+
+  // Hash change
+  window.addEventListener("hashchange", handleHash);
+
+  // Resize
+  var resizeTimer;
+  window.addEventListener("resize", function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(updateLayout, 100);
+  });
+
+  // Methodology panel: remember open/closed state
+  methodologyPanel.addEventListener("toggle", function () {
+    try { localStorage.setItem("mcpradar:methodology", methodologyPanel.open ? "1" : "0"); } catch (e) {}
+  });
+
+  // Expose key functions for inline onclick handlers
+  window.showMain = showMain;
+
+  /* ------------------------------------------------------------------
+     Init
+     ------------------------------------------------------------------ */
+  // Restore methodology state
+  try {
+    var mOpen = localStorage.getItem("mcpradar:methodology");
+    if (mOpen === "1") methodologyPanel.open = true;
+  } catch (e) {}
+
+  // Restore cal badge visibility from methodology
+  if (methodologyPanel.open) {
+    // will show after data load
+  }
+
+  // Fetch data
+  renderSkeleton();
+  fetch("data.json")
+    .then(function (r) {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.json();
+    })
+    .then(function (data) {
+      allServers = data || [];
+      isLoading = false;
+      loadError = false;
+      fullRender();
+      // Check hash after data loads
+      handleHash();
+    })
+    .catch(function () {
+      allServers = [];
+      isLoading = false;
+      loadError = true;
+      fullRender();
+    });
+})();
+</script>
+
+</body>
+</html>

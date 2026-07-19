@@ -1,0 +1,3902 @@
+[
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.modelcontextprotocol/server-sequential-thinking",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 0.0,
+        "scoring_model": "mrs-v1",
+        "grade": "A",
+        "confidence": 1.0,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 2
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "9bbea416bf3d4e0c",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "neo.mjs",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 0.1,
+        "scoring_model": "mrs-v1",
+        "grade": "A",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "zen-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 0.1,
+        "scoring_model": "mrs-v1",
+        "grade": "A",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.variflight-ai/variflight-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 0.4,
+        "scoring_model": "mrs-v1",
+        "grade": "A",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 3
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "ed8db337db25ab37",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "mcp-server-airbnb",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 0.4,
+        "scoring_model": "mrs-v1",
+        "grade": "A",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 8
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "6493a4115fd52980",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "mcp-server-weather",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 0.4,
+        "scoring_model": "mrs-v1",
+        "grade": "A",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 1
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "e05d859696fc0531",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "mcp-server-commands",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 0.4,
+        "scoring_model": "mrs-v1",
+        "grade": "A",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 4
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "faad75a511044025",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.modelcontextprotocol/server-slack",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 0.4,
+        "scoring_model": "mrs-v1",
+        "grade": "A",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.stripe/mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 0.4,
+        "scoring_model": "mrs-v1",
+        "grade": "A",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "comfyui-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 0.4,
+        "scoring_model": "mrs-v1",
+        "grade": "A",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "korean-law-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 0.4,
+        "scoring_model": "mrs-v1",
+        "grade": "A",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.modelcontextprotocol/server-git",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 0.6,
+        "scoring_model": "mrs-v1",
+        "grade": "A",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 19
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "a886c3366c5a8831",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "mcp-server-time",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 0.6,
+        "scoring_model": "mrs-v1",
+        "grade": "A",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 4
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "8e9f1e6cfff18235",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "excalidraw-architect-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 0.6,
+        "scoring_model": "mrs-v1",
+        "grade": "A",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "yfinance-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 1.0,
+        "scoring_model": "mrs-v1",
+        "grade": "B",
+        "confidence": 1.0,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 21
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "0e0081ffa4de6c00",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "tavily-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 1.0,
+        "scoring_model": "mrs-v1",
+        "grade": "B",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 10
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "ef01aa97f11827ba",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "context7",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 1.0,
+        "scoring_model": "mrs-v1",
+        "grade": "B",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 4
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "0c303bbade84b2bb",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "edgeone-pages-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 1.0,
+        "scoring_model": "mrs-v1",
+        "grade": "B",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 2
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "c48d92bab689ab02",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "markitdown-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 1.0,
+        "scoring_model": "mrs-v1",
+        "grade": "B",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 1
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "ddb208e84c8fc0a9",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.zereight/mcp-gitlab",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 1.0,
+        "scoring_model": "mrs-v1",
+        "grade": "B",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "wikipedia-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 1.1,
+        "scoring_model": "mrs-v1",
+        "grade": "B",
+        "confidence": 0.85,
+        "findings": 1,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 1,
+          "low": 70
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "9aecc2f1033e0b0c",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "exa-mcp-server",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 1.2,
+        "scoring_model": "mrs-v1",
+        "grade": "B",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 1
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "dde94629ddb9926d",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "duckduckgo-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 1.3,
+        "scoring_model": "mrs-v1",
+        "grade": "B",
+        "confidence": 0.7,
+        "findings": 1,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 1,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "mcp-hfspace",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 1.4,
+        "scoring_model": "mrs-v1",
+        "grade": "B",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 3
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "e020a18efe14ab26",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.benborla29/mcp-server-mysql",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 1.4,
+        "scoring_model": "mrs-v1",
+        "grade": "B",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "mcp-server-chart",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 1.8,
+        "scoring_model": "mrs-v1",
+        "grade": "B",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 127
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "1869cbc90d76d306",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.modelcontextprotocol/inspector-cli",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 2.0,
+        "scoring_model": "mrs-v1",
+        "grade": "B",
+        "confidence": 1.0,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 35
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "4d709119e341da34",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "iterm-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 2.0,
+        "scoring_model": "mrs-v1",
+        "grade": "B",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 2
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "3713cb6bb708bffa",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "mcp-server-reddit",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 2.2,
+        "scoring_model": "mrs-v1",
+        "grade": "B",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 8
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "a48d1e156b2aa1ea",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "mcp-server-docker",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 2.2,
+        "scoring_model": "mrs-v1",
+        "grade": "B",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 5
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "64e2995053ca761c",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.modelcontextprotocol/server-sentry",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 2.2,
+        "scoring_model": "mrs-v1",
+        "grade": "B",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 1
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "0b54b9ef236e8415",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "mcp-server-calculator",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 2.2,
+        "scoring_model": "mrs-v1",
+        "grade": "B",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 2
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "edca249d8d1f9a5b",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "searxng-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 2.2,
+        "scoring_model": "mrs-v1",
+        "grade": "B",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 1
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "2419329067823cab",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.modelcontextprotocol/server-filesystem",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 2.7,
+        "scoring_model": "mrs-v1",
+        "grade": "B",
+        "confidence": 0.73,
+        "findings": 5,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 5,
+          "low": 38
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "44c35cf6ac86e32d",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "mcp-server-fetch",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 2.7,
+        "scoring_model": "mrs-v1",
+        "grade": "B",
+        "confidence": 0.8,
+        "findings": 2,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 2,
+          "low": 0
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "e7d3799ecc09f5cb",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.modelcontextprotocol/server-github",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 2.8,
+        "scoring_model": "mrs-v1",
+        "grade": "B",
+        "confidence": 0.8,
+        "findings": 1,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 1,
+          "low": 82
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "50715a0a2f55c601",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.modelcontextprotocol/server-everything",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 2.8,
+        "scoring_model": "mrs-v1",
+        "grade": "B",
+        "confidence": 1.0,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 8
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "3f4d3cd441fa0a80",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "mcp-pandoc",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 2.8,
+        "scoring_model": "mrs-v1",
+        "grade": "B",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 6
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "7942daf03a875e04",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.agentdeskai/browser-tools-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 3.0,
+        "scoring_model": "mrs-v1",
+        "grade": "C",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "565952765ea33304",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "mcp-server-yfinance",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 3.0,
+        "scoring_model": "mrs-v1",
+        "grade": "C",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 18
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "00142d1aae518490",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "pdf-reader-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 3.0,
+        "scoring_model": "mrs-v1",
+        "grade": "C",
+        "confidence": 0.7,
+        "findings": 1,
+        "by_severity": {
+          "critical": 0,
+          "high": 1,
+          "medium": 0,
+          "low": 5
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "720340f95db71adc",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "mcp-installer",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 3.0,
+        "scoring_model": "mrs-v1",
+        "grade": "C",
+        "confidence": 0.8,
+        "findings": 1,
+        "by_severity": {
+          "critical": 0,
+          "high": 1,
+          "medium": 0,
+          "low": 3
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "3833814589108074",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "db-mcp-server",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 3.0,
+        "scoring_model": "mrs-v1",
+        "grade": "C",
+        "confidence": 0.9,
+        "findings": 1,
+        "by_severity": {
+          "critical": 0,
+          "high": 1,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "itu-mcp",
+    "version": "0.2.3",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 3.2,
+        "scoring_model": "mrs-v1",
+        "grade": "C",
+        "confidence": 1.0,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 45
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "e4a9ab21752edec5",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.notionhq/notion-mcp-server",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 3.2,
+        "scoring_model": "mrs-v1",
+        "grade": "C",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 40
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "fb89a6a995abd1dc",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.browsermcp/mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 3.2,
+        "scoring_model": "mrs-v1",
+        "grade": "C",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 11
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "e2c04b8f3bbd2861",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.modelcontextprotocol/server-postgres",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 3.2,
+        "scoring_model": "mrs-v1",
+        "grade": "C",
+        "confidence": 0.7,
+        "findings": 1,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 1,
+          "low": 2
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "a8b771920b8319e4",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "mcp-youtube-transcript",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 3.2,
+        "scoring_model": "mrs-v1",
+        "grade": "C",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 3
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "ecc707c586dd2a2d",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "chrome-devtools-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 3.8,
+        "scoring_model": "mrs-v1",
+        "grade": "C",
+        "confidence": 1.0,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 83
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "7c5d1c8baa98ef43",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "arxiv-mcp-server",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 4.0,
+        "scoring_model": "mrs-v1",
+        "grade": "C",
+        "confidence": 0.85,
+        "findings": 4,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 4,
+          "low": 14
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "0408f0d691105dad",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "mcp-code-executor",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 4.0,
+        "scoring_model": "mrs-v1",
+        "grade": "C",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 10
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "cc87e2fc3b49133e",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "mcp-shell",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 4.0,
+        "scoring_model": "mrs-v1",
+        "grade": "C",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 2
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "aeaf9a308c3a65df",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "com.postman/postman-mcp-server",
+    "version": "2.11.1",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 4.0,
+        "scoring_model": "mrs-v1",
+        "grade": "C",
+        "confidence": 0.78,
+        "findings": 3,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 3,
+          "low": 0
+        },
+        "last_scanned": "2026-07-19",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.modelcontextprotocol/server-puppeteer",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 4.5,
+        "scoring_model": "mrs-v1",
+        "grade": "C",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 10
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "10da201c43361eb8",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "mcp-server-sqlite",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 4.5,
+        "scoring_model": "mrs-v1",
+        "grade": "C",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 5
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "51015039cd19f301",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "mcp-clickhouse",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 4.5,
+        "scoring_model": "mrs-v1",
+        "grade": "C",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 5
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "fa34a24ef0c791fd",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "reaper-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 4.7,
+        "scoring_model": "mrs-v1",
+        "grade": "C",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.executeautomation/playwright-mcp-server",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 4.8,
+        "scoring_model": "mrs-v1",
+        "grade": "C",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 62
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "717bb183967118cc",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "com.microsoft.playwright/mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 4.8,
+        "scoring_model": "mrs-v1",
+        "grade": "C",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 63
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "64c419316a5d8e6d",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "mcp-shrimp-task-manager",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 4.8,
+        "scoring_model": "mrs-v1",
+        "grade": "C",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 14
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "cf953fcd1307a0c5",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "mcp-neo4j-cypher",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 4.8,
+        "scoring_model": "mrs-v1",
+        "grade": "C",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 3
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "9674c1b523a5958d",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "biothings-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 4.9,
+        "scoring_model": "mrs-v1",
+        "grade": "C",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 23
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "2d2dbd16c1135614",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "opengenes-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 4.9,
+        "scoring_model": "mrs-v1",
+        "grade": "C",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 2
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "d06fa3aaf94699ae",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "synergy-age-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 4.9,
+        "scoring_model": "mrs-v1",
+        "grade": "C",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 2
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "37e801476938e92c",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "gget-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 4.9,
+        "scoring_model": "mrs-v1",
+        "grade": "C",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "mcp-server-kubernetes",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 5.0,
+        "scoring_model": "mrs-v1",
+        "grade": "D",
+        "confidence": 0.78,
+        "findings": 3,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 3,
+          "low": 96
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "fabc635d889df215",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "mcp-hackernews",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 5.0,
+        "scoring_model": "mrs-v1",
+        "grade": "D",
+        "confidence": 0.81,
+        "findings": 5,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 5,
+          "low": 5
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "68e0b8883cf2eda8",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "davinci-resolve-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 5.0,
+        "scoring_model": "mrs-v1",
+        "grade": "D",
+        "confidence": 0.9,
+        "findings": 1,
+        "by_severity": {
+          "critical": 1,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.containers/kubernetes-mcp-server",
+    "version": "0.0.65",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 5.0,
+        "scoring_model": "mrs-v1",
+        "grade": "D",
+        "confidence": 0.9,
+        "findings": 1,
+        "by_severity": {
+          "critical": 1,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.modelcontextprotocol/server-brave-search",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 5.3,
+        "scoring_model": "mrs-v1",
+        "grade": "D",
+        "confidence": 0.74,
+        "findings": 4,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 4,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "mcp-server-ollama-bridge",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 5.3,
+        "scoring_model": "mrs-v1",
+        "grade": "D",
+        "confidence": 0.74,
+        "findings": 4,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 4,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "blender-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 6.0,
+        "scoring_model": "mrs-v1",
+        "grade": "D",
+        "confidence": 0.7,
+        "findings": 3,
+        "by_severity": {
+          "critical": 0,
+          "high": 1,
+          "medium": 2,
+          "low": 71
+        },
+        "last_scanned": "2026-07-12",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "bdab2d86acc3a9a3",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "forage",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 6.7,
+        "scoring_model": "mrs-v1",
+        "grade": "D",
+        "confidence": 0.73,
+        "findings": 5,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 5,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "mcp-gateway",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 6.7,
+        "scoring_model": "mrs-v1",
+        "grade": "D",
+        "confidence": 0.76,
+        "findings": 5,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 5,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "dotmd-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 9.3,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.73,
+        "findings": 7,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 7,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "demo/malicious_server.py",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.75,
+        "findings": 25,
+        "by_severity": {
+          "critical": 11,
+          "high": 8,
+          "medium": 6,
+          "low": 21
+        },
+        "last_scanned": "2026-07-13",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "9fd28cf53fb1cb93",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "DesktopCommanderMCP",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.86,
+        "findings": 41,
+        "by_severity": {
+          "critical": 31,
+          "high": 0,
+          "medium": 10,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "adeu",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.84,
+        "findings": 10,
+        "by_severity": {
+          "critical": 8,
+          "high": 1,
+          "medium": 1,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "eslint-mcp-server",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.89,
+        "findings": 73,
+        "by_severity": {
+          "critical": 71,
+          "high": 0,
+          "medium": 2,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "firefox-devtools-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.87,
+        "findings": 10,
+        "by_severity": {
+          "critical": 9,
+          "high": 0,
+          "medium": 1,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "ha-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.78,
+        "findings": 7,
+        "by_severity": {
+          "critical": 2,
+          "high": 0,
+          "medium": 5,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.YawLabs/ctxlint",
+    "version": "0.18.4",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.87,
+        "findings": 53,
+        "by_severity": {
+          "critical": 46,
+          "high": 0,
+          "medium": 7,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.artokun/comfyui-mcp",
+    "version": "0.4.1",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.81,
+        "findings": 127,
+        "by_severity": {
+          "critical": 70,
+          "high": 0,
+          "medium": 57,
+          "low": 0
+        },
+        "last_scanned": "2026-07-19",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.callstackincubator/agent-device",
+    "version": "0.16.9",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.83,
+        "findings": 30,
+        "by_severity": {
+          "critical": 21,
+          "high": 0,
+          "medium": 9,
+          "low": 0
+        },
+        "last_scanned": "2026-07-19",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.codefuturist/email-mcp",
+    "version": "0.2.3",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.77,
+        "findings": 21,
+        "by_severity": {
+          "critical": 5,
+          "high": 0,
+          "medium": 16,
+          "low": 0
+        },
+        "last_scanned": "2026-07-19",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.cyanheads/git-mcp-server",
+    "version": "2.15.1",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.82,
+        "findings": 89,
+        "by_severity": {
+          "critical": 52,
+          "high": 0,
+          "medium": 37,
+          "low": 0
+        },
+        "last_scanned": "2026-07-19",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.cyanheads/obsidian-mcp-server",
+    "version": "3.2.9",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.87,
+        "findings": 14,
+        "by_severity": {
+          "critical": 12,
+          "high": 0,
+          "medium": 2,
+          "low": 0
+        },
+        "last_scanned": "2026-07-19",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.juyterman1000/entroly",
+    "version": "1.0.63",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.76,
+        "findings": 43,
+        "by_severity": {
+          "critical": 6,
+          "high": 4,
+          "medium": 33,
+          "low": 0
+        },
+        "last_scanned": "2026-07-19",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.nteract/semiotic",
+    "version": "3.8.1",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.9,
+        "findings": 18,
+        "by_severity": {
+          "critical": 18,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "2026-07-19",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.serkan-ozal/browser-devtools-mcp",
+    "version": "0.9.1",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.86,
+        "findings": 17,
+        "by_severity": {
+          "critical": 9,
+          "high": 3,
+          "medium": 5,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.zereight/gitlab-mcp",
+    "version": "2.1.42",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.71,
+        "findings": 174,
+        "by_severity": {
+          "critical": 8,
+          "high": 0,
+          "medium": 166,
+          "low": 0
+        },
+        "last_scanned": "2026-07-19",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "local-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.74,
+        "findings": 11,
+        "by_severity": {
+          "critical": 2,
+          "high": 0,
+          "medium": 9,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "mcporter",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.81,
+        "findings": 11,
+        "by_severity": {
+          "critical": 6,
+          "high": 0,
+          "medium": 5,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "nakkas",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.9,
+        "findings": 3,
+        "by_severity": {
+          "critical": 3,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "plant-genomics-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.76,
+        "findings": 14,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 14,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "safari-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.84,
+        "findings": 8,
+        "by_severity": {
+          "critical": 5,
+          "high": 0,
+          "medium": 3,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "tentra-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.85,
+        "findings": 12,
+        "by_severity": {
+          "critical": 9,
+          "high": 0,
+          "medium": 3,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "thiri-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.9,
+        "findings": 13,
+        "by_severity": {
+          "critical": 13,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.anthropic/server-apple-shortcuts",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.anthropic/server-brave-search",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.anthropic/server-confluence",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.anthropic/server-crypto-wallet",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.anthropic/server-discord",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.anthropic/server-elasticsearch",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.anthropic/server-everart",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.anthropic/server-exa",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.anthropic/server-gitlab",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.anthropic/server-jira",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.anthropic/server-kubernetes",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.anthropic/server-langchain",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.anthropic/server-llamaindex",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.anthropic/server-microsoft-teams",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.anthropic/server-mysql",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.anthropic/server-pinecone",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.anthropic/server-qdrant",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.anthropic/server-redis",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.anthropic/server-rss",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.anthropic/server-sendgrid",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.anthropic/server-sequential-thinking",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.anthropic/server-serper",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.anthropic/server-sqlite",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.anthropic/server-terminal",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.microsoft/workiq",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "agent-device",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "agent-scraper-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "anyquery",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "aseprite-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "cli-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "codemcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "comfy-pilot",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "cortex",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "depwire",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "dicom-hl7-mcp-server",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "domcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "flstudio-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "frigate-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "genomic-agent-discovery",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.shinpr/mcp-local-rag",
+    "version": "0.16.1",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "liquid",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "lm-studio-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "manim-mcp-server",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "mcp-local-rag",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "mermaid-grammer-inspector-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "mockserver-client",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "ncp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "obsidian-mcp-server",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "ollama-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "periscope-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "proposalcraft",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "pskill9/web-search",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "selenium-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "semiotic",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "video-editing-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "wardn-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "windows-mcp",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "yahoo-finance2",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  }
+]
