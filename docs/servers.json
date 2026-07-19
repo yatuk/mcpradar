@@ -1316,7 +1316,7 @@
           "medium": 3,
           "low": 0
         },
-        "last_scanned": "2026-07-18",
+        "last_scanned": "2026-07-19",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -1858,7 +1858,7 @@
         "risk_score": 9.3,
         "scoring_model": "mrs-v1",
         "grade": "F",
-        "confidence": 0.72,
+        "confidence": 0.73,
         "findings": 7,
         "by_severity": {
           "critical": 0,
@@ -2066,7 +2066,7 @@
           "medium": 57,
           "low": 0
         },
-        "last_scanned": "2026-07-18",
+        "last_scanned": "2026-07-19",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2091,7 +2091,7 @@
           "medium": 9,
           "low": 0
         },
-        "last_scanned": "2026-07-18",
+        "last_scanned": "2026-07-19",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2116,7 +2116,7 @@
           "medium": 16,
           "low": 0
         },
-        "last_scanned": "2026-07-18",
+        "last_scanned": "2026-07-19",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2141,7 +2141,57 @@
           "medium": 37,
           "low": 0
         },
-        "last_scanned": "2026-07-18",
+        "last_scanned": "2026-07-19",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.cyanheads/obsidian-mcp-server",
+    "version": "3.2.9",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.87,
+        "findings": 14,
+        "by_severity": {
+          "critical": 12,
+          "high": 0,
+          "medium": 2,
+          "low": 0
+        },
+        "last_scanned": "2026-07-19",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.juyterman1000/entroly",
+    "version": "1.0.63",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.76,
+        "findings": 43,
+        "by_severity": {
+          "critical": 6,
+          "high": 4,
+          "medium": 33,
+          "low": 0
+        },
+        "last_scanned": "2026-07-19",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2166,7 +2216,7 @@
           "medium": 0,
           "low": 0
         },
-        "last_scanned": "2026-07-18",
+        "last_scanned": "2026-07-19",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2202,21 +2252,21 @@
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "io.github.zereight/gitlab-mcp",
-    "version": "2.1.40",
+    "version": "2.1.42",
     "_meta": {
       "com.github.yatuk.mcpradar/security": {
         "risk_score": 10.0,
         "scoring_model": "mrs-v1",
         "grade": "F",
         "confidence": 0.71,
-        "findings": 173,
+        "findings": 174,
         "by_severity": {
-          "critical": 7,
+          "critical": 8,
           "high": 0,
           "medium": 166,
           "low": 0
         },
-        "last_scanned": "2026-07-18",
+        "last_scanned": "2026-07-19",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -3353,6 +3403,31 @@
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "genomic-agent-discovery",
     "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.shinpr/mcp-local-rag",
+    "version": "0.16.1",
     "_meta": {
       "com.github.yatuk.mcpradar/security": {
         "risk_score": null,

@@ -1,0 +1,663 @@
+{
+  "transport": "stdio",
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "mcp@1.6.0 (PyPI) is affected by CVE-2025-53366: MCP Python SDK vulnerability in the FastMCP Server causes validation error, leading to DoS",
+      "severity": "high",
+      "target": "mcp@1.6.0",
+      "location": "pyproject.toml",
+      "evidence": "",
+      "detail": {
+        "package": "mcp",
+        "version": "1.6.0",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-3qhf-m339-9g5v",
+        "cve": "CVE-2025-53366",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-248"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://github.com/modelcontextprotocol/python-sdk/security/advisories/GHSA-3qhf-m339-9g5v",
+          "https://nvd.nist.gov/vuln/detail/CVE-2025-53366",
+          "https://github.com/modelcontextprotocol/python-sdk/pull/822"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "accuracy.py:780",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 780,
+        "sink": "urllib.request.urlopen"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "accuracy.py:627",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 627,
+        "sink": "urllib.request.urlopen"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "accuracy.py:671",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 671,
+        "sink": "urllib.request.urlopen"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "accuracy.py:720",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 720,
+        "sink": "urllib.request.urlopen"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "accuracy.py:979",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 979,
+        "sink": "urllib.request.urlopen"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "swebench_real.py:176",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 176,
+        "sink": "urllib.request.urlopen"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S006",
+      "title": "subprocess with shell=True",
+      "description": "subprocess.run(..., shell=True) is vulnerable to command injection",
+      "severity": "high",
+      "target": "coding_tasks.py:86",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 86,
+        "sink": "subprocess.run"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "compression_frontier.py:704",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 704,
+        "sink": "urllib.request.urlopen"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "compression_frontier.py:693",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 693,
+        "sink": "urllib.request.urlopen"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "cli.py:128",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 128,
+        "sink": "urllib.request.urlopen"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "cli.py:787",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 787,
+        "sink": "urllib.request.urlopen"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S006",
+      "title": "subprocess with shell=True",
+      "description": "subprocess.run(..., shell=True) is vulnerable to command injection",
+      "severity": "high",
+      "target": "cli.py:2300",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 2300,
+        "sink": "subprocess.run"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "federation.py:1024",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 1024,
+        "sink": "urllib.request.urlopen"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "federation.py:1053",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 1053,
+        "sink": "urllib.request.urlopen"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "federation.py:1087",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 1087,
+        "sink": "urllib.request.urlopen"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "federation.py:1122",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 1122,
+        "sink": "urllib.request.urlopen"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S008",
+      "title": "Trojan Source: bidirectional / invisible unicode in code",
+      "description": "Source line contains invisible unicode (U+200B, U+200C, U+200D); code may not read as it executes (CVE-2021-42574)",
+      "severity": "medium",
+      "target": "hardening.py:305",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 305,
+        "chars": "U+200B, U+200C, U+200D"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S008",
+      "title": "Trojan Source: bidirectional / invisible unicode in code",
+      "description": "Source line contains invisible unicode (U+FEFF); code may not read as it executes (CVE-2021-42574)",
+      "severity": "medium",
+      "target": "hardening.py:309",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 309,
+        "chars": "U+FEFF"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "discord_gateway.py:107",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 107,
+        "sink": "urllib.request.urlopen"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S005",
+      "title": "Possible SQL injection",
+      "description": "execute(...) builds its query with string formatting; use parameters",
+      "severity": "high",
+      "target": "event_delivery.py:335",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 335,
+        "sink": "execute"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "slack_gateway.py:103",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 103,
+        "sink": "urllib.request.urlopen"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "telegram_gateway.py:110",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 110,
+        "sink": "urllib.request.urlopen"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-0cz2m92q/entroly-1.0.63/entroly/npm/index.js:11",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 11,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-0cz2m92q/entroly-1.0.63/entroly/npm-alias/bin/entroly.js:6",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 6,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "client.get(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "proxy.py:5211",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 5211,
+        "sink": "client.get"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "client.post(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "proxy.py:4295",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 4295,
+        "sink": "client.post"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S004",
+      "title": "Dynamic code execution",
+      "description": "eval(...) on a non-literal argument executes attacker-controlled code",
+      "severity": "critical",
+      "target": "executors.py:221",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 221,
+        "sink": "eval"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S005",
+      "title": "Possible SQL injection",
+      "description": "execute(...) builds its query with string formatting; use parameters",
+      "severity": "high",
+      "target": "usage_ledger.py:641",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 641,
+        "sink": "execute"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S008",
+      "title": "Trojan Source: bidirectional / invisible unicode in code",
+      "description": "Source line contains invisible unicode (U+200B); code may not read as it executes (CVE-2021-42574)",
+      "severity": "medium",
+      "target": "witness_features.py:589",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 589,
+        "chars": "U+200B"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-0cz2m92q/entroly-1.0.63/entroly-wasm/js/cogops.js:185",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 185,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-0cz2m92q/entroly-1.0.63/entroly-wasm/js/federation.js:181",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 181,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-0cz2m92q/entroly-1.0.63/entroly-wasm/js/gateways.js:4",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 4,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-0cz2m92q/entroly-1.0.63/entroly-wasm/js/gateways.js:84",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 84,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-0cz2m92q/entroly-1.0.63/entroly-wasm/js/gateways.js:109",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 109,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-0cz2m92q/entroly-1.0.63/entroly-wasm/js/gateways.js:137",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 137,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-0cz2m92q/entroly-1.0.63/entroly-wasm/js/multimodal.js:18",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 18,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-0cz2m92q/entroly-1.0.63/entroly-wasm/js/server.js:484",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 484,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "proxy_e2e.py:131",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 131,
+        "sink": "urllib.request.urlopen"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "proxy_e2e.py:147",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 147,
+        "sink": "urllib.request.urlopen"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "proxy_e2e.py:93",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 93,
+        "sink": "urllib.request.urlopen"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "proxy_e2e.py:159",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 159,
+        "sink": "urllib.request.urlopen"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "verify_public_trust.py:400",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 400,
+        "sink": "urllib.request.urlopen"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Outbound request to a non-constant URL (SSRF risk)",
+      "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+      "severity": "medium",
+      "target": "verify_public_trust.py:373",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 373,
+        "sink": "urllib.request.urlopen"
+      },
+      "confidence": 0.7
+    }
+  ],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "io.github.juyterman1000/entroly",
+  "target": "uvx entroly==1.0.63",
+  "version": "1.0.63",
+  "scanned_at": "2026-07-19T08:12:45.115746+00:00",
+  "last_attempted_at": "2026-07-19T08:12:45.115746+00:00",
+  "trending": true,
+  "popularity": {
+    "method": "registry-packages/npm-pypi-github",
+    "score": 5.8476,
+    "npm_downloads": null,
+    "pypi_downloads": 1648,
+    "github_stars": 426
+  },
+  "live_scan": {
+    "ok": false,
+    "error": "scanner returned no JSON result"
+  },
+  "enriched": true,
+  "enriched_ref": "pip:entroly==1.0.63",
+  "package_scan": {
+    "ok": true,
+    "note": "+44 findings from pip:entroly==1.0.63"
+  },
+  "status": "scanned",
+  "scan_coverage": "package-only"
+}
