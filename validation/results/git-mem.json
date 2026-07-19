@@ -1,0 +1,733 @@
+{
+  "report_schema_version": "1.1",
+  "id": "c078bafb3a68",
+  "target": "git-mem -repo /sandbox/git-mem-store",
+  "transport": "stdio",
+  "scanned_at": "2026-07-19T09:33:08.239104+00:00",
+  "incomplete": false,
+  "incomplete_reason": "",
+  "server_version": "0.1.0",
+  "protocol_version": "2024-11-05",
+  "capabilities": {
+    "experimental": null,
+    "logging": null,
+    "prompts": null,
+    "resources": null,
+    "tools": {
+      "listChanged": null
+    },
+    "completions": null,
+    "tasks": null
+  },
+  "server_instructions": "",
+  "tools": [
+    {
+      "name": "memDelete",
+      "description": "Delete a memory and commit the removal.",
+      "input_schema": {
+        "properties": {
+          "key": {
+            "description": "dotted key",
+            "type": "string"
+          }
+        },
+        "required": [
+          "key"
+        ],
+        "type": "object"
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "memGet",
+      "description": "Fetch a single memory by key. Served from cache when warm.",
+      "input_schema": {
+        "properties": {
+          "key": {
+            "description": "dotted key, e.g. user.preferences.editor",
+            "type": "string"
+          }
+        },
+        "required": [
+          "key"
+        ],
+        "type": "object"
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "memHistory",
+      "description": "Return the git commit history for a key, newest first.",
+      "input_schema": {
+        "properties": {
+          "key": {
+            "description": "dotted key",
+            "type": "string"
+          }
+        },
+        "required": [
+          "key"
+        ],
+        "type": "object"
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "memList",
+      "description": "List memory keys, optionally filtered by a key prefix.",
+      "input_schema": {
+        "properties": {
+          "prefix": {
+            "description": "key prefix filter; empty lists all",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "memPush",
+      "description": "Publish local memory commits to the configured git remote. If it reports a non-fast-forward, call memSync then memPush again.",
+      "input_schema": {
+        "properties": {},
+        "type": "object"
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "memSearch",
+      "description": "Full-text substring search across keys, values, and tags. Optional limit caps the number of results returned (0 = all).",
+      "input_schema": {
+        "properties": {
+          "limit": {
+            "description": "max results to return (0 = all)",
+            "type": "number"
+          },
+          "query": {
+            "description": "case-insensitive substring",
+            "type": "string"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "type": "object"
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "memSet",
+      "description": "Create or update a memory and commit it to git. Returns the commit revision.",
+      "input_schema": {
+        "properties": {
+          "key": {
+            "description": "dotted key",
+            "type": "string"
+          },
+          "metadata": {
+            "description": "optional string->string annotations",
+            "type": "object"
+          },
+          "tags": {
+            "description": "optional string tags (e.g. secret)",
+            "type": "array"
+          },
+          "value": {
+            "description": "arbitrary JSON value to store",
+            "type": "object"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ],
+        "type": "object"
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "memSync",
+      "description": "Pull from the configured git remote and three-way merge. Returns {conflicts:[{key,base,local,remote}]} — for each conflict the local value was kept; resolve by memSet-ing the chosen value, then memPush.",
+      "input_schema": {
+        "properties": {},
+        "type": "object"
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "run",
+      "description": "Code mode: run one Go program that batches many memory operations in a single call. Import \"gitmem\" and use gitmem.Call(name, args) to invoke any memory tool and gitmem.Return(v) to return a result.",
+      "input_schema": {
+        "properties": {
+          "code": {
+            "description": "Go source: package main; import \"gitmem\"; func main() { ... }",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code"
+        ],
+        "type": "object"
+      },
+      "output_schema": {}
+    }
+  ],
+  "prompts": [],
+  "resources": [],
+  "resource_templates": [],
+  "surface_status": {
+    "tools": {
+      "state": "complete",
+      "count": 9,
+      "pages": 1,
+      "error": "",
+      "ttl_ms": null,
+      "cache_scope": ""
+    },
+    "prompts": {
+      "state": "unsupported",
+      "count": 0,
+      "pages": 0,
+      "error": "not declared by server; list method returned method not found",
+      "ttl_ms": null,
+      "cache_scope": ""
+    },
+    "resources": {
+      "state": "unsupported",
+      "count": 0,
+      "pages": 0,
+      "error": "not declared by server; list method returned method not found",
+      "ttl_ms": null,
+      "cache_scope": ""
+    },
+    "resource_templates": {
+      "state": "unsupported",
+      "count": 0,
+      "pages": 0,
+      "error": "not declared by server; list method returned method not found",
+      "ttl_ms": null,
+      "cache_scope": ""
+    },
+    "server_instructions": {
+      "state": "unsupported",
+      "count": 0,
+      "pages": 0,
+      "error": "",
+      "ttl_ms": null,
+      "cache_scope": ""
+    }
+  },
+  "probe_results": [],
+  "findings": [
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in the optional browser control panel; the fetch helper receives a same-origin API path.",
+      "severity": "medium",
+      "target": "pkg/web/static/app.js:46",
+      "location": "source",
+      "evidence": "fetch(path, opts)",
+      "detail": {
+        "line": 46,
+        "language": "javascript",
+        "context": "browser UI"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "github.com/go-git/go-git/v5@v5.12.0 (Go) is reachable and affected by CVE-2026-45570: go-git: Improper single-quote escaping in go-git SSH transport; fixed in 6.0.0-alpha.4",
+      "severity": "low",
+      "target": "github.com/go-git/go-git/v5@v5.12.0",
+      "location": "go.mod",
+      "evidence": "reachable call path reported by govulncheck",
+      "detail": {
+        "package": "github.com/go-git/go-git/v5",
+        "version": "v5.12.0",
+        "ecosystem": "Go",
+        "osv_id": "GO-2026-5496",
+        "cve": "CVE-2026-45570",
+        "ghsa": "GHSA-m7cr-m3pv-hgrp",
+        "cvss": 2.0,
+        "fixed_version": "6.0.0-alpha.4",
+        "reachability": "called",
+        "references": [
+          "https://pkg.go.dev/vuln/GO-2026-5496",
+          "https://github.com/advisories/GHSA-m7cr-m3pv-hgrp"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "golang.org/x/crypto@v0.21.0 (Go) is reachable and affected by CVE-2026-42508: golang.org/x/crypto vulnerable to auth bypass via unenforced @revoked status; fixed in 0.52.0",
+      "severity": "critical",
+      "target": "golang.org/x/crypto@v0.21.0",
+      "location": "go.mod",
+      "evidence": "reachable call path reported by govulncheck",
+      "detail": {
+        "package": "golang.org/x/crypto",
+        "version": "v0.21.0",
+        "ecosystem": "Go",
+        "osv_id": "GO-2026-5021",
+        "cve": "CVE-2026-42508",
+        "ghsa": "GHSA-5cgq-3rg8-m6cv",
+        "cvss": 9.1,
+        "fixed_version": "0.52.0",
+        "reachability": "called",
+        "references": [
+          "https://pkg.go.dev/vuln/GO-2026-5021",
+          "https://github.com/advisories/GHSA-5cgq-3rg8-m6cv"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "golang.org/x/crypto@v0.21.0 (Go) is reachable and affected by CVE-2026-39834: golang.org/x/crypto vulnerable to infinite loop on large channel writes; fixed in 0.52.0",
+      "severity": "critical",
+      "target": "golang.org/x/crypto@v0.21.0",
+      "location": "go.mod",
+      "evidence": "reachable call path reported by govulncheck",
+      "detail": {
+        "package": "golang.org/x/crypto",
+        "version": "v0.21.0",
+        "ecosystem": "Go",
+        "osv_id": "GO-2026-5020",
+        "cve": "CVE-2026-39834",
+        "ghsa": "GHSA-rm3j-f69w-wqmq",
+        "cvss": 9.1,
+        "fixed_version": "0.52.0",
+        "reachability": "called",
+        "references": [
+          "https://pkg.go.dev/vuln/GO-2026-5020",
+          "https://github.com/advisories/GHSA-rm3j-f69w-wqmq"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "golang.org/x/crypto@v0.21.0 (Go) is reachable and affected by CVE-2026-39831: golang.org/x/crypto: FIDO/U2F security key physical presence check can be bypassed; fixed in 0.52.0",
+      "severity": "critical",
+      "target": "golang.org/x/crypto@v0.21.0",
+      "location": "go.mod",
+      "evidence": "reachable call path reported by govulncheck",
+      "detail": {
+        "package": "golang.org/x/crypto",
+        "version": "v0.21.0",
+        "ecosystem": "Go",
+        "osv_id": "GO-2026-5019",
+        "cve": "CVE-2026-39831",
+        "ghsa": "GHSA-89gr-r52h-f8rx",
+        "cvss": 9.1,
+        "fixed_version": "0.52.0",
+        "reachability": "called",
+        "references": [
+          "https://pkg.go.dev/vuln/GO-2026-5019",
+          "https://github.com/advisories/GHSA-89gr-r52h-f8rx"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "golang.org/x/crypto@v0.21.0 (Go) is reachable and affected by CVE-2026-39829: golang.org/x/crypto: Pathological RSA/DSA parameters may cause denial of service; fixed in 0.52.0",
+      "severity": "high",
+      "target": "golang.org/x/crypto@v0.21.0",
+      "location": "go.mod",
+      "evidence": "reachable call path reported by govulncheck",
+      "detail": {
+        "package": "golang.org/x/crypto",
+        "version": "v0.21.0",
+        "ecosystem": "Go",
+        "osv_id": "GO-2026-5018",
+        "cve": "CVE-2026-39829",
+        "ghsa": "GHSA-w879-237q-wc7r",
+        "cvss": 7.5,
+        "fixed_version": "0.52.0",
+        "reachability": "called",
+        "references": [
+          "https://pkg.go.dev/vuln/GO-2026-5018",
+          "https://github.com/advisories/GHSA-w879-237q-wc7r"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "golang.org/x/crypto@v0.21.0 (Go) is reachable and affected by CVE-2026-39830: golang.org/x/crypto: A client can cause server deadlock on unexpected responses; fixed in 0.52.0",
+      "severity": "critical",
+      "target": "golang.org/x/crypto@v0.21.0",
+      "location": "go.mod",
+      "evidence": "reachable call path reported by govulncheck",
+      "detail": {
+        "package": "golang.org/x/crypto",
+        "version": "v0.21.0",
+        "ecosystem": "Go",
+        "osv_id": "GO-2026-5017",
+        "cve": "CVE-2026-39830",
+        "ghsa": "GHSA-vgwf-h737-ff37",
+        "cvss": 9.1,
+        "fixed_version": "0.52.0",
+        "reachability": "called",
+        "references": [
+          "https://pkg.go.dev/vuln/GO-2026-5017",
+          "https://github.com/advisories/GHSA-vgwf-h737-ff37"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "golang.org/x/crypto@v0.21.0 (Go) is reachable and affected by CVE-2026-39835: golang.org/x/crypto: Server panic during CheckHostKey/Authenticate flow; fixed in 0.52.0",
+      "severity": "medium",
+      "target": "golang.org/x/crypto@v0.21.0",
+      "location": "go.mod",
+      "evidence": "reachable call path reported by govulncheck",
+      "detail": {
+        "package": "golang.org/x/crypto",
+        "version": "v0.21.0",
+        "ecosystem": "Go",
+        "osv_id": "GO-2026-5015",
+        "cve": "CVE-2026-39835",
+        "ghsa": "GHSA-78mq-xcr3-xm33",
+        "cvss": 5.3,
+        "fixed_version": "0.52.0",
+        "reachability": "called",
+        "references": [
+          "https://pkg.go.dev/vuln/GO-2026-5015",
+          "https://github.com/advisories/GHSA-78mq-xcr3-xm33"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "golang.org/x/crypto@v0.21.0 (Go) is reachable and affected by CVE-2026-46597: golang.org/x/crypto: Byte arithmetic underflow can cause a panic; fixed in 0.52.0",
+      "severity": "high",
+      "target": "golang.org/x/crypto@v0.21.0",
+      "location": "go.mod",
+      "evidence": "reachable call path reported by govulncheck",
+      "detail": {
+        "package": "golang.org/x/crypto",
+        "version": "v0.21.0",
+        "ecosystem": "Go",
+        "osv_id": "GO-2026-5013",
+        "cve": "CVE-2026-46597",
+        "ghsa": "GHSA-q4h4-gmj2-qvw2",
+        "cvss": 7.5,
+        "fixed_version": "0.52.0",
+        "reachability": "called",
+        "references": [
+          "https://pkg.go.dev/vuln/GO-2026-5013",
+          "https://github.com/advisories/GHSA-q4h4-gmj2-qvw2"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "github.com/go-git/go-git/v5@v5.12.0 (Go) is reachable and affected by CVE-2026-34165: go-git: A crafted idx file can cause asymmetric memory consumption; fixed in 5.17.1",
+      "severity": "medium",
+      "target": "github.com/go-git/go-git/v5@v5.12.0",
+      "location": "go.mod",
+      "evidence": "reachable call path reported by govulncheck",
+      "detail": {
+        "package": "github.com/go-git/go-git/v5",
+        "version": "v5.12.0",
+        "ecosystem": "Go",
+        "osv_id": "GO-2026-4910",
+        "cve": "CVE-2026-34165",
+        "ghsa": "GHSA-jhf3-xxhw-2wpp",
+        "cvss": 5.0,
+        "fixed_version": "5.17.1",
+        "reachability": "called",
+        "references": [
+          "https://pkg.go.dev/vuln/GO-2026-4910",
+          "https://github.com/advisories/GHSA-jhf3-xxhw-2wpp"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "github.com/go-git/go-git/v5@v5.12.0 (Go) is reachable and affected by CVE-2026-33762: go-git: Missing Index v4 validation can cause a panic; fixed in 5.17.1",
+      "severity": "low",
+      "target": "github.com/go-git/go-git/v5@v5.12.0",
+      "location": "go.mod",
+      "evidence": "reachable call path reported by govulncheck",
+      "detail": {
+        "package": "github.com/go-git/go-git/v5",
+        "version": "v5.12.0",
+        "ecosystem": "Go",
+        "osv_id": "GO-2026-4909",
+        "cve": "CVE-2026-33762",
+        "ghsa": "GHSA-gm2x-2g9h-ccm8",
+        "cvss": 2.8,
+        "fixed_version": "5.17.1",
+        "reachability": "called",
+        "references": [
+          "https://pkg.go.dev/vuln/GO-2026-4909",
+          "https://github.com/advisories/GHSA-gm2x-2g9h-ccm8"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "github.com/cloudflare/circl@v1.3.7 (Go) is reachable and affected by CVE-2026-1229: CIRCL has an incorrect calculation in secp384r1 CombinedMult; fixed in 1.6.3",
+      "severity": "low",
+      "target": "github.com/cloudflare/circl@v1.3.7",
+      "location": "go.mod",
+      "evidence": "reachable call path reported by govulncheck",
+      "detail": {
+        "package": "github.com/cloudflare/circl",
+        "version": "v1.3.7",
+        "ecosystem": "Go",
+        "osv_id": "GO-2026-4550",
+        "cve": "CVE-2026-1229",
+        "ghsa": "GHSA-q9hv-hpm4-hj6x",
+        "cvss": 2.0,
+        "fixed_version": "1.6.3",
+        "reachability": "called",
+        "references": [
+          "https://pkg.go.dev/vuln/GO-2026-4550",
+          "https://github.com/advisories/GHSA-q9hv-hpm4-hj6x"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "github.com/go-git/go-git/v5@v5.12.0 (Go) is reachable and affected by CVE-2026-25934: go-git improperly verifies integrity values for .idx and .pack files; fixed in 5.16.5",
+      "severity": "medium",
+      "target": "github.com/go-git/go-git/v5@v5.12.0",
+      "location": "go.mod",
+      "evidence": "reachable call path reported by govulncheck",
+      "detail": {
+        "package": "github.com/go-git/go-git/v5",
+        "version": "v5.12.0",
+        "ecosystem": "Go",
+        "osv_id": "GO-2026-4473",
+        "cve": "CVE-2026-25934",
+        "ghsa": "GHSA-37cx-329c-33x3",
+        "cvss": 4.3,
+        "fixed_version": "5.16.5",
+        "reachability": "called",
+        "references": [
+          "https://pkg.go.dev/vuln/GO-2026-4473",
+          "https://github.com/advisories/GHSA-37cx-329c-33x3"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "golang.org/x/crypto@v0.21.0 (Go) is reachable and affected by CVE-2025-47913: golang.org/x/crypto/ssh/agent has a potential denial of service; fixed in 0.43.0",
+      "severity": "high",
+      "target": "golang.org/x/crypto@v0.21.0",
+      "location": "go.mod",
+      "evidence": "reachable call path reported by govulncheck",
+      "detail": {
+        "package": "golang.org/x/crypto",
+        "version": "v0.21.0",
+        "ecosystem": "Go",
+        "osv_id": "GO-2025-4116",
+        "cve": "CVE-2025-47913",
+        "ghsa": "GHSA-56w8-48fp-6mgv",
+        "cvss": 7.5,
+        "fixed_version": "0.43.0",
+        "reachability": "called",
+        "references": [
+          "https://pkg.go.dev/vuln/GO-2025-4116",
+          "https://github.com/advisories/GHSA-56w8-48fp-6mgv"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "github.com/cloudflare/circl@v1.3.7 (Go) is reachable and affected by CVE-2025-8556: CIRCL FourQ validation errors can lead to incorrect results; fixed in 1.6.1",
+      "severity": "low",
+      "target": "github.com/cloudflare/circl@v1.3.7",
+      "location": "go.mod",
+      "evidence": "reachable call path reported by govulncheck",
+      "detail": {
+        "package": "github.com/cloudflare/circl",
+        "version": "v1.3.7",
+        "ecosystem": "Go",
+        "osv_id": "GO-2025-3754",
+        "cve": "CVE-2025-8556",
+        "ghsa": "GHSA-2x5j-vhc8-9cwm",
+        "cvss": 3.7,
+        "fixed_version": "1.6.1",
+        "reachability": "called",
+        "references": [
+          "https://pkg.go.dev/vuln/GO-2025-3754",
+          "https://github.com/advisories/GHSA-2x5j-vhc8-9cwm"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "golang.org/x/net@v0.22.0 (Go) is reachable and affected by CVE-2025-22870: golang.org/x/net HTTP proxy bypass using IPv6 zone IDs; fixed in 0.36.0",
+      "severity": "medium",
+      "target": "golang.org/x/net@v0.22.0",
+      "location": "go.mod",
+      "evidence": "reachable call path reported by govulncheck",
+      "detail": {
+        "package": "golang.org/x/net",
+        "version": "v0.22.0",
+        "ecosystem": "Go",
+        "osv_id": "GO-2025-3503",
+        "cve": "CVE-2025-22870",
+        "ghsa": "GHSA-qxp5-gwg8-xv66",
+        "cvss": 4.4,
+        "fixed_version": "0.36.0",
+        "reachability": "called",
+        "references": [
+          "https://pkg.go.dev/vuln/GO-2025-3503",
+          "https://github.com/advisories/GHSA-qxp5-gwg8-xv66"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "golang.org/x/crypto@v0.21.0 (Go) is reachable and affected by CVE-2025-22869: golang.org/x/crypto denial of service via slow or incomplete key exchange; fixed in 0.35.0",
+      "severity": "high",
+      "target": "golang.org/x/crypto@v0.21.0",
+      "location": "go.mod",
+      "evidence": "reachable call path reported by govulncheck",
+      "detail": {
+        "package": "golang.org/x/crypto",
+        "version": "v0.21.0",
+        "ecosystem": "Go",
+        "osv_id": "GO-2025-3487",
+        "cve": "CVE-2025-22869",
+        "ghsa": "GHSA-hcg3-q754-cr77",
+        "cvss": 7.5,
+        "fixed_version": "0.35.0",
+        "reachability": "called",
+        "references": [
+          "https://pkg.go.dev/vuln/GO-2025-3487",
+          "https://github.com/advisories/GHSA-hcg3-q754-cr77"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "github.com/go-git/go-git/v5@v5.12.0 (Go) is reachable and affected by CVE-2025-21613: go-git argument injection via the URL field; fixed in 5.13.0",
+      "severity": "critical",
+      "target": "github.com/go-git/go-git/v5@v5.12.0",
+      "location": "go.mod",
+      "evidence": "reachable call path reported by govulncheck",
+      "detail": {
+        "package": "github.com/go-git/go-git/v5",
+        "version": "v5.12.0",
+        "ecosystem": "Go",
+        "osv_id": "GO-2025-3368",
+        "cve": "CVE-2025-21613",
+        "ghsa": "GHSA-v725-9546-7q7m",
+        "cvss": 9.5,
+        "fixed_version": "5.13.0",
+        "reachability": "called",
+        "references": [
+          "https://pkg.go.dev/vuln/GO-2025-3368",
+          "https://github.com/advisories/GHSA-v725-9546-7q7m"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "github.com/go-git/go-git/v5@v5.12.0 (Go) is reachable and affected by CVE-2025-21614: go-git client denial of service via crafted Git server replies; fixed in 5.13.0",
+      "severity": "high",
+      "target": "github.com/go-git/go-git/v5@v5.12.0",
+      "location": "go.mod",
+      "evidence": "reachable call path reported by govulncheck",
+      "detail": {
+        "package": "github.com/go-git/go-git/v5",
+        "version": "v5.12.0",
+        "ecosystem": "Go",
+        "osv_id": "GO-2025-3367",
+        "cve": "CVE-2025-21614",
+        "ghsa": "GHSA-r9px-m959-cxf4",
+        "cvss": 7.5,
+        "fixed_version": "5.13.0",
+        "reachability": "called",
+        "references": [
+          "https://pkg.go.dev/vuln/GO-2025-3367",
+          "https://github.com/advisories/GHSA-r9px-m959-cxf4"
+        ]
+      },
+      "confidence": 0.9
+    }
+  ],
+  "migration_readiness": [],
+  "summary": {
+    "total_tools": 9,
+    "total_prompts": 0,
+    "total_resources": 0,
+    "total_resource_templates": 0,
+    "clean": 9,
+    "low": 4,
+    "medium": 5,
+    "high": 5,
+    "critical": 5
+  },
+  "name": "git-mem",
+  "version": "0.1.0",
+  "status": "scanned",
+  "scan_coverage": "live-tools+source+dependencies",
+  "source": {
+    "repository": "https://github.com/imran31415/git-mem",
+    "commit": "19b05accbba23606a836c70a68994e0bd0976858"
+  },
+  "coverage_note": "The server declares only the MCP tools capability. Its nine tools were enumerated live; prompts and resources are unsupported by this server.",
+  "live_scan": {
+    "ok": true,
+    "sandboxed": true,
+    "network": "none",
+    "source_commit": "19b05accbba23606a836c70a68994e0bd0976858",
+    "base_image": "golang:1.22-bookworm@sha256:3d699e4d15d0f8f13c9195c0632a16702b8cbdece2955af1c23b37ae5d55a253",
+    "tool_surface": "complete"
+  },
+  "source_scan": {
+    "ok": true,
+    "source_commit": "19b05accbba23606a836c70a68994e0bd0976858",
+    "finding_count": 1
+  },
+  "dependency_scan": {
+    "ok": true,
+    "tool": "govulncheck",
+    "tool_version": "v1.6.0",
+    "database": "Go Vulnerability Database / OSV",
+    "reachable_vulnerabilities": 18,
+    "affected_modules": 4,
+    "imported_not_called": 9,
+    "required_not_called": 14
+  }
+}
