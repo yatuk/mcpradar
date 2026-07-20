@@ -24109,10 +24109,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.5107,
-      "npm_downloads": 11333,
+      "score": 6.5319,
+      "npm_downloads": 11856,
       "pypi_downloads": null,
-      "github_stars": 285
+      "github_stars": 286
     },
     "category": "Other",
     "vuln_types": [
@@ -24174,7 +24174,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-07-19",
+    "last_scanned": "2026-07-20",
     "status": "scanned",
     "breakdown": {
       "base": 4.0,
@@ -39383,6 +39383,337 @@
     }
   },
   {
+    "server": "git-mem",
+    "display_name": "git-mem",
+    "version": "0.1.0",
+    "scoring_model": "mrs-v1",
+    "tools": 9,
+    "scanner_version": "1.1.0-rc1",
+    "scan_coverage": "live-tools+source+dependencies",
+    "trending": false,
+    "popularity": null,
+    "category": "Other",
+    "vuln_types": [
+      "Dependency Vulnerability",
+      "Source-Code Risk"
+    ],
+    "history": [],
+    "api_free": false,
+    "risk_score": 4.9,
+    "grade": "C",
+    "aars": 6.0,
+    "capability": "db_write",
+    "confidence": 0.89,
+    "vulnerable_deps": 18,
+    "tools_detail": [
+      {
+        "name": "memDelete",
+        "description": "Delete a memory and commit the removal.",
+        "input_schema": {
+          "properties": {
+            "key": {
+              "description": "dotted key",
+              "type": "string"
+            }
+          },
+          "required": [
+            "key"
+          ],
+          "type": "object"
+        },
+        "output_schema": {},
+        "capabilities": [
+          "fs_write"
+        ]
+      },
+      {
+        "name": "memGet",
+        "description": "Fetch a single memory by key. Served from cache when warm.",
+        "input_schema": {
+          "properties": {
+            "key": {
+              "description": "dotted key, e.g. user.preferences.editor",
+              "type": "string"
+            }
+          },
+          "required": [
+            "key"
+          ],
+          "type": "object"
+        },
+        "output_schema": {},
+        "capabilities": [
+          "net_egress"
+        ]
+      },
+      {
+        "name": "memHistory",
+        "description": "Return the git commit history for a key, newest first.",
+        "input_schema": {
+          "properties": {
+            "key": {
+              "description": "dotted key",
+              "type": "string"
+            }
+          },
+          "required": [
+            "key"
+          ],
+          "type": "object"
+        },
+        "output_schema": {},
+        "capabilities": [
+          "pure_compute"
+        ]
+      },
+      {
+        "name": "memList",
+        "description": "List memory keys, optionally filtered by a key prefix.",
+        "input_schema": {
+          "properties": {
+            "prefix": {
+              "description": "key prefix filter; empty lists all",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "output_schema": {},
+        "capabilities": [
+          "pure_compute"
+        ]
+      },
+      {
+        "name": "memPush",
+        "description": "Publish local memory commits to the configured git remote. If it reports a non-fast-forward, call memSync then memPush again.",
+        "input_schema": {
+          "properties": {},
+          "type": "object"
+        },
+        "output_schema": {},
+        "capabilities": [
+          "pure_compute"
+        ]
+      },
+      {
+        "name": "memSearch",
+        "description": "Full-text substring search across keys, values, and tags. Optional limit caps the number of results returned (0 = all).",
+        "input_schema": {
+          "properties": {
+            "limit": {
+              "description": "max results to return (0 = all)",
+              "type": "number"
+            },
+            "query": {
+              "description": "case-insensitive substring",
+              "type": "string"
+            }
+          },
+          "required": [
+            "query"
+          ],
+          "type": "object"
+        },
+        "output_schema": {},
+        "capabilities": [
+          "pure_compute"
+        ]
+      },
+      {
+        "name": "memSet",
+        "description": "Create or update a memory and commit it to git. Returns the commit revision.",
+        "input_schema": {
+          "properties": {
+            "key": {
+              "description": "dotted key",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "optional string->string annotations",
+              "type": "object"
+            },
+            "tags": {
+              "description": "optional string tags (e.g. secret)",
+              "type": "array"
+            },
+            "value": {
+              "description": "arbitrary JSON value to store",
+              "type": "object"
+            }
+          },
+          "required": [
+            "key",
+            "value"
+          ],
+          "type": "object"
+        },
+        "output_schema": {},
+        "capabilities": [
+          "db_write"
+        ]
+      },
+      {
+        "name": "memSync",
+        "description": "Pull from the configured git remote and three-way merge. Returns {conflicts:[{key,base,local,remote}]} — for each conflict the local value was kept; resolve by memSet-ing the chosen value, then memPush.",
+        "input_schema": {
+          "properties": {},
+          "type": "object"
+        },
+        "output_schema": {},
+        "capabilities": [
+          "pure_compute"
+        ]
+      },
+      {
+        "name": "run",
+        "description": "Code mode: run one Go program that batches many memory operations in a single call. Import \"gitmem\" and use gitmem.Call(name, args) to invoke any memory tool and gitmem.Return(v) to return a result.",
+        "input_schema": {
+          "properties": {
+            "code": {
+              "description": "Go source: package main; import \"gitmem\"; func main() { ... }",
+              "type": "string"
+            }
+          },
+          "required": [
+            "code"
+          ],
+          "type": "object"
+        },
+        "output_schema": {},
+        "capabilities": [
+          "pure_compute"
+        ]
+      }
+    ],
+    "findings": 1,
+    "low_findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 1,
+      "low": 0
+    },
+    "findings_detail": [
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Dynamic outbound URL",
+        "description": "Dynamic outbound URL detected in the optional browser control panel; the fetch helper receives a same-origin API path.",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "D001",
+        "severity": "critical",
+        "title": "Known-vulnerable dependency (OSV)",
+        "description": "golang.org/x/crypto@v0.21.0 (Go) is reachable and affected by CVE-2026-42508: golang.org/x/crypto vulnerable to auth byp",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "D001",
+        "severity": "critical",
+        "title": "Known-vulnerable dependency (OSV)",
+        "description": "golang.org/x/crypto@v0.21.0 (Go) is reachable and affected by CVE-2026-39834: golang.org/x/crypto vulnerable to infinite",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "D001",
+        "severity": "critical",
+        "title": "Known-vulnerable dependency (OSV)",
+        "description": "golang.org/x/crypto@v0.21.0 (Go) is reachable and affected by CVE-2026-39831: golang.org/x/crypto: FIDO/U2F security key",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "D001",
+        "severity": "high",
+        "title": "Known-vulnerable dependency (OSV)",
+        "description": "golang.org/x/crypto@v0.21.0 (Go) is reachable and affected by CVE-2026-39829: golang.org/x/crypto: Pathological RSA/DSA ",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "D001",
+        "severity": "critical",
+        "title": "Known-vulnerable dependency (OSV)",
+        "description": "golang.org/x/crypto@v0.21.0 (Go) is reachable and affected by CVE-2026-39830: golang.org/x/crypto: A client can cause se",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "D001",
+        "severity": "medium",
+        "title": "Known-vulnerable dependency (OSV)",
+        "description": "golang.org/x/crypto@v0.21.0 (Go) is reachable and affected by CVE-2026-39835: golang.org/x/crypto: Server panic during C",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "D001",
+        "severity": "high",
+        "title": "Known-vulnerable dependency (OSV)",
+        "description": "golang.org/x/crypto@v0.21.0 (Go) is reachable and affected by CVE-2026-46597: golang.org/x/crypto: Byte arithmetic under",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "D001",
+        "severity": "medium",
+        "title": "Known-vulnerable dependency (OSV)",
+        "description": "github.com/go-git/go-git/v5@v5.12.0 (Go) is reachable and affected by CVE-2026-34165: go-git: A crafted idx file can cau",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "D001",
+        "severity": "medium",
+        "title": "Known-vulnerable dependency (OSV)",
+        "description": "github.com/go-git/go-git/v5@v5.12.0 (Go) is reachable and affected by CVE-2026-25934: go-git improperly verifies integri",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "D001",
+        "severity": "high",
+        "title": "Known-vulnerable dependency (OSV)",
+        "description": "golang.org/x/crypto@v0.21.0 (Go) is reachable and affected by CVE-2025-47913: golang.org/x/crypto/ssh/agent has a potent",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "D001",
+        "severity": "medium",
+        "title": "Known-vulnerable dependency (OSV)",
+        "description": "golang.org/x/net@v0.22.0 (Go) is reachable and affected by CVE-2025-22870: golang.org/x/net HTTP proxy bypass using IPv6",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "D001",
+        "severity": "high",
+        "title": "Known-vulnerable dependency (OSV)",
+        "description": "golang.org/x/crypto@v0.21.0 (Go) is reachable and affected by CVE-2025-22869: golang.org/x/crypto denial of service via ",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "D001",
+        "severity": "critical",
+        "title": "Known-vulnerable dependency (OSV)",
+        "description": "github.com/go-git/go-git/v5@v5.12.0 (Go) is reachable and affected by CVE-2025-21613: go-git argument injection via the ",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "D001",
+        "severity": "high",
+        "title": "Known-vulnerable dependency (OSV)",
+        "description": "github.com/go-git/go-git/v5@v5.12.0 (Go) is reachable and affected by CVE-2025-21614: go-git client denial of service vi",
+        "confidence": 0.9
+      }
+    ],
+    "tool_hash": "f12d2c2e16fd5c65",
+    "last_scanned": "2026-07-19",
+    "status": "scanned",
+    "breakdown": {
+      "base": 0.44,
+      "aars": 6.0,
+      "capability_term": 3.22,
+      "thm": 1.0,
+      "dep_risk": 4.9,
+      "weighted_findings": 4,
+      "driver": "dependencies"
+    }
+  },
+  {
     "server": "opengenes-mcp",
     "display_name": "opengenes-mcp",
     "version": "",
@@ -41655,13 +41986,13 @@
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
     "scan_coverage": "package-only",
-    "trending": false,
+    "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 3.5567,
+      "score": 6.8504,
       "npm_downloads": null,
-      "pypi_downloads": 3602,
-      "github_stars": null
+      "pypi_downloads": 3871,
+      "github_stars": 1829
     },
     "category": "DevOps",
     "vuln_types": [
@@ -41694,7 +42025,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-07-18",
+    "last_scanned": "2026-07-20",
     "status": "scanned",
     "breakdown": {
       "base": 5.0,
@@ -45153,10 +45484,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.9777,
-      "npm_downloads": 23341,
+      "score": 7.0574,
+      "npm_downloads": 27765,
       "pypi_downloads": null,
-      "github_stars": 406
+      "github_stars": 410
     },
     "category": "DevOps",
     "vuln_types": [
@@ -46079,7 +46410,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-07-19",
+    "last_scanned": "2026-07-20",
     "status": "scanned",
     "breakdown": {
       "base": 309.33,
@@ -46102,10 +46433,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 8.6326,
-      "npm_downloads": 122812,
+      "score": 8.6458,
+      "npm_downloads": 125881,
       "pypi_downloads": null,
-      "github_stars": 3493
+      "github_stars": 3513
     },
     "category": "DevOps",
     "vuln_types": [
@@ -46341,7 +46672,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-07-19",
+    "last_scanned": "2026-07-20",
     "status": "scanned",
     "breakdown": {
       "base": 82.0,
@@ -46364,8 +46695,8 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 5.9739,
-      "npm_downloads": 12556,
+      "score": 6.0132,
+      "npm_downloads": 13744,
       "pypi_downloads": null,
       "github_stars": 74
     },
@@ -46562,7 +46893,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-07-19",
+    "last_scanned": "2026-07-20",
     "status": "scanned",
     "breakdown": {
       "base": 38.0,
@@ -46585,8 +46916,8 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 5.9395,
-      "npm_downloads": 3798,
+      "score": 6.0074,
+      "npm_downloads": 4441,
       "pypi_downloads": null,
       "github_stars": 228
     },
@@ -47259,7 +47590,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-07-19",
+    "last_scanned": "2026-07-20",
     "status": "scanned",
     "breakdown": {
       "base": 222.67,
@@ -47282,10 +47613,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.2766,
-      "npm_downloads": 2981,
+      "score": 6.3243,
+      "npm_downloads": 3322,
       "pypi_downloads": null,
-      "github_stars": 633
+      "github_stars": 634
     },
     "category": "DevOps",
     "vuln_types": [
@@ -47409,7 +47740,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-07-19",
+    "last_scanned": "2026-07-20",
     "status": "scanned",
     "breakdown": {
       "base": 42.67,
@@ -47429,7 +47760,7 @@
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
     "scan_coverage": "package-only",
-    "trending": true,
+    "trending": false,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
       "score": 5.8476,
@@ -47793,10 +48124,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 7.3501,
-      "npm_downloads": 8336,
+      "score": 7.3677,
+      "npm_downloads": 8678,
       "pypi_downloads": null,
-      "github_stars": 2685
+      "github_stars": 2686
     },
     "category": "DevOps",
     "vuln_types": [
@@ -47811,10 +48142,10 @@
     "confidence": 0.9,
     "vulnerable_deps": 0,
     "tools_detail": [],
-    "findings": 18,
+    "findings": 16,
     "low_findings": 0,
     "by_severity": {
-      "critical": 18,
+      "critical": 16,
       "high": 0,
       "medium": 0,
       "low": 0
@@ -47931,32 +48262,18 @@
         "title": "Dynamic shell command execution",
         "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
         "confidence": 0.9
-      },
-      {
-        "rule_id": "S006",
-        "severity": "critical",
-        "title": "Dynamic shell command execution",
-        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
-        "confidence": 0.9
-      },
-      {
-        "rule_id": "S006",
-        "severity": "critical",
-        "title": "Dynamic shell command execution",
-        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
-        "confidence": 0.9
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-07-19",
+    "last_scanned": "2026-07-20",
     "status": "scanned",
     "breakdown": {
-      "base": 60.0,
+      "base": 53.33,
       "aars": 0.0,
-      "capability_term": 30.0,
+      "capability_term": 26.67,
       "thm": 1.0,
       "dep_risk": 0.0,
-      "weighted_findings": 180,
+      "weighted_findings": 160,
       "driver": "findings"
     }
   },
@@ -48192,10 +48509,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 8.2736,
-      "npm_downloads": 103167,
+      "score": 8.3129,
+      "npm_downloads": 112740,
       "pypi_downloads": null,
-      "github_stars": 1819
+      "github_stars": 1822
     },
     "category": "DevOps",
     "vuln_types": [
@@ -49447,7 +49764,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-07-19",
+    "last_scanned": "2026-07-20",
     "status": "scanned",
     "breakdown": {
       "base": 248.0,
@@ -51540,10 +51857,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 5.8912,
-      "npm_downloads": 2242,
+      "score": 5.9232,
+      "npm_downloads": 2407,
       "pypi_downloads": null,
-      "github_stars": 346
+      "github_stars": 347
     },
     "category": "DevOps",
     "vuln_types": [],
