@@ -251,6 +251,31 @@
   },
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.tavily-ai/tavily-mcp",
+    "version": "0.2.15",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 0.4,
+        "scoring_model": "mrs-v1",
+        "grade": "A",
+        "confidence": 0.9,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "2026-07-22",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "korean-law-mcp",
     "version": "unknown",
     "_meta": {
@@ -1316,7 +1341,7 @@
           "medium": 3,
           "low": 0
         },
-        "last_scanned": "2026-07-21",
+        "last_scanned": "2026-07-22",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -1741,7 +1766,7 @@
           "medium": 0,
           "low": 0
         },
-        "last_scanned": "2026-07-21",
+        "last_scanned": "2026-07-22",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -1842,6 +1867,56 @@
           "low": 0
         },
         "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.DeusData/codebase-memory-mcp",
+    "version": "0.9.0",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 6.7,
+        "scoring_model": "mrs-v1",
+        "grade": "D",
+        "confidence": 0.9,
+        "findings": 2,
+        "by_severity": {
+          "critical": 2,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "2026-07-22",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.firecrawl/firecrawl-mcp-server",
+    "version": "3.22.4",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 6.7,
+        "scoring_model": "mrs-v1",
+        "grade": "D",
+        "confidence": 0.7,
+        "findings": 5,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 5,
+          "low": 0
+        },
+        "last_scanned": "2026-07-22",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2083,15 +2158,15 @@
         "risk_score": 10.0,
         "scoring_model": "mrs-v1",
         "grade": "F",
-        "confidence": 0.81,
-        "findings": 130,
+        "confidence": 0.8,
+        "findings": 166,
         "by_severity": {
-          "critical": 72,
+          "critical": 89,
           "high": 0,
-          "medium": 58,
+          "medium": 77,
           "low": 0
         },
-        "last_scanned": "2026-07-21",
+        "last_scanned": "2026-07-22",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2108,15 +2183,15 @@
         "risk_score": 10.0,
         "scoring_model": "mrs-v1",
         "grade": "F",
-        "confidence": 0.83,
-        "findings": 30,
+        "confidence": 0.84,
+        "findings": 32,
         "by_severity": {
-          "critical": 21,
+          "critical": 23,
           "high": 0,
           "medium": 9,
           "low": 0
         },
-        "last_scanned": "2026-07-21",
+        "last_scanned": "2026-07-22",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2191,7 +2266,7 @@
           "medium": 2,
           "low": 0
         },
-        "last_scanned": "2026-07-21",
+        "last_scanned": "2026-07-22",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2241,7 +2316,7 @@
           "medium": 0,
           "low": 0
         },
-        "last_scanned": "2026-07-21",
+        "last_scanned": "2026-07-22",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2291,7 +2366,7 @@
           "medium": 166,
           "low": 0
         },
-        "last_scanned": "2026-07-21",
+        "last_scanned": "2026-07-22",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",

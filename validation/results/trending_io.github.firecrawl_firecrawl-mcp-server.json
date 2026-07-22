@@ -1,0 +1,104 @@
+{
+  "transport": "stdio",
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-cv3hrdpa/package/dist/index.js:40",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 40,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-cv3hrdpa/package/dist/index.js:944",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 944,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-cv3hrdpa/package/dist/index.js:1881",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 1881,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-cv3hrdpa/package/dist/index.js:2139",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 2139,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-cv3hrdpa/package/dist/index.js:2903",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 2903,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    }
+  ],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "io.github.firecrawl/firecrawl-mcp-server",
+  "target": "npx -y firecrawl-mcp@3.22.4",
+  "version": "3.22.4",
+  "scanned_at": "2026-07-22T08:24:10.146989+00:00",
+  "last_attempted_at": "2026-07-22T08:24:10.146989+00:00",
+  "trending": true,
+  "popularity": {
+    "method": "registry-packages/npm-pypi-github",
+    "score": 8.6761,
+    "npm_downloads": 67597,
+    "pypi_downloads": null,
+    "github_stars": 7016
+  },
+  "live_scan": {
+    "ok": false,
+    "error": "1m│\u001b[0m \u001b[31m│\u001b[0m \u001b[2m169 \u001b[0m\u001b[2m│ │ │ │ │ │ \u001b[0m\u001b[1;4m) \u001b[0m\u001b[1;4;94mfrom\u001b[0m\u001b[1;4;90m \u001b[0m\u001b[1;4;94mNone\u001b[0m \u001b[31m│\u001b[0m \u001b[31m│\u001b[0m \u001b[2m170 \u001b[0m\u001b[2m│ │ │ │ \u001b[0m\u001b[94melse\u001b[0m: \u001b[2m# implicit close\u001b[0m \u001b[31m│\u001b[0m \u001b[31m╰──────────────────────────────────────────────────────────────────────────────╯\u001b[0m \u001b[1;91mMarkupError: \u001b[0mclosing tag \u001b[32m'\u001b[0m\u001b[32m[\u001b[0m\u001b[32m/* current full extraction matching the monitor'\u001b[0ms schema *\u001b[35m/\u001b[0m\u001b[1m]\u001b[0m\u001b[32m' at position 91431 doesn'\u001b[0mt match any open tag"
+  },
+  "enriched": true,
+  "enriched_ref": "npm:firecrawl-mcp",
+  "package_scan": {
+    "ok": true,
+    "note": "+5 findings from npm:firecrawl-mcp"
+  },
+  "status": "scanned",
+  "scan_coverage": "package-only"
+}

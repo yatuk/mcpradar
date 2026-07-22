@@ -7,11 +7,25 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-_kgjn44u/package/bin/index.js:24",
+      "target": "/tmp/mcpradar-enrich-tohs1xnl/package/bin.js:17",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 24,
+        "line": 17,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-tohs1xnl/package/bin.js:29",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 29,
         "language": "javascript"
       },
       "confidence": 0.9
@@ -20,28 +34,28 @@
   "summary": {
     "total_tools": 0
   },
-  "name": "io.github.containers/kubernetes-mcp-server",
-  "target": "npx -y kubernetes-mcp-server@0.0.65",
-  "version": "0.0.65",
-  "scanned_at": "2026-07-22T08:24:31.295297+00:00",
-  "last_attempted_at": "2026-07-22T08:24:31.295297+00:00",
+  "name": "io.github.DeusData/codebase-memory-mcp",
+  "target": "npx -y codebase-memory-mcp@0.9.0",
+  "version": "0.9.0",
+  "scanned_at": "2026-07-22T08:24:14.868788+00:00",
+  "last_attempted_at": "2026-07-22T08:24:14.868788+00:00",
   "trending": true,
   "popularity": {
     "method": "registry-packages/npm-pypi-github",
-    "score": 6.8234,
+    "score": 8.1122,
     "npm_downloads": null,
-    "pypi_downloads": 3628,
-    "github_stars": 1834
+    "pypi_downloads": 3822,
+    "github_stars": 33867
   },
   "live_scan": {
     "ok": false,
     "error": "[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[31m│\u001b[0m \u001b[2m309 \u001b[0m \u001b[31m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[31m╰──────────────────────────────────────────────────────────────────────╯\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[1;91mMcpError: \u001b[0mConnection closed \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m╰──────────────────────────────────────────────────────────────────────────╯\u001b[0m \u001b[35m│\u001b[0m \u001b[35m╰──────────────────────────────────────────────────────────────────────────────╯\u001b[0m"
   },
   "enriched": true,
-  "enriched_ref": "npm:kubernetes-mcp-server",
+  "enriched_ref": "npm:codebase-memory-mcp",
   "package_scan": {
     "ok": true,
-    "note": "+1 findings from npm:kubernetes-mcp-server"
+    "note": "+2 findings from npm:codebase-memory-mcp"
   },
   "status": "scanned",
   "scan_coverage": "package-only"
