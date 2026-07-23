@@ -1341,7 +1341,7 @@
           "medium": 3,
           "low": 0
         },
-        "last_scanned": "2026-07-22",
+        "last_scanned": "2026-07-23",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -1766,7 +1766,7 @@
           "medium": 0,
           "low": 0
         },
-        "last_scanned": "2026-07-22",
+        "last_scanned": "2026-07-23",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2159,14 +2159,14 @@
         "scoring_model": "mrs-v1",
         "grade": "F",
         "confidence": 0.8,
-        "findings": 166,
+        "findings": 171,
         "by_severity": {
           "critical": 89,
           "high": 0,
-          "medium": 77,
+          "medium": 82,
           "low": 0
         },
-        "last_scanned": "2026-07-22",
+        "last_scanned": "2026-07-23",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2191,7 +2191,7 @@
           "medium": 9,
           "low": 0
         },
-        "last_scanned": "2026-07-22",
+        "last_scanned": "2026-07-23",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2216,7 +2216,7 @@
           "medium": 16,
           "low": 0
         },
-        "last_scanned": "2026-07-21",
+        "last_scanned": "2026-07-23",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2241,7 +2241,7 @@
           "medium": 37,
           "low": 0
         },
-        "last_scanned": "2026-07-21",
+        "last_scanned": "2026-07-23",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2266,7 +2266,7 @@
           "medium": 2,
           "low": 0
         },
-        "last_scanned": "2026-07-22",
+        "last_scanned": "2026-07-23",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2316,7 +2316,7 @@
           "medium": 0,
           "low": 0
         },
-        "last_scanned": "2026-07-22",
+        "last_scanned": "2026-07-23",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2366,7 +2366,7 @@
           "medium": 166,
           "low": 0
         },
-        "last_scanned": "2026-07-22",
+        "last_scanned": "2026-07-23",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2417,6 +2417,31 @@
           "low": 0
         },
         "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "mockserver-client",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.73,
+        "findings": 7,
+        "by_severity": {
+          "critical": 1,
+          "high": 1,
+          "medium": 5,
+          "low": 0
+        },
+        "last_scanned": "2026-07-23",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -3652,31 +3677,6 @@
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "mermaid-grammer-inspector-mcp",
-    "version": "unknown",
-    "_meta": {
-      "com.github.yatuk.mcpradar/security": {
-        "risk_score": null,
-        "scoring_model": "mrs-v1",
-        "grade": "-",
-        "confidence": null,
-        "findings": 0,
-        "by_severity": {
-          "critical": 0,
-          "high": 0,
-          "medium": 0,
-          "low": 0
-        },
-        "last_scanned": "-",
-        "scanner_version": "1.1.0-rc1",
-        "scan_coverage": "incomplete",
-        "tool_hash": "",
-        "status": "incomplete"
-      }
-    }
-  },
-  {
-    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-    "name": "mockserver-client",
     "version": "unknown",
     "_meta": {
       "com.github.yatuk.mcpradar/security": {

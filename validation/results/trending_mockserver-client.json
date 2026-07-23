@@ -1,20 +1,125 @@
 {
+  "transport": "stdio",
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-cxm1yqgm/package/a2aMockBuilder.js:142",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 142,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S010",
+      "title": "Authorization token forwarded downstream",
+      "description": "Authorization token forwarded downstream detected in JavaScript/TypeScript source",
+      "severity": "high",
+      "target": "/tmp/mcpradar-enrich-cxm1yqgm/package/mockServerClient.js:202",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 202,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-cxm1yqgm/package/sendRequest.js:138",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 138,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-cxm1yqgm/package/sendRequest.js:207",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 207,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-cxm1yqgm/package/sendRequest.js:267",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 267,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-cxm1yqgm/package/sendRequest.js:326",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 326,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-cxm1yqgm/package/sendRequest.js:396",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 396,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    }
+  ],
+  "summary": {
+    "total_tools": 0
+  },
   "name": "mockserver-client",
   "target": "npx -y mockserver-client",
-  "transport": "stdio",
   "version": "",
-  "tools": [],
-  "findings": [],
-  "scanned_at": "2026-07-16T08:04:51.375023+00:00",
-  "popularity": {
-    "score": 7.1191,
-    "npm_downloads": null,
-    "pypi_downloads": 2675,
-    "github_stars": 4915
-  },
+  "scanned_at": "2026-07-23T08:21:40.001972+00:00",
+  "last_attempted_at": "2026-07-23T08:21:40.001972+00:00",
   "trending": false,
+  "live_scan": {
+    "ok": false,
+    "error": "[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[31m│\u001b[0m \u001b[2m309 \u001b[0m \u001b[31m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[31m╰──────────────────────────────────────────────────────────────────────╯\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[1;91mMcpError: \u001b[0mConnection closed \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m╰──────────────────────────────────────────────────────────────────────────╯\u001b[0m \u001b[35m│\u001b[0m \u001b[35m╰──────────────────────────────────────────────────────────────────────────────╯\u001b[0m"
+  },
   "enriched": true,
   "enriched_ref": "npm:mockserver-client",
-  "incomplete": true,
-  "incomplete_reason": "could not launch headless; no package findings"
+  "package_scan": {
+    "ok": true,
+    "note": "+7 findings from npm:mockserver-client"
+  },
+  "status": "scanned",
+  "scan_coverage": "package-only"
 }
