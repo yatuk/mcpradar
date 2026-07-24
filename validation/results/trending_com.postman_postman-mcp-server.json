@@ -62,7 +62,7 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-8g1ewqwk/package/dist/src/telemetry/client.js:115",
+      "target": "/tmp/mcpradar-enrich-j3l_y_kx/package/dist/src/telemetry/client.js:115",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -76,7 +76,7 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-8g1ewqwk/package/dist/src/tools/getCodeGenerationInstructions.js:335",
+      "target": "/tmp/mcpradar-enrich-j3l_y_kx/package/dist/src/tools/getCodeGenerationInstructions.js:335",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -90,7 +90,7 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-8g1ewqwk/package/dist/src/tools/searchLearningCenter.js:41",
+      "target": "/tmp/mcpradar-enrich-j3l_y_kx/package/dist/src/tools/searchLearningCenter.js:41",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -106,13 +106,13 @@
   "name": "com.postman/postman-mcp-server",
   "target": "npx -y @postman/postman-mcp-server@2.11.1",
   "version": "2.11.1",
-  "scanned_at": "2026-07-23T08:29:05.040558+00:00",
-  "last_attempted_at": "2026-07-23T08:29:05.040558+00:00",
+  "scanned_at": "2026-07-24T08:23:15.662124+00:00",
+  "last_attempted_at": "2026-07-24T08:23:15.662124+00:00",
   "trending": true,
   "popularity": {
     "method": "registry-packages/npm-pypi-github",
-    "score": 6.4337,
-    "npm_downloads": 9424,
+    "score": 6.2977,
+    "npm_downloads": 6890,
     "pypi_downloads": null,
     "github_stars": 287
   },
