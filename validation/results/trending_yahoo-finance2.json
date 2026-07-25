@@ -1,20 +1,629 @@
 {
+  "transport": "stdio",
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "S004",
+      "title": "Dynamic JavaScript execution",
+      "description": "Dynamic JavaScript execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/esm/_dnt.polyfills.js:113",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 113,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/esm/deno.js:10",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 10,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/esm/deps/jsr.io/@std/path/1.1.4/is_glob.js:25",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 25,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/esm/src/lib/errors.js:38",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 38,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/esm/src/lib/getCrumb.js:89",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 89,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/esm/src/lib/getCrumb.js:111",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 111,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/esm/src/lib/getCrumb.js:130",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 130,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/esm/src/lib/getCrumb.js:154",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 154,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/esm/src/lib/getCrumb.js:177",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 177,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/esm/src/lib/getCrumb.js:284",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 284,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/esm/src/lib/moduleExec.d.ts:101",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 101,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/esm/src/lib/moduleExec.js:82",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 82,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/esm/src/lib/moduleExec.js:25",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 25,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/esm/src/lib/options/options.d.ts:69",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 69,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/esm/src/lib/yahooFinanceFetch.d.ts:32",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 32,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/esm/src/lib/yahooFinanceFetch.d.ts:41",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 41,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/esm/src/lib/yahooFinanceFetch.js:42",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 42,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/esm/src/lib/yahooFinanceFetch.js:95",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 95,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/esm/src/modules/chart.js:164",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 164,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/esm/src/modules/fundamentalsTimeSeries.js:208",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 208,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/esm/src/modules/historical.js:305",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 305,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/esm/src/modules/insights.js:119",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 119,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/esm/src/modules/options.js:136",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 136,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/esm/src/modules/quote.js:127",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 127,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/esm/src/modules/quoteSummary.js:150",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 150,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/esm/src/modules/recommendationsBySymbol.js:194",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 194,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/esm/src/modules/screener.js:265",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 265,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/esm/src/modules/search.js:100",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 100,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/esm/src/modules/trendingSymbols.js:84",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 84,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S004",
+      "title": "Dynamic JavaScript execution",
+      "description": "Dynamic JavaScript execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/script/_dnt.polyfills.js:116",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 116,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/script/deno.js:12",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 12,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/script/deps/jsr.io/@std/path/1.1.4/is_glob.js:28",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 28,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/script/src/lib/errors.js:44",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 44,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/script/src/lib/getCrumb.js:94",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 94,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/script/src/lib/getCrumb.js:116",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 116,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/script/src/lib/getCrumb.js:135",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 135,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/script/src/lib/getCrumb.js:159",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 159,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/script/src/lib/getCrumb.js:182",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 182,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/script/src/lib/getCrumb.js:289",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 289,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/script/src/lib/moduleExec.d.ts:101",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 101,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/script/src/lib/moduleExec.js:117",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 117,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/script/src/lib/moduleExec.js:60",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 60,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-7litai_w/package/script/src/lib/options/options.d.ts:69",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 69,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    }
+  ],
+  "summary": {
+    "total_tools": 0
+  },
   "name": "yahoo-finance2",
   "target": "npx -y yahoo-finance2",
-  "transport": "stdio",
   "version": "",
-  "tools": [],
-  "findings": [],
-  "scanned_at": "2026-07-18T07:41:53.595082+00:00",
-  "popularity": {
-    "score": 8.0881,
-    "npm_downloads": 159498,
-    "pypi_downloads": null,
-    "github_stars": 767
-  },
+  "scanned_at": "2026-07-25T07:58:48.276794+00:00",
+  "last_attempted_at": "2026-07-25T07:58:48.276794+00:00",
   "trending": false,
+  "live_scan": {
+    "ok": false,
+    "error": "[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[31m│\u001b[0m \u001b[2m309 \u001b[0m \u001b[31m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[31m╰──────────────────────────────────────────────────────────────────────╯\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[1;91mMcpError: \u001b[0mConnection closed \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m╰──────────────────────────────────────────────────────────────────────────╯\u001b[0m \u001b[35m│\u001b[0m \u001b[35m╰──────────────────────────────────────────────────────────────────────────────╯\u001b[0m"
+  },
   "enriched": true,
   "enriched_ref": "npm:yahoo-finance2",
-  "incomplete": true,
-  "incomplete_reason": "could not launch headless; no package findings"
+  "package_scan": {
+    "ok": true,
+    "note": "+43 findings from npm:yahoo-finance2"
+  },
+  "status": "scanned",
+  "scan_coverage": "package-only"
 }

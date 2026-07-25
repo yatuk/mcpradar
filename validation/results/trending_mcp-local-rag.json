@@ -1,20 +1,27 @@
 {
-  "name": "mcp-local-rag",
-  "target": "npx -y mcp-local-rag",
   "transport": "stdio",
-  "version": "",
   "tools": [],
   "findings": [],
-  "scanned_at": "2026-07-18T07:41:37.911188+00:00",
-  "popularity": {
-    "score": 8.2714,
-    "npm_downloads": 2782,
-    "pypi_downloads": 193,
-    "github_stars": 345
+  "summary": {
+    "total_tools": 0
   },
+  "name": "mcp-local-rag",
+  "target": "npx -y mcp-local-rag",
+  "version": "",
+  "scanned_at": "2026-07-25T07:58:33.664530+00:00",
+  "last_attempted_at": "2026-07-25T07:58:33.664530+00:00",
   "trending": false,
+  "live_scan": {
+    "ok": false,
+    "error": "[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[31m│\u001b[0m \u001b[2m309 \u001b[0m \u001b[31m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[31m╰──────────────────────────────────────────────────────────────────────╯\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[1;91mMcpError: \u001b[0mConnection closed \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m╰──────────────────────────────────────────────────────────────────────────╯\u001b[0m \u001b[35m│\u001b[0m \u001b[35m╰──────────────────────────────────────────────────────────────────────────────╯\u001b[0m"
+  },
   "enriched": true,
   "enriched_ref": "npm:mcp-local-rag",
+  "package_scan": {
+    "ok": true,
+    "note": "+0 findings from npm:mcp-local-rag"
+  },
+  "status": "incomplete",
   "incomplete": true,
-  "incomplete_reason": "could not launch headless; no package findings"
+  "incomplete_reason": "[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[31m│\u001b[0m \u001b[2m309 \u001b[0m \u001b[31m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[31m╰──────────────────────────────────────────────────────────────────────╯\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[1;91mMcpError: \u001b[0mConnection closed \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m╰──────────────────────────────────────────────────────────────────────────╯\u001b[0m \u001b[35m│\u001b[0m \u001b[35m╰──────────────────────────────────────────────────────────────────────────────╯\u001b[0m"
 }

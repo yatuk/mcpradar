@@ -1,20 +1,278 @@
 {
+  "transport": "stdio",
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "react-router@7.18.1 (npm) is affected by GHSA-qwww-vcr4-c8h2: React Router: RSC Mode CSRF Bypass Allows Action Execution Before 400 Response; fixed in 8.3.0",
+      "severity": "high",
+      "target": "react-router@7.18.1",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "react-router",
+        "version": "7.18.1",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-qwww-vcr4-c8h2",
+        "cve": "GHSA-qwww-vcr4-c8h2",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-352"
+        ],
+        "fixed_version": "8.3.0",
+        "references": [
+          "https://github.com/remix-run/react-router/security/advisories/GHSA-qwww-vcr4-c8h2",
+          "https://github.com/remix-run/react-router/commit/7a71c728ad116bd78699a258b2014ce9585729f5",
+          "https://github.com/remix-run/react-router"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S004",
+      "title": "Dynamic JavaScript execution",
+      "description": "Dynamic JavaScript execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-73dob1fp/package/ai/dist/mcp-server.js:2947",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 2947,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-73dob1fp/package/ai/dist/mcp-server.js:2798",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 2798,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-73dob1fp/package/ai/dist/mcp-server.js:6654",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 6654,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-73dob1fp/package/ai/dist/mcp-server.js:6674",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 6674,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-73dob1fp/package/ai/dist/mcp-server.js:6705",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 6705,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-73dob1fp/package/ai/dist/mcp-server.js:6706",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 6706,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-73dob1fp/package/dist/chunk-chunk-2CHN2TA3.module.min.js:1",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 1,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-73dob1fp/package/dist/chunk-chunk-2JGJ5GUG.module.min.js:2",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 2,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-73dob1fp/package/dist/chunk-chunk-ARZGA4LJ.module.min.js:2",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 2,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-73dob1fp/package/dist/chunk-chunk-CAFLML4L.module.min.js:2",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 2,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-73dob1fp/package/dist/chunk-chunk-FHBN7OEB.module.min.js:2",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 2,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-73dob1fp/package/dist/chunk-chunk-ITDWLZXV.module.min.js:2",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 2,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-73dob1fp/package/dist/chunk-chunk-LPSPATPC.module.min.js:1",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 1,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-73dob1fp/package/dist/chunk-chunk-ROZWKEUG.module.min.js:1",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 1,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-73dob1fp/package/dist/chunk-chunk-WYARAXHR.module.min.js:2",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 2,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-73dob1fp/package/dist/components/charts/physics/chainReactionRuntime.d.ts:35",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 35,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    }
+  ],
+  "summary": {
+    "total_tools": 0
+  },
   "name": "semiotic",
   "target": "npx -y semiotic",
-  "transport": "stdio",
   "version": "",
-  "tools": [],
-  "findings": [],
-  "scanned_at": "2026-07-18T07:42:02.248706+00:00",
-  "popularity": {
-    "score": 7.3983,
-    "npm_downloads": 9314,
-    "pypi_downloads": null,
-    "github_stars": 2685
-  },
+  "scanned_at": "2026-07-25T07:58:43.185217+00:00",
+  "last_attempted_at": "2026-07-25T07:58:43.185217+00:00",
   "trending": false,
+  "live_scan": {
+    "ok": false,
+    "error": "[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[31m│\u001b[0m \u001b[2m309 \u001b[0m \u001b[31m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[31m╰──────────────────────────────────────────────────────────────────────╯\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[1;91mMcpError: \u001b[0mConnection closed \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m╰──────────────────────────────────────────────────────────────────────────╯\u001b[0m \u001b[35m│\u001b[0m \u001b[35m╰──────────────────────────────────────────────────────────────────────────────╯\u001b[0m"
+  },
   "enriched": true,
   "enriched_ref": "npm:semiotic",
-  "incomplete": true,
-  "incomplete_reason": "could not launch headless; no package findings"
+  "package_scan": {
+    "ok": true,
+    "note": "+17 findings from npm:semiotic"
+  },
+  "status": "scanned",
+  "scan_coverage": "package-only"
 }
