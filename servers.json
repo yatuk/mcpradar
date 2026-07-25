@@ -1327,7 +1327,7 @@
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "com.postman/postman-mcp-server",
-    "version": "2.11.1",
+    "version": "2.11.2",
     "_meta": {
       "com.github.yatuk.mcpradar/security": {
         "risk_score": 4.0,
@@ -1341,7 +1341,7 @@
           "medium": 3,
           "low": 0
         },
-        "last_scanned": "2026-07-24",
+        "last_scanned": "2026-07-25",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -1766,7 +1766,7 @@
           "medium": 0,
           "low": 0
         },
-        "last_scanned": "2026-07-24",
+        "last_scanned": "2026-07-25",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2051,6 +2051,31 @@
   },
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "agent-device",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.84,
+        "findings": 32,
+        "by_severity": {
+          "critical": 23,
+          "high": 0,
+          "medium": 9,
+          "low": 0
+        },
+        "last_scanned": "2026-07-25",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "eslint-mcp-server",
     "version": "unknown",
     "_meta": {
@@ -2159,14 +2184,14 @@
         "scoring_model": "mrs-v1",
         "grade": "F",
         "confidence": 0.8,
-        "findings": 171,
+        "findings": 172,
         "by_severity": {
           "critical": 89,
           "high": 0,
-          "medium": 82,
+          "medium": 83,
           "low": 0
         },
-        "last_scanned": "2026-07-24",
+        "last_scanned": "2026-07-25",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2191,7 +2216,7 @@
           "medium": 9,
           "low": 0
         },
-        "last_scanned": "2026-07-24",
+        "last_scanned": "2026-07-25",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2216,7 +2241,7 @@
           "medium": 16,
           "low": 0
         },
-        "last_scanned": "2026-07-24",
+        "last_scanned": "2026-07-25",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2241,7 +2266,7 @@
           "medium": 37,
           "low": 0
         },
-        "last_scanned": "2026-07-24",
+        "last_scanned": "2026-07-25",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2266,7 +2291,7 @@
           "medium": 2,
           "low": 0
         },
-        "last_scanned": "2026-07-24",
+        "last_scanned": "2026-07-25",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2316,7 +2341,7 @@
           "medium": 0,
           "low": 0
         },
-        "last_scanned": "2026-07-24",
+        "last_scanned": "2026-07-25",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2366,7 +2391,7 @@
           "medium": 166,
           "low": 0
         },
-        "last_scanned": "2026-07-24",
+        "last_scanned": "2026-07-25",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2476,6 +2501,31 @@
   },
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "obsidian-mcp-server",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.87,
+        "findings": 14,
+        "by_severity": {
+          "critical": 12,
+          "high": 0,
+          "medium": 2,
+          "low": 0
+        },
+        "last_scanned": "2026-07-25",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "plant-genomics-mcp",
     "version": "unknown",
     "_meta": {
@@ -2526,6 +2576,31 @@
   },
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "semiotic",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.9,
+        "findings": 16,
+        "by_severity": {
+          "critical": 16,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "2026-07-25",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "tentra-mcp",
     "version": "unknown",
     "_meta": {
@@ -2567,6 +2642,31 @@
           "low": 0
         },
         "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "yahoo-finance2",
+    "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.8,
+        "findings": 43,
+        "by_severity": {
+          "critical": 21,
+          "high": 0,
+          "medium": 22,
+          "low": 0
+        },
+        "last_scanned": "2026-07-25",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -3201,31 +3301,6 @@
   },
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-    "name": "agent-device",
-    "version": "unknown",
-    "_meta": {
-      "com.github.yatuk.mcpradar/security": {
-        "risk_score": null,
-        "scoring_model": "mrs-v1",
-        "grade": "-",
-        "confidence": null,
-        "findings": 0,
-        "by_severity": {
-          "critical": 0,
-          "high": 0,
-          "medium": 0,
-          "low": 0
-        },
-        "last_scanned": "-",
-        "scanner_version": "1.1.0-rc1",
-        "scan_coverage": "incomplete",
-        "tool_hash": "",
-        "status": "incomplete"
-      }
-    }
-  },
-  {
-    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "agent-scraper-mcp",
     "version": "unknown",
     "_meta": {
@@ -3726,31 +3801,6 @@
   },
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-    "name": "obsidian-mcp-server",
-    "version": "unknown",
-    "_meta": {
-      "com.github.yatuk.mcpradar/security": {
-        "risk_score": null,
-        "scoring_model": "mrs-v1",
-        "grade": "-",
-        "confidence": null,
-        "findings": 0,
-        "by_severity": {
-          "critical": 0,
-          "high": 0,
-          "medium": 0,
-          "low": 0
-        },
-        "last_scanned": "-",
-        "scanner_version": "1.1.0-rc1",
-        "scan_coverage": "incomplete",
-        "tool_hash": "",
-        "status": "incomplete"
-      }
-    }
-  },
-  {
-    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "ollama-mcp",
     "version": "unknown",
     "_meta": {
@@ -3876,31 +3926,6 @@
   },
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-    "name": "semiotic",
-    "version": "unknown",
-    "_meta": {
-      "com.github.yatuk.mcpradar/security": {
-        "risk_score": null,
-        "scoring_model": "mrs-v1",
-        "grade": "-",
-        "confidence": null,
-        "findings": 0,
-        "by_severity": {
-          "critical": 0,
-          "high": 0,
-          "medium": 0,
-          "low": 0
-        },
-        "last_scanned": "-",
-        "scanner_version": "1.1.0-rc1",
-        "scan_coverage": "incomplete",
-        "tool_hash": "",
-        "status": "incomplete"
-      }
-    }
-  },
-  {
-    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "video-editing-mcp",
     "version": "unknown",
     "_meta": {
@@ -3952,31 +3977,6 @@
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "windows-mcp",
-    "version": "unknown",
-    "_meta": {
-      "com.github.yatuk.mcpradar/security": {
-        "risk_score": null,
-        "scoring_model": "mrs-v1",
-        "grade": "-",
-        "confidence": null,
-        "findings": 0,
-        "by_severity": {
-          "critical": 0,
-          "high": 0,
-          "medium": 0,
-          "low": 0
-        },
-        "last_scanned": "-",
-        "scanner_version": "1.1.0-rc1",
-        "scan_coverage": "incomplete",
-        "tool_hash": "",
-        "status": "incomplete"
-      }
-    }
-  },
-  {
-    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-    "name": "yahoo-finance2",
     "version": "unknown",
     "_meta": {
       "com.github.yatuk.mcpradar/security": {
