@@ -1341,7 +1341,7 @@
           "medium": 3,
           "low": 0
         },
-        "last_scanned": "2026-07-26",
+        "last_scanned": "2026-07-27",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -1766,7 +1766,7 @@
           "medium": 0,
           "low": 0
         },
-        "last_scanned": "2026-07-26",
+        "last_scanned": "2026-07-27",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2151,6 +2151,31 @@
   },
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.KnockOutEZ/wigolo",
+    "version": "0.2.1",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.77,
+        "findings": 97,
+        "by_severity": {
+          "critical": 34,
+          "high": 0,
+          "medium": 63,
+          "low": 0
+        },
+        "last_scanned": "2026-07-27",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "io.github.YawLabs/ctxlint",
     "version": "0.18.4",
     "_meta": {
@@ -2191,7 +2216,7 @@
           "medium": 83,
           "low": 0
         },
-        "last_scanned": "2026-07-26",
+        "last_scanned": "2026-07-27",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2216,7 +2241,7 @@
           "medium": 9,
           "low": 0
         },
-        "last_scanned": "2026-07-26",
+        "last_scanned": "2026-07-27",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2266,7 +2291,7 @@
           "medium": 37,
           "low": 0
         },
-        "last_scanned": "2026-07-26",
+        "last_scanned": "2026-07-27",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2291,7 +2316,7 @@
           "medium": 2,
           "low": 0
         },
-        "last_scanned": "2026-07-26",
+        "last_scanned": "2026-07-27",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2341,7 +2366,7 @@
           "medium": 0,
           "low": 0
         },
-        "last_scanned": "2026-07-26",
+        "last_scanned": "2026-07-27",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2391,7 +2416,7 @@
           "medium": 167,
           "low": 0
         },
-        "last_scanned": "2026-07-26",
+        "last_scanned": "2026-07-27",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
