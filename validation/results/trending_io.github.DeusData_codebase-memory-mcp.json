@@ -7,7 +7,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-tohs1xnl/package/bin.js:17",
+      "target": "/tmp/mcpradar-enrich-x1gy3gs8/package/bin.js:17",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -21,7 +21,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-tohs1xnl/package/bin.js:29",
+      "target": "/tmp/mcpradar-enrich-x1gy3gs8/package/bin.js:29",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -37,15 +37,15 @@
   "name": "io.github.DeusData/codebase-memory-mcp",
   "target": "npx -y codebase-memory-mcp@0.9.0",
   "version": "0.9.0",
-  "scanned_at": "2026-07-22T08:24:14.868788+00:00",
-  "last_attempted_at": "2026-07-22T08:24:14.868788+00:00",
-  "trending": false,
+  "scanned_at": "2026-07-28T08:30:24.071699+00:00",
+  "last_attempted_at": "2026-07-28T08:30:24.071699+00:00",
+  "trending": true,
   "popularity": {
     "method": "registry-packages/npm-pypi-github",
-    "score": 8.1122,
+    "score": 8.1522,
     "npm_downloads": null,
-    "pypi_downloads": 3822,
-    "github_stars": 33867
+    "pypi_downloads": 3939,
+    "github_stars": 36029
   },
   "live_scan": {
     "ok": false,
