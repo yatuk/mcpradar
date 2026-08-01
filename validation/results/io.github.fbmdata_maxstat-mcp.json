@@ -1,0 +1,1471 @@
+{
+  "transport": "http",
+  "tools": [
+    {
+      "name": "get_account_usage",
+      "description": "История списаний кредитов · бесплатно\n\n> 💳 **Стоимость:** бесплатно\n\nВозвращает пагинированную историю списаний кредитов по вашему аккаунту, отсортированную от новых к старым. Поле `request_id` каждой записи совпадает со значением заголовка `X-Request-Id` соответствующего запроса.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n```json\n{\n  \"items\": [\n    {\n      \"request_id\": \"Request Id\",\n      \"operation_code\": \"Operation Code\",\n      \"credits_charged\": 1,\n      \"method\": \"Method\",\n      \"path\": \"Path\",\n      \"created_at\": \"2023-01-01T00:00:00Z\"\n    }\n  ]\n}\n```",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "maximum": 100,
+            "minimum": 1,
+            "description": "Максимальное количество записей в ответе.",
+            "examples": [
+              20
+            ],
+            "default": 20,
+            "title": "limit"
+          },
+          "offset": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Количество записей, которое нужно пропустить от начала списка.",
+            "examples": [
+              0
+            ],
+            "default": 0,
+            "title": "offset"
+          }
+        },
+        "title": "get_account_usageArguments"
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get_account_limits",
+      "description": "Лимиты аккаунта · бесплатно\n\n> 💳 **Стоимость:** бесплатно\n\nВозвращает лимиты кредитов текущего биллингового периода: сколько кредитов включено в тарифный план, сколько куплено дополнительно, сколько потрачено и сколько осталось.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n```json\n{\n  \"plan_credits\": 1,\n  \"addon_credits\": 1,\n  \"used_credits\": 1,\n  \"remaining_credits\": 1,\n  \"period_ends_at\": \"2023-01-01T00:00:00Z\"\n}\n```",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "title": "get_account_limitsArguments"
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get_account_subscription",
+      "description": "Текущая подписка · бесплатно\n\n> 💳 **Стоимость:** бесплатно\n\nВозвращает информацию о текущей подписке: тарифный план, статус, даты начала и окончания текущего периода, а также состояние кредитов.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n```json\n{\n  \"plan_id\": \"Plan Id\",\n  \"status\": \"Status\",\n  \"starts_at\": \"2023-01-01T00:00:00Z\",\n  \"ends_at\": \"2023-01-01T00:00:00Z\",\n  \"plan_credits\": 1,\n  \"addon_credits\": 1,\n  \"used_credits\": 1,\n  \"remaining_credits\": 1\n}\n```",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "title": "get_account_subscriptionArguments"
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "add_channel",
+      "description": "Добавить канал Max для отслеживания · бесплатно\n\n> 💳 **Стоимость:** бесплатно\n\nДобавляет канал в очередь на отслеживание по его публичной или пригласительной ссылке MAX. Если канал уже находится в системе, в ответе возвращается сообщение без повторного добавления.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n```json\n{\n  \"ok\": true\n}\n```",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "link": {
+            "type": "string",
+            "pattern": "^https://max\\.ru/(?:[A-Za-z0-9_.-]+|join/[A-Za-z0-9_-]+)$",
+            "title": "link",
+            "description": "Публичная ссылка на канал или пригласительная ссылка MAX.",
+            "examples": [
+              "https://max.ru/max_news"
+            ]
+          }
+        },
+        "title": "add_channelArguments",
+        "required": [
+          "link"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "search_channels",
+      "description": "Поиск по каналам · 3 кредита\n\n> 💳 **Стоимость:** 3 кредита\n\nВозвращает пагинированный список каналов из публичного индекса. Поддерживается полнотекстовый поиск по названию, описанию и ссылке канала, фильтрация по категории, диапазонам подписчиков и количества публикаций, а также сортировка по релевантности, дате, числу подписчиков или публикаций.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n```json\n{\n  \"total\": 1,\n  \"channels\": [\n    {\n      \"id\": \"Id\",\n      \"name\": \"Name\",\n      \"description\": \"Description\",\n      \"avatar\": \"Avatar\",\n      \"url\": \"Url\",\n      \"access\": \"Access\",\n      \"subscribers\": 1,\n      \"posts\": 1,\n      \"categories\": [\n        \"string\"\n      ],\n      \"created_at\": \"2023-01-01T00:00:00Z\",\n      \"updated_at\": \"2023-01-01T00:00:00Z\"\n    }\n  ],\n  \"limit\": 1,\n  \"offset\": 1\n}\n```",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "search": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Полнотекстовый поисковый запрос по названию, описанию или ссылке на канал.",
+            "examples": [
+              "новости технологий"
+            ],
+            "title": "search",
+            "type": "string"
+          },
+          "limit": {
+            "type": "integer",
+            "maximum": 100,
+            "minimum": 1,
+            "description": "Количество каналов в ответе. Допустимый диапазон: от 1 до 100.",
+            "examples": [
+              10
+            ],
+            "default": 10,
+            "title": "limit"
+          },
+          "offset": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Смещение относительно начала выборки для постраничной навигации.",
+            "examples": [
+              0
+            ],
+            "default": 0,
+            "title": "offset"
+          },
+          "category_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Фильтр по идентификатору категории канала.",
+            "examples": [
+              12
+            ],
+            "title": "category_id",
+            "type": "integer"
+          },
+          "access": {
+            "anyOf": [
+              {
+                "enum": [
+                  "public",
+                  "private"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Фильтр по типу канала: `public` — открытый канал, `private` — канал по приглашению. Если не задано, в выдачу попадают каналы обоих типов.",
+            "examples": [
+              "public"
+            ],
+            "title": "access",
+            "type": "string"
+          },
+          "subscribers_min": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Минимальное количество подписчиков канала.",
+            "examples": [
+              10000
+            ],
+            "default": 0,
+            "title": "subscribers_min"
+          },
+          "subscribers_max": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Максимальное количество подписчиков канала. Значение `0` отключает верхнюю границу.",
+            "examples": [
+              500000
+            ],
+            "default": 0,
+            "title": "subscribers_max"
+          },
+          "posts_min": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Минимальное количество публикаций в канале.",
+            "examples": [
+              100
+            ],
+            "default": 0,
+            "title": "posts_min"
+          },
+          "posts_max": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Максимальное количество публикаций в канале. Значение `0` отключает верхнюю границу.",
+            "examples": [
+              10000
+            ],
+            "default": 0,
+            "title": "posts_max"
+          },
+          "order_by": {
+            "enum": [
+              "subscribers",
+              "posts",
+              "date",
+              "score"
+            ],
+            "type": "string",
+            "description": "Поле сортировки: `subscribers` для количества подписчиков, `posts` для количества публикаций, `date` для даты обновления канала, `score` для релевантности.",
+            "examples": [
+              "subscribers"
+            ],
+            "default": "subscribers",
+            "title": "order_by"
+          },
+          "order": {
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "type": "string",
+            "description": "Направление сортировки.",
+            "examples": [
+              "desc"
+            ],
+            "default": "desc",
+            "title": "order"
+          }
+        },
+        "title": "search_channelsArguments"
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get_categories",
+      "description": "Список категорий каналов · бесплатно\n\n> 💳 **Стоимость:** бесплатно\n\nВозвращает список доступных категорий каналов и количество каналов в каждой категории.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n```json\n{\n  \"categories\": [\n    {\n      \"id\": 1,\n      \"title\": \"Title\",\n      \"channels_count\": 1\n    }\n  ]\n}\n```",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "title": "get_categoriesArguments"
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get_channel",
+      "description": "Получение данных о канале · 1 кредит\n\n> 💳 **Стоимость:** 1 кредит\n\nВозвращает полную информацию о канале по его идентификатору.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n```json\n{\n  \"id\": \"Id\",\n  \"name\": \"Name\",\n  \"description\": \"Description\",\n  \"avatar\": \"Avatar\",\n  \"url\": \"Url\",\n  \"access\": \"Access\",\n  \"subscribers\": 1,\n  \"posts\": 1,\n  \"categories\": [\n    \"string\"\n  ],\n  \"created_at\": \"2023-01-01T00:00:00Z\",\n  \"updated_at\": \"2023-01-01T00:00:00Z\"\n}\n```",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "channel_id": {
+            "type": "string",
+            "maxLength": 20,
+            "pattern": "^-?\\d+$",
+            "description": "Числовой идентификатор канала, передаётся строкой.",
+            "examples": [
+              "-918273645"
+            ],
+            "title": "channel_id"
+          }
+        },
+        "title": "get_channelArguments",
+        "required": [
+          "channel_id"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get_channel_subscribers",
+      "description": "Статистика подписчиков канала · 5 кредитов\n\n> 💳 **Стоимость:** 5 кредитов\n\nВозвращает минимальное и максимальное количество подписчиков, абсолютный и относительный прирост, а также дневную историю подписчиков за выбранный диапазон дат. Если `date_from` и `date_to` не переданы, используется последние 30 дней.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n```json\n{\n  \"subscribers_min\": 1,\n  \"subscribers_max\": 1,\n  \"subscribers_growth_count\": 1,\n  \"subscribers_growth_percent\": 1.0,\n  \"subscribers_history\": [\n    {\n      \"date\": \"2023-01-01\",\n      \"total\": 1\n    }\n  ]\n}\n```",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "channel_id": {
+            "type": "string",
+            "maxLength": 20,
+            "pattern": "^-?\\d+$",
+            "description": "Числовой идентификатор канала, передаётся строкой.",
+            "examples": [
+              "-918273645"
+            ],
+            "title": "channel_id"
+          },
+          "date_from": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Нижняя граница диапазона дат включительно в формате `YYYY-MM-DD`.",
+            "examples": [
+              "2026-03-01"
+            ],
+            "title": "date_from",
+            "type": "string"
+          },
+          "date_to": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Верхняя граница диапазона дат включительно в формате `YYYY-MM-DD`.",
+            "examples": [
+              "2026-03-31"
+            ],
+            "title": "date_to",
+            "type": "string"
+          }
+        },
+        "title": "get_channel_subscribersArguments",
+        "required": [
+          "channel_id"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get_channel_views",
+      "description": "Статистика просмотров публикаций канала · 5 кредитов\n\n> 💳 **Стоимость:** 5 кредитов\n\nВозвращает суммарное количество просмотров публикаций канала, среднее и максимальное значение на один пост, а также дневную историю просмотров за выбранный диапазон дат. Если `date_from` и `date_to` не переданы, используется последние 30 дней.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n```json\n{\n  \"views_total\": 1,\n  \"views_avg_per_post\": 1,\n  \"views_max_per_post\": 1,\n  \"views_history\": [\n    {\n      \"date\": \"2023-01-01\",\n      \"total\": 1\n    }\n  ]\n}\n```",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "channel_id": {
+            "type": "string",
+            "maxLength": 20,
+            "pattern": "^-?\\d+$",
+            "description": "Числовой идентификатор канала, передаётся строкой.",
+            "examples": [
+              "-918273645"
+            ],
+            "title": "channel_id"
+          },
+          "date_from": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Нижняя граница диапазона дат включительно в формате `YYYY-MM-DD`.",
+            "examples": [
+              "2026-03-01"
+            ],
+            "title": "date_from",
+            "type": "string"
+          },
+          "date_to": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Верхняя граница диапазона дат включительно в формате `YYYY-MM-DD`.",
+            "examples": [
+              "2026-03-31"
+            ],
+            "title": "date_to",
+            "type": "string"
+          }
+        },
+        "title": "get_channel_viewsArguments",
+        "required": [
+          "channel_id"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get_channel_likes",
+      "description": "Статистика лайков публикаций канала · 5 кредитов\n\n> 💳 **Стоимость:** 5 кредитов\n\nВозвращает суммарное количество лайков публикаций канала, среднее и максимальное значение на один пост, а также дневную историю лайков за выбранный диапазон дат. Если `date_from` и `date_to` не переданы, используется последние 30 дней.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n```json\n{\n  \"likes_total\": 1,\n  \"likes_avg_per_post\": 1,\n  \"likes_max_per_post\": 1,\n  \"likes_history\": [\n    {\n      \"date\": \"2023-01-01\",\n      \"total\": 1\n    }\n  ]\n}\n```",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "channel_id": {
+            "type": "string",
+            "maxLength": 20,
+            "pattern": "^-?\\d+$",
+            "description": "Числовой идентификатор канала, передаётся строкой.",
+            "examples": [
+              "-918273645"
+            ],
+            "title": "channel_id"
+          },
+          "date_from": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Нижняя граница диапазона дат включительно в формате `YYYY-MM-DD`.",
+            "examples": [
+              "2026-03-01"
+            ],
+            "title": "date_from",
+            "type": "string"
+          },
+          "date_to": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Верхняя граница диапазона дат включительно в формате `YYYY-MM-DD`.",
+            "examples": [
+              "2026-03-31"
+            ],
+            "title": "date_to",
+            "type": "string"
+          }
+        },
+        "title": "get_channel_likesArguments",
+        "required": [
+          "channel_id"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get_channel_posts",
+      "description": "Статистика публикаций канала · 5 кредитов\n\n> 💳 **Стоимость:** 5 кредитов\n\nВозвращает общее количество публикаций канала, распределение по типам постов и дневную историю публикаций за выбранный диапазон дат. Если `date_from` и `date_to` не переданы, используется последние 30 дней.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n```json\n{\n  \"posts_total\": 1,\n  \"post_types\": [\n    {\n      \"name\": \"Name\",\n      \"count\": 1,\n      \"percent\": 1.0\n    }\n  ],\n  \"posts_history\": [\n    {\n      \"date\": \"2023-01-01\",\n      \"total\": 1\n    }\n  ]\n}\n```",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "channel_id": {
+            "type": "string",
+            "maxLength": 20,
+            "pattern": "^-?\\d+$",
+            "description": "Числовой идентификатор канала, передаётся строкой.",
+            "examples": [
+              "-918273645"
+            ],
+            "title": "channel_id"
+          },
+          "date_from": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Нижняя граница диапазона дат включительно в формате `YYYY-MM-DD`.",
+            "examples": [
+              "2026-03-01"
+            ],
+            "title": "date_from",
+            "type": "string"
+          },
+          "date_to": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Верхняя граница диапазона дат включительно в формате `YYYY-MM-DD`.",
+            "examples": [
+              "2026-03-31"
+            ],
+            "title": "date_to",
+            "type": "string"
+          }
+        },
+        "title": "get_channel_postsArguments",
+        "required": [
+          "channel_id"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "search_posts",
+      "description": "Поиск публикаций · 3 кредита\n\n> 💳 **Стоимость:** 3 кредита\n\nВозвращает пагинированный список публикаций из публичного индекса. Поддерживается полнотекстовый поиск по полю `text`, фильтрация по каналу, типу публикации и диапазону дат, а также сортировка по релевантности, дате, просмотрам или лайкам.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n```json\n{\n  \"total\": 1,\n  \"posts\": [\n    {\n      \"id\": \"Id\",\n      \"channel_id\": \"Channel Id\",\n      \"type\": \"Type\",\n      \"url\": \"Url\",\n      \"text\": \"Text\",\n      \"views\": 1,\n      \"likes\": 1,\n      \"likes_detailed\": {},\n      \"attachments\": [\n        {\n          \"attachment_type\": \"Attachment Type\",\n          \"attachment_url\": \"Attachment Url\"\n        }\n      ],\n      \"published_at\": \"2023-01-01T00:00:00Z\",\n      \"updated_at\": \"2023-01-01T00:00:00Z\"\n    }\n  ],\n  \"limit\": 1,\n  \"offset\": 1\n}\n```",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "search": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Полнотекстовый поисковый запрос по тексту публикации.",
+            "examples": [
+              "запуск продукта"
+            ],
+            "title": "search",
+            "type": "string"
+          },
+          "limit": {
+            "type": "integer",
+            "maximum": 100,
+            "minimum": 1,
+            "description": "Количество публикаций в ответе. Допустимый диапазон: от 1 до 100.",
+            "examples": [
+              10
+            ],
+            "default": 10,
+            "title": "limit"
+          },
+          "offset": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Смещение относительно начала выборки для постраничной навигации.",
+            "examples": [
+              0
+            ],
+            "default": 0,
+            "title": "offset"
+          },
+          "channel_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 20,
+                "pattern": "^-?\\d+$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Фильтр по числовому идентификатору канала, передаётся строкой.",
+            "examples": [
+              "-91827364546372"
+            ],
+            "title": "channel_id",
+            "type": "string"
+          },
+          "post_type": {
+            "anyOf": [
+              {
+                "enum": [
+                  "text",
+                  "file",
+                  "photo",
+                  "video",
+                  "audio",
+                  "share",
+                  "sticker",
+                  "contact",
+                  "location",
+                  "inline_keyboard"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Фильтр по типу публикации.",
+            "examples": [
+              "video"
+            ],
+            "title": "post_type",
+            "type": "string"
+          },
+          "date_from": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Нижняя граница даты публикации включительно в формате `YYYY-MM-DD`.",
+            "examples": [
+              "2026-03-01"
+            ],
+            "title": "date_from",
+            "type": "string"
+          },
+          "date_to": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Верхняя граница даты публикации включительно в формате `YYYY-MM-DD`.",
+            "examples": [
+              "2026-03-31"
+            ],
+            "title": "date_to",
+            "type": "string"
+          },
+          "order_by": {
+            "enum": [
+              "likes",
+              "views",
+              "date",
+              "score"
+            ],
+            "type": "string",
+            "description": "Поле сортировки: `score` для релевантности, `date` для даты публикации, `views` для просмотров, `likes` для лайков.",
+            "examples": [
+              "score"
+            ],
+            "default": "score",
+            "title": "order_by"
+          },
+          "order": {
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "type": "string",
+            "description": "Направление сортировки.",
+            "examples": [
+              "desc"
+            ],
+            "default": "desc",
+            "title": "order"
+          }
+        },
+        "title": "search_postsArguments"
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get_post",
+      "description": "Получение данных о публикации · 1 кредит\n\n> 💳 **Стоимость:** 1 кредит\n\nВозвращает полную информацию о публикации по её идентификатору. Опционально можно включить список найденных репостов этой публикации.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n```json\n{\n  \"id\": \"Id\",\n  \"channel_id\": \"Channel Id\",\n  \"type\": \"Type\",\n  \"url\": \"Url\",\n  \"text\": \"Text\",\n  \"views\": 1,\n  \"likes\": 1,\n  \"likes_detailed\": {},\n  \"attachments\": [\n    {\n      \"attachment_type\": \"Attachment Type\",\n      \"attachment_url\": \"Attachment Url\"\n    }\n  ],\n  \"published_at\": \"2023-01-01T00:00:00Z\",\n  \"updated_at\": \"2023-01-01T00:00:00Z\"\n}\n```",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "post_id": {
+            "type": "string",
+            "maxLength": 20,
+            "pattern": "^-?\\d+$",
+            "description": "Числовой идентификатор публикации, передаётся строкой.",
+            "examples": [
+              "192837465192837465"
+            ],
+            "title": "post_id"
+          },
+          "include_forwards": {
+            "type": "boolean",
+            "description": "Если `true`, в ответ будет добавлен список репостов публикации.",
+            "examples": [
+              false
+            ],
+            "default": false,
+            "title": "include_forwards"
+          }
+        },
+        "title": "get_postArguments",
+        "required": [
+          "post_id"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get_post_views",
+      "description": "Статистика просмотров публикации · 5 кредитов\n\n> 💳 **Стоимость:** 5 кредитов\n\nВозвращает текущее суммарное количество просмотров публикации и дневную историю просмотров за выбранный диапазон дат. Если `date_from` и `date_to` не переданы, возвращаются первые 15 дней истории с момента публикации.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n```json\n{\n  \"views_total\": 1,\n  \"views_history\": [\n    {\n      \"date\": \"2023-01-01\",\n      \"total\": 1\n    }\n  ]\n}\n```",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "post_id": {
+            "type": "string",
+            "maxLength": 20,
+            "pattern": "^-?\\d+$",
+            "description": "Числовой идентификатор публикации, передаётся строкой.",
+            "examples": [
+              "192837465192837465"
+            ],
+            "title": "post_id"
+          },
+          "date_from": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Нижняя граница диапазона дат включительно в формате `YYYY-MM-DD`.",
+            "examples": [
+              "2026-03-20"
+            ],
+            "title": "date_from",
+            "type": "string"
+          },
+          "date_to": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Верхняя граница диапазона дат включительно в формате `YYYY-MM-DD`.",
+            "examples": [
+              "2026-04-03"
+            ],
+            "title": "date_to",
+            "type": "string"
+          }
+        },
+        "title": "get_post_viewsArguments",
+        "required": [
+          "post_id"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get_post_likes",
+      "description": "Статистика лайков публикации · 5 кредитов\n\n> 💳 **Стоимость:** 5 кредитов\n\nВозвращает текущее суммарное количество лайков, разбивку по типам реакций и дневную историю лайков за выбранный диапазон дат. Если `date_from` и `date_to` не переданы, возвращаются первые 15 дней истории с момента публикации.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n```json\n{\n  \"likes_total\": 1,\n  \"likes_detailed\": {},\n  \"likes_history\": [\n    {\n      \"date\": \"2023-01-01\",\n      \"total\": 1\n    }\n  ]\n}\n```",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "post_id": {
+            "type": "string",
+            "maxLength": 20,
+            "pattern": "^-?\\d+$",
+            "description": "Числовой идентификатор публикации, передаётся строкой.",
+            "examples": [
+              "192837465192837465"
+            ],
+            "title": "post_id"
+          },
+          "date_from": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Нижняя граница диапазона дат включительно в формате `YYYY-MM-DD`.",
+            "examples": [
+              "2026-03-20"
+            ],
+            "title": "date_from",
+            "type": "string"
+          },
+          "date_to": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Верхняя граница диапазона дат включительно в формате `YYYY-MM-DD`.",
+            "examples": [
+              "2026-04-03"
+            ],
+            "title": "date_to",
+            "type": "string"
+          }
+        },
+        "title": "get_post_likesArguments",
+        "required": [
+          "post_id"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get_subscriptions",
+      "description": "Получение списка подписок · бесплатно\n\n> 💳 **Стоимость:** бесплатно\n\nВозвращает список webhook-подписок, созданных с вашим API-токеном. Подписки можно отфильтровать по признаку активности и типу.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n```json\n{\n  \"items\": [\n    {\n      \"id\": \"Id\",\n      \"type\": \"Type\",\n      \"active\": true,\n      \"callback_url\": \"Callback Url\",\n      \"consecutive_failures\": 1,\n      \"created_at\": \"2023-01-01T00:00:00Z\",\n      \"updated_at\": \"2023-01-01T00:00:00Z\"\n    }\n  ]\n}\n```",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "active": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Фильтр по статусу подписки. Если параметр не передан, возвращаются все подписки.",
+            "examples": [
+              true
+            ],
+            "title": "active",
+            "type": "boolean"
+          },
+          "subscription_type": {
+            "anyOf": [
+              {
+                "enum": [
+                  "channel",
+                  "keyword"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Фильтр по типу подписки: `channel` или `keyword`. Если не передан, возвращаются все подписки.",
+            "examples": [
+              "channel"
+            ],
+            "title": "subscription_type",
+            "type": "string"
+          }
+        },
+        "title": "get_subscriptionsArguments"
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "create_channel_subscription",
+      "description": "Подписка на канал · бесплатно\n\n> 💳 **Стоимость:** бесплатно (создание подписки). Каждая доставка уведомления по этой подписке тарифицируется в **2 кредита**.\n\nСоздает подписку на новые публикации указанного канала. Канал можно передать числовым идентификатором, публичной ссылкой `https://max.ru/...` или коротким именем. Подписка уникальна по каналу: если подписка на этот канал уже существует, возвращается существующая запись.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n```json\n{\n  \"id\": \"Id\",\n  \"type\": \"Type\",\n  \"active\": true,\n  \"callback_url\": \"Callback Url\",\n  \"consecutive_failures\": 1,\n  \"created_at\": \"2023-01-01T00:00:00Z\",\n  \"updated_at\": \"2023-01-01T00:00:00Z\"\n}\n```",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "callback_url": {
+            "type": "string",
+            "minLength": 1,
+            "format": "uri",
+            "title": "callback_url",
+            "description": "Публично доступный HTTPS URL, на который MaxStat будет отправлять уведомления.",
+            "examples": [
+              "https://example.com/maxstat/webhooks"
+            ]
+          },
+          "channel": {
+            "type": "string",
+            "minLength": 1,
+            "title": "channel",
+            "description": "Канал для отслеживания: числовой идентификатор, публичная ссылка или короткое имя.",
+            "examples": [
+              "https://max.ru/max_news"
+            ]
+          }
+        },
+        "title": "create_channel_subscriptionArguments",
+        "required": [
+          "callback_url",
+          "channel"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "create_keyword_subscription",
+      "description": "Подписка на поисковый запрос · бесплатно\n\n> 💳 **Стоимость:** бесплатно (создание подписки). Каждая доставка уведомления по этой подписке тарифицируется в **3 кредита**.\n\nСоздает подписку на новые публикации, текст которых соответствует поисковому запросу. Опционально можно ограничить поиск категорией канала. Подписка уникальна по паре `query + category_id`: если такая подписка уже существует, возвращается существующая запись.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n```json\n{\n  \"id\": \"Id\",\n  \"type\": \"Type\",\n  \"active\": true,\n  \"callback_url\": \"Callback Url\",\n  \"consecutive_failures\": 1,\n  \"created_at\": \"2023-01-01T00:00:00Z\",\n  \"updated_at\": \"2023-01-01T00:00:00Z\"\n}\n```",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "callback_url": {
+            "type": "string",
+            "minLength": 1,
+            "format": "uri",
+            "title": "callback_url",
+            "description": "Публично доступный HTTPS URL, на который MaxStat будет отправлять уведомления.",
+            "examples": [
+              "https://example.com/maxstat/webhooks"
+            ]
+          },
+          "query": {
+            "type": "string",
+            "maxLength": 800,
+            "minLength": 1,
+            "title": "query",
+            "description": "Поисковый запрос по тексту публикаций. Лишние пробелы по краям удаляются.",
+            "examples": [
+              "запуск продукта"
+            ]
+          },
+          "category_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "category_id",
+            "description": "Идентификатор категории канала для дополнительной фильтрации найденных публикаций.",
+            "examples": [
+              12
+            ],
+            "type": "integer"
+          }
+        },
+        "title": "create_keyword_subscriptionArguments",
+        "required": [
+          "callback_url",
+          "query"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get_subscription",
+      "description": "Получение информации о подписке · бесплатно\n\n> 💳 **Стоимость:** бесплатно\n\nВозвращает параметры webhook-подписки, статус доставки и сведения о последней ошибке.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n```json\n{\n  \"id\": \"Id\",\n  \"type\": \"Type\",\n  \"active\": true,\n  \"callback_url\": \"Callback Url\",\n  \"consecutive_failures\": 1,\n  \"created_at\": \"2023-01-01T00:00:00Z\",\n  \"updated_at\": \"2023-01-01T00:00:00Z\"\n}\n```",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "subscription_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Идентификатор подписки на уведомления.",
+            "examples": [
+              "9f3f0c8a-7d52-4f42-a8b1-5a9b7a7f6a10"
+            ],
+            "title": "subscription_id"
+          }
+        },
+        "title": "get_subscriptionArguments",
+        "required": [
+          "subscription_id"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "update_subscription",
+      "description": "Обновление подписки · бесплатно\n\n> 💳 **Стоимость:** бесплатно\n\nОбновляет URL получателя уведомлений и/или статус активности подписки. При повторном включении подписки сбрасываются счётчики ошибок и доставка возобновляется на следующем тике.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n```json\n{\n  \"id\": \"Id\",\n  \"type\": \"Type\",\n  \"active\": true,\n  \"callback_url\": \"Callback Url\",\n  \"consecutive_failures\": 1,\n  \"created_at\": \"2023-01-01T00:00:00Z\",\n  \"updated_at\": \"2023-01-01T00:00:00Z\"\n}\n```",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "subscription_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Идентификатор подписки на уведомления.",
+            "examples": [
+              "9f3f0c8a-7d52-4f42-a8b1-5a9b7a7f6a10"
+            ],
+            "title": "subscription_id"
+          },
+          "callback_url": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "callback_url",
+            "description": "Новый публично доступный HTTPS URL получателя уведомлений.",
+            "examples": [
+              "https://example.com/maxstat/webhooks-v2"
+            ],
+            "type": "string"
+          },
+          "active": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "active",
+            "description": "Статус подписки. Неактивные подписки не обрабатываются. При установке `true` сбрасываются счётчики ошибок.",
+            "examples": [
+              true
+            ],
+            "type": "boolean"
+          }
+        },
+        "title": "update_subscriptionArguments",
+        "required": [
+          "subscription_id"
+        ]
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "delete_subscription",
+      "description": "Отмена подписки · бесплатно\n\n> 💳 **Стоимость:** бесплатно\n\nУдаляет webhook-подписку. После удаления уведомления по ней больше не отправляются.\n\n### Responses:\n\n**204**: Successful Response (Success Response)",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "subscription_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Идентификатор подписки на уведомления.",
+            "examples": [
+              "9f3f0c8a-7d52-4f42-a8b1-5a9b7a7f6a10"
+            ],
+            "title": "subscription_id"
+          }
+        },
+        "title": "delete_subscriptionArguments",
+        "required": [
+          "subscription_id"
+        ]
+      },
+      "output_schema": {}
+    }
+  ],
+  "findings": [
+    {
+      "rule_id": "R109",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
+      "severity": "low",
+      "target": "get_account_usage",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "schema": "input_schema",
+        "issue": "no_required_fields"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "R109",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
+      "severity": "low",
+      "target": "search_channels",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "schema": "input_schema",
+        "issue": "no_required_fields"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'search' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "search_channels",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "search",
+        "schema": "input_schema"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'access' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "search_channels",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "access",
+        "schema": "input_schema"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'date_from' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_channel_subscribers",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "date_from",
+        "schema": "input_schema"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'date_to' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_channel_subscribers",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "date_to",
+        "schema": "input_schema"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'date_from' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_channel_views",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "date_from",
+        "schema": "input_schema"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'date_to' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_channel_views",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "date_to",
+        "schema": "input_schema"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'date_from' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_channel_likes",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "date_from",
+        "schema": "input_schema"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'date_to' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_channel_likes",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "date_to",
+        "schema": "input_schema"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'date_from' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_channel_posts",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "date_from",
+        "schema": "input_schema"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'date_to' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_channel_posts",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "date_to",
+        "schema": "input_schema"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "R109",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
+      "severity": "low",
+      "target": "search_posts",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "schema": "input_schema",
+        "issue": "no_required_fields"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'search' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "search_posts",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "search",
+        "schema": "input_schema"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'channel_id' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "search_posts",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "channel_id",
+        "schema": "input_schema"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'post_type' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "search_posts",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "post_type",
+        "schema": "input_schema"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'date_from' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "search_posts",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "date_from",
+        "schema": "input_schema"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'date_to' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "search_posts",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "date_to",
+        "schema": "input_schema"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'date_from' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_post_views",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "date_from",
+        "schema": "input_schema"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'date_to' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_post_views",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "date_to",
+        "schema": "input_schema"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'date_from' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_post_likes",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "date_from",
+        "schema": "input_schema"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'date_to' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_post_likes",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "date_to",
+        "schema": "input_schema"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "R109",
+      "title": "Schema poisoning indicator",
+      "description": "input_schema: no required fields; empty input acceptable",
+      "severity": "low",
+      "target": "get_subscriptions",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "schema": "input_schema",
+        "issue": "no_required_fields"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'subscription_type' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_subscriptions",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "subscription_type",
+        "schema": "input_schema"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'callback_url' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "update_subscription",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "callback_url",
+        "schema": "input_schema"
+      },
+      "confidence": 0.7
+    }
+  ],
+  "summary": {
+    "total_tools": 21,
+    "total_prompts": 0,
+    "total_resources": 0,
+    "total_resource_templates": 0,
+    "clean": 10,
+    "low": 25,
+    "medium": 0,
+    "high": 0,
+    "critical": 0
+  },
+  "name": "io.github.fbmdata/maxstat-mcp",
+  "display_name": "MaxStat MCP",
+  "target": "https://maxstat.ru/api/mcp",
+  "version": "1.2.3",
+  "scan_id": "adce48bf37ae",
+  "protocol_version": "2025-11-25",
+  "scanned_at": "2026-08-01T18:11:00.737096+00:00",
+  "last_attempted_at": "2026-08-01T18:11:00.737096+00:00",
+  "trending": false,
+  "scan_coverage": "live",
+  "live_scan": {
+    "ok": true,
+    "note": "Authenticated streamable-http scan. Endpoint requires an X-API-Token header, so the scan was run through an mcp-remote stdio bridge inside a disposable Docker container (--sandbox, cap-drop ALL, no-new-privileges, ephemeral tmpfs FS). Credential supplied at runtime only; never persisted to this repository.",
+    "method": "sandboxed mcp-remote bridge (docker, node:22-slim)",
+    "protocol_version": "2025-11-25",
+    "tools_enumerated": 21,
+    "prompts": 0,
+    "resources": 0,
+    "server_instructions": "empty (no server-level instruction block)",
+    "probing": "not performed — tool calls consume paid credits and create real webhook subscriptions"
+  },
+  "package_scan": {
+    "ok": true,
+    "note": "source-scan: 2 source file(s) analyzed, 0 findings. config-scan: 5 manifests (server.json, plugins/maxstat/.mcp.json, configs/claude-desktop.json, gemini-extension.json, .claude-plugin/marketplace.json), 0 findings. Integration/manifest-only repository — the server implementation is hosted and closed-source."
+  },
+  "source_scan": {
+    "ok": true,
+    "repo": "https://github.com/fbmdata/maxstat-mcp",
+    "files_scanned": 2,
+    "findings": 0,
+    "note": "Only local validation tooling (scripts/*.mjs) is present. No zero-width characters, prompt-injection markers, or committed credentials across README.md, SKILL.md and the config templates."
+  },
+  "config_scan": {
+    "ok": true,
+    "findings": 0,
+    "note": "server.json and all client manifests are well-formed; the API token is referenced via an environment placeholder, never inlined. The repo ships its own CI check (validate-integrations.mjs) that fails the build on token-like values committed to the tree."
+  },
+  "oauth": {
+    "detected": false,
+    "note": "Static API key via X-API-Token header (isSecret: true in the registry entry). No OAuth 2.1 / PKCE flow. Token is header-only — an unauthenticated GET is also rejected with 401 and the token is never accepted in the URL."
+  },
+  "server_metadata": {
+    "hosted_on": "Yandex Cloud (server: ycalb)",
+    "transport_type": "streamable-http",
+    "registry": "io.modelcontextprotocol.registry (active, latest 1.2.3)",
+    "http_to_https_redirect": "301",
+    "capabilities": {
+      "experimental": {},
+      "logging": null,
+      "prompts": null,
+      "resources": null,
+      "tools": {
+        "listChanged": false
+      },
+      "completions": null,
+      "tasks": null
+    },
+    "security_headers": {
+      "hsts": "absent",
+      "content_type_options": "absent",
+      "frame_options": "absent",
+      "referrer_policy": "absent",
+      "content_security_policy": "absent"
+    },
+    "notes": [
+      "21 tools enumerated; all descriptions are plain analytics documentation — no hidden instructions, no tool shadowing, no cross-server references.",
+      "package.json declares zero third-party runtime dependencies; no lockfile, so no OSV dependency scan applicable."
+    ]
+  },
+  "status": "scanned"
+}

@@ -976,6 +976,31 @@
   },
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.fbmdata/maxstat-mcp",
+    "version": "1.2.3",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 3.0,
+        "scoring_model": "mrs-v1",
+        "grade": "C",
+        "confidence": 1.0,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 25
+        },
+        "last_scanned": "2026-08-01",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "0cb6b19bce07dacb",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "io.github.agentdeskai/browser-tools-mcp",
     "version": "unknown",
     "_meta": {
@@ -1958,7 +1983,7 @@
         "risk_score": 9.3,
         "scoring_model": "mrs-v1",
         "grade": "F",
-        "confidence": 0.73,
+        "confidence": 0.72,
         "findings": 7,
         "by_severity": {
           "critical": 0,
@@ -3628,6 +3653,31 @@
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "genomic-agent-discovery",
     "version": "unknown",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.coinrule-com/coinrule-mcp",
+    "version": "1.0.0",
     "_meta": {
       "com.github.yatuk.mcpradar/security": {
         "risk_score": null,
