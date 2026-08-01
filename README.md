@@ -30,6 +30,10 @@
   <a href="docs/cli-reference.md">Documentation</a>
 </p>
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/yatuk/mcpradar/main/docs/Animation.gif" width="720" alt="MCPRadar scanning an MCP server and reporting findings">
+</p>
+
 ## Overview
 
 MCP servers expose instructions, tools, schemas, resources, and privileged integrations to
@@ -160,9 +164,14 @@ The complete example is available at
 ## Public leaderboard
 
 The [MCPRadar leaderboard](https://yatuk.github.io/mcpradar) publishes reproducible scan
-coverage, findings, MRS grades, and per-server artifacts. A daily workflow retries unresolved
-entries and refreshes ten popular, installable packages that are present in the official MCP
-Registry.
+coverage, findings, MRS grades, and per-server artifacts. It currently tracks 163 servers,
+109 of them scanned live. A daily workflow retries unresolved entries and refreshes ten
+popular, installable packages that are present in the official MCP Registry.
+
+Servers that require authentication are scanned by bridging the endpoint into a disposable
+`--sandbox` container, so credentials stay out of this repository and are never persisted to
+a result file. A server whose protocol surface cannot be reached is published as `incomplete`
+rather than graded: that records absence of evidence, not a clean result.
 
 To suggest another server, open an
 [MCP Server Scan Request](https://github.com/yatuk/mcpradar/issues/new?template=scan_request.yml).
