@@ -5,17 +5,43 @@ __pycache__/
 dist/
 build/
 .venv/
+venv/
+env/
 
 # IDE
 .idea/
 .vscode/
 *.swp
 
+# Node (vscode-mcpradar extension)
+node_modules/
+*.vsix
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Secrets — never commit a scan credential
+.env
+.env.*
+!.env.example
+
 # Project
 mcpradar.db
 snapshots/
 *.db-journal
 *.db-wal
+
+# Local scan output — ad-hoc scratch dirs from `scan -o` / `scan-source`.
+# Published results live in validation/results/ and are tracked.
+out/
+generated_code/
+biothings_output/
+
+# Agent tooling local state (.claude/agents/ and .codex/agents/ ARE tracked)
+.claude/settings.local.json
+.codex/settings.local.json
 
 # Coverage
 .coverage
