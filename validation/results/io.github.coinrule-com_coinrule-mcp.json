@@ -1,53 +1,25 @@
 {
-  "transport": "http",
+  "transport": "stdio",
   "tools": [],
   "findings": [],
   "summary": {
     "total_tools": 0
   },
   "name": "io.github.coinrule-com/coinrule-mcp",
-  "display_name": "Coinrule MCP",
   "target": "https://cloud.coinrule.com/mcp",
   "version": "1.0.0",
-  "scanned_at": "2026-07-23T19:31:28.877716+00:00",
-  "last_attempted_at": "2026-07-23T19:31:28.877716+00:00",
+  "scanned_at": "2026-08-02T08:13:20.795068+00:00",
+  "last_attempted_at": "2026-08-02T08:13:20.795068+00:00",
   "trending": false,
   "live_scan": {
     "ok": false,
-    "error": "HTTP 401 Unauthorized — server requires OAuth authentication. MCPRadar does not yet support scanning OAuth-protected MCP servers without credentials."
+    "error": "\u001b[31mCannot auto-pick a container image for launcher \u001b[0m\u001b[31m'mcp'\u001b[0m\u001b[31m. Pass --sandbox-image \u001b[0m \u001b[31mexplicitly.\u001b[0m"
   },
   "package_scan": {
-    "ok": true,
-    "note": "source-scan: 4 files analyzed (README.md, server.json, docs/, examples/), 0 findings. Config-scan: server.json well-formed, 0 findings. Repository is a manifest-only repo (no server source code)."
-  },
-  "source_scan": {
-    "ok": true,
-    "repo": "https://github.com/coinrule-com/coinrule-mcp-ai-trading",
-    "files_scanned": 4,
-    "findings": 0,
-    "note": "Manifest-only repository — no Python/JS source code to analyze. Static analysis not applicable."
-  },
-  "config_scan": {
-    "ok": true,
-    "findings": 0,
-    "note": "server.json is a well-formed MCP server manifest with standard schema."
-  },
-  "oauth": {
-    "detected": true,
-    "note": "Server returns 401 with MCP-specific headers. OAuth metadata discovery attempted."
-  },
-  "server_metadata": {
-    "hosted_on": "Cloudflare",
-    "transport_type": "streamable-http",
-    "security_headers": {
-      "hsts": "max-age=31536000; includeSubDomains; preload",
-      "xss_protection": "1; mode=block",
-      "content_type_options": "nosniff",
-      "frame_options": "SAMEORIGIN",
-      "referrer_policy": "same-origin"
-    }
+    "ok": false,
+    "note": "no package ref"
   },
   "status": "incomplete",
   "incomplete": true,
-  "incomplete_reason": "Server requires OAuth authentication. Live protocol scan blocked (401 Unauthorized). Source code is closed-source (GitHub repo contains only server.json manifest, docs, and examples). Full security audit requires authenticated access."
+  "incomplete_reason": "\u001b[31mCannot auto-pick a container image for launcher \u001b[0m\u001b[31m'mcp'\u001b[0m\u001b[31m. Pass --sandbox-image \u001b[0m \u001b[31mexplicitly.\u001b[0m; no package ref"
 }
