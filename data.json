@@ -12554,6 +12554,1159 @@
     }
   },
   {
+    "server": "io.github.fbmdata/maxstat-mcp",
+    "display_name": "io.github.fbmdata / maxstat-mcp",
+    "version": "1.2.3",
+    "scoring_model": "mrs-v1",
+    "tools": 21,
+    "scanner_version": "1.1.0-rc1",
+    "scan_coverage": "live",
+    "trending": false,
+    "popularity": null,
+    "category": "DevOps",
+    "vuln_types": [
+      "Input Bounds",
+      "Schema Poisoning"
+    ],
+    "history": [],
+    "api_free": false,
+    "risk_score": 3.0,
+    "grade": "C",
+    "aars": 6.0,
+    "capability": "db_write",
+    "confidence": 1.0,
+    "vulnerable_deps": 0,
+    "tools_detail": [
+      {
+        "name": "get_account_usage",
+        "description": "История списаний кредитов · бесплатно\n\n> 💳 **Стоимость:** бесплатно\n\nВозвращает пагинированную историю списаний кредитов по вашему аккаунту, отсортированную от новых к старым. Поле `request_id` каждой записи совпадает со значением заголовка `X-Request-Id` соответствующего запроса.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "description": "Максимальное количество записей в ответе.",
+              "examples": [
+                20
+              ],
+              "default": 20,
+              "title": "limit"
+            },
+            "offset": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Количество записей, которое нужно пропустить от начала списка.",
+              "examples": [
+                0
+              ],
+              "default": 0,
+              "title": "offset"
+            }
+          },
+          "title": "get_account_usageArguments"
+        },
+        "output_schema": {},
+        "capabilities": [
+          "net_egress"
+        ]
+      },
+      {
+        "name": "get_account_limits",
+        "description": "Лимиты аккаунта · бесплатно\n\n> 💳 **Стоимость:** бесплатно\n\nВозвращает лимиты кредитов текущего биллингового периода: сколько кредитов включено в тарифный план, сколько куплено дополнительно, сколько потрачено и сколько осталось.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n```json\n{\n  \"plan_credits\": 1,\n  \"addon_credits\": 1,",
+        "input_schema": {
+          "type": "object",
+          "properties": {},
+          "title": "get_account_limitsArguments"
+        },
+        "output_schema": {},
+        "capabilities": [
+          "pure_compute"
+        ]
+      },
+      {
+        "name": "get_account_subscription",
+        "description": "Текущая подписка · бесплатно\n\n> 💳 **Стоимость:** бесплатно\n\nВозвращает информацию о текущей подписке: тарифный план, статус, даты начала и окончания текущего периода, а также состояние кредитов.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n```json\n{\n  \"plan_id\": \"Plan Id\",\n  \"status\": \"Status\",\n  \"starts_at\": \"2023-01-01T00:",
+        "input_schema": {
+          "type": "object",
+          "properties": {},
+          "title": "get_account_subscriptionArguments"
+        },
+        "output_schema": {},
+        "capabilities": [
+          "pure_compute"
+        ]
+      },
+      {
+        "name": "add_channel",
+        "description": "Добавить канал Max для отслеживания · бесплатно\n\n> 💳 **Стоимость:** бесплатно\n\nДобавляет канал в очередь на отслеживание по его публичной или пригласительной ссылке MAX. Если канал уже находится в системе, в ответе возвращается сообщение без повторного добавления.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n```json\n{\n  \"ok\"",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "link": {
+              "type": "string",
+              "pattern": "^https://max\\.ru/(?:[A-Za-z0-9_.-]+|join/[A-Za-z0-9_-]+)$",
+              "title": "link",
+              "description": "Публичная ссылка на канал или пригласительная ссылка MAX.",
+              "examples": [
+                "https://max.ru/max_news"
+              ]
+            }
+          },
+          "title": "add_channelArguments",
+          "required": [
+            "link"
+          ]
+        },
+        "output_schema": {},
+        "capabilities": [
+          "pure_compute"
+        ]
+      },
+      {
+        "name": "search_channels",
+        "description": "Поиск по каналам · 3 кредита\n\n> 💳 **Стоимость:** 3 кредита\n\nВозвращает пагинированный список каналов из публичного индекса. Поддерживается полнотекстовый поиск по названию, описанию и ссылке канала, фильтрация по категории, диапазонам подписчиков и количества публикаций, а также сортировка по релевантности, дате, числу подписчиков или публикаций.\n\n### Responses:\n\n**200**: Successful Response (Succ",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "search": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Полнотекстовый поисковый запрос по названию, описанию или ссылке на канал.",
+              "examples": [
+                "новости технологий"
+              ],
+              "title": "search",
+              "type": "string"
+            },
+            "limit": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "description": "Количество каналов в ответе. Допустимый диапазон: от 1 до 100.",
+              "examples": [
+                10
+              ],
+              "default": 10,
+              "title": "limit"
+            },
+            "offset": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Смещение относительно начала выборки для постраничной навигации.",
+              "examples": [
+                0
+              ],
+              "default": 0,
+              "title": "offset"
+            },
+            "category_id": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Фильтр по идентификатору категории канала.",
+              "examples": [
+                12
+              ],
+              "title": "category_id",
+              "type": "integer"
+            },
+            "access": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "public",
+                    "private"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Фильтр по типу канала: `public` — открытый канал, `private` — канал по приглашению. Если не задано, в выдачу попадают каналы обоих типов.",
+              "examples": [
+                "public"
+              ],
+              "title": "access",
+              "type": "string"
+            },
+            "subscribers_min": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Минимальное количество подписчиков канала.",
+              "examples": [
+                10000
+              ],
+              "default": 0,
+              "title": "subscribers_min"
+            },
+            "subscribers_max": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Максимальное количество подписчиков канала. Значение `0` отключает верхнюю границу.",
+              "examples": [
+                500000
+              ],
+              "default": 0,
+              "title": "subscribers_max"
+            },
+            "posts_min": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Минимальное количество публикаций в канале.",
+              "examples": [
+                100
+              ],
+              "default": 0,
+              "title": "posts_min"
+            },
+            "posts_max": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Максимальное количество публикаций в канале. Значение `0` отключает верхнюю границу.",
+              "examples": [
+                10000
+              ],
+              "default": 0,
+              "title": "posts_max"
+            },
+            "order_by": {
+              "enum": [
+                "subscribers",
+                "posts",
+                "date",
+                "score"
+              ],
+              "type": "string",
+              "description": "Поле сортировки: `subscribers` для количества подписчиков, `posts` для количества публикаций, `date` для даты обновления канала, `score` для релевантности.",
+              "examples": [
+                "subscribers"
+              ],
+              "default": "subscribers",
+              "title": "order_by"
+            },
+            "order": {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Направление сортировки.",
+              "examples": [
+                "desc"
+              ],
+              "default": "desc",
+              "title": "order"
+            }
+          },
+          "title": "search_channelsArguments"
+        },
+        "output_schema": {},
+        "capabilities": [
+          "db_write",
+          "net_egress"
+        ]
+      },
+      {
+        "name": "get_categories",
+        "description": "Список категорий каналов · бесплатно\n\n> 💳 **Стоимость:** бесплатно\n\nВозвращает список доступных категорий каналов и количество каналов в каждой категории.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n```json\n{\n  \"categories\": [\n    {\n      \"id\": 1,\n      \"title\": \"Title\",\n      \"channels_count\": 1\n    }\n  ]\n}\n```",
+        "input_schema": {
+          "type": "object",
+          "properties": {},
+          "title": "get_categoriesArguments"
+        },
+        "output_schema": {},
+        "capabilities": [
+          "pure_compute"
+        ]
+      },
+      {
+        "name": "get_channel",
+        "description": "Получение данных о канале · 1 кредит\n\n> 💳 **Стоимость:** 1 кредит\n\nВозвращает полную информацию о канале по его идентификатору.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n```json\n{\n  \"id\": \"Id\",\n  \"name\": \"Name\",\n  \"description\": \"Description\",\n  \"avatar\": \"Avatar\",\n  \"url\": \"Url\",\n  \"access\": \"Access\",\n  \"subscribers\": 1,",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "channel_id": {
+              "type": "string",
+              "maxLength": 20,
+              "pattern": "^-?\\d+$",
+              "description": "Числовой идентификатор канала, передаётся строкой.",
+              "examples": [
+                "-918273645"
+              ],
+              "title": "channel_id"
+            }
+          },
+          "title": "get_channelArguments",
+          "required": [
+            "channel_id"
+          ]
+        },
+        "output_schema": {},
+        "capabilities": [
+          "db_write",
+          "net_egress"
+        ]
+      },
+      {
+        "name": "get_channel_subscribers",
+        "description": "Статистика подписчиков канала · 5 кредитов\n\n> 💳 **Стоимость:** 5 кредитов\n\nВозвращает минимальное и максимальное количество подписчиков, абсолютный и относительный прирост, а также дневную историю подписчиков за выбранный диапазон дат. Если `date_from` и `date_to` не переданы, используется последние 30 дней.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "channel_id": {
+              "type": "string",
+              "maxLength": 20,
+              "pattern": "^-?\\d+$",
+              "description": "Числовой идентификатор канала, передаётся строкой.",
+              "examples": [
+                "-918273645"
+              ],
+              "title": "channel_id"
+            },
+            "date_from": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Нижняя граница диапазона дат включительно в формате `YYYY-MM-DD`.",
+              "examples": [
+                "2026-03-01"
+              ],
+              "title": "date_from",
+              "type": "string"
+            },
+            "date_to": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Верхняя граница диапазона дат включительно в формате `YYYY-MM-DD`.",
+              "examples": [
+                "2026-03-31"
+              ],
+              "title": "date_to",
+              "type": "string"
+            }
+          },
+          "title": "get_channel_subscribersArguments",
+          "required": [
+            "channel_id"
+          ]
+        },
+        "output_schema": {},
+        "capabilities": [
+          "pure_compute"
+        ]
+      },
+      {
+        "name": "get_channel_views",
+        "description": "Статистика просмотров публикаций канала · 5 кредитов\n\n> 💳 **Стоимость:** 5 кредитов\n\nВозвращает суммарное количество просмотров публикаций канала, среднее и максимальное значение на один пост, а также дневную историю просмотров за выбранный диапазон дат. Если `date_from` и `date_to` не переданы, используется последние 30 дней.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nConten",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "channel_id": {
+              "type": "string",
+              "maxLength": 20,
+              "pattern": "^-?\\d+$",
+              "description": "Числовой идентификатор канала, передаётся строкой.",
+              "examples": [
+                "-918273645"
+              ],
+              "title": "channel_id"
+            },
+            "date_from": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Нижняя граница диапазона дат включительно в формате `YYYY-MM-DD`.",
+              "examples": [
+                "2026-03-01"
+              ],
+              "title": "date_from",
+              "type": "string"
+            },
+            "date_to": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Верхняя граница диапазона дат включительно в формате `YYYY-MM-DD`.",
+              "examples": [
+                "2026-03-31"
+              ],
+              "title": "date_to",
+              "type": "string"
+            }
+          },
+          "title": "get_channel_viewsArguments",
+          "required": [
+            "channel_id"
+          ]
+        },
+        "output_schema": {},
+        "capabilities": [
+          "pure_compute"
+        ]
+      },
+      {
+        "name": "get_channel_likes",
+        "description": "Статистика лайков публикаций канала · 5 кредитов\n\n> 💳 **Стоимость:** 5 кредитов\n\nВозвращает суммарное количество лайков публикаций канала, среднее и максимальное значение на один пост, а также дневную историю лайков за выбранный диапазон дат. Если `date_from` и `date_to` не переданы, используется последние 30 дней.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: appl",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "channel_id": {
+              "type": "string",
+              "maxLength": 20,
+              "pattern": "^-?\\d+$",
+              "description": "Числовой идентификатор канала, передаётся строкой.",
+              "examples": [
+                "-918273645"
+              ],
+              "title": "channel_id"
+            },
+            "date_from": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Нижняя граница диапазона дат включительно в формате `YYYY-MM-DD`.",
+              "examples": [
+                "2026-03-01"
+              ],
+              "title": "date_from",
+              "type": "string"
+            },
+            "date_to": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Верхняя граница диапазона дат включительно в формате `YYYY-MM-DD`.",
+              "examples": [
+                "2026-03-31"
+              ],
+              "title": "date_to",
+              "type": "string"
+            }
+          },
+          "title": "get_channel_likesArguments",
+          "required": [
+            "channel_id"
+          ]
+        },
+        "output_schema": {},
+        "capabilities": [
+          "pure_compute"
+        ]
+      },
+      {
+        "name": "get_channel_posts",
+        "description": "Статистика публикаций канала · 5 кредитов\n\n> 💳 **Стоимость:** 5 кредитов\n\nВозвращает общее количество публикаций канала, распределение по типам постов и дневную историю публикаций за выбранный диапазон дат. Если `date_from` и `date_to` не переданы, используется последние 30 дней.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "channel_id": {
+              "type": "string",
+              "maxLength": 20,
+              "pattern": "^-?\\d+$",
+              "description": "Числовой идентификатор канала, передаётся строкой.",
+              "examples": [
+                "-918273645"
+              ],
+              "title": "channel_id"
+            },
+            "date_from": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Нижняя граница диапазона дат включительно в формате `YYYY-MM-DD`.",
+              "examples": [
+                "2026-03-01"
+              ],
+              "title": "date_from",
+              "type": "string"
+            },
+            "date_to": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Верхняя граница диапазона дат включительно в формате `YYYY-MM-DD`.",
+              "examples": [
+                "2026-03-31"
+              ],
+              "title": "date_to",
+              "type": "string"
+            }
+          },
+          "title": "get_channel_postsArguments",
+          "required": [
+            "channel_id"
+          ]
+        },
+        "output_schema": {},
+        "capabilities": [
+          "pure_compute"
+        ]
+      },
+      {
+        "name": "search_posts",
+        "description": "Поиск публикаций · 3 кредита\n\n> 💳 **Стоимость:** 3 кредита\n\nВозвращает пагинированный список публикаций из публичного индекса. Поддерживается полнотекстовый поиск по полю `text`, фильтрация по каналу, типу публикации и диапазону дат, а также сортировка по релевантности, дате, просмотрам или лайкам.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**E",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "search": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Полнотекстовый поисковый запрос по тексту публикации.",
+              "examples": [
+                "запуск продукта"
+              ],
+              "title": "search",
+              "type": "string"
+            },
+            "limit": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "description": "Количество публикаций в ответе. Допустимый диапазон: от 1 до 100.",
+              "examples": [
+                10
+              ],
+              "default": 10,
+              "title": "limit"
+            },
+            "offset": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Смещение относительно начала выборки для постраничной навигации.",
+              "examples": [
+                0
+              ],
+              "default": 0,
+              "title": "offset"
+            },
+            "channel_id": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 20,
+                  "pattern": "^-?\\d+$"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Фильтр по числовому идентификатору канала, передаётся строкой.",
+              "examples": [
+                "-91827364546372"
+              ],
+              "title": "channel_id",
+              "type": "string"
+            },
+            "post_type": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "text",
+                    "file",
+                    "photo",
+                    "video",
+                    "audio",
+                    "share",
+                    "sticker",
+                    "contact",
+                    "location",
+                    "inline_keyboard"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Фильтр по типу публикации.",
+              "examples": [
+                "video"
+              ],
+              "title": "post_type",
+              "type": "string"
+            },
+            "date_from": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Нижняя граница даты публикации включительно в формате `YYYY-MM-DD`.",
+              "examples": [
+                "2026-03-01"
+              ],
+              "title": "date_from",
+              "type": "string"
+            },
+            "date_to": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Верхняя граница даты публикации включительно в формате `YYYY-MM-DD`.",
+              "examples": [
+                "2026-03-31"
+              ],
+              "title": "date_to",
+              "type": "string"
+            },
+            "order_by": {
+              "enum": [
+                "likes",
+                "views",
+                "date",
+                "score"
+              ],
+              "type": "string",
+              "description": "Поле сортировки: `score` для релевантности, `date` для даты публикации, `views` для просмотров, `likes` для лайков.",
+              "examples": [
+                "score"
+              ],
+              "default": "score",
+              "title": "order_by"
+            },
+            "order": {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Направление сортировки.",
+              "examples": [
+                "desc"
+              ],
+              "default": "desc",
+              "title": "order"
+            }
+          },
+          "title": "search_postsArguments"
+        },
+        "output_schema": {},
+        "capabilities": [
+          "db_write",
+          "net_egress"
+        ]
+      },
+      {
+        "name": "get_post",
+        "description": "Получение данных о публикации · 1 кредит\n\n> 💳 **Стоимость:** 1 кредит\n\nВозвращает полную информацию о публикации по её идентификатору. Опционально можно включить список найденных репостов этой публикации.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n```json\n{\n  \"id\": \"Id\",\n  \"channel_id\": \"Channel Id\",\n  \"type\": \"Type\",\n  \"u",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "post_id": {
+              "type": "string",
+              "maxLength": 20,
+              "pattern": "^-?\\d+$",
+              "description": "Числовой идентификатор публикации, передаётся строкой.",
+              "examples": [
+                "192837465192837465"
+              ],
+              "title": "post_id"
+            },
+            "include_forwards": {
+              "type": "boolean",
+              "description": "Если `true`, в ответ будет добавлен список репостов публикации.",
+              "examples": [
+                false
+              ],
+              "default": false,
+              "title": "include_forwards"
+            }
+          },
+          "title": "get_postArguments",
+          "required": [
+            "post_id"
+          ]
+        },
+        "output_schema": {},
+        "capabilities": [
+          "db_write",
+          "net_egress"
+        ]
+      },
+      {
+        "name": "get_post_views",
+        "description": "Статистика просмотров публикации · 5 кредитов\n\n> 💳 **Стоимость:** 5 кредитов\n\nВозвращает текущее суммарное количество просмотров публикации и дневную историю просмотров за выбранный диапазон дат. Если `date_from` и `date_to` не переданы, возвращаются первые 15 дней истории с момента публикации.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Examp",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "post_id": {
+              "type": "string",
+              "maxLength": 20,
+              "pattern": "^-?\\d+$",
+              "description": "Числовой идентификатор публикации, передаётся строкой.",
+              "examples": [
+                "192837465192837465"
+              ],
+              "title": "post_id"
+            },
+            "date_from": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Нижняя граница диапазона дат включительно в формате `YYYY-MM-DD`.",
+              "examples": [
+                "2026-03-20"
+              ],
+              "title": "date_from",
+              "type": "string"
+            },
+            "date_to": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Верхняя граница диапазона дат включительно в формате `YYYY-MM-DD`.",
+              "examples": [
+                "2026-04-03"
+              ],
+              "title": "date_to",
+              "type": "string"
+            }
+          },
+          "title": "get_post_viewsArguments",
+          "required": [
+            "post_id"
+          ]
+        },
+        "output_schema": {},
+        "capabilities": [
+          "pure_compute"
+        ]
+      },
+      {
+        "name": "get_post_likes",
+        "description": "Статистика лайков публикации · 5 кредитов\n\n> 💳 **Стоимость:** 5 кредитов\n\nВозвращает текущее суммарное количество лайков, разбивку по типам реакций и дневную историю лайков за выбранный диапазон дат. Если `date_from` и `date_to` не переданы, возвращаются первые 15 дней истории с момента публикации.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**E",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "post_id": {
+              "type": "string",
+              "maxLength": 20,
+              "pattern": "^-?\\d+$",
+              "description": "Числовой идентификатор публикации, передаётся строкой.",
+              "examples": [
+                "192837465192837465"
+              ],
+              "title": "post_id"
+            },
+            "date_from": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Нижняя граница диапазона дат включительно в формате `YYYY-MM-DD`.",
+              "examples": [
+                "2026-03-20"
+              ],
+              "title": "date_from",
+              "type": "string"
+            },
+            "date_to": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Верхняя граница диапазона дат включительно в формате `YYYY-MM-DD`.",
+              "examples": [
+                "2026-04-03"
+              ],
+              "title": "date_to",
+              "type": "string"
+            }
+          },
+          "title": "get_post_likesArguments",
+          "required": [
+            "post_id"
+          ]
+        },
+        "output_schema": {},
+        "capabilities": [
+          "pure_compute"
+        ]
+      },
+      {
+        "name": "get_subscriptions",
+        "description": "Получение списка подписок · бесплатно\n\n> 💳 **Стоимость:** бесплатно\n\nВозвращает список webhook-подписок, созданных с вашим API-токеном. Подписки можно отфильтровать по признаку активности и типу.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n```json\n{\n  \"items\": [\n    {\n      \"id\": \"Id\",\n      \"type\": \"Type\",\n      \"active\": ",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "active": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Фильтр по статусу подписки. Если параметр не передан, возвращаются все подписки.",
+              "examples": [
+                true
+              ],
+              "title": "active",
+              "type": "boolean"
+            },
+            "subscription_type": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "channel",
+                    "keyword"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Фильтр по типу подписки: `channel` или `keyword`. Если не передан, возвращаются все подписки.",
+              "examples": [
+                "channel"
+              ],
+              "title": "subscription_type",
+              "type": "string"
+            }
+          },
+          "title": "get_subscriptionsArguments"
+        },
+        "output_schema": {},
+        "capabilities": [
+          "db_write",
+          "net_egress"
+        ]
+      },
+      {
+        "name": "create_channel_subscription",
+        "description": "Подписка на канал · бесплатно\n\n> 💳 **Стоимость:** бесплатно (создание подписки). Каждая доставка уведомления по этой подписке тарифицируется в **2 кредита**.\n\nСоздает подписку на новые публикации указанного канала. Канал можно передать числовым идентификатором, публичной ссылкой `https://max.ru/...` или коротким именем. Подписка уникальна по каналу: если подписка на этот канал уже существует, возв",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "callback_url": {
+              "type": "string",
+              "minLength": 1,
+              "format": "uri",
+              "title": "callback_url",
+              "description": "Публично доступный HTTPS URL, на который MaxStat будет отправлять уведомления.",
+              "examples": [
+                "https://example.com/maxstat/webhooks"
+              ]
+            },
+            "channel": {
+              "type": "string",
+              "minLength": 1,
+              "title": "channel",
+              "description": "Канал для отслеживания: числовой идентификатор, публичная ссылка или короткое имя.",
+              "examples": [
+                "https://max.ru/max_news"
+              ]
+            }
+          },
+          "title": "create_channel_subscriptionArguments",
+          "required": [
+            "callback_url",
+            "channel"
+          ]
+        },
+        "output_schema": {},
+        "capabilities": [
+          "db_write",
+          "net_egress"
+        ]
+      },
+      {
+        "name": "create_keyword_subscription",
+        "description": "Подписка на поисковый запрос · бесплатно\n\n> 💳 **Стоимость:** бесплатно (создание подписки). Каждая доставка уведомления по этой подписке тарифицируется в **3 кредита**.\n\nСоздает подписку на новые публикации, текст которых соответствует поисковому запросу. Опционально можно ограничить поиск категорией канала. Подписка уникальна по паре `query + category_id`: если такая подписка уже существует, возв",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "callback_url": {
+              "type": "string",
+              "minLength": 1,
+              "format": "uri",
+              "title": "callback_url",
+              "description": "Публично доступный HTTPS URL, на который MaxStat будет отправлять уведомления.",
+              "examples": [
+                "https://example.com/maxstat/webhooks"
+              ]
+            },
+            "query": {
+              "type": "string",
+              "maxLength": 800,
+              "minLength": 1,
+              "title": "query",
+              "description": "Поисковый запрос по тексту публикаций. Лишние пробелы по краям удаляются.",
+              "examples": [
+                "запуск продукта"
+              ]
+            },
+            "category_id": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "category_id",
+              "description": "Идентификатор категории канала для дополнительной фильтрации найденных публикаций.",
+              "examples": [
+                12
+              ],
+              "type": "integer"
+            }
+          },
+          "title": "create_keyword_subscriptionArguments",
+          "required": [
+            "callback_url",
+            "query"
+          ]
+        },
+        "output_schema": {},
+        "capabilities": [
+          "db_write",
+          "net_egress"
+        ]
+      },
+      {
+        "name": "get_subscription",
+        "description": "Получение информации о подписке · бесплатно\n\n> 💳 **Стоимость:** бесплатно\n\nВозвращает параметры webhook-подписки, статус доставки и сведения о последней ошибке.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n```json\n{\n  \"id\": \"Id\",\n  \"type\": \"Type\",\n  \"active\": true,\n  \"callback_url\": \"Callback Url\",\n  \"consecutive_failures\": ",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "subscription_id": {
+              "type": "string",
+              "format": "uuid",
+              "description": "Идентификатор подписки на уведомления.",
+              "examples": [
+                "9f3f0c8a-7d52-4f42-a8b1-5a9b7a7f6a10"
+              ],
+              "title": "subscription_id"
+            }
+          },
+          "title": "get_subscriptionArguments",
+          "required": [
+            "subscription_id"
+          ]
+        },
+        "output_schema": {},
+        "capabilities": [
+          "db_write",
+          "net_egress"
+        ]
+      },
+      {
+        "name": "update_subscription",
+        "description": "Обновление подписки · бесплатно\n\n> 💳 **Стоимость:** бесплатно\n\nОбновляет URL получателя уведомлений и/или статус активности подписки. При повторном включении подписки сбрасываются счётчики ошибок и доставка возобновляется на следующем тике.\n\n### Responses:\n\n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n```json\n{\n  \"id\": \"Id\",\n  \"type\": \"Type\"",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "subscription_id": {
+              "type": "string",
+              "format": "uuid",
+              "description": "Идентификатор подписки на уведомления.",
+              "examples": [
+                "9f3f0c8a-7d52-4f42-a8b1-5a9b7a7f6a10"
+              ],
+              "title": "subscription_id"
+            },
+            "callback_url": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "format": "uri"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "callback_url",
+              "description": "Новый публично доступный HTTPS URL получателя уведомлений.",
+              "examples": [
+                "https://example.com/maxstat/webhooks-v2"
+              ],
+              "type": "string"
+            },
+            "active": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "active",
+              "description": "Статус подписки. Неактивные подписки не обрабатываются. При установке `true` сбрасываются счётчики ошибок.",
+              "examples": [
+                true
+              ],
+              "type": "boolean"
+            }
+          },
+          "title": "update_subscriptionArguments",
+          "required": [
+            "subscription_id"
+          ]
+        },
+        "output_schema": {},
+        "capabilities": [
+          "db_write",
+          "net_egress"
+        ]
+      },
+      {
+        "name": "delete_subscription",
+        "description": "Отмена подписки · бесплатно\n\n> 💳 **Стоимость:** бесплатно\n\nУдаляет webhook-подписку. После удаления уведомления по ней больше не отправляются.\n\n### Responses:\n\n**204**: Successful Response (Success Response)",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "subscription_id": {
+              "type": "string",
+              "format": "uuid",
+              "description": "Идентификатор подписки на уведомления.",
+              "examples": [
+                "9f3f0c8a-7d52-4f42-a8b1-5a9b7a7f6a10"
+              ],
+              "title": "subscription_id"
+            }
+          },
+          "title": "delete_subscriptionArguments",
+          "required": [
+            "subscription_id"
+          ]
+        },
+        "output_schema": {},
+        "capabilities": [
+          "fs_write",
+          "net_egress"
+        ]
+      }
+    ],
+    "findings": 0,
+    "low_findings": 25,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 25
+    },
+    "findings_detail": [],
+    "tool_hash": "0cb6b19bce07dacb",
+    "last_scanned": "2026-08-01",
+    "status": "scanned",
+    "breakdown": {
+      "base": 0.0,
+      "aars": 6.0,
+      "capability_term": 3.0,
+      "thm": 1.0,
+      "dep_risk": 0.0,
+      "weighted_findings": 0,
+      "driver": "capability"
+    }
+  },
+  {
     "server": "@agentdeskai/browser-tools-mcp",
     "display_name": "agentdeskai / browser-tools-mcp",
     "version": "",
@@ -24168,8 +25321,8 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.5711,
-      "npm_downloads": 12754,
+      "score": 6.3857,
+      "npm_downloads": 8322,
       "pypi_downloads": null,
       "github_stars": 291
     },
@@ -24233,7 +25386,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-01",
+    "last_scanned": "2026-08-02",
     "status": "scanned",
     "breakdown": {
       "base": 4.0,
@@ -42040,18 +43193,18 @@
   {
     "server": "io.github.containers/kubernetes-mcp-server",
     "display_name": "io.github.containers / kubernetes-mcp-server",
-    "version": "0.0.65",
+    "version": "0.0.66",
     "scoring_model": "mrs-v1",
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
     "scan_coverage": "package-only",
-    "trending": false,
+    "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.9342,
+      "score": 6.988,
       "npm_downloads": null,
-      "pypi_downloads": 4595,
-      "github_stars": 1869
+      "pypi_downloads": 5192,
+      "github_stars": 1872
     },
     "category": "DevOps",
     "vuln_types": [
@@ -42084,7 +43237,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-07-31",
+    "last_scanned": "2026-08-02",
     "status": "scanned",
     "breakdown": {
       "base": 5.0,
@@ -43232,10 +44385,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 8.2014,
+      "score": 8.3195,
       "npm_downloads": null,
-      "pypi_downloads": 4309,
-      "github_stars": 36889
+      "pypi_downloads": 5635,
+      "github_stars": 37027
     },
     "category": "AI/ML",
     "vuln_types": [
@@ -43275,7 +44428,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-01",
+    "last_scanned": "2026-08-02",
     "status": "scanned",
     "breakdown": {
       "base": 6.67,
@@ -45543,10 +46696,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.763,
-      "npm_downloads": 1433,
+      "score": 6.768,
+      "npm_downloads": 1441,
       "pypi_downloads": null,
-      "github_stars": 4040
+      "github_stars": 4064
     },
     "category": "DevOps",
     "vuln_types": [
@@ -46259,7 +47412,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-01",
+    "last_scanned": "2026-08-02",
     "status": "scanned",
     "breakdown": {
       "base": 197.33,
@@ -46705,10 +47858,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 7.3031,
-      "npm_downloads": 42842,
+      "score": 7.3823,
+      "npm_downloads": 51096,
       "pypi_downloads": null,
-      "github_stars": 468
+      "github_stars": 471
     },
     "category": "DevOps",
     "vuln_types": [
@@ -46724,12 +47877,12 @@
     "confidence": 0.79,
     "vulnerable_deps": 2,
     "tools_detail": [],
-    "findings": 192,
+    "findings": 194,
     "low_findings": 0,
     "by_severity": {
-      "critical": 95,
+      "critical": 96,
       "high": 0,
-      "medium": 97,
+      "medium": 98,
       "low": 0
     },
     "findings_detail": [
@@ -47075,6 +48228,20 @@
         "title": "Dynamic shell command execution",
         "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
         "confidence": 0.9
+      },
+      {
+        "rule_id": "S008",
+        "severity": "critical",
+        "title": "Trojan Source Unicode control character",
+        "description": "Trojan Source Unicode control character detected in JavaScript/TypeScript source",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Dynamic outbound URL",
+        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+        "confidence": 0.7
       },
       {
         "rule_id": "S002",
@@ -48093,15 +49260,15 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-01",
+    "last_scanned": "2026-08-02",
     "status": "scanned",
     "breakdown": {
-      "base": 446.0,
+      "base": 450.67,
       "aars": 0.0,
-      "capability_term": 223.0,
+      "capability_term": 225.33,
       "thm": 1.0,
       "dep_risk": 0.8,
-      "weighted_findings": 1338,
+      "weighted_findings": 1352,
       "driver": "findings"
     }
   },
@@ -48116,10 +49283,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 8.7232,
-      "npm_downloads": 139166,
+      "score": 8.7343,
+      "npm_downloads": 142196,
       "pypi_downloads": null,
-      "github_stars": 3798
+      "github_stars": 3813
     },
     "category": "DevOps",
     "vuln_types": [
@@ -48383,7 +49550,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-01",
+    "last_scanned": "2026-08-02",
     "status": "scanned",
     "breakdown": {
       "base": 95.33,
@@ -48624,7 +49791,7 @@
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
     "scan_coverage": "package-only",
-    "trending": true,
+    "trending": false,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
       "score": 6.0367,
@@ -49331,10 +50498,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.1167,
-      "npm_downloads": 2024,
+      "score": 6.0985,
+      "npm_downloads": 1938,
       "pypi_downloads": null,
-      "github_stars": 645
+      "github_stars": 646
     },
     "category": "DevOps",
     "vuln_types": [
@@ -49466,7 +50633,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-01",
+    "last_scanned": "2026-08-02",
     "status": "scanned",
     "breakdown": {
       "base": 42.67,
@@ -49850,8 +51017,8 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 7.4778,
-      "npm_downloads": 11165,
+      "score": 7.5151,
+      "npm_downloads": 12166,
       "pypi_downloads": null,
       "github_stars": 2690
     },
@@ -49999,7 +51166,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-01",
+    "last_scanned": "2026-08-02",
     "status": "scanned",
     "breakdown": {
       "base": 53.33,
@@ -50243,10 +51410,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 8.3235,
-      "npm_downloads": 113049,
+      "score": 8.3377,
+      "npm_downloads": 116610,
       "pypi_downloads": null,
-      "github_stars": 1862
+      "github_stars": 1865
     },
     "category": "DevOps",
     "vuln_types": [
@@ -51505,7 +52672,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-01",
+    "last_scanned": "2026-08-02",
     "status": "scanned",
     "breakdown": {
       "base": 249.33,
@@ -54309,6 +55476,35 @@
     "status": "incomplete"
   },
   {
+    "server": "io.github.coinrule-com/coinrule-mcp",
+    "display_name": "io.github.coinrule-com / coinrule-mcp",
+    "version": "1.0.0",
+    "scoring_model": "mrs-v1",
+    "tools": 0,
+    "scanner_version": "1.1.0-rc1",
+    "scan_coverage": "incomplete",
+    "trending": false,
+    "popularity": null,
+    "category": "DevOps",
+    "vuln_types": [],
+    "history": [],
+    "api_free": false,
+    "risk_score": null,
+    "grade": "-",
+    "confidence": null,
+    "findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [],
+    "tool_hash": "",
+    "last_scanned": "-",
+    "status": "incomplete"
+  },
+  {
     "server": "io.github.shinpr/mcp-local-rag",
     "display_name": "io.github.shinpr / mcp-local-rag",
     "version": "0.17.2",
@@ -54319,8 +55515,8 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.2093,
-      "npm_downloads": 4509,
+      "score": 6.196,
+      "npm_downloads": 4373,
       "pypi_downloads": null,
       "github_stars": 358
     },
