@@ -8,12 +8,12 @@
   "name": "liquid",
   "target": "uvx --from liquid-api[mcp] liquid-mcp",
   "version": "",
-  "scanned_at": "2026-07-26T08:17:46.453382+00:00",
-  "last_attempted_at": "2026-07-26T08:17:46.453382+00:00",
+  "scanned_at": "2026-08-03T09:34:15.195234+00:00",
+  "last_attempted_at": "2026-08-03T09:34:15.195234+00:00",
   "trending": false,
   "live_scan": {
     "ok": false,
-    "error": "scanner returned no JSON result"
+    "error": "[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[31m│\u001b[0m \u001b[2m309 \u001b[0m \u001b[31m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[31m╰──────────────────────────────────────────────────────────────────────╯\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[1;91mMcpError: \u001b[0mConnection closed \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m╰──────────────────────────────────────────────────────────────────────────╯\u001b[0m \u001b[35m│\u001b[0m \u001b[35m╰──────────────────────────────────────────────────────────────────────────────╯\u001b[0m"
   },
   "package_scan": {
     "ok": false,
@@ -21,5 +21,5 @@
   },
   "status": "incomplete",
   "incomplete": true,
-  "incomplete_reason": "scanner returned no JSON result; fetch failed: PyPI metadata fetch failed for 'liquid-api[mcp]': Client error '404 Not Found' for url 'https://pypi.org/p"
+  "incomplete_reason": "[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[31m│\u001b[0m \u001b[2m309 \u001b[0m \u001b[31m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[31m╰──────────────────────────────────────────────────────────────────────╯\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[1;91mMcpError: \u001b[0mConnection closed \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m╰──────────────────────────────────────────────────────────────────────────╯\u001b[0m \u001b[35m│\u001b[0m \u001b[35m╰──────────────────────────────────────────────────────────────────────────────╯\u001b[0m"
 }
