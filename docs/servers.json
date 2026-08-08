@@ -1366,7 +1366,7 @@
           "medium": 3,
           "low": 0
         },
-        "last_scanned": "2026-08-07",
+        "last_scanned": "2026-08-08",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -1791,7 +1791,7 @@
           "medium": 0,
           "low": 0
         },
-        "last_scanned": "2026-08-06",
+        "last_scanned": "2026-08-08",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -1916,7 +1916,7 @@
           "medium": 0,
           "low": 0
         },
-        "last_scanned": "2026-08-07",
+        "last_scanned": "2026-08-08",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2216,7 +2216,7 @@
           "medium": 63,
           "low": 0
         },
-        "last_scanned": "2026-08-07",
+        "last_scanned": "2026-08-08",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2259,14 +2259,39 @@
         "scoring_model": "mrs-v1",
         "grade": "F",
         "confidence": 0.8,
-        "findings": 229,
+        "findings": 231,
         "by_severity": {
-          "critical": 120,
+          "critical": 122,
           "high": 0,
           "medium": 109,
           "low": 0
         },
-        "last_scanned": "2026-08-07",
+        "last_scanned": "2026-08-08",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.callstack/agent-device",
+    "version": "0.20.6",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.84,
+        "findings": 35,
+        "by_severity": {
+          "critical": 26,
+          "high": 0,
+          "medium": 9,
+          "low": 0
+        },
+        "last_scanned": "2026-08-08",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2341,7 +2366,7 @@
           "medium": 37,
           "low": 0
         },
-        "last_scanned": "2026-08-07",
+        "last_scanned": "2026-08-08",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2366,7 +2391,7 @@
           "medium": 2,
           "low": 0
         },
-        "last_scanned": "2026-08-07",
+        "last_scanned": "2026-08-08",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2416,7 +2441,7 @@
           "medium": 0,
           "low": 0
         },
-        "last_scanned": "2026-08-07",
+        "last_scanned": "2026-08-08",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2466,7 +2491,7 @@
           "medium": 168,
           "low": 0
         },
-        "last_scanned": "2026-08-07",
+        "last_scanned": "2026-08-08",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
