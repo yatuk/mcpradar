@@ -1366,7 +1366,7 @@
           "medium": 3,
           "low": 0
         },
-        "last_scanned": "2026-08-10",
+        "last_scanned": "2026-08-11",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -1901,31 +1901,6 @@
   },
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-    "name": "io.github.DeusData/codebase-memory-mcp",
-    "version": "0.9.0",
-    "_meta": {
-      "com.github.yatuk.mcpradar/security": {
-        "risk_score": 6.7,
-        "scoring_model": "mrs-v1",
-        "grade": "D",
-        "confidence": 0.9,
-        "findings": 2,
-        "by_severity": {
-          "critical": 2,
-          "high": 0,
-          "medium": 0,
-          "low": 0
-        },
-        "last_scanned": "2026-08-09",
-        "scanner_version": "1.1.0-rc1",
-        "scan_coverage": "package-only",
-        "tool_hash": "",
-        "status": "scanned"
-      }
-    }
-  },
-  {
-    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "io.github.firecrawl/firecrawl-mcp-server",
     "version": "3.22.4",
     "_meta": {
@@ -2201,6 +2176,31 @@
   },
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.DeusData/codebase-memory-mcp",
+    "version": "0.10.0",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.9,
+        "findings": 3,
+        "by_severity": {
+          "critical": 3,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "2026-08-11",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "io.github.KnockOutEZ/wigolo",
     "version": "0.2.1",
     "_meta": {
@@ -2216,7 +2216,7 @@
           "medium": 63,
           "low": 0
         },
-        "last_scanned": "2026-08-10",
+        "last_scanned": "2026-08-11",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2259,14 +2259,14 @@
         "scoring_model": "mrs-v1",
         "grade": "F",
         "confidence": 0.8,
-        "findings": 243,
+        "findings": 244,
         "by_severity": {
-          "critical": 126,
+          "critical": 127,
           "high": 0,
           "medium": 117,
           "low": 0
         },
-        "last_scanned": "2026-08-10",
+        "last_scanned": "2026-08-11",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2277,21 +2277,21 @@
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "io.github.callstack/agent-device",
-    "version": "0.20.6",
+    "version": "0.20.7",
     "_meta": {
       "com.github.yatuk.mcpradar/security": {
         "risk_score": 10.0,
         "scoring_model": "mrs-v1",
         "grade": "F",
-        "confidence": 0.84,
-        "findings": 35,
+        "confidence": 0.85,
+        "findings": 37,
         "by_severity": {
-          "critical": 26,
+          "critical": 29,
           "high": 0,
-          "medium": 9,
+          "medium": 8,
           "low": 0
         },
-        "last_scanned": "2026-08-10",
+        "last_scanned": "2026-08-11",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2366,7 +2366,7 @@
           "medium": 37,
           "low": 0
         },
-        "last_scanned": "2026-08-10",
+        "last_scanned": "2026-08-11",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2391,7 +2391,7 @@
           "medium": 2,
           "low": 0
         },
-        "last_scanned": "2026-08-10",
+        "last_scanned": "2026-08-11",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2441,7 +2441,7 @@
           "medium": 0,
           "low": 0
         },
-        "last_scanned": "2026-08-10",
+        "last_scanned": "2026-08-11",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2491,7 +2491,7 @@
           "medium": 168,
           "low": 0
         },
-        "last_scanned": "2026-08-10",
+        "last_scanned": "2026-08-11",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",

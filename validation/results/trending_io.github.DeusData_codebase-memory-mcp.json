@@ -7,11 +7,11 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-cf_duo8o/package/bin.js:17",
+      "target": "/tmp/mcpradar-enrich-rf8opice/package/bin.js:23",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 17,
+        "line": 23,
         "language": "javascript"
       },
       "confidence": 0.9
@@ -21,11 +21,25 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-cf_duo8o/package/bin.js:29",
+      "target": "/tmp/mcpradar-enrich-rf8opice/package/bin.js:34",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 29,
+        "line": 34,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-rf8opice/package/bin.js:56",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 56,
         "language": "javascript"
       },
       "confidence": 0.9
@@ -35,17 +49,17 @@
     "total_tools": 0
   },
   "name": "io.github.DeusData/codebase-memory-mcp",
-  "target": "npx -y codebase-memory-mcp@0.9.0",
-  "version": "0.9.0",
-  "scanned_at": "2026-08-09T06:46:26.802768+00:00",
-  "last_attempted_at": "2026-08-09T06:46:26.802768+00:00",
-  "trending": false,
+  "target": "npx -y codebase-memory-mcp@0.10.0",
+  "version": "0.10.0",
+  "scanned_at": "2026-08-11T06:59:47.240346+00:00",
+  "last_attempted_at": "2026-08-11T06:59:47.240346+00:00",
+  "trending": true,
   "popularity": {
     "method": "registry-packages/npm-pypi-github",
-    "score": 7.8769,
+    "score": 7.967,
     "npm_downloads": null,
-    "pypi_downloads": 1969,
-    "github_stars": 38235
+    "pypi_downloads": 2408,
+    "github_stars": 38471
   },
   "live_scan": {
     "ok": false,
@@ -55,7 +69,7 @@
   "enriched_ref": "npm:codebase-memory-mcp",
   "package_scan": {
     "ok": true,
-    "note": "+2 findings from npm:codebase-memory-mcp"
+    "note": "+3 findings from npm:codebase-memory-mcp"
   },
   "status": "scanned",
   "scan_coverage": "package-only"
