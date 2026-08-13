@@ -7,7 +7,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-miyqas3c/package/bin/index.js:24",
+      "target": "/tmp/mcpradar-enrich-awiavqki/package/bin/index.js:24",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -23,15 +23,15 @@
   "name": "io.github.containers/kubernetes-mcp-server",
   "target": "npx -y kubernetes-mcp-server@0.0.66",
   "version": "0.0.66",
-  "scanned_at": "2026-08-12T07:18:14.222671+00:00",
-  "last_attempted_at": "2026-08-12T07:18:14.222671+00:00",
+  "scanned_at": "2026-08-13T07:25:40.515348+00:00",
+  "last_attempted_at": "2026-08-13T07:25:40.515348+00:00",
   "trending": true,
   "popularity": {
     "method": "registry-packages/npm-pypi-github",
-    "score": 6.9699,
+    "score": 6.9965,
     "npm_downloads": null,
-    "pypi_downloads": 4794,
-    "github_stars": 1945
+    "pypi_downloads": 5089,
+    "github_stars": 1948
   },
   "live_scan": {
     "ok": false,
