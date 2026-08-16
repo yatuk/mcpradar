@@ -34,7 +34,7 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/auth-retry.js:52",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/auth-retry.js:52",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -48,7 +48,7 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/auth-retry.js:73",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/auth-retry.js:73",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -62,7 +62,7 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/downloads/proxy.js:160",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/downloads/proxy.js:160",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -76,11 +76,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:1250",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:1187",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 1250,
+        "line": 1187,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -90,11 +90,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:1274",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:1211",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 1274,
+        "line": 1211,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -104,11 +104,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:1296",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:1233",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 1296,
+        "line": 1233,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -118,11 +118,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:1322",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:1259",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 1322,
+        "line": 1259,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -132,11 +132,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:1348",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:1289",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 1348,
+        "line": 1289,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -146,11 +146,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:1400",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:1341",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 1400,
+        "line": 1341,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -160,11 +160,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:1414",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:1355",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 1414,
+        "line": 1355,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -174,11 +174,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:1469",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:1410",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 1469,
+        "line": 1410,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -188,11 +188,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:1487",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:1428",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 1487,
+        "line": 1428,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -202,11 +202,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:1511",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:1452",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 1511,
+        "line": 1452,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -216,11 +216,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:1531",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:1472",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 1531,
+        "line": 1472,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -230,11 +230,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:1548",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:1489",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 1548,
+        "line": 1489,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -244,11 +244,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:2144",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:2085",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 2144,
+        "line": 2085,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -258,11 +258,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:2152",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:2093",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 2152,
+        "line": 2093,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -272,11 +272,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:2164",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:2105",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 2164,
+        "line": 2105,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -286,11 +286,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:2905",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:2846",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 2905,
+        "line": 2846,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -300,11 +300,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:2924",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:2865",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 2924,
+        "line": 2865,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -314,11 +314,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:2946",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:2887",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 2946,
+        "line": 2887,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -328,11 +328,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:2971",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:2912",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 2971,
+        "line": 2912,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -342,11 +342,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:2988",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:2929",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 2988,
+        "line": 2929,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -356,11 +356,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:3037",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:2978",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 3037,
+        "line": 2978,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -370,11 +370,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:3094",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:3035",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 3094,
+        "line": 3035,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -384,11 +384,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:3126",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:3067",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 3126,
+        "line": 3067,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -398,11 +398,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:3172",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:3113",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 3172,
+        "line": 3113,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -412,11 +412,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:3198",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:3139",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 3198,
+        "line": 3139,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -426,11 +426,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:3225",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:3166",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 3225,
+        "line": 3166,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -440,11 +440,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:3242",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:3183",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 3242,
+        "line": 3183,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -454,11 +454,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:3254",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:3195",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 3254,
+        "line": 3195,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -468,11 +468,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:3279",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:3220",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 3279,
+        "line": 3220,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -482,11 +482,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:3288",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:3229",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 3288,
+        "line": 3229,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -496,11 +496,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:3293",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:3234",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 3293,
+        "line": 3234,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -510,11 +510,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:3302",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:3243",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 3302,
+        "line": 3243,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -524,11 +524,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:3325",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:3266",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 3325,
+        "line": 3266,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -538,11 +538,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:3342",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:3283",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 3342,
+        "line": 3283,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -552,11 +552,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:3416",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:3357",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 3416,
+        "line": 3357,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -566,11 +566,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:3441",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:3382",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 3441,
+        "line": 3382,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -580,11 +580,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:3482",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:3423",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 3482,
+        "line": 3423,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -594,11 +594,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:3539",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:3480",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 3539,
+        "line": 3480,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -608,11 +608,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:3596",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:3537",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 3596,
+        "line": 3537,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -622,11 +622,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:3615",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:3556",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 3615,
+        "line": 3556,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -636,11 +636,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:3643",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:3584",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 3643,
+        "line": 3584,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -650,11 +650,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:3652",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:3593",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 3652,
+        "line": 3593,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -664,11 +664,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:3842",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:3783",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 3842,
+        "line": 3783,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -678,11 +678,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:3878",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:3819",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 3878,
+        "line": 3819,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -692,11 +692,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:3905",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:3846",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 3905,
+        "line": 3846,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -706,11 +706,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:3951",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:3892",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 3951,
+        "line": 3892,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -720,11 +720,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:3994",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:3935",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 3994,
+        "line": 3935,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -734,11 +734,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:4024",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:3965",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 4024,
+        "line": 3965,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -748,11 +748,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:4044",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:3985",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 4044,
+        "line": 3985,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -762,11 +762,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:4071",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:4012",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 4071,
+        "line": 4012,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -776,11 +776,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:4089",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:4030",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 4089,
+        "line": 4030,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -790,11 +790,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:4107",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:4048",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 4107,
+        "line": 4048,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -804,11 +804,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:4135",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:4096",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 4135,
+        "line": 4096,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -818,11 +818,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:4144",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:4105",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 4144,
+        "line": 4105,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -832,11 +832,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:4205",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:4166",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 4205,
+        "line": 4166,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -846,11 +846,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:4235",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:4196",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 4235,
+        "line": 4196,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -860,11 +860,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:4269",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:4230",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 4269,
+        "line": 4230,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -874,11 +874,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:4304",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:4265",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 4304,
+        "line": 4265,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -888,11 +888,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:4326",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:4287",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 4326,
+        "line": 4287,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -902,11 +902,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:4345",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:4306",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 4345,
+        "line": 4306,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -916,11 +916,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:4425",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:4386",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 4425,
+        "line": 4386,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -930,11 +930,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:4457",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:4418",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 4457,
+        "line": 4418,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -944,11 +944,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:4493",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:4454",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 4493,
+        "line": 4454,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -958,11 +958,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:4513",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:4474",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 4513,
+        "line": 4474,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -972,11 +972,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:4535",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:4496",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 4535,
+        "line": 4496,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -986,11 +986,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:4595",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:4556",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 4595,
+        "line": 4556,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1000,11 +1000,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:4620",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:4581",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 4620,
+        "line": 4581,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1014,11 +1014,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:4731",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:4692",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 4731,
+        "line": 4692,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1028,11 +1028,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:4759",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:4720",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 4759,
+        "line": 4720,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1042,11 +1042,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:4772",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:4733",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 4772,
+        "line": 4733,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1056,11 +1056,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:4824",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:4785",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 4824,
+        "line": 4785,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1070,11 +1070,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:4839",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:4800",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 4839,
+        "line": 4800,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1084,11 +1084,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:4914",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:4875",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 4914,
+        "line": 4875,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1098,11 +1098,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:4929",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:4890",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 4929,
+        "line": 4890,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1112,11 +1112,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5006",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:4967",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5006,
+        "line": 4967,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1126,11 +1126,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5023",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:4984",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5023,
+        "line": 4984,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1140,11 +1140,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5048",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5009",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5048,
+        "line": 5009,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1154,11 +1154,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5065",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5026",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5065,
+        "line": 5026,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1168,11 +1168,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5090",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5051",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5090,
+        "line": 5051,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1182,11 +1182,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5107",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5068",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5107,
+        "line": 5068,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1196,11 +1196,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5139",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5100",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5139,
+        "line": 5100,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1210,11 +1210,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5171",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5132",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5171,
+        "line": 5132,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1224,11 +1224,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5184",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5145",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5184,
+        "line": 5145,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1238,11 +1238,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5207",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5168",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5207,
+        "line": 5168,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1252,11 +1252,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5242",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5203",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5242,
+        "line": 5203,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1266,11 +1266,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5264",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5225",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5264,
+        "line": 5225,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1280,11 +1280,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5292",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5253",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5292,
+        "line": 5253,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1294,11 +1294,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5314",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5275",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5314,
+        "line": 5275,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1308,11 +1308,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5346",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5306",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5346,
+        "line": 5306,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1322,11 +1322,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5374",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5334",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5374,
+        "line": 5334,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1336,11 +1336,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5393",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5353",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5393,
+        "line": 5353,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1350,11 +1350,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5411",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5371",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5411,
+        "line": 5371,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1364,11 +1364,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5434",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5394",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5434,
+        "line": 5394,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1378,11 +1378,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5453",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5413",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5453,
+        "line": 5413,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1392,11 +1392,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5475",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5435",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5475,
+        "line": 5435,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1406,11 +1406,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5538",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5498",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5538,
+        "line": 5498,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1420,11 +1420,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5554",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5514",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5554,
+        "line": 5514,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1434,11 +1434,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5570",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5530",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5570,
+        "line": 5530,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1448,11 +1448,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5589",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5549",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5589,
+        "line": 5549,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1462,11 +1462,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5607",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5567",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5607,
+        "line": 5567,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1476,11 +1476,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5627",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5587",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5627,
+        "line": 5587,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1490,11 +1490,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5648",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5608",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5648,
+        "line": 5608,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1504,11 +1504,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5664",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5624",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5664,
+        "line": 5624,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1518,11 +1518,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5686",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5646",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5686,
+        "line": 5646,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1532,11 +1532,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5711",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5671",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5711,
+        "line": 5671,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1546,11 +1546,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5724",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5684",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5724,
+        "line": 5684,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1560,11 +1560,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5737",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5697",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5737,
+        "line": 5697,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1574,11 +1574,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5752",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5712",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5752,
+        "line": 5712,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1588,11 +1588,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5767",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5727",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5767,
+        "line": 5727,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1602,11 +1602,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5784",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5744",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5784,
+        "line": 5744,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1616,11 +1616,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5802",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5762",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5802,
+        "line": 5762,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1630,11 +1630,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5820",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5780",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5820,
+        "line": 5780,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1644,11 +1644,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5837",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5797",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5837,
+        "line": 5797,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1658,11 +1658,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5915",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5875",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5915,
+        "line": 5875,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1672,11 +1672,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5937",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5897",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5937,
+        "line": 5897,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1686,11 +1686,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:5963",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5923",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 5963,
+        "line": 5923,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1700,11 +1700,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:6000",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5960",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 6000,
+        "line": 5960,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1714,11 +1714,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:6023",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:5983",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 6023,
+        "line": 5983,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1728,11 +1728,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:6049",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:6009",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 6049,
+        "line": 6009,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1742,11 +1742,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:6151",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:6111",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 6151,
+        "line": 6111,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1756,11 +1756,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:6180",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:6140",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 6180,
+        "line": 6140,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1770,11 +1770,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:6214",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:6174",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 6214,
+        "line": 6174,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1784,11 +1784,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:6240",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:6200",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 6240,
+        "line": 6200,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1798,11 +1798,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:6251",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:6211",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 6251,
+        "line": 6211,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1812,11 +1812,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:6270",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:6230",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 6270,
+        "line": 6230,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1826,11 +1826,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:6285",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:6245",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 6285,
+        "line": 6245,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1840,11 +1840,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:6306",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:6266",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 6306,
+        "line": 6266,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1854,11 +1854,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:6317",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:6277",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 6317,
+        "line": 6277,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1868,11 +1868,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:6340",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:6300",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 6340,
+        "line": 6300,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1882,11 +1882,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:6355",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:6315",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 6355,
+        "line": 6315,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1896,11 +1896,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:6439",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:6399",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 6439,
+        "line": 6399,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1910,11 +1910,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:6468",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:6428",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 6468,
+        "line": 6428,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1924,11 +1924,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:6745",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:6703",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 6745,
+        "line": 6703,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1938,11 +1938,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:6784",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:6742",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 6784,
+        "line": 6742,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1952,11 +1952,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:6837",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:6778",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 6837,
+        "line": 6778,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1966,11 +1966,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:6859",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:6800",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 6859,
+        "line": 6800,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1980,11 +1980,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:6882",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:6823",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 6882,
+        "line": 6823,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -1994,11 +1994,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:6903",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:6844",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 6903,
+        "line": 6844,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -2008,11 +2008,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:7009",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:6950",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 7009,
+        "line": 6950,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -2022,11 +2022,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:7089",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:7030",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 7089,
+        "line": 7030,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -2036,11 +2036,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:7164",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:7105",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 7164,
+        "line": 7105,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -2050,11 +2050,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:7318",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:7259",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 7318,
+        "line": 7259,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -2064,11 +2064,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:7706",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:7647",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 7706,
+        "line": 7647,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -2078,11 +2078,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:7719",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:7660",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 7719,
+        "line": 7660,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -2092,11 +2092,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:7734",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:7675",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 7734,
+        "line": 7675,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -2106,11 +2106,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:7755",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:7696",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 7755,
+        "line": 7696,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -2120,11 +2120,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:7816",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:7757",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 7816,
+        "line": 7757,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -2134,11 +2134,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:7829",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:7770",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 7829,
+        "line": 7770,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -2148,11 +2148,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:9362",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:9303",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 9362,
+        "line": 9303,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -2162,11 +2162,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:9368",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:9309",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 9368,
+        "line": 9309,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -2176,11 +2176,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:9392",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:9333",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 9392,
+        "line": 9333,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -2190,11 +2190,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:9415",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:9356",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 9415,
+        "line": 9356,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -2204,7 +2204,49 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:9429",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:9370",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 9370,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:9390",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 9390,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:9404",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 9404,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:9429",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -2218,11 +2260,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:9449",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:9445",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 9449,
+        "line": 9445,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -2232,53 +2274,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:9463",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:9459",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 9463,
-        "language": "javascript"
-      },
-      "confidence": 0.7
-    },
-    {
-      "rule_id": "S002",
-      "title": "Dynamic outbound URL",
-      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
-      "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:9488",
-      "location": "source",
-      "evidence": "",
-      "detail": {
-        "line": 9488,
-        "language": "javascript"
-      },
-      "confidence": 0.7
-    },
-    {
-      "rule_id": "S002",
-      "title": "Dynamic outbound URL",
-      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
-      "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:9504",
-      "location": "source",
-      "evidence": "",
-      "detail": {
-        "line": 9504,
-        "language": "javascript"
-      },
-      "confidence": 0.7
-    },
-    {
-      "rule_id": "S002",
-      "title": "Dynamic outbound URL",
-      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
-      "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:9518",
-      "location": "source",
-      "evidence": "",
-      "detail": {
-        "line": 9518,
+        "line": 9459,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -2288,11 +2288,11 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:9586",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:9529",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 9586,
+        "line": 9529,
         "language": "javascript"
       },
       "confidence": 0.9
@@ -2302,11 +2302,11 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:9797",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:9740",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 9797,
+        "line": 9740,
         "language": "javascript"
       },
       "confidence": 0.9
@@ -2316,11 +2316,11 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/index.js:10244",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/index.js:10187",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 10244,
+        "line": 10187,
         "language": "javascript"
       },
       "confidence": 0.9
@@ -2330,7 +2330,7 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/oauth.js:53",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/oauth.js:53",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -2344,7 +2344,7 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/oauth.js:131",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/oauth.js:131",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -2358,7 +2358,7 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/oauth.js:166",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/oauth.js:166",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -2372,7 +2372,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/scripts/check-skill-sync.js:36",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/scripts/check-skill-sync.js:36",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -2386,7 +2386,7 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/test-note.js:16",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/test-note.js:16",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -2400,7 +2400,7 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/test-resolve-issue-note.js:20",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/test-resolve-issue-note.js:20",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -2414,7 +2414,7 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/test-resolve-issue-note.js:49",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/test-resolve-issue-note.js:49",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -2428,7 +2428,7 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/test-resolve-issue-note.js:78",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/test-resolve-issue-note.js:78",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -2442,7 +2442,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/utils/gitlab-version-gate.js:11",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/utils/gitlab-version-gate.js:11",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -2456,7 +2456,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/utils/graphql-query.js:78",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/utils/graphql-query.js:78",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -2470,7 +2470,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/utils/graphql-query.js:100",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/utils/graphql-query.js:100",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -2484,7 +2484,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-sazpdl_2/package/build/utils/patch-helper.js:24",
+      "target": "/tmp/mcpradar-enrich-welld1cl/package/build/utils/patch-helper.js:24",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -2498,17 +2498,17 @@
     "total_tools": 0
   },
   "name": "io.github.zereight/gitlab-mcp",
-  "target": "npx -y @zereight/mcp-gitlab@2.1.46",
-  "version": "2.1.46",
-  "scanned_at": "2026-08-15T06:29:13.225852+00:00",
-  "last_attempted_at": "2026-08-15T06:29:13.225852+00:00",
+  "target": "npx -y @zereight/mcp-gitlab@2.1.47",
+  "version": "2.1.47",
+  "scanned_at": "2026-08-16T06:31:13.668364+00:00",
+  "last_attempted_at": "2026-08-16T06:31:13.668364+00:00",
   "trending": true,
   "popularity": {
     "method": "registry-packages/npm-pypi-github",
-    "score": 8.2446,
-    "npm_downloads": 92984,
+    "score": 7.9153,
+    "npm_downloads": 43532,
     "pypi_downloads": null,
-    "github_stars": 1888
+    "github_stars": 1889
   },
   "live_scan": {
     "ok": false,
