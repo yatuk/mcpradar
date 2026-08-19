@@ -25313,7 +25313,7 @@
   {
     "server": "com.postman/postman-mcp-server",
     "display_name": "com.postman / postman-mcp-server",
-    "version": "2.11.2",
+    "version": "2.12.0",
     "scoring_model": "mrs-v1",
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
@@ -25321,10 +25321,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.1063,
+      "score": 6.1048,
       "npm_downloads": 4271,
       "pypi_downloads": null,
-      "github_stars": 298
+      "github_stars": 297
     },
     "category": "Other",
     "vuln_types": [
@@ -25386,7 +25386,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-18",
+    "last_scanned": "2026-08-19",
     "status": "scanned",
     "breakdown": {
       "base": 4.0,
@@ -43201,10 +43201,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.9509,
+      "score": 6.937,
       "npm_downloads": null,
-      "pypi_downloads": 4519,
-      "github_stars": 1975
+      "pypi_downloads": 4374,
+      "github_stars": 1976
     },
     "category": "DevOps",
     "vuln_types": [
@@ -43237,7 +43237,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-18",
+    "last_scanned": "2026-08-19",
     "status": "scanned",
     "breakdown": {
       "base": 5.0,
@@ -55627,7 +55627,7 @@
   {
     "server": "io.github.DeusData/codebase-memory-mcp",
     "display_name": "io.github.DeusData / codebase-memory-mcp",
-    "version": "0.10.6",
+    "version": "0.10.8",
     "scoring_model": "mrs-v1",
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
@@ -55635,10 +55635,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 8.6211,
+      "score": 8.4939,
       "npm_downloads": null,
-      "pypi_downloads": 10629,
-      "github_stars": 39314
+      "pypi_downloads": 7901,
+      "github_stars": 39460
     },
     "category": "AI/ML",
     "vuln_types": [
@@ -55685,7 +55685,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-18",
+    "last_scanned": "2026-08-19",
     "status": "scanned",
     "breakdown": {
       "base": 10.0,
@@ -56862,7 +56862,7 @@
   {
     "server": "io.github.artokun/comfyui-mcp",
     "display_name": "io.github.artokun / comfyui-mcp",
-    "version": "0.52.1",
+    "version": "0.52.3",
     "scoring_model": "mrs-v1",
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
@@ -56870,10 +56870,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 7.9263,
+      "score": 7.9292,
       "npm_downloads": 140410,
       "pypi_downloads": null,
-      "github_stars": 600
+      "github_stars": 604
     },
     "category": "DevOps",
     "vuln_types": [
@@ -56888,15 +56888,22 @@
     "confidence": 0.81,
     "vulnerable_deps": 0,
     "tools_detail": [],
-    "findings": 268,
+    "findings": 270,
     "low_findings": 0,
     "by_severity": {
-      "critical": 149,
+      "critical": 151,
       "high": 0,
       "medium": 119,
       "low": 0
     },
     "findings_detail": [
+      {
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
+      },
       {
         "rule_id": "S002",
         "severity": "medium",
@@ -58613,6 +58620,13 @@
         "confidence": 0.9
       },
       {
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
+      },
+      {
         "rule_id": "S002",
         "severity": "medium",
         "title": "Dynamic outbound URL",
@@ -58775,15 +58789,15 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-18",
+    "last_scanned": "2026-08-19",
     "status": "scanned",
     "breakdown": {
-      "base": 655.33,
+      "base": 662.0,
       "aars": 0.0,
-      "capability_term": 327.67,
+      "capability_term": 331.0,
       "thm": 1.0,
       "dep_risk": 0.0,
-      "weighted_findings": 1966,
+      "weighted_findings": 1986,
       "driver": "findings"
     }
   },
@@ -58798,10 +58812,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 8.6765,
+      "score": 8.6777,
       "npm_downloads": 115255,
       "pypi_downloads": null,
-      "github_stars": 4118
+      "github_stars": 4130
     },
     "category": "DevOps",
     "vuln_types": [
@@ -58901,13 +58915,6 @@
         "title": "Dynamic outbound URL",
         "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
         "confidence": 0.7
-      },
-      {
-        "rule_id": "S006",
-        "severity": "critical",
-        "title": "Dynamic shell command execution",
-        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
-        "confidence": 0.9
       },
       {
         "rule_id": "S006",
@@ -59104,10 +59111,17 @@
         "title": "Dynamic shell command execution",
         "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
         "confidence": 0.9
+      },
+      {
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-18",
+    "last_scanned": "2026-08-19",
     "status": "scanned",
     "breakdown": {
       "base": 117.33,
@@ -59427,10 +59441,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 5.9429,
+      "score": 5.952,
       "npm_downloads": 9229,
       "pypi_downloads": null,
-      "github_stars": 94
+      "github_stars": 96
     },
     "category": "Communication",
     "vuln_types": [
@@ -59625,7 +59639,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-18",
+    "last_scanned": "2026-08-19",
     "status": "scanned",
     "breakdown": {
       "base": 38.0,
@@ -60352,10 +60366,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.2147,
+      "score": 6.216,
       "npm_downloads": 2472,
       "pypi_downloads": null,
-      "github_stars": 662
+      "github_stars": 664
     },
     "category": "DevOps",
     "vuln_types": [
@@ -60479,7 +60493,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-18",
+    "last_scanned": "2026-08-19",
     "status": "scanned",
     "breakdown": {
       "base": 42.67,
@@ -60882,10 +60896,10 @@
     "confidence": 0.9,
     "vulnerable_deps": 1,
     "tools_detail": [],
-    "findings": 16,
+    "findings": 17,
     "low_findings": 0,
     "by_severity": {
-      "critical": 16,
+      "critical": 17,
       "high": 0,
       "medium": 0,
       "low": 0
@@ -61009,18 +61023,25 @@
         "title": "Dynamic shell command execution",
         "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
         "confidence": 0.9
+      },
+      {
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-18",
+    "last_scanned": "2026-08-19",
     "status": "scanned",
     "breakdown": {
-      "base": 53.33,
+      "base": 56.67,
       "aars": 0.0,
-      "capability_term": 26.67,
+      "capability_term": 28.33,
       "thm": 1.0,
       "dep_risk": 0.4,
-      "weighted_findings": 160,
+      "weighted_findings": 170,
       "driver": "findings"
     }
   },
@@ -61248,7 +61269,7 @@
   {
     "server": "io.github.zereight/gitlab-mcp",
     "display_name": "io.github.zereight / gitlab-mcp",
-    "version": "2.1.48",
+    "version": "2.1.49",
     "scoring_model": "mrs-v1",
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
@@ -61256,10 +61277,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 7.9173,
+      "score": 7.9176,
       "npm_downloads": 43532,
       "pypi_downloads": null,
-      "github_stars": 1898
+      "github_stars": 1899
     },
     "category": "DevOps",
     "vuln_types": [
@@ -62525,7 +62546,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-18",
+    "last_scanned": "2026-08-19",
     "status": "scanned",
     "breakdown": {
       "base": 250.67,

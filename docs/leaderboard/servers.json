@@ -1352,7 +1352,7 @@
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "com.postman/postman-mcp-server",
-    "version": "2.11.2",
+    "version": "2.12.0",
     "_meta": {
       "com.github.yatuk.mcpradar/security": {
         "risk_score": 4.0,
@@ -1366,7 +1366,7 @@
           "medium": 3,
           "low": 0
         },
-        "last_scanned": "2026-08-18",
+        "last_scanned": "2026-08-19",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -1791,7 +1791,7 @@
           "medium": 0,
           "low": 0
         },
-        "last_scanned": "2026-08-18",
+        "last_scanned": "2026-08-19",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2177,7 +2177,7 @@
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "io.github.DeusData/codebase-memory-mcp",
-    "version": "0.10.6",
+    "version": "0.10.8",
     "_meta": {
       "com.github.yatuk.mcpradar/security": {
         "risk_score": 10.0,
@@ -2191,7 +2191,7 @@
           "medium": 0,
           "low": 0
         },
-        "last_scanned": "2026-08-18",
+        "last_scanned": "2026-08-19",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2252,21 +2252,21 @@
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "io.github.artokun/comfyui-mcp",
-    "version": "0.52.1",
+    "version": "0.52.3",
     "_meta": {
       "com.github.yatuk.mcpradar/security": {
         "risk_score": 10.0,
         "scoring_model": "mrs-v1",
         "grade": "F",
         "confidence": 0.81,
-        "findings": 268,
+        "findings": 270,
         "by_severity": {
-          "critical": 149,
+          "critical": 151,
           "high": 0,
           "medium": 119,
           "low": 0
         },
-        "last_scanned": "2026-08-18",
+        "last_scanned": "2026-08-19",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2291,7 +2291,7 @@
           "medium": 8,
           "low": 0
         },
-        "last_scanned": "2026-08-18",
+        "last_scanned": "2026-08-19",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2341,7 +2341,7 @@
           "medium": 16,
           "low": 0
         },
-        "last_scanned": "2026-08-18",
+        "last_scanned": "2026-08-19",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2391,7 +2391,7 @@
           "medium": 2,
           "low": 0
         },
-        "last_scanned": "2026-08-18",
+        "last_scanned": "2026-08-19",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2434,14 +2434,14 @@
         "scoring_model": "mrs-v1",
         "grade": "F",
         "confidence": 0.9,
-        "findings": 16,
+        "findings": 17,
         "by_severity": {
-          "critical": 16,
+          "critical": 17,
           "high": 0,
           "medium": 0,
           "low": 0
         },
-        "last_scanned": "2026-08-18",
+        "last_scanned": "2026-08-19",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2477,7 +2477,7 @@
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "io.github.zereight/gitlab-mcp",
-    "version": "2.1.48",
+    "version": "2.1.49",
     "_meta": {
       "com.github.yatuk.mcpradar/security": {
         "risk_score": 10.0,
@@ -2491,7 +2491,7 @@
           "medium": 168,
           "low": 0
         },
-        "last_scanned": "2026-08-18",
+        "last_scanned": "2026-08-19",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
