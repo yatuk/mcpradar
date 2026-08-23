@@ -1,0 +1,117 @@
+{
+  "transport": "stdio",
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "@modelcontextprotocol/sdk@1.21.2 (npm) is affected by CVE-2026-25536: @modelcontextprotocol/sdk has cross-client data leak via shared server/transport instance reuse; fixed in 1.26.0",
+      "severity": "high",
+      "target": "@modelcontextprotocol/sdk@1.21.2",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "@modelcontextprotocol/sdk",
+        "version": "1.21.2",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-345p-7cg4-v4c7",
+        "cve": "CVE-2026-25536",
+        "cvss": 7.1,
+        "cwe_ids": [
+          "CWE-362"
+        ],
+        "fixed_version": "1.26.0",
+        "references": [
+          "https://github.com/modelcontextprotocol/typescript-sdk/security/advisories/GHSA-345p-7cg4-v4c7",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-25536",
+          "https://github.com/modelcontextprotocol/typescript-sdk/issues/204"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "axios@1.11.0 (npm) is affected by CVE-2026-44494: axios Vulnerable to Full Man-in-the-Middle via Prototype Pollution Gadget in `config.proxy`; fixed in 1.16.0",
+      "severity": "high",
+      "target": "axios@1.11.0",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "axios",
+        "version": "1.11.0",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-35jp-ww65-95wh",
+        "cve": "CVE-2026-44494",
+        "cvss": 8.7,
+        "cwe_ids": [
+          "CWE-1321",
+          "CWE-441"
+        ],
+        "fixed_version": "1.16.0",
+        "references": [
+          "https://github.com/axios/axios/security/advisories/GHSA-35jp-ww65-95wh",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-44494",
+          "https://github.com/advisories/GHSA-fvcv-3m26-pcqx"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S004",
+      "title": "Dynamic JavaScript execution",
+      "description": "Dynamic JavaScript execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-oe77cr4e/package/browser_tools.js:285",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 285,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S004",
+      "title": "Dynamic JavaScript execution",
+      "description": "Dynamic JavaScript execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-oe77cr4e/package/browser_tools.js:306",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 306,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    }
+  ],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "io.github.brightdata/brightdata-mcp",
+  "target": "npx -y @brightdata/mcp@2.11.1",
+  "version": "2.11.1",
+  "scanned_at": "2026-08-23T06:34:22.443873+00:00",
+  "last_attempted_at": "2026-08-23T06:34:22.443873+00:00",
+  "trending": true,
+  "popularity": {
+    "method": "registry-packages/npm-pypi-github",
+    "score": 7.2568,
+    "npm_downloads": 6925,
+    "pypi_downloads": null,
+    "github_stars": 2607
+  },
+  "live_scan": {
+    "ok": false,
+    "error": "[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[31m│\u001b[0m \u001b[2m309 \u001b[0m \u001b[31m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[31m╰──────────────────────────────────────────────────────────────────────╯\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[1;91mMcpError: \u001b[0mConnection closed \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m╰──────────────────────────────────────────────────────────────────────────╯\u001b[0m \u001b[35m│\u001b[0m \u001b[35m╰──────────────────────────────────────────────────────────────────────────────╯\u001b[0m"
+  },
+  "enriched": true,
+  "enriched_ref": "npm:@brightdata/mcp",
+  "package_scan": {
+    "ok": true,
+    "note": "+4 findings from npm:@brightdata/mcp"
+  },
+  "status": "scanned",
+  "scan_coverage": "package-only"
+}
