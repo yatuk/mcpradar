@@ -1366,7 +1366,7 @@
           "medium": 3,
           "low": 0
         },
-        "last_scanned": "2026-08-23",
+        "last_scanned": "2026-08-24",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -1791,7 +1791,7 @@
           "medium": 0,
           "low": 0
         },
-        "last_scanned": "2026-08-23",
+        "last_scanned": "2026-08-24",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2202,21 +2202,21 @@
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "io.github.AVIDS2/memorix",
-    "version": "1.7.2",
+    "version": "1.8.1",
     "_meta": {
       "com.github.yatuk.mcpradar/security": {
         "risk_score": 10.0,
         "scoring_model": "mrs-v1",
         "grade": "F",
         "confidence": 0.81,
-        "findings": 1279,
+        "findings": 1319,
         "by_severity": {
-          "critical": 778,
+          "critical": 818,
           "high": 0,
           "medium": 501,
           "low": 0
         },
-        "last_scanned": "2026-08-22",
+        "last_scanned": "2026-08-24",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2241,7 +2241,7 @@
           "medium": 0,
           "low": 0
         },
-        "last_scanned": "2026-08-23",
+        "last_scanned": "2026-08-24",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2302,21 +2302,21 @@
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "io.github.artokun/comfyui-mcp",
-    "version": "0.52.67",
+    "version": "0.52.89",
     "_meta": {
       "com.github.yatuk.mcpradar/security": {
         "risk_score": 10.0,
         "scoring_model": "mrs-v1",
         "grade": "F",
         "confidence": 0.81,
-        "findings": 299,
+        "findings": 304,
         "by_severity": {
-          "critical": 175,
+          "critical": 177,
           "high": 0,
-          "medium": 124,
+          "medium": 127,
           "low": 0
         },
-        "last_scanned": "2026-08-23",
+        "last_scanned": "2026-08-24",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2341,7 +2341,7 @@
           "medium": 8,
           "low": 0
         },
-        "last_scanned": "2026-08-23",
+        "last_scanned": "2026-08-24",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2441,7 +2441,7 @@
           "medium": 2,
           "low": 0
         },
-        "last_scanned": "2026-08-23",
+        "last_scanned": "2026-08-24",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2491,7 +2491,7 @@
           "medium": 0,
           "low": 0
         },
-        "last_scanned": "2026-08-23",
+        "last_scanned": "2026-08-24",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2541,7 +2541,7 @@
           "medium": 168,
           "low": 0
         },
-        "last_scanned": "2026-08-23",
+        "last_scanned": "2026-08-24",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -3802,7 +3802,7 @@
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "io.github.shinpr/mcp-local-rag",
-    "version": "0.17.4",
+    "version": "0.18.0",
     "_meta": {
       "com.github.yatuk.mcpradar/security": {
         "risk_score": null,
