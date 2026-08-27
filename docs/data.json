@@ -25321,8 +25321,8 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.624,
-      "npm_downloads": 13615,
+      "score": 6.3715,
+      "npm_downloads": 7612,
       "pypi_downloads": null,
       "github_stars": 308
     },
@@ -25386,7 +25386,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-26",
+    "last_scanned": "2026-08-27",
     "status": "scanned",
     "breakdown": {
       "base": 4.0,
@@ -43198,7 +43198,7 @@
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
     "scan_coverage": "package-only",
-    "trending": true,
+    "trending": false,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
       "score": 6.7812,
@@ -46791,7 +46791,7 @@
   {
     "server": "io.github.AVIDS2/memorix",
     "display_name": "io.github.AVIDS2 / memorix",
-    "version": "1.8.3",
+    "version": "1.8.4",
     "scoring_model": "mrs-v1",
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
@@ -46799,10 +46799,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.2643,
-      "npm_downloads": 2651,
+      "score": 6.2031,
+      "npm_downloads": 2273,
       "pypi_downloads": null,
-      "github_stars": 692
+      "github_stars": 701
     },
     "category": "DevOps",
     "vuln_types": [
@@ -56061,7 +56061,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-26",
+    "last_scanned": "2026-08-27",
     "status": "scanned",
     "breakdown": {
       "base": 3394.67,
@@ -56081,7 +56081,7 @@
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
     "scan_coverage": "package-only",
-    "trending": true,
+    "trending": false,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
       "score": 8.0297,
@@ -57311,7 +57311,7 @@
   {
     "server": "io.github.artokun/comfyui-mcp",
     "display_name": "io.github.artokun / comfyui-mcp",
-    "version": "0.52.125",
+    "version": "0.52.139",
     "scoring_model": "mrs-v1",
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
@@ -57319,10 +57319,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 8.054,
-      "npm_downloads": 166761,
+      "score": 8.0763,
+      "npm_downloads": 173023,
       "pypi_downloads": null,
-      "github_stars": 678
+      "github_stars": 688
     },
     "category": "DevOps",
     "vuln_types": [
@@ -57337,12 +57337,12 @@
     "confidence": 0.82,
     "vulnerable_deps": 0,
     "tools_detail": [],
-    "findings": 293,
+    "findings": 299,
     "low_findings": 0,
     "by_severity": {
-      "critical": 179,
+      "critical": 183,
       "high": 0,
-      "medium": 114,
+      "medium": 116,
       "low": 0
     },
     "findings_detail": [
@@ -58626,6 +58626,20 @@
         "title": "Dynamic outbound URL",
         "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
         "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Dynamic outbound URL",
+        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S011",
+        "severity": "medium",
+        "title": "Raw fetched content returned to the agent",
+        "description": "Raw fetched content returned to the agent detected in JavaScript/TypeScript source",
+        "confidence": 0.5
       },
       {
         "rule_id": "S006",
@@ -59216,6 +59230,27 @@
         "confidence": 0.7
       },
       {
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
+      },
+      {
         "rule_id": "S002",
         "severity": "medium",
         "title": "Dynamic outbound URL",
@@ -59242,6 +59277,13 @@
         "title": "Dynamic outbound URL",
         "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
         "confidence": 0.7
+      },
+      {
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
       },
       {
         "rule_id": "S006",
@@ -59399,15 +59441,15 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-26",
+    "last_scanned": "2026-08-27",
     "status": "scanned",
     "breakdown": {
-      "base": 748.67,
+      "base": 764.67,
       "aars": 0.0,
-      "capability_term": 374.33,
+      "capability_term": 382.33,
       "thm": 1.0,
       "dep_risk": 0.0,
-      "weighted_findings": 2246,
+      "weighted_findings": 2294,
       "driver": "findings"
     }
   },
@@ -59422,10 +59464,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 8.7534,
-      "npm_downloads": 134241,
+      "score": 8.7484,
+      "npm_downloads": 131995,
       "pypi_downloads": null,
-      "github_stars": 4221
+      "github_stars": 4244
     },
     "category": "DevOps",
     "vuln_types": [
@@ -59731,7 +59773,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-26",
+    "last_scanned": "2026-08-27",
     "status": "scanned",
     "breakdown": {
       "base": 117.33,
@@ -60269,13 +60311,13 @@
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
     "scan_coverage": "package-only",
-    "trending": false,
+    "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 5.9701,
-      "npm_downloads": 3954,
+      "score": 6.198,
+      "npm_downloads": 6627,
       "pypi_downloads": null,
-      "github_stars": 235
+      "github_stars": 237
     },
     "category": "DevOps",
     "vuln_types": [
@@ -61071,7 +61113,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-25",
+    "last_scanned": "2026-08-27",
     "status": "scanned",
     "breakdown": {
       "base": 296.67,
@@ -61094,10 +61136,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.7573,
-      "npm_downloads": 8534,
+      "score": 6.7974,
+      "npm_downloads": 9346,
       "pypi_downloads": null,
-      "github_stars": 669
+      "github_stars": 670
     },
     "category": "DevOps",
     "vuln_types": [
@@ -61221,7 +61263,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-26",
+    "last_scanned": "2026-08-27",
     "status": "scanned",
     "breakdown": {
       "base": 42.67,
@@ -61605,10 +61647,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 7.4704,
-      "npm_downloads": 10969,
+      "score": 7.4683,
+      "npm_downloads": 10919,
       "pypi_downloads": null,
-      "github_stars": 2692
+      "github_stars": 2691
     },
     "category": "DevOps",
     "vuln_types": [
@@ -61761,7 +61803,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-26",
+    "last_scanned": "2026-08-27",
     "status": "scanned",
     "breakdown": {
       "base": 56.67,
@@ -61995,9 +62037,9 @@
     }
   },
   {
-    "server": "io.github.zereight/gitlab-mcp",
-    "display_name": "io.github.zereight / gitlab-mcp",
-    "version": "2.1.52",
+    "server": "io.github.varun369/superlocalmemory",
+    "display_name": "io.github.varun369 / superlocalmemory",
+    "version": "2.7.5",
     "scoring_model": "mrs-v1",
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
@@ -62005,10 +62047,1547 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 8.4162,
-      "npm_downloads": 135528,
+      "score": 5.8754,
+      "npm_downloads": 3350,
       "pypi_downloads": null,
-      "github_stars": 1923
+      "github_stars": 223
+    },
+    "category": "AI/ML",
+    "vuln_types": [
+      "Dependency Vulnerability",
+      "Source-Code Risk"
+    ],
+    "history": [],
+    "api_free": true,
+    "risk_score": 10.0,
+    "grade": "F",
+    "aars": 0.0,
+    "capability": "pure_compute",
+    "confidence": 0.86,
+    "vulnerable_deps": 2,
+    "tools_detail": [],
+    "findings": 211,
+    "low_findings": 0,
+    "by_severity": {
+      "critical": 8,
+      "high": 167,
+      "medium": 36,
+      "low": 0
+    },
+    "findings_detail": [
+      {
+        "rule_id": "D001",
+        "severity": "medium",
+        "title": "Known-vulnerable dependency (OSV)",
+        "description": "zeroconf@0.140 (PyPI) is affected by CVE-2026-48045: python-zeroconf: Unbounded TC-deferred queue allows LAN-local memor",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "httpx.get(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "_urq.urlopen(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "_urq.urlopen(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "httpx.get(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "client.post(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "client.post(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "httpx.get(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "httpx.post(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "httpx.post(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "httpx.post(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "httpx.get(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "httpx.post(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "httpx.post(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "client.post(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "httpx.post(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "client.post(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S007",
+        "severity": "high",
+        "title": "Description-Code Inconsistency (read-only tool with side effects)",
+        "description": "Tool 'get_version' presents as read-only but its handler executes commands",
+        "confidence": 0.5
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "_urq.urlopen(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "socket.create_connection(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "client.get(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "client.get(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "client.get(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "client.post(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "client.post(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S001",
+        "severity": "critical",
+        "title": "Cloud-metadata SSRF target in source",
+        "description": "Cloud metadata endpoint 'metadata.google.internal' referenced in source",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S001",
+        "severity": "critical",
+        "title": "Cloud-metadata SSRF target in source",
+        "description": "Cloud metadata endpoint '169.254.169.254' referenced in source",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S001",
+        "severity": "critical",
+        "title": "Cloud-metadata SSRF target in source",
+        "description": "Cloud metadata endpoint 'metadata.google.internal' referenced in source",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Outbound request to a non-constant URL (SSRF risk)",
+        "description": "httpx.get(...) called with a dynamic URL; validate against an allowlist",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S005",
+        "severity": "high",
+        "title": "Possible SQL injection",
+        "description": "execute(...) builds its query with string formatting; use parameters",
+        "confidence": 0.9
+      }
+    ],
+    "tool_hash": "",
+    "last_scanned": "2026-08-27",
+    "status": "scanned",
+    "breakdown": {
+      "base": 464.33,
+      "aars": 0.0,
+      "capability_term": 232.17,
+      "thm": 1.0,
+      "dep_risk": 0.15,
+      "weighted_findings": 1393,
+      "driver": "findings"
+    }
+  },
+  {
+    "server": "io.github.zereight/gitlab-mcp",
+    "display_name": "io.github.zereight / gitlab-mcp",
+    "version": "2.1.53",
+    "scoring_model": "mrs-v1",
+    "tools": 0,
+    "scanner_version": "1.1.0-rc1",
+    "scan_coverage": "package-only",
+    "trending": true,
+    "popularity": {
+      "method": "registry-packages/npm-pypi-github",
+      "score": 8.2975,
+      "npm_downloads": 102834,
+      "pypi_downloads": null,
+      "github_stars": 1928
     },
     "category": "DevOps",
     "vuln_types": [
@@ -62024,12 +63603,12 @@
     "confidence": 0.71,
     "vulnerable_deps": 1,
     "tools_detail": [],
-    "findings": 176,
+    "findings": 189,
     "low_findings": 0,
     "by_severity": {
       "critical": 8,
       "high": 0,
-      "medium": 168,
+      "medium": 181,
       "low": 0
     },
     "findings_detail": [
@@ -63168,6 +64747,97 @@
         "confidence": 0.7
       },
       {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Dynamic outbound URL",
+        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Dynamic outbound URL",
+        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Dynamic outbound URL",
+        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Dynamic outbound URL",
+        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Dynamic outbound URL",
+        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Dynamic outbound URL",
+        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Dynamic outbound URL",
+        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Dynamic outbound URL",
+        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Dynamic outbound URL",
+        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Dynamic outbound URL",
+        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Dynamic outbound URL",
+        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Dynamic outbound URL",
+        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Dynamic outbound URL",
+        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+        "confidence": 0.7
+      },
+      {
         "rule_id": "S006",
         "severity": "critical",
         "title": "Dynamic shell command execution",
@@ -63274,15 +64944,15 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-26",
+    "last_scanned": "2026-08-27",
     "status": "scanned",
     "breakdown": {
-      "base": 250.67,
+      "base": 268.0,
       "aars": 0.0,
-      "capability_term": 125.33,
+      "capability_term": 134.0,
       "thm": 1.0,
       "dep_risk": 1.0,
-      "weighted_findings": 752,
+      "weighted_findings": 804,
       "driver": "findings"
     }
   },
@@ -66117,10 +67787,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.2009,
-      "npm_downloads": 4257,
+      "score": 6.226,
+      "npm_downloads": 4498,
       "pypi_downloads": null,
-      "github_stars": 372
+      "github_stars": 373
     },
     "category": "DevOps",
     "vuln_types": [],
