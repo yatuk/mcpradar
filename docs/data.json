@@ -25321,10 +25321,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.3206,
-      "npm_downloads": 6770,
+      "score": 6.288,
+      "npm_downloads": 6260,
       "pypi_downloads": null,
-      "github_stars": 308
+      "github_stars": 309
     },
     "category": "Other",
     "vuln_types": [
@@ -25386,7 +25386,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-28",
+    "last_scanned": "2026-08-29",
     "status": "scanned",
     "breakdown": {
       "base": 4.0,
@@ -43201,9 +43201,9 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.7793,
+      "score": 6.7181,
       "npm_downloads": null,
-      "pypi_downloads": 2951,
+      "pypi_downloads": 2563,
       "github_stars": 2037
     },
     "category": "DevOps",
@@ -43237,7 +43237,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-28",
+    "last_scanned": "2026-08-29",
     "status": "scanned",
     "breakdown": {
       "base": 5.0,
@@ -46796,7 +46796,7 @@
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
     "scan_coverage": "package-only",
-    "trending": true,
+    "trending": false,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
       "score": 6.1751,
@@ -56081,13 +56081,13 @@
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
     "scan_coverage": "package-only",
-    "trending": false,
+    "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 8.0297,
+      "score": 7.9188,
       "npm_downloads": null,
-      "pypi_downloads": 2632,
-      "github_stars": 40669
+      "pypi_downloads": 2019,
+      "github_stars": 41058
     },
     "category": "AI/ML",
     "vuln_types": [
@@ -56134,7 +56134,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-26",
+    "last_scanned": "2026-08-29",
     "status": "scanned",
     "breakdown": {
       "base": 10.0,
@@ -57319,10 +57319,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 8.0628,
-      "npm_downloads": 166980,
+      "score": 8.0457,
+      "npm_downloads": 159837,
       "pypi_downloads": null,
-      "github_stars": 691
+      "github_stars": 694
     },
     "category": "DevOps",
     "vuln_types": [
@@ -59476,7 +59476,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-28",
+    "last_scanned": "2026-08-29",
     "status": "scanned",
     "breakdown": {
       "base": 781.33,
@@ -59499,10 +59499,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 8.7549,
-      "npm_downloads": 133512,
+      "score": 8.7733,
+      "npm_downloads": 138924,
       "pypi_downloads": null,
-      "github_stars": 4259
+      "github_stars": 4270
     },
     "category": "DevOps",
     "vuln_types": [
@@ -59808,7 +59808,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-28",
+    "last_scanned": "2026-08-29",
     "status": "scanned",
     "breakdown": {
       "base": 117.33,
@@ -60349,8 +60349,8 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.2292,
-      "npm_downloads": 7122,
+      "score": 6.2345,
+      "npm_downloads": 7208,
       "pypi_downloads": null,
       "github_stars": 237
     },
@@ -61148,7 +61148,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-28",
+    "last_scanned": "2026-08-29",
     "status": "scanned",
     "breakdown": {
       "base": 296.67,
@@ -61171,8 +61171,8 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.8078,
-      "npm_downloads": 9559,
+      "score": 6.7085,
+      "npm_downloads": 7604,
       "pypi_downloads": null,
       "github_stars": 671
     },
@@ -61298,7 +61298,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-28",
+    "last_scanned": "2026-08-29",
     "status": "scanned",
     "breakdown": {
       "base": 42.67,
@@ -61682,8 +61682,8 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 7.4542,
-      "npm_downloads": 10571,
+      "score": 7.4366,
+      "npm_downloads": 10151,
       "pypi_downloads": null,
       "github_stars": 2691
     },
@@ -61838,7 +61838,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-28",
+    "last_scanned": "2026-08-29",
     "status": "scanned",
     "breakdown": {
       "base": 56.67,
@@ -63619,8 +63619,8 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 8.3064,
-      "npm_downloads": 104755,
+      "score": 8.3854,
+      "npm_downloads": 125644,
       "pypi_downloads": null,
       "github_stars": 1932
     },
@@ -64979,7 +64979,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-28",
+    "last_scanned": "2026-08-29",
     "status": "scanned",
     "breakdown": {
       "base": 268.0,
@@ -67822,10 +67822,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.2286,
-      "npm_downloads": 4501,
+      "score": 6.2422,
+      "npm_downloads": 4632,
       "pypi_downloads": null,
-      "github_stars": 375
+      "github_stars": 376
     },
     "category": "DevOps",
     "vuln_types": [],
