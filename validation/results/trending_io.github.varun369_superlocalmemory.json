@@ -58,11 +58,35 @@
       "confidence": 0.9
     },
     {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "nltk@3.10.0 (PyPI) is affected by CVE-2026-62383: PYSEC-2026-3726",
+      "severity": "medium",
+      "target": "nltk@3.10.0",
+      "location": "pyproject.toml",
+      "evidence": "",
+      "detail": {
+        "package": "nltk",
+        "version": "3.10.0",
+        "ecosystem": "PyPI",
+        "osv_id": "PYSEC-2026-3726",
+        "cve": "CVE-2026-62383",
+        "cvss": null,
+        "cwe_ids": [],
+        "fixed_version": null,
+        "references": [
+          "https://www.vulncheck.com/advisories/nltk-ipipancorpusreader-symlink-arbitrary-file-read",
+          "https://github.com/nltk/nltk/security/advisories/GHSA-3hhw-38pf-pxj6"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
       "rule_id": "S006",
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-67ys8dka/package/scripts/postinstall-interactive.js:239",
+      "target": "/tmp/mcpradar-enrich-3rkg4rlu/package/scripts/postinstall-interactive.js:239",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -76,7 +100,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-67ys8dka/package/scripts/postinstall.js:63",
+      "target": "/tmp/mcpradar-enrich-3rkg4rlu/package/scripts/postinstall.js:63",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -90,7 +114,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-67ys8dka/package/scripts/postinstall.js:148",
+      "target": "/tmp/mcpradar-enrich-3rkg4rlu/package/scripts/postinstall.js:148",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -104,7 +128,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-67ys8dka/package/scripts/postinstall.js:165",
+      "target": "/tmp/mcpradar-enrich-3rkg4rlu/package/scripts/postinstall.js:165",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -118,7 +142,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-67ys8dka/package/scripts/postinstall.js:184",
+      "target": "/tmp/mcpradar-enrich-3rkg4rlu/package/scripts/postinstall.js:184",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -202,11 +226,11 @@
       "title": "Outbound request to a non-constant URL (SSRF risk)",
       "description": "urllib.request.urlopen(...) called with a dynamic URL; validate against an allowlist",
       "severity": "medium",
-      "target": "daemon.py:455",
+      "target": "daemon.py:464",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 455,
+        "line": 464,
         "sink": "urllib.request.urlopen"
       },
       "confidence": 0.7
@@ -3021,13 +3045,13 @@
   "name": "io.github.varun369/superlocalmemory",
   "target": "npx -y superlocalmemory@2.7.5",
   "version": "2.7.5",
-  "scanned_at": "2026-08-27T17:15:57.456399+00:00",
-  "last_attempted_at": "2026-08-27T17:15:57.456399+00:00",
-  "trending": false,
+  "scanned_at": "2026-08-30T11:06:15.388568+00:00",
+  "last_attempted_at": "2026-08-30T11:06:15.388568+00:00",
+  "trending": true,
   "popularity": {
     "method": "registry-packages/npm-pypi-github",
-    "score": 5.8754,
-    "npm_downloads": 3350,
+    "score": 5.8278,
+    "npm_downloads": 3002,
     "pypi_downloads": null,
     "github_stars": 223
   },
@@ -3039,7 +3063,7 @@
   "enriched_ref": "npm:superlocalmemory",
   "package_scan": {
     "ok": true,
-    "note": "+213 findings from npm:superlocalmemory"
+    "note": "+214 findings from npm:superlocalmemory"
   },
   "status": "scanned",
   "scan_coverage": "package-only"
