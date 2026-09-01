@@ -1,5 +1,187 @@
 [
   {
+    "server": "io.github.sandbaseai/sandbase-harness",
+    "display_name": "io.github.sandbaseai / sandbase-harness",
+    "version": "0.3.8",
+    "scoring_model": "mrs-v1",
+    "tools": 6,
+    "scanner_version": "1.1.0-rc1",
+    "scan_coverage": "live",
+    "trending": false,
+    "popularity": null,
+    "category": "DevOps",
+    "vuln_types": [
+      "Input Bounds"
+    ],
+    "history": [],
+    "api_free": false,
+    "risk_score": 0.0,
+    "grade": "A",
+    "aars": 0.0,
+    "capability": "pure_compute",
+    "confidence": 1.0,
+    "vulnerable_deps": 0,
+    "tools_detail": [
+      {
+        "name": "list_agents",
+        "description": "List agents available in the connected SandBase managed-agents runtime.",
+        "input_schema": {
+          "type": "object",
+          "properties": {}
+        },
+        "output_schema": {},
+        "capabilities": [
+          "pure_compute"
+        ]
+      },
+      {
+        "name": "create_session",
+        "description": "Create a SandBase managed-agents session for an agent.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "agent": {
+              "type": "string",
+              "description": "Agent id, for example agent_assistant"
+            },
+            "environment_id": {
+              "type": "string",
+              "description": "Optional environment id"
+            },
+            "title": {
+              "type": "string",
+              "description": "Optional session title"
+            }
+          },
+          "required": [
+            "agent"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "output_schema": {},
+        "capabilities": [
+          "pure_compute"
+        ]
+      },
+      {
+        "name": "run_session",
+        "description": "Send a message to a session and wait until its streamed turn becomes idle.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "session_id": {
+              "type": "string",
+              "description": "Session id"
+            },
+            "message": {
+              "type": "string",
+              "minLength": 1,
+              "description": "User message to run"
+            }
+          },
+          "required": [
+            "session_id",
+            "message"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "output_schema": {},
+        "capabilities": [
+          "pure_compute"
+        ]
+      },
+      {
+        "name": "get_session",
+        "description": "Get the current state and usage of a managed-agents session.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "session_id": {
+              "type": "string",
+              "description": "Session id"
+            }
+          },
+          "required": [
+            "session_id"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "output_schema": {},
+        "capabilities": [
+          "pure_compute"
+        ]
+      },
+      {
+        "name": "list_artifacts",
+        "description": "List artifacts produced by a managed-agents session.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "session_id": {
+              "type": "string",
+              "description": "Session id"
+            }
+          },
+          "required": [
+            "session_id"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "output_schema": {},
+        "capabilities": [
+          "pure_compute"
+        ]
+      },
+      {
+        "name": "stop_session",
+        "description": "Stop a running managed-agents session.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "session_id": {
+              "type": "string",
+              "description": "Session id"
+            }
+          },
+          "required": [
+            "session_id"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "output_schema": {},
+        "capabilities": [
+          "pure_compute"
+        ]
+      }
+    ],
+    "findings": 0,
+    "low_findings": 7,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 7
+    },
+    "findings_detail": [],
+    "tool_hash": "ca56bf4e05709895",
+    "last_scanned": "2026-09-01",
+    "status": "scanned",
+    "breakdown": {
+      "base": 0.0,
+      "aars": 0.0,
+      "capability_term": 0.0,
+      "thm": 1.0,
+      "dep_risk": 0.0,
+      "weighted_findings": 0,
+      "driver": "findings"
+    }
+  },
+  {
     "server": "@modelcontextprotocol/server-sequential-thinking",
     "display_name": "modelcontextprotocol / server-sequential-thinking",
     "version": "",
@@ -44747,7 +44929,7 @@
     "grade": "F",
     "aars": 0.0,
     "capability": "pure_compute",
-    "confidence": 0.73,
+    "confidence": 0.72,
     "vulnerable_deps": 1,
     "tools_detail": [],
     "findings": 7,
@@ -59913,7 +60095,7 @@
     "grade": "F",
     "aars": 0.0,
     "capability": "pure_compute",
-    "confidence": 0.85,
+    "confidence": 0.86,
     "vulnerable_deps": 0,
     "tools_detail": [],
     "findings": 40,

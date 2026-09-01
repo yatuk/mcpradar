@@ -1,6 +1,31 @@
 [
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.sandbaseai/sandbase-harness",
+    "version": "0.3.8",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 0.0,
+        "scoring_model": "mrs-v1",
+        "grade": "A",
+        "confidence": 1.0,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 7
+        },
+        "last_scanned": "2026-09-01",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "ca56bf4e05709895",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "io.modelcontextprotocol/server-sequential-thinking",
     "version": "unknown",
     "_meta": {
@@ -2008,7 +2033,7 @@
         "risk_score": 9.3,
         "scoring_model": "mrs-v1",
         "grade": "F",
-        "confidence": 0.73,
+        "confidence": 0.72,
         "findings": 7,
         "by_severity": {
           "critical": 0,
@@ -2333,7 +2358,7 @@
         "risk_score": 10.0,
         "scoring_model": "mrs-v1",
         "grade": "F",
-        "confidence": 0.85,
+        "confidence": 0.86,
         "findings": 40,
         "by_severity": {
           "critical": 32,

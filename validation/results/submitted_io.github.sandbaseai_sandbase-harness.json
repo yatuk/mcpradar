@@ -1,0 +1,311 @@
+{
+  "report_schema_version": "1.1",
+  "id": "88ce589d6252",
+  "target": "docker run -i --rm ghcr.io/sandbaseai/sandbase-harness-mcp:0.3.8",
+  "transport": "stdio",
+  "scanned_at": "2026-09-01T16:39:24.870830+00:00",
+  "server_version": "0.1.0",
+  "protocol_version": "2025-11-25",
+  "capabilities": {
+    "experimental": null,
+    "logging": null,
+    "prompts": null,
+    "resources": null,
+    "tools": {
+      "listChanged": true
+    },
+    "completions": null,
+    "tasks": null
+  },
+  "server_instructions": "",
+  "tools": [
+    {
+      "name": "list_agents",
+      "description": "List agents available in the connected SandBase managed-agents runtime.",
+      "input_schema": {
+        "type": "object",
+        "properties": {}
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "create_session",
+      "description": "Create a SandBase managed-agents session for an agent.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "agent": {
+            "type": "string",
+            "description": "Agent id, for example agent_assistant"
+          },
+          "environment_id": {
+            "type": "string",
+            "description": "Optional environment id"
+          },
+          "title": {
+            "type": "string",
+            "description": "Optional session title"
+          }
+        },
+        "required": [
+          "agent"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "run_session",
+      "description": "Send a message to a session and wait until its streamed turn becomes idle.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "description": "Session id"
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1,
+            "description": "User message to run"
+          }
+        },
+        "required": [
+          "session_id",
+          "message"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "get_session",
+      "description": "Get the current state and usage of a managed-agents session.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "description": "Session id"
+          }
+        },
+        "required": [
+          "session_id"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "list_artifacts",
+      "description": "List artifacts produced by a managed-agents session.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "description": "Session id"
+          }
+        },
+        "required": [
+          "session_id"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "output_schema": {}
+    },
+    {
+      "name": "stop_session",
+      "description": "Stop a running managed-agents session.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "description": "Session id"
+          }
+        },
+        "required": [
+          "session_id"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "output_schema": {}
+    }
+  ],
+  "prompts": [],
+  "resources": [],
+  "resource_templates": [],
+  "surface_status": {
+    "tools": {
+      "state": "complete",
+      "count": 6,
+      "pages": 1,
+      "error": "",
+      "ttl_ms": null,
+      "cache_scope": ""
+    },
+    "prompts": {
+      "state": "failed",
+      "count": 0,
+      "pages": 0,
+      "error": "Method not found",
+      "ttl_ms": null,
+      "cache_scope": ""
+    },
+    "resources": {
+      "state": "failed",
+      "count": 0,
+      "pages": 0,
+      "error": "Method not found",
+      "ttl_ms": null,
+      "cache_scope": ""
+    },
+    "resource_templates": {
+      "state": "failed",
+      "count": 0,
+      "pages": 0,
+      "error": "Method not found",
+      "ttl_ms": null,
+      "cache_scope": ""
+    },
+    "server_instructions": {
+      "state": "unsupported",
+      "count": 0,
+      "pages": 0,
+      "error": "",
+      "ttl_ms": null,
+      "cache_scope": ""
+    }
+  },
+  "probe_results": [],
+  "findings": [
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'agent' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "create_session",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "agent",
+        "schema": "input_schema"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'environment_id' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "create_session",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "environment_id",
+        "schema": "input_schema"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'title' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "create_session",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "title",
+        "schema": "input_schema"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'session_id' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "run_session",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "session_id",
+        "schema": "input_schema"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'session_id' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "get_session",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "session_id",
+        "schema": "input_schema"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'session_id' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "list_artifacts",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "session_id",
+        "schema": "input_schema"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "R114",
+      "title": "Unbounded input: no size/content constraints",
+      "description": "String parameter 'session_id' in input_schema has no validation constraints (no pattern, format, enum, or length limits)",
+      "severity": "low",
+      "target": "stop_session",
+      "location": "tool",
+      "evidence": "",
+      "detail": {
+        "property": "session_id",
+        "schema": "input_schema"
+      },
+      "confidence": 0.7
+    }
+  ],
+  "migration_readiness": [],
+  "summary": {
+    "total_tools": 6,
+    "total_prompts": 0,
+    "total_resources": 0,
+    "total_resource_templates": 0,
+    "clean": 1,
+    "low": 7,
+    "medium": 0,
+    "high": 0,
+    "critical": 0
+  },
+  "name": "io.github.sandbaseai/sandbase-harness",
+  "version": "0.3.8",
+  "last_attempted_at": "2026-09-01T16:40:49.959566+00:00",
+  "trending": false,
+  "live_scan": {
+    "ok": true
+  },
+  "package_scan": {
+    "ok": false,
+    "note": "no package ref"
+  },
+  "status": "scanned"
+}
