@@ -25386,7 +25386,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-31",
+    "last_scanned": "2026-09-01",
     "status": "scanned",
     "breakdown": {
       "base": 4.0,
@@ -46791,7 +46791,7 @@
   {
     "server": "io.github.AVIDS2/memorix",
     "display_name": "io.github.AVIDS2 / memorix",
-    "version": "1.8.5",
+    "version": "1.8.6",
     "scoring_model": "mrs-v1",
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
@@ -46799,10 +46799,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.1253,
+      "score": 6.1272,
       "npm_downloads": 1884,
       "pypi_downloads": null,
-      "github_stars": 707
+      "github_stars": 710
     },
     "category": "DevOps",
     "vuln_types": [
@@ -56299,7 +56299,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-31",
+    "last_scanned": "2026-09-01",
     "status": "scanned",
     "breakdown": {
       "base": 3446.0,
@@ -56319,7 +56319,7 @@
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
     "scan_coverage": "package-only",
-    "trending": true,
+    "trending": false,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
       "score": 7.8682,
@@ -57557,10 +57557,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 8.0008,
+      "score": 8.0026,
       "npm_downloads": 141905,
       "pypi_downloads": null,
-      "github_stars": 705
+      "github_stars": 708
     },
     "category": "DevOps",
     "vuln_types": [
@@ -59875,7 +59875,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-31",
+    "last_scanned": "2026-09-01",
     "status": "scanned",
     "breakdown": {
       "base": 848.0,
@@ -59898,10 +59898,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 8.7735,
+      "score": 8.7748,
       "npm_downloads": 138188,
       "pypi_downloads": null,
-      "github_stars": 4295
+      "github_stars": 4308
     },
     "category": "DevOps",
     "vuln_types": [
@@ -60207,7 +60207,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-31",
+    "last_scanned": "2026-09-01",
     "status": "scanned",
     "breakdown": {
       "base": 117.33,
@@ -60748,10 +60748,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.247,
+      "score": 6.2489,
       "npm_downloads": 7389,
       "pypi_downloads": null,
-      "github_stars": 238
+      "github_stars": 239
     },
     "category": "DevOps",
     "vuln_types": [
@@ -61547,7 +61547,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-31",
+    "last_scanned": "2026-09-01",
     "status": "scanned",
     "breakdown": {
       "base": 296.67,
@@ -61570,10 +61570,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.5903,
+      "score": 6.591,
       "npm_downloads": 5784,
       "pypi_downloads": null,
-      "github_stars": 672
+      "github_stars": 673
     },
     "category": "DevOps",
     "vuln_types": [
@@ -61697,7 +61697,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-31",
+    "last_scanned": "2026-09-01",
     "status": "scanned",
     "breakdown": {
       "base": 42.67,
@@ -62073,7 +62073,7 @@
   {
     "server": "io.github.nteract/semiotic",
     "display_name": "io.github.nteract / semiotic",
-    "version": "3.9.1",
+    "version": "3.9.2",
     "scoring_model": "mrs-v1",
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
@@ -62100,10 +62100,10 @@
     "confidence": 0.9,
     "vulnerable_deps": 1,
     "tools_detail": [],
-    "findings": 17,
+    "findings": 13,
     "low_findings": 0,
     "by_severity": {
-      "critical": 17,
+      "critical": 13,
       "high": 0,
       "medium": 0,
       "low": 0
@@ -62206,46 +62206,18 @@
         "title": "Dynamic shell command execution",
         "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
         "confidence": 0.9
-      },
-      {
-        "rule_id": "S006",
-        "severity": "critical",
-        "title": "Dynamic shell command execution",
-        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
-        "confidence": 0.9
-      },
-      {
-        "rule_id": "S006",
-        "severity": "critical",
-        "title": "Dynamic shell command execution",
-        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
-        "confidence": 0.9
-      },
-      {
-        "rule_id": "S006",
-        "severity": "critical",
-        "title": "Dynamic shell command execution",
-        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
-        "confidence": 0.9
-      },
-      {
-        "rule_id": "S006",
-        "severity": "critical",
-        "title": "Dynamic shell command execution",
-        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
-        "confidence": 0.9
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-31",
+    "last_scanned": "2026-09-01",
     "status": "scanned",
     "breakdown": {
-      "base": 56.67,
+      "base": 43.33,
       "aars": 0.0,
-      "capability_term": 28.33,
+      "capability_term": 21.67,
       "thm": 1.0,
       "dep_risk": 0.4,
-      "weighted_findings": 170,
+      "weighted_findings": 130,
       "driver": "findings"
     }
   },
@@ -62478,7 +62450,7 @@
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
     "scan_coverage": "package-only",
-    "trending": false,
+    "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
       "score": 5.8278,
@@ -64002,7 +63974,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-30",
+    "last_scanned": "2026-09-01",
     "status": "scanned",
     "breakdown": {
       "base": 464.33,
@@ -64017,7 +63989,7 @@
   {
     "server": "io.github.zereight/gitlab-mcp",
     "display_name": "io.github.zereight / gitlab-mcp",
-    "version": "2.1.54",
+    "version": "2.1.56",
     "scoring_model": "mrs-v1",
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
@@ -64025,10 +63997,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 8.3798,
+      "score": 8.38,
       "npm_downloads": 123899,
       "pypi_downloads": null,
-      "github_stars": 1934
+      "github_stars": 1935
     },
     "category": "DevOps",
     "vuln_types": [
@@ -65385,7 +65357,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-08-31",
+    "last_scanned": "2026-09-01",
     "status": "scanned",
     "breakdown": {
       "base": 268.0,
@@ -68228,10 +68200,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.2526,
+      "score": 6.2515,
       "npm_downloads": 4707,
       "pypi_downloads": null,
-      "github_stars": 379
+      "github_stars": 378
     },
     "category": "DevOps",
     "vuln_types": [],
