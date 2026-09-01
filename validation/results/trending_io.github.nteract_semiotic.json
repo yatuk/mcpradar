@@ -34,11 +34,11 @@
       "title": "Dynamic JavaScript execution",
       "description": "Dynamic JavaScript execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-pm95ne_h/package/ai/dist/mcp-server.js:2947",
+      "target": "/tmp/mcpradar-enrich-myjynwpn/package/ai/dist/mcp-server.js:6",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 2947,
+        "line": 6,
         "language": "javascript"
       },
       "confidence": 0.9
@@ -48,11 +48,11 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-pm95ne_h/package/ai/dist/mcp-server.js:2798",
+      "target": "/tmp/mcpradar-enrich-myjynwpn/package/ai/dist/mcp-server.js:6",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 2798,
+        "line": 6,
         "language": "javascript"
       },
       "confidence": 0.9
@@ -62,11 +62,11 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-pm95ne_h/package/ai/dist/mcp-server.js:6680",
+      "target": "/tmp/mcpradar-enrich-myjynwpn/package/ai/dist/mcp-server.js:9",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 6680,
+        "line": 9,
         "language": "javascript"
       },
       "confidence": 0.9
@@ -76,63 +76,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-pm95ne_h/package/ai/dist/mcp-server.js:6700",
-      "location": "source",
-      "evidence": "",
-      "detail": {
-        "line": 6700,
-        "language": "javascript"
-      },
-      "confidence": 0.9
-    },
-    {
-      "rule_id": "S006",
-      "title": "Dynamic shell command execution",
-      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
-      "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-pm95ne_h/package/ai/dist/mcp-server.js:6731",
-      "location": "source",
-      "evidence": "",
-      "detail": {
-        "line": 6731,
-        "language": "javascript"
-      },
-      "confidence": 0.9
-    },
-    {
-      "rule_id": "S006",
-      "title": "Dynamic shell command execution",
-      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
-      "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-pm95ne_h/package/ai/dist/mcp-server.js:6732",
-      "location": "source",
-      "evidence": "",
-      "detail": {
-        "line": 6732,
-        "language": "javascript"
-      },
-      "confidence": 0.9
-    },
-    {
-      "rule_id": "S006",
-      "title": "Dynamic shell command execution",
-      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
-      "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-pm95ne_h/package/ai/dist/mcp-server.js:6973",
-      "location": "source",
-      "evidence": "",
-      "detail": {
-        "line": 6973,
-        "language": "javascript"
-      },
-      "confidence": 0.9
-    },
-    {
-      "rule_id": "S006",
-      "title": "Dynamic shell command execution",
-      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
-      "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-pm95ne_h/package/dist/c-4TWEX5HG.min.js:1",
+      "target": "/tmp/mcpradar-enrich-myjynwpn/package/dist/c-3SCUN5HI.min.js:1",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -146,7 +90,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-pm95ne_h/package/dist/c-74HEEZGK.min.js:1",
+      "target": "/tmp/mcpradar-enrich-myjynwpn/package/dist/c-ALYR5LKK.min.js:1",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -160,7 +104,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-pm95ne_h/package/dist/c-GPYOFETM.min.js:1",
+      "target": "/tmp/mcpradar-enrich-myjynwpn/package/dist/c-BYDPC44I.min.js:1",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -174,7 +118,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-pm95ne_h/package/dist/c-KG3NXHAL.min.js:1",
+      "target": "/tmp/mcpradar-enrich-myjynwpn/package/dist/c-DPMVAUAW.min.js:1",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -188,7 +132,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-pm95ne_h/package/dist/c-LIXGXMNS.min.js:1",
+      "target": "/tmp/mcpradar-enrich-myjynwpn/package/dist/c-ECJCKLYY.min.js:1",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -202,7 +146,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-pm95ne_h/package/dist/c-LVEY6D6B.min.js:1",
+      "target": "/tmp/mcpradar-enrich-myjynwpn/package/dist/c-GYOQCEFP.min.js:1",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -216,7 +160,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-pm95ne_h/package/dist/c-OXYMVK7Q.min.js:1",
+      "target": "/tmp/mcpradar-enrich-myjynwpn/package/dist/c-LF5BZFNC.min.js:1",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -230,7 +174,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-pm95ne_h/package/dist/c-US5ZFT6E.min.js:1",
+      "target": "/tmp/mcpradar-enrich-myjynwpn/package/dist/c-SFDIIU5G.min.js:1",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -244,7 +188,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-pm95ne_h/package/dist/c-X5UBGU2V.min.js:1",
+      "target": "/tmp/mcpradar-enrich-myjynwpn/package/dist/c-X5UBGU2V.min.js:1",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -258,7 +202,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-pm95ne_h/package/dist/components/charts/physics/chainReactionRuntime.d.ts:36",
+      "target": "/tmp/mcpradar-enrich-myjynwpn/package/dist/components/charts/physics/chainReactionRuntime.d.ts:36",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -272,10 +216,10 @@
     "total_tools": 0
   },
   "name": "io.github.nteract/semiotic",
-  "target": "npx -y semiotic@3.9.1",
-  "version": "3.9.1",
-  "scanned_at": "2026-08-31T12:32:01.516112+00:00",
-  "last_attempted_at": "2026-08-31T12:32:01.516112+00:00",
+  "target": "npx -y semiotic@3.9.2",
+  "version": "3.9.2",
+  "scanned_at": "2026-09-01T11:03:09.129023+00:00",
+  "last_attempted_at": "2026-09-01T11:03:09.129023+00:00",
   "trending": true,
   "popularity": {
     "method": "registry-packages/npm-pypi-github",
@@ -292,7 +236,7 @@
   "enriched_ref": "npm:semiotic",
   "package_scan": {
     "ok": true,
-    "note": "+18 findings from npm:semiotic"
+    "note": "+14 findings from npm:semiotic"
   },
   "status": "scanned",
   "scan_coverage": "package-only"
