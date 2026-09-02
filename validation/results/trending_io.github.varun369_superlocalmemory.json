@@ -33,6 +33,33 @@
     {
       "rule_id": "D001",
       "title": "Known-vulnerable dependency (OSV)",
+      "description": "transformers@5.5.4 (PyPI) is affected by CVE-2026-9856: Transformers save_pretrained path traversal allows arbitrary file writes through chat template names",
+      "severity": "high",
+      "target": "transformers@5.5.4",
+      "location": "pyproject.toml",
+      "evidence": "",
+      "detail": {
+        "package": "transformers",
+        "version": "5.5.4",
+        "ecosystem": "PyPI",
+        "osv_id": "GHSA-xrqw-3rrv-vx5w",
+        "cve": "CVE-2026-9856",
+        "cvss": 7.1,
+        "cwe_ids": [
+          "CWE-22"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-9856",
+          "https://github.com/huggingface/transformers/pull/46191",
+          "https://github.com/huggingface/transformers/commit/eaaaf8494dd5386634ae37d1d122212fdc315be5"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
       "description": "torch@2.11.0 (PyPI) is affected by CVE-2025-3000: PyTorch is vulnerable to memory corruption through its torch.jit.script function",
       "severity": "low",
       "target": "torch@2.11.0",
@@ -60,8 +87,8 @@
     {
       "rule_id": "D001",
       "title": "Known-vulnerable dependency (OSV)",
-      "description": "nltk@3.10.0 (PyPI) is affected by CVE-2026-62383: PYSEC-2026-3726",
-      "severity": "medium",
+      "description": "nltk@3.10.0 (PyPI) is affected by CVE-2026-78680: NLTK: Uncontrolled search path when invoking the Graphviz 'dot' binary",
+      "severity": "high",
       "target": "nltk@3.10.0",
       "location": "pyproject.toml",
       "evidence": "",
@@ -69,14 +96,18 @@
         "package": "nltk",
         "version": "3.10.0",
         "ecosystem": "PyPI",
-        "osv_id": "PYSEC-2026-3726",
-        "cve": "CVE-2026-62383",
-        "cvss": null,
-        "cwe_ids": [],
+        "osv_id": "GHSA-6hwm-xvph-95vm",
+        "cve": "CVE-2026-78680",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-426",
+          "CWE-427"
+        ],
         "fixed_version": null,
         "references": [
-          "https://www.vulncheck.com/advisories/nltk-ipipancorpusreader-symlink-arbitrary-file-read",
-          "https://github.com/nltk/nltk/security/advisories/GHSA-3hhw-38pf-pxj6"
+          "https://github.com/nltk/nltk/security/advisories/GHSA-6hwm-xvph-95vm",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-78680",
+          "https://github.com/nltk/nltk/commit/1a3cd1764ab3deb084fb66d0ffb4873717659538"
         ]
       },
       "confidence": 0.9
@@ -86,7 +117,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-8w2ws0b5/package/scripts/postinstall-interactive.js:239",
+      "target": "/tmp/mcpradar-enrich-unu5hvx9/package/scripts/postinstall-interactive.js:239",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -100,7 +131,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-8w2ws0b5/package/scripts/postinstall.js:63",
+      "target": "/tmp/mcpradar-enrich-unu5hvx9/package/scripts/postinstall.js:63",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -114,7 +145,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-8w2ws0b5/package/scripts/postinstall.js:148",
+      "target": "/tmp/mcpradar-enrich-unu5hvx9/package/scripts/postinstall.js:148",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -128,7 +159,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-8w2ws0b5/package/scripts/postinstall.js:165",
+      "target": "/tmp/mcpradar-enrich-unu5hvx9/package/scripts/postinstall.js:165",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -142,7 +173,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-8w2ws0b5/package/scripts/postinstall.js:184",
+      "target": "/tmp/mcpradar-enrich-unu5hvx9/package/scripts/postinstall.js:184",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -3045,8 +3076,8 @@
   "name": "io.github.varun369/superlocalmemory",
   "target": "npx -y superlocalmemory@2.7.5",
   "version": "2.7.5",
-  "scanned_at": "2026-09-01T11:03:43.954408+00:00",
-  "last_attempted_at": "2026-09-01T11:03:43.954408+00:00",
+  "scanned_at": "2026-09-02T10:36:56.237407+00:00",
+  "last_attempted_at": "2026-09-02T10:36:56.237407+00:00",
   "trending": true,
   "popularity": {
     "method": "registry-packages/npm-pypi-github",
@@ -3063,7 +3094,7 @@
   "enriched_ref": "npm:superlocalmemory",
   "package_scan": {
     "ok": true,
-    "note": "+214 findings from npm:superlocalmemory"
+    "note": "+215 findings from npm:superlocalmemory"
   },
   "status": "scanned",
   "scan_coverage": "package-only"

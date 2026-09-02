@@ -1,0 +1,48 @@
+{
+  "transport": "stdio",
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-qx1q0rdk/package/dist/services/clinical-trials/clinical-trials-service.js:565",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 565,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    }
+  ],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "io.github.cyanheads/clinicaltrialsgov-mcp-server",
+  "target": "npx -y clinicaltrialsgov-mcp-server@2.9.2",
+  "version": "2.9.2",
+  "scanned_at": "2026-09-02T10:37:43.800552+00:00",
+  "last_attempted_at": "2026-09-02T10:37:43.800552+00:00",
+  "trending": true,
+  "popularity": {
+    "method": "registry-packages/npm-pypi-github",
+    "score": 5.4585,
+    "npm_downloads": 3123,
+    "pypi_downloads": null,
+    "github_stars": 91
+  },
+  "live_scan": {
+    "ok": false,
+    "error": "scanner returned no JSON result"
+  },
+  "enriched": true,
+  "enriched_ref": "npm:clinicaltrialsgov-mcp-server",
+  "package_scan": {
+    "ok": true,
+    "note": "+1 findings from npm:clinicaltrialsgov-mcp-server"
+  },
+  "status": "scanned",
+  "scan_coverage": "package-only"
+}

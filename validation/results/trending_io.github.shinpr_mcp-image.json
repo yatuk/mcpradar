@@ -1,0 +1,48 @@
+{
+  "transport": "stdio",
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-7meqzgc3/package/dist/api/seedreamImageClient.js:239",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 239,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    }
+  ],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "io.github.shinpr/mcp-image",
+  "target": "npx -y mcp-image@0.13.1",
+  "version": "0.13.1",
+  "scanned_at": "2026-09-02T10:36:58.818208+00:00",
+  "last_attempted_at": "2026-09-02T10:36:58.818208+00:00",
+  "trending": true,
+  "popularity": {
+    "method": "registry-packages/npm-pypi-github",
+    "score": 5.7525,
+    "npm_downloads": 3579,
+    "pypi_downloads": null,
+    "github_stars": 157
+  },
+  "live_scan": {
+    "ok": false,
+    "error": "scanner returned no JSON result"
+  },
+  "enriched": true,
+  "enriched_ref": "npm:mcp-image",
+  "package_scan": {
+    "ok": true,
+    "note": "+1 findings from npm:mcp-image"
+  },
+  "status": "scanned",
+  "scan_coverage": "package-only"
+}
