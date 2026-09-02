@@ -1,6 +1,31 @@
 [
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.sandbaseai/sandbase-harness",
+    "version": "0.3.8",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 0.0,
+        "scoring_model": "mrs-v1",
+        "grade": "A",
+        "confidence": 1.0,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 7
+        },
+        "last_scanned": "2026-09-01",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "live",
+        "tool_hash": "ca56bf4e05709895",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "io.modelcontextprotocol/server-sequential-thinking",
     "version": "unknown",
     "_meta": {
@@ -592,6 +617,56 @@
           "low": 0
         },
         "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.cyanheads/clinicaltrialsgov-mcp-server",
+    "version": "2.9.2",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 1.3,
+        "scoring_model": "mrs-v1",
+        "grade": "B",
+        "confidence": 0.7,
+        "findings": 1,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 1,
+          "low": 0
+        },
+        "last_scanned": "2026-09-02",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.shinpr/mcp-image",
+    "version": "0.13.1",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 1.3,
+        "scoring_model": "mrs-v1",
+        "grade": "B",
+        "confidence": 0.7,
+        "findings": 1,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 1,
+          "low": 0
+        },
+        "last_scanned": "2026-09-02",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -1366,7 +1441,7 @@
           "medium": 3,
           "low": 0
         },
-        "last_scanned": "2026-09-01",
+        "last_scanned": "2026-09-02",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2202,7 +2277,7 @@
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "io.github.AVIDS2/memorix",
-    "version": "1.8.6",
+    "version": "1.8.7",
     "_meta": {
       "com.github.yatuk.mcpradar/security": {
         "risk_score": 10.0,
@@ -2216,7 +2291,7 @@
           "medium": 532,
           "low": 0
         },
-        "last_scanned": "2026-09-01",
+        "last_scanned": "2026-09-02",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2292,6 +2367,31 @@
           "low": 0
         },
         "last_scanned": "2026-07-18",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.achiya-automation/safari-mcp",
+    "version": "2.17.1",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.79,
+        "findings": 13,
+        "by_severity": {
+          "critical": 6,
+          "high": 0,
+          "medium": 7,
+          "low": 0
+        },
+        "last_scanned": "2026-09-02",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2441,7 +2541,32 @@
           "medium": 2,
           "low": 0
         },
-        "last_scanned": "2026-09-01",
+        "last_scanned": "2026-09-02",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.cyanheads/pubmed-mcp-server",
+    "version": "2.10.4",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.71,
+        "findings": 21,
+        "by_severity": {
+          "critical": 3,
+          "high": 0,
+          "medium": 18,
+          "low": 0
+        },
+        "last_scanned": "2026-09-02",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2476,6 +2601,31 @@
   },
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.nikolai-vysotskyi/trace-mcp",
+    "version": "3.11.0",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.89,
+        "findings": 2024,
+        "by_severity": {
+          "critical": 1956,
+          "high": 2,
+          "medium": 66,
+          "low": 0
+        },
+        "last_scanned": "2026-09-02",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "io.github.nteract/semiotic",
     "version": "3.9.2",
     "_meta": {
@@ -2491,7 +2641,7 @@
           "medium": 0,
           "low": 0
         },
-        "last_scanned": "2026-09-01",
+        "last_scanned": "2026-09-02",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2541,7 +2691,7 @@
           "medium": 36,
           "low": 0
         },
-        "last_scanned": "2026-09-01",
+        "last_scanned": "2026-09-02",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
