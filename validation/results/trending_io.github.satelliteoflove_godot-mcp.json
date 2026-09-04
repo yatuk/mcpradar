@@ -1,0 +1,243 @@
+{
+  "transport": "stdio",
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "ws@8.18.0 (npm) is affected by CVE-2026-45736: ws: Uninitialized memory disclosure; fixed in 8.20.1",
+      "severity": "medium",
+      "target": "ws@8.18.0",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "ws",
+        "version": "8.18.0",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-58qx-3vcg-4xpx",
+        "cve": "CVE-2026-45736",
+        "cvss": 4.4,
+        "cwe_ids": [
+          "CWE-908"
+        ],
+        "fixed_version": "8.20.1",
+        "references": [
+          "https://github.com/websockets/ws/security/advisories/GHSA-58qx-3vcg-4xpx",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-45736",
+          "https://github.com/websockets/ws/commit/c0327ec15a54d701eb6ccefaa8bef328cfc03086"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "vitest@4.0.16 (npm) is affected by CVE-2026-47429: When Vitest UI server is listening, arbitrary file can be read and executed; fixed in 3.2.6",
+      "severity": "critical",
+      "target": "vitest@4.0.16",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "vitest",
+        "version": "4.0.16",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-5xrq-8626-4rwp",
+        "cve": "CVE-2026-47429",
+        "cvss": 9.8,
+        "cwe_ids": [
+          "CWE-22",
+          "CWE-862"
+        ],
+        "fixed_version": "3.2.6",
+        "references": [
+          "https://github.com/vitest-dev/vitest/security/advisories/GHSA-5xrq-8626-4rwp",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-47429",
+          "https://github.com/vitest-dev/vitest/pull/10445"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-n4ndk2ge/package/dist/__tests__/tools/docs.test.js:79",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 79,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-n4ndk2ge/package/dist/__tests__/tools/docs.test.js:84",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 84,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-n4ndk2ge/package/dist/__tests__/tools/docs.test.js:97",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 97,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-n4ndk2ge/package/dist/__tests__/tools/docs.test.js:105",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 105,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-n4ndk2ge/package/dist/__tests__/tools/docs.test.js:131",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 131,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-n4ndk2ge/package/dist/__tests__/tools/docs.test.js:140",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 140,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-n4ndk2ge/package/dist/__tests__/tools/docs.test.js:147",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 147,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-n4ndk2ge/package/dist/__tests__/tools/docs.test.js:155",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 155,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-n4ndk2ge/package/dist/__tests__/tools/docs.test.js:163",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 163,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-n4ndk2ge/package/dist/tools/docs.js:47",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 47,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-n4ndk2ge/package/dist/tools/profiler.js:122",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 122,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    }
+  ],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "io.github.satelliteoflove/godot-mcp",
+  "target": "npx -y @satelliteoflove/godot-mcp@4.1.11",
+  "version": "4.1.11",
+  "scanned_at": "2026-09-04T10:38:26.032934+00:00",
+  "last_attempted_at": "2026-09-04T10:38:26.032934+00:00",
+  "trending": true,
+  "popularity": {
+    "method": "registry-packages/npm-pypi-github",
+    "score": 5.8021,
+    "npm_downloads": 4089,
+    "pypi_downloads": null,
+    "github_stars": 154
+  },
+  "live_scan": {
+    "ok": false,
+    "error": "timeout after 120s"
+  },
+  "enriched": true,
+  "enriched_ref": "npm:@satelliteoflove/godot-mcp",
+  "package_scan": {
+    "ok": true,
+    "note": "+13 findings from npm:@satelliteoflove/godot-mcp"
+  },
+  "status": "scanned",
+  "scan_coverage": "package-only"
+}
