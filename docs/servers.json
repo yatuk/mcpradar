@@ -666,7 +666,7 @@
           "medium": 1,
           "low": 0
         },
-        "last_scanned": "2026-09-07",
+        "last_scanned": "2026-09-08",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -1441,7 +1441,7 @@
           "medium": 3,
           "low": 0
         },
-        "last_scanned": "2026-09-07",
+        "last_scanned": "2026-09-08",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2402,21 +2402,21 @@
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "io.github.artokun/comfyui-mcp",
-    "version": "0.52.199",
+    "version": "0.52.202",
     "_meta": {
       "com.github.yatuk.mcpradar/security": {
         "risk_score": 10.0,
         "scoring_model": "mrs-v1",
         "grade": "F",
         "confidence": 0.82,
-        "findings": 345,
+        "findings": 349,
         "by_severity": {
-          "critical": 214,
+          "critical": 217,
           "high": 0,
-          "medium": 131,
+          "medium": 132,
           "low": 0
         },
-        "last_scanned": "2026-09-07",
+        "last_scanned": "2026-09-08",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2441,7 +2441,7 @@
           "medium": 8,
           "low": 0
         },
-        "last_scanned": "2026-09-07",
+        "last_scanned": "2026-09-08",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2516,7 +2516,7 @@
           "medium": 35,
           "low": 0
         },
-        "last_scanned": "2026-09-07",
+        "last_scanned": "2026-09-08",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2541,7 +2541,7 @@
           "medium": 2,
           "low": 0
         },
-        "last_scanned": "2026-09-07",
+        "last_scanned": "2026-09-08",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2602,21 +2602,21 @@
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "io.github.nikolai-vysotskyi/trace-mcp",
-    "version": "3.22.0",
+    "version": "3.23.2",
     "_meta": {
       "com.github.yatuk.mcpradar/security": {
         "risk_score": 10.0,
         "scoring_model": "mrs-v1",
         "grade": "F",
         "confidence": 0.89,
-        "findings": 3511,
+        "findings": 3514,
         "by_severity": {
-          "critical": 3378,
+          "critical": 3379,
           "high": 4,
-          "medium": 129,
+          "medium": 131,
           "low": 0
         },
-        "last_scanned": "2026-09-07",
+        "last_scanned": "2026-09-08",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2641,7 +2641,7 @@
           "medium": 0,
           "low": 0
         },
-        "last_scanned": "2026-09-07",
+        "last_scanned": "2026-09-08",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2741,7 +2741,7 @@
           "medium": 195,
           "low": 0
         },
-        "last_scanned": "2026-09-07",
+        "last_scanned": "2026-09-08",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -4002,7 +4002,7 @@
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "io.github.shinpr/mcp-local-rag",
-    "version": "0.18.2",
+    "version": "0.18.4",
     "_meta": {
       "com.github.yatuk.mcpradar/security": {
         "risk_score": null,
