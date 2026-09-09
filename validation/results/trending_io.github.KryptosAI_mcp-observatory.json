@@ -1,0 +1,258 @@
+{
+  "transport": "stdio",
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-cnxzzpmn/package/dist/src/auth.js:166",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 166,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-cnxzzpmn/package/dist/src/auth.js:258",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 258,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-cnxzzpmn/package/dist/src/auth.js:277",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 277,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-cnxzzpmn/package/dist/src/checks/runtime-profile.js:26",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 26,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-cnxzzpmn/package/dist/src/checks/skill-scan.js:230",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 230,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-cnxzzpmn/package/dist/src/checks/skill-scan.js:309",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 309,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-cnxzzpmn/package/dist/src/checks/skill-scan.js:418",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 418,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-cnxzzpmn/package/dist/src/ci-issue.js:95",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 95,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-cnxzzpmn/package/dist/src/cli.js:320",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 320,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-cnxzzpmn/package/dist/src/handshake.js:76",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 76,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-cnxzzpmn/package/dist/src/integrations/smithery.js:35",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 35,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S011",
+      "title": "Raw fetched content returned to the agent",
+      "description": "Raw fetched content returned to the agent detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-cnxzzpmn/package/dist/src/integrations/smithery.js:197",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 197,
+        "language": "javascript"
+      },
+      "confidence": 0.5
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-cnxzzpmn/package/dist/src/runtime/monitor.js:155",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 155,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-cnxzzpmn/package/dist/src/telemetry.js:158",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 158,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-cnxzzpmn/package/dist/src/telemetry.js:524",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 524,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-cnxzzpmn/package/dist/src/tools/suggest-servers.js:70",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 70,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    }
+  ],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "io.github.KryptosAI/mcp-observatory",
+  "target": "npx -y @kryptosai/mcp-observatory@1.36.1",
+  "version": "1.36.1",
+  "scanned_at": "2026-09-09T10:52:15.274525+00:00",
+  "last_attempted_at": "2026-09-09T10:52:15.274525+00:00",
+  "trending": true,
+  "popularity": {
+    "method": "registry-packages/npm-pypi-github",
+    "score": 5.2377,
+    "npm_downloads": 1175,
+    "pypi_downloads": null,
+    "github_stars": 146
+  },
+  "live_scan": {
+    "ok": false,
+    "error": "[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[31m│\u001b[0m \u001b[2m309 \u001b[0m \u001b[31m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[31m╰──────────────────────────────────────────────────────────────────────╯\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[1;91mMcpError: \u001b[0mConnection closed \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m╰──────────────────────────────────────────────────────────────────────────╯\u001b[0m \u001b[35m│\u001b[0m \u001b[35m╰──────────────────────────────────────────────────────────────────────────────╯\u001b[0m"
+  },
+  "enriched": true,
+  "enriched_ref": "npm:@kryptosai/mcp-observatory",
+  "package_scan": {
+    "ok": true,
+    "note": "+16 findings from npm:@kryptosai/mcp-observatory"
+  },
+  "status": "scanned",
+  "scan_coverage": "package-only"
+}

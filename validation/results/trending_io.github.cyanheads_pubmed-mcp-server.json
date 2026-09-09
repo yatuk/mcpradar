@@ -7,11 +7,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-dky5znhv/package/dist/mcp-server/tools/definitions/fetch-articles.tool.js:137",
+      "target": "/tmp/mcpradar-enrich-yyraqjjg/package/dist/mcp-server/tools/definitions/fetch-articles.tool.js:173",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 137,
+        "line": 173,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -21,11 +21,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-dky5znhv/package/dist/mcp-server/tools/definitions/fetch-fulltext.tool.js:164",
+      "target": "/tmp/mcpradar-enrich-yyraqjjg/package/dist/mcp-server/tools/definitions/fetch-fulltext.tool.js:165",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 164,
+        "line": 165,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -35,11 +35,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-dky5znhv/package/dist/mcp-server/tools/definitions/fetch-fulltext.tool.js:574",
+      "target": "/tmp/mcpradar-enrich-yyraqjjg/package/dist/mcp-server/tools/definitions/fetch-fulltext.tool.js:628",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 574,
+        "line": 628,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -49,11 +49,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-dky5znhv/package/dist/mcp-server/tools/definitions/fetch-fulltext.tool.js:810",
+      "target": "/tmp/mcpradar-enrich-yyraqjjg/package/dist/mcp-server/tools/definitions/fetch-fulltext.tool.js:891",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 810,
+        "line": 891,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -63,11 +63,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-dky5znhv/package/dist/mcp-server/tools/definitions/fetch-fulltext.tool.js:1440",
+      "target": "/tmp/mcpradar-enrich-yyraqjjg/package/dist/mcp-server/tools/definitions/fetch-fulltext.tool.js:1620",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 1440,
+        "line": 1620,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -77,11 +77,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-dky5znhv/package/dist/mcp-server/tools/definitions/format-citations.tool.js:65",
+      "target": "/tmp/mcpradar-enrich-yyraqjjg/package/dist/mcp-server/tools/definitions/format-citations.tool.js:75",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 65,
+        "line": 75,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -91,7 +91,7 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-dky5znhv/package/dist/services/ncbi/api-client.d.ts:25",
+      "target": "/tmp/mcpradar-enrich-yyraqjjg/package/dist/services/ncbi/api-client.d.ts:25",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -105,7 +105,7 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-dky5znhv/package/dist/services/ncbi/api-client.d.ts:33",
+      "target": "/tmp/mcpradar-enrich-yyraqjjg/package/dist/services/ncbi/api-client.d.ts:33",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -119,11 +119,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-dky5znhv/package/dist/services/ncbi/api-client.js:58",
+      "target": "/tmp/mcpradar-enrich-yyraqjjg/package/dist/services/ncbi/api-client.js:59",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 58,
+        "line": 59,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -133,11 +133,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-dky5znhv/package/dist/services/ncbi/api-client.js:79",
+      "target": "/tmp/mcpradar-enrich-yyraqjjg/package/dist/services/ncbi/api-client.js:80",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 79,
+        "line": 80,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -147,11 +147,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-dky5znhv/package/dist/services/ncbi/api-client.js:119",
+      "target": "/tmp/mcpradar-enrich-yyraqjjg/package/dist/services/ncbi/api-client.js:120",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 119,
+        "line": 120,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -161,7 +161,7 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-dky5znhv/package/dist/services/ncbi/api-client.js:127",
+      "target": "/tmp/mcpradar-enrich-yyraqjjg/package/dist/services/ncbi/api-client.js:127",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -175,7 +175,7 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-dky5znhv/package/dist/services/ncbi/api-client.js:132",
+      "target": "/tmp/mcpradar-enrich-yyraqjjg/package/dist/services/ncbi/api-client.js:132",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -189,7 +189,7 @@
       "title": "Raw fetched content returned to the agent",
       "description": "Raw fetched content returned to the agent detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-dky5znhv/package/dist/services/ncbi/api-client.js:127",
+      "target": "/tmp/mcpradar-enrich-yyraqjjg/package/dist/services/ncbi/api-client.js:127",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -203,7 +203,7 @@
       "title": "Raw fetched content returned to the agent",
       "description": "Raw fetched content returned to the agent detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-dky5znhv/package/dist/services/ncbi/api-client.js:132",
+      "target": "/tmp/mcpradar-enrich-yyraqjjg/package/dist/services/ncbi/api-client.js:132",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -217,7 +217,7 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-dky5znhv/package/dist/services/ncbi/ncbi-service.d.ts:65",
+      "target": "/tmp/mcpradar-enrich-yyraqjjg/package/dist/services/ncbi/ncbi-service.d.ts:65",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -231,11 +231,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-dky5znhv/package/dist/services/ncbi/ncbi-service.js:114",
+      "target": "/tmp/mcpradar-enrich-yyraqjjg/package/dist/services/ncbi/ncbi-service.js:115",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 114,
+        "line": 115,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -245,11 +245,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-dky5znhv/package/dist/services/ncbi/ncbi-service.js:354",
+      "target": "/tmp/mcpradar-enrich-yyraqjjg/package/dist/services/ncbi/ncbi-service.js:359",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 354,
+        "line": 359,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -259,11 +259,11 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-dky5znhv/package/dist/services/ncbi/ncbi-service.js:172",
+      "target": "/tmp/mcpradar-enrich-yyraqjjg/package/dist/services/ncbi/ncbi-service.js:177",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 172,
+        "line": 177,
         "language": "javascript"
       },
       "confidence": 0.9
@@ -273,7 +273,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-dky5znhv/package/dist/services/ncbi/parsing/esummary-parser.js:56",
+      "target": "/tmp/mcpradar-enrich-yyraqjjg/package/dist/services/ncbi/parsing/esummary-parser.js:56",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -287,11 +287,11 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-dky5znhv/package/dist/services/openalex/openalex-service.js:53",
+      "target": "/tmp/mcpradar-enrich-yyraqjjg/package/dist/services/openalex/openalex-service.js:54",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 53,
+        "line": 54,
         "language": "javascript"
       },
       "confidence": 0.9
@@ -301,17 +301,17 @@
     "total_tools": 0
   },
   "name": "io.github.cyanheads/pubmed-mcp-server",
-  "target": "npx -y @cyanheads/pubmed-mcp-server@2.10.4",
-  "version": "2.10.4",
-  "scanned_at": "2026-09-02T10:37:12.805217+00:00",
-  "last_attempted_at": "2026-09-02T10:37:12.805217+00:00",
-  "trending": false,
+  "target": "npx -y @cyanheads/pubmed-mcp-server@2.10.7",
+  "version": "2.10.7",
+  "scanned_at": "2026-09-09T10:51:47.367616+00:00",
+  "last_attempted_at": "2026-09-09T10:51:47.367616+00:00",
+  "trending": true,
   "popularity": {
     "method": "registry-packages/npm-pypi-github",
-    "score": 5.5496,
-    "npm_downloads": 2478,
+    "score": 5.5488,
+    "npm_downloads": 2374,
     "pypi_downloads": null,
-    "github_stars": 142
+    "github_stars": 148
   },
   "live_scan": {
     "ok": false,
