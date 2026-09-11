@@ -5,28 +5,28 @@
   "summary": {
     "total_tools": 0
   },
-  "name": "io.github.shinpr/mcp-local-rag",
-  "target": "npx -y mcp-local-rag@0.18.4",
-  "version": "0.18.4",
-  "scanned_at": "2026-09-10T10:35:44.999914+00:00",
-  "last_attempted_at": "2026-09-10T10:35:44.999914+00:00",
-  "trending": false,
+  "name": "io.github.razzant/claudexor",
+  "target": "npx -y claudexor@3.9.5",
+  "version": "3.9.5",
+  "scanned_at": "2026-09-11T10:41:57.000985+00:00",
+  "last_attempted_at": "2026-09-11T10:41:57.000985+00:00",
+  "trending": true,
   "popularity": {
     "method": "registry-packages/npm-pypi-github",
-    "score": 6.1127,
-    "npm_downloads": 3331,
+    "score": 5.4552,
+    "npm_downloads": 640,
     "pypi_downloads": null,
-    "github_stars": 388
+    "github_stars": 444
   },
   "live_scan": {
     "ok": false,
     "error": "[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[31m│\u001b[0m \u001b[2m309 \u001b[0m \u001b[31m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[31m╰──────────────────────────────────────────────────────────────────────╯\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[1;91mMcpError: \u001b[0mConnection closed \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m╰──────────────────────────────────────────────────────────────────────────╯\u001b[0m \u001b[35m│\u001b[0m \u001b[35m╰──────────────────────────────────────────────────────────────────────────────╯\u001b[0m"
   },
   "enriched": true,
-  "enriched_ref": "npm:mcp-local-rag",
+  "enriched_ref": "npm:claudexor",
   "package_scan": {
     "ok": true,
-    "note": "+0 findings from npm:mcp-local-rag"
+    "note": "+0 findings from npm:claudexor"
   },
   "status": "incomplete",
   "incomplete": true,

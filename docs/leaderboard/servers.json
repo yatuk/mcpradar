@@ -691,7 +691,7 @@
           "medium": 1,
           "low": 0
         },
-        "last_scanned": "2026-09-10",
+        "last_scanned": "2026-09-11",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -1891,7 +1891,7 @@
           "medium": 0,
           "low": 0
         },
-        "last_scanned": "2026-09-10",
+        "last_scanned": "2026-09-11",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -1902,7 +1902,7 @@
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "io.github.putervision/state-memory-mcp",
-    "version": "1.0.0",
+    "version": "1.1.1",
     "_meta": {
       "com.github.yatuk.mcpradar/security": {
         "risk_score": 5.0,
@@ -1916,7 +1916,7 @@
           "medium": 0,
           "low": 0
         },
-        "last_scanned": "2026-09-09",
+        "last_scanned": "2026-09-11",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2251,6 +2251,31 @@
   },
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "com.execbro/execbro",
+    "version": "2.12.0",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": 10.0,
+        "scoring_model": "mrs-v1",
+        "grade": "F",
+        "confidence": 0.85,
+        "findings": 60,
+        "by_severity": {
+          "critical": 48,
+          "high": 0,
+          "medium": 12,
+          "low": 0
+        },
+        "last_scanned": "2026-09-11",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "package-only",
+        "tool_hash": "",
+        "status": "scanned"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "eslint-mcp-server",
     "version": "unknown",
     "_meta": {
@@ -2366,7 +2391,7 @@
           "medium": 0,
           "low": 0
         },
-        "last_scanned": "2026-09-09",
+        "last_scanned": "2026-09-11",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2391,7 +2416,7 @@
           "medium": 63,
           "low": 0
         },
-        "last_scanned": "2026-08-15",
+        "last_scanned": "2026-09-11",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2541,7 +2566,7 @@
           "medium": 14,
           "low": 0
         },
-        "last_scanned": "2026-09-10",
+        "last_scanned": "2026-09-11",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2641,7 +2666,7 @@
           "medium": 2,
           "low": 0
         },
-        "last_scanned": "2026-09-10",
+        "last_scanned": "2026-09-11",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2702,21 +2727,21 @@
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "io.github.nikolai-vysotskyi/trace-mcp",
-    "version": "3.23.2",
+    "version": "3.25.0",
     "_meta": {
       "com.github.yatuk.mcpradar/security": {
         "risk_score": 10.0,
         "scoring_model": "mrs-v1",
         "grade": "F",
         "confidence": 0.89,
-        "findings": 3514,
+        "findings": 3558,
         "by_severity": {
-          "critical": 3379,
+          "critical": 3423,
           "high": 4,
           "medium": 131,
           "low": 0
         },
-        "last_scanned": "2026-09-08",
+        "last_scanned": "2026-09-11",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -4053,6 +4078,31 @@
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "io.github.coinrule-com/coinrule-mcp",
     "version": "1.0.0",
+    "_meta": {
+      "com.github.yatuk.mcpradar/security": {
+        "risk_score": null,
+        "scoring_model": "mrs-v1",
+        "grade": "-",
+        "confidence": null,
+        "findings": 0,
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "last_scanned": "-",
+        "scanner_version": "1.1.0-rc1",
+        "scan_coverage": "incomplete",
+        "tool_hash": "",
+        "status": "incomplete"
+      }
+    }
+  },
+  {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.razzant/claudexor",
+    "version": "3.9.5",
     "_meta": {
       "com.github.yatuk.mcpradar/security": {
         "risk_score": null,
