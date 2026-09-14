@@ -1,0 +1,171 @@
+{
+  "transport": "stdio",
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "@modelcontextprotocol/sdk@1.0.4 (npm) is affected by CVE-2025-66414: Model Context Protocol (MCP) TypeScript SDK does not enable DNS rebinding protection by default; fixed in 1.24.0",
+      "severity": "high",
+      "target": "@modelcontextprotocol/sdk@1.0.4",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "@modelcontextprotocol/sdk",
+        "version": "1.0.4",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-w48q-cv73-mx4w",
+        "cve": "CVE-2025-66414",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-1188",
+          "CWE-350"
+        ],
+        "fixed_version": "1.24.0",
+        "references": [
+          "https://github.com/modelcontextprotocol/typescript-sdk/security/advisories/GHSA-w48q-cv73-mx4w",
+          "https://nvd.nist.gov/vuln/detail/CVE-2025-66414",
+          "https://github.com/modelcontextprotocol/typescript-sdk/pull/1205"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "tsup@8.1.0 (npm) is affected by CVE-2024-53384: tsup DOM Clobbering vulnerability",
+      "severity": "low",
+      "target": "tsup@8.1.0",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "tsup",
+        "version": "8.1.0",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-3mv9-4h5g-vhg3",
+        "cve": "CVE-2024-53384",
+        "cvss": 2.0,
+        "cwe_ids": [
+          "CWE-79"
+        ],
+        "fixed_version": null,
+        "references": [
+          "https://nvd.nist.gov/vuln/detail/CVE-2024-53384",
+          "https://gist.github.com/jackfromeast/36f98bf7542d11835c883c1d175d9b92",
+          "https://github.com/egoist/tsup"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "vitest@3.2.7 (npm) is affected by CVE-2026-84373: Vitest: Path Traversal / Arbitrary File Read via @vitest/mocker Redirect Mock; fixed in 5.0.0-rc.2",
+      "severity": "medium",
+      "target": "vitest@3.2.7",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "vitest",
+        "version": "3.2.7",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-82fw-gwwq-j7x9",
+        "cve": "CVE-2026-84373",
+        "cvss": 5.9,
+        "cwe_ids": [
+          "CWE-22"
+        ],
+        "fixed_version": "5.0.0-rc.2",
+        "references": [
+          "https://github.com/vitest-dev/vitest/security/advisories/GHSA-82fw-gwwq-j7x9",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-84373",
+          "https://github.com/vitest-dev/vitest/pull/10972"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "sharp@0.35.3 (npm) is affected by GHSA-rgj7-g3m4-5g8c: sharp: Vulnerabilities in libheif: GHSA-g89c-p67h-r497 and GHSA-2jg2-4ch7-h545; fixed in 0.35.4",
+      "severity": "high",
+      "target": "sharp@0.35.3",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "sharp",
+        "version": "0.35.3",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-rgj7-g3m4-5g8c",
+        "cve": "GHSA-rgj7-g3m4-5g8c",
+        "cvss": 7.5,
+        "cwe_ids": [
+          "CWE-122"
+        ],
+        "fixed_version": "0.35.4",
+        "references": [
+          "https://github.com/lovell/sharp/security/advisories/GHSA-rgj7-g3m4-5g8c",
+          "https://github.com/strukturag/libheif/security/advisories/GHSA-2jg2-4ch7-h545",
+          "https://github.com/strukturag/libheif/security/advisories/GHSA-g89c-p67h-r497"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-p2snkykd/package/dist/cli.js:3126",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 3126,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-p2snkykd/package/dist/index.js:3102",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 3102,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    }
+  ],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "io.github.putervision/vision-memory-mcp",
+  "target": "npx -y @putervision/vision-memory-mcp@1.1.1",
+  "version": "1.1.1",
+  "scanned_at": "2026-09-14T11:35:44.709779+00:00",
+  "last_attempted_at": "2026-09-14T11:35:44.709779+00:00",
+  "trending": true,
+  "popularity": {
+    "method": "registry-packages/npm-pypi-github",
+    "score": 6.0185,
+    "npm_downloads": 14907,
+    "pypi_downloads": null,
+    "github_stars": 69
+  },
+  "live_scan": {
+    "ok": false,
+    "error": "[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[31m│\u001b[0m \u001b[2m309 \u001b[0m \u001b[31m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[31m╰──────────────────────────────────────────────────────────────────────╯\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[1;91mMcpError: \u001b[0mConnection closed \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m╰──────────────────────────────────────────────────────────────────────────╯\u001b[0m \u001b[35m│\u001b[0m \u001b[35m╰──────────────────────────────────────────────────────────────────────────────╯\u001b[0m"
+  },
+  "enriched": true,
+  "enriched_ref": "npm:@putervision/vision-memory-mcp",
+  "package_scan": {
+    "ok": true,
+    "note": "+6 findings from npm:@putervision/vision-memory-mcp"
+  },
+  "status": "scanned",
+  "scan_coverage": "package-only"
+}

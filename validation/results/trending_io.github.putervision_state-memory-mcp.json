@@ -89,7 +89,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-byyyrb5m/package/dist/index.js:2142",
+      "target": "/tmp/mcpradar-enrich-1cqmjz63/package/dist/index.js:2142",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -105,15 +105,15 @@
   "name": "io.github.putervision/state-memory-mcp",
   "target": "npx -y @putervision/state-memory-mcp@1.1.1",
   "version": "1.1.1",
-  "scanned_at": "2026-09-13T11:00:20.982464+00:00",
-  "last_attempted_at": "2026-09-13T11:00:20.982464+00:00",
+  "scanned_at": "2026-09-14T11:35:27.586490+00:00",
+  "last_attempted_at": "2026-09-14T11:35:27.586490+00:00",
   "trending": true,
   "popularity": {
     "method": "registry-packages/npm-pypi-github",
-    "score": 6.1182,
+    "score": 6.1231,
     "npm_downloads": 14917,
     "pypi_downloads": null,
-    "github_stars": 87
+    "github_stars": 88
   },
   "live_scan": {
     "ok": false,
