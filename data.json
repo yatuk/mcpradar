@@ -11156,6 +11156,94 @@
     }
   },
   {
+    "server": "io.github.putervision/vision-memory-mcp",
+    "display_name": "io.github.putervision / vision-memory-mcp",
+    "version": "1.1.1",
+    "scoring_model": "mrs-v1",
+    "tools": 0,
+    "scanner_version": "1.1.0-rc1",
+    "scan_coverage": "package-only",
+    "trending": true,
+    "popularity": {
+      "method": "registry-packages/npm-pypi-github",
+      "score": 6.0185,
+      "npm_downloads": 14907,
+      "pypi_downloads": null,
+      "github_stars": 69
+    },
+    "category": "AI/ML",
+    "vuln_types": [
+      "Dependency Vulnerability",
+      "Source-Code Risk"
+    ],
+    "history": [],
+    "api_free": false,
+    "risk_score": 2.7,
+    "grade": "B",
+    "aars": 0.0,
+    "capability": "pure_compute",
+    "confidence": 0.82,
+    "vulnerable_deps": 4,
+    "tools_detail": [],
+    "findings": 2,
+    "low_findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 2,
+      "low": 0
+    },
+    "findings_detail": [
+      {
+        "rule_id": "D001",
+        "severity": "high",
+        "title": "Known-vulnerable dependency (OSV)",
+        "description": "@modelcontextprotocol/sdk@1.0.4 (npm) is affected by CVE-2025-66414: Model Context Protocol (MCP) TypeScript SDK does no",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "D001",
+        "severity": "medium",
+        "title": "Known-vulnerable dependency (OSV)",
+        "description": "vitest@3.2.7 (npm) is affected by CVE-2026-84373: Vitest: Path Traversal / Arbitrary File Read via @vitest/mocker Redire",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "D001",
+        "severity": "high",
+        "title": "Known-vulnerable dependency (OSV)",
+        "description": "sharp@0.35.3 (npm) is affected by GHSA-rgj7-g3m4-5g8c: sharp: Vulnerabilities in libheif: GHSA-g89c-p67h-r497 and GHSA-2",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Dynamic outbound URL",
+        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Dynamic outbound URL",
+        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+        "confidence": 0.7
+      }
+    ],
+    "tool_hash": "",
+    "last_scanned": "2026-09-14",
+    "status": "scanned",
+    "breakdown": {
+      "base": 2.67,
+      "aars": 0.0,
+      "capability_term": 1.33,
+      "thm": 1.0,
+      "dep_risk": 0.95,
+      "weighted_findings": 8,
+      "driver": "findings"
+    }
+  },
+  {
     "server": "@modelcontextprotocol/server-github",
     "display_name": "modelcontextprotocol / server-github",
     "version": "",
@@ -25674,10 +25762,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.6189,
+      "score": 6.6203,
       "npm_downloads": 13285,
       "pypi_downloads": null,
-      "github_stars": 312
+      "github_stars": 313
     },
     "category": "Other",
     "vuln_types": [
@@ -25739,7 +25827,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-09-13",
+    "last_scanned": "2026-09-14",
     "status": "scanned",
     "breakdown": {
       "base": 4.0,
@@ -43551,7 +43639,7 @@
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
     "scan_coverage": "package-only",
-    "trending": true,
+    "trending": false,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
       "score": 6.5514,
@@ -43613,10 +43701,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.1182,
+      "score": 6.1231,
       "npm_downloads": 14917,
       "pypi_downloads": null,
-      "github_stars": 87
+      "github_stars": 88
     },
     "category": "AI/ML",
     "vuln_types": [
@@ -43664,7 +43752,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-09-13",
+    "last_scanned": "2026-09-14",
     "status": "scanned",
     "breakdown": {
       "base": 5.0,
@@ -47719,7 +47807,7 @@
   {
     "server": "io.github.AVIDS2/memorix",
     "display_name": "io.github.AVIDS2 / memorix",
-    "version": "1.9.2",
+    "version": "1.9.3",
     "scoring_model": "mrs-v1",
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
@@ -47727,10 +47815,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 7.251,
+      "score": 7.2544,
       "npm_downloads": 23392,
       "pypi_downloads": null,
-      "github_stars": 761
+      "github_stars": 767
     },
     "category": "DevOps",
     "vuln_types": [
@@ -57452,7 +57540,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-09-13",
+    "last_scanned": "2026-09-14",
     "status": "scanned",
     "breakdown": {
       "base": 3547.33,
@@ -59039,10 +59127,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 7.5106,
+      "score": 7.5117,
       "npm_downloads": 43607,
       "pypi_downloads": null,
-      "github_stars": 742
+      "github_stars": 744
     },
     "category": "DevOps",
     "vuln_types": [
@@ -61512,7 +61600,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-09-13",
+    "last_scanned": "2026-09-14",
     "status": "scanned",
     "breakdown": {
       "base": 898.0,
@@ -61651,10 +61739,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 8.6903,
+      "score": 8.6917,
       "npm_downloads": 107534,
       "pypi_downloads": null,
-      "github_stars": 4557
+      "github_stars": 4571
     },
     "category": "DevOps",
     "vuln_types": [
@@ -62086,7 +62174,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-09-13",
+    "last_scanned": "2026-09-14",
     "status": "scanned",
     "breakdown": {
       "base": 165.33,
@@ -63449,7 +63537,7 @@
   {
     "server": "io.github.cyanheads/obsidian-mcp-server",
     "display_name": "io.github.cyanheads / obsidian-mcp-server",
-    "version": "3.5.2",
+    "version": "3.5.3",
     "scoring_model": "mrs-v1",
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
@@ -63457,10 +63545,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.6246,
+      "score": 6.6259,
       "npm_downloads": 6222,
       "pypi_downloads": null,
-      "github_stars": 676
+      "github_stars": 678
     },
     "category": "DevOps",
     "vuln_types": [
@@ -63577,7 +63665,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-09-13",
+    "last_scanned": "2026-09-14",
     "status": "scanned",
     "breakdown": {
       "base": 39.33,
@@ -89268,7 +89356,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-09-13",
+    "last_scanned": "2026-09-14",
     "status": "scanned",
     "breakdown": {
       "base": 46.67,
@@ -91193,7 +91281,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-09-13",
+    "last_scanned": "2026-09-14",
     "status": "scanned",
     "breakdown": {
       "base": 286.67,
