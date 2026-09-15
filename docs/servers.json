@@ -1016,7 +1016,7 @@
           "medium": 2,
           "low": 0
         },
-        "last_scanned": "2026-09-14",
+        "last_scanned": "2026-09-15",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -1491,7 +1491,7 @@
           "medium": 3,
           "low": 0
         },
-        "last_scanned": "2026-09-14",
+        "last_scanned": "2026-09-15",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -1941,7 +1941,7 @@
           "medium": 0,
           "low": 0
         },
-        "last_scanned": "2026-09-14",
+        "last_scanned": "2026-09-15",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2391,7 +2391,7 @@
           "medium": 532,
           "low": 0
         },
-        "last_scanned": "2026-09-14",
+        "last_scanned": "2026-09-15",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2541,7 +2541,7 @@
           "medium": 131,
           "low": 0
         },
-        "last_scanned": "2026-09-14",
+        "last_scanned": "2026-09-15",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2577,21 +2577,21 @@
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "io.github.callstack/agent-device",
-    "version": "0.21.0",
+    "version": "0.21.2",
     "_meta": {
       "com.github.yatuk.mcpradar/security": {
         "risk_score": 10.0,
         "scoring_model": "mrs-v1",
         "grade": "F",
         "confidence": 0.85,
-        "findings": 58,
+        "findings": 60,
         "by_severity": {
-          "critical": 44,
+          "critical": 46,
           "high": 0,
           "medium": 14,
           "low": 0
         },
-        "last_scanned": "2026-09-14",
+        "last_scanned": "2026-09-15",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2691,7 +2691,7 @@
           "medium": 2,
           "low": 0
         },
-        "last_scanned": "2026-09-14",
+        "last_scanned": "2026-09-15",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2791,7 +2791,7 @@
           "medium": 0,
           "low": 0
         },
-        "last_scanned": "2026-09-14",
+        "last_scanned": "2026-09-15",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2891,7 +2891,7 @@
           "medium": 195,
           "low": 0
         },
-        "last_scanned": "2026-09-14",
+        "last_scanned": "2026-09-15",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
