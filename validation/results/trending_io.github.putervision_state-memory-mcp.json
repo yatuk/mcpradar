@@ -5,34 +5,6 @@
     {
       "rule_id": "D001",
       "title": "Known-vulnerable dependency (OSV)",
-      "description": "@modelcontextprotocol/sdk@1.0.4 (npm) is affected by CVE-2025-66414: Model Context Protocol (MCP) TypeScript SDK does not enable DNS rebinding protection by default; fixed in 1.24.0",
-      "severity": "high",
-      "target": "@modelcontextprotocol/sdk@1.0.4",
-      "location": "package.json",
-      "evidence": "",
-      "detail": {
-        "package": "@modelcontextprotocol/sdk",
-        "version": "1.0.4",
-        "ecosystem": "npm",
-        "osv_id": "GHSA-w48q-cv73-mx4w",
-        "cve": "CVE-2025-66414",
-        "cvss": 7.5,
-        "cwe_ids": [
-          "CWE-1188",
-          "CWE-350"
-        ],
-        "fixed_version": "1.24.0",
-        "references": [
-          "https://github.com/modelcontextprotocol/typescript-sdk/security/advisories/GHSA-w48q-cv73-mx4w",
-          "https://nvd.nist.gov/vuln/detail/CVE-2025-66414",
-          "https://github.com/modelcontextprotocol/typescript-sdk/pull/1205"
-        ]
-      },
-      "confidence": 0.9
-    },
-    {
-      "rule_id": "D001",
-      "title": "Known-vulnerable dependency (OSV)",
       "description": "tsup@8.1.0 (npm) is affected by CVE-2024-53384: tsup DOM Clobbering vulnerability",
       "severity": "low",
       "target": "tsup@8.1.0",
@@ -58,29 +30,16 @@
       "confidence": 0.9
     },
     {
-      "rule_id": "D001",
-      "title": "Known-vulnerable dependency (OSV)",
-      "description": "vitest@4.1.10 (npm) is affected by CVE-2026-84373: Vitest: Path Traversal / Arbitrary File Read via @vitest/mocker Redirect Mock; fixed in 5.0.0-rc.2",
-      "severity": "medium",
-      "target": "vitest@4.1.10",
-      "location": "package.json",
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-6ty7tu50/package/dist/chunk-WA5UVFCV.js:173",
+      "location": "source",
       "evidence": "",
       "detail": {
-        "package": "vitest",
-        "version": "4.1.10",
-        "ecosystem": "npm",
-        "osv_id": "GHSA-82fw-gwwq-j7x9",
-        "cve": "CVE-2026-84373",
-        "cvss": 5.9,
-        "cwe_ids": [
-          "CWE-22"
-        ],
-        "fixed_version": "5.0.0-rc.2",
-        "references": [
-          "https://github.com/vitest-dev/vitest/security/advisories/GHSA-82fw-gwwq-j7x9",
-          "https://nvd.nist.gov/vuln/detail/CVE-2026-84373",
-          "https://github.com/vitest-dev/vitest/pull/10972"
-        ]
+        "line": 173,
+        "language": "javascript"
       },
       "confidence": 0.9
     },
@@ -89,11 +48,11 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-nphu99lw/package/dist/index.js:2142",
+      "target": "/tmp/mcpradar-enrich-6ty7tu50/package/dist/index.js:2297",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 2142,
+        "line": 2297,
         "language": "javascript"
       },
       "confidence": 0.9
@@ -103,10 +62,10 @@
     "total_tools": 0
   },
   "name": "io.github.putervision/state-memory-mcp",
-  "target": "npx -y @putervision/state-memory-mcp@1.1.1",
-  "version": "1.1.1",
-  "scanned_at": "2026-09-15T11:02:26.534263+00:00",
-  "last_attempted_at": "2026-09-15T11:02:26.534263+00:00",
+  "target": "npx -y @putervision/state-memory-mcp@1.2.1",
+  "version": "1.2.1",
+  "scanned_at": "2026-09-16T10:47:30.205858+00:00",
+  "last_attempted_at": "2026-09-16T10:47:30.205858+00:00",
   "trending": true,
   "popularity": {
     "method": "registry-packages/npm-pypi-github",
@@ -123,7 +82,7 @@
   "enriched_ref": "npm:@putervision/state-memory-mcp",
   "package_scan": {
     "ok": true,
-    "note": "+4 findings from npm:@putervision/state-memory-mcp"
+    "note": "+3 findings from npm:@putervision/state-memory-mcp"
   },
   "status": "scanned",
   "scan_coverage": "package-only"
