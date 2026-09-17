@@ -5,26 +5,26 @@
     {
       "rule_id": "D001",
       "title": "Known-vulnerable dependency (OSV)",
-      "description": "tsup@8.1.0 (npm) is affected by CVE-2024-53384: tsup DOM Clobbering vulnerability",
-      "severity": "low",
-      "target": "tsup@8.1.0",
+      "description": "valibot@1.4.0 (npm) is affected by CVE-2026-59952: Valibot: record() issue paths can make flatten() throw for inherited Object property names; fixed in 1.4.2",
+      "severity": "medium",
+      "target": "valibot@1.4.0",
       "location": "package.json",
       "evidence": "",
       "detail": {
-        "package": "tsup",
-        "version": "8.1.0",
+        "package": "valibot",
+        "version": "1.4.0",
         "ecosystem": "npm",
-        "osv_id": "GHSA-3mv9-4h5g-vhg3",
-        "cve": "CVE-2024-53384",
-        "cvss": 2.0,
+        "osv_id": "GHSA-5qjj-4xww-7phc",
+        "cve": "CVE-2026-59952",
+        "cvss": 5.0,
         "cwe_ids": [
-          "CWE-79"
+          "CWE-755"
         ],
-        "fixed_version": null,
+        "fixed_version": "1.4.2",
         "references": [
-          "https://nvd.nist.gov/vuln/detail/CVE-2024-53384",
-          "https://gist.github.com/jackfromeast/36f98bf7542d11835c883c1d175d9b92",
-          "https://github.com/egoist/tsup"
+          "https://github.com/open-circle/valibot/security/advisories/GHSA-5qjj-4xww-7phc",
+          "https://github.com/open-circle/valibot/pull/1522",
+          "https://github.com/open-circle/valibot/commit/1bd01c304657cd0809cc92694360b6cc60f700bf"
         ]
       },
       "confidence": 0.9
@@ -34,83 +34,97 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-nyzm2ruc/package/dist/cli.js:3952",
+      "target": "/tmp/mcpradar-enrich-2rucv_o3/package/dist/preset.js:1231",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 3952,
+        "line": 1231,
         "language": "javascript"
       },
       "confidence": 0.7
-    },
-    {
-      "rule_id": "S006",
-      "title": "Dynamic shell command execution",
-      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
-      "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-nyzm2ruc/package/dist/cli.js:2086",
-      "location": "source",
-      "evidence": "",
-      "detail": {
-        "line": 2086,
-        "language": "javascript"
-      },
-      "confidence": 0.9
     },
     {
       "rule_id": "S002",
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-nyzm2ruc/package/dist/index.js:3917",
+      "target": "/tmp/mcpradar-enrich-2rucv_o3/package/dist/preset.js:1295",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 3917,
+        "line": 1295,
         "language": "javascript"
       },
       "confidence": 0.7
     },
     {
-      "rule_id": "S006",
-      "title": "Dynamic shell command execution",
-      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
-      "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-nyzm2ruc/package/dist/index.js:3019",
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-2rucv_o3/package/dist/preset.js:1305",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 3019,
+        "line": 1305,
         "language": "javascript"
       },
-      "confidence": 0.9
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-2rucv_o3/package/dist/preset.js:1387",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 1387,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S010",
+      "title": "Authorization token forwarded downstream",
+      "description": "Authorization token forwarded downstream detected in JavaScript/TypeScript source",
+      "severity": "high",
+      "target": "/tmp/mcpradar-enrich-2rucv_o3/package/dist/preset.js:1305",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 1305,
+        "language": "javascript"
+      },
+      "confidence": 0.7
     }
   ],
   "summary": {
     "total_tools": 0
   },
-  "name": "io.github.putervision/vision-memory-mcp",
-  "target": "npx -y @putervision/vision-memory-mcp@1.2.1",
-  "version": "1.2.1",
-  "scanned_at": "2026-09-16T10:47:31.055506+00:00",
-  "last_attempted_at": "2026-09-16T10:47:31.055506+00:00",
-  "trending": false,
+  "name": "io.github.storybookjs/addon-mcp",
+  "target": "npx -y @storybook/addon-mcp@0.6.0",
+  "version": "0.6.0",
+  "scanned_at": "2026-09-17T10:52:37.258179+00:00",
+  "last_attempted_at": "2026-09-17T10:52:37.258179+00:00",
+  "trending": true,
   "popularity": {
     "method": "registry-packages/npm-pypi-github",
-    "score": 6.0185,
-    "npm_downloads": 14907,
+    "score": 8.6214,
+    "npm_downloads": 1543268,
     "pypi_downloads": null,
-    "github_stars": 69
+    "github_stars": 270
   },
   "live_scan": {
     "ok": false,
     "error": "[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[31m│\u001b[0m \u001b[2m309 \u001b[0m \u001b[31m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[31m╰──────────────────────────────────────────────────────────────────────╯\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[1;91mMcpError: \u001b[0mConnection closed \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m╰──────────────────────────────────────────────────────────────────────────╯\u001b[0m \u001b[35m│\u001b[0m \u001b[35m╰──────────────────────────────────────────────────────────────────────────────╯\u001b[0m"
   },
   "enriched": true,
-  "enriched_ref": "npm:@putervision/vision-memory-mcp",
+  "enriched_ref": "npm:@storybook/addon-mcp",
   "package_scan": {
     "ok": true,
-    "note": "+5 findings from npm:@putervision/vision-memory-mcp"
+    "note": "+6 findings from npm:@storybook/addon-mcp"
   },
   "status": "scanned",
   "scan_coverage": "package-only"

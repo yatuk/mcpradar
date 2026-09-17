@@ -25674,10 +25674,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.6217,
+      "score": 6.6231,
       "npm_downloads": 13285,
       "pypi_downloads": null,
-      "github_stars": 314
+      "github_stars": 315
     },
     "category": "Other",
     "vuln_types": [
@@ -25739,7 +25739,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-09-16",
+    "last_scanned": "2026-09-17",
     "status": "scanned",
     "breakdown": {
       "base": 4.0,
@@ -45038,7 +45038,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-09-16",
+    "last_scanned": "2026-09-17",
     "status": "scanned",
     "breakdown": {
       "base": 6.67,
@@ -45143,6 +45143,101 @@
       "thm": 1.0,
       "dep_risk": 0.55,
       "weighted_findings": 20,
+      "driver": "findings"
+    }
+  },
+  {
+    "server": "io.github.storybookjs/addon-mcp",
+    "display_name": "io.github.storybookjs / addon-mcp",
+    "version": "0.6.0",
+    "scoring_model": "mrs-v1",
+    "tools": 0,
+    "scanner_version": "1.1.0-rc1",
+    "scan_coverage": "package-only",
+    "trending": true,
+    "popularity": {
+      "method": "registry-packages/npm-pypi-github",
+      "score": 8.6214,
+      "npm_downloads": 1543268,
+      "pypi_downloads": null,
+      "github_stars": 270
+    },
+    "category": "DevOps",
+    "vuln_types": [
+      "Dependency Vulnerability",
+      "Source-Code Risk"
+    ],
+    "history": [],
+    "api_free": false,
+    "risk_score": 7.7,
+    "grade": "F",
+    "aars": 0.0,
+    "capability": "pure_compute",
+    "confidence": 0.73,
+    "vulnerable_deps": 1,
+    "tools_detail": [],
+    "findings": 5,
+    "low_findings": 0,
+    "by_severity": {
+      "critical": 0,
+      "high": 1,
+      "medium": 4,
+      "low": 0
+    },
+    "findings_detail": [
+      {
+        "rule_id": "D001",
+        "severity": "medium",
+        "title": "Known-vulnerable dependency (OSV)",
+        "description": "valibot@1.4.0 (npm) is affected by CVE-2026-59952: Valibot: record() issue paths can make flatten() throw for inherited ",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Dynamic outbound URL",
+        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Dynamic outbound URL",
+        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Dynamic outbound URL",
+        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Dynamic outbound URL",
+        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S010",
+        "severity": "high",
+        "title": "Authorization token forwarded downstream",
+        "description": "Authorization token forwarded downstream detected in JavaScript/TypeScript source",
+        "confidence": 0.7
+      }
+    ],
+    "tool_hash": "",
+    "last_scanned": "2026-09-17",
+    "status": "scanned",
+    "breakdown": {
+      "base": 7.67,
+      "aars": 0.0,
+      "capability_term": 3.83,
+      "thm": 1.0,
+      "dep_risk": 0.15,
+      "weighted_findings": 23,
       "driver": "findings"
     }
   },
@@ -45257,7 +45352,7 @@
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
     "scan_coverage": "package-only",
-    "trending": true,
+    "trending": false,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
       "score": 6.0185,
@@ -47801,10 +47896,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 7.2589,
+      "score": 7.2617,
       "npm_downloads": 23392,
       "pypi_downloads": null,
-      "github_stars": 775
+      "github_stars": 780
     },
     "category": "DevOps",
     "vuln_types": [
@@ -57526,7 +57621,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-09-16",
+    "last_scanned": "2026-09-17",
     "status": "scanned",
     "breakdown": {
       "base": 3547.33,
@@ -59113,10 +59208,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 7.514,
+      "score": 7.5158,
       "npm_downloads": 43607,
       "pypi_downloads": null,
-      "github_stars": 748
+      "github_stars": 751
     },
     "category": "DevOps",
     "vuln_types": [
@@ -61586,7 +61681,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-09-16",
+    "last_scanned": "2026-09-17",
     "status": "scanned",
     "breakdown": {
       "base": 898.0,
@@ -61725,10 +61820,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 8.6951,
+      "score": 8.6955,
       "npm_downloads": 107534,
       "pypi_downloads": null,
-      "github_stars": 4607
+      "github_stars": 4612
     },
     "category": "DevOps",
     "vuln_types": [
@@ -62202,7 +62297,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-09-16",
+    "last_scanned": "2026-09-17",
     "status": "scanned",
     "breakdown": {
       "base": 184.33,
@@ -63573,10 +63668,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.6265,
+      "score": 6.6271,
       "npm_downloads": 6222,
       "pypi_downloads": null,
-      "github_stars": 679
+      "github_stars": 680
     },
     "category": "DevOps",
     "vuln_types": [
@@ -63693,7 +63788,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-09-16",
+    "last_scanned": "2026-09-17",
     "status": "scanned",
     "breakdown": {
       "base": 39.33,
@@ -89242,10 +89337,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 7.1163,
+      "score": 7.1165,
       "npm_downloads": 4828,
       "pypi_downloads": null,
-      "github_stars": 2706
+      "github_stars": 2707
     },
     "category": "DevOps",
     "vuln_types": [
@@ -89384,7 +89479,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-09-16",
+    "last_scanned": "2026-09-17",
     "status": "scanned",
     "breakdown": {
       "base": 46.67,
@@ -89851,7 +89946,7 @@
   {
     "server": "io.github.zereight/gitlab-mcp",
     "display_name": "io.github.zereight / gitlab-mcp",
-    "version": "2.1.62",
+    "version": "2.1.63",
     "scoring_model": "mrs-v1",
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
@@ -89859,10 +89954,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 8.2106,
+      "score": 8.2115,
       "npm_downloads": 82103,
       "pypi_downloads": null,
-      "github_stars": 1977
+      "github_stars": 1981
     },
     "category": "DevOps",
     "vuln_types": [
@@ -89877,15 +89972,22 @@
     "confidence": 0.71,
     "vulnerable_deps": 0,
     "tools_detail": [],
-    "findings": 203,
+    "findings": 205,
     "low_findings": 0,
     "by_severity": {
-      "critical": 8,
+      "critical": 9,
       "high": 0,
-      "medium": 195,
+      "medium": 196,
       "low": 0
     },
     "findings_detail": [
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Dynamic outbound URL",
+        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+        "confidence": 0.7
+      },
       {
         "rule_id": "S002",
         "severity": "medium",
@@ -91224,6 +91326,13 @@
         "confidence": 0.5
       },
       {
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
+      },
+      {
         "rule_id": "S002",
         "severity": "medium",
         "title": "Dynamic outbound URL",
@@ -91309,15 +91418,15 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-09-16",
+    "last_scanned": "2026-09-17",
     "status": "scanned",
     "breakdown": {
-      "base": 286.67,
+      "base": 291.33,
       "aars": 0.0,
-      "capability_term": 143.33,
+      "capability_term": 145.67,
       "thm": 1.0,
       "dep_risk": 0.0,
-      "weighted_findings": 860,
+      "weighted_findings": 874,
       "driver": "findings"
     }
   },
@@ -94158,10 +94267,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.1156,
+      "score": 6.1178,
       "npm_downloads": 3286,
       "pypi_downloads": null,
-      "github_stars": 396
+      "github_stars": 398
     },
     "category": "DevOps",
     "vuln_types": [],
