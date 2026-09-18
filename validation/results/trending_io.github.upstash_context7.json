@@ -1,0 +1,144 @@
+{
+  "transport": "stdio",
+  "tools": [],
+  "findings": [
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "undici@7.0.0 (npm) is affected by CVE-2026-1525: Undici has an HTTP Request/Response Smuggling issue; fixed in 7.24.0",
+      "severity": "medium",
+      "target": "undici@7.0.0",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "undici",
+        "version": "7.0.0",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-2mjp-6q6p-2qxm",
+        "cve": "CVE-2026-1525",
+        "cvss": 6.5,
+        "cwe_ids": [
+          "CWE-444"
+        ],
+        "fixed_version": "7.24.0",
+        "references": [
+          "https://github.com/nodejs/undici/security/advisories/GHSA-2mjp-6q6p-2qxm",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-1525",
+          "https://hackerone.com/reports/3556037"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "D001",
+      "title": "Known-vulnerable dependency (OSV)",
+      "description": "vitest@4.1.9 (npm) is affected by CVE-2026-84373: Vitest: Path Traversal / Arbitrary File Read via @vitest/mocker Redirect Mock; fixed in 5.0.0-rc.2",
+      "severity": "medium",
+      "target": "vitest@4.1.9",
+      "location": "package.json",
+      "evidence": "",
+      "detail": {
+        "package": "vitest",
+        "version": "4.1.9",
+        "ecosystem": "npm",
+        "osv_id": "GHSA-82fw-gwwq-j7x9",
+        "cve": "CVE-2026-84373",
+        "cvss": 5.9,
+        "cwe_ids": [
+          "CWE-22"
+        ],
+        "fixed_version": "5.0.0-rc.2",
+        "references": [
+          "https://github.com/vitest-dev/vitest/security/advisories/GHSA-82fw-gwwq-j7x9",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-84373",
+          "https://github.com/vitest-dev/vitest/pull/10972"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-oz32ysk3/package/dist/lib/api.js:111",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 111,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-oz32ysk3/package/dist/lib/api.js:141",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 141,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-oz32ysk3/package/dist/lib/mcp-subscription-telemetry.js:403",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 403,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-oz32ysk3/package/dist/lib/mcp-subscription-telemetry.js:417",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 417,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    }
+  ],
+  "summary": {
+    "total_tools": 0
+  },
+  "name": "io.github.upstash/context7",
+  "target": "npx -y @upstash/context7-mcp@4.1.1",
+  "version": "4.1.1",
+  "scanned_at": "2026-09-18T10:37:12.874877+00:00",
+  "last_attempted_at": "2026-09-18T10:37:12.874877+00:00",
+  "trending": true,
+  "popularity": {
+    "method": "registry-packages/npm-pypi-github",
+    "score": 10.816,
+    "npm_downloads": 1053239,
+    "pypi_downloads": null,
+    "github_stars": 62156
+  },
+  "live_scan": {
+    "ok": false,
+    "error": "scanner returned no JSON result"
+  },
+  "enriched": true,
+  "enriched_ref": "npm:@upstash/context7-mcp",
+  "package_scan": {
+    "ok": true,
+    "note": "+6 findings from npm:@upstash/context7-mcp"
+  },
+  "status": "scanned",
+  "scan_coverage": "package-only"
+}

@@ -3,58 +3,58 @@
   "tools": [],
   "findings": [
     {
-      "rule_id": "D001",
-      "title": "Known-vulnerable dependency (OSV)",
-      "description": "uuid@13.0.0 (npm) is affected by CVE-2026-41907: uuid: Missing buffer bounds check in v3/v5/v6 when buf is provided; fixed in 13.0.1",
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "uuid@13.0.0",
-      "location": "package.json",
+      "target": "/tmp/mcpradar-enrich-nnojud3y/package/dist/BraveAPI/index.js:103",
+      "location": "source",
       "evidence": "",
       "detail": {
-        "package": "uuid",
-        "version": "13.0.0",
-        "ecosystem": "npm",
-        "osv_id": "GHSA-w5hq-g745-h8pq",
-        "cve": "CVE-2026-41907",
-        "cvss": 5.0,
-        "cwe_ids": [
-          "CWE-1285",
-          "CWE-787"
-        ],
-        "fixed_version": "13.0.1",
-        "references": [
-          "https://github.com/uuidjs/uuid/security/advisories/GHSA-w5hq-g745-h8pq",
-          "https://nvd.nist.gov/vuln/detail/CVE-2026-41907",
-          "https://github.com/uuidjs/uuid/commit/32389c887c9e75f90442ee4cc95bbab0c4e8346e"
-        ]
+        "line": 103,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S009",
+      "title": "Server binds to all interfaces",
+      "description": "Server binds to all interfaces detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-nnojud3y/package/dist/config.test.js:91",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 91,
+        "language": "javascript"
       },
       "confidence": 0.9
     },
     {
-      "rule_id": "D001",
-      "title": "Known-vulnerable dependency (OSV)",
-      "description": "vitest@4.0.18 (npm) is affected by CVE-2026-47429: When Vitest UI server is listening, arbitrary file can be read and executed; fixed in 3.2.6",
+      "rule_id": "S002",
+      "title": "Dynamic outbound URL",
+      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+      "severity": "medium",
+      "target": "/tmp/mcpradar-enrich-nnojud3y/package/dist/protocols/http.test.js:12",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 12,
+        "language": "javascript"
+      },
+      "confidence": 0.7
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "vitest@4.0.18",
-      "location": "package.json",
+      "target": "/tmp/mcpradar-enrich-nnojud3y/package/dist/protocols/http.test.js:171",
+      "location": "source",
       "evidence": "",
       "detail": {
-        "package": "vitest",
-        "version": "4.0.18",
-        "ecosystem": "npm",
-        "osv_id": "GHSA-5xrq-8626-4rwp",
-        "cve": "CVE-2026-47429",
-        "cvss": 9.8,
-        "cwe_ids": [
-          "CWE-22",
-          "CWE-862"
-        ],
-        "fixed_version": "3.2.6",
-        "references": [
-          "https://github.com/vitest-dev/vitest/security/advisories/GHSA-5xrq-8626-4rwp",
-          "https://nvd.nist.gov/vuln/detail/CVE-2026-47429",
-          "https://github.com/vitest-dev/vitest/pull/10445"
-        ]
+        "line": 171,
+        "language": "javascript"
       },
       "confidence": 0.9
     },
@@ -63,11 +63,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-2thswhtf/package/dist/src/telemetry/client.js:115",
+      "target": "/tmp/mcpradar-enrich-nnojud3y/package/dist/testUtils/mcpTestHarness.js:22",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 115,
+        "line": 22,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -77,11 +77,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-2thswhtf/package/dist/src/tools/getCodeGenerationInstructions.js:335",
+      "target": "/tmp/mcpradar-enrich-nnojud3y/package/dist/testUtils/mcpTestHarness.js:48",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 335,
+        "line": 48,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -91,11 +91,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-2thswhtf/package/dist/src/tools/searchLearningCenter.js:41",
+      "target": "/tmp/mcpradar-enrich-nnojud3y/package/dist/testUtils/mcpTestHarness.js:52",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 41,
+        "line": 52,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -104,28 +104,28 @@
   "summary": {
     "total_tools": 0
   },
-  "name": "com.postman/postman-mcp-server",
-  "target": "npx -y @postman/postman-mcp-server@2.12.3",
-  "version": "2.12.3",
-  "scanned_at": "2026-09-17T10:53:12.416886+00:00",
-  "last_attempted_at": "2026-09-17T10:53:12.416886+00:00",
-  "trending": false,
+  "name": "io.github.brave/brave-search-mcp-server",
+  "target": "npx -y @brave/brave-search-mcp-server@2.1.3",
+  "version": "2.1.3",
+  "scanned_at": "2026-09-18T10:37:42.130630+00:00",
+  "last_attempted_at": "2026-09-18T10:37:42.130630+00:00",
+  "trending": true,
   "popularity": {
     "method": "registry-packages/npm-pypi-github",
-    "score": 6.6231,
-    "npm_downloads": 13285,
+    "score": 7.277,
+    "npm_downloads": 13040,
     "pypi_downloads": null,
-    "github_stars": 315
+    "github_stars": 1450
   },
   "live_scan": {
     "ok": false,
     "error": "[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[31m│\u001b[0m \u001b[2m309 \u001b[0m \u001b[31m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[31m╰──────────────────────────────────────────────────────────────────────╯\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[1;91mMcpError: \u001b[0mConnection closed \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m╰──────────────────────────────────────────────────────────────────────────╯\u001b[0m \u001b[35m│\u001b[0m \u001b[35m╰──────────────────────────────────────────────────────────────────────────────╯\u001b[0m"
   },
   "enriched": true,
-  "enriched_ref": "npm:@postman/postman-mcp-server",
+  "enriched_ref": "npm:@brave/brave-search-mcp-server",
   "package_scan": {
     "ok": true,
-    "note": "+5 findings from npm:@postman/postman-mcp-server"
+    "note": "+7 findings from npm:@brave/brave-search-mcp-server"
   },
   "status": "scanned",
   "scan_coverage": "package-only"
