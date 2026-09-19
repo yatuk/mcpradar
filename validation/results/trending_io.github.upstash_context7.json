@@ -61,7 +61,7 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-oz32ysk3/package/dist/lib/api.js:111",
+      "target": "/tmp/mcpradar-enrich-71bvmb07/package/dist/lib/api.js:111",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -75,7 +75,7 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-oz32ysk3/package/dist/lib/api.js:141",
+      "target": "/tmp/mcpradar-enrich-71bvmb07/package/dist/lib/api.js:141",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -89,7 +89,7 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-oz32ysk3/package/dist/lib/mcp-subscription-telemetry.js:403",
+      "target": "/tmp/mcpradar-enrich-71bvmb07/package/dist/lib/mcp-subscription-telemetry.js:403",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -103,7 +103,7 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-oz32ysk3/package/dist/lib/mcp-subscription-telemetry.js:417",
+      "target": "/tmp/mcpradar-enrich-71bvmb07/package/dist/lib/mcp-subscription-telemetry.js:417",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -119,15 +119,15 @@
   "name": "io.github.upstash/context7",
   "target": "npx -y @upstash/context7-mcp@4.1.1",
   "version": "4.1.1",
-  "scanned_at": "2026-09-18T10:37:12.874877+00:00",
-  "last_attempted_at": "2026-09-18T10:37:12.874877+00:00",
+  "scanned_at": "2026-09-19T10:20:04.797856+00:00",
+  "last_attempted_at": "2026-09-19T10:20:04.797856+00:00",
   "trending": true,
   "popularity": {
     "method": "registry-packages/npm-pypi-github",
-    "score": 10.816,
+    "score": 10.8162,
     "npm_downloads": 1053239,
     "pypi_downloads": null,
-    "github_stars": 62156
+    "github_stars": 62189
   },
   "live_scan": {
     "ok": false,

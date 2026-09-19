@@ -62,7 +62,7 @@
       "title": "Dynamic JavaScript execution",
       "description": "Dynamic JavaScript execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-oe77cr4e/package/browser_tools.js:285",
+      "target": "/tmp/mcpradar-enrich-bpmnf2zw/package/browser_tools.js:285",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -76,7 +76,7 @@
       "title": "Dynamic JavaScript execution",
       "description": "Dynamic JavaScript execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-oe77cr4e/package/browser_tools.js:306",
+      "target": "/tmp/mcpradar-enrich-bpmnf2zw/package/browser_tools.js:306",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -90,17 +90,17 @@
     "total_tools": 0
   },
   "name": "io.github.brightdata/brightdata-mcp",
-  "target": "npx -y @brightdata/mcp@2.11.1",
-  "version": "2.11.1",
-  "scanned_at": "2026-08-23T06:34:22.443873+00:00",
-  "last_attempted_at": "2026-08-23T06:34:22.443873+00:00",
-  "trending": false,
+  "target": "npx -y @brightdata/mcp@2.11.2",
+  "version": "2.11.2",
+  "scanned_at": "2026-09-19T10:20:34.867243+00:00",
+  "last_attempted_at": "2026-09-19T10:20:34.867243+00:00",
+  "trending": true,
   "popularity": {
     "method": "registry-packages/npm-pypi-github",
-    "score": 7.2568,
-    "npm_downloads": 6925,
+    "score": 7.4246,
+    "npm_downloads": 10020,
     "pypi_downloads": null,
-    "github_stars": 2607
+    "github_stars": 2652
   },
   "live_scan": {
     "ok": false,
