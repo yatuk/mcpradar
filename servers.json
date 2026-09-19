@@ -316,7 +316,7 @@
           "medium": 0,
           "low": 0
         },
-        "last_scanned": "2026-09-18",
+        "last_scanned": "2026-09-19",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -1941,7 +1941,7 @@
           "medium": 4,
           "low": 0
         },
-        "last_scanned": "2026-09-18",
+        "last_scanned": "2026-09-19",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2016,7 +2016,7 @@
           "medium": 2,
           "low": 0
         },
-        "last_scanned": "2026-08-23",
+        "last_scanned": "2026-09-19",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2052,7 +2052,7 @@
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "io.github.brightdata/brightdata-mcp",
-    "version": "2.11.1",
+    "version": "2.11.2",
     "_meta": {
       "com.github.yatuk.mcpradar/security": {
         "risk_score": 6.7,
@@ -2066,7 +2066,7 @@
           "medium": 0,
           "low": 0
         },
-        "last_scanned": "2026-08-23",
+        "last_scanned": "2026-09-19",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2427,7 +2427,7 @@
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "io.github.AVIDS2/memorix",
-    "version": "1.9.3",
+    "version": "1.9.4",
     "_meta": {
       "com.github.yatuk.mcpradar/security": {
         "risk_score": 10.0,
@@ -2441,7 +2441,7 @@
           "medium": 532,
           "low": 0
         },
-        "last_scanned": "2026-09-17",
+        "last_scanned": "2026-09-19",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2616,7 +2616,7 @@
           "medium": 131,
           "low": 0
         },
-        "last_scanned": "2026-09-18",
+        "last_scanned": "2026-09-19",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2691,7 +2691,7 @@
           "medium": 14,
           "low": 0
         },
-        "last_scanned": "2026-09-18",
+        "last_scanned": "2026-09-19",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2841,7 +2841,7 @@
           "medium": 44,
           "low": 0
         },
-        "last_scanned": "2026-09-18",
+        "last_scanned": "2026-09-19",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -2927,21 +2927,21 @@
   {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
     "name": "io.github.nteract/semiotic",
-    "version": "3.9.2",
+    "version": "3.10.2",
     "_meta": {
       "com.github.yatuk.mcpradar/security": {
         "risk_score": 10.0,
         "scoring_model": "mrs-v1",
         "grade": "F",
         "confidence": 0.9,
-        "findings": 14,
+        "findings": 18,
         "by_severity": {
-          "critical": 14,
+          "critical": 18,
           "high": 0,
           "medium": 0,
           "low": 0
         },
-        "last_scanned": "2026-09-18",
+        "last_scanned": "2026-09-19",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
@@ -3041,7 +3041,7 @@
           "medium": 196,
           "low": 0
         },
-        "last_scanned": "2026-09-18",
+        "last_scanned": "2026-09-19",
         "scanner_version": "1.1.0-rc1",
         "scan_coverage": "package-only",
         "tool_hash": "",
