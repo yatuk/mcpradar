@@ -90,7 +90,7 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-ji37zznj/package/bin/modules/download-openapi.mjs:31",
+      "target": "/tmp/mcpradar-enrich-v_5co65r/package/bin/modules/download-openapi.mjs:31",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -104,7 +104,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-ji37zznj/package/bin/modules/generate-mcp-tools.mjs:28",
+      "target": "/tmp/mcpradar-enrich-v_5co65r/package/bin/modules/generate-mcp-tools.mjs:28",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -118,7 +118,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-ji37zznj/package/dist/generated/hack.js:23",
+      "target": "/tmp/mcpradar-enrich-v_5co65r/package/dist/generated/hack.js:23",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -132,11 +132,11 @@
       "title": "Raw fetched content returned to the agent",
       "description": "Raw fetched content returned to the agent detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-ji37zznj/package/dist/graph-client.js:306",
+      "target": "/tmp/mcpradar-enrich-v_5co65r/package/dist/graph-client.js:308",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 306,
+        "line": 308,
         "language": "javascript"
       },
       "confidence": 0.5
@@ -146,7 +146,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-ji37zznj/package/dist/graph-tools.js:130",
+      "target": "/tmp/mcpradar-enrich-v_5co65r/package/dist/graph-tools.js:130",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -160,7 +160,7 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-ji37zznj/package/dist/lib/graph-resilience.js:131",
+      "target": "/tmp/mcpradar-enrich-v_5co65r/package/dist/lib/graph-resilience.js:131",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -174,7 +174,7 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-ji37zznj/package/dist/lib/microsoft-auth.js:122",
+      "target": "/tmp/mcpradar-enrich-v_5co65r/package/dist/lib/microsoft-auth.js:122",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -188,7 +188,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-ji37zznj/package/dist/lib/path-params.js:2",
+      "target": "/tmp/mcpradar-enrich-v_5co65r/package/dist/lib/path-params.js:2",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -202,7 +202,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-ji37zznj/package/src/generated/hack.ts:31",
+      "target": "/tmp/mcpradar-enrich-v_5co65r/package/src/generated/hack.ts:31",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -218,15 +218,15 @@
   "name": "io.github.Softeria/ms-365-mcp-server",
   "target": "npx -y @softeria/ms-365-mcp-server@0.154.2",
   "version": "0.154.2",
-  "scanned_at": "2026-09-18T10:37:31.002155+00:00",
-  "last_attempted_at": "2026-09-18T10:37:31.002155+00:00",
-  "trending": false,
+  "scanned_at": "2026-09-20T10:33:25.245642+00:00",
+  "last_attempted_at": "2026-09-20T10:33:25.245642+00:00",
+  "trending": true,
   "popularity": {
     "method": "registry-packages/npm-pypi-github",
-    "score": 7.6015,
-    "npm_downloads": 40680,
+    "score": 7.5657,
+    "npm_downloads": 37382,
     "pypi_downloads": null,
-    "github_stars": 981
+    "github_stars": 983
   },
   "live_scan": {
     "ok": false,
