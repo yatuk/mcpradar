@@ -1,15 +1,30 @@
 {
   "transport": "stdio",
   "tools": [],
-  "findings": [],
+  "findings": [
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-oley_y6l/package/dist/rerank/index.js:45",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 45,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    }
+  ],
   "summary": {
     "total_tools": 0
   },
   "name": "mcp-local-rag",
   "target": "npx -y mcp-local-rag",
   "version": "",
-  "scanned_at": "2026-09-14T14:36:30.705370+00:00",
-  "last_attempted_at": "2026-09-14T14:36:30.705370+00:00",
+  "scanned_at": "2026-10-01T12:16:27.273936+00:00",
+  "last_attempted_at": "2026-10-01T12:16:27.273936+00:00",
   "trending": false,
   "live_scan": {
     "ok": false,
@@ -19,9 +34,8 @@
   "enriched_ref": "npm:mcp-local-rag",
   "package_scan": {
     "ok": true,
-    "note": "+0 findings from npm:mcp-local-rag"
+    "note": "+1 findings from npm:mcp-local-rag"
   },
-  "status": "incomplete",
-  "incomplete": true,
-  "incomplete_reason": "[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[31m│\u001b[0m \u001b[2m309 \u001b[0m \u001b[31m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[31m╰──────────────────────────────────────────────────────────────────────╯\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[1;91mMcpError: \u001b[0mConnection closed \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m│\u001b[0m \u001b[35m╰──────────────────────────────────────────────────────────────────────────╯\u001b[0m \u001b[35m│\u001b[0m \u001b[35m╰──────────────────────────────────────────────────────────────────────────────╯\u001b[0m"
+  "status": "scanned",
+  "scan_coverage": "package-only"
 }

@@ -25666,7 +25666,7 @@
   {
     "server": "com.postman/postman-mcp-server",
     "display_name": "com.postman / postman-mcp-server",
-    "version": "2.12.3",
+    "version": "2.13.0",
     "scoring_model": "mrs-v1",
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
@@ -25674,8 +25674,8 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.1377,
-      "npm_downloads": 4331,
+      "score": 6.39,
+      "npm_downloads": 7743,
       "pypi_downloads": null,
       "github_stars": 316
     },
@@ -25739,7 +25739,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-09-20",
+    "last_scanned": "2026-10-01",
     "status": "scanned",
     "breakdown": {
       "base": 4.0,
@@ -43605,7 +43605,7 @@
   {
     "server": "io.github.shinpr/mcp-local-rag",
     "display_name": "io.github.shinpr / mcp-local-rag",
-    "version": "0.19.0",
+    "version": "0.20.0",
     "scoring_model": "mrs-v1",
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
@@ -43613,10 +43613,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.3166,
-      "npm_downloads": 5156,
+      "score": 6.4771,
+      "npm_downloads": 7387,
       "pypi_downloads": null,
-      "github_stars": 401
+      "github_stars": 405
     },
     "category": "DevOps",
     "vuln_types": [
@@ -43649,7 +43649,60 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-09-20",
+    "last_scanned": "2026-10-01",
+    "status": "scanned",
+    "breakdown": {
+      "base": 5.0,
+      "aars": 0.0,
+      "capability_term": 2.5,
+      "thm": 1.0,
+      "dep_risk": 0.0,
+      "weighted_findings": 10,
+      "driver": "findings"
+    }
+  },
+  {
+    "server": "mcp-local-rag",
+    "display_name": "mcp-local-rag",
+    "version": "",
+    "scoring_model": "mrs-v1",
+    "tools": 0,
+    "scanner_version": "1.1.0-rc1",
+    "scan_coverage": "package-only",
+    "trending": false,
+    "popularity": null,
+    "category": "Other",
+    "vuln_types": [
+      "Source-Code Risk"
+    ],
+    "history": [],
+    "api_free": true,
+    "risk_score": 5.0,
+    "grade": "D",
+    "aars": 0.0,
+    "capability": "pure_compute",
+    "confidence": 0.9,
+    "vulnerable_deps": 0,
+    "tools_detail": [],
+    "findings": 1,
+    "low_findings": 0,
+    "by_severity": {
+      "critical": 1,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings_detail": [
+      {
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
+      }
+    ],
+    "tool_hash": "",
+    "last_scanned": "2026-10-01",
     "status": "scanned",
     "breakdown": {
       "base": 5.0,
@@ -44800,7 +44853,7 @@
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
     "scan_coverage": "package-only",
-    "trending": true,
+    "trending": false,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
       "score": 8.9801,
@@ -45053,18 +45106,18 @@
   {
     "server": "io.github.putervision/state-memory-mcp",
     "display_name": "io.github.putervision / state-memory-mcp",
-    "version": "1.2.1",
+    "version": "1.3.1",
     "scoring_model": "mrs-v1",
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
     "scan_coverage": "package-only",
-    "trending": false,
+    "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.1231,
-      "npm_downloads": 14917,
+      "score": 5.9961,
+      "npm_downloads": 9092,
       "pypi_downloads": null,
-      "github_stars": 88
+      "github_stars": 108
     },
     "category": "AI/ML",
     "vuln_types": [
@@ -45105,7 +45158,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-09-17",
+    "last_scanned": "2026-10-01",
     "status": "scanned",
     "breakdown": {
       "base": 6.67,
@@ -45316,7 +45369,7 @@
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
     "scan_coverage": "package-only",
-    "trending": true,
+    "trending": false,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
       "score": 8.2257,
@@ -58792,7 +58845,7 @@
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
     "scan_coverage": "package-only",
-    "trending": true,
+    "trending": false,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
       "score": 7.5657,
@@ -59506,10 +59559,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 7.4247,
-      "npm_downloads": 35030,
+      "score": 7.4089,
+      "npm_downloads": 32956,
       "pypi_downloads": null,
-      "github_stars": 758
+      "github_stars": 777
     },
     "category": "DevOps",
     "vuln_types": [
@@ -59523,7 +59576,7 @@
     "aars": 0.0,
     "capability": "pure_compute",
     "confidence": 0.82,
-    "vulnerable_deps": 1,
+    "vulnerable_deps": 2,
     "tools_detail": [],
     "findings": 348,
     "low_findings": 0,
@@ -61979,7 +62032,7 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-09-20",
+    "last_scanned": "2026-10-01",
     "status": "scanned",
     "breakdown": {
       "base": 898.0,
@@ -62211,7 +62264,7 @@
   {
     "server": "io.github.callstack/agent-device",
     "display_name": "io.github.callstack / agent-device",
-    "version": "0.21.4",
+    "version": "0.21.18",
     "scoring_model": "mrs-v1",
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
@@ -62219,13 +62272,14 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 8.741,
-      "npm_downloads": 117468,
+      "score": 9.1003,
+      "npm_downloads": 260263,
       "pypi_downloads": null,
-      "github_stars": 4688
+      "github_stars": 4840
     },
     "category": "DevOps",
     "vuln_types": [
+      "Dependency Vulnerability",
       "Source-Code Risk"
     ],
     "history": [],
@@ -62235,14 +62289,14 @@
     "aars": 0.0,
     "capability": "pure_compute",
     "confidence": 0.85,
-    "vulnerable_deps": 0,
+    "vulnerable_deps": 1,
     "tools_detail": [],
-    "findings": 64,
+    "findings": 66,
     "low_findings": 0,
     "by_severity": {
-      "critical": 49,
+      "critical": 50,
       "high": 1,
-      "medium": 14,
+      "medium": 15,
       "low": 0
     },
     "findings_detail": [
@@ -62352,13 +62406,6 @@
         "confidence": 0.9
       },
       {
-        "rule_id": "S006",
-        "severity": "critical",
-        "title": "Dynamic shell command execution",
-        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
-        "confidence": 0.9
-      },
-      {
         "rule_id": "S002",
         "severity": "medium",
         "title": "Dynamic outbound URL",
@@ -62450,6 +62497,13 @@
         "confidence": 0.9
       },
       {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Dynamic outbound URL",
+        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+        "confidence": 0.7
+      },
+      {
         "rule_id": "S006",
         "severity": "critical",
         "title": "Dynamic shell command execution",
@@ -62548,18 +62602,18 @@
         "confidence": 0.9
       },
       {
-        "rule_id": "S002",
-        "severity": "medium",
-        "title": "Dynamic outbound URL",
-        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
-        "confidence": 0.7
-      },
-      {
         "rule_id": "S006",
         "severity": "critical",
         "title": "Dynamic shell command execution",
         "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
         "confidence": 0.9
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Dynamic outbound URL",
+        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+        "confidence": 0.7
       },
       {
         "rule_id": "S011",
@@ -62625,6 +62679,13 @@
         "confidence": 0.9
       },
       {
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
+      },
+      {
         "rule_id": "S002",
         "severity": "medium",
         "title": "Dynamic outbound URL",
@@ -62693,18 +62754,25 @@
         "title": "Dynamic shell command execution",
         "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
         "confidence": 0.9
+      },
+      {
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-09-20",
+    "last_scanned": "2026-10-01",
     "status": "scanned",
     "breakdown": {
-      "base": 184.33,
+      "base": 189.0,
       "aars": 0.0,
-      "capability_term": 92.17,
+      "capability_term": 94.5,
       "thm": 1.0,
       "dep_risk": 0.0,
-      "weighted_findings": 553,
+      "weighted_findings": 567,
       "driver": "findings"
     }
   },
@@ -64059,7 +64127,7 @@
   {
     "server": "io.github.cyanheads/obsidian-mcp-server",
     "display_name": "io.github.cyanheads / obsidian-mcp-server",
-    "version": "3.5.4",
+    "version": "3.6.0",
     "scoring_model": "mrs-v1",
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
@@ -64067,10 +64135,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 6.6275,
-      "npm_downloads": 6209,
+      "score": 6.8251,
+      "npm_downloads": 9687,
       "pypi_downloads": null,
-      "github_stars": 682
+      "github_stars": 689
     },
     "category": "DevOps",
     "vuln_types": [
@@ -64082,15 +64150,15 @@
     "grade": "F",
     "aars": 0.0,
     "capability": "pure_compute",
-    "confidence": 0.84,
+    "confidence": 0.85,
     "vulnerable_deps": 0,
     "tools_detail": [],
-    "findings": 17,
+    "findings": 16,
     "low_findings": 0,
     "by_severity": {
       "critical": 12,
       "high": 0,
-      "medium": 5,
+      "medium": 4,
       "low": 0
     },
     "findings_detail": [
@@ -64123,46 +64191,39 @@
         "confidence": 0.9
       },
       {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Dynamic outbound URL",
+        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Dynamic outbound URL",
+        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Dynamic outbound URL",
+        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+        "confidence": 0.7
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Dynamic outbound URL",
+        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+        "confidence": 0.7
+      },
+      {
         "rule_id": "S006",
         "severity": "critical",
         "title": "Dynamic shell command execution",
         "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
         "confidence": 0.9
-      },
-      {
-        "rule_id": "S002",
-        "severity": "medium",
-        "title": "Dynamic outbound URL",
-        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
-        "confidence": 0.7
-      },
-      {
-        "rule_id": "S002",
-        "severity": "medium",
-        "title": "Dynamic outbound URL",
-        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
-        "confidence": 0.7
-      },
-      {
-        "rule_id": "S002",
-        "severity": "medium",
-        "title": "Dynamic outbound URL",
-        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
-        "confidence": 0.7
-      },
-      {
-        "rule_id": "S002",
-        "severity": "medium",
-        "title": "Dynamic outbound URL",
-        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
-        "confidence": 0.7
-      },
-      {
-        "rule_id": "S002",
-        "severity": "medium",
-        "title": "Dynamic outbound URL",
-        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
-        "confidence": 0.7
       },
       {
         "rule_id": "S006",
@@ -64215,33 +64276,33 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-09-20",
+    "last_scanned": "2026-10-01",
     "status": "scanned",
     "breakdown": {
-      "base": 46.67,
+      "base": 45.33,
       "aars": 0.0,
-      "capability_term": 23.33,
+      "capability_term": 22.67,
       "thm": 1.0,
       "dep_risk": 0.0,
-      "weighted_findings": 140,
+      "weighted_findings": 136,
       "driver": "findings"
     }
   },
   {
     "server": "io.github.cyanheads/pubmed-mcp-server",
     "display_name": "io.github.cyanheads / pubmed-mcp-server",
-    "version": "2.10.7",
+    "version": "2.10.19",
     "scoring_model": "mrs-v1",
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
     "scan_coverage": "package-only",
-    "trending": false,
+    "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 5.5488,
-      "npm_downloads": 2374,
+      "score": 5.9667,
+      "npm_downloads": 6013,
       "pypi_downloads": null,
-      "github_stars": 148
+      "github_stars": 153
     },
     "category": "DevOps",
     "vuln_types": [
@@ -64253,15 +64314,15 @@
     "grade": "F",
     "aars": 0.0,
     "capability": "pure_compute",
-    "confidence": 0.71,
+    "confidence": 0.72,
     "vulnerable_deps": 0,
     "tools_detail": [],
-    "findings": 21,
+    "findings": 20,
     "low_findings": 0,
     "by_severity": {
-      "critical": 3,
+      "critical": 4,
       "high": 0,
-      "medium": 18,
+      "medium": 16,
       "low": 0
     },
     "findings_detail": [
@@ -64378,18 +64439,11 @@
         "confidence": 0.7
       },
       {
-        "rule_id": "S002",
-        "severity": "medium",
-        "title": "Dynamic outbound URL",
-        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
-        "confidence": 0.7
-      },
-      {
-        "rule_id": "S002",
-        "severity": "medium",
-        "title": "Dynamic outbound URL",
-        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
-        "confidence": 0.7
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
       },
       {
         "rule_id": "S006",
@@ -64414,15 +64468,15 @@
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-09-09",
+    "last_scanned": "2026-10-01",
     "status": "scanned",
     "breakdown": {
-      "base": 34.0,
+      "base": 34.67,
       "aars": 0.0,
-      "capability_term": 17.0,
+      "capability_term": 17.33,
       "thm": 1.0,
       "dep_risk": 0.0,
-      "weighted_findings": 102,
+      "weighted_findings": 104,
       "driver": "findings"
     }
   },
@@ -65292,6 +65346,129 @@
       "thm": 1.0,
       "dep_risk": 0.4,
       "weighted_findings": 220,
+      "driver": "findings"
+    }
+  },
+  {
+    "server": "io.github.mozilla/firefox-devtools-mcp",
+    "display_name": "io.github.mozilla / firefox-devtools-mcp",
+    "version": "0.10.4",
+    "scoring_model": "mrs-v1",
+    "tools": 0,
+    "scanner_version": "1.1.0-rc1",
+    "scan_coverage": "package-only",
+    "trending": true,
+    "popularity": {
+      "method": "registry-packages/npm-pypi-github",
+      "score": 6.2112,
+      "npm_downloads": 3581,
+      "pypi_downloads": null,
+      "github_stars": 453
+    },
+    "category": "DevOps",
+    "vuln_types": [
+      "Dependency Vulnerability",
+      "Source-Code Risk"
+    ],
+    "history": [],
+    "api_free": false,
+    "risk_score": 10.0,
+    "grade": "F",
+    "aars": 0.0,
+    "capability": "pure_compute",
+    "confidence": 0.86,
+    "vulnerable_deps": 1,
+    "tools_detail": [],
+    "findings": 9,
+    "low_findings": 0,
+    "by_severity": {
+      "critical": 8,
+      "high": 0,
+      "medium": 1,
+      "low": 0
+    },
+    "findings_detail": [
+      {
+        "rule_id": "D001",
+        "severity": "medium",
+        "title": "Known-vulnerable dependency (OSV)",
+        "description": "vitest@4.1.8 (npm) is affected by CVE-2026-84373: Vitest: Path Traversal / Arbitrary File Read via @vitest/mocker Redire",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S004",
+        "severity": "critical",
+        "title": "Dynamic JavaScript execution",
+        "description": "Dynamic JavaScript execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S011",
+        "severity": "medium",
+        "title": "Raw fetched content returned to the agent",
+        "description": "Raw fetched content returned to the agent detected in JavaScript/TypeScript source",
+        "confidence": 0.5
+      }
+    ],
+    "tool_hash": "",
+    "last_scanned": "2026-10-01",
+    "status": "scanned",
+    "breakdown": {
+      "base": 28.0,
+      "aars": 0.0,
+      "capability_term": 14.0,
+      "thm": 1.0,
+      "dep_risk": 0.15,
+      "weighted_findings": 84,
       "driver": "findings"
     }
   },
@@ -90428,7 +90605,7 @@
   {
     "server": "io.github.nteract/semiotic",
     "display_name": "io.github.nteract / semiotic",
-    "version": "3.10.3",
+    "version": "3.12.0",
     "scoring_model": "mrs-v1",
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
@@ -90436,10 +90613,10 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 7.1473,
-      "npm_downloads": 5185,
+      "score": 7.4656,
+      "npm_downloads": 10780,
       "pypi_downloads": null,
-      "github_stars": 2706
+      "github_stars": 2709
     },
     "category": "DevOps",
     "vuln_types": [
@@ -90455,10 +90632,10 @@
     "confidence": 0.9,
     "vulnerable_deps": 1,
     "tools_detail": [],
-    "findings": 18,
+    "findings": 26,
     "low_findings": 0,
     "by_severity": {
-      "critical": 18,
+      "critical": 26,
       "high": 0,
       "medium": 0,
       "low": 0
@@ -90596,18 +90773,74 @@
         "title": "Dynamic shell command execution",
         "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
         "confidence": 0.9
+      },
+      {
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S006",
+        "severity": "critical",
+        "title": "Dynamic shell command execution",
+        "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+        "confidence": 0.9
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-09-20",
+    "last_scanned": "2026-10-01",
     "status": "scanned",
     "breakdown": {
-      "base": 60.0,
+      "base": 86.67,
       "aars": 0.0,
-      "capability_term": 30.0,
+      "capability_term": 43.33,
       "thm": 1.0,
       "dep_risk": 0.4,
-      "weighted_findings": 180,
+      "weighted_findings": 260,
       "driver": "findings"
     }
   },
@@ -91066,7 +91299,7 @@
   {
     "server": "io.github.zereight/gitlab-mcp",
     "display_name": "io.github.zereight / gitlab-mcp",
-    "version": "2.1.64",
+    "version": "2.1.67",
     "scoring_model": "mrs-v1",
     "tools": 0,
     "scanner_version": "1.1.0-rc1",
@@ -91074,13 +91307,14 @@
     "trending": true,
     "popularity": {
       "method": "registry-packages/npm-pypi-github",
-      "score": 8.145,
-      "npm_downloads": 70206,
+      "score": 8.4751,
+      "npm_downloads": 148123,
       "pypi_downloads": null,
-      "github_stars": 1988
+      "github_stars": 2015
     },
     "category": "DevOps",
     "vuln_types": [
+      "Dependency Vulnerability",
       "Source-Code Risk"
     ],
     "history": [],
@@ -91090,44 +91324,23 @@
     "aars": 0.0,
     "capability": "pure_compute",
     "confidence": 0.71,
-    "vulnerable_deps": 0,
+    "vulnerable_deps": 1,
     "tools_detail": [],
-    "findings": 205,
+    "findings": 203,
     "low_findings": 0,
     "by_severity": {
-      "critical": 9,
+      "critical": 10,
       "high": 0,
-      "medium": 196,
+      "medium": 193,
       "low": 0
     },
     "findings_detail": [
       {
-        "rule_id": "S002",
+        "rule_id": "D001",
         "severity": "medium",
-        "title": "Dynamic outbound URL",
-        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
-        "confidence": 0.7
-      },
-      {
-        "rule_id": "S002",
-        "severity": "medium",
-        "title": "Dynamic outbound URL",
-        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
-        "confidence": 0.7
-      },
-      {
-        "rule_id": "S002",
-        "severity": "medium",
-        "title": "Dynamic outbound URL",
-        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
-        "confidence": 0.7
-      },
-      {
-        "rule_id": "S002",
-        "severity": "medium",
-        "title": "Dynamic outbound URL",
-        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
-        "confidence": 0.7
+        "title": "Known-vulnerable dependency (OSV)",
+        "description": "undici@6.28.0 (npm) is affected by CVE-2026-85024: undici vulnerable to Denial of Service via unhandled error in WebSock",
+        "confidence": 0.9
       },
       {
         "rule_id": "S002",
@@ -92535,18 +92748,32 @@
         "title": "Dynamic shell command execution",
         "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
         "confidence": 0.9
+      },
+      {
+        "rule_id": "S001",
+        "severity": "critical",
+        "title": "Cloud metadata SSRF endpoint",
+        "description": "Cloud metadata SSRF endpoint detected in JavaScript/TypeScript source",
+        "confidence": 0.9
+      },
+      {
+        "rule_id": "S002",
+        "severity": "medium",
+        "title": "Dynamic outbound URL",
+        "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
+        "confidence": 0.7
       }
     ],
     "tool_hash": "",
-    "last_scanned": "2026-09-20",
+    "last_scanned": "2026-10-01",
     "status": "scanned",
     "breakdown": {
-      "base": 291.33,
+      "base": 290.67,
       "aars": 0.0,
-      "capability_term": 145.67,
+      "capability_term": 145.33,
       "thm": 1.0,
-      "dep_risk": 0.0,
-      "weighted_findings": 874,
+      "dep_risk": 0.15,
+      "weighted_findings": 872,
       "driver": "findings"
     }
   },
@@ -95442,35 +95669,6 @@
     "vuln_types": [],
     "history": [],
     "api_free": false,
-    "risk_score": null,
-    "grade": "-",
-    "confidence": null,
-    "findings": 0,
-    "by_severity": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0
-    },
-    "findings_detail": [],
-    "tool_hash": "",
-    "last_scanned": "-",
-    "status": "incomplete"
-  },
-  {
-    "server": "mcp-local-rag",
-    "display_name": "mcp-local-rag",
-    "version": "",
-    "scoring_model": "mrs-v1",
-    "tools": 0,
-    "scanner_version": "1.1.0-rc1",
-    "scan_coverage": "incomplete",
-    "trending": false,
-    "popularity": null,
-    "category": "Other",
-    "vuln_types": [],
-    "history": [],
-    "api_free": true,
     "risk_score": null,
     "grade": "-",
     "confidence": null,

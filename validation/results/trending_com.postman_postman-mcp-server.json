@@ -63,7 +63,7 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-4whnx4_8/package/dist/src/telemetry/client.js:115",
+      "target": "/tmp/mcpradar-enrich-wdk_v3nm/package/dist/src/telemetry/client.js:115",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -77,11 +77,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-4whnx4_8/package/dist/src/tools/getCodeGenerationInstructions.js:335",
+      "target": "/tmp/mcpradar-enrich-wdk_v3nm/package/dist/src/tools/getCodeGenerationInstructions.js:337",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 335,
+        "line": 337,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -91,11 +91,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-4whnx4_8/package/dist/src/tools/searchLearningCenter.js:41",
+      "target": "/tmp/mcpradar-enrich-wdk_v3nm/package/dist/src/tools/searchLearningCenter.js:42",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 41,
+        "line": 42,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -105,15 +105,15 @@
     "total_tools": 0
   },
   "name": "com.postman/postman-mcp-server",
-  "target": "npx -y @postman/postman-mcp-server@2.12.3",
-  "version": "2.12.3",
-  "scanned_at": "2026-09-20T10:34:13.954484+00:00",
-  "last_attempted_at": "2026-09-20T10:34:13.954484+00:00",
+  "target": "npx -y @postman/postman-mcp-server@2.13.0",
+  "version": "2.13.0",
+  "scanned_at": "2026-10-01T12:25:11.457209+00:00",
+  "last_attempted_at": "2026-10-01T12:25:11.457209+00:00",
   "trending": true,
   "popularity": {
     "method": "registry-packages/npm-pypi-github",
-    "score": 6.1377,
-    "npm_downloads": 4331,
+    "score": 6.39,
+    "npm_downloads": 7743,
     "pypi_downloads": null,
     "github_stars": 316
   },

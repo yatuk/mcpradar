@@ -7,11 +7,11 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-gtuhs3ha/package/dist/mcp-server/tools/definitions/obsidian-write-note.tool.js:198",
+      "target": "/tmp/mcpradar-enrich-hdzowond/package/dist/services/obsidian/frontmatter-ops.js:32",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 198,
+        "line": 32,
         "language": "javascript"
       },
       "confidence": 0.9
@@ -21,11 +21,11 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-gtuhs3ha/package/dist/services/obsidian/frontmatter-ops.js:31",
+      "target": "/tmp/mcpradar-enrich-hdzowond/package/dist/services/obsidian/frontmatter-ops.js:98",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 31,
+        "line": 98,
         "language": "javascript"
       },
       "confidence": 0.9
@@ -35,11 +35,11 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-gtuhs3ha/package/dist/services/obsidian/frontmatter-ops.js:97",
+      "target": "/tmp/mcpradar-enrich-hdzowond/package/dist/services/obsidian/frontmatter-ops.js:707",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 97,
+        "line": 707,
         "language": "javascript"
       },
       "confidence": 0.9
@@ -49,25 +49,11 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-gtuhs3ha/package/dist/services/obsidian/frontmatter-ops.js:443",
+      "target": "/tmp/mcpradar-enrich-hdzowond/package/dist/services/obsidian/markdown-blocks.js:180",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 443,
-        "language": "javascript"
-      },
-      "confidence": 0.9
-    },
-    {
-      "rule_id": "S006",
-      "title": "Dynamic shell command execution",
-      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
-      "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-gtuhs3ha/package/dist/services/obsidian/frontmatter-ops.js:480",
-      "location": "source",
-      "evidence": "",
-      "detail": {
-        "line": 480,
+        "line": 180,
         "language": "javascript"
       },
       "confidence": 0.9
@@ -77,11 +63,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-gtuhs3ha/package/dist/services/obsidian/obsidian-service.js:256",
+      "target": "/tmp/mcpradar-enrich-hdzowond/package/dist/services/obsidian/obsidian-service.js:435",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 256,
+        "line": 435,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -91,11 +77,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-gtuhs3ha/package/dist/services/obsidian/obsidian-service.js:379",
+      "target": "/tmp/mcpradar-enrich-hdzowond/package/dist/services/obsidian/obsidian-service.js:465",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 379,
+        "line": 465,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -105,11 +91,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-gtuhs3ha/package/dist/services/obsidian/obsidian-service.js:409",
+      "target": "/tmp/mcpradar-enrich-hdzowond/package/dist/services/obsidian/obsidian-service.js:885",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 409,
+        "line": 885,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -119,25 +105,11 @@
       "title": "Dynamic outbound URL",
       "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
       "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-gtuhs3ha/package/dist/services/obsidian/obsidian-service.js:626",
+      "target": "/tmp/mcpradar-enrich-hdzowond/package/dist/services/obsidian/obsidian-service.js:1021",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 626,
-        "language": "javascript"
-      },
-      "confidence": 0.7
-    },
-    {
-      "rule_id": "S002",
-      "title": "Dynamic outbound URL",
-      "description": "Dynamic outbound URL detected in JavaScript/TypeScript source",
-      "severity": "medium",
-      "target": "/tmp/mcpradar-enrich-gtuhs3ha/package/dist/services/obsidian/obsidian-service.js:743",
-      "location": "source",
-      "evidence": "",
-      "detail": {
-        "line": 743,
+        "line": 1021,
         "language": "javascript"
       },
       "confidence": 0.7
@@ -147,11 +119,11 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-gtuhs3ha/package/dist/services/obsidian/obsidian-service.js:554",
+      "target": "/tmp/mcpradar-enrich-hdzowond/package/dist/services/obsidian/obsidian-service.js:833",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 554,
+        "line": 833,
         "language": "javascript"
       },
       "confidence": 0.9
@@ -161,11 +133,11 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-gtuhs3ha/package/dist/services/obsidian/obsidian-service.js:649",
+      "target": "/tmp/mcpradar-enrich-hdzowond/package/dist/services/obsidian/obsidian-service.js:925",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 649,
+        "line": 925,
         "language": "javascript"
       },
       "confidence": 0.9
@@ -175,11 +147,11 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-gtuhs3ha/package/dist/services/obsidian/obsidian-service.js:832",
+      "target": "/tmp/mcpradar-enrich-hdzowond/package/dist/services/obsidian/obsidian-service.js:1123",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 832,
+        "line": 1123,
         "language": "javascript"
       },
       "confidence": 0.9
@@ -189,11 +161,11 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-gtuhs3ha/package/dist/services/obsidian/obsidian-service.js:1114",
+      "target": "/tmp/mcpradar-enrich-hdzowond/package/dist/services/obsidian/obsidian-service.js:1544",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 1114,
+        "line": 1544,
         "language": "javascript"
       },
       "confidence": 0.9
@@ -203,11 +175,11 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-gtuhs3ha/package/dist/services/obsidian/obsidian-service.js:1136",
+      "target": "/tmp/mcpradar-enrich-hdzowond/package/dist/services/obsidian/obsidian-service.js:1659",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 1136,
+        "line": 1659,
         "language": "javascript"
       },
       "confidence": 0.9
@@ -217,11 +189,11 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-gtuhs3ha/package/dist/services/obsidian/section-extractor.js:44",
+      "target": "/tmp/mcpradar-enrich-hdzowond/package/dist/services/obsidian/section-extractor.js:67",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 44,
+        "line": 67,
         "language": "javascript"
       },
       "confidence": 0.9
@@ -231,11 +203,25 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-gtuhs3ha/package/dist/services/obsidian/section-extractor.js:214",
+      "target": "/tmp/mcpradar-enrich-hdzowond/package/dist/services/obsidian/section-extractor.js:323",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 214,
+        "line": 323,
+        "language": "javascript"
+      },
+      "confidence": 0.9
+    },
+    {
+      "rule_id": "S006",
+      "title": "Dynamic shell command execution",
+      "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
+      "severity": "critical",
+      "target": "/tmp/mcpradar-enrich-hdzowond/package/dist/services/obsidian/section-extractor.js:491",
+      "location": "source",
+      "evidence": "",
+      "detail": {
+        "line": 491,
         "language": "javascript"
       },
       "confidence": 0.9
@@ -245,17 +231,17 @@
     "total_tools": 0
   },
   "name": "io.github.cyanheads/obsidian-mcp-server",
-  "target": "npx -y obsidian-mcp-server@3.5.4",
-  "version": "3.5.4",
-  "scanned_at": "2026-09-20T10:33:59.257471+00:00",
-  "last_attempted_at": "2026-09-20T10:33:59.257471+00:00",
+  "target": "npx -y obsidian-mcp-server@3.6.0",
+  "version": "3.6.0",
+  "scanned_at": "2026-10-01T12:24:56.130370+00:00",
+  "last_attempted_at": "2026-10-01T12:24:56.130370+00:00",
   "trending": true,
   "popularity": {
     "method": "registry-packages/npm-pypi-github",
-    "score": 6.6275,
-    "npm_downloads": 6209,
+    "score": 6.8251,
+    "npm_downloads": 9687,
     "pypi_downloads": null,
-    "github_stars": 682
+    "github_stars": 689
   },
   "live_scan": {
     "ok": false,
@@ -265,7 +251,7 @@
   "enriched_ref": "npm:obsidian-mcp-server",
   "package_scan": {
     "ok": true,
-    "note": "+17 findings from npm:obsidian-mcp-server"
+    "note": "+16 findings from npm:obsidian-mcp-server"
   },
   "status": "scanned",
   "scan_coverage": "package-only"

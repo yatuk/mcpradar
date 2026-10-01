@@ -34,7 +34,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-kmcg45dn/package/dist/chunk-WA5UVFCV.js:173",
+      "target": "/tmp/mcpradar-enrich-qppd0qze/package/dist/chunk-75BC6Y5R.js:173",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -48,11 +48,11 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-kmcg45dn/package/dist/index.js:2297",
+      "target": "/tmp/mcpradar-enrich-qppd0qze/package/dist/index.js:2398",
       "location": "source",
       "evidence": "",
       "detail": {
-        "line": 2297,
+        "line": 2398,
         "language": "javascript"
       },
       "confidence": 0.9
@@ -62,17 +62,17 @@
     "total_tools": 0
   },
   "name": "io.github.putervision/state-memory-mcp",
-  "target": "npx -y @putervision/state-memory-mcp@1.2.1",
-  "version": "1.2.1",
-  "scanned_at": "2026-09-17T10:53:20.205369+00:00",
-  "last_attempted_at": "2026-09-17T10:53:20.205369+00:00",
-  "trending": false,
+  "target": "npx -y @putervision/state-memory-mcp@1.3.1",
+  "version": "1.3.1",
+  "scanned_at": "2026-10-01T12:25:31.546014+00:00",
+  "last_attempted_at": "2026-10-01T12:25:31.546014+00:00",
+  "trending": true,
   "popularity": {
     "method": "registry-packages/npm-pypi-github",
-    "score": 6.1231,
-    "npm_downloads": 14917,
+    "score": 5.9961,
+    "npm_downloads": 9092,
     "pypi_downloads": null,
-    "github_stars": 88
+    "github_stars": 108
   },
   "live_scan": {
     "ok": false,

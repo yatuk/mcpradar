@@ -7,7 +7,7 @@
       "title": "Dynamic shell command execution",
       "description": "Dynamic shell command execution detected in JavaScript/TypeScript source",
       "severity": "critical",
-      "target": "/tmp/mcpradar-enrich-1m15l_v6/package/dist/rerank/index.js:45",
+      "target": "/tmp/mcpradar-enrich-7u8dcl6e/package/dist/rerank/index.js:45",
       "location": "source",
       "evidence": "",
       "detail": {
@@ -21,17 +21,17 @@
     "total_tools": 0
   },
   "name": "io.github.shinpr/mcp-local-rag",
-  "target": "npx -y mcp-local-rag@0.19.0",
-  "version": "0.19.0",
-  "scanned_at": "2026-09-20T10:34:00.706227+00:00",
-  "last_attempted_at": "2026-09-20T10:34:00.706227+00:00",
+  "target": "npx -y mcp-local-rag@0.20.0",
+  "version": "0.20.0",
+  "scanned_at": "2026-10-01T12:25:03.975759+00:00",
+  "last_attempted_at": "2026-10-01T12:25:03.975759+00:00",
   "trending": true,
   "popularity": {
     "method": "registry-packages/npm-pypi-github",
-    "score": 6.3166,
-    "npm_downloads": 5156,
+    "score": 6.4771,
+    "npm_downloads": 7387,
     "pypi_downloads": null,
-    "github_stars": 401
+    "github_stars": 405
   },
   "live_scan": {
     "ok": false,
